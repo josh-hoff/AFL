@@ -178,6 +178,20 @@ def write_csv(games, path):
             writer.writerow({k: g[k] for k in fieldnames})
 
 
+def update_seasons_manifest(output_dir, season):
+    manifest_path = os.path.join(output_dir, "seasons.json")
+    seasons = []
+    if os.path.exists(manifest_path):
+        with open(manifest_path, "r") as f:
+            seasons = json.load(f)
+    if season not in seasons:
+        seasons.append(season)
+    seasons.sort()
+    with open(manifest_path, "w") as f:
+        json.dump(seasons, f)
+    return seasons
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Fetch and parse the AFL schedule for a given season."
@@ -219,9 +233,12 @@ def main():
     csv_path = os.path.join(season_dir, "schedule.csv")
     write_csv(games, csv_path)
 
+    seasons = update_seasons_manifest(args.output_dir, args.season)
+
     print(f"Parsed {len(games)} games for the {args.season} season.")
     print(f"  Raw JSON saved to: {raw_path}")
     print(f"  Schedule CSV saved to: {csv_path}")
+    print(f"  Seasons manifest now includes: {seasons}")
 
 
 if __name__ == "__main__":

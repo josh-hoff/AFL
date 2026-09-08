@@ -28,6 +28,11 @@
     padding: 2.5rem 1.5rem 1.5rem;
     max-width: 900px;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
   }
   h1 {
     font-size: 1.8rem;
@@ -40,25 +45,15 @@
     font-size: 0.95rem;
     margin: 0;
   }
-  .controls {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.5rem 1rem;
-    display: flex;
-    gap: 0.5rem;
-  }
-  .season-btn {
+  .season-select {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    color: var(--text-muted);
-    padding: 0.4rem 1rem;
+    color: var(--text);
+    padding: 0.5rem 1rem;
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.9rem;
-  }
-  .season-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
+    font-family: inherit;
   }
   main {
     max-width: 900px;
@@ -193,11 +188,13 @@
 <body>
 
 <header>
-  <h1>Arizona Fall League</h1>
-  <p class="subtitle">Schedule, updated automatically from the MLB Stats API</p>
+  <div>
+    <h1>Arizona Fall League</h1>
+    <p class="subtitle">Schedule, updated automatically from the MLB Stats API</p>
+  </div>
+  <select id="season-select" class="season-select"></select>
 </header>
 
-<div class="controls" id="season-controls"></div>
 <div class="filter-banner" id="filter-banner" style="display:none;"></div>
 
 <main id="content">
@@ -205,29 +202,46 @@
 </main>
 
 <script>
-  const SEASONS = [2025, 2026];
+  let SEASONS = [];
   const params = new URLSearchParams(window.location.search);
-  let currentSeason = parseInt(params.get('season'), 10) || 2026;
+  let currentSeason = parseInt(params.get('season'), 10) || new Date().getFullYear();
   let currentTeam = params.get('team') || null;
   let allGames = [];
   let decisionsByGame = {};
 
+  async function loadSeasons() {
+    try {
+      const res = await fetch('data/seasons.json');
+      if (res.ok) {
+        SEASONS = await res.json();
+      }
+    } catch (e) {
+      // fall through to fallback below
+    }
+    if (!SEASONS || SEASONS.length === 0) {
+      SEASONS = [currentSeason];
+    }
+    if (!SEASONS.includes(currentSeason)) {
+      currentSeason = SEASONS[SEASONS.length - 1];
+    }
+  }
+
   function renderControls() {
-    const el = document.getElementById('season-controls');
+    const el = document.getElementById('season-select');
     el.innerHTML = '';
-    SEASONS.forEach(season => {
-      const btn = document.createElement('button');
-      btn.className = 'season-btn' + (season === currentSeason ? ' active' : '');
-      btn.textContent = season + ' season';
-      btn.onclick = () => {
-        currentSeason = season;
-        currentTeam = null;
-        updateUrl();
-        renderControls();
-        loadSchedule();
-      };
-      el.appendChild(btn);
+    [...SEASONS].sort((a, b) => b - a).forEach(season => {
+      const opt = document.createElement('option');
+      opt.value = season;
+      opt.textContent = season + ' season';
+      if (season === currentSeason) opt.selected = true;
+      el.appendChild(opt);
     });
+    el.onchange = () => {
+      currentSeason = parseInt(el.value, 10);
+      currentTeam = null;
+      updateUrl();
+      loadSchedule();
+    };
   }
 
   function updateUrl() {
@@ -462,8 +476,13 @@
     }
   }
 
-  renderControls();
-  loadSchedule();
+  async function init() {
+    await loadSeasons();
+    renderControls();
+    loadSchedule();
+  }
+
+  init();
 </script>
 
 </body>
