@@ -57,10 +57,23 @@ def parse_schedule(data):
         existing = deduped[pk]
         existing_priority = STATUS_PRIORITY.get(existing["status"], 1)
         new_priority = STATUS_PRIORITY.get(g["status"], 1)
+
         if new_priority > existing_priority:
-            deduped[pk] = g
-        elif new_priority == existing_priority and g["_sort_key"] > existing["_sort_key"]:
-            deduped[pk] = g
+            winner, loser = g, existing
+        elif new_priority < existing_priority:
+            winner, loser = existing, g
+        else:
+            winner, loser = (g, existing) if g["_sort_key"] > existing["_sort_key"] else (existing, g)
+
+        if loser.get("rescheduled") == "Y" and winner.get("rescheduled") != "Y":
+            winner["rescheduled"] = "Y"
+            winner["original_date"] = loser["original_date"]
+            base_date = winner["date"].split(" (originally")[0]
+            year, month, day = loser["original_date"].split("-")
+            winner["date"] = f"{base_date} (originally {int(month)}/{int(day)})"
+
+        deduped[pk] = winner
+
     games = list(deduped.values())
 
     games.sort(key=lambda g: g["_sort_key"])

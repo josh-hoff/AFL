@@ -32,11 +32,11 @@ date,time_az,away_team,home_team,away_wins,away_losses,away_ties,home_wins,home_
 2025-10-19,1:30 PM,Mesa Solar Sox,Peoria Javelinas,4,6,0,5,5,0,12,6,Peoria Stadium,2530,825645,Regular Season,Final,,N,,
 2025-10-19,5:00 PM,Surprise Saguaros,Scottsdale Scorpions,5,4,0,7,3,0,4,15,Scottsdale Stadium,2532,825615,Regular Season,Completed Early,Venue,N,,
 2025-10-21,12:00 PM,Scottsdale Scorpions,Peoria Javelinas,8,3,0,5,6,0,5,1,Peoria Stadium,2530,825646,Regular Season,Final,,N,,
-2025-10-21,12:05 PM,Scottsdale Scorpions,Peoria Javelinas,8,4,0,6,6,0,4,8,Peoria Stadium,2530,825616,Regular Season,Final,,N,,Makeup of 10/12ppd in Scottsdale
+2025-10-21 (originally 10/12),12:05 PM,Scottsdale Scorpions,Peoria Javelinas,8,4,0,6,6,0,4,8,Peoria Stadium,2530,825616,Regular Season,Final,,Y,2025-10-12,Makeup of 10/12ppd in Scottsdale
 2025-10-21,1:30 PM,Glendale Desert Dogs,Surprise Saguaros,3,7,0,6,4,0,3,6,Surprise Stadium,2603,825581,Regular Season,Final,,N,,
 2025-10-21,1:30 PM,Salt River Rafters,Mesa Solar Sox,6,5,0,4,7,0,7,0,Sloan Park,4629,825601,Regular Season,Final,,N,,
-2025-10-21,1:35 PM,Glendale Desert Dogs,Surprise Saguaros,3,8,0,7,4,0,4,6,Surprise Stadium,2603,825664,Regular Season,Final,,N,,Makeup of 10/12ppd in Glendale
-2025-10-21,1:35 PM,Salt River Rafters,Mesa Solar Sox,6,6,0,5,7,0,3,6,Sloan Park,4629,825605,Regular Season,Final,,N,,Makeup of 10/12ppd.
+2025-10-21 (originally 10/12),1:35 PM,Glendale Desert Dogs,Surprise Saguaros,3,8,0,7,4,0,4,6,Surprise Stadium,2603,825664,Regular Season,Final,,Y,2025-10-12,Makeup of 10/12ppd in Glendale
+2025-10-21 (originally 10/12),1:35 PM,Salt River Rafters,Mesa Solar Sox,6,6,0,5,7,0,3,6,Sloan Park,4629,825605,Regular Season,Final,,Y,2025-10-12,Makeup of 10/12ppd.
 2025-10-22,1:30 PM,Scottsdale Scorpions,Surprise Saguaros,8,5,0,8,4,0,1,10,Surprise Stadium,2603,825586,Regular Season,Final,,N,,
 2025-10-22,1:30 PM,Mesa Solar Sox,Salt River Rafters,5,8,0,7,6,0,1,14,Salt River Fields at Talking Stick,4249,825631,Regular Season,Final,,N,,
 2025-10-22,6:30 PM,Glendale Desert Dogs,Peoria Javelinas,3,9,0,7,6,0,6,10,Peoria Stadium,2530,825643,Regular Season,Final,,N,,
