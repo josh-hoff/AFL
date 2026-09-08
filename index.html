@@ -275,7 +275,7 @@
         }
         recordHtml += ')';
       }
-      banner.innerHTML = `<strong>${currentTeam}</strong>${recordHtml}`;
+      banner.innerHTML = `${teamLogoImg(currentTeam)}<strong>${currentTeam}</strong>${recordHtml}`;
       const clearBtn = document.createElement('button');
       clearBtn.className = 'clear-filter';
       clearBtn.textContent = 'Show all teams';
