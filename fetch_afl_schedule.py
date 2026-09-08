@@ -79,6 +79,8 @@ def _parse_game(game):
     home_team = home_info.get("team", {}).get("name", "TBD")
     away_record = away_info.get("leagueRecord", {})
     home_record = home_info.get("leagueRecord", {})
+    away_score = away_info.get("score", "")
+    home_score = home_info.get("score", "")
 
     venue = game.get("venue", {}).get("name", "Unknown")
     venue_id = game.get("venue", {}).get("id")
@@ -98,6 +100,8 @@ def _parse_game(game):
         "home_wins": home_record.get("wins", ""),
         "home_losses": home_record.get("losses", ""),
         "home_ties": home_record.get("ties", ""),
+        "away_score": away_score,
+        "home_score": home_score,
         "venue": venue,
         "venue_id": venue_id,
         "game_pk": game_pk,

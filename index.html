@@ -110,6 +110,14 @@
   .status.final { background: rgba(79,138,99,0.18); color: var(--final); }
   .status.scheduled { background: rgba(74,111,165,0.18); color: var(--scheduled); }
   .status.cancelled, .status.postponed { background: rgba(163,74,63,0.18); color: var(--cancelled); }
+  .score {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .score.win {
+    color: var(--text);
+    font-weight: 600;
+  }
   .loading, .error {
     color: var(--text-muted);
     padding: 2rem 0;
@@ -218,9 +226,10 @@
   function getTeamRecord(teamName) {
     const played = allGames.filter(g => {
       const isThisTeam = g.away_team === teamName || g.home_team === teamName;
+      const isRegularSeason = g.game_type === 'Regular Season';
       const s = (g.status || '').toLowerCase();
       const wasPlayed = s.includes('final') || s.includes('completed');
-      return isThisTeam && wasPlayed;
+      return isThisTeam && isRegularSeason && wasPlayed;
     });
     if (played.length === 0) return null;
 
@@ -303,6 +312,12 @@
     return `<a class="team-link" href="#" onclick="setTeamFilter('${safe}'); return false;">${name || 'TBD'}</a>`;
   }
 
+  function scoreSpan(teamScore, opponentScore) {
+    if (teamScore === '' || teamScore === undefined) return '';
+    const isWin = Number(teamScore) > Number(opponentScore);
+    return ` <span class="score${isWin ? ' win' : ''}">${teamScore}</span>`;
+  }
+
   function renderGames() {
     const content = document.getElementById('content');
     let games = allGames;
@@ -334,7 +349,7 @@
         row.innerHTML = `
           <div class="game-time">${g.time_az || ''}</div>
           <div>
-            <div class="matchup">${teamLink(g.away_team)} @ ${teamLink(g.home_team)}</div>
+            <div class="matchup">${teamLink(g.away_team)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team)}${scoreSpan(g.home_score, g.away_score)}</div>
             <div class="venue">${g.venue || ''}</div>
           </div>
           <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
