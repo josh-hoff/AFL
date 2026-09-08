@@ -35,10 +35,47 @@ def parse_schedule(data):
         for game in date_entry.get("games", []):
             games.append(_parse_game(game))
 
+    games.extend(_synthesize_missing_original_entries(games))
+
     games.sort(key=lambda g: g["_sort_key"])
     for g in games:
         del g["_sort_key"]
     return games
+
+
+def _synthesize_missing_original_entries(games):
+    existing_dates_by_pk = {}
+    for g in games:
+        base_date = g["date"].split(" (originally")[0]
+        existing_dates_by_pk.setdefault(g["game_pk"], set()).add(base_date)
+
+    synthesized = []
+    for g in games:
+        match = re.search(r"[Mm]akeup of (\d{1,2})/(\d{1,2})", g.get("description", ""))
+        if not match:
+            continue
+
+        orig_month, orig_day = int(match.group(1)), int(match.group(2))
+        orig_date_str = f"{g['_sort_key'].year}-{orig_month:02d}-{orig_day:02d}"
+
+        if orig_date_str in existing_dates_by_pk.get(g["game_pk"], set()):
+            continue
+
+        placeholder = dict(g)
+        placeholder["date"] = orig_date_str
+        placeholder["time_az"] = ""
+        placeholder["status"] = "Postponed"
+        placeholder["status_reason"] = "Originally scheduled here -- see makeup note"
+        placeholder["rescheduled"] = "N"
+        placeholder["original_date"] = ""
+        placeholder["away_score"] = ""
+        placeholder["home_score"] = ""
+        placeholder["_sort_key"] = placeholder["_sort_key"].replace(
+            month=orig_month, day=orig_day
+        )
+        synthesized.append(placeholder)
+
+    return synthesized
 
 
 def _parse_utc(iso_str):
