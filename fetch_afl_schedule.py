@@ -19,6 +19,20 @@ GAME_TYPE_LABELS = {
 }
 
 
+STATUS_PRIORITY = {
+    "Final": 3,
+    "Completed Early": 3,
+    "Game Over": 3,
+    "In Progress": 2,
+    "Scheduled": 1,
+    "Pre-Game": 1,
+    "Warmup": 1,
+    "Postponed": 0,
+    "Cancelled": 0,
+    "Suspended": 0,
+}
+
+
 def fetch_schedule(season):
     import requests
 
@@ -33,6 +47,21 @@ def parse_schedule(data):
     for date_entry in data.get("dates", []):
         for game in date_entry.get("games", []):
             games.append(_parse_game(game))
+
+    deduped = {}
+    for g in games:
+        pk = g["game_pk"]
+        if pk not in deduped:
+            deduped[pk] = g
+            continue
+        existing = deduped[pk]
+        existing_priority = STATUS_PRIORITY.get(existing["status"], 1)
+        new_priority = STATUS_PRIORITY.get(g["status"], 1)
+        if new_priority > existing_priority:
+            deduped[pk] = g
+        elif new_priority == existing_priority and g["_sort_key"] > existing["_sort_key"]:
+            deduped[pk] = g
+    games = list(deduped.values())
 
     games.sort(key=lambda g: g["_sort_key"])
     for g in games:
