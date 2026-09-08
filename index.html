@@ -131,6 +131,16 @@
     cursor: pointer;
     text-decoration: none;
     border-bottom: 1px dashed transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    vertical-align: middle;
+  }
+  .team-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
   }
   .team-link:hover {
     color: var(--accent);
@@ -315,10 +325,25 @@
     return 'scheduled';
   }
 
+  const TEAM_LOGOS = {
+    'Glendale Desert Dogs': 'logos/glendale.png',
+    'Mesa Solar Sox': 'logos/mesa.png',
+    'Peoria Javelinas': 'logos/peoria.png',
+    'Salt River Rafters': 'logos/salt-river.png',
+    'Scottsdale Scorpions': 'logos/scottsdale.png',
+    'Surprise Saguaros': 'logos/surprise.png',
+  };
+
+  function teamLogoImg(name) {
+    const src = TEAM_LOGOS[name];
+    if (!src) return '';
+    return `<img class="team-logo" src="${src}" alt="" onerror="this.style.display='none'">`;
+  }
+
   function teamLink(name, isWinner) {
     const safe = (name || 'TBD').replace(/'/g, "\\'");
     const winnerClass = isWinner ? ' winner' : '';
-    return `<a class="team-link${winnerClass}" href="#" onclick="setTeamFilter('${safe}'); return false;">${name || 'TBD'}</a>`;
+    return `<a class="team-link${winnerClass}" href="#" onclick="setTeamFilter('${safe}'); return false;">${teamLogoImg(name)}${name || 'TBD'}</a>`;
   }
 
   function scoreSpan(teamScore, opponentScore) {
