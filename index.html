@@ -32,19 +32,35 @@
     text-align: center;
   }
   h1 {
-    font-size: 2.6rem;
+    font-size: 2.2rem;
     font-weight: 600;
     margin: 0;
     letter-spacing: -0.01em;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
+    gap: 1rem;
   }
   .league-logo {
-    height: 2.6rem;
+    height: 100px;
     width: auto;
     flex-shrink: 0;
+  }
+  .title-lines {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.15rem;
+  }
+  .title-line {
+    line-height: 1;
+  }
+  .title-central {
+    display: inline-block;
+    border-bottom: 2px solid var(--text);
+    padding-bottom: 0.2rem;
+    width: fit-content;
   }
   footer {
     max-width: 900px;
@@ -220,7 +236,13 @@
 <body>
 
 <header>
-  <h1><img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'">Arizona Fall League</h1>
+  <h1>
+    <img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'">
+    <span class="title-lines">
+      <span class="title-line">Arizona Fall League</span>
+      <span class="title-line"><span class="title-central">Central</span></span>
+    </span>
+  </h1>
   <select id="season-select" class="season-select"></select>
 </header>
 
