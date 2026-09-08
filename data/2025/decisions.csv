@@ -1,0 +1,92 @@
+game_pk,date,winning_pitcher_id,winning_pitcher_name,losing_pitcher_id,losing_pitcher_name,save_pitcher_id,save_pitcher_name
+825618,2025-10-06,691000,Carson Montgomery,687562,Jake Bennett,805321,Trevor Kuncl
+825635,2025-10-07,686753,Drey Jameson,807410,Chay Yeager,,
+825607,2025-10-07,682982,Daniel Espino,701480,Bryce Cunningham,693713,Emiliano Teodo
+825606,2025-10-08,804663,Tyler Cleveland,802374,Brady Kirtner,827317,Brandon Downer
+825591,2025-10-08,695294,Tommy McCollum,695003,Randel Clemente,,
+825619,2025-10-08,809340,Austin Troesser,700380,Joshua Loeschorn,,
+825652,2025-10-09,682769,Eiberson Castellano,801333,Johnathan Harmon,,
+825666,2025-10-09,813820,Chen-Wei Lin,694885,Ryan Murphy,,
+825637,2025-10-09,801270,Darwin Rodriguez,694518,Austin Smith,686672,Mark Adamiak
+825651,2025-10-10,695076,Rhett Lowder,695065,Ryan Costeiu,,
+825620,2025-10-10,801802,James Hicks,702516,JP Wheat,,
+825636,2025-10-14,806270,Dominic Perachi,809915,Jakob Wright,695402,Najer Victor
+825649,2025-10-14,690162,Kenny Serwa,681041,Marcelo Perez,,
+825604,2025-10-14,701604,Andrew Lindsey,692030,Jose Corniell,815292,Luis Martinez-Gomez
+825648,2025-10-15,806293,Payton Martin,695569,Luke Hayden,699823,Tyler Davis
+825622,2025-10-15,808054,Yordin Chalas,808743,Bryce Jenkins,692243,Jaden Woods
+825589,2025-10-15,695871,Jesús Broca,701480,Bryce Cunningham,,
+825603,2025-10-16,801725,Luis De León,703596,Karson Milbrandt,,
+825633,2025-10-16,695294,Tommy McCollum,814106,Cade Denton,694725,Michael Fowler
+825621,2025-10-16,694885,Ryan Murphy,681410,Connor McCullough,691028,Nate Wohlgemuth
+825632,2025-10-17,801333,Johnathan Harmon,701908,David Hagaman,,
+825587,2025-10-17,813820,Chen-Wei Lin,814803,Logan Martin,,
+825595,2025-10-17,820901,Anderson Brito,813895,Corey Avant,,
+825663,2025-10-18,687020,Mason Auer,830485,Trent Buchanan,695366,Holt Jones
+825644,2025-10-18,695065,Ryan Costeiu,805812,Dylan Questad,808054,Yordin Chalas
+825614,2025-10-18,801802,James Hicks,682769,Eiberson Castellano,,
+825647,2025-10-19,682981,Derek Diamond,807724,Justin Chambers,,
+825645,2025-10-19,701604,Andrew Lindsey,681041,Marcelo Perez,,
+825615,2025-10-19,687562,Jake Bennett,806641,Kolton Curtis,,
+825646,2025-10-21,678738,Juan Sanchez,804592,Hunter Hoopes,,
+825616,2025-10-21 (originally 10/12),807748,Kannon Kemp,690162,Kenny Serwa,,
+825616,2025-10-21,807748,Kannon Kemp,690162,Kenny Serwa,,
+825581,2025-10-21,692030,Jose Corniell,696505,Cory Wall,801367,Matt Jachec
+825601,2025-10-21,806270,Dominic Perachi,691765,Jackson Baumeister,692243,Jaden Woods
+825664,2025-10-21 (originally 10/12),692437,Winston Santos,806293,Payton Martin,683720,Edwin Jimenez
+825605,2025-10-21 (originally 10/12),695366,Holt Jones,702586,Fulton Lockhart,,
+825664,2025-10-21,692437,Winston Santos,806293,Payton Martin,683720,Edwin Jimenez
+825605,2025-10-21,695366,Holt Jones,702586,Fulton Lockhart,,
+825586,2025-10-22,685396,Nate Peterson,694885,Ryan Murphy,,
+825631,2025-10-22,694788,Carlson Reed,701480,Bryce Cunningham,,
+825643,2025-10-22,674265,Kevin Abel,681410,Connor McCullough,805955,Carson Dorsey
+825630,2025-10-23,809138,Isaac Stebens,813820,Chen-Wei Lin,,
+825638,2025-10-23,693686,Spencer Miles,808063,Maikel Miralles,,
+825600,2025-10-23,702045,Rorik Maltrud,691103,Koen Moreno,693713,Emiliano Teodo
+825629,2025-10-24,701557,Carlos Lequerica,695402,Najer Victor,,
+825585,2025-10-25,812163,Jonathan Russell,694725,Michael Fowler,680893,Hueston Morrill
+825662,2025-10-25,691629,Miguelangel Boadas,696505,Cory Wall,,
+825584,2025-10-26,822067,A.J. Causey,823801,Tanner Smith,,
+825660,2025-10-26,815794,Hyun-Seok Jang,691384,Luis Perales,,
+825609,2025-10-26,698952,Jose T. Perez,806281,Blaze Pontes,689223,Derek True
+825639,2025-10-28,700675,Jimmy Kingsbury,806270,Dominic Perachi,,
+825613,2025-10-28,678738,Juan Sanchez,692437,Winston Santos,688692,Jared Simpson
+825599,2025-10-28,694696,Cade Smith,806334,Alex Amalfi,,
+825628,2025-10-29,801725,Luis De León,815456,Ben Shields,805955,Carson Dorsey
+825583,2025-10-29,692137,L.P. Langevin,801221,Pedro Garcia,689557,Zane Morehouse
+825656,2025-10-29,694989,Kelena Sauer,702516,JP Wheat,699823,Tyler Davis
+825627,2025-10-30,815292,Luis Martinez-Gomez,692243,Jaden Woods,690658,Will Johnston
+825612,2025-10-30,808743,Bryce Jenkins,807724,Justin Chambers,,
+825659,2025-10-31,692404,Darlin Saladin,804592,Hunter Hoopes,695003,Randel Clemente
+825626,2025-10-31,820901,Anderson Brito,701908,David Hagaman,,
+825582,2025-10-31,703596,Karson Milbrandt,814803,Logan Martin,686672,Mark Adamiak
+825598,2025-11-01,680893,Hueston Morrill,690229,LJ McDonough,,
+825578,2025-11-01,689557,Zane Morehouse,695076,Rhett Lowder,822067,A.J. Causey
+825611,2025-11-01,813865,Hudson Leach,700327,Welinton Herrera,,
+825658,2025-11-02,682769,Eiberson Castellano,815794,Hyun-Seok Jang,,
+825597,2025-11-02,815292,Luis Martinez-Gomez,802967,Benny Thompson,802374,Brady Kirtner
+825610,2025-11-02,694885,Ryan Murphy,681041,Marcelo Perez,688781,Brett Banks
+825579,2025-11-04,692437,Winston Santos,692243,Jaden Woods,,
+825596,2025-11-04,801270,Darwin Rodriguez,829338,Dariel Fregio,,
+825657,2025-11-04,695316,Jarold Rosado,828471,Jakob Hall,,
+825577,2025-11-05,690162,Kenny Serwa,695871,Jesús Broca,,
+825594,2025-11-05,806334,Alex Amalfi,813895,Corey Avant,,
+825625,2025-11-05,814106,Cade Denton,823801,Tanner Smith,699230,Lorenzo Encarnacion
+825641,2025-11-06,813820,Chen-Wei Lin,808063,Maikel Miralles,,
+825624,2025-11-06,671143,Trenton Denholm,694968,Jack Mahoney,,
+825593,2025-11-06,693686,Spencer Miles,701480,Bryce Cunningham,,
+825655,2025-11-07,800811,Jacob Kroeger,701557,Carlos Lequerica,,
+825640,2025-11-07,807748,Kannon Kemp,815292,Luis Martinez-Gomez,804663,Tyler Cleveland
+825576,2025-11-07,814803,Logan Martin,691384,Luis Perales,,
+825588,2025-11-09,829338,Dariel Fregio,692404,Darlin Saladin,,
+825575,2025-11-10,827317,Brandon Downer,822067,A.J. Causey,687040,Sayer Diederich
+825623,2025-11-10,801829,Jay Allmer,678738,Juan Sanchez,700327,Welinton Herrera
+825653,2025-11-10,690658,Will Johnston,702910,Jhancarlos Lara,680893,Hueston Morrill
+825592,2025-11-11,801270,Darwin Rodriguez,828471,Jakob Hall,802963,Mathew Peters
+825617,2025-11-11,806270,Dominic Perachi,692030,Jose Corniell,700380,Joshua Loeschorn
+825608,2025-11-11,695003,Randel Clemente,691028,Nate Wohlgemuth,,
+825574,2025-11-12,815292,Luis Martinez-Gomez,695632,Brandon Neely,680893,Hueston Morrill
+825573,2025-11-12,806288,Stefan Raeth,807724,Justin Chambers,,
+825580,2025-11-13,822067,A.J. Causey,695366,Holt Jones,,
+825571,2025-11-13,691000,Carson Montgomery,693686,Spencer Miles,,
+825572,2025-11-14,683720,Edwin Jimenez,805321,Trevor Kuncl,,

@@ -22,6 +22,14 @@ PITCH_FIELDS = [
 ]
 
 
+DECISION_FIELDS = [
+    "game_pk", "date",
+    "winning_pitcher_id", "winning_pitcher_name",
+    "losing_pitcher_id", "losing_pitcher_name",
+    "save_pitcher_id", "save_pitcher_name",
+]
+
+
 def load_schedule(season, output_dir):
     path = os.path.join(output_dir, str(season), "schedule.csv")
     if not os.path.exists(path):
@@ -113,6 +121,27 @@ def extract_pitches(feed, game_info):
     return rows
 
 
+def extract_decisions(feed, game_info):
+    decisions = feed.get("liveData", {}).get("decisions", {})
+    winner = decisions.get("winner", {})
+    loser = decisions.get("loser", {})
+    save = decisions.get("save", {})
+
+    if not winner and not loser:
+        return None
+
+    return {
+        "game_pk": game_info.get("game_pk"),
+        "date": game_info.get("date"),
+        "winning_pitcher_id": winner.get("id", ""),
+        "winning_pitcher_name": winner.get("fullName", ""),
+        "losing_pitcher_id": loser.get("id", ""),
+        "losing_pitcher_name": loser.get("fullName", ""),
+        "save_pitcher_id": save.get("id", ""),
+        "save_pitcher_name": save.get("fullName", ""),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Pull per-pitch Statcast data for an AFL season's games."
@@ -144,6 +173,7 @@ def main():
         schedule = schedule[: args.limit]
 
     all_rows = []
+    all_decisions = []
     skipped_no_plays = 0
     skipped_missing = 0
 
@@ -167,6 +197,10 @@ def main():
             time.sleep(0.5)
 
         rows = extract_pitches(feed, game)
+        decision = extract_decisions(feed, game)
+        if decision:
+            all_decisions.append(decision)
+
         if not rows:
             print("no pitches (likely cancelled/postponed).")
             skipped_no_plays += 1
@@ -185,8 +219,16 @@ def main():
         for row in all_rows:
             writer.writerow(row)
 
+    decisions_path = os.path.join(season_dir, "decisions.csv")
+    with open(decisions_path, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=DECISION_FIELDS)
+        writer.writeheader()
+        for row in all_decisions:
+            writer.writerow(row)
+
     print()
     print(f"Done. {len(all_rows)} total pitches saved to {out_path}")
+    print(f"{len(all_decisions)} game decisions saved to {decisions_path}")
     print(f"Games with no data: {skipped_no_plays} (cancelled/postponed)")
     if skipped_missing:
         print(f"Games skipped due to fetch/file errors: {skipped_missing}")

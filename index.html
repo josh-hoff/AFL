@@ -100,6 +100,15 @@
     font-size: 0.82rem;
     margin-top: 0.15rem;
   }
+  .decisions {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    margin-top: 0.3rem;
+  }
+  .decision-label {
+    color: var(--accent);
+    font-weight: 600;
+  }
   .status {
     font-size: 0.78rem;
     padding: 0.25rem 0.6rem;
@@ -201,6 +210,7 @@
   let currentSeason = parseInt(params.get('season'), 10) || 2026;
   let currentTeam = params.get('team') || null;
   let allGames = [];
+  let decisionsByGame = {};
 
   function renderControls() {
     const el = document.getElementById('season-controls');
@@ -354,6 +364,19 @@
     return ` <span class="score${cls}">${teamScore}</span>`;
   }
 
+  function decisionLine(gamePk) {
+    const d = decisionsByGame[gamePk];
+    if (!d || !d.winning_pitcher_name) return '';
+    let line = `<span class="decision-label">W</span> ${d.winning_pitcher_name}`;
+    if (d.losing_pitcher_name) {
+      line += ` &nbsp; <span class="decision-label">L</span> ${d.losing_pitcher_name}`;
+    }
+    if (d.save_pitcher_name) {
+      line += ` &nbsp; <span class="decision-label">SV</span> ${d.save_pitcher_name}`;
+    }
+    return `<div class="decisions">${line}</div>`;
+  }
+
   function renderGames() {
     const content = document.getElementById('content');
     let games = allGames;
@@ -390,6 +413,7 @@
           <div>
             <div class="matchup">${teamLink(g.away_team, awayWon)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team, homeWon)}${scoreSpan(g.home_score, g.away_score)}</div>
             <div class="venue">${g.venue || ''}</div>
+            ${decisionLine(g.game_pk)}
           </div>
           <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
         `;
@@ -415,6 +439,18 @@
       if (!res.ok) throw new Error('Schedule not found for this season yet.');
       const text = await res.text();
       allGames = parseCSV(text);
+
+      decisionsByGame = {};
+      try {
+        const decRes = await fetch(`data/${currentSeason}/decisions.csv`);
+        if (decRes.ok) {
+          const decText = await decRes.text();
+          parseCSV(decText).forEach(d => { decisionsByGame[d.game_pk] = d; });
+        }
+      } catch (e) {
+        // decisions.csv is optional -- schedule still renders without it
+      }
+
       renderBanner();
       renderGames();
     } catch (err) {
