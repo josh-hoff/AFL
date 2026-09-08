@@ -46,6 +46,12 @@
     width: auto;
     flex-shrink: 0;
   }
+  .logo-spacer {
+    display: inline-block;
+    height: 1px;
+    width: 0;
+    flex-shrink: 0;
+  }
   .title-lines {
     height: 100px;
     display: flex;
@@ -237,11 +243,14 @@
 
 <header>
   <h1>
-    <img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'">
+    <img class="league-logo" src="logos/afl-logo.svg" alt=""
+         onload="document.getElementById('logo-spacer').style.width = this.offsetWidth + 'px'"
+         onerror="this.style.display='none'; document.getElementById('logo-spacer').style.width='0'">
     <span class="title-lines">
       <span class="title-line">Arizona Fall League</span>
       <span class="title-line"><span class="title-central">Central</span></span>
     </span>
+    <span class="logo-spacer" id="logo-spacer" aria-hidden="true"></span>
   </h1>
   <select id="season-select" class="season-select"></select>
 </header>
