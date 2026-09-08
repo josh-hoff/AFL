@@ -231,6 +231,7 @@
   let currentTeam = params.get('team') || null;
   let allGames = [];
   let decisionsByGame = {};
+  let pitcherStatsById = {};
 
   async function loadSeasons() {
     try {
@@ -401,6 +402,21 @@
     return ` <span class="score${cls}">${teamScore}</span>`;
   }
 
+  function pitcherRecordSuffix(pitcherId) {
+    const p = pitcherStatsById[pitcherId];
+    if (!p || p.wins === '' || p.losses === '') return '';
+    return ` (${p.wins}-${p.losses})`;
+  }
+
+  function pitcherRecordAndEraSuffix(pitcherId) {
+    const p = pitcherStatsById[pitcherId];
+    if (!p) return '';
+    const parts = [];
+    if (p.wins !== '' && p.losses !== '') parts.push(`${p.wins}-${p.losses}`);
+    if (p.era !== '') parts.push(`${p.era} ERA`);
+    return parts.length ? ` (${parts.join(', ')})` : '';
+  }
+
   function decisionLine(gamePk, status) {
     const s = (status || '').toLowerCase();
     const wasPlayed = s.includes('final') || s.includes('completed');
@@ -408,14 +424,31 @@
 
     const d = decisionsByGame[gamePk];
     if (!d || !d.winning_pitcher_name) return '';
-    let line = `<span class="decision-label">W</span> ${d.winning_pitcher_name}`;
+    let line = `<span class="decision-label">W</span> ${d.winning_pitcher_name}${pitcherRecordSuffix(d.winning_pitcher_id)}`;
     if (d.losing_pitcher_name) {
-      line += ` &nbsp; <span class="decision-label">L</span> ${d.losing_pitcher_name}`;
+      line += ` &nbsp; <span class="decision-label">L</span> ${d.losing_pitcher_name}${pitcherRecordSuffix(d.losing_pitcher_id)}`;
     }
     if (d.save_pitcher_name) {
-      line += ` &nbsp; <span class="decision-label">SV</span> ${d.save_pitcher_name}`;
+      const savePitcher = pitcherStatsById[d.save_pitcher_id];
+      const saveSuffix = savePitcher && savePitcher.saves !== '' ? ` (${savePitcher.saves} SV)` : '';
+      line += ` &nbsp; <span class="decision-label">SV</span> ${d.save_pitcher_name}${saveSuffix}`;
     }
     return `<div class="decisions">${line}</div>`;
+  }
+
+  function probableLine(g) {
+    const s = (g.status || '').toLowerCase();
+    const notYetPlayed = s.includes('scheduled') || s.includes('pre-game') || s.includes('warmup');
+    if (!notYetPlayed) return '';
+    if (!g.away_probable_pitcher && !g.home_probable_pitcher) return '';
+
+    const away = g.away_probable_pitcher
+      ? `${g.away_probable_pitcher}${pitcherRecordAndEraSuffix(g.away_probable_pitcher_id)}`
+      : 'TBD';
+    const home = g.home_probable_pitcher
+      ? `${g.home_probable_pitcher}${pitcherRecordAndEraSuffix(g.home_probable_pitcher_id)}`
+      : 'TBD';
+    return `<div class="decisions"><span class="decision-label">Probable</span> ${away} vs. ${home}</div>`;
   }
 
   function formatDateLabel(rawDate) {
@@ -491,6 +524,7 @@
             <div class="matchup">${teamLink(g.away_team, awayWon)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team, homeWon)}${scoreSpan(g.home_score, g.away_score)}</div>
             <div class="venue">${g.venue || ''}</div>
             ${decisionLine(g.game_pk, g.status)}
+            ${probableLine(g)}
           </div>
           <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
         `;
@@ -526,6 +560,17 @@
         }
       } catch (e) {
         // decisions.csv is optional -- schedule still renders without it
+      }
+
+      pitcherStatsById = {};
+      try {
+        const statsRes = await fetch(`data/${currentSeason}/pitcher_stats.csv`);
+        if (statsRes.ok) {
+          const statsText = await statsRes.text();
+          parseCSV(statsText).forEach(p => { pitcherStatsById[p.pitcher_id] = p; });
+        }
+      } catch (e) {
+        // pitcher_stats.csv is optional -- schedule still renders without it
       }
 
       renderBanner();

@@ -127,6 +127,12 @@ def _parse_game(game):
     home_record = home_info.get("leagueRecord", {})
     away_score = away_info.get("score", "")
     home_score = home_info.get("score", "")
+    away_probable = away_info.get("probablePitcher", {})
+    home_probable = home_info.get("probablePitcher", {})
+    away_probable_pitcher = away_probable.get("fullName", "")
+    home_probable_pitcher = home_probable.get("fullName", "")
+    away_probable_pitcher_id = away_probable.get("id", "")
+    home_probable_pitcher_id = home_probable.get("id", "")
 
     venue = game.get("venue", {}).get("name", "Unknown")
     venue_id = game.get("venue", {}).get("id")
@@ -154,6 +160,10 @@ def _parse_game(game):
         "home_ties": home_record.get("ties", ""),
         "away_score": away_score,
         "home_score": home_score,
+        "away_probable_pitcher": away_probable_pitcher,
+        "home_probable_pitcher": home_probable_pitcher,
+        "away_probable_pitcher_id": away_probable_pitcher_id,
+        "home_probable_pitcher_id": home_probable_pitcher_id,
         "venue": venue,
         "venue_id": venue_id,
         "game_pk": game_pk,

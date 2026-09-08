@@ -10,6 +10,9 @@ game_pk,date,winning_pitcher_id,winning_pitcher_name,losing_pitcher_id,losing_pi
 825637,2025-10-09,801270,Darwin Rodriguez,694518,Austin Smith,686672,Mark Adamiak
 825651,2025-10-10,695076,Rhett Lowder,695065,Ryan Costeiu,,
 825620,2025-10-10,801802,James Hicks,702516,JP Wheat,,
+825664,2025-10-12,692437,Winston Santos,806293,Payton Martin,683720,Edwin Jimenez
+825605,2025-10-12,695366,Holt Jones,702586,Fulton Lockhart,,
+825616,2025-10-12,807748,Kannon Kemp,690162,Kenny Serwa,,
 825636,2025-10-14,806270,Dominic Perachi,809915,Jakob Wright,695402,Najer Victor
 825649,2025-10-14,690162,Kenny Serwa,681041,Marcelo Perez,,
 825604,2025-10-14,701604,Andrew Lindsey,692030,Jose Corniell,815292,Luis Martinez-Gomez
@@ -30,13 +33,10 @@ game_pk,date,winning_pitcher_id,winning_pitcher_name,losing_pitcher_id,losing_pi
 825615,2025-10-19,687562,Jake Bennett,806641,Kolton Curtis,,
 825646,2025-10-21,678738,Juan Sanchez,804592,Hunter Hoopes,,
 825616,2025-10-21 (originally 10/12),807748,Kannon Kemp,690162,Kenny Serwa,,
-825616,2025-10-21,807748,Kannon Kemp,690162,Kenny Serwa,,
 825581,2025-10-21,692030,Jose Corniell,696505,Cory Wall,801367,Matt Jachec
 825601,2025-10-21,806270,Dominic Perachi,691765,Jackson Baumeister,692243,Jaden Woods
 825664,2025-10-21 (originally 10/12),692437,Winston Santos,806293,Payton Martin,683720,Edwin Jimenez
 825605,2025-10-21 (originally 10/12),695366,Holt Jones,702586,Fulton Lockhart,,
-825664,2025-10-21,692437,Winston Santos,806293,Payton Martin,683720,Edwin Jimenez
-825605,2025-10-21,695366,Holt Jones,702586,Fulton Lockhart,,
 825586,2025-10-22,685396,Nate Peterson,694885,Ryan Murphy,,
 825631,2025-10-22,694788,Carlson Reed,701480,Bryce Cunningham,,
 825643,2025-10-22,674265,Kevin Abel,681410,Connor McCullough,805955,Carson Dorsey
