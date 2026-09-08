@@ -138,6 +138,8 @@
     color: var(--text);
     font-weight: 600;
   }
+  .record-win { color: var(--final); font-weight: 600; }
+  .record-loss { color: var(--cancelled); font-weight: 600; }
   .clear-filter {
     color: var(--accent);
     cursor: pointer;
@@ -213,11 +215,43 @@
     renderGames();
   }
 
+  function getTeamRecord(teamName) {
+    // Find this team's most recently completed game (by date) and read
+    // their win-loss record as of that game -- this is the same record
+    // MLB's own schedule data tracks, so no extra calculation is needed
+    // beyond finding the latest played game the team appears in.
+    const played = allGames.filter(g => {
+      const isThisTeam = g.away_team === teamName || g.home_team === teamName;
+      const s = (g.status || '').toLowerCase();
+      const wasPlayed = s.includes('final') || s.includes('completed');
+      return isThisTeam && wasPlayed;
+    });
+    if (played.length === 0) return null;
+
+    played.sort((a, b) => (a.date > b.date ? 1 : -1));
+    const last = played[played.length - 1];
+    const isAway = last.away_team === teamName;
+    const wins = isAway ? last.away_wins : last.home_wins;
+    const losses = isAway ? last.away_losses : last.home_losses;
+    const ties = isAway ? last.away_ties : last.home_ties;
+    if (wins === '' || losses === '') return null;
+
+    return { wins, losses, ties };
+  }
+
   function renderBanner() {
     const banner = document.getElementById('filter-banner');
     if (currentTeam) {
       banner.style.display = 'flex';
-      banner.innerHTML = `Showing schedule for <strong>${currentTeam}</strong>`;
+      const record = getTeamRecord(currentTeam);
+      let recordHtml = '';
+      if (record) {
+        recordHtml = ` &nbsp;·&nbsp; <span class="record-win">${record.wins}W</span> <span class="record-loss">${record.losses}L</span>`;
+        if (record.ties && record.ties !== '0') {
+          recordHtml += ` <span>${record.ties}T</span>`;
+        }
+      }
+      banner.innerHTML = `<strong>${currentTeam}</strong>${recordHtml}`;
       const clearBtn = document.createElement('button');
       clearBtn.className = 'clear-filter';
       clearBtn.textContent = 'Show all teams';
