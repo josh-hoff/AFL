@@ -19,6 +19,8 @@ GAME_TYPE_LABELS = {
     "W": "Championship",
 }
 
+SHIFT_TO_RESCHEDULE_STATUSES = {"Final", "Completed Early", "Game Over", "In Progress"}
+
 
 def fetch_schedule(season):
     import requests
@@ -92,9 +94,15 @@ def _parse_game(game):
     game_pk = game.get("gamePk")
     game_type_code = game.get("gameType", "")
 
+    status_info = game.get("status", {})
+    status = status_info.get("detailedState", "")
+    status_reason = status_info.get("reason", "")
+    description = game.get("description", "")
+
     original_utc_str = game.get("gameDate")
     reschedule_utc_str = game.get("rescheduleDate")
-    is_rescheduled = reschedule_utc_str is not None
+    should_shift = status in SHIFT_TO_RESCHEDULE_STATUSES
+    is_rescheduled = reschedule_utc_str is not None and should_shift
 
     original_utc_dt = _parse_utc(original_utc_str)
     original_az_dt = original_utc_dt.astimezone(ARIZONA_TZ)
@@ -122,10 +130,6 @@ def _parse_game(game):
 
     venue = game.get("venue", {}).get("name", "Unknown")
     venue_id = game.get("venue", {}).get("id")
-    status_info = game.get("status", {})
-    status = status_info.get("detailedState", "")
-    status_reason = status_info.get("reason", "")
-    description = game.get("description", "")
 
     original_date_str = original_az_dt.strftime("%Y-%m-%d") if is_rescheduled else ""
 
