@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arizona Fall League Schedule</title>
+<style>
+  :root {
+    --bg: #14181f;
+    --bg-card: #1c222c;
+    --border: #2c3440;
+    --text: #e8e6df;
+    --text-muted: #8b93a1;
+    --accent: #d9a441;
+    --final: #4f8a63;
+    --cancelled: #a34a3f;
+    --scheduled: #4a6fa5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  header {
+    padding: 2.5rem 1.5rem 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 0.3rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  .controls {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .season-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  .season-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+  }
+  .day-group {
+    margin-bottom: 1.75rem;
+  }
+  .day-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin: 0 0 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .game-row {
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 0.9rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+  }
+  .game-time {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .matchup {
+    font-size: 0.98rem;
+  }
+  .venue {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-top: 0.15rem;
+  }
+  .status {
+    font-size: 0.78rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 5px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .status.final { background: rgba(79,138,99,0.18); color: var(--final); }
+  .status.scheduled { background: rgba(74,111,165,0.18); color: var(--scheduled); }
+  .status.cancelled, .status.postponed { background: rgba(163,74,63,0.18); color: var(--cancelled); }
+  .loading, .error {
+    color: var(--text-muted);
+    padding: 2rem 0;
+  }
+  @media (max-width: 560px) {
+    .game-row { grid-template-columns: 55px 1fr; }
+    .status { grid-column: 1 / -1; justify-self: start; margin-top: 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Arizona Fall League</h1>
+  <p class="subtitle">Schedule, updated automatically from the MLB Stats API</p>
+</header>
+
+<div class="controls" id="season-controls"></div>
+
+<main id="content">
+  <p class="loading">Loading schedule...</p>
+</main>
+
+<script>
+  const SEASONS = [2025, 2026];
+  let currentSeason = 2026;
+
+  function renderControls() {
+    const el = document.getElementById('season-controls');
+    el.innerHTML = '';
+    SEASONS.forEach(season => {
+      const btn = document.createElement('button');
+      btn.className = 'season-btn' + (season === currentSeason ? ' active' : '');
+      btn.textContent = season + ' season';
+      btn.onclick = () => { currentSeason = season; renderControls(); loadSchedule(); };
+      el.appendChild(btn);
+    });
+  }
+
+  function parseCSV(text) {
+    const lines = text.trim().split(/\r?\n/);
+    const headers = splitCSVLine(lines[0]);
+    return lines.slice(1).map(line => {
+      const values = splitCSVLine(line);
+      const row = {};
+      headers.forEach((h, i) => { row[h] = values[i] !== undefined ? values[i] : ''; });
+      return row;
+    });
+  }
+
+  function splitCSVLine(line) {
+    const result = [];
+    let cur = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        inQuotes = !inQuotes;
+      } else if (ch === ',' && !inQuotes) {
+        result.push(cur);
+        cur = '';
+      } else {
+        cur += ch;
+      }
+    }
+    result.push(cur);
+    return result;
+  }
+
+  function statusClass(status) {
+    const s = (status || '').toLowerCase();
+    if (s.includes('final') || s.includes('completed')) return 'final';
+    if (s.includes('cancel')) return 'cancelled';
+    if (s.includes('postpon')) return 'postponed';
+    return 'scheduled';
+  }
+
+  async function loadSchedule() {
+    const content = document.getElementById('content');
+    content.innerHTML = '<p class="loading">Loading schedule...</p>';
+
+    try {
+      const res = await fetch(`data/${currentSeason}/schedule.csv`);
+      if (!res.ok) throw new Error('Schedule not found for this season yet.');
+      const text = await res.text();
+      const games = parseCSV(text);
+
+      const groups = {};
+      games.forEach(g => {
+        const key = g.date || 'Unknown date';
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(g);
+      });
+
+      content.innerHTML = '';
+      Object.keys(groups).forEach(dateLabel => {
+        const section = document.createElement('div');
+        section.className = 'day-group';
+
+        const label = document.createElement('div');
+        label.className = 'day-label';
+        label.textContent = dateLabel;
+        section.appendChild(label);
+
+        groups[dateLabel].forEach(g => {
+          const row = document.createElement('div');
+          row.className = 'game-row';
+          row.innerHTML = `
+            <div class="game-time">${g.time_az || ''}</div>
+            <div>
+              <div class="matchup">${g.away_team || 'TBD'} @ ${g.home_team || 'TBD'}</div>
+              <div class="venue">${g.venue || ''}</div>
+            </div>
+            <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
+          `;
+          section.appendChild(row);
+        });
+
+        content.appendChild(section);
+      });
+
+      if (Object.keys(groups).length === 0) {
+        content.innerHTML = '<p class="error">No games found for this season.</p>';
+      }
+    } catch (err) {
+      content.innerHTML = `<p class="error">Couldn't load the schedule: ${err.message}</p>`;
+    }
+  }
+
+  renderControls();
+  loadSchedule();
+</script>
+
+</body>
+</html>
