@@ -3,6 +3,7 @@ import csv
 import json
 import os
 import time
+from datetime import datetime
 
 LIVE_FEED_URL = "https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live"
 
@@ -25,7 +26,8 @@ def load_schedule(season, output_dir):
     path = os.path.join(output_dir, str(season), "schedule.csv")
     if not os.path.exists(path):
         raise FileNotFoundError(
-            f"No schedule found at {path}. Run fetch_afl_schedule.py {season} first."
+            f"No schedule found at {path}. "
+            f"Run fetch_afl_schedule.py {season} first."
         )
     with open(path, "r", newline="") as f:
         return list(csv.DictReader(f))
@@ -112,12 +114,23 @@ def extract_pitches(feed, game_info):
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("season", type=int)
-    parser.add_argument("--output-dir", default="data")
-    parser.add_argument("--game-pk", type=int)
-    parser.add_argument("--limit", type=int)
-    parser.add_argument("--feeds-dir")
+    parser = argparse.ArgumentParser(
+        description="Pull per-pitch Statcast data for an AFL season's games."
+    )
+    parser.add_argument(
+        "season",
+        type=int,
+        nargs="?",
+        default=datetime.now().year,
+        help="Season year, e.g. 2025, 2026, 2027 (defaults to the current year if omitted)",
+    )
+    parser.add_argument("--output-dir", default="data", help="Base data folder (default: data)")
+    parser.add_argument("--game-pk", type=int, help="Pull just this one game instead of the whole season")
+    parser.add_argument("--limit", type=int, help="Only process the first N games (for testing)")
+    parser.add_argument(
+        "--feeds-dir",
+        help="Read game feeds from local {gamePk}.json files here instead of calling the live API",
+    )
     args = parser.parse_args()
 
     schedule = load_schedule(args.season, args.output_dir)

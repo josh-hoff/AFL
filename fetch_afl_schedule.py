@@ -1,26 +1,3 @@
-"""
-Fetch and parse the Arizona Fall League schedule for any season.
-
-This is the season-agnostic version of the schedule tool: point it at any
-year and it fetches, parses, and saves that season's data into its own
-folder -- 2025, 2026, 2027, and beyond all work the same way, with no code
-changes needed for a new season.
-
-Usage:
-    python fetch_afl_schedule.py 2025
-    python fetch_afl_schedule.py 2026 --output-dir data
-
-    # If you already have a saved schedule JSON and don't want to re-fetch:
-    python fetch_afl_schedule.py 2025 --skip-fetch schedule.json
-
-Requires the 'requests' library (install with: pip install requests)
-unless using --skip-fetch, in which case it's not needed.
-
-Output (for season 2025, with default --output-dir):
-    data/2025/schedule_raw.json   (the raw API response, kept for reference)
-    data/2025/schedule.csv        (the cleaned, parsed schedule)
-"""
-
 import argparse
 import csv
 import json
@@ -31,7 +8,6 @@ AFL_SPORT_ID = 17
 AFL_LEAGUE_ID = 119
 SCHEDULE_URL = "https://statsapi.mlb.com/api/v1/schedule"
 
-# Arizona does not observe daylight saving time, so it's always UTC-7.
 ARIZONA_TZ = timezone(timedelta(hours=-7))
 
 GAME_TYPE_LABELS = {
@@ -44,8 +20,7 @@ GAME_TYPE_LABELS = {
 
 
 def fetch_schedule(season):
-    """Pull the raw schedule JSON for a given AFL season from the Stats API."""
-    import requests  # imported here so --skip-fetch never requires it
+    import requests
 
     params = {"sportId": AFL_SPORT_ID, "leagueId": AFL_LEAGUE_ID, "season": season}
     resp = requests.get(SCHEDULE_URL, params=params, timeout=30)
@@ -54,7 +29,6 @@ def fetch_schedule(season):
 
 
 def parse_schedule(data):
-    """Turn a raw Stats API schedule response into a list of clean game dicts."""
     games = []
     for date_entry in data.get("dates", []):
         for game in date_entry.get("games", []):
@@ -73,7 +47,6 @@ def _parse_utc(iso_str):
 
 
 def _fmt_mmdd(dt):
-    """M/D format without relying on platform-specific strftime flags."""
     return f"{dt.month}/{dt.day}"
 
 
@@ -100,8 +73,12 @@ def _parse_game(game):
         date_display = actual_az_dt.strftime("%Y-%m-%d")
 
     teams = game.get("teams", {})
-    away_team = teams.get("away", {}).get("team", {}).get("name", "TBD")
-    home_team = teams.get("home", {}).get("team", {}).get("name", "TBD")
+    away_info = teams.get("away", {})
+    home_info = teams.get("home", {})
+    away_team = away_info.get("team", {}).get("name", "TBD")
+    home_team = home_info.get("team", {}).get("name", "TBD")
+    away_record = away_info.get("leagueRecord", {})
+    home_record = home_info.get("leagueRecord", {})
 
     venue = game.get("venue", {}).get("name", "Unknown")
     venue_id = game.get("venue", {}).get("id")
@@ -115,6 +92,12 @@ def _parse_game(game):
         "time_az": actual_az_dt.strftime("%I:%M %p").lstrip("0"),
         "away_team": away_team,
         "home_team": home_team,
+        "away_wins": away_record.get("wins", ""),
+        "away_losses": away_record.get("losses", ""),
+        "away_ties": away_record.get("ties", ""),
+        "home_wins": home_record.get("wins", ""),
+        "home_losses": home_record.get("losses", ""),
+        "home_ties": home_record.get("ties", ""),
         "venue": venue,
         "venue_id": venue_id,
         "game_pk": game_pk,
@@ -143,7 +126,13 @@ def main():
     parser = argparse.ArgumentParser(
         description="Fetch and parse the AFL schedule for a given season."
     )
-    parser.add_argument("season", type=int, help="Season year, e.g. 2025, 2026, 2027")
+    parser.add_argument(
+        "season",
+        type=int,
+        nargs="?",
+        default=datetime.now().year,
+        help="Season year, e.g. 2025, 2026, 2027 (defaults to the current year if omitted)",
+    )
     parser.add_argument(
         "--output-dir",
         default="data",
