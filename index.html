@@ -81,7 +81,7 @@
   }
   .game-row {
     display: grid;
-    grid-template-columns: 70px 1fr auto;
+    grid-template-columns: 120px 1fr auto;
     align-items: center;
     gap: 1rem;
     padding: 0.7rem 0.9rem;
@@ -92,7 +92,8 @@
   }
   .game-time {
     color: var(--text-muted);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
   }
   .matchup {
     font-size: 0.98rem;
@@ -412,6 +413,33 @@
     return `${month}/${day}/${year}${suffix}`;
   }
 
+  function formatBothTimes(dateStr, timeStr) {
+    if (!timeStr) return '';
+    const dateMatch = (dateStr || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+    const timeMatch = timeStr.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+    if (!dateMatch || !timeMatch) return timeStr;
+
+    const [, y, m, d] = dateMatch;
+    let [, hh, mm, ampm] = timeMatch;
+    hh = parseInt(hh, 10);
+    if (ampm.toUpperCase() === 'PM' && hh !== 12) hh += 12;
+    if (ampm.toUpperCase() === 'AM' && hh === 12) hh = 0;
+
+    const utcMoment = new Date(Date.UTC(
+      parseInt(y, 10), parseInt(m, 10) - 1, parseInt(d, 10), hh + 7, parseInt(mm, 10)
+    ));
+
+    const etTime = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+      timeZoneName: 'short',
+    }).format(utcMoment);
+
+    return `${timeStr} MST<br>${etTime}`;
+  }
+
   function renderGames() {
     const content = document.getElementById('content');
     let games = allGames;
@@ -444,7 +472,7 @@
         const awayWon = hasScore && Number(g.away_score) > Number(g.home_score);
         const homeWon = hasScore && Number(g.home_score) > Number(g.away_score);
         row.innerHTML = `
-          <div class="game-time">${g.time_az || ''}</div>
+          <div class="game-time">${formatBothTimes(g.date, g.time_az)}</div>
           <div>
             <div class="matchup">${teamLink(g.away_team, awayWon)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team, homeWon)}${scoreSpan(g.home_score, g.away_score)}</div>
             <div class="venue">${g.venue || ''}</div>
