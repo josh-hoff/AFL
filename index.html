@@ -94,17 +94,20 @@
     color: var(--text-muted);
     font-size: 0.8rem;
     line-height: 1.4;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    padding-left: 0.4rem;
+  }
+  .time-wrap {
+    display: inline-block;
   }
   .time-line {
     display: block;
+    white-space: nowrap;
   }
   .time-divider {
     display: block;
     border-top: 1px solid var(--border);
     width: 100%;
+    margin: 0.2rem 0;
   }
   .matchup {
     font-size: 0.98rem;
@@ -448,7 +451,7 @@
       timeZoneName: 'short',
     }).format(utcMoment);
 
-    return `<span class="time-line">${etTime}</span><span class="time-divider"></span><span class="time-line">${timeStr} MST</span>`;
+    return `<span class="time-wrap"><span class="time-line">${etTime}</span><span class="time-divider"></span><span class="time-line">${timeStr} MST</span></span>`;
   }
 
   function renderGames() {
