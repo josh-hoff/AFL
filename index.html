@@ -403,6 +403,15 @@
     return `<div class="decisions">${line}</div>`;
   }
 
+  function formatDateLabel(rawDate) {
+    if (!rawDate) return rawDate;
+    const suffixMatch = rawDate.match(/^(\d{4}-\d{2}-\d{2})(.*)$/);
+    if (!suffixMatch) return rawDate;
+    const [, isoDate, suffix] = suffixMatch;
+    const [year, month, day] = isoDate.split('-');
+    return `${month}/${day}/${year}${suffix}`;
+  }
+
   function renderGames() {
     const content = document.getElementById('content');
     let games = allGames;
@@ -425,7 +434,7 @@
 
       const label = document.createElement('div');
       label.className = 'day-label';
-      label.textContent = dateLabel;
+      label.textContent = formatDateLabel(dateLabel);
       section.appendChild(label);
 
       groups[dateLabel].forEach(g => {
