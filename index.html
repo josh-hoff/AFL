@@ -114,6 +114,39 @@
     color: var(--text-muted);
     padding: 2rem 0;
   }
+  .team-link {
+    color: var(--text);
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+  }
+  .team-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .filter-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .filter-banner strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .clear-filter {
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    padding: 0;
+  }
   @media (max-width: 560px) {
     .game-row { grid-template-columns: 55px 1fr; }
     .status { grid-column: 1 / -1; justify-self: start; margin-top: 0.3rem; }
@@ -128,6 +161,7 @@
 </header>
 
 <div class="controls" id="season-controls"></div>
+<div class="filter-banner" id="filter-banner" style="display:none;"></div>
 
 <main id="content">
   <p class="loading">Loading schedule...</p>
@@ -135,7 +169,10 @@
 
 <script>
   const SEASONS = [2025, 2026];
-  let currentSeason = 2026;
+  const params = new URLSearchParams(window.location.search);
+  let currentSeason = parseInt(params.get('season'), 10) || 2026;
+  let currentTeam = params.get('team') || null;
+  let allGames = [];
 
   function renderControls() {
     const el = document.getElementById('season-controls');
@@ -144,9 +181,52 @@
       const btn = document.createElement('button');
       btn.className = 'season-btn' + (season === currentSeason ? ' active' : '');
       btn.textContent = season + ' season';
-      btn.onclick = () => { currentSeason = season; renderControls(); loadSchedule(); };
+      btn.onclick = () => {
+        currentSeason = season;
+        currentTeam = null;
+        updateUrl();
+        renderControls();
+        loadSchedule();
+      };
       el.appendChild(btn);
     });
+  }
+
+  function updateUrl() {
+    const p = new URLSearchParams();
+    p.set('season', currentSeason);
+    if (currentTeam) p.set('team', currentTeam);
+    history.replaceState(null, '', '?' + p.toString());
+  }
+
+  function setTeamFilter(teamName) {
+    currentTeam = teamName;
+    updateUrl();
+    renderBanner();
+    renderGames();
+  }
+
+  function clearTeamFilter() {
+    currentTeam = null;
+    updateUrl();
+    renderBanner();
+    renderGames();
+  }
+
+  function renderBanner() {
+    const banner = document.getElementById('filter-banner');
+    if (currentTeam) {
+      banner.style.display = 'flex';
+      banner.innerHTML = `Showing schedule for <strong>${currentTeam}</strong>`;
+      const clearBtn = document.createElement('button');
+      clearBtn.className = 'clear-filter';
+      clearBtn.textContent = 'Show all teams';
+      clearBtn.onclick = clearTeamFilter;
+      banner.appendChild(clearBtn);
+    } else {
+      banner.style.display = 'none';
+      banner.innerHTML = '';
+    }
   }
 
   function parseCSV(text) {
@@ -187,6 +267,60 @@
     return 'scheduled';
   }
 
+  function teamLink(name) {
+    const safe = (name || 'TBD').replace(/'/g, "\\'");
+    return `<a class="team-link" href="#" onclick="setTeamFilter('${safe}'); return false;">${name || 'TBD'}</a>`;
+  }
+
+  function renderGames() {
+    const content = document.getElementById('content');
+    let games = allGames;
+
+    if (currentTeam) {
+      games = games.filter(g => g.away_team === currentTeam || g.home_team === currentTeam);
+    }
+
+    const groups = {};
+    games.forEach(g => {
+      const key = g.date || 'Unknown date';
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(g);
+    });
+
+    content.innerHTML = '';
+    Object.keys(groups).forEach(dateLabel => {
+      const section = document.createElement('div');
+      section.className = 'day-group';
+
+      const label = document.createElement('div');
+      label.className = 'day-label';
+      label.textContent = dateLabel;
+      section.appendChild(label);
+
+      groups[dateLabel].forEach(g => {
+        const row = document.createElement('div');
+        row.className = 'game-row';
+        row.innerHTML = `
+          <div class="game-time">${g.time_az || ''}</div>
+          <div>
+            <div class="matchup">${teamLink(g.away_team)} @ ${teamLink(g.home_team)}</div>
+            <div class="venue">${g.venue || ''}</div>
+          </div>
+          <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
+        `;
+        section.appendChild(row);
+      });
+
+      content.appendChild(section);
+    });
+
+    if (Object.keys(groups).length === 0) {
+      content.innerHTML = currentTeam
+        ? `<p class="error">No games found for ${currentTeam} this season.</p>`
+        : '<p class="error">No games found for this season.</p>';
+    }
+  }
+
   async function loadSchedule() {
     const content = document.getElementById('content');
     content.innerHTML = '<p class="loading">Loading schedule...</p>';
@@ -195,45 +329,9 @@
       const res = await fetch(`data/${currentSeason}/schedule.csv`);
       if (!res.ok) throw new Error('Schedule not found for this season yet.');
       const text = await res.text();
-      const games = parseCSV(text);
-
-      const groups = {};
-      games.forEach(g => {
-        const key = g.date || 'Unknown date';
-        if (!groups[key]) groups[key] = [];
-        groups[key].push(g);
-      });
-
-      content.innerHTML = '';
-      Object.keys(groups).forEach(dateLabel => {
-        const section = document.createElement('div');
-        section.className = 'day-group';
-
-        const label = document.createElement('div');
-        label.className = 'day-label';
-        label.textContent = dateLabel;
-        section.appendChild(label);
-
-        groups[dateLabel].forEach(g => {
-          const row = document.createElement('div');
-          row.className = 'game-row';
-          row.innerHTML = `
-            <div class="game-time">${g.time_az || ''}</div>
-            <div>
-              <div class="matchup">${g.away_team || 'TBD'} @ ${g.home_team || 'TBD'}</div>
-              <div class="venue">${g.venue || ''}</div>
-            </div>
-            <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
-          `;
-          section.appendChild(row);
-        });
-
-        content.appendChild(section);
-      });
-
-      if (Object.keys(groups).length === 0) {
-        content.innerHTML = '<p class="error">No games found for this season.</p>';
-      }
+      allGames = parseCSV(text);
+      renderBanner();
+      renderGames();
     } catch (err) {
       content.innerHTML = `<p class="error">Couldn't load the schedule: ${err.message}</p>`;
     }
