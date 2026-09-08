@@ -364,7 +364,11 @@
     return ` <span class="score${cls}">${teamScore}</span>`;
   }
 
-  function decisionLine(gamePk) {
+  function decisionLine(gamePk, status) {
+    const s = (status || '').toLowerCase();
+    const wasPlayed = s.includes('final') || s.includes('completed');
+    if (!wasPlayed) return '';
+
     const d = decisionsByGame[gamePk];
     if (!d || !d.winning_pitcher_name) return '';
     let line = `<span class="decision-label">W</span> ${d.winning_pitcher_name}`;
@@ -413,7 +417,7 @@
           <div>
             <div class="matchup">${teamLink(g.away_team, awayWon)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team, homeWon)}${scoreSpan(g.home_score, g.away_score)}</div>
             <div class="venue">${g.venue || ''}</div>
-            ${decisionLine(g.game_pk)}
+            ${decisionLine(g.game_pk, g.status)}
           </div>
           <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
         `;
