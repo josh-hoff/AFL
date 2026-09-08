@@ -2,6 +2,7 @@ import argparse
 import csv
 import json
 import os
+import re
 from datetime import datetime, timedelta, timezone
 
 AFL_SPORT_ID = 17
@@ -19,20 +20,6 @@ GAME_TYPE_LABELS = {
 }
 
 
-STATUS_PRIORITY = {
-    "Final": 3,
-    "Completed Early": 3,
-    "Game Over": 3,
-    "In Progress": 2,
-    "Scheduled": 1,
-    "Pre-Game": 1,
-    "Warmup": 1,
-    "Postponed": 0,
-    "Cancelled": 0,
-    "Suspended": 0,
-}
-
-
 def fetch_schedule(season):
     import requests
 
@@ -47,34 +34,6 @@ def parse_schedule(data):
     for date_entry in data.get("dates", []):
         for game in date_entry.get("games", []):
             games.append(_parse_game(game))
-
-    deduped = {}
-    for g in games:
-        pk = g["game_pk"]
-        if pk not in deduped:
-            deduped[pk] = g
-            continue
-        existing = deduped[pk]
-        existing_priority = STATUS_PRIORITY.get(existing["status"], 1)
-        new_priority = STATUS_PRIORITY.get(g["status"], 1)
-
-        if new_priority > existing_priority:
-            winner, loser = g, existing
-        elif new_priority < existing_priority:
-            winner, loser = existing, g
-        else:
-            winner, loser = (g, existing) if g["_sort_key"] > existing["_sort_key"] else (existing, g)
-
-        if loser.get("rescheduled") == "Y" and winner.get("rescheduled") != "Y":
-            winner["rescheduled"] = "Y"
-            winner["original_date"] = loser["original_date"]
-            base_date = winner["date"].split(" (originally")[0]
-            year, month, day = loser["original_date"].split("-")
-            winner["date"] = f"{base_date} (originally {int(month)}/{int(day)})"
-
-        deduped[pk] = winner
-
-    games = list(deduped.values())
 
     games.sort(key=lambda g: g["_sort_key"])
     for g in games:
@@ -131,6 +90,16 @@ def _parse_game(game):
     status_reason = status_info.get("reason", "")
     description = game.get("description", "")
 
+    original_date_str = original_az_dt.strftime("%Y-%m-%d") if is_rescheduled else ""
+
+    if not is_rescheduled and description:
+        makeup_match = re.search(r"[Mm]akeup of (\d{1,2})/(\d{1,2})", description)
+        if makeup_match:
+            orig_month, orig_day = int(makeup_match.group(1)), int(makeup_match.group(2))
+            original_date_str = f"{actual_az_dt.year}-{orig_month:02d}-{orig_day:02d}"
+            date_display = f"{date_display} (originally {orig_month}/{orig_day})"
+            is_rescheduled = True
+
     return {
         "date": date_display,
         "time_az": actual_az_dt.strftime("%I:%M %p").lstrip("0"),
@@ -151,7 +120,7 @@ def _parse_game(game):
         "status": status,
         "status_reason": status_reason,
         "rescheduled": "Y" if is_rescheduled else "N",
-        "original_date": original_az_dt.strftime("%Y-%m-%d") if is_rescheduled else "",
+        "original_date": original_date_str,
         "description": description,
         "_sort_key": actual_utc_dt,
     }
