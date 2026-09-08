@@ -25,27 +25,34 @@
     line-height: 1.5;
   }
   header {
-    padding: 2.5rem 1.5rem 1.5rem;
+    position: relative;
+    padding: 3rem 1.5rem 1.5rem;
     max-width: 900px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
+    text-align: center;
   }
   h1 {
-    font-size: 1.8rem;
+    font-size: 2.6rem;
     font-weight: 600;
-    margin: 0 0 0.3rem;
+    margin: 0;
     letter-spacing: -0.01em;
+  }
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 3rem;
+    text-align: center;
   }
   .subtitle {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.75rem;
     margin: 0;
   }
   .season-select {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
     background: var(--bg-card);
     border: 1px solid var(--border);
     color: var(--text);
@@ -188,10 +195,7 @@
 <body>
 
 <header>
-  <div>
-    <h1>Arizona Fall League</h1>
-    <p class="subtitle">Schedule, updated automatically from the MLB Stats API</p>
-  </div>
+  <h1>Arizona Fall League</h1>
   <select id="season-select" class="season-select"></select>
 </header>
 
@@ -200,6 +204,10 @@
 <main id="content">
   <p class="loading">Loading schedule...</p>
 </main>
+
+<footer>
+  <p class="subtitle">Schedule, updated automatically from the MLB Stats API</p>
+</footer>
 
 <script>
   let SEASONS = [];
