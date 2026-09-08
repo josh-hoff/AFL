@@ -25,8 +25,10 @@ PITCH_FIELDS = [
 DECISION_FIELDS = [
     "game_pk", "date",
     "winning_pitcher_id", "winning_pitcher_name",
+    "winning_pitcher_wins", "winning_pitcher_losses", "winning_pitcher_era",
     "losing_pitcher_id", "losing_pitcher_name",
-    "save_pitcher_id", "save_pitcher_name",
+    "losing_pitcher_wins", "losing_pitcher_losses", "losing_pitcher_era",
+    "save_pitcher_id", "save_pitcher_name", "save_pitcher_saves",
 ]
 
 
@@ -135,11 +137,79 @@ def extract_decisions(feed, game_info):
         "date": game_info.get("date"),
         "winning_pitcher_id": winner.get("id", ""),
         "winning_pitcher_name": winner.get("fullName", ""),
+        "winning_pitcher_wins": "",
+        "winning_pitcher_losses": "",
+        "winning_pitcher_era": "",
         "losing_pitcher_id": loser.get("id", ""),
         "losing_pitcher_name": loser.get("fullName", ""),
+        "losing_pitcher_wins": "",
+        "losing_pitcher_losses": "",
+        "losing_pitcher_era": "",
         "save_pitcher_id": save.get("id", ""),
         "save_pitcher_name": save.get("fullName", ""),
+        "save_pitcher_saves": "",
     }
+
+
+def innings_pitched_to_outs(ip_str):
+    if not ip_str:
+        return 0
+    whole, _, frac = str(ip_str).partition(".")
+    whole_outs = int(whole) * 3 if whole else 0
+    frac_outs = int(frac) if frac else 0
+    return whole_outs + frac_outs
+
+
+def get_pitcher_game_stats(feed, pitcher_id):
+    teams = feed.get("liveData", {}).get("boxscore", {}).get("teams", {})
+    for side in ("away", "home"):
+        players = teams.get(side, {}).get("players", {})
+        player = players.get(f"ID{pitcher_id}")
+        if player:
+            return player.get("stats", {}).get("pitching", {})
+    return {}
+
+
+def apply_running_record(decision, feed, pitcher_records):
+    def record_for(pid):
+        return pitcher_records.setdefault(
+            pid, {"wins": 0, "losses": 0, "saves": 0, "earned_runs": 0, "outs": 0}
+        )
+
+    def update_era_stats(pid, rec):
+        game_stats = get_pitcher_game_stats(feed, pid)
+        rec["earned_runs"] += int(game_stats.get("earnedRuns", 0) or 0)
+        rec["outs"] += innings_pitched_to_outs(game_stats.get("inningsPitched", ""))
+
+    def era_display(rec):
+        if rec["outs"] == 0:
+            return ""
+        era = rec["earned_runs"] * 9 / (rec["outs"] / 3)
+        return f"{era:.2f}"
+
+    w_id = decision["winning_pitcher_id"]
+    if w_id:
+        rec = record_for(w_id)
+        rec["wins"] += 1
+        update_era_stats(w_id, rec)
+        decision["winning_pitcher_wins"] = rec["wins"]
+        decision["winning_pitcher_losses"] = rec["losses"]
+        decision["winning_pitcher_era"] = era_display(rec)
+
+    l_id = decision["losing_pitcher_id"]
+    if l_id:
+        rec = record_for(l_id)
+        rec["losses"] += 1
+        update_era_stats(l_id, rec)
+        decision["losing_pitcher_wins"] = rec["wins"]
+        decision["losing_pitcher_losses"] = rec["losses"]
+        decision["losing_pitcher_era"] = era_display(rec)
+
+    s_id = decision["save_pitcher_id"]
+    if s_id:
+        rec = record_for(s_id)
+        rec["saves"] += 1
+        decision["save_pitcher_saves"] = rec["saves"]
 
 
 def main():
@@ -174,6 +244,7 @@ def main():
 
     all_rows = []
     all_decisions = []
+    pitcher_records = {}
     skipped_no_plays = 0
     skipped_missing = 0
 
@@ -199,6 +270,7 @@ def main():
         rows = extract_pitches(feed, game)
         decision = extract_decisions(feed, game)
         if decision:
+            apply_running_record(decision, feed, pitcher_records)
             all_decisions.append(decision)
 
         if not rows:

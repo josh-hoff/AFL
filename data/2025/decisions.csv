@@ -1,92 +1,92 @@
-game_pk,date,winning_pitcher_id,winning_pitcher_name,losing_pitcher_id,losing_pitcher_name,save_pitcher_id,save_pitcher_name
-825618,2025-10-06,691000,Carson Montgomery,687562,Jake Bennett,805321,Trevor Kuncl
-825635,2025-10-07,686753,Drey Jameson,807410,Chay Yeager,,
-825607,2025-10-07,682982,Daniel Espino,701480,Bryce Cunningham,693713,Emiliano Teodo
-825606,2025-10-08,804663,Tyler Cleveland,802374,Brady Kirtner,827317,Brandon Downer
-825591,2025-10-08,695294,Tommy McCollum,695003,Randel Clemente,,
-825619,2025-10-08,809340,Austin Troesser,700380,Joshua Loeschorn,,
-825652,2025-10-09,682769,Eiberson Castellano,801333,Johnathan Harmon,,
-825666,2025-10-09,813820,Chen-Wei Lin,694885,Ryan Murphy,,
-825637,2025-10-09,801270,Darwin Rodriguez,694518,Austin Smith,686672,Mark Adamiak
-825651,2025-10-10,695076,Rhett Lowder,695065,Ryan Costeiu,,
-825620,2025-10-10,801802,James Hicks,702516,JP Wheat,,
-825664,2025-10-12,692437,Winston Santos,806293,Payton Martin,683720,Edwin Jimenez
-825605,2025-10-12,695366,Holt Jones,702586,Fulton Lockhart,,
-825616,2025-10-12,807748,Kannon Kemp,690162,Kenny Serwa,,
-825636,2025-10-14,806270,Dominic Perachi,809915,Jakob Wright,695402,Najer Victor
-825649,2025-10-14,690162,Kenny Serwa,681041,Marcelo Perez,,
-825604,2025-10-14,701604,Andrew Lindsey,692030,Jose Corniell,815292,Luis Martinez-Gomez
-825648,2025-10-15,806293,Payton Martin,695569,Luke Hayden,699823,Tyler Davis
-825622,2025-10-15,808054,Yordin Chalas,808743,Bryce Jenkins,692243,Jaden Woods
-825589,2025-10-15,695871,Jesús Broca,701480,Bryce Cunningham,,
-825603,2025-10-16,801725,Luis De León,703596,Karson Milbrandt,,
-825633,2025-10-16,695294,Tommy McCollum,814106,Cade Denton,694725,Michael Fowler
-825621,2025-10-16,694885,Ryan Murphy,681410,Connor McCullough,691028,Nate Wohlgemuth
-825632,2025-10-17,801333,Johnathan Harmon,701908,David Hagaman,,
-825587,2025-10-17,813820,Chen-Wei Lin,814803,Logan Martin,,
-825595,2025-10-17,820901,Anderson Brito,813895,Corey Avant,,
-825663,2025-10-18,687020,Mason Auer,830485,Trent Buchanan,695366,Holt Jones
-825644,2025-10-18,695065,Ryan Costeiu,805812,Dylan Questad,808054,Yordin Chalas
-825614,2025-10-18,801802,James Hicks,682769,Eiberson Castellano,,
-825647,2025-10-19,682981,Derek Diamond,807724,Justin Chambers,,
-825645,2025-10-19,701604,Andrew Lindsey,681041,Marcelo Perez,,
-825615,2025-10-19,687562,Jake Bennett,806641,Kolton Curtis,,
-825646,2025-10-21,678738,Juan Sanchez,804592,Hunter Hoopes,,
-825616,2025-10-21 (originally 10/12),807748,Kannon Kemp,690162,Kenny Serwa,,
-825581,2025-10-21,692030,Jose Corniell,696505,Cory Wall,801367,Matt Jachec
-825601,2025-10-21,806270,Dominic Perachi,691765,Jackson Baumeister,692243,Jaden Woods
-825664,2025-10-21 (originally 10/12),692437,Winston Santos,806293,Payton Martin,683720,Edwin Jimenez
-825605,2025-10-21 (originally 10/12),695366,Holt Jones,702586,Fulton Lockhart,,
-825586,2025-10-22,685396,Nate Peterson,694885,Ryan Murphy,,
-825631,2025-10-22,694788,Carlson Reed,701480,Bryce Cunningham,,
-825643,2025-10-22,674265,Kevin Abel,681410,Connor McCullough,805955,Carson Dorsey
-825630,2025-10-23,809138,Isaac Stebens,813820,Chen-Wei Lin,,
-825638,2025-10-23,693686,Spencer Miles,808063,Maikel Miralles,,
-825600,2025-10-23,702045,Rorik Maltrud,691103,Koen Moreno,693713,Emiliano Teodo
-825629,2025-10-24,701557,Carlos Lequerica,695402,Najer Victor,,
-825585,2025-10-25,812163,Jonathan Russell,694725,Michael Fowler,680893,Hueston Morrill
-825662,2025-10-25,691629,Miguelangel Boadas,696505,Cory Wall,,
-825584,2025-10-26,822067,A.J. Causey,823801,Tanner Smith,,
-825660,2025-10-26,815794,Hyun-Seok Jang,691384,Luis Perales,,
-825609,2025-10-26,698952,Jose T. Perez,806281,Blaze Pontes,689223,Derek True
-825639,2025-10-28,700675,Jimmy Kingsbury,806270,Dominic Perachi,,
-825613,2025-10-28,678738,Juan Sanchez,692437,Winston Santos,688692,Jared Simpson
-825599,2025-10-28,694696,Cade Smith,806334,Alex Amalfi,,
-825628,2025-10-29,801725,Luis De León,815456,Ben Shields,805955,Carson Dorsey
-825583,2025-10-29,692137,L.P. Langevin,801221,Pedro Garcia,689557,Zane Morehouse
-825656,2025-10-29,694989,Kelena Sauer,702516,JP Wheat,699823,Tyler Davis
-825627,2025-10-30,815292,Luis Martinez-Gomez,692243,Jaden Woods,690658,Will Johnston
-825612,2025-10-30,808743,Bryce Jenkins,807724,Justin Chambers,,
-825659,2025-10-31,692404,Darlin Saladin,804592,Hunter Hoopes,695003,Randel Clemente
-825626,2025-10-31,820901,Anderson Brito,701908,David Hagaman,,
-825582,2025-10-31,703596,Karson Milbrandt,814803,Logan Martin,686672,Mark Adamiak
-825598,2025-11-01,680893,Hueston Morrill,690229,LJ McDonough,,
-825578,2025-11-01,689557,Zane Morehouse,695076,Rhett Lowder,822067,A.J. Causey
-825611,2025-11-01,813865,Hudson Leach,700327,Welinton Herrera,,
-825658,2025-11-02,682769,Eiberson Castellano,815794,Hyun-Seok Jang,,
-825597,2025-11-02,815292,Luis Martinez-Gomez,802967,Benny Thompson,802374,Brady Kirtner
-825610,2025-11-02,694885,Ryan Murphy,681041,Marcelo Perez,688781,Brett Banks
-825579,2025-11-04,692437,Winston Santos,692243,Jaden Woods,,
-825596,2025-11-04,801270,Darwin Rodriguez,829338,Dariel Fregio,,
-825657,2025-11-04,695316,Jarold Rosado,828471,Jakob Hall,,
-825577,2025-11-05,690162,Kenny Serwa,695871,Jesús Broca,,
-825594,2025-11-05,806334,Alex Amalfi,813895,Corey Avant,,
-825625,2025-11-05,814106,Cade Denton,823801,Tanner Smith,699230,Lorenzo Encarnacion
-825641,2025-11-06,813820,Chen-Wei Lin,808063,Maikel Miralles,,
-825624,2025-11-06,671143,Trenton Denholm,694968,Jack Mahoney,,
-825593,2025-11-06,693686,Spencer Miles,701480,Bryce Cunningham,,
-825655,2025-11-07,800811,Jacob Kroeger,701557,Carlos Lequerica,,
-825640,2025-11-07,807748,Kannon Kemp,815292,Luis Martinez-Gomez,804663,Tyler Cleveland
-825576,2025-11-07,814803,Logan Martin,691384,Luis Perales,,
-825588,2025-11-09,829338,Dariel Fregio,692404,Darlin Saladin,,
-825575,2025-11-10,827317,Brandon Downer,822067,A.J. Causey,687040,Sayer Diederich
-825623,2025-11-10,801829,Jay Allmer,678738,Juan Sanchez,700327,Welinton Herrera
-825653,2025-11-10,690658,Will Johnston,702910,Jhancarlos Lara,680893,Hueston Morrill
-825592,2025-11-11,801270,Darwin Rodriguez,828471,Jakob Hall,802963,Mathew Peters
-825617,2025-11-11,806270,Dominic Perachi,692030,Jose Corniell,700380,Joshua Loeschorn
-825608,2025-11-11,695003,Randel Clemente,691028,Nate Wohlgemuth,,
-825574,2025-11-12,815292,Luis Martinez-Gomez,695632,Brandon Neely,680893,Hueston Morrill
-825573,2025-11-12,806288,Stefan Raeth,807724,Justin Chambers,,
-825580,2025-11-13,822067,A.J. Causey,695366,Holt Jones,,
-825571,2025-11-13,691000,Carson Montgomery,693686,Spencer Miles,,
-825572,2025-11-14,683720,Edwin Jimenez,805321,Trevor Kuncl,,
+game_pk,date,winning_pitcher_id,winning_pitcher_name,winning_pitcher_wins,winning_pitcher_losses,winning_pitcher_era,losing_pitcher_id,losing_pitcher_name,losing_pitcher_wins,losing_pitcher_losses,losing_pitcher_era,save_pitcher_id,save_pitcher_name,save_pitcher_saves
+825618,2025-10-06,691000,Carson Montgomery,1,0,3.00,687562,Jake Bennett,0,1,9.00,805321,Trevor Kuncl,1
+825635,2025-10-07,686753,Drey Jameson,1,0,0.00,807410,Chay Yeager,0,1,9.00,,,
+825607,2025-10-07,682982,Daniel Espino,1,0,0.00,701480,Bryce Cunningham,0,1,18.00,693713,Emiliano Teodo,1
+825606,2025-10-08,804663,Tyler Cleveland,1,0,0.00,802374,Brady Kirtner,0,1,20.25,827317,Brandon Downer,1
+825591,2025-10-08,695294,Tommy McCollum,1,0,9.00,695003,Randel Clemente,0,1,27.00,,,
+825619,2025-10-08,809340,Austin Troesser,1,0,0.00,700380,Joshua Loeschorn,0,1,6.75,,,
+825652,2025-10-09,682769,Eiberson Castellano,1,0,3.00,801333,Johnathan Harmon,0,1,9.00,,,
+825666,2025-10-09,813820,Chen-Wei Lin,1,0,0.00,694885,Ryan Murphy,0,1,27.00,,,
+825637,2025-10-09,801270,Darwin Rodriguez,1,0,9.00,694518,Austin Smith,0,1,45.00,686672,Mark Adamiak,1
+825651,2025-10-10,695076,Rhett Lowder,1,0,0.00,695065,Ryan Costeiu,0,1,13.50,,,
+825620,2025-10-10,801802,James Hicks,1,0,0.00,702516,JP Wheat,0,1,36.00,,,
+825664,2025-10-12,692437,Winston Santos,1,0,4.50,806293,Payton Martin,0,1,9.00,683720,Edwin Jimenez,1
+825605,2025-10-12,695366,Holt Jones,1,0,4.50,702586,Fulton Lockhart,0,1,36.00,,,
+825616,2025-10-12,807748,Kannon Kemp,1,0,0.00,690162,Kenny Serwa,0,1,13.50,,,
+825636,2025-10-14,806270,Dominic Perachi,1,0,3.00,809915,Jakob Wright,0,1,40.50,695402,Najer Victor,1
+825649,2025-10-14,690162,Kenny Serwa,1,1,12.79,681041,Marcelo Perez,0,1,108.00,,,
+825604,2025-10-14,701604,Andrew Lindsey,1,0,6.75,692030,Jose Corniell,0,1,6.75,815292,Luis Martinez-Gomez,1
+825648,2025-10-15,806293,Payton Martin,1,1,3.00,695569,Luke Hayden,0,1,40.50,699823,Tyler Davis,1
+825622,2025-10-15,808054,Yordin Chalas,1,0,0.00,808743,Bryce Jenkins,0,1,108.00,692243,Jaden Woods,1
+825589,2025-10-15,695871,Jesús Broca,1,0,0.00,701480,Bryce Cunningham,0,2,7.94,,,
+825603,2025-10-16,801725,Luis De León,1,0,2.08,703596,Karson Milbrandt,0,1,3.00,,,
+825633,2025-10-16,695294,Tommy McCollum,2,0,3.86,814106,Cade Denton,0,1,45.00,694725,Michael Fowler,1
+825621,2025-10-16,694885,Ryan Murphy,1,1,16.20,681410,Connor McCullough,0,1,12.00,691028,Nate Wohlgemuth,1
+825632,2025-10-17,801333,Johnathan Harmon,1,1,5.40,701908,David Hagaman,0,1,6.75,,,
+825587,2025-10-17,813820,Chen-Wei Lin,2,0,0.00,814803,Logan Martin,0,1,10.12,,,
+825595,2025-10-17,820901,Anderson Brito,1,0,0.00,813895,Corey Avant,0,1,54.00,,,
+825663,2025-10-18,687020,Mason Auer,1,0,0.00,830485,Trent Buchanan,0,1,81.00,695366,Holt Jones,1
+825644,2025-10-18,695065,Ryan Costeiu,1,1,7.36,805812,Dylan Questad,0,1,40.50,808054,Yordin Chalas,1
+825614,2025-10-18,801802,James Hicks,2,0,0.00,682769,Eiberson Castellano,1,1,6.00,,,
+825647,2025-10-19,682981,Derek Diamond,1,0,0.00,807724,Justin Chambers,0,1,40.50,,,
+825645,2025-10-19,701604,Andrew Lindsey,2,0,8.10,681041,Marcelo Perez,0,2,60.75,,,
+825615,2025-10-19,687562,Jake Bennett,1,1,9.00,806641,Kolton Curtis,0,1,54.00,,,
+825646,2025-10-21,678738,Juan Sanchez,1,0,0.00,804592,Hunter Hoopes,0,1,27.00,,,
+825616,2025-10-21 (originally 10/12),807748,Kannon Kemp,2,0,0.00,690162,Kenny Serwa,1,2,13.03,,,
+825581,2025-10-21,692030,Jose Corniell,1,1,5.62,696505,Cory Wall,0,1,6.75,801367,Matt Jachec,1
+825601,2025-10-21,806270,Dominic Perachi,2,0,1.50,691765,Jackson Baumeister,0,1,2.25,692243,Jaden Woods,2
+825664,2025-10-21 (originally 10/12),692437,Winston Santos,2,0,4.50,806293,Payton Martin,1,2,4.50,683720,Edwin Jimenez,2
+825605,2025-10-21 (originally 10/12),695366,Holt Jones,2,0,4.50,702586,Fulton Lockhart,0,2,36.00,,,
+825586,2025-10-22,685396,Nate Peterson,1,0,0.00,694885,Ryan Murphy,1,2,8.53,,,
+825631,2025-10-22,694788,Carlson Reed,1,0,0.00,701480,Bryce Cunningham,0,3,10.12,,,
+825643,2025-10-22,674265,Kevin Abel,1,0,0.00,681410,Connor McCullough,0,2,19.64,805955,Carson Dorsey,1
+825630,2025-10-23,809138,Isaac Stebens,1,0,0.00,813820,Chen-Wei Lin,2,1,4.91,,,
+825638,2025-10-23,693686,Spencer Miles,1,0,0.00,808063,Maikel Miralles,0,1,32.40,,,
+825600,2025-10-23,702045,Rorik Maltrud,1,0,9.00,691103,Koen Moreno,0,1,15.00,693713,Emiliano Teodo,2
+825629,2025-10-24,701557,Carlos Lequerica,1,0,0.00,695402,Najer Victor,0,1,9.00,,,
+825585,2025-10-25,812163,Jonathan Russell,1,0,9.00,694725,Michael Fowler,0,1,0.00,680893,Hueston Morrill,1
+825662,2025-10-25,691629,Miguelangel Boadas,1,0,0.00,696505,Cory Wall,0,2,27.00,,,
+825584,2025-10-26,822067,A.J. Causey,1,0,0.00,823801,Tanner Smith,0,1,9.00,,,
+825660,2025-10-26,815794,Hyun-Seok Jang,1,0,0.00,691384,Luis Perales,0,1,6.75,,,
+825609,2025-10-26,698952,Jose T. Perez,1,0,0.00,806281,Blaze Pontes,0,1,27.00,689223,Derek True,1
+825639,2025-10-28,700675,Jimmy Kingsbury,1,0,0.00,806270,Dominic Perachi,2,1,4.66,,,
+825613,2025-10-28,678738,Juan Sanchez,2,0,0.00,692437,Winston Santos,2,1,5.56,688692,Jared Simpson,1
+825599,2025-10-28,694696,Cade Smith,1,0,0.00,806334,Alex Amalfi,0,1,21.60,,,
+825628,2025-10-29,801725,Luis De León,2,0,2.45,815456,Ben Shields,0,1,135.00,805955,Carson Dorsey,2
+825583,2025-10-29,692137,L.P. Langevin,1,0,0.00,801221,Pedro Garcia,0,1,27.00,689557,Zane Morehouse,1
+825656,2025-10-29,694989,Kelena Sauer,1,0,18.00,702516,JP Wheat,0,2,54.00,699823,Tyler Davis,2
+825627,2025-10-30,815292,Luis Martinez-Gomez,1,0,0.00,692243,Jaden Woods,0,1,18.00,690658,Will Johnston,1
+825612,2025-10-30,808743,Bryce Jenkins,1,1,18.00,807724,Justin Chambers,0,2,19.29,,,
+825659,2025-10-31,692404,Darlin Saladin,1,0,3.00,804592,Hunter Hoopes,0,2,31.50,695003,Randel Clemente,1
+825626,2025-10-31,820901,Anderson Brito,2,0,0.00,701908,David Hagaman,0,2,6.75,,,
+825582,2025-10-31,703596,Karson Milbrandt,1,1,4.50,814803,Logan Martin,0,2,16.20,686672,Mark Adamiak,2
+825598,2025-11-01,680893,Hueston Morrill,1,0,13.50,690229,LJ McDonough,0,1,13.50,,,
+825578,2025-11-01,689557,Zane Morehouse,1,0,4.50,695076,Rhett Lowder,1,1,5.40,822067,A.J. Causey,1
+825611,2025-11-01,813865,Hudson Leach,1,0,0.00,700327,Welinton Herrera,0,1,27.00,,,
+825658,2025-11-02,682769,Eiberson Castellano,2,1,4.50,815794,Hyun-Seok Jang,1,1,5.06,,,
+825597,2025-11-02,815292,Luis Martinez-Gomez,2,0,6.00,802967,Benny Thompson,0,1,27.00,802374,Brady Kirtner,1
+825610,2025-11-02,694885,Ryan Murphy,2,2,5.23,681041,Marcelo Perez,0,3,35.10,688781,Brett Banks,1
+825579,2025-11-04,692437,Winston Santos,3,1,6.46,692243,Jaden Woods,0,2,27.00,,,
+825596,2025-11-04,801270,Darwin Rodriguez,2,0,10.12,829338,Dariel Fregio,0,1,81.00,,,
+825657,2025-11-04,695316,Jarold Rosado,1,0,0.00,828471,Jakob Hall,0,1,18.00,,,
+825577,2025-11-05,690162,Kenny Serwa,2,2,9.22,695871,Jesús Broca,1,1,0.00,,,
+825594,2025-11-05,806334,Alex Amalfi,1,1,11.57,813895,Corey Avant,0,2,38.57,,,
+825625,2025-11-05,814106,Cade Denton,1,1,13.50,823801,Tanner Smith,0,2,13.50,699230,Lorenzo Encarnacion,1
+825641,2025-11-06,813820,Chen-Wei Lin,3,1,3.48,808063,Maikel Miralles,0,2,50.14,,,
+825624,2025-11-06,671143,Trenton Denholm,1,0,0.00,694968,Jack Mahoney,0,1,13.50,,,
+825593,2025-11-06,693686,Spencer Miles,2,0,2.25,701480,Bryce Cunningham,0,4,11.70,,,
+825655,2025-11-07,800811,Jacob Kroeger,1,0,0.00,701557,Carlos Lequerica,1,1,4.50,,,
+825640,2025-11-07,807748,Kannon Kemp,3,0,0.00,815292,Luis Martinez-Gomez,2,1,5.40,804663,Tyler Cleveland,1
+825576,2025-11-07,814803,Logan Martin,1,2,8.53,691384,Luis Perales,0,2,9.82,,,
+825588,2025-11-09,829338,Dariel Fregio,1,1,40.50,692404,Darlin Saladin,1,1,5.40,,,
+825575,2025-11-10,827317,Brandon Downer,1,0,4.50,822067,A.J. Causey,1,1,3.38,687040,Sayer Diederich,1
+825623,2025-11-10,801829,Jay Allmer,1,0,0.00,678738,Juan Sanchez,2,1,4.15,700327,Welinton Herrera,1
+825653,2025-11-10,690658,Will Johnston,1,0,0.00,702910,Jhancarlos Lara,0,1,13.50,680893,Hueston Morrill,2
+825592,2025-11-11,801270,Darwin Rodriguez,3,0,7.36,828471,Jakob Hall,0,2,16.88,802963,Mathew Peters,1
+825617,2025-11-11,806270,Dominic Perachi,3,1,4.72,692030,Jose Corniell,1,2,8.18,700380,Joshua Loeschorn,1
+825608,2025-11-11,695003,Randel Clemente,1,1,7.71,691028,Nate Wohlgemuth,0,1,108.00,,,
+825574,2025-11-12,815292,Luis Martinez-Gomez,3,1,3.38,695632,Brandon Neely,0,1,27.00,680893,Hueston Morrill,3
+825573,2025-11-12,806288,Stefan Raeth,1,0,0.00,807724,Justin Chambers,0,3,11.25,,,
+825580,2025-11-13,822067,A.J. Causey,2,1,2.45,695366,Holt Jones,2,1,5.79,,,
+825571,2025-11-13,691000,Carson Montgomery,2,0,1.80,693686,Spencer Miles,2,1,8.44,,,
+825572,2025-11-14,683720,Edwin Jimenez,1,0,0.00,805321,Trevor Kuncl,0,1,135.00,,,

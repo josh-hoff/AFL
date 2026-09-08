@@ -402,12 +402,6 @@
     return ` <span class="score${cls}">${teamScore}</span>`;
   }
 
-  function pitcherRecordSuffix(pitcherId) {
-    const p = pitcherStatsById[pitcherId];
-    if (!p || p.wins === '' || p.losses === '') return '';
-    return ` (${p.wins}-${p.losses})`;
-  }
-
   function pitcherRecordAndEraSuffix(pitcherId) {
     const p = pitcherStatsById[pitcherId];
     if (!p) return '';
@@ -424,13 +418,22 @@
 
     const d = decisionsByGame[gamePk];
     if (!d || !d.winning_pitcher_name) return '';
-    let line = `<span class="decision-label">W</span> ${d.winning_pitcher_name}${pitcherRecordSuffix(d.winning_pitcher_id)}`;
+
+    const wParts = [];
+    if (d.winning_pitcher_wins !== '' && d.winning_pitcher_losses !== '') wParts.push(`${d.winning_pitcher_wins}-${d.winning_pitcher_losses}`);
+    if (d.winning_pitcher_era !== '') wParts.push(`${d.winning_pitcher_era} ERA`);
+    const wRecord = wParts.length ? ` (${wParts.join(', ')})` : '';
+    let line = `<span class="decision-label">W</span> ${d.winning_pitcher_name}${wRecord}`;
+
     if (d.losing_pitcher_name) {
-      line += ` &nbsp; <span class="decision-label">L</span> ${d.losing_pitcher_name}${pitcherRecordSuffix(d.losing_pitcher_id)}`;
+      const lParts = [];
+      if (d.losing_pitcher_wins !== '' && d.losing_pitcher_losses !== '') lParts.push(`${d.losing_pitcher_wins}-${d.losing_pitcher_losses}`);
+      if (d.losing_pitcher_era !== '') lParts.push(`${d.losing_pitcher_era} ERA`);
+      const lRecord = lParts.length ? ` (${lParts.join(', ')})` : '';
+      line += ` &nbsp; <span class="decision-label">L</span> ${d.losing_pitcher_name}${lRecord}`;
     }
     if (d.save_pitcher_name) {
-      const savePitcher = pitcherStatsById[d.save_pitcher_id];
-      const saveSuffix = savePitcher && savePitcher.saves !== '' ? ` (${savePitcher.saves} SV)` : '';
+      const saveSuffix = d.save_pitcher_saves !== '' ? ` (${d.save_pitcher_saves} SV)` : '';
       line += ` &nbsp; <span class="decision-label">SV</span> ${d.save_pitcher_name}${saveSuffix}`;
     }
     return `<div class="decisions">${line}</div>`;
