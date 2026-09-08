@@ -36,6 +36,15 @@
     font-weight: 600;
     margin: 0;
     letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .league-logo {
+    height: 2.6rem;
+    width: auto;
+    flex-shrink: 0;
   }
   footer {
     max-width: 900px;
@@ -211,7 +220,7 @@
 <body>
 
 <header>
-  <h1>Arizona Fall League</h1>
+  <h1><img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'">Arizona Fall League</h1>
   <select id="season-select" class="season-select"></select>
 </header>
 
