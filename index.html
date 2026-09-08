@@ -115,8 +115,12 @@
     font-weight: 400;
   }
   .score.win {
-    color: var(--text);
+    color: var(--final);
     font-weight: 600;
+  }
+  .score.loss {
+    color: var(--cancelled);
+    font-weight: 400;
   }
   .loading, .error {
     color: var(--text-muted);
@@ -131,6 +135,9 @@
   .team-link:hover {
     color: var(--accent);
     border-bottom-color: var(--accent);
+  }
+  .team-link.winner {
+    font-weight: 700;
   }
   .filter-banner {
     display: flex;
@@ -148,6 +155,7 @@
   }
   .record-win { color: var(--final); font-weight: 600; }
   .record-loss { color: var(--cancelled); font-weight: 600; }
+  .record-tie { color: var(--text); font-weight: 600; }
   .clear-filter {
     color: var(--accent);
     cursor: pointer;
@@ -253,7 +261,7 @@
       if (record) {
         recordHtml = ` (<span class="record-win">${record.wins}</span> - <span class="record-loss">${record.losses}</span>`;
         if (record.ties && record.ties !== '0') {
-          recordHtml += ` - ${record.ties}`;
+          recordHtml += ` - <span class="record-tie">${record.ties}</span>`;
         }
         recordHtml += ')';
       }
@@ -307,15 +315,18 @@
     return 'scheduled';
   }
 
-  function teamLink(name) {
+  function teamLink(name, isWinner) {
     const safe = (name || 'TBD').replace(/'/g, "\\'");
-    return `<a class="team-link" href="#" onclick="setTeamFilter('${safe}'); return false;">${name || 'TBD'}</a>`;
+    const winnerClass = isWinner ? ' winner' : '';
+    return `<a class="team-link${winnerClass}" href="#" onclick="setTeamFilter('${safe}'); return false;">${name || 'TBD'}</a>`;
   }
 
   function scoreSpan(teamScore, opponentScore) {
     if (teamScore === '' || teamScore === undefined) return '';
     const isWin = Number(teamScore) > Number(opponentScore);
-    return ` <span class="score${isWin ? ' win' : ''}">${teamScore}</span>`;
+    const isLoss = Number(teamScore) < Number(opponentScore);
+    const cls = isWin ? ' win' : isLoss ? ' loss' : '';
+    return ` <span class="score${cls}">${teamScore}</span>`;
   }
 
   function renderGames() {
@@ -346,10 +357,13 @@
       groups[dateLabel].forEach(g => {
         const row = document.createElement('div');
         row.className = 'game-row';
+        const hasScore = g.away_score !== '' && g.away_score !== undefined && g.home_score !== '' && g.home_score !== undefined;
+        const awayWon = hasScore && Number(g.away_score) > Number(g.home_score);
+        const homeWon = hasScore && Number(g.home_score) > Number(g.away_score);
         row.innerHTML = `
           <div class="game-time">${g.time_az || ''}</div>
           <div>
-            <div class="matchup">${teamLink(g.away_team)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team)}${scoreSpan(g.home_score, g.away_score)}</div>
+            <div class="matchup">${teamLink(g.away_team, awayWon)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team, homeWon)}${scoreSpan(g.home_score, g.away_score)}</div>
             <div class="venue">${g.venue || ''}</div>
           </div>
           <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
