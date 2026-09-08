@@ -216,10 +216,6 @@
   }
 
   function getTeamRecord(teamName) {
-    // Find this team's most recently completed game (by date) and read
-    // their win-loss record as of that game -- this is the same record
-    // MLB's own schedule data tracks, so no extra calculation is needed
-    // beyond finding the latest played game the team appears in.
     const played = allGames.filter(g => {
       const isThisTeam = g.away_team === teamName || g.home_team === teamName;
       const s = (g.status || '').toLowerCase();
@@ -234,7 +230,7 @@
     const wins = isAway ? last.away_wins : last.home_wins;
     const losses = isAway ? last.away_losses : last.home_losses;
     const ties = isAway ? last.away_ties : last.home_ties;
-    if (wins === '' || losses === '') return null;
+    if (wins === undefined || losses === undefined || wins === '' || losses === '') return null;
 
     return { wins, losses, ties };
   }
@@ -246,10 +242,11 @@
       const record = getTeamRecord(currentTeam);
       let recordHtml = '';
       if (record) {
-        recordHtml = ` &nbsp;·&nbsp; <span class="record-win">${record.wins}W</span> <span class="record-loss">${record.losses}L</span>`;
+        recordHtml = ` (<span class="record-win">${record.wins}</span>-<span class="record-loss">${record.losses}</span>`;
         if (record.ties && record.ties !== '0') {
-          recordHtml += ` <span>${record.ties}T</span>`;
+          recordHtml += `-${record.ties}`;
         }
+        recordHtml += ')';
       }
       banner.innerHTML = `<strong>${currentTeam}</strong>${recordHtml}`;
       const clearBtn = document.createElement('button');
