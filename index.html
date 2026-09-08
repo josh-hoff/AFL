@@ -251,9 +251,9 @@
       const record = getTeamRecord(currentTeam);
       let recordHtml = '';
       if (record) {
-        recordHtml = ` (<span class="record-win">${record.wins}</span>-<span class="record-loss">${record.losses}</span>`;
+        recordHtml = ` (<span class="record-win">${record.wins}</span> - <span class="record-loss">${record.losses}</span>`;
         if (record.ties && record.ties !== '0') {
-          recordHtml += `-${record.ties}`;
+          recordHtml += ` - ${record.ties}`;
         }
         recordHtml += ')';
       }
