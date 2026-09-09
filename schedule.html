@@ -187,16 +187,55 @@
   .day-group {
     margin-bottom: 1.75rem;
   }
+  .day-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 0.6rem;
+    padding-bottom: 0.4rem;
+    padding-left: 1.3rem;
+    padding-right: 0.2rem;
+    border-bottom: 1px solid var(--border);
+  }
   .day-label {
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--text-muted);
-    margin: 0 0 0.6rem;
-    padding-bottom: 0.4rem;
-    padding-left: 1.3rem;
-    border-bottom: 1px solid var(--border);
+  }
+  .chrono-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  .chrono-toggle input {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+  }
+  .season-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 1.5rem 0 1.75rem;
+  }
+  .season-divider::before,
+  .season-divider::after {
+    content: '';
+    flex: 1;
+    border-top: 1px solid var(--border);
   }
   .game-row {
     display: grid;
@@ -453,9 +492,20 @@
   let currentSeason = parseInt(params.get('season'), 10) || new Date().getFullYear();
   let currentTeam = params.get('team') || null;
   let currentDate = params.get('date') || null;
+  let chronoOrderChecked = false;
   let allGames = [];
   let decisionsByGame = {};
   let pitcherStatsById = {};
+
+  function getArizonaTodayISO() {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Phoenix', year: 'numeric', month: '2-digit', day: '2-digit',
+    }).formatToParts(new Date());
+    const y = parts.find(p => p.type === 'year').value;
+    const m = parts.find(p => p.type === 'month').value;
+    const d = parts.find(p => p.type === 'day').value;
+    return `${y}-${m}-${d}`;
+  }
 
   async function loadSeasons() {
     try {
@@ -887,22 +937,64 @@
       games = games.filter(g => (g.date || '').startsWith(currentDate));
     }
 
+    const todayISO = getArizonaTodayISO();
+    let orderedGames = games;
+    if (!chronoOrderChecked) {
+      const upcoming = games.filter(g => (g.date || '').slice(0, 10) >= todayISO);
+      const played = games.filter(g => (g.date || '').slice(0, 10) < todayISO);
+      orderedGames = upcoming.concat(played);
+    }
+
+    const groupOrder = [];
     const groups = {};
-    games.forEach(g => {
+    orderedGames.forEach(g => {
       const key = g.date || 'Unknown date';
-      if (!groups[key]) groups[key] = [];
+      if (!groups[key]) { groups[key] = []; groupOrder.push(key); }
       groups[key].push(g);
     });
 
     content.innerHTML = '';
-    Object.keys(groups).forEach(dateLabel => {
+    let previousWasUpcoming = null;
+
+    groupOrder.forEach((dateLabel, idx) => {
+      if (!chronoOrderChecked) {
+        const isUpcomingGroup = dateLabel.slice(0, 10) >= todayISO;
+        if (previousWasUpcoming === true && isUpcomingGroup === false) {
+          const divider = document.createElement('div');
+          divider.className = 'season-divider';
+          divider.textContent = 'Already played';
+          content.appendChild(divider);
+        }
+        previousWasUpcoming = isUpcomingGroup;
+      }
+
       const section = document.createElement('div');
       section.className = 'day-group';
+
+      const labelRow = document.createElement('div');
+      labelRow.className = 'day-label-row';
 
       const label = document.createElement('div');
       label.className = 'day-label';
       label.textContent = formatDateLabel(dateLabel);
-      section.appendChild(label);
+      labelRow.appendChild(label);
+
+      if (idx === 0) {
+        const toggleLabel = document.createElement('label');
+        toggleLabel.className = 'chrono-toggle';
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = chronoOrderChecked;
+        cb.onchange = () => {
+          chronoOrderChecked = cb.checked;
+          renderGames();
+        };
+        toggleLabel.appendChild(cb);
+        toggleLabel.appendChild(document.createTextNode(' Start of season'));
+        labelRow.appendChild(toggleLabel);
+      }
+
+      section.appendChild(labelRow);
 
       groups[dateLabel].forEach(g => {
         const row = document.createElement('div');
@@ -926,7 +1018,7 @@
       content.appendChild(section);
     });
 
-    if (Object.keys(groups).length === 0) {
+    if (groupOrder.length === 0) {
       const parts = [];
       if (currentTeam) parts.push(currentTeam);
       if (currentDate) parts.push(`on ${currentDate}`);
