@@ -213,7 +213,6 @@
   .game-time {
     color: var(--text-muted);
     font-size: 0.8rem;
-    font-weight: 700;
     line-height: 1.4;
     padding-left: 0.4rem;
   }
@@ -245,6 +244,18 @@
   }
   .decision-label {
     color: var(--accent);
+    font-weight: 600;
+  }
+  .decision-label-win {
+    color: var(--final);
+    font-weight: 600;
+  }
+  .decision-label-loss {
+    color: var(--cancelled);
+    font-weight: 600;
+  }
+  .decision-label-save {
+    color: var(--header-bg);
     font-weight: 600;
   }
   .status {
@@ -291,8 +302,8 @@
     flex-shrink: 0;
   }
   .team-link:hover {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
+    color: var(--tab-active);
+    border-bottom-color: var(--tab-active);
   }
   .team-link.winner {
     font-weight: 700;
@@ -680,18 +691,18 @@
     if (d.winning_pitcher_wins !== '' && d.winning_pitcher_losses !== '') wParts.push(`${d.winning_pitcher_wins}-${d.winning_pitcher_losses}`);
     if (d.winning_pitcher_era !== '') wParts.push(`${d.winning_pitcher_era} ERA`);
     const wRecord = wParts.length ? ` (${wParts.join(', ')})` : '';
-    let line = `<span class="decision-label">W</span> ${d.winning_pitcher_name}${wRecord}`;
+    let line = `<span class="decision-label-win">W</span> ${d.winning_pitcher_name}${wRecord}`;
 
     if (d.losing_pitcher_name) {
       const lParts = [];
       if (d.losing_pitcher_wins !== '' && d.losing_pitcher_losses !== '') lParts.push(`${d.losing_pitcher_wins}-${d.losing_pitcher_losses}`);
       if (d.losing_pitcher_era !== '') lParts.push(`${d.losing_pitcher_era} ERA`);
       const lRecord = lParts.length ? ` (${lParts.join(', ')})` : '';
-      line += ` &nbsp; <span class="decision-label">L</span> ${d.losing_pitcher_name}${lRecord}`;
+      line += ` &nbsp; <span class="decision-label-loss">L</span> ${d.losing_pitcher_name}${lRecord}`;
     }
     if (d.save_pitcher_name) {
       const saveSuffix = d.save_pitcher_saves !== '' ? ` (${d.save_pitcher_saves} SV)` : '';
-      line += ` &nbsp; <span class="decision-label">SV</span> ${d.save_pitcher_name}${saveSuffix}`;
+      line += ` &nbsp; <span class="decision-label-save">SV</span> ${d.save_pitcher_name}${saveSuffix}`;
     }
     return `<div class="decisions">${line}</div>`;
   }
