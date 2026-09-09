@@ -432,8 +432,6 @@
     });
     el.onchange = () => {
       currentSeason = parseInt(el.value, 10);
-      currentTeam = null;
-      currentDate = null;
       updateUrl();
       loadSchedule();
     };
@@ -479,7 +477,6 @@
       const targetYear = parseInt(currentDate.slice(0, 4), 10);
       if (targetYear !== currentSeason && SEASONS.includes(targetYear)) {
         currentSeason = targetYear;
-        currentTeam = null;
         renderControls();
         updateUrl();
         syncFilterControls();
