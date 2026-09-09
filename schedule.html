@@ -129,6 +129,50 @@
     font-weight: 700;
     border-bottom-color: var(--tab-active);
   }
+  .filters-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.25rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem 0;
+    flex-wrap: wrap;
+  }
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .filter-group label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .filter-group select,
+  .filter-group input[type="date"] {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.45rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-family: inherit;
+  }
+  .clear-filters-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: inherit;
+  }
+  .clear-filters-btn:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
   main {
     max-width: 900px;
     margin: 0 auto;
@@ -298,6 +342,20 @@
   <a class="nav-tab" href="standings.html">Standings</a>
 </nav>
 
+<div class="filters-bar">
+  <div class="filter-group">
+    <label for="team-filter-select">Team</label>
+    <select id="team-filter-select">
+      <option value="">All teams</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label for="date-filter-input">Date</label>
+    <input type="date" id="date-filter-input">
+  </div>
+  <button id="clear-filters-btn" class="clear-filters-btn" style="display:none;">Clear filters</button>
+</div>
+
 <div class="filter-banner" id="filter-banner" style="display:none;"></div>
 
 <main id="content">
@@ -313,6 +371,7 @@
   const params = new URLSearchParams(window.location.search);
   let currentSeason = parseInt(params.get('season'), 10) || new Date().getFullYear();
   let currentTeam = params.get('team') || null;
+  let currentDate = params.get('date') || null;
   let allGames = [];
   let decisionsByGame = {};
   let pitcherStatsById = {};
@@ -347,6 +406,7 @@
     el.onchange = () => {
       currentSeason = parseInt(el.value, 10);
       currentTeam = null;
+      currentDate = null;
       updateUrl();
       loadSchedule();
     };
@@ -356,12 +416,23 @@
     const p = new URLSearchParams();
     p.set('season', currentSeason);
     if (currentTeam) p.set('team', currentTeam);
+    if (currentDate) p.set('date', currentDate);
     history.replaceState(null, '', '?' + p.toString());
   }
 
+  function syncFilterControls() {
+    const teamSelect = document.getElementById('team-filter-select');
+    const dateInput = document.getElementById('date-filter-input');
+    const clearBtn = document.getElementById('clear-filters-btn');
+    if (teamSelect) teamSelect.value = currentTeam || '';
+    if (dateInput) dateInput.value = currentDate || '';
+    if (clearBtn) clearBtn.style.display = (currentTeam || currentDate) ? 'inline-block' : 'none';
+  }
+
   function setTeamFilter(teamName) {
-    currentTeam = teamName;
+    currentTeam = teamName || null;
     updateUrl();
+    syncFilterControls();
     renderBanner();
     renderGames();
   }
@@ -369,8 +440,58 @@
   function clearTeamFilter() {
     currentTeam = null;
     updateUrl();
+    syncFilterControls();
     renderBanner();
     renderGames();
+  }
+
+  function setDateFilter(dateStr) {
+    currentDate = dateStr || null;
+    updateUrl();
+    syncFilterControls();
+    renderGames();
+  }
+
+  function clearAllFilters() {
+    currentTeam = null;
+    currentDate = null;
+    updateUrl();
+    syncFilterControls();
+    renderBanner();
+    renderGames();
+  }
+
+  function populateTeamFilterOptions() {
+    const el = document.getElementById('team-filter-select');
+    if (!el) return;
+    const teams = new Set();
+    allGames.forEach(g => {
+      if (g.away_team && g.away_team !== 'TBD' && g.away_team !== 'To Be Determined') teams.add(g.away_team);
+      if (g.home_team && g.home_team !== 'TBD' && g.home_team !== 'To Be Determined') teams.add(g.home_team);
+    });
+    el.innerHTML = '<option value="">All teams</option>';
+    [...teams].sort().forEach(team => {
+      const opt = document.createElement('option');
+      opt.value = team;
+      opt.textContent = team;
+      el.appendChild(opt);
+    });
+    syncFilterControls();
+  }
+
+  function setupFilterControls() {
+    const teamSelect = document.getElementById('team-filter-select');
+    const dateInput = document.getElementById('date-filter-input');
+    const clearBtn = document.getElementById('clear-filters-btn');
+    if (teamSelect) {
+      teamSelect.onchange = () => setTeamFilter(teamSelect.value || null);
+    }
+    if (dateInput) {
+      dateInput.onchange = () => setDateFilter(dateInput.value || null);
+    }
+    if (clearBtn) {
+      clearBtn.onclick = clearAllFilters;
+    }
   }
 
   function getTeamRecord(teamName) {
@@ -581,6 +702,9 @@
     if (currentTeam) {
       games = games.filter(g => g.away_team === currentTeam || g.home_team === currentTeam);
     }
+    if (currentDate) {
+      games = games.filter(g => (g.date || '').startsWith(currentDate));
+    }
 
     const groups = {};
     games.forEach(g => {
@@ -622,8 +746,11 @@
     });
 
     if (Object.keys(groups).length === 0) {
-      content.innerHTML = currentTeam
-        ? `<p class="error">No games found for ${currentTeam} this season.</p>`
+      const parts = [];
+      if (currentTeam) parts.push(currentTeam);
+      if (currentDate) parts.push(`on ${currentDate}`);
+      content.innerHTML = parts.length
+        ? `<p class="error">No games found for ${parts.join(' ')}.</p>`
         : '<p class="error">No games found for this season.</p>';
     }
   }
@@ -637,6 +764,7 @@
       if (!res.ok) throw new Error('Schedule not found for this season yet.');
       const text = await res.text();
       allGames = parseCSV(text);
+      populateTeamFilterOptions();
 
       decisionsByGame = {};
       try {
@@ -670,6 +798,7 @@
   async function init() {
     await loadSeasons();
     renderControls();
+    setupFilterControls();
     loadSchedule();
   }
 
