@@ -447,6 +447,20 @@
 
   function setDateFilter(dateStr) {
     currentDate = dateStr || null;
+
+    if (currentDate) {
+      const targetYear = parseInt(currentDate.slice(0, 4), 10);
+      if (targetYear !== currentSeason && SEASONS.includes(targetYear)) {
+        currentSeason = targetYear;
+        currentTeam = null;
+        renderControls();
+        updateUrl();
+        syncFilterControls();
+        loadSchedule();
+        return;
+      }
+    }
+
     updateUrl();
     syncFilterControls();
     renderGames();
