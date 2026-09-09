@@ -137,10 +137,12 @@
   .filters-bar {
     display: flex;
     align-items: flex-end;
-    gap: 1.25rem;
+    justify-content: center;
+    gap: 2.5rem;
     max-width: 900px;
     margin: 0 auto;
-    padding: 1.25rem 1.5rem 0;
+    padding: 1.25rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--border);
     flex-wrap: wrap;
   }
   .filter-group {
@@ -294,22 +296,42 @@
     font-weight: 700;
   }
   .filter-banner {
+    max-width: 900px;
+    margin: 1.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+  .team-banner-card {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.5rem 1rem;
-    font-size: 0.9rem;
+    gap: 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .team-banner-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .team-banner-name {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.15;
+  }
+  .team-banner-record {
+    font-size: 1.3rem;
+    margin-top: 0.2rem;
+  }
+  .team-banner-dash {
     color: var(--text-muted);
   }
-  .filter-banner strong {
-    color: var(--text);
-    font-weight: 600;
-  }
-  .record-win { color: var(--final); font-weight: 600; }
-  .record-loss { color: var(--cancelled); font-weight: 600; }
-  .record-tie { color: var(--text); font-weight: 600; }
+  .record-win { color: var(--final); font-weight: 700; }
+  .record-loss { color: var(--cancelled); font-weight: 700; }
+  .record-tie { color: var(--text); font-weight: 700; }
   .clear-filter {
     color: var(--accent);
     cursor: pointer;
@@ -358,7 +380,7 @@
     <label for="date-filter-input">Date</label>
     <input type="date" id="date-filter-input">
   </div>
-  <button id="clear-filters-btn" class="clear-filters-btn" style="display:none;">Clear filters</button>
+  <button id="clear-filters-btn" class="clear-filters-btn" style="display:none;">Reset</button>
 </div>
 
 <div class="filter-banner" id="filter-banner" style="display:none;"></div>
@@ -539,22 +561,28 @@
   function renderBanner() {
     const banner = document.getElementById('filter-banner');
     if (currentTeam) {
-      banner.style.display = 'flex';
+      banner.style.display = 'block';
       const record = getTeamRecord(currentTeam);
       let recordHtml = '';
       if (record) {
-        recordHtml = ` (<span class="record-win">${record.wins}</span> - <span class="record-loss">${record.losses}</span>`;
+        recordHtml = `<span class="record-win">${record.wins}</span><span class="team-banner-dash"> - </span><span class="record-loss">${record.losses}</span>`;
         if (record.ties && record.ties !== '0') {
-          recordHtml += ` - <span class="record-tie">${record.ties}</span>`;
+          recordHtml += `<span class="team-banner-dash"> - </span><span class="record-tie">${record.ties}</span>`;
         }
-        recordHtml += ')';
       }
-      banner.innerHTML = `${teamLogoImg(currentTeam)}<strong>${currentTeam}</strong>${recordHtml}`;
-      const clearBtn = document.createElement('button');
-      clearBtn.className = 'clear-filter';
-      clearBtn.textContent = 'Show all teams';
-      clearBtn.onclick = clearTeamFilter;
-      banner.appendChild(clearBtn);
+      const logoSrc = TEAM_LOGOS[currentTeam];
+      const logoImg = logoSrc
+        ? `<img class="team-banner-logo" src="${logoSrc}" alt="" onerror="this.style.display='none'">`
+        : '';
+      banner.innerHTML = `
+        <div class="team-banner-card">
+          ${logoImg}
+          <div>
+            <div class="team-banner-name">${currentTeam}</div>
+            ${recordHtml ? `<div class="team-banner-record">${recordHtml}</div>` : ''}
+          </div>
+        </div>
+      `;
     } else {
       banner.style.display = 'none';
       banner.innerHTML = '';
