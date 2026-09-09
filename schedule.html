@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arizona Fall League Schedule</title>
+<style>
+  :root {
+    --bg: #FDFCFB;
+    --bg-card: #FFFFFF;
+    --border: #e8e6e2;
+    --text: #111418;
+    --text-muted: #5a6472;
+    --accent: #b8860b;
+    --final: #1a8a4a;
+    --cancelled: #c0392b;
+    --scheduled: #2f6fb0;
+    --header-bg: #0d1b3a;
+    --header-card-bg: #16305c;
+    --header-border: #2c4a7c;
+    --header-text: #ffffff;
+    --tab-active: #f26522;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  header {
+    padding: 1.5rem 1.5rem 0;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--header-bg);
+    border-radius: 16px;
+    padding: 2.25rem 1.5rem;
+  }
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: var(--header-text);
+  }
+  .league-logo {
+    height: 100px;
+    width: auto;
+    flex-shrink: 0;
+  }
+  .title-line {
+    display: block;
+    line-height: 1.3;
+  }
+  .title-central {
+    display: inline-block;
+    border-bottom: 2px solid var(--header-text);
+    padding-bottom: 0.2rem;
+    width: fit-content;
+  }
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 3rem;
+    text-align: center;
+  }
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    margin: 0;
+  }
+  .season-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+  .season-label {
+    color: var(--header-text);
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  .season-select {
+    background: var(--header-card-bg);
+    border: 1px solid var(--header-border);
+    color: var(--header-text);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+  }
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 1.25rem auto 0;
+    padding: 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-tab {
+    display: inline-block;
+    padding-bottom: 0.7rem;
+    margin-bottom: -1px;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+  }
+  .nav-tab:hover {
+    color: var(--text);
+  }
+  .nav-tab.active {
+    color: var(--text);
+    font-weight: 700;
+    border-bottom-color: var(--tab-active);
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+  }
+  .day-group {
+    margin-bottom: 1.75rem;
+  }
+  .day-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin: 0 0 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .game-row {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 0.9rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .game-time {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    padding-left: 0.4rem;
+  }
+  .time-wrap {
+    display: inline-block;
+  }
+  .time-line {
+    display: block;
+    white-space: nowrap;
+  }
+  .time-divider {
+    display: block;
+    border-top: 1px solid var(--border);
+    width: 100%;
+    margin: 0.2rem 0;
+  }
+  .matchup {
+    font-size: 0.98rem;
+  }
+  .venue {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-top: 0.15rem;
+  }
+  .decisions {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    margin-top: 0.3rem;
+  }
+  .decision-label {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .status {
+    font-size: 0.78rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 5px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .status.final { background: rgba(26,138,74,0.12); color: var(--final); }
+  .status.scheduled { background: rgba(47,111,176,0.12); color: var(--scheduled); }
+  .status.cancelled, .status.postponed { background: rgba(192,57,43,0.12); color: var(--cancelled); }
+  .score {
+    color: var(--text-muted);
+    font-weight: 400;
+    vertical-align: middle;
+  }
+  .score.win {
+    color: var(--final);
+    font-weight: 600;
+  }
+  .score.loss {
+    color: var(--cancelled);
+    font-weight: 400;
+  }
+  .loading, .error {
+    color: var(--text-muted);
+    padding: 2rem 0;
+  }
+  .team-link {
+    color: var(--text);
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    vertical-align: middle;
+  }
+  .team-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .team-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .team-link.winner {
+    font-weight: 700;
+  }
+  .filter-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .filter-banner strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .record-win { color: var(--final); font-weight: 600; }
+  .record-loss { color: var(--cancelled); font-weight: 600; }
+  .record-tie { color: var(--text); font-weight: 600; }
+  .clear-filter {
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    padding: 0;
+  }
+  @media (max-width: 560px) {
+    .game-row { grid-template-columns: 55px 1fr; }
+    .status { grid-column: 1 / -1; justify-self: start; margin-top: 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'">
+    <h1>
+      <span class="title-line">Arizona Fall League</span>
+      <span class="title-line"><span class="title-central">Central</span></span>
+    </h1>
+    <div class="season-control">
+      <span class="season-label">Season:</span>
+      <select id="season-select" class="season-select"></select>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <a class="nav-tab" href="index.html">Home</a>
+  <a class="nav-tab active" href="schedule.html">Schedule</a>
+  <a class="nav-tab" href="standings.html">Standings</a>
+</nav>
+
+<div class="filter-banner" id="filter-banner" style="display:none;"></div>
+
+<main id="content">
+  <p class="loading">Loading schedule...</p>
+</main>
+
+<footer>
+  <p class="subtitle">Schedule, updated automatically from the MLB Stats API</p>
+</footer>
+
+<script>
+  let SEASONS = [];
+  const params = new URLSearchParams(window.location.search);
+  let currentSeason = parseInt(params.get('season'), 10) || new Date().getFullYear();
+  let currentTeam = params.get('team') || null;
+  let allGames = [];
+  let decisionsByGame = {};
+  let pitcherStatsById = {};
+
+  async function loadSeasons() {
+    try {
+      const res = await fetch('data/seasons.json');
+      if (res.ok) {
+        SEASONS = await res.json();
+      }
+    } catch (e) {
+      // fall through to fallback below
+    }
+    if (!SEASONS || SEASONS.length === 0) {
+      SEASONS = [currentSeason];
+    }
+    if (!SEASONS.includes(currentSeason)) {
+      currentSeason = SEASONS[SEASONS.length - 1];
+    }
+  }
+
+  function renderControls() {
+    const el = document.getElementById('season-select');
+    el.innerHTML = '';
+    [...SEASONS].sort((a, b) => b - a).forEach(season => {
+      const opt = document.createElement('option');
+      opt.value = season;
+      opt.textContent = season;
+      if (season === currentSeason) opt.selected = true;
+      el.appendChild(opt);
+    });
+    el.onchange = () => {
+      currentSeason = parseInt(el.value, 10);
+      currentTeam = null;
+      updateUrl();
+      loadSchedule();
+    };
+  }
+
+  function updateUrl() {
+    const p = new URLSearchParams();
+    p.set('season', currentSeason);
+    if (currentTeam) p.set('team', currentTeam);
+    history.replaceState(null, '', '?' + p.toString());
+  }
+
+  function setTeamFilter(teamName) {
+    currentTeam = teamName;
+    updateUrl();
+    renderBanner();
+    renderGames();
+  }
+
+  function clearTeamFilter() {
+    currentTeam = null;
+    updateUrl();
+    renderBanner();
+    renderGames();
+  }
+
+  function getTeamRecord(teamName) {
+    const played = allGames.filter(g => {
+      const isThisTeam = g.away_team === teamName || g.home_team === teamName;
+      const isRegularSeason = g.game_type === 'Regular Season';
+      const s = (g.status || '').toLowerCase();
+      const wasPlayed = s.includes('final') || s.includes('completed');
+      return isThisTeam && isRegularSeason && wasPlayed;
+    });
+    if (played.length === 0) return null;
+
+    played.sort((a, b) => (a.date > b.date ? 1 : -1));
+    const last = played[played.length - 1];
+    const isAway = last.away_team === teamName;
+    const wins = isAway ? last.away_wins : last.home_wins;
+    const losses = isAway ? last.away_losses : last.home_losses;
+    const ties = isAway ? last.away_ties : last.home_ties;
+    if (wins === undefined || losses === undefined || wins === '' || losses === '') return null;
+
+    return { wins, losses, ties };
+  }
+
+  function renderBanner() {
+    const banner = document.getElementById('filter-banner');
+    if (currentTeam) {
+      banner.style.display = 'flex';
+      const record = getTeamRecord(currentTeam);
+      let recordHtml = '';
+      if (record) {
+        recordHtml = ` (<span class="record-win">${record.wins}</span> - <span class="record-loss">${record.losses}</span>`;
+        if (record.ties && record.ties !== '0') {
+          recordHtml += ` - <span class="record-tie">${record.ties}</span>`;
+        }
+        recordHtml += ')';
+      }
+      banner.innerHTML = `${teamLogoImg(currentTeam)}<strong>${currentTeam}</strong>${recordHtml}`;
+      const clearBtn = document.createElement('button');
+      clearBtn.className = 'clear-filter';
+      clearBtn.textContent = 'Show all teams';
+      clearBtn.onclick = clearTeamFilter;
+      banner.appendChild(clearBtn);
+    } else {
+      banner.style.display = 'none';
+      banner.innerHTML = '';
+    }
+  }
+
+  function parseCSV(text) {
+    const lines = text.trim().split(/\r?\n/);
+    const headers = splitCSVLine(lines[0]);
+    return lines.slice(1).map(line => {
+      const values = splitCSVLine(line);
+      const row = {};
+      headers.forEach((h, i) => { row[h] = values[i] !== undefined ? values[i] : ''; });
+      return row;
+    });
+  }
+
+  function splitCSVLine(line) {
+    const result = [];
+    let cur = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        inQuotes = !inQuotes;
+      } else if (ch === ',' && !inQuotes) {
+        result.push(cur);
+        cur = '';
+      } else {
+        cur += ch;
+      }
+    }
+    result.push(cur);
+    return result;
+  }
+
+  function statusClass(status) {
+    const s = (status || '').toLowerCase();
+    if (s.includes('final') || s.includes('completed')) return 'final';
+    if (s.includes('cancel')) return 'cancelled';
+    if (s.includes('postpon')) return 'postponed';
+    return 'scheduled';
+  }
+
+  const TEAM_LOGOS = {
+    'Glendale Desert Dogs': 'logos/glendale.svg',
+    'Mesa Solar Sox': 'logos/mesa.svg',
+    'Peoria Javelinas': 'logos/peoria.svg',
+    'Salt River Rafters': 'logos/salt-river.svg',
+    'Scottsdale Scorpions': 'logos/scottsdale.svg',
+    'Surprise Saguaros': 'logos/surprise.svg',
+  };
+
+  function teamLogoImg(name) {
+    const src = TEAM_LOGOS[name];
+    if (!src) return '';
+    return `<img class="team-logo" src="${src}" alt="" onerror="this.style.display='none'">`;
+  }
+
+  function teamLink(name, isWinner) {
+    const safe = (name || 'TBD').replace(/'/g, "\\'");
+    const winnerClass = isWinner ? ' winner' : '';
+    return `<a class="team-link${winnerClass}" href="#" onclick="setTeamFilter('${safe}'); return false;">${teamLogoImg(name)}${name || 'TBD'}</a>`;
+  }
+
+  function scoreSpan(teamScore, opponentScore) {
+    if (teamScore === '' || teamScore === undefined) return '';
+    const isWin = Number(teamScore) > Number(opponentScore);
+    const isLoss = Number(teamScore) < Number(opponentScore);
+    const cls = isWin ? ' win' : isLoss ? ' loss' : '';
+    return ` <span class="score${cls}">${teamScore}</span>`;
+  }
+
+  function pitcherRecordAndEraSuffix(pitcherId) {
+    const p = pitcherStatsById[pitcherId];
+    if (!p) return '';
+    const parts = [];
+    if (p.wins !== '' && p.losses !== '') parts.push(`${p.wins}-${p.losses}`);
+    if (p.era !== '') parts.push(`${p.era} ERA`);
+    return parts.length ? ` (${parts.join(', ')})` : '';
+  }
+
+  function decisionLine(gamePk, status) {
+    const s = (status || '').toLowerCase();
+    const wasPlayed = s.includes('final') || s.includes('completed');
+    if (!wasPlayed) return '';
+
+    const d = decisionsByGame[gamePk];
+    if (!d || !d.winning_pitcher_name) return '';
+
+    const wParts = [];
+    if (d.winning_pitcher_wins !== '' && d.winning_pitcher_losses !== '') wParts.push(`${d.winning_pitcher_wins}-${d.winning_pitcher_losses}`);
+    if (d.winning_pitcher_era !== '') wParts.push(`${d.winning_pitcher_era} ERA`);
+    const wRecord = wParts.length ? ` (${wParts.join(', ')})` : '';
+    let line = `<span class="decision-label">W</span> ${d.winning_pitcher_name}${wRecord}`;
+
+    if (d.losing_pitcher_name) {
+      const lParts = [];
+      if (d.losing_pitcher_wins !== '' && d.losing_pitcher_losses !== '') lParts.push(`${d.losing_pitcher_wins}-${d.losing_pitcher_losses}`);
+      if (d.losing_pitcher_era !== '') lParts.push(`${d.losing_pitcher_era} ERA`);
+      const lRecord = lParts.length ? ` (${lParts.join(', ')})` : '';
+      line += ` &nbsp; <span class="decision-label">L</span> ${d.losing_pitcher_name}${lRecord}`;
+    }
+    if (d.save_pitcher_name) {
+      const saveSuffix = d.save_pitcher_saves !== '' ? ` (${d.save_pitcher_saves} SV)` : '';
+      line += ` &nbsp; <span class="decision-label">SV</span> ${d.save_pitcher_name}${saveSuffix}`;
+    }
+    return `<div class="decisions">${line}</div>`;
+  }
+
+  function probableLine(g) {
+    const s = (g.status || '').toLowerCase();
+    const notYetPlayed = s.includes('scheduled') || s.includes('pre-game') || s.includes('warmup');
+    if (!notYetPlayed) return '';
+    if (!g.away_probable_pitcher && !g.home_probable_pitcher) return '';
+
+    const away = g.away_probable_pitcher
+      ? `${g.away_probable_pitcher}${pitcherRecordAndEraSuffix(g.away_probable_pitcher_id)}`
+      : 'TBD';
+    const home = g.home_probable_pitcher
+      ? `${g.home_probable_pitcher}${pitcherRecordAndEraSuffix(g.home_probable_pitcher_id)}`
+      : 'TBD';
+    return `<div class="decisions"><span class="decision-label">Probable</span> ${away} vs. ${home}</div>`;
+  }
+
+  function formatDateLabel(rawDate) {
+    if (!rawDate) return rawDate;
+    const suffixMatch = rawDate.match(/^(\d{4}-\d{2}-\d{2})(.*)$/);
+    if (!suffixMatch) return rawDate;
+    const [, isoDate, suffix] = suffixMatch;
+    const [year, month, day] = isoDate.split('-');
+    return `${month}/${day}/${year}${suffix}`;
+  }
+
+  function formatBothTimes(dateStr, timeStr) {
+    if (!timeStr) return '';
+    const dateMatch = (dateStr || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+    const timeMatch = timeStr.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+    if (!dateMatch || !timeMatch) return timeStr;
+
+    const [, y, m, d] = dateMatch;
+    let [, hh, mm, ampm] = timeMatch;
+    hh = parseInt(hh, 10);
+    if (ampm.toUpperCase() === 'PM' && hh !== 12) hh += 12;
+    if (ampm.toUpperCase() === 'AM' && hh === 12) hh = 0;
+
+    const utcMoment = new Date(Date.UTC(
+      parseInt(y, 10), parseInt(m, 10) - 1, parseInt(d, 10), hh + 7, parseInt(mm, 10)
+    ));
+
+    const etTime = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+      timeZoneName: 'short',
+    }).format(utcMoment);
+
+    return `<span class="time-wrap"><span class="time-line">${etTime}</span><span class="time-divider"></span><span class="time-line">${timeStr} MST</span></span>`;
+  }
+
+  function renderGames() {
+    const content = document.getElementById('content');
+    let games = allGames;
+
+    if (currentTeam) {
+      games = games.filter(g => g.away_team === currentTeam || g.home_team === currentTeam);
+    }
+
+    const groups = {};
+    games.forEach(g => {
+      const key = g.date || 'Unknown date';
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(g);
+    });
+
+    content.innerHTML = '';
+    Object.keys(groups).forEach(dateLabel => {
+      const section = document.createElement('div');
+      section.className = 'day-group';
+
+      const label = document.createElement('div');
+      label.className = 'day-label';
+      label.textContent = formatDateLabel(dateLabel);
+      section.appendChild(label);
+
+      groups[dateLabel].forEach(g => {
+        const row = document.createElement('div');
+        row.className = 'game-row';
+        const hasScore = g.away_score !== '' && g.away_score !== undefined && g.home_score !== '' && g.home_score !== undefined;
+        const awayWon = hasScore && Number(g.away_score) > Number(g.home_score);
+        const homeWon = hasScore && Number(g.home_score) > Number(g.away_score);
+        row.innerHTML = `
+          <div class="game-time">${formatBothTimes(g.date, g.time_az)}</div>
+          <div>
+            <div class="matchup">${teamLink(g.away_team, awayWon)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team, homeWon)}${scoreSpan(g.home_score, g.away_score)}</div>
+            <div class="venue">${g.venue || ''}</div>
+            ${decisionLine(g.game_pk, g.status)}
+            ${probableLine(g)}
+          </div>
+          <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
+        `;
+        section.appendChild(row);
+      });
+
+      content.appendChild(section);
+    });
+
+    if (Object.keys(groups).length === 0) {
+      content.innerHTML = currentTeam
+        ? `<p class="error">No games found for ${currentTeam} this season.</p>`
+        : '<p class="error">No games found for this season.</p>';
+    }
+  }
+
+  async function loadSchedule() {
+    const content = document.getElementById('content');
+    content.innerHTML = '<p class="loading">Loading schedule...</p>';
+
+    try {
+      const res = await fetch(`data/${currentSeason}/schedule.csv`);
+      if (!res.ok) throw new Error('Schedule not found for this season yet.');
+      const text = await res.text();
+      allGames = parseCSV(text);
+
+      decisionsByGame = {};
+      try {
+        const decRes = await fetch(`data/${currentSeason}/decisions.csv`);
+        if (decRes.ok) {
+          const decText = await decRes.text();
+          parseCSV(decText).forEach(d => { decisionsByGame[d.game_pk] = d; });
+        }
+      } catch (e) {
+        // decisions.csv is optional -- schedule still renders without it
+      }
+
+      pitcherStatsById = {};
+      try {
+        const statsRes = await fetch(`data/${currentSeason}/pitcher_stats.csv`);
+        if (statsRes.ok) {
+          const statsText = await statsRes.text();
+          parseCSV(statsText).forEach(p => { pitcherStatsById[p.pitcher_id] = p; });
+        }
+      } catch (e) {
+        // pitcher_stats.csv is optional -- schedule still renders without it
+      }
+
+      renderBanner();
+      renderGames();
+    } catch (err) {
+      content.innerHTML = `<p class="error">Couldn't load the schedule: ${err.message}</p>`;
+    }
+  }
+
+  async function init() {
+    await loadSeasons();
+    renderControls();
+    loadSchedule();
+  }
+
+  init();
+</script>
+
+</body>
+</html>
