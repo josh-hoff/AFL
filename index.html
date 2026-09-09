@@ -25,42 +25,29 @@
     line-height: 1.5;
   }
   header {
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
     padding: 3rem 1.5rem 1.5rem;
     max-width: 900px;
     margin: 0 auto;
-    text-align: center;
   }
   h1 {
     font-size: 2.2rem;
     font-weight: 600;
     margin: 0;
     letter-spacing: -0.01em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+    text-align: center;
+    flex: 1;
   }
   .league-logo {
     height: 100px;
     width: auto;
     flex-shrink: 0;
   }
-  .logo-spacer {
-    display: inline-block;
-    height: 1px;
-    width: 0;
-    flex-shrink: 0;
-  }
-  .title-lines {
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.15rem;
-  }
   .title-line {
-    line-height: 1;
+    line-height: 1.3;
   }
   .title-central {
     display: inline-block;
@@ -79,11 +66,20 @@
     font-size: 0.75rem;
     margin: 0;
   }
+  .season-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+  .season-label {
+    color: var(--text);
+    font-size: 1.05rem;
+  }
   .season-select {
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
     background: var(--bg-card);
     border: 1px solid var(--border);
     color: var(--text);
@@ -242,17 +238,15 @@
 <body>
 
 <header>
+  <img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'">
   <h1>
-    <img class="league-logo" src="logos/afl-logo.svg" alt=""
-         onload="document.getElementById('logo-spacer').style.width = this.offsetWidth + 'px'"
-         onerror="this.style.display='none'; document.getElementById('logo-spacer').style.width='0'">
-    <span class="title-lines">
-      <span class="title-line">Arizona Fall League</span>
-      <span class="title-line"><span class="title-central">Central</span></span>
-    </span>
-    <span class="logo-spacer" id="logo-spacer" aria-hidden="true"></span>
+    <span class="title-line">Arizona Fall League</span>
+    <span class="title-line"><span class="title-central">Central</span></span>
   </h1>
-  <select id="season-select" class="season-select"></select>
+  <div class="season-control">
+    <span class="season-label">Season:</span>
+    <select id="season-select" class="season-select"></select>
+  </div>
 </header>
 
 <div class="filter-banner" id="filter-banner" style="display:none;"></div>
@@ -297,7 +291,7 @@
     [...SEASONS].sort((a, b) => b - a).forEach(season => {
       const opt = document.createElement('option');
       opt.value = season;
-      opt.textContent = season + ' season';
+      opt.textContent = season;
       if (season === currentSeason) opt.selected = true;
       el.appendChild(opt);
     });
