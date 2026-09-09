@@ -316,12 +316,19 @@
   .team-banner-card {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.5rem;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.25rem 1.5rem;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    flex-wrap: wrap;
+  }
+  .team-banner-identity {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-shrink: 0;
   }
   .team-banner-logo {
     width: 64px;
@@ -330,21 +337,55 @@
     flex-shrink: 0;
   }
   .team-banner-name {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--text);
     line-height: 1.15;
   }
   .team-banner-record {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-top: 0.2rem;
+    color: var(--text);
   }
   .team-banner-dash {
     color: var(--text-muted);
   }
-  .record-win { color: var(--final); font-weight: 700; }
-  .record-loss { color: var(--cancelled); font-weight: 700; }
-  .record-tie { color: var(--text); font-weight: 700; }
+  .team-banner-info {
+    display: flex;
+    flex: 1;
+    gap: 1.5rem;
+    min-width: 260px;
+  }
+  .team-banner-col {
+    flex: 1;
+    border-left: 1px solid var(--border);
+    padding-left: 1.5rem;
+  }
+  .team-banner-col-label {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+  .team-banner-col-date {
+    color: var(--text);
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+  }
+  .team-banner-col-detail {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-top: 0.2rem;
+  }
+  .team-banner-col-note {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    margin-top: 0.1rem;
+    font-style: italic;
+  }
+  .team-banner-result-win { color: var(--final); font-weight: 700; }
+  .team-banner-result-loss { color: var(--cancelled); font-weight: 700; }
   .clear-filter {
     color: var(--accent);
     cursor: pointer;
@@ -559,7 +600,7 @@
       const wasPlayed = s.includes('final') || s.includes('completed');
       return isThisTeam && isRegularSeason && wasPlayed;
     });
-    if (played.length === 0) return null;
+    if (played.length === 0) return { wins: '0', losses: '0', ties: '0' };
 
     played.sort((a, b) => (a.date > b.date ? 1 : -1));
     const last = played[played.length - 1];
@@ -567,40 +608,115 @@
     const wins = isAway ? last.away_wins : last.home_wins;
     const losses = isAway ? last.away_losses : last.home_losses;
     const ties = isAway ? last.away_ties : last.home_ties;
-    if (wins === undefined || losses === undefined || wins === '' || losses === '') return null;
+    if (wins === undefined || losses === undefined || wins === '' || losses === '') {
+      return { wins: '0', losses: '0', ties: '0' };
+    }
 
     return { wins, losses, ties };
   }
 
+  function getNextGame(teamName) {
+    const upcoming = allGames.filter(g => {
+      const isThisTeam = (g.away_team === teamName || g.home_team === teamName) && g.game_type !== 'Fall Stars Game';
+      const s = (g.status || '').toLowerCase();
+      const isUpcoming = s.includes('scheduled') || s.includes('pre-game') || s.includes('warmup');
+      return isThisTeam && isUpcoming;
+    });
+    return upcoming.length ? upcoming[0] : null;
+  }
+
+  function getLastGame(teamName) {
+    const played = allGames.filter(g => {
+      const isThisTeam = (g.away_team === teamName || g.home_team === teamName) && g.game_type !== 'Fall Stars Game';
+      const s = (g.status || '').toLowerCase();
+      const wasPlayed = s.includes('final') || s.includes('completed');
+      return isThisTeam && wasPlayed;
+    });
+    return played.length ? played[played.length - 1] : null;
+  }
+
+  function opponentLine(g, teamName) {
+    const isAway = g.away_team === teamName;
+    const opponent = isAway ? g.home_team : g.away_team;
+    return isAway ? `@ ${opponent}` : `vs. ${opponent}`;
+  }
+
   function renderBanner() {
     const banner = document.getElementById('filter-banner');
-    if (currentTeam) {
-      banner.style.display = 'block';
-      const record = getTeamRecord(currentTeam);
-      let recordHtml = '';
-      if (record) {
-        recordHtml = `<span class="record-win">${record.wins}</span><span class="team-banner-dash"> - </span><span class="record-loss">${record.losses}</span>`;
-        if (record.ties && record.ties !== '0') {
-          recordHtml += `<span class="team-banner-dash"> - </span><span class="record-tie">${record.ties}</span>`;
-        }
+    if (!currentTeam) {
+      banner.style.display = 'none';
+      banner.innerHTML = '';
+      return;
+    }
+    banner.style.display = 'block';
+
+    const record = getTeamRecord(currentTeam);
+    let recordHtml = `${record.wins}<span class="team-banner-dash"> - </span>${record.losses}`;
+    if (record.ties && record.ties !== '0') {
+      recordHtml += `<span class="team-banner-dash"> - </span>${record.ties}`;
+    }
+
+    const logoSrc = TEAM_LOGOS[currentTeam];
+    const logoImg = logoSrc
+      ? `<img class="team-banner-logo" src="${logoSrc}" alt="" onerror="this.style.display='none'">`
+      : '';
+
+    const next = getNextGame(currentTeam);
+    const last = getLastGame(currentTeam);
+
+    let nextCol = '';
+    if (next) {
+      nextCol = `
+        <div class="team-banner-col">
+          <div class="team-banner-col-label">Next game</div>
+          <div class="team-banner-col-date">${formatDateLabel(next.date)}</div>
+          <div class="team-banner-col-date">${next.time_az || ''}</div>
+          <div class="team-banner-col-detail">${opponentLine(next, currentTeam)}</div>
+          <div class="team-banner-col-detail">${next.venue || ''}</div>
+        </div>
+      `;
+    }
+
+    let lastCol = '';
+    if (last) {
+      const hasScore = last.away_score !== '' && last.away_score !== undefined && last.home_score !== '' && last.home_score !== undefined;
+      const isAway = last.away_team === currentTeam;
+      const teamScore = isAway ? last.away_score : last.home_score;
+      const oppScore = isAway ? last.home_score : last.away_score;
+      let resultHtml = '';
+      if (hasScore) {
+        const won = Number(teamScore) > Number(oppScore);
+        const cls = won ? 'team-banner-result-win' : 'team-banner-result-loss';
+        const letter = won ? 'W' : 'L';
+        resultHtml = `<span class="${cls}">${letter}</span> ${teamScore}-${oppScore}`;
       }
-      const logoSrc = TEAM_LOGOS[currentTeam];
-      const logoImg = logoSrc
-        ? `<img class="team-banner-logo" src="${logoSrc}" alt="" onerror="this.style.display='none'">`
-        : '';
-      banner.innerHTML = `
-        <div class="team-banner-card">
+      const gameTypeNote = (last.game_type && last.game_type !== 'Regular Season')
+        ? `<div class="team-banner-col-note">${last.game_type}</div>` : '';
+      lastCol = `
+        <div class="team-banner-col">
+          <div class="team-banner-col-label">Last game</div>
+          <div class="team-banner-col-date">${formatDateLabel(last.date)}</div>
+          ${resultHtml ? `<div class="team-banner-col-date">${resultHtml}</div>` : ''}
+          <div class="team-banner-col-detail">${opponentLine(last, currentTeam)}</div>
+          ${gameTypeNote}
+        </div>
+      `;
+    }
+
+    const infoHtml = (nextCol || lastCol) ? `<div class="team-banner-info">${nextCol}${lastCol}</div>` : '';
+
+    banner.innerHTML = `
+      <div class="team-banner-card">
+        <div class="team-banner-identity">
           ${logoImg}
           <div>
             <div class="team-banner-name">${currentTeam}</div>
-            ${recordHtml ? `<div class="team-banner-record">${recordHtml}</div>` : ''}
+            <div class="team-banner-record">${recordHtml}</div>
           </div>
         </div>
-      `;
-    } else {
-      banner.style.display = 'none';
-      banner.innerHTML = '';
-    }
+        ${infoHtml}
+      </div>
+    `;
   }
 
   function parseCSV(text) {
