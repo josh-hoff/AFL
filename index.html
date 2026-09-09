@@ -6,15 +6,19 @@
 <title>Arizona Fall League Schedule</title>
 <style>
   :root {
-    --bg: #14181f;
-    --bg-card: #1c222c;
-    --border: #2c3440;
-    --text: #e8e6df;
-    --text-muted: #8b93a1;
-    --accent: #d9a441;
-    --final: #4f8a63;
-    --cancelled: #a34a3f;
-    --scheduled: #4a6fa5;
+    --bg: #FDFCFB;
+    --bg-card: #FFFFFF;
+    --border: #e8e6e2;
+    --text: #111418;
+    --text-muted: #5a6472;
+    --accent: #b8860b;
+    --final: #1a8a4a;
+    --cancelled: #c0392b;
+    --scheduled: #2f6fb0;
+    --header-bg: #0d1b3a;
+    --header-card-bg: #16305c;
+    --header-border: #2c4a7c;
+    --header-text: #ffffff;
   }
   * { box-sizing: border-box; }
   body {
@@ -25,11 +29,14 @@
     line-height: 1.5;
   }
   header {
+    background: var(--header-bg);
+    padding: 3rem 1.5rem 1.5rem;
+  }
+  .header-inner {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 2.5rem;
-    padding: 3rem 1.5rem 1.5rem;
     max-width: 900px;
     margin: 0 auto;
   }
@@ -39,6 +46,7 @@
     margin: 0;
     letter-spacing: -0.01em;
     text-align: center;
+    color: var(--header-text);
   }
   .league-logo {
     height: 100px;
@@ -51,7 +59,7 @@
   }
   .title-central {
     display: inline-block;
-    border-bottom: 2px solid var(--text);
+    border-bottom: 2px solid var(--header-text);
     padding-bottom: 0.2rem;
     width: fit-content;
   }
@@ -76,14 +84,14 @@
     flex-shrink: 0;
   }
   .season-label {
-    color: var(--text);
+    color: var(--header-text);
     font-size: 1.15rem;
     font-weight: 600;
   }
   .season-select {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text);
+    background: var(--header-card-bg);
+    border: 1px solid var(--header-border);
+    color: var(--header-text);
     padding: 0.5rem 1rem;
     border-radius: 6px;
     cursor: pointer;
@@ -118,6 +126,7 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     margin-bottom: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
   }
   .game-time {
     color: var(--text-muted);
@@ -162,9 +171,9 @@
     white-space: nowrap;
     text-align: center;
   }
-  .status.final { background: rgba(79,138,99,0.18); color: var(--final); }
-  .status.scheduled { background: rgba(74,111,165,0.18); color: var(--scheduled); }
-  .status.cancelled, .status.postponed { background: rgba(163,74,63,0.18); color: var(--cancelled); }
+  .status.final { background: rgba(26,138,74,0.12); color: var(--final); }
+  .status.scheduled { background: rgba(47,111,176,0.12); color: var(--scheduled); }
+  .status.cancelled, .status.postponed { background: rgba(192,57,43,0.12); color: var(--cancelled); }
   .score {
     color: var(--text-muted);
     font-weight: 400;
@@ -240,14 +249,16 @@
 <body>
 
 <header>
-  <img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'">
-  <h1>
-    <span class="title-line">Arizona Fall League</span>
-    <span class="title-line"><span class="title-central">Central</span></span>
-  </h1>
-  <div class="season-control">
-    <span class="season-label">Season:</span>
-    <select id="season-select" class="season-select"></select>
+  <div class="header-inner">
+    <img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'">
+    <h1>
+      <span class="title-line">Arizona Fall League</span>
+      <span class="title-line"><span class="title-central">Central</span></span>
+    </h1>
+    <div class="season-control">
+      <span class="season-label">Season:</span>
+      <select id="season-select" class="season-select"></select>
+    </div>
   </div>
 </header>
 
