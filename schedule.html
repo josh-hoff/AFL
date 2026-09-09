@@ -480,13 +480,15 @@
     renderGames();
   }
 
+  const NON_TEAM_NAMES = ['TBD', 'To Be Determined', 'American League Fall Stars', 'National League Fall Stars'];
+
   function populateTeamFilterOptions() {
     const el = document.getElementById('team-filter-select');
     if (!el) return;
     const teams = new Set();
     allGames.forEach(g => {
-      if (g.away_team && g.away_team !== 'TBD' && g.away_team !== 'To Be Determined') teams.add(g.away_team);
-      if (g.home_team && g.home_team !== 'TBD' && g.home_team !== 'To Be Determined') teams.add(g.home_team);
+      if (g.away_team && !NON_TEAM_NAMES.includes(g.away_team)) teams.add(g.away_team);
+      if (g.home_team && !NON_TEAM_NAMES.includes(g.home_team)) teams.add(g.home_team);
     });
     el.innerHTML = '<option value="">All teams</option>';
     [...teams].sort().forEach(team => {
@@ -719,7 +721,9 @@
     let games = allGames;
 
     if (currentTeam) {
-      games = games.filter(g => g.away_team === currentTeam || g.home_team === currentTeam);
+      games = games.filter(g =>
+        g.away_team === currentTeam || g.home_team === currentTeam || g.game_type === 'Fall Stars Game'
+      );
     }
     if (currentDate) {
       games = games.filter(g => (g.date || '').startsWith(currentDate));

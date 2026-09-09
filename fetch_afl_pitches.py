@@ -170,7 +170,10 @@ def get_pitcher_game_stats(feed, pitcher_id):
     return {}
 
 
-def apply_running_record(decision, feed, pitcher_records):
+EXCLUDE_FROM_SEASON_STATS = {"Fall Stars Game"}
+
+
+def apply_running_record(decision, feed, pitcher_records, game_type):
     def record_for(pid):
         return pitcher_records.setdefault(
             pid, {"wins": 0, "losses": 0, "saves": 0, "earned_runs": 0, "outs": 0}
@@ -186,6 +189,9 @@ def apply_running_record(decision, feed, pitcher_records):
             return ""
         era = rec["earned_runs"] * 9 / (rec["outs"] / 3)
         return f"{era:.2f}"
+
+    if game_type in EXCLUDE_FROM_SEASON_STATS:
+        return
 
     w_id = decision["winning_pitcher_id"]
     if w_id:
@@ -270,7 +276,7 @@ def main():
         rows = extract_pitches(feed, game)
         decision = extract_decisions(feed, game)
         if decision:
-            apply_running_record(decision, feed, pitcher_records)
+            apply_running_record(decision, feed, pitcher_records, game.get("game_type", ""))
             all_decisions.append(decision)
 
         if not rows:
