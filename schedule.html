@@ -224,7 +224,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: var(--text-muted);
+    color: var(--tab-active);
     font-size: 0.78rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -235,7 +235,7 @@
   .season-divider::after {
     content: '';
     flex: 1;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--tab-active);
   }
   .game-row {
     display: grid;
@@ -962,7 +962,7 @@
         if (previousWasUpcoming === true && isUpcomingGroup === false) {
           const divider = document.createElement('div');
           divider.className = 'season-divider';
-          divider.textContent = 'Already played';
+          divider.textContent = 'Games Completed';
           content.appendChild(divider);
         }
         previousWasUpcoming = isUpcomingGroup;
