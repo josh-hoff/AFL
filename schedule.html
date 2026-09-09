@@ -432,6 +432,10 @@
     });
     el.onchange = () => {
       currentSeason = parseInt(el.value, 10);
+      if (currentDate) {
+        const [, month, day] = currentDate.split('-');
+        currentDate = `${currentSeason}-${month}-${day}`;
+      }
       updateUrl();
       loadSchedule();
     };
