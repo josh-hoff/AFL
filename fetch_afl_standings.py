@@ -94,6 +94,32 @@ def extract_standings(data):
     return teams
 
 
+def build_zero_standings(date_str):
+    teams = [
+        {
+            "team_id": team_id,
+            "team_name": name,
+            "wins": 0,
+            "losses": 0,
+            "pct": ".000",
+            "games_back": "-",
+            "streak": "",
+            "last_ten_wins": 0,
+            "last_ten_losses": 0,
+            "runs_scored": 0,
+            "runs_allowed": 0,
+            "run_diff": 0,
+            "home_wins": 0,
+            "home_losses": 0,
+            "away_wins": 0,
+            "away_losses": 0,
+            "league_rank": 1,
+        }
+        for team_id, name in sorted(TEAM_ID_TO_NAME.items(), key=lambda kv: kv[1])
+    ]
+    return {"date": date_str, "teams": teams}
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Fetch daily AFL standings snapshots for a season."
@@ -115,12 +141,15 @@ def main():
 
     start_date, last_game_date = load_schedule_dates(args.season, args.output_dir)
 
-    start_dt = datetime.strptime(start_date, "%Y-%m-%d")
+    season_start_dt = datetime.strptime(start_date, "%Y-%m-%d")
     today_dt = datetime.now()
 
-    if today_dt < start_dt:
+    if today_dt < season_start_dt:
         print(f"The {args.season} season hasn't started yet (opens {start_date}). Nothing to fetch.")
         return
+
+    fetch_start_dt = season_start_dt - timedelta(days=1)
+    fetch_start_date = fetch_start_dt.strftime("%Y-%m-%d")
 
     end_dt = datetime.strptime(last_game_date, "%Y-%m-%d") + timedelta(days=args.end_buffer_days)
     if end_dt > today_dt:
@@ -129,6 +158,11 @@ def main():
 
     standings_dir = os.path.join(args.output_dir, str(args.season), "standings")
     os.makedirs(standings_dir, exist_ok=True)
+
+    zero_day_path = os.path.join(standings_dir, f"{fetch_start_date}.json")
+    with open(zero_day_path, "w") as f:
+        json.dump(build_zero_standings(fetch_start_date), f)
+    print(f"Wrote pre-season baseline (all teams 0-0) for {fetch_start_date}.")
 
     dates = list(daterange(start_date, end_date))
     today_str = today_dt.strftime("%Y-%m-%d")
