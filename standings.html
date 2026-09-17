@@ -138,12 +138,101 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem 1.5rem 3rem;
-    text-align: center;
-    color: var(--text-muted);
   }
-  .placeholder {
-    padding: 4rem 0;
-    font-size: 0.95rem;
+  .standings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
+  }
+  .standings-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .standings-asof {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .standings-asof-label {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+  }
+  .standings-asof-label.final {
+    color: var(--tab-active);
+    font-weight: 600;
+  }
+  .standings-date-input {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-family: inherit;
+  }
+  .standings-table {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    overflow-x: auto;
+  }
+  .standings-row {
+    display: grid;
+    grid-template-columns: 1.8fr 0.5fr 0.5fr 0.6fr 0.5fr 0.7fr 0.6fr 0.5fr 0.5fr 0.6fr 0.7fr 0.7fr;
+    gap: 0.3rem;
+    padding: 0.65rem 1.1rem;
+    align-items: center;
+    min-width: 820px;
+  }
+  .standings-row.head {
+    background: #f2f1ee;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .standings-row.body {
+    border-top: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .standings-cell {
+    text-align: center;
+  }
+  .standings-team-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: left;
+  }
+  .standings-logo {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .standings-team-link {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+  }
+  .standings-team-link:hover {
+    color: var(--tab-active);
+    border-bottom-color: var(--tab-active);
+  }
+  .streak-win { color: var(--final); font-weight: 700; }
+  .streak-loss { color: var(--cancelled); font-weight: 700; }
+  .diff-pos { color: var(--final); }
+  .diff-neg { color: var(--cancelled); }
+  .standings-note {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    margin-top: 0.6rem;
   }
 </style>
 </head>
@@ -170,7 +259,7 @@
 </nav>
 
 <main id="content">
-  <p class="placeholder">Standings page content coming soon</p>
+  <p class="loading">Loading standings...</p>
 </main>
 
 <footer>
@@ -178,31 +267,28 @@
 </footer>
 
 <script>
+  const TEAM_LOGOS = {
+    'Glendale Desert Dogs': 'logos/glendale.svg',
+    'Mesa Solar Sox': 'logos/mesa.svg',
+    'Peoria Javelinas': 'logos/peoria.svg',
+    'Salt River Rafters': 'logos/salt-river.svg',
+    'Scottsdale Scorpions': 'logos/scottsdale.svg',
+    'Surprise Saguaros': 'logos/surprise.svg',
+  };
+
   let SEASONS = [];
   const params = new URLSearchParams(window.location.search);
   let currentSeason = parseInt(params.get('season'), 10) || new Date().getFullYear();
+  let availableDates = [];
+  let currentDate = null;
 
   async function loadSeasons() {
     try {
       const res = await fetch('data/seasons.json');
-      if (res.ok) {
-        SEASONS = await res.json();
-      }
-    } catch (e) {
-      // fall through to fallback below
-    }
-    if (!SEASONS || SEASONS.length === 0) {
-      SEASONS = [currentSeason];
-    }
-    if (!SEASONS.includes(currentSeason)) {
-      currentSeason = SEASONS[SEASONS.length - 1];
-    }
-  }
-
-  function updateUrl() {
-    const p = new URLSearchParams();
-    p.set('season', currentSeason);
-    history.replaceState(null, '', '?' + p.toString());
+      if (res.ok) SEASONS = await res.json();
+    } catch (e) {}
+    if (!SEASONS || SEASONS.length === 0) SEASONS = [currentSeason];
+    if (!SEASONS.includes(currentSeason)) currentSeason = SEASONS[SEASONS.length - 1];
   }
 
   function renderControls() {
@@ -217,14 +303,166 @@
     });
     el.onchange = () => {
       currentSeason = parseInt(el.value, 10);
+      currentDate = null;
       updateUrl();
+      loadStandingsForSeason();
     };
+  }
+
+  function updateUrl() {
+    const p = new URLSearchParams();
+    p.set('season', currentSeason);
+    if (currentDate) p.set('date', currentDate);
+    history.replaceState(null, '', '?' + p.toString());
+  }
+
+  function teamLogoImg(name) {
+    const src = TEAM_LOGOS[name];
+    if (!src) return '';
+    return `<img class="standings-logo" src="${src}" alt="" onerror="this.style.display='none'">`;
+  }
+
+  function streakClass(streak) {
+    if (!streak) return '';
+    if (streak.startsWith('W')) return 'streak-win';
+    if (streak.startsWith('L')) return 'streak-loss';
+    return '';
+  }
+
+  function diffClass(diff) {
+    const n = Number(diff);
+    if (n > 0) return 'diff-pos';
+    if (n < 0) return 'diff-neg';
+    return '';
+  }
+
+  function diffDisplay(diff) {
+    const n = Number(diff);
+    return n > 0 ? `+${n}` : `${n}`;
+  }
+
+  function renderStandings(data) {
+    const content = document.getElementById('content');
+    const isLatest = availableDates.length > 0 && currentDate === availableDates[availableDates.length - 1];
+    const today = new Date();
+    const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Phoenix' }).format(today);
+    const isToday = currentDate === todayStr;
+
+    let asofLabel;
+    if (isToday) {
+      asofLabel = `<span class="standings-asof-label">As of today (${currentDate})</span>`;
+    } else if (isLatest) {
+      asofLabel = `<span class="standings-asof-label final">Final standings (as of ${currentDate})</span>`;
+    } else {
+      asofLabel = `<span class="standings-asof-label">As of ${currentDate}</span>`;
+    }
+
+    const minDate = availableDates[0] || '';
+    const maxDate = availableDates[availableDates.length - 1] || '';
+
+    let html = `
+      <div class="standings-header">
+        <div class="standings-title">${currentSeason} Standings</div>
+        <div class="standings-asof">
+          ${asofLabel}
+          <input type="date" id="standings-date-input" class="standings-date-input"
+                 value="${currentDate}" min="${minDate}" max="${maxDate}">
+        </div>
+      </div>
+      <div class="standings-table">
+        <div class="standings-row head">
+          <div>Team</div>
+          <div class="standings-cell">W</div>
+          <div class="standings-cell">L</div>
+          <div class="standings-cell">PCT</div>
+          <div class="standings-cell">GB</div>
+          <div class="standings-cell">L10</div>
+          <div class="standings-cell">Strk</div>
+          <div class="standings-cell">RS</div>
+          <div class="standings-cell">RA</div>
+          <div class="standings-cell">Diff</div>
+          <div class="standings-cell">Home</div>
+          <div class="standings-cell">Road</div>
+        </div>
+    `;
+
+    (data.teams || []).forEach(t => {
+      const teamLink = `schedule.html?season=${currentSeason}&team=${encodeURIComponent(t.team_name)}`;
+      html += `
+        <div class="standings-row body">
+          <div class="standings-team-cell">
+            ${teamLogoImg(t.team_name)}
+            <a class="standings-team-link" href="${teamLink}">${t.team_name}</a>
+          </div>
+          <div class="standings-cell">${t.wins ?? ''}</div>
+          <div class="standings-cell">${t.losses ?? ''}</div>
+          <div class="standings-cell">${t.pct ?? ''}</div>
+          <div class="standings-cell">${t.games_back ?? ''}</div>
+          <div class="standings-cell">${t.last_ten_wins ?? ''}-${t.last_ten_losses ?? ''}</div>
+          <div class="standings-cell ${streakClass(t.streak)}">${t.streak ?? ''}</div>
+          <div class="standings-cell">${t.runs_scored ?? ''}</div>
+          <div class="standings-cell">${t.runs_allowed ?? ''}</div>
+          <div class="standings-cell ${diffClass(t.run_diff)}">${t.run_diff !== undefined && t.run_diff !== null ? diffDisplay(t.run_diff) : ''}</div>
+          <div class="standings-cell">${t.home_wins ?? ''}-${t.home_losses ?? ''}</div>
+          <div class="standings-cell">${t.away_wins ?? ''}-${t.away_losses ?? ''}</div>
+        </div>
+      `;
+    });
+
+    html += `</div><div class="standings-note">Scroll horizontally to see all columns on narrow screens</div>`;
+    content.innerHTML = html;
+
+    document.getElementById('standings-date-input').onchange = (e) => {
+      currentDate = e.target.value;
+      updateUrl();
+      loadOneDay();
+    };
+  }
+
+  async function loadOneDay() {
+    const content = document.getElementById('content');
+    try {
+      const res = await fetch(`data/${currentSeason}/standings/${currentDate}.json`);
+      if (!res.ok) throw new Error('No standings found for this date.');
+      const data = await res.json();
+      renderStandings(data);
+    } catch (err) {
+      content.innerHTML = `<p class="error">Couldn't load standings for ${currentDate}: ${err.message}</p>`;
+    }
+  }
+
+  async function loadStandingsForSeason() {
+    const content = document.getElementById('content');
+    content.innerHTML = '<p class="loading">Loading standings...</p>';
+
+    try {
+      const res = await fetch(`data/${currentSeason}/standings/dates.json`);
+      if (!res.ok) throw new Error('No standings available for this season yet.');
+      availableDates = await res.json();
+      if (!availableDates || availableDates.length === 0) {
+        throw new Error('No standings available for this season yet.');
+      }
+
+      const today = new Date();
+      const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Phoenix' }).format(today);
+
+      if (!currentDate) {
+        currentDate = availableDates.includes(todayStr) ? todayStr : availableDates[availableDates.length - 1];
+      } else if (!availableDates.includes(currentDate)) {
+        currentDate = availableDates[availableDates.length - 1];
+      }
+
+      await loadOneDay();
+    } catch (err) {
+      content.innerHTML = `<p class="error">${err.message}</p>`;
+    }
   }
 
   async function init() {
     await loadSeasons();
     renderControls();
-    updateUrl();
+    currentDate = params.get('date') || null;
+    loadStandingsForSeason();
   }
 
   init();
