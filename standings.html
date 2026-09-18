@@ -399,7 +399,7 @@
       asofLabel = `<span class="standings-asof-label">Season starts ${seasonDateRange ? formatShortDate(seasonDateRange.first) : ''}</span>`;
       minDate = seasonDateRange ? dayBefore(seasonDateRange.first) : '';
       maxDate = seasonDateRange ? seasonDateRange.last : '';
-      inputValue = seasonDateRange ? seasonDateRange.first : minDate;
+      inputValue = options.selectedDate || (seasonDateRange ? seasonDateRange.first : minDate);
     } else {
       const latestAvailable = availableDates[availableDates.length - 1];
       const isLatestAvailable = currentDate === latestAvailable;
@@ -475,7 +475,7 @@
 
     document.getElementById('standings-date-input').onchange = (e) => {
       if (noDataYet) {
-        renderStandings({ date: null, teams: buildZeroTeams() }, { noDataYet: true });
+        renderStandings({ date: null, teams: buildZeroTeams() }, { noDataYet: true, selectedDate: e.target.value });
         return;
       }
       const resolved = findClosestAvailableDate(e.target.value) || availableDates[availableDates.length - 1];
