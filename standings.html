@@ -394,7 +394,7 @@
       asofLabel = `<span class="standings-asof-label">Season hasn't started yet &mdash; all teams begin at 0-0</span>`;
       minDate = seasonDateRange ? dayBefore(seasonDateRange.first) : '';
       maxDate = seasonDateRange ? seasonDateRange.last : '';
-      inputValue = minDate;
+      inputValue = seasonDateRange ? seasonDateRange.first : minDate;
     } else {
       const latestAvailable = availableDates[availableDates.length - 1];
       const isLatestAvailable = currentDate === latestAvailable;
