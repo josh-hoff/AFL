@@ -322,6 +322,11 @@
     return d.toISOString().slice(0, 10);
   }
 
+  function formatShortDate(iso) {
+    const [y, m, d] = iso.split('-');
+    return `${parseInt(m, 10)}/${parseInt(d, 10)}/${y}`;
+  }
+
   async function loadSeasons() {
     try {
       const res = await fetch('data/seasons.json');
@@ -391,7 +396,7 @@
     let asofLabel, minDate, maxDate, inputValue;
 
     if (noDataYet) {
-      asofLabel = `<span class="standings-asof-label">Season hasn't started yet &mdash; all teams begin at 0-0</span>`;
+      asofLabel = `<span class="standings-asof-label">Season starts ${seasonDateRange ? formatShortDate(seasonDateRange.first) : ''}</span>`;
       minDate = seasonDateRange ? dayBefore(seasonDateRange.first) : '';
       maxDate = seasonDateRange ? seasonDateRange.last : '';
       inputValue = seasonDateRange ? seasonDateRange.first : minDate;
@@ -402,13 +407,13 @@
       const seasonTrulyOver = seasonDateRange && latestAvailable >= seasonDateRange.last;
 
       if (isToday) {
-        asofLabel = `<span class="standings-asof-label">As of today (${currentDate})</span>`;
+        asofLabel = `<span class="standings-asof-label">As of today (${formatShortDate(currentDate)})</span>`;
       } else if (isLatestAvailable && seasonTrulyOver) {
-        asofLabel = `<span class="standings-asof-label final">Final standings (as of ${currentDate})</span>`;
+        asofLabel = `<span class="standings-asof-label final">Final standings (as of ${formatShortDate(currentDate)})</span>`;
       } else if (isLatestAvailable) {
-        asofLabel = `<span class="standings-asof-label">Most recent standings (as of ${currentDate})</span>`;
+        asofLabel = `<span class="standings-asof-label">Most recent standings (as of ${formatShortDate(currentDate)})</span>`;
       } else {
-        asofLabel = `<span class="standings-asof-label">As of ${currentDate}</span>`;
+        asofLabel = `<span class="standings-asof-label">As of ${formatShortDate(currentDate)}</span>`;
       }
 
       minDate = availableDates[0];
