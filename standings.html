@@ -316,6 +316,12 @@
     return closest || availableDates[0] || null;
   }
 
+  function dayBefore(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00Z');
+    d.setUTCDate(d.getUTCDate() - 1);
+    return d.toISOString().slice(0, 10);
+  }
+
   async function loadSeasons() {
     try {
       const res = await fetch('data/seasons.json');
@@ -386,7 +392,7 @@
 
     if (noDataYet) {
       asofLabel = `<span class="standings-asof-label">Season hasn't started yet &mdash; all teams begin at 0-0</span>`;
-      minDate = seasonDateRange ? seasonDateRange.first : '';
+      minDate = seasonDateRange ? dayBefore(seasonDateRange.first) : '';
       maxDate = seasonDateRange ? seasonDateRange.last : '';
       inputValue = minDate;
     } else {
