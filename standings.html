@@ -275,12 +275,46 @@
     'Scottsdale Scorpions': 'logos/scottsdale.svg',
     'Surprise Saguaros': 'logos/surprise.svg',
   };
+  const AFL_TEAM_NAMES = Object.keys(TEAM_LOGOS);
 
   let SEASONS = [];
   const params = new URLSearchParams(window.location.search);
   let currentSeason = parseInt(params.get('season'), 10) || new Date().getFullYear();
   let availableDates = [];
   let currentDate = null;
+  let seasonDateRange = null;
+
+  function buildZeroTeams() {
+    return AFL_TEAM_NAMES.map(name => ({
+      team_name: name, wins: 0, losses: 0, pct: '.000', games_back: '-',
+      streak: '', last_ten_wins: 0, last_ten_losses: 0, runs_scored: 0,
+      runs_allowed: 0, run_diff: 0, home_wins: 0, home_losses: 0, away_wins: 0, away_losses: 0,
+    }));
+  }
+
+  function extractSeasonDateRange(csvText) {
+    const lines = csvText.trim().split(/\r?\n/);
+    if (lines.length < 2) return null;
+    let minDate = null, maxDate = null;
+    for (let i = 1; i < lines.length; i++) {
+      const m = lines[i].match(/^(\d{4}-\d{2}-\d{2})/);
+      if (!m) continue;
+      const d = m[1];
+      if (!minDate || d < minDate) minDate = d;
+      if (!maxDate || d > maxDate) maxDate = d;
+    }
+    return minDate && maxDate ? { first: minDate, last: maxDate } : null;
+  }
+
+  function findClosestAvailableDate(targetDate) {
+    if (availableDates.includes(targetDate)) return targetDate;
+    let closest = null;
+    for (const d of availableDates) {
+      if (d <= targetDate) closest = d;
+      else break;
+    }
+    return closest || availableDates[0] || null;
+  }
 
   async function loadSeasons() {
     try {
@@ -341,24 +375,40 @@
     return n > 0 ? `+${n}` : `${n}`;
   }
 
-  function renderStandings(data) {
+  function renderStandings(data, options = {}) {
     const content = document.getElementById('content');
-    const isLatest = availableDates.length > 0 && currentDate === availableDates[availableDates.length - 1];
+    const noDataYet = !!options.noDataYet;
+
     const today = new Date();
     const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Phoenix' }).format(today);
-    const isToday = currentDate === todayStr;
 
-    let asofLabel;
-    if (isToday) {
-      asofLabel = `<span class="standings-asof-label">As of today (${currentDate})</span>`;
-    } else if (isLatest) {
-      asofLabel = `<span class="standings-asof-label final">Final standings (as of ${currentDate})</span>`;
+    let asofLabel, minDate, maxDate, inputValue;
+
+    if (noDataYet) {
+      asofLabel = `<span class="standings-asof-label">Season hasn't started yet &mdash; all teams begin at 0-0</span>`;
+      minDate = seasonDateRange ? seasonDateRange.first : '';
+      maxDate = seasonDateRange ? seasonDateRange.last : '';
+      inputValue = minDate;
     } else {
-      asofLabel = `<span class="standings-asof-label">As of ${currentDate}</span>`;
-    }
+      const latestAvailable = availableDates[availableDates.length - 1];
+      const isLatestAvailable = currentDate === latestAvailable;
+      const isToday = currentDate === todayStr;
+      const seasonTrulyOver = seasonDateRange && latestAvailable >= seasonDateRange.last;
 
-    const minDate = availableDates[0] || '';
-    const maxDate = availableDates[availableDates.length - 1] || '';
+      if (isToday) {
+        asofLabel = `<span class="standings-asof-label">As of today (${currentDate})</span>`;
+      } else if (isLatestAvailable && seasonTrulyOver) {
+        asofLabel = `<span class="standings-asof-label final">Final standings (as of ${currentDate})</span>`;
+      } else if (isLatestAvailable) {
+        asofLabel = `<span class="standings-asof-label">Most recent standings (as of ${currentDate})</span>`;
+      } else {
+        asofLabel = `<span class="standings-asof-label">As of ${currentDate}</span>`;
+      }
+
+      minDate = availableDates[0];
+      maxDate = (seasonDateRange && seasonDateRange.last > latestAvailable) ? seasonDateRange.last : latestAvailable;
+      inputValue = currentDate;
+    }
 
     let html = `
       <div class="standings-header">
@@ -366,7 +416,7 @@
         <div class="standings-asof">
           ${asofLabel}
           <input type="date" id="standings-date-input" class="standings-date-input"
-                 value="${currentDate}" min="${minDate}" max="${maxDate}">
+                 value="${inputValue}" min="${minDate}" max="${maxDate}">
         </div>
       </div>
       <div class="standings-table">
@@ -413,7 +463,12 @@
     content.innerHTML = html;
 
     document.getElementById('standings-date-input').onchange = (e) => {
-      currentDate = e.target.value;
+      if (noDataYet) {
+        renderStandings({ date: null, teams: buildZeroTeams() }, { noDataYet: true });
+        return;
+      }
+      const resolved = findClosestAvailableDate(e.target.value) || availableDates[availableDates.length - 1];
+      currentDate = resolved;
       updateUrl();
       loadOneDay();
     };
@@ -435,27 +490,36 @@
     const content = document.getElementById('content');
     content.innerHTML = '<p class="loading">Loading standings...</p>';
 
+    seasonDateRange = null;
+    try {
+      const schedRes = await fetch(`data/${currentSeason}/schedule.csv`);
+      if (schedRes.ok) {
+        const text = await schedRes.text();
+        seasonDateRange = extractSeasonDateRange(text);
+      }
+    } catch (e) {}
+
+    availableDates = [];
     try {
       const res = await fetch(`data/${currentSeason}/standings/dates.json`);
-      if (!res.ok) throw new Error('No standings available for this season yet.');
-      availableDates = await res.json();
-      if (!availableDates || availableDates.length === 0) {
-        throw new Error('No standings available for this season yet.');
+      if (res.ok) {
+        const parsed = await res.json();
+        if (parsed && parsed.length > 0) availableDates = parsed;
       }
+    } catch (e) {}
 
-      const today = new Date();
-      const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Phoenix' }).format(today);
-
-      if (!currentDate) {
-        currentDate = availableDates.includes(todayStr) ? todayStr : availableDates[availableDates.length - 1];
-      } else if (!availableDates.includes(currentDate)) {
-        currentDate = availableDates[availableDates.length - 1];
-      }
-
-      await loadOneDay();
-    } catch (err) {
-      content.innerHTML = `<p class="error">${err.message}</p>`;
+    if (availableDates.length === 0) {
+      renderStandings({ date: null, teams: buildZeroTeams() }, { noDataYet: true });
+      return;
     }
+
+    const today = new Date();
+    const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Phoenix' }).format(today);
+
+    if (!currentDate) currentDate = todayStr;
+    currentDate = findClosestAvailableDate(currentDate) || availableDates[availableDates.length - 1];
+
+    await loadOneDay();
   }
 
   async function init() {
