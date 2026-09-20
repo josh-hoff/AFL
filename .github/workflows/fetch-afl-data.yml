@@ -29,6 +29,12 @@ jobs:
       - name: Fetch current season pitch data
         run: python fetch_afl_pitches.py
 
+      - name: Fetch current season pitcher stats
+        run: python fetch_afl_pitcher_stats.py
+
+      - name: Fetch current season standings
+        run: python fetch_afl_standings.py --only-missing
+
       - name: Commit and push updated data
         run: |
           git config user.name "github-actions[bot]"
