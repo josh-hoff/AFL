@@ -8,6 +8,9 @@ on:
     - cron: '0 12 * 7-12 *'
   workflow_dispatch: {}
 
+permissions:
+  contents: write
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
@@ -31,6 +34,21 @@ jobs:
 
       - name: Fetch current season pitcher stats
         run: python fetch_afl_pitcher_stats.py
+
+      - name: Fetch current season roster
+        run: python fetch_afl_roster.py
+
+      - name: Fetch current season hitting game logs
+        run: python fetch_afl_hitting_gamelogs.py
+
+      - name: Fetch current season fielding game logs
+        run: python fetch_afl_fielding_gamelogs.py
+
+      - name: Fetch current season transactions
+        run: python fetch_afl_transactions.py
+
+      - name: Fetch current season standings
+        run: python fetch_afl_standings.py --only-missing
 
       - name: Commit and push updated data
         run: |

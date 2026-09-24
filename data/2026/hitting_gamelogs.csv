@@ -1,0 +1,1 @@
+season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,at_bats,plate_appearances,hits,doubles,triples,home_runs,total_bases,runs,rbi,walks,intentional_walks,strikeouts,hit_by_pitch,stolen_bases,caught_stealing,avg,obp,slg,ops,babip,ground_outs,air_outs,ground_into_double_play,sac_bunts,sac_flies,left_on_base,catchers_interference
