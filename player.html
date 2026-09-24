@@ -150,6 +150,7 @@
   const params = new URLSearchParams(window.location.search);
   const playerId = params.get('id');
   let currentSeason = parseInt(params.get('season'), 10) || new Date().getFullYear();
+  let lastKnownTeam = null;
 
   function parseCSVLine(line) {
     const result = [];
@@ -486,9 +487,14 @@
 
       const player = roster.find(p => p.player_id === playerId);
       if (!player) {
+        if (lastKnownTeam) {
+          window.location.href = `roster.html?season=${currentSeason}&team=${encodeURIComponent(lastKnownTeam)}`;
+          return;
+        }
         content.innerHTML = '<p class="error">Player not found for this season.</p>';
         return;
       }
+      lastKnownTeam = player.team;
 
       const isPitcher = player.position_code === PITCHER_POSITION_CODE;
 

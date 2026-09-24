@@ -386,6 +386,15 @@
     margin-top: 0.2rem;
     color: var(--text);
   }
+  .team-banner-roster-link {
+    display: inline-block;
+    margin-top: 0.4rem;
+    color: var(--tab-active);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--tab-active);
+  }
   .team-banner-dash {
     color: var(--text-muted);
   }
@@ -763,6 +772,7 @@
           <div>
             <div class="team-banner-name">${currentTeam}</div>
             <div class="team-banner-record">${recordHtml}</div>
+            <a class="team-banner-roster-link" href="roster.html?season=${currentSeason}&team=${encodeURIComponent(currentTeam)}">Roster</a>
           </div>
         </div>
         ${infoHtml}
