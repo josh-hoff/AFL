@@ -59,7 +59,21 @@
     padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04); margin-bottom: 1.5rem; flex-wrap: wrap;
   }
-  .bio-avatar { width: 90px; height: 90px; border-radius: 50%; background: #2b2b2b; flex-shrink: 0; }
+  .bio-avatar { width: 90px; height: 90px; border-radius: 50%; background: #2b2b2b; flex-shrink: 0; position: relative; }
+  .bio-avatar img.bio-photo { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+  .bio-org-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    object-fit: contain;
+    padding: 2px;
+  }
   .bio-name { font-size: 1.6rem; font-weight: 700; color: var(--text); }
   .bio-subline { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.15rem; }
   .bio-details { display: flex; gap: 1.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
@@ -239,15 +253,19 @@
     const heightWeight = [player.height, player.weight ? `${player.weight} lbs` : ''].filter(Boolean).join(', ');
     const batsThrows = (player.bats || player.throws) ? `${(player.bats || '?')[0]}/${(player.throws || '?')[0]}` : '';
     const draft = player.draft_year ? `${player.draft_year}` : '';
+    const photoUrl = `https://img.mlbstatic.com/mlb-photos/image/upload/c_fill,g_auto/w_180/v1/people/${player.player_id}/headshot/milb/current`;
+    const orgLogoUrl = player.org_id ? `https://www.mlbstatic.com/team-logos/${player.org_id}.svg` : '';
+    const orgBadge = orgLogoUrl
+      ? `<img class="bio-org-badge" src="${orgLogoUrl}" alt="" onerror="this.style.display='none'">`
+      : '';
 
     return `
       <div class="bio-card">
-        <div class="bio-avatar"></div>
+        <div class="bio-avatar"><img class="bio-photo" src="${photoUrl}" alt="" onerror="this.style.display='none'">${orgBadge}</div>
         <div style="flex:1;">
           <div class="bio-name">${player.full_name}</div>
           <div class="bio-subline">${player.jersey_number ? '#' + player.jersey_number + ' \u00b7 ' : ''}${player.position_name} \u00b7 ${player.org_name}</div>
-          <div class="bio-details">
-            ${bioDetail('Age', player.age)}
+          <div class="bio-details">            ${bioDetail('Age', player.age)}
             ${bioDetail('Height/Weight', heightWeight)}
             ${bioDetail('Bats/Throws', batsThrows)}
             ${bioDetail('Hometown', hometown)}
