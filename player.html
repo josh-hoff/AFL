@@ -141,6 +141,7 @@
   };
 
   const MILB_SPORT_IDS = [16, 14, 13, 12, 11];
+  const PITCHER_POSITION_CODE = '1';
   const MLB_SPORT_ID = 1;
   const LEVEL_RANK = { 'ROK': 0, 'A': 1, 'A+': 2, 'AA': 3, 'AAA': 4, 'AFL': 5, 'MLB': 6 };
 
@@ -297,6 +298,26 @@
     `;
   }
 
+  function renderAflSeasonCardPitching(team, stats) {
+    return `
+      <div class="afl-season-card">
+        <div class="afl-season-top">
+          <div class="afl-season-title">${currentSeason} Arizona Fall League</div>
+          <div class="afl-season-team">
+            ${TEAM_LOGOS[team] ? `<img src="${TEAM_LOGOS[team]}" alt="" onerror="this.style.display='none'">` : ''}
+            ${team || ''}
+          </div>
+        </div>
+        <div class="afl-stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+          <div><div class="afl-stat-label">W</div><div class="afl-stat-value">${stats.wins !== '' ? stats.wins : '\u2014'}</div></div>
+          <div><div class="afl-stat-label">L</div><div class="afl-stat-value">${stats.losses !== '' ? stats.losses : '\u2014'}</div></div>
+          <div><div class="afl-stat-label">ERA</div><div class="afl-stat-value">${stats.era || '\u2014'}</div></div>
+          <div><div class="afl-stat-label">SV</div><div class="afl-stat-value">${stats.saves !== '' ? stats.saves : '\u2014'}</div></div>
+        </div>
+      </div>
+    `;
+  }
+
   function buildTransactionRowHtml(r) {
     const desc = highlightPlayerName(r.description, r.player_name, r.player_id, r.season);
     return `<div class="transaction-row body"><div>${formatShortDate(r.date)}</div><div>${desc}</div></div>`;
@@ -359,12 +380,34 @@
     }
   }
 
-  async function loadCareerPath(aflRow) {
+  async function fetchLevelPitching(sportId) {
+    try {
+      const res = await fetch(`https://statsapi.mlb.com/api/v1/people/${playerId}/stats?stats=yearByYear&group=pitching&sportId=${sportId}`);
+      if (!res.ok) return [];
+      const data = await res.json();
+      const splits = (data.stats && data.stats[0] && data.stats[0].splits) || [];
+      return splits.map(s => ({
+        season: s.season,
+        level: (s.sport && s.sport.abbreviation) || '',
+        team: (s.team && s.team.name) || '',
+        games: s.stat.gamesPlayed,
+        wins: s.stat.wins,
+        losses: s.stat.losses,
+        era: s.stat.era,
+        saves: s.stat.saves,
+      }));
+    } catch (e) {
+      return [];
+    }
+  }
+
+  async function loadCareerPath(aflRow, statType) {
     const container = document.getElementById('career-path-container');
     container.innerHTML = '<p class="loading">Loading career path...</p>';
 
     const allSportIds = [...MILB_SPORT_IDS, MLB_SPORT_ID];
-    const results = await Promise.all(allSportIds.map(fetchLevelHitting));
+    const fetchFn = statType === 'pitching' ? fetchLevelPitching : fetchLevelHitting;
+    const results = await Promise.all(allSportIds.map(fetchFn));
     let rows = results.flat();
 
     if (aflRow) rows.push(aflRow);
@@ -381,18 +424,32 @@
       return;
     }
 
+    const headerRow = statType === 'pitching'
+      ? '<div>Yr</div><div>Lvl</div><div>Team</div><div>G</div><div>W</div><div>L</div><div>ERA</div><div>SV</div>'
+      : '<div>Yr</div><div>Lvl</div><div>Team</div><div>G</div><div>AVG</div><div>OBP</div><div>OPS</div><div>HR</div>';
+
     let html = `
       <div class="career-table">
-        <div class="career-row head"><div>Yr</div><div>Lvl</div><div>Team</div><div>G</div><div>AVG</div><div>OBP</div><div>OPS</div><div>HR</div></div>
+        <div class="career-row head">${headerRow}</div>
     `;
     rows.forEach(r => {
       const rowClass = r.level === 'AFL' ? 'career-row afl' : 'career-row body';
-      html += `
-        <div class="${rowClass}">
-          <div>${r.season}</div><div>${r.level}</div><div>${r.team}</div><div>${r.games}</div>
-          <div>${r.avg || ''}</div><div>${r.obp || ''}</div><div>${r.ops || ''}</div><div>${r.hr !== undefined ? r.hr : ''}</div>
-        </div>
-      `;
+      if (statType === 'pitching') {
+        html += `
+          <div class="${rowClass}">
+            <div>${r.season}</div><div>${r.level}</div><div>${r.team}</div><div>${r.games}</div>
+            <div>${r.wins !== undefined ? r.wins : ''}</div><div>${r.losses !== undefined ? r.losses : ''}</div>
+            <div>${r.era || ''}</div><div>${r.saves !== undefined ? r.saves : ''}</div>
+          </div>
+        `;
+      } else {
+        html += `
+          <div class="${rowClass}">
+            <div>${r.season}</div><div>${r.level}</div><div>${r.team}</div><div>${r.games}</div>
+            <div>${r.avg || ''}</div><div>${r.obp || ''}</div><div>${r.ops || ''}</div><div>${r.hr !== undefined ? r.hr : ''}</div>
+          </div>
+        `;
+      }
     });
     html += `</div>`;
     container.innerHTML = html;
@@ -408,14 +465,16 @@
     }
 
     try {
-      const [rosterRes, hittingRes, txnRes] = await Promise.all([
+      const [rosterRes, hittingRes, pitcherStatsRes, txnRes] = await Promise.all([
         fetch(`data/${currentSeason}/roster.csv`),
         fetch(`data/${currentSeason}/hitting_gamelogs.csv`),
+        fetch(`data/${currentSeason}/pitcher_stats.csv`),
         fetch(`data/${currentSeason}/transactions.csv`),
       ]);
 
       const roster = rosterRes.ok ? parseCSV(await rosterRes.text()) : [];
       const hitting = hittingRes.ok ? parseCSV(await hittingRes.text()) : [];
+      const pitcherStats = pitcherStatsRes.ok ? parseCSV(await pitcherStatsRes.text()) : [];
       const transactions = txnRes.ok ? parseCSV(await txnRes.text()) : [];
 
       const player = roster.find(p => p.player_id === playerId);
@@ -424,16 +483,38 @@
         return;
       }
 
-      const playerHitting = hitting.filter(g => g.player_id === playerId);
-      const hasHitting = playerHitting.length > 0;
-      const totals = hasHitting ? sumHittingGames(playerHitting) : null;
+      const isPitcher = player.position_code === PITCHER_POSITION_CODE;
 
       const playerTransactions = transactions
         .filter(t => t.player_id === playerId)
         .sort((a, b) => (a.date < b.date ? 1 : -1));
 
       let html = renderBio(player);
-      if (hasHitting) html += renderAflSeasonCard(player.team, totals);
+      let aflRow = null;
+      let statType = 'hitting';
+
+      if (isPitcher) {
+        statType = 'pitching';
+        const pStats = pitcherStats.find(p => p.pitcher_id === playerId);
+        if (pStats) {
+          html += renderAflSeasonCardPitching(player.team, pStats);
+          aflRow = {
+            season: String(currentSeason), level: 'AFL', team: player.team, games: '',
+            wins: pStats.wins, losses: pStats.losses, era: pStats.era, saves: pStats.saves,
+          };
+        }
+      } else {
+        const playerHitting = hitting.filter(g => g.player_id === playerId);
+        const hasHitting = playerHitting.length > 0;
+        if (hasHitting) {
+          const totals = sumHittingGames(playerHitting);
+          html += renderAflSeasonCard(player.team, totals);
+          aflRow = {
+            season: String(currentSeason), level: 'AFL', team: player.team, games: totals.games,
+            avg: fmtRate(totals.avg), obp: fmtRate(totals.obp), ops: fmtRate(totals.ops), hr: totals.home_runs,
+          };
+        }
+      }
 
       html += `<div class="section-title">Career Path <span class="section-note">(live from MLB, ${currentSeason} AFL row highlighted)</span></div>`;
       html += `<div id="career-path-container"><p class="loading">Loading career path...</p></div>`;
@@ -442,14 +523,7 @@
       content.innerHTML = html;
       wireTransactionExpand();
 
-      let aflRow = null;
-      if (hasHitting) {
-        aflRow = {
-          season: String(currentSeason), level: 'AFL', team: player.team, games: totals.games,
-          avg: fmtRate(totals.avg), obp: fmtRate(totals.obp), ops: fmtRate(totals.ops), hr: totals.home_runs,
-        };
-      }
-      loadCareerPath(aflRow);
+      loadCareerPath(aflRow, statType);
     } catch (err) {
       content.innerHTML = `<p class="error">Couldn't load player: ${err.message}</p>`;
     }
