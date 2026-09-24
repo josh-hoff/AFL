@@ -85,6 +85,7 @@
   .career-row.head { background: #f2f1ee; color: var(--text-muted); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; }
   .career-row.body { border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text); align-items: center; }
   .career-row.afl { border-top: 1px solid var(--tab-active); font-weight: 700; background: #fff8f2; }
+  .career-row.mlb { border-top: 1px solid #2f6fb0; font-weight: 700; background: #eaf1fa; }
 
   .transaction-log-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 2rem 0 0.6rem; }
   .transaction-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
@@ -411,6 +412,11 @@
     const results = await Promise.all(allSportIds.map(fetchFn));
     let rows = results.flat();
 
+    // MLB's own API bundles in a same-level "combined" row (blank team name)
+    // whenever a player changed affiliates at the same level in one year --
+    // we only want the real, individual affiliate rows.
+    rows = rows.filter(r => r.team && r.team.trim() !== '');
+
     if (aflRow) rows.push(aflRow);
 
     rows.sort((a, b) => {
@@ -434,7 +440,7 @@
         <div class="career-row head">${headerRow}</div>
     `;
     rows.forEach(r => {
-      const rowClass = r.level === 'AFL' ? 'career-row body afl' : 'career-row body';
+      const rowClass = r.level === 'AFL' ? 'career-row body afl' : r.level === 'MLB' ? 'career-row body mlb' : 'career-row body';
       if (statType === 'pitching') {
         html += `
           <div class="${rowClass}">
