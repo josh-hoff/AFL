@@ -19,7 +19,7 @@ AFL_TEAMS = {
 ROSTER_FIELDS = [
     "season", "team", "player_id", "full_name", "jersey_number",
     "position_code", "position_name", "position_abbreviation",
-    "org_name", "birth_date", "age", "birth_city", "birth_state",
+    "org_id", "org_name", "birth_date", "age", "birth_city", "birth_state",
     "birth_country", "height", "weight", "bats", "throws",
     "draft_year", "mlb_debut_date",
 ]
@@ -61,21 +61,21 @@ def fetch_team_name(team_id):
     return name
 
 
-def resolve_org_name(roster_entry, person_bio):
+def resolve_org(roster_entry, person_bio):
     parent_team_id = roster_entry.get("parentTeamId")
     if parent_team_id:
-        return fetch_team_name(parent_team_id)
+        return parent_team_id, fetch_team_name(parent_team_id)
 
     person_with_team = fetch_person(person_bio["id"], hydrate_current_team=True)
     current_team = person_with_team.get("currentTeam", {})
     if not current_team:
-        return ""
+        return "", ""
 
     parent_org_id = current_team.get("parentOrgId")
     if parent_org_id:
-        return fetch_team_name(parent_org_id)
+        return parent_org_id, fetch_team_name(parent_org_id)
 
-    return current_team.get("name", "")
+    return current_team.get("id", ""), current_team.get("name", "")
 
 
 def build_roster_row(season, team_name, roster_entry):
@@ -83,7 +83,7 @@ def build_roster_row(season, team_name, roster_entry):
     person_bio = fetch_person(person_id)
     time.sleep(0.2)
 
-    org_name = resolve_org_name(roster_entry, {"id": person_id})
+    org_id, org_name = resolve_org(roster_entry, {"id": person_id})
     time.sleep(0.2)
 
     position = roster_entry.get("position", {})
@@ -97,6 +97,7 @@ def build_roster_row(season, team_name, roster_entry):
         "position_code": position.get("code", ""),
         "position_name": position.get("name", ""),
         "position_abbreviation": position.get("abbreviation", ""),
+        "org_id": org_id,
         "org_name": org_name,
         "birth_date": person_bio.get("birthDate", ""),
         "age": person_bio.get("currentAge", ""),

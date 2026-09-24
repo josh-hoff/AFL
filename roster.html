@@ -190,6 +190,25 @@
     text-transform: uppercase;
     letter-spacing: 0.04em;
     margin: 0 0 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .position-group-arrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    transition: transform 0.15s ease;
+  }
+  .position-group-label.collapsed .position-group-arrow {
+    transform: rotate(-90deg);
+  }
+  .position-group-count {
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
   }
   .roster-table {
     background: var(--bg-card);
@@ -476,6 +495,18 @@
     };
   }
 
+  function wireCollapsibleGroups() {
+    document.querySelectorAll('.position-group-label').forEach(label => {
+      label.onclick = () => {
+        const targetId = label.getAttribute('data-target');
+        const table = document.getElementById(targetId);
+        if (!table) return;
+        const isCollapsed = label.classList.toggle('collapsed');
+        table.style.display = isCollapsed ? 'none' : 'block';
+      };
+    });
+  }
+
   function renderRoster() {
     const content = document.getElementById('content');
 
@@ -505,7 +536,13 @@
       const playersInGroup = teamPlayers.filter(p => group.codes.includes(p.position_code));
       if (playersInGroup.length === 0) return;
 
-      html += `<div class="position-group-label">${group.label}</div><div class="roster-table">`;
+      const groupId = `group-${group.label.toLowerCase()}`;
+      html += `
+        <div class="position-group-label" data-target="${groupId}">
+          <span class="position-group-arrow">&#9662;</span> ${group.label} <span class="position-group-count">(${playersInGroup.length})</span>
+        </div>
+        <div class="roster-table" id="${groupId}">
+      `;
       html += `<div class="roster-row head"><div>#</div><div>Name</div><div>Pos</div></div>`;
       playersInGroup.forEach(p => {
         const link = `player.html?id=${p.player_id}&season=${currentSeason}`;
@@ -523,6 +560,7 @@
     html += renderTransactionTable(teamTransactions);
 
     content.innerHTML = html;
+    wireCollapsibleGroups();
     wireTransactionExpand();
 
     const teamSelect = document.getElementById('team-select');
