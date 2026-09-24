@@ -32,11 +32,11 @@ jobs:
       - name: Fetch current season pitch data
         run: python fetch_afl_pitches.py
 
-      - name: Fetch current season pitcher stats
-        run: python fetch_afl_pitcher_stats.py
-
       - name: Fetch current season roster
         run: python fetch_afl_roster.py
+
+      - name: Fetch current season pitcher stats
+        run: python fetch_afl_pitcher_stats.py
 
       - name: Fetch current season hitting game logs
         run: python fetch_afl_hitting_gamelogs.py

@@ -43,6 +43,13 @@ def collect_pitcher_ids(output_dir, season):
             if pid:
                 ids[pid] = g.get(name_key, "")
 
+    roster = load_csv(os.path.join(season_dir, "roster.csv"))
+    for p in roster:
+        if p.get("position_code") == "1":
+            pid = p.get("player_id")
+            if pid:
+                ids[pid] = p.get("full_name", "")
+
     return ids
 
 
@@ -76,7 +83,7 @@ def extract_pitching_line(data):
 def main():
     parser = argparse.ArgumentParser(
         description="Pull season pitching stats (W-L, ERA, saves) for every pitcher "
-        "who appears in a season's decisions or probable-pitcher listings."
+        "who appears in a season's decisions, probable-pitcher listings, or team roster."
     )
     parser.add_argument(
         "season",
