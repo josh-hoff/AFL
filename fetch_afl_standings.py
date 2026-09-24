@@ -26,7 +26,7 @@ def load_schedule_dates(season, output_dir):
             f"No schedule found at {path}. Run fetch_afl_schedule.py {season} first."
         )
     dates = []
-    with open(path, "r", newline="") as f:
+    with open(path, "r", newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
             m = re.match(r"(\d{4}-\d{2}-\d{2})", row.get("date", ""))
             if m:

@@ -109,11 +109,11 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,position,
 2025,702253,Cam Collier,Peoria Javelinas,2025-11-06,Glendale Desert Dogs,True,False,825641,3B,7.0,0,2,0,0,2,.980,0,0,2.00,2.57
 2025,702253,Cam Collier,Peoria Javelinas,2025-11-07,Mesa Solar Sox,True,True,825640,1B,9.0,8,3,0,0,11,.981,1,0,11.00,11.00
 2025,702253,Cam Collier,Peoria Javelinas,2025-11-11,Mesa Solar Sox,False,False,825592,DH,0.0,0,0,0,0,0,.981,0,0,0.00,-.--
-2025,801725,Luis De Le�n,Peoria Javelinas,2025-10-08,Mesa Solar Sox,False,True,825606,P,4.0,0,0,0,0,0,.000,0,0,0.00,0.00
-2025,801725,Luis De Le�n,Peoria Javelinas,2025-10-16,Mesa Solar Sox,False,True,825603,P,4.1,0,0,0,0,0,.000,0,0,0.00,0.00
-2025,801725,Luis De Le�n,Peoria Javelinas,2025-10-22,Glendale Desert Dogs,True,True,825643,P,3.0,0,1,0,0,1,1.000,1,0,1.00,3.00
-2025,801725,Luis De Le�n,Peoria Javelinas,2025-10-29,Salt River Rafters,False,True,825628,P,3.0,0,0,0,0,0,1.000,0,0,0.00,0.00
-2025,801725,Luis De Le�n,Peoria Javelinas,2025-11-04,Glendale Desert Dogs,False,False,825657,P,2.0,0,0,0,0,0,1.000,0,0,0.00,0.00
+2025,801725,Luis De LeÃ³n,Peoria Javelinas,2025-10-08,Mesa Solar Sox,False,True,825606,P,4.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2025,801725,Luis De LeÃ³n,Peoria Javelinas,2025-10-16,Mesa Solar Sox,False,True,825603,P,4.1,0,0,0,0,0,.000,0,0,0.00,0.00
+2025,801725,Luis De LeÃ³n,Peoria Javelinas,2025-10-22,Glendale Desert Dogs,True,True,825643,P,3.0,0,1,0,0,1,1.000,1,0,1.00,3.00
+2025,801725,Luis De LeÃ³n,Peoria Javelinas,2025-10-29,Salt River Rafters,False,True,825628,P,3.0,0,0,0,0,0,1.000,0,0,0.00,0.00
+2025,801725,Luis De LeÃ³n,Peoria Javelinas,2025-11-04,Glendale Desert Dogs,False,False,825657,P,2.0,0,0,0,0,0,1.000,0,0,0.00,0.00
 2025,687040,Sayer Diederich,Peoria Javelinas,2025-10-09,Surprise Saguaros,True,False,825652,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2025,687040,Sayer Diederich,Peoria Javelinas,2025-10-15,Glendale Desert Dogs,True,False,825648,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2025,687040,Sayer Diederich,Peoria Javelinas,2025-10-21,Scottsdale Scorpions,True,False,825646,P,1.2,0,0,0,0,0,.000,0,0,0.00,0.00
@@ -865,10 +865,10 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,position,
 2025,691405,Juan Benjamin,Surprise Saguaros,2025-11-06,Salt River Rafters,False,True,825624,2B,7.0,2,0,0,0,2,1.000,0,0,2.00,2.57
 2025,691405,Juan Benjamin,Surprise Saguaros,2025-11-07,Salt River Rafters,True,True,825576,1B,9.0,8,0,1,0,9,.985,1,0,8.00,8.00
 2025,691405,Juan Benjamin,Surprise Saguaros,2025-11-10,Peoria Javelinas,True,False,825575,1B,7.0,5,1,0,0,6,.986,1,0,6.00,7.71
-2025,695871,Jes�s Broca,Surprise Saguaros,2025-10-15,Mesa Solar Sox,True,True,825589,P,1.2,0,1,0,0,1,1.000,0,0,1.00,9.00
-2025,695871,Jes�s Broca,Surprise Saguaros,2025-10-22,Scottsdale Scorpions,True,True,825586,P,3.0,0,1,0,0,1,1.000,0,0,1.00,3.00
-2025,695871,Jes�s Broca,Surprise Saguaros,2025-10-29,Scottsdale Scorpions,True,True,825583,P,2.1,0,0,1,1,1,.667,0,0,0.00,0.00
-2025,695871,Jes�s Broca,Surprise Saguaros,2025-11-05,Scottsdale Scorpions,True,False,825577,P,2.0,0,0,0,0,0,.667,0,0,0.00,0.00
+2025,695871,JesÃºs Broca,Surprise Saguaros,2025-10-15,Mesa Solar Sox,True,True,825589,P,1.2,0,1,0,0,1,1.000,0,0,1.00,9.00
+2025,695871,JesÃºs Broca,Surprise Saguaros,2025-10-22,Scottsdale Scorpions,True,True,825586,P,3.0,0,1,0,0,1,1.000,0,0,1.00,3.00
+2025,695871,JesÃºs Broca,Surprise Saguaros,2025-10-29,Scottsdale Scorpions,True,True,825583,P,2.1,0,0,1,1,1,.667,0,0,0.00,0.00
+2025,695871,JesÃºs Broca,Surprise Saguaros,2025-11-05,Scottsdale Scorpions,True,False,825577,P,2.0,0,0,0,0,0,.667,0,0,0.00,0.00
 2025,694749,Dylan Campbell,Surprise Saguaros,2025-10-08,Glendale Desert Dogs,True,True,825591,2B,10.0,3,3,0,0,6,1.000,0,0,6.00,5.40
 2025,694749,Dylan Campbell,Surprise Saguaros,2025-10-09,Peoria Javelinas,False,True,825652,CF,9.0,1,1,0,0,2,1.000,1,0,2.00,2.00
 2025,694749,Dylan Campbell,Surprise Saguaros,2025-10-14,Mesa Solar Sox,False,False,825604,3B,8.0,0,1,0,0,1,1.000,0,0,1.00,1.13
@@ -1388,8 +1388,8 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,position,
 2025,701557,Carlos Lequerica,Scottsdale Scorpions,2025-10-29,Surprise Saguaros,False,False,825583,P,1.2,0,0,0,0,0,1.000,0,0,0.00,0.00
 2025,701557,Carlos Lequerica,Scottsdale Scorpions,2025-11-04,Mesa Solar Sox,False,False,825596,P,0.1,0,0,0,0,0,1.000,0,0,0.00,0.00
 2025,701557,Carlos Lequerica,Scottsdale Scorpions,2025-11-07,Glendale Desert Dogs,False,False,825655,P,2.0,0,0,0,0,0,1.000,0,0,0.00,0.00
-2025,800344,Sean Paul Li�an,Scottsdale Scorpions,2025-10-06,Peoria Javelinas,True,False,825618,P,2.0,0,0,0,0,0,.000,0,0,0.00,0.00
-2025,800344,Sean Paul Li�an,Scottsdale Scorpions,2025-10-15,Salt River Rafters,True,False,825622,P,3.0,2,0,0,0,2,1.000,0,0,2.00,6.00
+2025,800344,Sean Paul LiÃ±an,Scottsdale Scorpions,2025-10-06,Peoria Javelinas,True,False,825618,P,2.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2025,800344,Sean Paul LiÃ±an,Scottsdale Scorpions,2025-10-15,Salt River Rafters,True,False,825622,P,3.0,2,0,0,0,2,1.000,0,0,2.00,6.00
 2025,806152,Walker Martin,Scottsdale Scorpions,2025-10-08,Salt River Rafters,True,True,825619,DH,0.0,0,0,0,0,0,.000,0,0,0.00,-.--
 2025,806152,Walker Martin,Scottsdale Scorpions,2025-10-09,Glendale Desert Dogs,False,False,825666,SS,8.0,1,1,0,0,2,1.000,1,0,2.00,2.25
 2025,806152,Walker Martin,Scottsdale Scorpions,2025-10-15,Salt River Rafters,True,False,825622,3B,9.0,0,5,0,0,5,1.000,0,0,5.00,5.00
@@ -1799,8 +1799,8 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,position,
 2025,815292,Luis Martinez-Gomez,Mesa Solar Sox,2025-10-30,Salt River Rafters,False,True,825627,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2025,815292,Luis Martinez-Gomez,Mesa Solar Sox,2025-11-02,Salt River Rafters,True,True,825597,P,2.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2025,815292,Luis Martinez-Gomez,Mesa Solar Sox,2025-11-07,Peoria Javelinas,False,False,825640,P,2.0,0,0,0,0,0,.000,0,0,0.00,0.00
-2025,695573,Cole Mathis,Mesa Solar Sox,2025-10-08,Peoria Javelinas,True,False,825606,3B,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2025,695573,Cole Mathis,Mesa Solar Sox,2025-10-08,Peoria Javelinas,True,False,825606,1B,9.0,4,0,0,0,4,1.000,1,0,4.00,4.00
+2025,695573,Cole Mathis,Mesa Solar Sox,2025-10-08,Peoria Javelinas,True,False,825606,3B,1.0,0,0,0,0,0,1.000,0,0,0.00,0.00
 2025,695573,Cole Mathis,Mesa Solar Sox,2025-10-10,Scottsdale Scorpions,False,False,825620,1B,8.0,6,1,0,0,7,1.000,1,0,7.00,7.88
 2025,695573,Cole Mathis,Mesa Solar Sox,2025-10-14,Surprise Saguaros,True,True,825604,1B,9.0,5,0,0,0,5,1.000,1,0,5.00,5.00
 2025,695573,Cole Mathis,Mesa Solar Sox,2025-10-17,Scottsdale Scorpions,True,False,825595,1B,9.0,8,0,0,0,8,1.000,2,0,8.00,8.00
@@ -1826,8 +1826,8 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,position,
 2025,703596,Karson Milbrandt,Mesa Solar Sox,2025-10-23,Surprise Saguaros,True,False,825600,P,2.2,0,0,0,0,0,.000,0,0,0.00,0.00
 2025,703596,Karson Milbrandt,Mesa Solar Sox,2025-10-31,Surprise Saguaros,False,True,825582,P,3.0,1,0,0,0,1,1.000,0,0,1.00,3.00
 2025,703596,Karson Milbrandt,Mesa Solar Sox,2025-11-06,Scottsdale Scorpions,True,False,825593,P,1.0,0,0,0,0,0,1.000,0,0,0.00,0.00
+2025,815089,Coby Morales,Mesa Solar Sox,2025-10-08,Peoria Javelinas,True,False,825606,1B,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2025,815089,Coby Morales,Mesa Solar Sox,2025-10-08,Peoria Javelinas,True,False,825606,LF,9.0,4,0,0,0,4,1.000,0,0,4.00,4.00
-2025,815089,Coby Morales,Mesa Solar Sox,2025-10-08,Peoria Javelinas,True,False,825606,1B,1.0,0,0,0,0,0,1.000,0,0,0.00,0.00
 2025,815089,Coby Morales,Mesa Solar Sox,2025-10-09,Salt River Rafters,False,True,825637,RF,9.0,1,0,0,0,1,1.000,0,0,1.00,1.00
 2025,815089,Coby Morales,Mesa Solar Sox,2025-10-15,Surprise Saguaros,False,False,825589,RF,8.0,0,0,0,0,0,1.000,0,0,0.00,0.00
 2025,815089,Coby Morales,Mesa Solar Sox,2025-10-16,Peoria Javelinas,True,False,825603,1B,9.0,3,1,0,0,4,1.000,0,0,4.00,4.00
@@ -1906,8 +1906,8 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,position,
 2025,806281,Blaze Pontes,Mesa Solar Sox,2025-11-05,Glendale Desert Dogs,True,False,825594,P,1.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2025,806281,Blaze Pontes,Mesa Solar Sox,2025-11-11,Peoria Javelinas,True,True,825592,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2025,804751,Logan Poteet,Mesa Solar Sox,2025-10-09,Salt River Rafters,False,True,825637,1B,9.0,6,0,0,0,6,1.000,0,0,6.00,6.00
-2025,804751,Logan Poteet,Mesa Solar Sox,2025-10-19,Peoria Javelinas,False,True,825645,C,1.0,0,0,0,0,0,1.000,0,0,0.00,0.00
 2025,804751,Logan Poteet,Mesa Solar Sox,2025-10-19,Peoria Javelinas,False,True,825645,DH,0.0,0,0,0,0,0,1.000,0,0,0.00,-.--
+2025,804751,Logan Poteet,Mesa Solar Sox,2025-10-19,Peoria Javelinas,False,True,825645,C,1.0,0,0,0,0,0,1.000,0,0,0.00,0.00
 2025,804751,Logan Poteet,Mesa Solar Sox,2025-10-21,Salt River Rafters,True,False,825601,DH,0.0,0,0,0,0,0,1.000,0,0,0.00,-.--
 2025,804751,Logan Poteet,Mesa Solar Sox,2025-10-30,Salt River Rafters,False,True,825627,1B,9.0,8,0,0,0,8,1.000,0,0,8.00,8.00
 2025,804751,Logan Poteet,Mesa Solar Sox,2025-11-05,Glendale Desert Dogs,True,False,825594,C,3.0,5,0,0,0,5,1.000,0,0,5.00,15.00

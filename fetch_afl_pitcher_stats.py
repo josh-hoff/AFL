@@ -14,7 +14,7 @@ PITCHER_STATS_FIELDS = [
 def load_csv(path):
     if not os.path.exists(path):
         return []
-    with open(path, "r", newline="") as f:
+    with open(path, "r", newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 
@@ -120,7 +120,7 @@ def main():
         time.sleep(0.3)
 
     out_path = os.path.join(season_dir, "pitcher_stats.csv")
-    with open(out_path, "w", newline="") as f:
+    with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=PITCHER_STATS_FIELDS)
         writer.writeheader()
         for row in rows:

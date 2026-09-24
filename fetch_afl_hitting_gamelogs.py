@@ -123,7 +123,7 @@ def main():
     os.makedirs(season_dir, exist_ok=True)
     out_path = os.path.join(season_dir, "hitting_gamelogs.csv")
 
-    with open(out_path, "w", newline="") as f:
+    with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=HITTING_GAMELOG_FIELDS)
         writer.writeheader()
         for row in all_rows:

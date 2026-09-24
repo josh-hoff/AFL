@@ -181,7 +181,7 @@ def write_csv(games, path):
     if not games:
         return
     fieldnames = [k for k in games[0].keys() if not k.startswith("_")]
-    with open(path, "w", newline="") as f:
+    with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for g in games:

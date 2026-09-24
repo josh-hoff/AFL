@@ -7,7 +7,7 @@ season,team,player_id,full_name,jersey_number,position_code,position_name,positi
 2025,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,8,Outfielder,CF,Baltimore Orioles,2001-12-02,24,Pembroke Pines,FL,USA,"5' 11""",170,Left,Left,2023,
 2025,Peoria Javelinas,804663,Tyler Cleveland,18,1,Pitcher,P,Seattle Mariners,1999-09-09,27,Little Rock,AR,USA,"6' 2""",185,Left,Right,2022,
 2025,Peoria Javelinas,702253,Cam Collier,6,5,Third Base,3B,Cincinnati Reds,2004-11-20,21,Chicago,IL,USA,"6' 1""",210,Left,Right,2022,
-2025,Peoria Javelinas,801725,Luis De León,11,1,Pitcher,P,Baltimore Orioles,2003-04-14,23,Barahona,,Dominican Republic,"6' 3""",168,Left,Left,,2026-09-01
+2025,Peoria Javelinas,801725,Luis De LeÃ³n,11,1,Pitcher,P,Baltimore Orioles,2003-04-14,23,Barahona,,Dominican Republic,"6' 3""",168,Left,Left,,2026-09-01
 2025,Peoria Javelinas,687040,Sayer Diederich,44,1,Pitcher,P,Baltimore Orioles,2000-10-10,25,Omaha,NE,USA,"5' 11""",190,Left,Left,2023,
 2025,Peoria Javelinas,805955,Carson Dorsey,16,1,Pitcher,P,Baltimore Orioles,2003-02-25,23,Panama City,FL,USA,"6' 0""",180,Left,Left,2024,
 2025,Peoria Javelinas,827317,Brandon Downer,29,1,Pitcher,P,Baltimore Orioles,2003-05-10,23,Fullerton,CA,USA,"6' 4""",225,Right,Right,2024,
@@ -88,7 +88,7 @@ season,team,player_id,full_name,jersey_number,position_code,position_name,positi
 2025,Surprise Saguaros,702726,Luke Adams,20,5,Third Base,3B,Milwaukee Brewers,2004-04-24,22,Hinsdale,IL,USA,"6' 4""",233,Right,Right,2022,
 2025,Surprise Saguaros,686404,Wuilfredo Antunez,2,9,Outfielder,RF,Philadelphia Phillies,2002-05-16,24,Rio Tucani,,Venezuela,"5' 11""",193,Left,Right,,
 2025,Surprise Saguaros,691405,Juan Benjamin,7,5,Third Base,3B,Cleveland Guardians,2003-04-25,23,Santiago,,Dominican Republic,"5' 8""",179,Switch,Right,,
-2025,Surprise Saguaros,695871,Jesús Broca,41,1,Pitcher,P,Milwaukee Brewers,2003-10-16,22,Villahermosa,TB,Mexico,"5' 8""",183,Left,Left,,
+2025,Surprise Saguaros,695871,JesÃºs Broca,41,1,Pitcher,P,Milwaukee Brewers,2003-10-16,22,Villahermosa,TB,Mexico,"5' 8""",183,Left,Left,,
 2025,Surprise Saguaros,694749,Dylan Campbell,10,8,Outfielder,CF,Chicago White Sox,2002-07-02,24,Houston,TX,USA,"5' 8""",205,Right,Right,2023,
 2025,Surprise Saguaros,682769,Eiberson Castellano,47,1,Pitcher,P,Colorado Rockies,2001-05-09,25,Maracaibo,,Venezuela,"6' 3""",214,Right,Right,,2026-06-14
 2025,Surprise Saguaros,822067,A.J. Causey,38,1,Pitcher,P,Athletics,2002-11-19,23,Huntsville,AL,USA,"6' 2""",210,Right,Right,2024,
@@ -149,7 +149,7 @@ season,team,player_id,full_name,jersey_number,position_code,position_name,positi
 2025,Scottsdale Scorpions,814409,Seaver King,5,6,Shortstop,SS,Washington Nationals,2003-04-25,23,Athens,GA,USA,"6' 0""",195,Right,Right,2024,
 2025,Scottsdale Scorpions,813865,Hudson Leach,16,1,Pitcher,P,Houston Astros,2002-06-16,24,Kansas City,MO,USA,"6' 3""",211,Right,Right,2023,
 2025,Scottsdale Scorpions,701557,Carlos Lequerica,38,1,Pitcher,P,Detroit Tigers,2000-09-06,26,Miami,FL,USA,"6' 1""",198,Right,Right,2023,
-2025,Scottsdale Scorpions,800344,Sean Paul Liñan,48,1,Pitcher,P,New York Yankees,2004-11-07,21,Cartagena,,Colombia,"6' 0""",185,Right,Right,,
+2025,Scottsdale Scorpions,800344,Sean Paul LiÃ±an,48,1,Pitcher,P,New York Yankees,2004-11-07,21,Cartagena,,Colombia,"6' 0""",185,Right,Right,,
 2025,Scottsdale Scorpions,806152,Walker Martin,12,6,Shortstop,SS,San Francisco Giants,2004-02-20,22,Greeley,CO,USA,"6' 3""",215,Left,Right,2023,
 2025,Scottsdale Scorpions,805808,Kevin McGonigle,9,6,Shortstop,SS,Detroit Tigers,2004-08-18,22,Media,PA,USA,"5' 9""",187,Left,Right,2023,2026-03-26
 2025,Scottsdale Scorpions,800233,Ernesto Mercedes,78,1,Pitcher,P,New York Mets,2003-10-14,22,Pimentel,,Dominican Republic,"6' 2""",180,Right,Right,,

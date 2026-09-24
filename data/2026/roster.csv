@@ -11,7 +11,7 @@ season,team,player_id,full_name,jersey_number,position_code,position_name,positi
 2026,Peoria Javelinas,800176,Carlos Sanchez,,6,Shortstop,SS,Cincinnati Reds,2005-01-12,21,Santo Domingo,,Dominican Republic,"6' 1""",215,Left,Right,,
 2026,Peoria Javelinas,807728,Carter Graham,,3,First Base,1B,Cincinnati Reds,2001-09-17,25,Northridge,CA,USA,"6' 1""",228,Right,Right,2023,
 2026,Peoria Javelinas,694832,Cody Adcock,,1,Pitcher,P,Cincinnati Reds,2002-06-21,24,Texarkana,TX,USA,"6' 4""",205,Right,Right,2023,
-2026,Peoria Javelinas,800212,Francis Peña,,1,Pitcher,P,San Diego Padres,2001-01-25,25,Piedra Blanca,,Dominican Republic,"6' 1""",170,Right,Right,,
+2026,Peoria Javelinas,800212,Francis PeÃ±a,,1,Pitcher,P,San Diego Padres,2001-01-25,25,Piedra Blanca,,Dominican Republic,"6' 1""",170,Right,Right,,
 2026,Peoria Javelinas,692284,Frank Elissalt,72,1,Pitcher,P,St. Louis Cardinals,2002-03-25,24,Miami,FL,USA,"6' 2""",210,Switch,Right,2024,
 2026,Peoria Javelinas,815951,Igor Gil,38,1,Pitcher,P,San Diego Padres,2001-03-23,25,Maracay,,Venezuela,"5' 11""",170,Left,Left,,
 2026,Peoria Javelinas,702610,Ike Irish,10,O,Outfield,OF,Baltimore Orioles,2003-11-26,22,Grand Rapids,MI,USA,"6' 2""",201,Left,Right,2025,
@@ -154,7 +154,7 @@ season,team,player_id,full_name,jersey_number,position_code,position_name,positi
 2026,Scottsdale Scorpions,823809,Nick Monistere,3,4,Second Base,2B,Houston Astros,2004-01-27,22,Sugar Land,TX,USA,"6' 0""",192,Right,Right,2025,
 2026,Scottsdale Scorpions,813796,Preston Howey,19,1,Pitcher,P,Detroit Tigers,2002-06-20,24,Pasadena,CA,USA,"5' 10""",175,Right,Right,2024,
 2026,Scottsdale Scorpions,683988,Railin Perez,,1,Pitcher,P,Houston Astros,2001-09-02,25,Santiago,,Dominican Republic,"6' 3""",185,Right,Right,,
-2026,Scottsdale Scorpions,678495,Randy Rodríguez,73,1,Pitcher,P,San Francisco Giants,1999-09-05,27,Santo Domingo,,Dominican Republic,"6' 0""",195,Right,Right,,2024-05-04
+2026,Scottsdale Scorpions,678495,Randy RodrÃ­guez,73,1,Pitcher,P,San Francisco Giants,1999-09-05,27,Santo Domingo,,Dominican Republic,"6' 0""",195,Right,Right,,2024-05-04
 2026,Scottsdale Scorpions,804670,Ryan Birchard,33,1,Pitcher,P,Milwaukee Brewers,2003-07-12,23,Auburn,NY,USA,"6' 0""",207,Left,Right,2023,
 2026,Scottsdale Scorpions,800294,Waner Luciano,2,5,Third Base,3B,Houston Astros,2005-01-13,21,Santo Domingo,,Dominican Republic,"6' 1""",210,Right,Right,,
 2026,Scottsdale Scorpions,803094,Win Scott,30,1,Pitcher,P,Detroit Tigers,2002-11-27,23,Greensboro,NC,USA,"6' 2""",205,Left,Left,2025,

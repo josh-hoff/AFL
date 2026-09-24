@@ -18,8 +18,8 @@ game_pk,date,winning_pitcher_id,winning_pitcher_name,winning_pitcher_wins,winnin
 825604,2025-10-14,701604,Andrew Lindsey,1,0,6.75,692030,Jose Corniell,0,1,6.75,815292,Luis Martinez-Gomez,1
 825648,2025-10-15,806293,Payton Martin,1,1,3.00,695569,Luke Hayden,0,1,40.50,699823,Tyler Davis,1
 825622,2025-10-15,808054,Yordin Chalas,1,0,0.00,808743,Bryce Jenkins,0,1,108.00,692243,Jaden Woods,1
-825589,2025-10-15,695871,Jesús Broca,1,0,0.00,701480,Bryce Cunningham,0,2,7.94,,,
-825603,2025-10-16,801725,Luis De León,1,0,2.08,703596,Karson Milbrandt,0,1,3.00,,,
+825589,2025-10-15,695871,JesÃºs Broca,1,0,0.00,701480,Bryce Cunningham,0,2,7.94,,,
+825603,2025-10-16,801725,Luis De LeÃ³n,1,0,2.08,703596,Karson Milbrandt,0,1,3.00,,,
 825633,2025-10-16,695294,Tommy McCollum,2,0,3.86,814106,Cade Denton,0,1,45.00,694725,Michael Fowler,1
 825621,2025-10-16,694885,Ryan Murphy,1,1,16.20,681410,Connor McCullough,0,1,12.00,691028,Nate Wohlgemuth,1
 825632,2025-10-17,801333,Johnathan Harmon,1,1,5.40,701908,David Hagaman,0,1,6.75,,,
@@ -52,7 +52,7 @@ game_pk,date,winning_pitcher_id,winning_pitcher_name,winning_pitcher_wins,winnin
 825639,2025-10-28,700675,Jimmy Kingsbury,1,0,0.00,806270,Dominic Perachi,2,1,4.66,,,
 825613,2025-10-28,678738,Juan Sanchez,2,0,0.00,692437,Winston Santos,2,1,5.56,688692,Jared Simpson,1
 825599,2025-10-28,694696,Cade Smith,1,0,0.00,806334,Alex Amalfi,0,1,21.60,,,
-825628,2025-10-29,801725,Luis De León,2,0,2.45,815456,Ben Shields,0,1,135.00,805955,Carson Dorsey,2
+825628,2025-10-29,801725,Luis De LeÃ³n,2,0,2.45,815456,Ben Shields,0,1,135.00,805955,Carson Dorsey,2
 825583,2025-10-29,692137,L.P. Langevin,1,0,0.00,801221,Pedro Garcia,0,1,27.00,689557,Zane Morehouse,1
 825656,2025-10-29,694989,Kelena Sauer,1,0,18.00,702516,JP Wheat,0,2,54.00,699823,Tyler Davis,2
 825627,2025-10-30,815292,Luis Martinez-Gomez,1,0,0.00,692243,Jaden Woods,0,1,18.00,690658,Will Johnston,1
@@ -69,7 +69,7 @@ game_pk,date,winning_pitcher_id,winning_pitcher_name,winning_pitcher_wins,winnin
 825579,2025-11-04,692437,Winston Santos,3,1,6.46,692243,Jaden Woods,0,2,27.00,,,
 825596,2025-11-04,801270,Darwin Rodriguez,2,0,10.12,829338,Dariel Fregio,0,1,81.00,,,
 825657,2025-11-04,695316,Jarold Rosado,1,0,0.00,828471,Jakob Hall,0,1,18.00,,,
-825577,2025-11-05,690162,Kenny Serwa,2,2,9.22,695871,Jesús Broca,1,1,0.00,,,
+825577,2025-11-05,690162,Kenny Serwa,2,2,9.22,695871,JesÃºs Broca,1,1,0.00,,,
 825594,2025-11-05,806334,Alex Amalfi,1,1,11.57,813895,Corey Avant,0,2,38.57,,,
 825625,2025-11-05,814106,Cade Denton,1,1,13.50,823801,Tanner Smith,0,2,13.50,699230,Lorenzo Encarnacion,1
 825641,2025-11-06,813820,Chen-Wei Lin,3,1,3.48,808063,Maikel Miralles,0,2,50.14,,,

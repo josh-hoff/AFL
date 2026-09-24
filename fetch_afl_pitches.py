@@ -39,7 +39,7 @@ def load_schedule(season, output_dir):
             f"No schedule found at {path}. "
             f"Run fetch_afl_schedule.py {season} first."
         )
-    with open(path, "r", newline="") as f:
+    with open(path, "r", newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 
@@ -56,7 +56,7 @@ def load_game_feed_from_file(feeds_dir, game_pk):
     path = os.path.join(feeds_dir, f"{game_pk}.json")
     if not os.path.exists(path):
         return None
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -291,14 +291,14 @@ def main():
     os.makedirs(season_dir, exist_ok=True)
     out_path = os.path.join(season_dir, "pitches.csv")
 
-    with open(out_path, "w", newline="") as f:
+    with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=PITCH_FIELDS)
         writer.writeheader()
         for row in all_rows:
             writer.writerow(row)
 
     decisions_path = os.path.join(season_dir, "decisions.csv")
-    with open(decisions_path, "w", newline="") as f:
+    with open(decisions_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=DECISION_FIELDS)
         writer.writeheader()
         for row in all_decisions:

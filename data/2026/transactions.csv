@@ -81,7 +81,7 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Mesa Solar Sox,2026-09-15,701836,Kyle Robinson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Kyle Robinson.
 2026,Mesa Solar Sox,2026-09-15,803021,Peyton Olejnik,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Peyton Olejnik.
 2026,Mesa Solar Sox,2026-09-15,701512,Tucker Novotny,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Tucker Novotny.
-2026,Peoria Javelinas,2026-09-15,800212,Francis Peña,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Francis Peña.
+2026,Peoria Javelinas,2026-09-15,800212,Francis PeÃ±a,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Francis PeÃ±a.
 2026,Peoria Javelinas,2026-09-15,807748,Kannon Kemp,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kannon Kemp.
 2026,Peoria Javelinas,2026-09-15,834596,Kailen Hamson,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Kailen Hamson.
 2026,Peoria Javelinas,2026-09-15,811296,Kiefer Lord,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kiefer Lord.
@@ -164,7 +164,7 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Scottsdale Scorpions,2026-09-15,806711,Yereny Teus,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Yereny Teus.
 2026,Scottsdale Scorpions,2026-09-15,700800,Darien Smith,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Darien Smith.
 2026,Scottsdale Scorpions,2026-09-15,803094,Win Scott,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Win Scott.
-2026,Scottsdale Scorpions,2026-09-15,678495,Randy Rodríguez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Randy Rodríguez from the 60-day injured list.
+2026,Scottsdale Scorpions,2026-09-15,678495,Randy RodrÃ­guez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Randy RodrÃ­guez from the 60-day injured list.
 2026,Scottsdale Scorpions,2026-09-15,703142,Andy Rodriguez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Andy Rodriguez.
 2026,Scottsdale Scorpions,2026-09-15,808350,Joshua Quezada,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Joshua Quezada.
 2026,Scottsdale Scorpions,2026-09-15,807823,Jank Pichardo,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Jank Pichardo.
