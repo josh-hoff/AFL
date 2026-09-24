@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arizona Fall League Central - Player</title>
+<style>
+  :root {
+    --bg: #FDFCFB;
+    --bg-card: #FFFFFF;
+    --border: #e8e6e2;
+    --text: #111418;
+    --text-muted: #5a6472;
+    --accent: #b8860b;
+    --final: #1a8a4a;
+    --cancelled: #c0392b;
+    --scheduled: #2f6fb0;
+    --header-bg: #0d1b3a;
+    --header-card-bg: #16305c;
+    --header-border: #2c4a7c;
+    --header-text: #ffffff;
+    --tab-active: #f26522;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  header { padding: 1.5rem 1.5rem 0; }
+  .header-inner {
+    display: flex; align-items: center; justify-content: center; gap: 2.5rem;
+    max-width: 900px; margin: 0 auto; background: var(--header-bg);
+    border-radius: 16px; padding: 2.25rem 1.5rem;
+  }
+  h1 { font-size: 2.2rem; font-weight: 600; margin: 0; letter-spacing: -0.01em; text-align: center; color: var(--header-text); }
+  .league-logo { height: 100px; width: auto; flex-shrink: 0; }
+  .header-inner > a { display: inline-flex; flex-shrink: 0; line-height: 0; }
+  .title-line { display: block; line-height: 1.3; }
+  .title-central { display: inline-block; border-bottom: 2px solid var(--header-text); padding-bottom: 0.2rem; width: fit-content; }
+  footer { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; text-align: center; }
+  .subtitle { color: var(--text-muted); font-size: 0.75rem; margin: 0; }
+  .season-control { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100px; gap: 0.4rem; flex-shrink: 0; }
+  .season-label { color: var(--header-text); font-size: 1.15rem; font-weight: 600; }
+  .season-select {
+    background: var(--header-card-bg); border: 1px solid var(--header-border); color: var(--header-text);
+    padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 600; font-family: inherit;
+  }
+  .nav-tabs { display: flex; justify-content: center; gap: 2rem; max-width: 900px; margin: 1.25rem auto 0; padding: 0 1.5rem; border-bottom: 1px solid var(--border); }
+  .nav-tab { display: inline-block; padding-bottom: 0.7rem; margin-bottom: -1px; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; text-decoration: none; border-bottom: 3px solid transparent; }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--text); font-weight: 700; border-bottom-color: var(--tab-active); }
+  main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+
+  .bio-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04); margin-bottom: 1.5rem; flex-wrap: wrap;
+  }
+  .bio-avatar { width: 90px; height: 90px; border-radius: 50%; background: #2b2b2b; flex-shrink: 0; }
+  .bio-name { font-size: 1.6rem; font-weight: 700; color: var(--text); }
+  .bio-subline { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.15rem; }
+  .bio-details { display: flex; gap: 1.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
+  .bio-detail-label { color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; font-weight: 600; }
+  .bio-detail-value { color: var(--text); font-size: 0.9rem; }
+
+  .afl-season-card {
+    background: var(--header-bg); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;
+  }
+  .afl-season-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
+  .afl-season-title { color: var(--header-text); font-size: 1.1rem; font-weight: 700; }
+  .afl-season-team { display: flex; align-items: center; gap: 0.5rem; color: var(--header-text); font-size: 0.85rem; }
+  .afl-season-team img { width: 20px; height: 20px; object-fit: contain; }
+  .afl-stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem; text-align: center; }
+  .afl-stat-label { color: #9fb3d1; font-size: 0.7rem; text-transform: uppercase; font-weight: 600; }
+  .afl-stat-value { color: var(--header-text); font-size: 1.15rem; font-weight: 700; }
+
+  .section-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 0 0 0.6rem; }
+  .section-note { color: var(--text-muted); font-weight: 400; font-size: 0.8rem; }
+
+  .career-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 2px rgba(0,0,0,0.04); margin-bottom: 1.5rem; }
+  .career-row { display: grid; grid-template-columns: 0.6fr 0.6fr 1.8fr 0.5fr 0.6fr 0.6fr 0.6fr 0.5fr; padding: 0.55rem 1rem; gap: 0.3rem; min-width: 620px; }
+  .career-row.head { background: #f2f1ee; color: var(--text-muted); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; }
+  .career-row.body { border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text); align-items: center; }
+  .career-row.afl { border-top: 1px solid var(--tab-active); font-weight: 700; background: #fff8f2; }
+
+  .transaction-log-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 2rem 0 0.6rem; }
+  .transaction-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .transaction-row { display: grid; grid-template-columns: 0.9fr 3fr; padding: 0.8rem 1.2rem; align-items: center; font-size: 0.88rem; }
+  .transaction-row.head { background: #ececec; font-weight: 700; color: var(--text); font-size: 0.85rem; }
+  .transaction-row.body { border-top: 1px solid var(--border); color: var(--text); }
+  .transaction-row.body a { color: var(--tab-active); text-decoration: none; font-weight: 600; }
+  .transaction-expand-wrap { text-align: center; margin-top: 0.75rem; }
+  .transaction-expand-link { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-decoration: none; border-bottom: 1px dashed var(--text-muted); }
+
+  .error { color: var(--cancelled); }
+  .loading { color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html"><img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'"></a>
+    <h1>
+      <span class="title-line">Arizona Fall League</span>
+      <span class="title-line"><span class="title-central">Central</span></span>
+    </h1>
+    <div class="season-control">
+      <span class="season-label">Season:</span>
+      <select id="season-select" class="season-select"></select>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <a class="nav-tab" href="index.html">Home</a>
+  <a class="nav-tab" href="schedule.html">Schedule</a>
+  <a class="nav-tab" href="standings.html">Standings</a>
+  <a class="nav-tab active" href="roster.html">Rosters</a>
+</nav>
+
+<main id="content">
+  <p class="loading">Loading player...</p>
+</main>
+
+<footer>
+  <p class="subtitle">Data updated automatically from the MLB Stats API</p>
+</footer>
+
+<script>
+  const TEAM_LOGOS = {
+    'Glendale Desert Dogs': 'logos/glendale.svg',
+    'Mesa Solar Sox': 'logos/mesa.svg',
+    'Peoria Javelinas': 'logos/peoria.svg',
+    'Salt River Rafters': 'logos/salt-river.svg',
+    'Scottsdale Scorpions': 'logos/scottsdale.svg',
+    'Surprise Saguaros': 'logos/surprise.svg',
+  };
+
+  const MILB_SPORT_IDS = [16, 14, 13, 12, 11];
+  const MLB_SPORT_ID = 1;
+  const LEVEL_RANK = { 'ROK': 0, 'A': 1, 'A+': 2, 'AA': 3, 'AAA': 4, 'AFL': 5, 'MLB': 6 };
+
+  let SEASONS = [];
+  const params = new URLSearchParams(window.location.search);
+  const playerId = params.get('id');
+  let currentSeason = parseInt(params.get('season'), 10) || new Date().getFullYear();
+
+  function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"') {
+        if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+        else inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        result.push(current);
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    result.push(current);
+    return result;
+  }
+
+  function parseCSV(text) {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    const headers = parseCSVLine(lines[0]);
+    return lines.slice(1).map(line => {
+      const values = parseCSVLine(line);
+      const row = {};
+      headers.forEach((h, i) => { row[h] = values[i] !== undefined ? values[i] : ''; });
+      return row;
+    });
+  }
+
+  async function loadSeasons() {
+    try {
+      const res = await fetch('data/seasons.json');
+      if (res.ok) SEASONS = await res.json();
+    } catch (e) {}
+    if (!SEASONS || SEASONS.length === 0) SEASONS = [currentSeason];
+    if (!SEASONS.includes(currentSeason)) currentSeason = SEASONS[SEASONS.length - 1];
+  }
+
+  function renderControls() {
+    const el = document.getElementById('season-select');
+    el.innerHTML = '';
+    [...SEASONS].sort((a, b) => b - a).forEach(season => {
+      const opt = document.createElement('option');
+      opt.value = season;
+      opt.textContent = season;
+      if (season === currentSeason) opt.selected = true;
+      el.appendChild(opt);
+    });
+    el.onchange = () => {
+      currentSeason = parseInt(el.value, 10);
+      updateUrl();
+      loadPlayerPage();
+    };
+  }
+
+  function updateUrl() {
+    const p = new URLSearchParams();
+    p.set('id', playerId);
+    p.set('season', currentSeason);
+    history.replaceState(null, '', '?' + p.toString());
+  }
+
+  function formatShortDate(iso) {
+    if (!iso) return '';
+    const [y, m, d] = iso.split('-');
+    return `${parseInt(m, 10)}/${parseInt(d, 10)}/${y}`;
+  }
+
+  function highlightPlayerName(description, playerName, pId, season) {
+    if (!playerName || !description.includes(playerName)) return description;
+    const link = `<a href="player.html?id=${pId}&season=${season}">${playerName}</a>`;
+    return description.split(playerName).join(link);
+  }
+
+  function bioDetail(label, value) {
+    if (!value) return '';
+    return `<div><div class="bio-detail-label">${label}</div><div class="bio-detail-value">${value}</div></div>`;
+  }
+
+  function renderBio(player) {
+    const hometown = [player.birth_city, player.birth_state, player.birth_country].filter(Boolean).join(', ');
+    const heightWeight = [player.height, player.weight ? `${player.weight} lbs` : ''].filter(Boolean).join(', ');
+    const batsThrows = (player.bats || player.throws) ? `${(player.bats || '?')[0]}/${(player.throws || '?')[0]}` : '';
+    const draft = player.draft_year ? `${player.draft_year}` : '';
+
+    return `
+      <div class="bio-card">
+        <div class="bio-avatar"></div>
+        <div style="flex:1;">
+          <div class="bio-name">${player.full_name}</div>
+          <div class="bio-subline">${player.jersey_number ? '#' + player.jersey_number + ' \u00b7 ' : ''}${player.position_name} \u00b7 ${player.org_name}</div>
+          <div class="bio-details">
+            ${bioDetail('Age', player.age)}
+            ${bioDetail('Height/Weight', heightWeight)}
+            ${bioDetail('Bats/Throws', batsThrows)}
+            ${bioDetail('Hometown', hometown)}
+            ${bioDetail('Draft', draft)}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function sumHittingGames(games) {
+    const totals = { games: games.length };
+    const numericFields = ['at_bats', 'hits', 'doubles', 'triples', 'home_runs', 'runs', 'rbi', 'walks',
+      'intentional_walks', 'strikeouts', 'hit_by_pitch', 'stolen_bases', 'caught_stealing', 'total_bases', 'sac_flies'];
+    numericFields.forEach(f => { totals[f] = games.reduce((sum, g) => sum + (Number(g[f]) || 0), 0); });
+
+    const ab = totals.at_bats;
+    const pa_denominator = ab + totals.walks + totals.hit_by_pitch + totals.sac_flies;
+    totals.avg = ab > 0 ? (totals.hits / ab) : null;
+    totals.obp = pa_denominator > 0 ? ((totals.hits + totals.walks + totals.hit_by_pitch) / pa_denominator) : null;
+    totals.slg = ab > 0 ? (totals.total_bases / ab) : null;
+    totals.ops = (totals.obp !== null && totals.slg !== null) ? (totals.obp + totals.slg) : null;
+    return totals;
+  }
+
+  function fmtRate(n) {
+    if (n === null || n === undefined || isNaN(n)) return '';
+    return n.toFixed(3).replace(/^0\./, '.');
+  }
+
+  function renderAflSeasonCard(team, totals) {
+    return `
+      <div class="afl-season-card">
+        <div class="afl-season-top">
+          <div class="afl-season-title">${currentSeason} Arizona Fall League</div>
+          <div class="afl-season-team">
+            ${TEAM_LOGOS[team] ? `<img src="${TEAM_LOGOS[team]}" alt="" onerror="this.style.display='none'">` : ''}
+            ${team || ''}
+          </div>
+        </div>
+        <div class="afl-stats-grid">
+          <div><div class="afl-stat-label">GP</div><div class="afl-stat-value">${totals.games}</div></div>
+          <div><div class="afl-stat-label">AVG</div><div class="afl-stat-value">${fmtRate(totals.avg) || '\u2014'}</div></div>
+          <div><div class="afl-stat-label">OBP</div><div class="afl-stat-value">${fmtRate(totals.obp) || '\u2014'}</div></div>
+          <div><div class="afl-stat-label">SLG</div><div class="afl-stat-value">${fmtRate(totals.slg) || '\u2014'}</div></div>
+          <div><div class="afl-stat-label">OPS</div><div class="afl-stat-value">${fmtRate(totals.ops) || '\u2014'}</div></div>
+          <div><div class="afl-stat-label">HR</div><div class="afl-stat-value">${totals.home_runs}</div></div>
+        </div>
+      </div>
+    `;
+  }
+
+  function buildTransactionRowHtml(r) {
+    const desc = highlightPlayerName(r.description, r.player_name, r.player_id, r.season);
+    return `<div class="transaction-row body"><div>${formatShortDate(r.date)}</div><div>${desc}</div></div>`;
+  }
+
+  function renderTransactionTable(rows) {
+    let html = `
+      <div class="transaction-log-title">Transaction Log</div>
+      <div class="transaction-table">
+        <div class="transaction-row head"><div>Date</div><div>Transaction</div></div>
+        <div id="transaction-rows-visible">
+    `;
+    if (rows.length === 0) {
+      html += `<div class="transaction-row body"><div></div><div>No transactions found.</div></div>`;
+    } else {
+      rows.slice(0, 3).forEach(r => { html += buildTransactionRowHtml(r); });
+    }
+    html += `</div><div id="transaction-rows-hidden" style="display:none;">`;
+    rows.slice(3).forEach(r => { html += buildTransactionRowHtml(r); });
+    html += `</div></div>`;
+    if (rows.length > 3) {
+      html += `
+        <div class="transaction-expand-wrap">
+          <a href="#" id="transaction-expand-link" class="transaction-expand-link">Show all ${rows.length} transactions &#9662;</a>
+        </div>
+      `;
+    }
+    return html;
+  }
+
+  function wireTransactionExpand() {
+    const link = document.getElementById('transaction-expand-link');
+    if (!link) return;
+    link.onclick = (e) => {
+      e.preventDefault();
+      document.getElementById('transaction-rows-hidden').style.display = 'block';
+      link.style.display = 'none';
+    };
+  }
+
+  async function fetchLevelHitting(sportId) {
+    try {
+      const res = await fetch(`https://statsapi.mlb.com/api/v1/people/${playerId}/stats?stats=yearByYear&group=hitting&sportId=${sportId}`);
+      if (!res.ok) return [];
+      const data = await res.json();
+      const splits = (data.stats && data.stats[0] && data.stats[0].splits) || [];
+      return splits.map(s => ({
+        season: s.season,
+        level: (s.sport && s.sport.abbreviation) || '',
+        team: (s.team && s.team.name) || '',
+        games: s.stat.gamesPlayed,
+        avg: s.stat.avg,
+        obp: s.stat.obp,
+        slg: s.stat.slg,
+        ops: s.stat.ops,
+        hr: s.stat.homeRuns,
+      }));
+    } catch (e) {
+      return [];
+    }
+  }
+
+  async function loadCareerPath(aflRow) {
+    const container = document.getElementById('career-path-container');
+    container.innerHTML = '<p class="loading">Loading career path...</p>';
+
+    const allSportIds = [...MILB_SPORT_IDS, MLB_SPORT_ID];
+    const results = await Promise.all(allSportIds.map(fetchLevelHitting));
+    let rows = results.flat();
+
+    if (aflRow) rows.push(aflRow);
+
+    rows.sort((a, b) => {
+      if (a.season !== b.season) return a.season < b.season ? -1 : 1;
+      const rankA = LEVEL_RANK[a.level] !== undefined ? LEVEL_RANK[a.level] : 99;
+      const rankB = LEVEL_RANK[b.level] !== undefined ? LEVEL_RANK[b.level] : 99;
+      return rankA - rankB;
+    });
+
+    if (rows.length === 0) {
+      container.innerHTML = '<p class="error">No career stats found.</p>';
+      return;
+    }
+
+    let html = `
+      <div class="career-table">
+        <div class="career-row head"><div>Yr</div><div>Lvl</div><div>Team</div><div>G</div><div>AVG</div><div>OBP</div><div>OPS</div><div>HR</div></div>
+    `;
+    rows.forEach(r => {
+      const rowClass = r.level === 'AFL' ? 'career-row afl' : 'career-row body';
+      html += `
+        <div class="${rowClass}">
+          <div>${r.season}</div><div>${r.level}</div><div>${r.team}</div><div>${r.games}</div>
+          <div>${r.avg || ''}</div><div>${r.obp || ''}</div><div>${r.ops || ''}</div><div>${r.hr !== undefined ? r.hr : ''}</div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+  }
+
+  async function loadPlayerPage() {
+    const content = document.getElementById('content');
+    content.innerHTML = '<p class="loading">Loading player...</p>';
+
+    if (!playerId) {
+      content.innerHTML = '<p class="error">No player specified.</p>';
+      return;
+    }
+
+    try {
+      const [rosterRes, hittingRes, txnRes] = await Promise.all([
+        fetch(`data/${currentSeason}/roster.csv`),
+        fetch(`data/${currentSeason}/hitting_gamelogs.csv`),
+        fetch(`data/${currentSeason}/transactions.csv`),
+      ]);
+
+      const roster = rosterRes.ok ? parseCSV(await rosterRes.text()) : [];
+      const hitting = hittingRes.ok ? parseCSV(await hittingRes.text()) : [];
+      const transactions = txnRes.ok ? parseCSV(await txnRes.text()) : [];
+
+      const player = roster.find(p => p.player_id === playerId);
+      if (!player) {
+        content.innerHTML = '<p class="error">Player not found for this season.</p>';
+        return;
+      }
+
+      const playerHitting = hitting.filter(g => g.player_id === playerId);
+      const hasHitting = playerHitting.length > 0;
+      const totals = hasHitting ? sumHittingGames(playerHitting) : null;
+
+      const playerTransactions = transactions
+        .filter(t => t.player_id === playerId)
+        .sort((a, b) => (a.date < b.date ? 1 : -1));
+
+      let html = renderBio(player);
+      if (hasHitting) html += renderAflSeasonCard(player.team, totals);
+
+      html += `<div class="section-title">Career Path <span class="section-note">(live from MLB, ${currentSeason} AFL row highlighted)</span></div>`;
+      html += `<div id="career-path-container"><p class="loading">Loading career path...</p></div>`;
+      html += renderTransactionTable(playerTransactions);
+
+      content.innerHTML = html;
+      wireTransactionExpand();
+
+      let aflRow = null;
+      if (hasHitting) {
+        aflRow = {
+          season: String(currentSeason), level: 'AFL', team: player.team, games: totals.games,
+          avg: fmtRate(totals.avg), obp: fmtRate(totals.obp), ops: fmtRate(totals.ops), hr: totals.home_runs,
+        };
+      }
+      loadCareerPath(aflRow);
+    } catch (err) {
+      content.innerHTML = `<p class="error">Couldn't load player: ${err.message}</p>`;
+    }
+  }
+
+  async function init() {
+    await loadSeasons();
+    renderControls();
+    loadPlayerPage();
+  }
+
+  init();
+</script>
+
+</body>
+</html>
