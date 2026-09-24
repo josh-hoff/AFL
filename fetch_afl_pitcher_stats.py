@@ -6,9 +6,10 @@ from datetime import datetime
 
 PLAYER_STATS_URL = "https://statsapi.mlb.com/api/v1/people/{player_id}/stats"
 
-PITCHER_STATS_FIELDS = [
-    "pitcher_id", "pitcher_name", "wins", "losses", "era", "saves",
-]
+# Fields are no longer a fixed list -- we capture every stat MLB's API
+# returns for a pitcher's season line, dynamically, so no field ever
+# has to be added by hand again.
+BASE_FIELDS = ["pitcher_id", "pitcher_name"]
 
 
 def load_csv(path):
@@ -64,25 +65,20 @@ def fetch_pitcher_stats(player_id, season):
     return resp.json()
 
 
-def extract_pitching_line(data):
+def extract_pitching_stat(data):
+    """Return the raw stat dict as-is, whatever fields MLB includes."""
     stats = data.get("stats", [])
     if not stats:
         return None
     splits = stats[0].get("splits", [])
     if not splits:
         return None
-    stat = splits[0].get("stat", {})
-    return {
-        "wins": stat.get("wins", ""),
-        "losses": stat.get("losses", ""),
-        "era": stat.get("era", ""),
-        "saves": stat.get("saves", ""),
-    }
+    return splits[0].get("stat", {})
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Pull season pitching stats (W-L, ERA, saves) for every pitcher "
+        description="Pull every available season pitching stat for every pitcher "
         "who appears in a season's decisions, probable-pitcher listings, or team roster."
     )
     parser.add_argument(
@@ -102,6 +98,8 @@ def main():
     print(f"Found {len(pitcher_ids)} unique pitchers to look up.")
 
     rows = []
+    all_stat_keys = set()
+
     for i, (pid, name) in enumerate(pitcher_ids.items(), 1):
         print(f"[{i}/{len(pitcher_ids)}] {name} ({pid}) ...", end=" ")
         try:
@@ -110,31 +108,37 @@ def main():
             print(f"fetch failed ({e}), skipping.")
             continue
 
-        line = extract_pitching_line(data)
-        if not line:
-            print("no pitching stats found.")
+        stat = extract_pitching_stat(data)
+        if stat is None:
+            print("no pitching stats found, skipping.")
             continue
 
-        rows.append({
-            "pitcher_id": pid,
-            "pitcher_name": name,
-            "wins": line["wins"],
-            "losses": line["losses"],
-            "era": line["era"],
-            "saves": line["saves"],
-        })
-        print(f"{line['wins']}-{line['losses']}, {line['era']} ERA, {line['saves']} SV.")
+        # Flatten out any nested value (e.g. a position dict) to a plain string,
+        # so nothing breaks the CSV writer.
+        flat_stat = {}
+        for k, v in stat.items():
+            flat_stat[k] = v if isinstance(v, (str, int, float, type(None))) else str(v)
+
+        row = {"pitcher_id": pid, "pitcher_name": name}
+        row.update(flat_stat)
+        rows.append(row)
+        all_stat_keys.update(flat_stat.keys())
+
+        print(f"{stat.get('wins', '?')}-{stat.get('losses', '?')}, {stat.get('era', '?')} ERA.")
         time.sleep(0.3)
+
+    fieldnames = BASE_FIELDS + sorted(all_stat_keys)
 
     out_path = os.path.join(season_dir, "pitcher_stats.csv")
     with open(out_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=PITCHER_STATS_FIELDS)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, restval="")
         writer.writeheader()
         for row in rows:
             writer.writerow(row)
 
     print()
     print(f"Done. {len(rows)} pitchers saved to {out_path}")
+    print(f"Captured {len(all_stat_keys)} distinct stat fields.")
 
 
 if __name__ == "__main__":

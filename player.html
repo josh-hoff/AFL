@@ -308,7 +308,8 @@
             ${team || ''}
           </div>
         </div>
-        <div class="afl-stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="afl-stats-grid" style="grid-template-columns: repeat(5, 1fr);">
+          <div><div class="afl-stat-label">GP</div><div class="afl-stat-value">${stats.gamesPitched !== '' && stats.gamesPitched !== undefined ? stats.gamesPitched : '\u2014'}</div></div>
           <div><div class="afl-stat-label">W</div><div class="afl-stat-value">${stats.wins !== '' ? stats.wins : '\u2014'}</div></div>
           <div><div class="afl-stat-label">L</div><div class="afl-stat-value">${stats.losses !== '' ? stats.losses : '\u2014'}</div></div>
           <div><div class="afl-stat-label">ERA</div><div class="afl-stat-value">${stats.era || '\u2014'}</div></div>
@@ -433,7 +434,7 @@
         <div class="career-row head">${headerRow}</div>
     `;
     rows.forEach(r => {
-      const rowClass = r.level === 'AFL' ? 'career-row afl' : 'career-row body';
+      const rowClass = r.level === 'AFL' ? 'career-row body afl' : 'career-row body';
       if (statType === 'pitching') {
         html += `
           <div class="${rowClass}">
@@ -499,7 +500,7 @@
         if (pStats) {
           html += renderAflSeasonCardPitching(player.team, pStats);
           aflRow = {
-            season: String(currentSeason), level: 'AFL', team: player.team, games: '',
+            season: String(currentSeason), level: 'AFL', team: player.team, games: pStats.gamesPitched,
             wins: pStats.wins, losses: pStats.losses, era: pStats.era, saves: pStats.saves,
           };
         }
