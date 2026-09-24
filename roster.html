@@ -220,9 +220,10 @@
   }
   .roster-row {
     display: grid;
-    grid-template-columns: 0.6fr 2.5fr 0.8fr;
-    padding: 0.6rem 1.1rem;
+    grid-template-columns: 0.5fr 0.6fr 2.0fr 0.7fr;
+    padding: 1.1rem 1.1rem;
     align-items: center;
+    gap: 0.5rem;
   }
   .roster-row.head {
     background: #f2f1ee;
@@ -239,6 +240,35 @@
   }
   .roster-row.body .pos {
     color: var(--text-muted);
+  }
+  .roster-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #2b2b2b;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .roster-avatar img.roster-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+  .roster-org-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    object-fit: contain;
+    padding: 1.5px;
   }
   .player-link {
     color: var(--text);
@@ -543,11 +573,16 @@
         </div>
         <div class="roster-table" id="${groupId}">
       `;
-      html += `<div class="roster-row head"><div>#</div><div>Name</div><div>Pos</div></div>`;
+      html += `<div class="roster-row head"><div></div><div>#</div><div>Name</div><div>Pos</div></div>`;
       playersInGroup.forEach(p => {
         const link = `player.html?id=${p.player_id}&season=${currentSeason}`;
+        const photoUrl = `https://img.mlbstatic.com/mlb-photos/image/upload/c_fill,g_auto/w_180/v1/people/${p.player_id}/headshot/milb/current`;
+        const orgBadge = p.org_id
+          ? `<img class="roster-org-badge" src="https://www.mlbstatic.com/team-logos/${p.org_id}.svg" alt="" onerror="this.style.display='none'">`
+          : '';
         html += `
           <div class="roster-row body">
+            <a href="${link}"><div class="roster-avatar"><img class="roster-photo" src="${photoUrl}" alt="" onerror="this.style.display='none'">${orgBadge}</div></a>
             <div class="jersey">${p.jersey_number || ''}</div>
             <div><a class="player-link" href="${link}">${p.full_name}</a></div>
             <div class="pos">${p.position_abbreviation}</div>
