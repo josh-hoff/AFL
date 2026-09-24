@@ -265,6 +265,17 @@
     text-decoration: none;
     font-weight: 600;
   }
+  .transaction-expand-wrap {
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+  .transaction-expand-link {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--text-muted);
+  }
   .error {
     color: var(--cancelled);
   }
@@ -417,22 +428,52 @@
     return `${parseInt(m, 10)}/${parseInt(d, 10)}/${y}`;
   }
 
+  function buildTransactionRowHtml(r) {
+    const desc = highlightPlayerName(r.description, r.player_name, r.player_id, r.season);
+    return `<div class="transaction-row body"><div>${formatShortDate(r.date)}</div><div>${desc}</div></div>`;
+  }
+
   function renderTransactionTable(rows) {
     let html = `
       <div class="transaction-log-title">Transaction Log</div>
       <div class="transaction-table">
         <div class="transaction-row head"><div>Date</div><div>Transaction</div></div>
+        <div id="transaction-rows-visible">
     `;
+
     if (rows.length === 0) {
       html += `<div class="transaction-row body"><div></div><div>No transactions found.</div></div>`;
     } else {
-      rows.forEach(r => {
-        const desc = highlightPlayerName(r.description, r.player_name, r.player_id, r.season);
-        html += `<div class="transaction-row body"><div>${formatShortDate(r.date)}</div><div>${desc}</div></div>`;
+      rows.slice(0, 3).forEach(r => {
+        html += buildTransactionRowHtml(r);
       });
     }
-    html += `</div>`;
+
+    html += `</div><div id="transaction-rows-hidden" style="display:none;">`;
+    rows.slice(3).forEach(r => {
+      html += buildTransactionRowHtml(r);
+    });
+    html += `</div></div>`;
+
+    if (rows.length > 3) {
+      html += `
+        <div class="transaction-expand-wrap">
+          <a href="#" id="transaction-expand-link" class="transaction-expand-link">Show all ${rows.length} transactions &#9662;</a>
+        </div>
+      `;
+    }
+
     return html;
+  }
+
+  function wireTransactionExpand() {
+    const link = document.getElementById('transaction-expand-link');
+    if (!link) return;
+    link.onclick = (e) => {
+      e.preventDefault();
+      document.getElementById('transaction-rows-hidden').style.display = 'block';
+      link.style.display = 'none';
+    };
   }
 
   function renderRoster() {
@@ -482,6 +523,7 @@
     html += renderTransactionTable(teamTransactions);
 
     content.innerHTML = html;
+    wireTransactionExpand();
 
     const teamSelect = document.getElementById('team-select');
     AFL_TEAM_NAMES.forEach(name => {
