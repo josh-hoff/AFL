@@ -1,5 +1,12 @@
 season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,description
-2026,Glendale Desert Dogs,2026-09-15,827610,Brandon Cain,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brandon Cain.
+2026,Glendale Desert Dogs,2026-09-15,807187,Mathias LaCombe,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Mathias LaCombe.
+2026,Glendale Desert Dogs,2026-09-15,803183,Luke Fox,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Luke Fox.
+2026,Glendale Desert Dogs,2026-09-15,815704,Samuel Carpio,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Samuel Carpio.
+2026,Glendale Desert Dogs,2026-09-15,703670,Pierce George,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Pierce George.
+2026,Glendale Desert Dogs,2026-09-15,702165,Jonathan Clark,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Jonathan Clark.
+2026,Glendale Desert Dogs,2026-09-15,805892,Nick Altermatt,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Nick Altermatt.
+2026,Glendale Desert Dogs,2026-09-15,824624,Brooks Auger,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brooks Auger.
+2026,Glendale Desert Dogs,2026-09-15,703748,Tanner Bauman,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Tanner Bauman.
 2026,Glendale Desert Dogs,2026-09-15,701333,Colby Shelton,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 2B Colby Shelton.
 2026,Glendale Desert Dogs,2026-09-15,815352,Caleb Bonemer,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 3B Caleb Bonemer.
 2026,Glendale Desert Dogs,2026-09-15,827665,Dillon Lewis,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated OF Dillon Lewis.
@@ -33,19 +40,21 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Glendale Desert Dogs,2026-09-15,828987,Briggs McKenzie,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Briggs McKenzie from the 60-day injured list.
 2026,Glendale Desert Dogs,2026-09-15,813706,Owen Hackman,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Owen Hackman.
 2026,Glendale Desert Dogs,2026-09-15,679489,Tyler LaPorte,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Tyler LaPorte.
-2026,Glendale Desert Dogs,2026-09-15,807187,Mathias LaCombe,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Mathias LaCombe.
-2026,Glendale Desert Dogs,2026-09-15,803183,Luke Fox,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Luke Fox.
-2026,Glendale Desert Dogs,2026-09-15,815704,Samuel Carpio,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Samuel Carpio.
-2026,Glendale Desert Dogs,2026-09-15,703670,Pierce George,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Pierce George.
-2026,Glendale Desert Dogs,2026-09-15,702165,Jonathan Clark,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Jonathan Clark.
-2026,Glendale Desert Dogs,2026-09-15,805892,Nick Altermatt,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Nick Altermatt.
-2026,Glendale Desert Dogs,2026-09-15,824624,Brooks Auger,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brooks Auger.
-2026,Glendale Desert Dogs,2026-09-15,703748,Tanner Bauman,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Tanner Bauman.
+2026,Glendale Desert Dogs,2026-09-15,827610,Brandon Cain,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brandon Cain.
+2026,Mesa Solar Sox,2026-09-15,838799,Harry Blum,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Harry Blum.
+2026,Mesa Solar Sox,2026-09-15,814005,Jake Bloss,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jake Bloss from the 60-day injured list.
+2026,Mesa Solar Sox,2026-09-15,805255,Dominick Reid,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Dominick Reid.
+2026,Mesa Solar Sox,2026-09-15,700113,Nicholas Judice,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Nicholas Judice.
+2026,Mesa Solar Sox,2026-09-15,805093,Jhon Cabral,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jhon Cabral.
+2026,Mesa Solar Sox,2026-09-15,701839,Jay Dill,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jay Dill.
 2026,Mesa Solar Sox,2026-09-15,702255,Brandon Barriera,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Brandon Barriera.
+2026,Mesa Solar Sox,2026-09-15,807625,Gilberto Batista,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Gilberto Batista.
+2026,Mesa Solar Sox,2026-09-15,701836,Kyle Robinson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Kyle Robinson.
+2026,Mesa Solar Sox,2026-09-15,803021,Peyton Olejnik,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Peyton Olejnik.
+2026,Mesa Solar Sox,2026-09-15,701512,Tucker Novotny,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Tucker Novotny.
 2026,Mesa Solar Sox,2026-09-15,803248,Yoendris Gonzalez,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Yoendris Gonzalez.
 2026,Mesa Solar Sox,2026-09-15,806879,Anhuar Garcia,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Anhuar Garcia.
 2026,Mesa Solar Sox,2026-09-15,687991,Jared Johnson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jared Johnson.
-2026,Mesa Solar Sox,2026-09-15,838799,Harry Blum,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Harry Blum.
 2026,Mesa Solar Sox,2026-09-15,800125,Fernando Perez,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Fernando Perez.
 2026,Mesa Solar Sox,2026-09-15,695761,Kenya Huggins,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Kenya Huggins.
 2026,Mesa Solar Sox,2026-09-15,810830,Jake Knapp,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jake Knapp from the 7-day injured list.
@@ -55,15 +64,12 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Mesa Solar Sox,2026-09-15,834404,Jake Cook,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated OF Jake Cook.
 2026,Mesa Solar Sox,2026-09-15,829052,Breyson Guedez,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated OF Breyson Guedez.
 2026,Mesa Solar Sox,2026-09-15,814457,Jake Casey,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated OF Jake Casey.
-2026,Mesa Solar Sox,2026-09-15,805093,Jhon Cabral,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jhon Cabral.
 2026,Mesa Solar Sox,2026-09-15,702517,Mason White,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated SS Mason White.
 2026,Mesa Solar Sox,2026-09-15,695301,Ryland Zaborowski,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated 1B Ryland Zaborowski.
 2026,Mesa Solar Sox,2026-09-15,829040,Juan Cabada,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated SS Juan Cabada.
 2026,Mesa Solar Sox,2026-09-15,827719,Jake Munroe,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated 3B Jake Munroe.
 2026,Mesa Solar Sox,2026-09-15,805796,Arjun Nimmala,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated SS Arjun Nimmala.
 2026,Mesa Solar Sox,2026-09-15,805801,Nazzan Zanetello,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated 2B Nazzan Zanetello.
-2026,Mesa Solar Sox,2026-09-15,814005,Jake Bloss,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jake Bloss from the 60-day injured list.
-2026,Mesa Solar Sox,2026-09-15,807625,Gilberto Batista,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Gilberto Batista.
 2026,Mesa Solar Sox,2026-09-15,815343,Myles Bailey,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated 1B Myles Bailey from the 60-day injured list.
 2026,Mesa Solar Sox,2026-09-15,813833,Cole Conn,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated C Cole Conn.
 2026,Mesa Solar Sox,2026-09-15,696286,Davis Diaz,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated C Davis Diaz.
@@ -71,21 +77,20 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Mesa Solar Sox,2026-09-15,700292,Yondrei Rojas,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Yondrei Rojas.
 2026,Mesa Solar Sox,2026-09-15,702494,Sam Tookoian,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Sam Tookoian.
 2026,Mesa Solar Sox,2026-09-15,701791,Caden Vire,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Caden Vire.
+2026,Mesa Solar Sox,2026-09-15,814279,Yeferson Vargas,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Yeferson Vargas.
 2026,Mesa Solar Sox,2026-09-15,801590,Aaron Parker,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated C Aaron Parker.
 2026,Mesa Solar Sox,2026-09-15,808911,Grant Richardson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Grant Richardson from the 7-day injured list.
 2026,Mesa Solar Sox,2026-09-15,702995,Antonio Anderson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated 3B Antonio Anderson.
-2026,Mesa Solar Sox,2026-09-15,805255,Dominick Reid,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Dominick Reid.
-2026,Mesa Solar Sox,2026-09-15,814279,Yeferson Vargas,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Yeferson Vargas.
-2026,Mesa Solar Sox,2026-09-15,700113,Nicholas Judice,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Nicholas Judice.
-2026,Mesa Solar Sox,2026-09-15,701839,Jay Dill,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jay Dill.
-2026,Mesa Solar Sox,2026-09-15,701836,Kyle Robinson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Kyle Robinson.
-2026,Mesa Solar Sox,2026-09-15,803021,Peyton Olejnik,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Peyton Olejnik.
-2026,Mesa Solar Sox,2026-09-15,701512,Tucker Novotny,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Tucker Novotny.
-2026,Peoria Javelinas,2026-09-15,800212,Francis Peña,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Francis Peña.
-2026,Peoria Javelinas,2026-09-15,807748,Kannon Kemp,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kannon Kemp.
-2026,Peoria Javelinas,2026-09-15,834596,Kailen Hamson,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Kailen Hamson.
-2026,Peoria Javelinas,2026-09-15,811296,Kiefer Lord,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kiefer Lord.
-2026,Peoria Javelinas,2026-09-15,702751,Jose Geraldo,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Geraldo.
+2026,Peoria Javelinas,2026-09-15,695705,Luke Holman,ASG,Assigned,,Peoria Javelinas,RHP Luke Holman assigned to Peoria Javelinas.
+2026,Peoria Javelinas,2026-09-15,700251,Brandon Clarke,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Brandon Clarke.
+2026,Peoria Javelinas,2026-09-15,692284,Frank Elissalt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Frank Elissalt from the 60-day injured list.
+2026,Peoria Javelinas,2026-09-15,807744,Ty Cummings,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Ty Cummings.
+2026,Peoria Javelinas,2026-09-15,822498,Reid Easterly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Reid Easterly.
+2026,Peoria Javelinas,2026-09-15,702296,Nate Dohm,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Nate Dohm from the Development List.
+2026,Peoria Javelinas,2026-09-15,828718,Victor Diaz,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Victor Diaz.
+2026,Peoria Javelinas,2026-09-15,688867,Braxton Bragg,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Braxton Bragg from the 60-day injured list.
+2026,Peoria Javelinas,2026-09-15,694832,Cody Adcock,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Cody Adcock.
+2026,Peoria Javelinas,2026-09-15,826466,Winyer Chourio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Winyer Chourio.
 2026,Peoria Javelinas,2026-09-15,681064,Calvin Schapira,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Calvin Schapira.
 2026,Peoria Javelinas,2026-09-15,695787,Trent Hodgdon,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Trent Hodgdon.
 2026,Peoria Javelinas,2026-09-15,815951,Igor Gil,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Igor Gil.
@@ -111,16 +116,33 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Peoria Javelinas,2026-09-15,700815,Matthew Ellis,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated DH Matthew Ellis.
 2026,Peoria Javelinas,2026-09-15,829210,Ty Harvey,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Ty Harvey.
 2026,Peoria Javelinas,2026-09-15,813664,Justin DeCriscio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Justin DeCriscio.
-2026,Peoria Javelinas,2026-09-15,694832,Cody Adcock,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Cody Adcock.
-2026,Peoria Javelinas,2026-09-15,695705,Luke Holman,ASG,Assigned,,Peoria Javelinas,RHP Luke Holman assigned to Peoria Javelinas.
-2026,Peoria Javelinas,2026-09-15,822498,Reid Easterly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Reid Easterly.
-2026,Peoria Javelinas,2026-09-15,826466,Winyer Chourio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Winyer Chourio.
-2026,Peoria Javelinas,2026-09-15,700251,Brandon Clarke,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Brandon Clarke.
-2026,Peoria Javelinas,2026-09-15,692284,Frank Elissalt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Frank Elissalt from the 60-day injured list.
-2026,Peoria Javelinas,2026-09-15,807744,Ty Cummings,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Ty Cummings.
-2026,Peoria Javelinas,2026-09-15,828718,Victor Diaz,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Victor Diaz.
-2026,Peoria Javelinas,2026-09-15,702296,Nate Dohm,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Nate Dohm from the Development List.
-2026,Peoria Javelinas,2026-09-15,688867,Braxton Bragg,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Braxton Bragg from the 60-day injured list.
+2026,Peoria Javelinas,2026-09-15,800212,Francis Peña,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Francis Peña.
+2026,Peoria Javelinas,2026-09-15,807748,Kannon Kemp,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kannon Kemp.
+2026,Peoria Javelinas,2026-09-15,834596,Kailen Hamson,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Kailen Hamson.
+2026,Peoria Javelinas,2026-09-15,811296,Kiefer Lord,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kiefer Lord.
+2026,Peoria Javelinas,2026-09-15,702751,Jose Geraldo,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Geraldo.
+2026,Salt River Rafters,2026-09-15,807743,Sean Sullivan,ASG,Assigned,,Salt River Rafters,LHP Sean Sullivan assigned to Salt River Rafters.
+2026,Salt River Rafters,2026-09-15,814487,Nolan Hughes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Nolan Hughes from the 60-day injured list.
+2026,Salt River Rafters,2026-09-15,805879,Connor Foley,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Connor Foley.
+2026,Salt River Rafters,2026-09-15,800544,Cesar Lares,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Cesar Lares.
+2026,Salt River Rafters,2026-09-15,699283,Cleiber Maldonado,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Cleiber Maldonado.
+2026,Salt River Rafters,2026-09-15,822950,J.T. Etheridge,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP J.T. Etheridge.
+2026,Salt River Rafters,2026-09-15,687317,Stu Flesland III,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Stu Flesland III.
+2026,Salt River Rafters,2026-09-15,813409,Joe Ariola,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Joe Ariola.
+2026,Salt River Rafters,2026-09-15,823996,Luke Craig,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Luke Craig.
+2026,Salt River Rafters,2026-09-15,806070,Mack Estrada,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Mack Estrada.
+2026,Salt River Rafters,2026-09-15,820825,Konner Eaton,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Konner Eaton.
+2026,Salt River Rafters,2026-09-15,694933,Ross Dunn,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Ross Dunn.
+2026,Salt River Rafters,2026-09-15,688629,Noah Dean,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Noah Dean from the 60-day injured list.
+2026,Salt River Rafters,2026-09-15,700321,Andy Perez,SC,Status Change,,Salt River Rafters,Salt River Rafters activated SS Andy Perez.
+2026,Salt River Rafters,2026-09-15,829643,Jacob McCombs,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Jacob McCombs.
+2026,Salt River Rafters,2026-09-15,695493,Teo Banks,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Teo Banks.
+2026,Salt River Rafters,2026-09-15,703160,Yasser Mercedes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Yasser Mercedes.
+2026,Salt River Rafters,2026-09-15,807957,Yassel Soler,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 3B Yassel Soler.
+2026,Salt River Rafters,2026-09-15,703449,Nathan Hall,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Nathan Hall.
+2026,Salt River Rafters,2026-09-15,823918,Kyle West,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 1B Kyle West.
+2026,Salt River Rafters,2026-09-15,800195,Jorgelys Mota,SC,Status Change,,Salt River Rafters,Salt River Rafters activated CF Jorgelys Mota from the 7-day injured list.
+2026,Salt River Rafters,2026-09-15,703606,Jared Thomas,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Jared Thomas.
 2026,Salt River Rafters,2026-09-15,814414,Kyle DeBarge,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 2B Kyle DeBarge.
 2026,Salt River Rafters,2026-09-15,702679,Demetrio Crisantes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 2B Demetrio Crisantes.
 2026,Salt River Rafters,2026-09-15,691942,Jack O'Dowd,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 1B Jack O'Dowd.
@@ -136,29 +158,16 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Salt River Rafters,2026-09-15,701680,R.J. Sales,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP R.J. Sales.
 2026,Salt River Rafters,2026-09-15,804467,Patrick Forbes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Patrick Forbes.
 2026,Salt River Rafters,2026-09-15,815065,Hunter Mann,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Hunter Mann.
-2026,Salt River Rafters,2026-09-15,814487,Nolan Hughes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Nolan Hughes from the 60-day injured list.
-2026,Salt River Rafters,2026-09-15,805879,Connor Foley,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Connor Foley.
-2026,Salt River Rafters,2026-09-15,800544,Cesar Lares,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Cesar Lares.
-2026,Salt River Rafters,2026-09-15,699283,Cleiber Maldonado,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Cleiber Maldonado.
-2026,Salt River Rafters,2026-09-15,822950,J.T. Etheridge,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP J.T. Etheridge.
-2026,Salt River Rafters,2026-09-15,687317,Stu Flesland III,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Stu Flesland III.
-2026,Salt River Rafters,2026-09-15,813409,Joe Ariola,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Joe Ariola.
-2026,Salt River Rafters,2026-09-15,823996,Luke Craig,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Luke Craig.
-2026,Salt River Rafters,2026-09-15,806070,Mack Estrada,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Mack Estrada.
-2026,Salt River Rafters,2026-09-15,820825,Konner Eaton,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Konner Eaton.
-2026,Salt River Rafters,2026-09-15,694933,Ross Dunn,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Ross Dunn.
-2026,Salt River Rafters,2026-09-15,688629,Noah Dean,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Noah Dean from the 60-day injured list.
-2026,Salt River Rafters,2026-09-15,807743,Sean Sullivan,ASG,Assigned,,Salt River Rafters,LHP Sean Sullivan assigned to Salt River Rafters.
-2026,Salt River Rafters,2026-09-15,703160,Yasser Mercedes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Yasser Mercedes.
-2026,Salt River Rafters,2026-09-15,807957,Yassel Soler,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 3B Yassel Soler.
-2026,Salt River Rafters,2026-09-15,703449,Nathan Hall,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Nathan Hall.
-2026,Salt River Rafters,2026-09-15,823918,Kyle West,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 1B Kyle West.
-2026,Salt River Rafters,2026-09-15,800195,Jorgelys Mota,SC,Status Change,,Salt River Rafters,Salt River Rafters activated CF Jorgelys Mota from the 7-day injured list.
-2026,Salt River Rafters,2026-09-15,703606,Jared Thomas,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Jared Thomas.
-2026,Salt River Rafters,2026-09-15,700321,Andy Perez,SC,Status Change,,Salt River Rafters,Salt River Rafters activated SS Andy Perez.
-2026,Salt River Rafters,2026-09-15,829643,Jacob McCombs,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Jacob McCombs.
-2026,Salt River Rafters,2026-09-15,695493,Teo Banks,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Teo Banks.
-2026,Scottsdale Scorpions,2026-09-15,701592,Luke Davis,ASG,Assigned,,Scottsdale Scorpions,C Luke Davis assigned to Scottsdale Scorpions.
+2026,Scottsdale Scorpions,2026-09-15,800294,Waner Luciano,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 3B Waner Luciano.
+2026,Scottsdale Scorpions,2026-09-15,702607,Dakota Jordan,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Dakota Jordan.
+2026,Scottsdale Scorpions,2026-09-15,814307,Zyhir Hope,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated CF Zyhir Hope.
+2026,Scottsdale Scorpions,2026-09-15,807275,Dalton Wentz,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 3B Dalton Wentz.
+2026,Scottsdale Scorpions,2026-09-15,800614,Bryce Rainer,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated SS Bryce Rainer.
+2026,Scottsdale Scorpions,2026-09-15,800440,Narciso Polanco,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated SS Narciso Polanco.
+2026,Scottsdale Scorpions,2026-09-15,823809,Nick Monistere,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 2B Nick Monistere.
+2026,Scottsdale Scorpions,2026-09-15,809763,Kaeden Kent,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated SS Kaeden Kent.
+2026,Scottsdale Scorpions,2026-09-15,800724,Eric Bitonti,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 1B Eric Bitonti.
+2026,Scottsdale Scorpions,2026-09-15,687783,Matthew Wood,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated C Matthew Wood.
 2026,Scottsdale Scorpions,2026-09-15,807083,Nathan Flewelling,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated C Nathan Flewelling.
 2026,Scottsdale Scorpions,2026-09-15,805783,Mason Nichols,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Mason Nichols.
 2026,Scottsdale Scorpions,2026-09-15,806711,Yereny Teus,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Yereny Teus.
@@ -173,6 +182,9 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Scottsdale Scorpions,2026-09-15,823650,Miqueas Mercedes,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Miqueas Mercedes.
 2026,Scottsdale Scorpions,2026-09-15,813796,Preston Howey,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Preston Howey.
 2026,Scottsdale Scorpions,2026-09-15,800427,Jose Meneses,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Jose Meneses.
+2026,Scottsdale Scorpions,2026-09-15,806441,Nehomar Ochoa Jr.,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Nehomar Ochoa Jr. from the 60-day injured list.
+2026,Scottsdale Scorpions,2026-09-15,804911,Brendan Summerhill,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Brendan Summerhill.
+2026,Scottsdale Scorpions,2026-09-15,815520,Braylon Payne,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Braylon Payne.
 2026,Scottsdale Scorpions,2026-09-15,700280,Miguel Mendez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Miguel Mendez.
 2026,Scottsdale Scorpions,2026-09-15,687189,Marcus Johnson,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Marcus Johnson.
 2026,Scottsdale Scorpions,2026-09-15,690972,Joey Dixon,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Joey Dixon from the 60-day injured list.
@@ -184,21 +196,29 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Scottsdale Scorpions,2026-09-15,814374,Francisco Frias,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Francisco Frias.
 2026,Scottsdale Scorpions,2026-09-15,815218,Alexander Fuentes,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Alexander Fuentes.
 2026,Scottsdale Scorpions,2026-09-15,825095,Drake George,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Drake George from the 60-day injured list.
-2026,Scottsdale Scorpions,2026-09-15,806441,Nehomar Ochoa Jr.,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Nehomar Ochoa Jr. from the 60-day injured list.
-2026,Scottsdale Scorpions,2026-09-15,804911,Brendan Summerhill,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Brendan Summerhill.
-2026,Scottsdale Scorpions,2026-09-15,815520,Braylon Payne,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Braylon Payne.
-2026,Scottsdale Scorpions,2026-09-15,800294,Waner Luciano,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 3B Waner Luciano.
-2026,Scottsdale Scorpions,2026-09-15,702607,Dakota Jordan,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Dakota Jordan.
-2026,Scottsdale Scorpions,2026-09-15,814307,Zyhir Hope,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated CF Zyhir Hope.
-2026,Scottsdale Scorpions,2026-09-15,807275,Dalton Wentz,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 3B Dalton Wentz.
-2026,Scottsdale Scorpions,2026-09-15,800614,Bryce Rainer,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated SS Bryce Rainer.
-2026,Scottsdale Scorpions,2026-09-15,800440,Narciso Polanco,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated SS Narciso Polanco.
-2026,Scottsdale Scorpions,2026-09-15,823809,Nick Monistere,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 2B Nick Monistere.
-2026,Scottsdale Scorpions,2026-09-15,809763,Kaeden Kent,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated SS Kaeden Kent.
-2026,Scottsdale Scorpions,2026-09-15,800724,Eric Bitonti,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 1B Eric Bitonti.
-2026,Scottsdale Scorpions,2026-09-15,687783,Matthew Wood,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated C Matthew Wood.
+2026,Scottsdale Scorpions,2026-09-15,701592,Luke Davis,ASG,Assigned,,Scottsdale Scorpions,C Luke Davis assigned to Scottsdale Scorpions.
+2026,Surprise Saguaros,2026-09-15,806522,Irving Cota,ASG,Assigned,,Surprise Saguaros,RHP Irving Cota assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-15,805799,Zion Rose,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated CF Zion Rose.
 2026,Surprise Saguaros,2026-09-15,695517,Casey Cook,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Casey Cook.
+2026,Surprise Saguaros,2026-09-15,805951,Boston Baro,ASG,Assigned,,Surprise Saguaros,SS Boston Baro assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-15,815066,Kyle Scott,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Kyle Scott from the 60-day injured list.
+2026,Surprise Saguaros,2026-09-15,825100,Kevin Warunek,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated LHP Kevin Warunek.
+2026,Surprise Saguaros,2026-09-15,700985,Josh Hansell,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Josh Hansell from the 7-day injured list.
+2026,Surprise Saguaros,2026-09-15,700924,Frank Mozzicato,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated LHP Frank Mozzicato.
+2026,Surprise Saguaros,2026-09-15,822415,Mason McConnaughey,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Mason McConnaughey from the 7-day injured list.
+2026,Surprise Saguaros,2026-09-15,802146,Aidan Major,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Aidan Major.
+2026,Surprise Saguaros,2026-09-15,703610,Justin Lamkin,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated LHP Justin Lamkin from the 60-day injured list.
+2026,Surprise Saguaros,2026-09-15,822038,Ryan Lambert,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Ryan Lambert.
+2026,Surprise Saguaros,2026-09-15,835375,Jacob Johnson,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Jacob Johnson.
+2026,Surprise Saguaros,2026-09-15,693732,Estibenzon Jimenez,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Estibenzon Jimenez.
+2026,Surprise Saguaros,2026-09-15,694858,Brendan Girton,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Brendan Girton.
+2026,Surprise Saguaros,2026-09-15,804966,Jesus Gamez,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Jesus Gamez.
+2026,Surprise Saguaros,2026-09-15,701884,Magnus Ellerts,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Magnus Ellerts.
+2026,Surprise Saguaros,2026-09-15,823804,Ryan Dromboski,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Ryan Dromboski.
+2026,Surprise Saguaros,2026-09-15,702126,Aaron Davenport,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Aaron Davenport from the 60-day injured list.
+2026,Surprise Saguaros,2026-09-15,823330,Alejandro Chiquillo,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Alejandro Chiquillo.
+2026,Surprise Saguaros,2026-09-15,695037,J'Briell Easley,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP J'Briell Easley.
+2026,Surprise Saguaros,2026-09-15,700176,Keegan Batka,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Keegan Batka.
 2026,Surprise Saguaros,2026-09-15,800169,Aroon Escobar,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Aroon Escobar.
 2026,Surprise Saguaros,2026-09-15,807276,Dante Nori,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Dante Nori.
 2026,Surprise Saguaros,2026-09-15,702265,Paxton Kling,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Paxton Kling.
@@ -217,23 +237,3 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Surprise Saguaros,2026-09-15,807575,Cam Schuelke,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Cam Schuelke.
 2026,Surprise Saguaros,2026-09-15,700247,Jose Pena Jr.,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Jose Pena Jr. from the 60-day injured list.
 2026,Surprise Saguaros,2026-09-15,807290,Peyton Prescott,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Peyton Prescott from the Development List.
-2026,Surprise Saguaros,2026-09-15,815066,Kyle Scott,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Kyle Scott from the 60-day injured list.
-2026,Surprise Saguaros,2026-09-15,825100,Kevin Warunek,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated LHP Kevin Warunek.
-2026,Surprise Saguaros,2026-09-15,700985,Josh Hansell,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Josh Hansell from the 7-day injured list.
-2026,Surprise Saguaros,2026-09-15,700924,Frank Mozzicato,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated LHP Frank Mozzicato.
-2026,Surprise Saguaros,2026-09-15,822415,Mason McConnaughey,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Mason McConnaughey from the 7-day injured list.
-2026,Surprise Saguaros,2026-09-15,802146,Aidan Major,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Aidan Major.
-2026,Surprise Saguaros,2026-09-15,703610,Justin Lamkin,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated LHP Justin Lamkin from the 60-day injured list.
-2026,Surprise Saguaros,2026-09-15,822038,Ryan Lambert,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Ryan Lambert.
-2026,Surprise Saguaros,2026-09-15,835375,Jacob Johnson,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Jacob Johnson.
-2026,Surprise Saguaros,2026-09-15,693732,Estibenzon Jimenez,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Estibenzon Jimenez.
-2026,Surprise Saguaros,2026-09-15,695037,J'Briell Easley,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP J'Briell Easley.
-2026,Surprise Saguaros,2026-09-15,694858,Brendan Girton,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Brendan Girton.
-2026,Surprise Saguaros,2026-09-15,804966,Jesus Gamez,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Jesus Gamez.
-2026,Surprise Saguaros,2026-09-15,701884,Magnus Ellerts,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Magnus Ellerts.
-2026,Surprise Saguaros,2026-09-15,823804,Ryan Dromboski,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Ryan Dromboski.
-2026,Surprise Saguaros,2026-09-15,702126,Aaron Davenport,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Aaron Davenport from the 60-day injured list.
-2026,Surprise Saguaros,2026-09-15,823330,Alejandro Chiquillo,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Alejandro Chiquillo.
-2026,Surprise Saguaros,2026-09-15,700176,Keegan Batka,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Keegan Batka.
-2026,Surprise Saguaros,2026-09-15,806522,Irving Cota,ASG,Assigned,,Surprise Saguaros,RHP Irving Cota assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-15,805951,Boston Baro,ASG,Assigned,,Surprise Saguaros,SS Boston Baro assigned to Surprise Saguaros.
