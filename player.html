@@ -95,11 +95,12 @@
   .section-note { color: var(--text-muted); font-weight: 400; font-size: 0.8rem; }
 
   .career-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 2px rgba(0,0,0,0.04); margin-bottom: 1.5rem; }
-  .career-row { display: grid; grid-template-columns: 0.6fr 0.6fr 1.8fr 0.5fr 0.6fr 0.6fr 0.6fr 0.5fr; padding: 0.55rem 1rem; gap: 0.3rem; min-width: 620px; }
+  .career-row { display: grid; padding: 0.55rem 1rem; gap: 0.5rem; align-items: center; white-space: nowrap; }
   .career-row.head { background: #f2f1ee; color: var(--text-muted); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; }
   .career-row.body { border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text); align-items: center; }
   .career-row.afl { border-top: 1px solid var(--tab-active); font-weight: 700; background: #fff8f2; }
   .career-row.mlb { border-top: 1px solid #2f6fb0; font-weight: 700; background: #eaf1fa; }
+  .career-row > div { overflow: hidden; text-overflow: ellipsis; }
 
   .transaction-log-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 2rem 0 0.6rem; }
   .transaction-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
@@ -379,6 +380,20 @@
     };
   }
 
+  // We don't hand-pick fields here -- same "capture everything" approach
+  // used for pitcher_stats.csv. Every field MLB's stat block returns for
+  // that year/level gets carried through onto the row.
+  function flattenStatBlock(stat) {
+    const out = {};
+    Object.keys(stat || {}).forEach(k => {
+      const v = stat[k];
+      if (v === null || v === undefined) out[k] = '';
+      else if (typeof v === 'object') out[k] = JSON.stringify(v);
+      else out[k] = v;
+    });
+    return out;
+  }
+
   async function fetchLevelHitting(sportId) {
     try {
       const res = await fetch(`https://statsapi.mlb.com/api/v1/people/${playerId}/stats?stats=yearByYear&group=hitting&sportId=${sportId}`);
@@ -389,12 +404,7 @@
         season: s.season,
         level: (s.sport && s.sport.abbreviation) || '',
         team: (s.team && s.team.name) || '',
-        games: s.stat.gamesPlayed,
-        avg: s.stat.avg,
-        obp: s.stat.obp,
-        slg: s.stat.slg,
-        ops: s.stat.ops,
-        hr: s.stat.homeRuns,
+        ...flattenStatBlock(s.stat),
       }));
     } catch (e) {
       return [];
@@ -411,16 +421,20 @@
         season: s.season,
         level: (s.sport && s.sport.abbreviation) || '',
         team: (s.team && s.team.name) || '',
-        games: s.stat.gamesPlayed,
-        wins: s.stat.wins,
-        losses: s.stat.losses,
-        era: s.stat.era,
-        saves: s.stat.saves,
+        ...flattenStatBlock(s.stat),
       }));
     } catch (e) {
       return [];
     }
   }
+
+  function prettifyKey(key) {
+    return key
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .replace(/^./, c => c.toUpperCase());
+  }
+
+  const PINNED_COLS = ['season', 'level', 'team'];
 
   async function loadCareerPath(aflRow, statType) {
     const container = document.getElementById('career-path-container');
@@ -450,32 +464,31 @@
       return;
     }
 
-    const headerRow = statType === 'pitching'
-      ? '<div>Yr</div><div>Lvl</div><div>Team</div><div>G</div><div>W</div><div>L</div><div>ERA</div><div>SV</div>'
-      : '<div>Yr</div><div>Lvl</div><div>Team</div><div>G</div><div>AVG</div><div>OBP</div><div>OPS</div><div>HR</div>';
+    // Capture every field that shows up on ANY row -- same "don't hand-pick
+    // fields, capture everything" approach used for pitcher_stats.csv --
+    // so a stat that only exists at one level (or only in our AFL data)
+    // still gets its own column.
+    const statKeySet = new Set();
+    rows.forEach(r => {
+      Object.keys(r).forEach(k => { if (!PINNED_COLS.includes(k)) statKeySet.add(k); });
+    });
+    const statKeys = Array.from(statKeySet).sort();
+    const allCols = [...PINNED_COLS, ...statKeys];
+
+    const gridTemplate = `0.6fr 0.55fr 1.6fr ${statKeys.map(() => 'minmax(75px, 1fr)').join(' ')}`;
+    const minWidth = `${3 * 90 + statKeys.length * 85}px`;
+
+    const colLabel = (k) => k === 'season' ? 'Yr' : k === 'level' ? 'Lvl' : k === 'team' ? 'Team' : prettifyKey(k);
+    const headerCells = allCols.map(k => `<div>${colLabel(k)}</div>`).join('');
 
     let html = `
       <div class="career-table">
-        <div class="career-row head">${headerRow}</div>
+        <div class="career-row head" style="grid-template-columns:${gridTemplate}; min-width:${minWidth};">${headerCells}</div>
     `;
     rows.forEach(r => {
       const rowClass = r.level === 'AFL' ? 'career-row body afl' : r.level === 'MLB' ? 'career-row body mlb' : 'career-row body';
-      if (statType === 'pitching') {
-        html += `
-          <div class="${rowClass}">
-            <div>${r.season}</div><div>${r.level}</div><div>${r.team}</div><div>${r.games}</div>
-            <div>${r.wins !== undefined ? r.wins : ''}</div><div>${r.losses !== undefined ? r.losses : ''}</div>
-            <div>${r.era || ''}</div><div>${r.saves !== undefined ? r.saves : ''}</div>
-          </div>
-        `;
-      } else {
-        html += `
-          <div class="${rowClass}">
-            <div>${r.season}</div><div>${r.level}</div><div>${r.team}</div><div>${r.games}</div>
-            <div>${r.avg || ''}</div><div>${r.obp || ''}</div><div>${r.ops || ''}</div><div>${r.hr !== undefined ? r.hr : ''}</div>
-          </div>
-        `;
-      }
+      const cells = allCols.map(k => `<div>${r[k] !== undefined && r[k] !== null ? r[k] : ''}</div>`).join('');
+      html += `<div class="${rowClass}" style="grid-template-columns:${gridTemplate}; min-width:${minWidth};">${cells}</div>`;
     });
     html += `</div>`;
     container.innerHTML = html;
@@ -529,10 +542,13 @@
         const pStats = pitcherStats.find(p => p.pitcher_id === playerId);
         if (pStats) {
           html += renderAflSeasonCardPitching(player.team, pStats);
-          aflRow = {
-            season: String(currentSeason), level: 'AFL', team: player.team, games: pStats.gamesPitched,
-            wins: pStats.wins, losses: pStats.losses, era: pStats.era, saves: pStats.saves,
-          };
+          // pitcher_stats.csv already captures every field MLB gives us
+          // (dynamically) -- carry all of it through onto the AFL row.
+          aflRow = { season: String(currentSeason), level: 'AFL', team: player.team };
+          Object.keys(pStats).forEach(k => {
+            if (k === 'pitcher_id' || k === 'pitcher_name') return;
+            aflRow[k] = pStats[k];
+          });
         }
       } else {
         const playerHitting = hitting.filter(g => g.player_id === playerId);
@@ -540,9 +556,19 @@
         if (hasHitting) {
           const totals = sumHittingGames(playerHitting);
           html += renderAflSeasonCard(player.team, totals);
+          // Every field we sum from hitting_gamelogs.csv, carried through
+          // with the same field names MLB's own API uses, so it lines up
+          // in the same columns as the MiLB/MLB rows above.
           aflRow = {
-            season: String(currentSeason), level: 'AFL', team: player.team, games: totals.games,
-            avg: fmtRate(totals.avg), obp: fmtRate(totals.obp), ops: fmtRate(totals.ops), hr: totals.home_runs,
+            season: String(currentSeason), level: 'AFL', team: player.team,
+            gamesPlayed: totals.games,
+            atBats: totals.at_bats, hits: totals.hits, doubles: totals.doubles, triples: totals.triples,
+            homeRuns: totals.home_runs, runs: totals.runs, rbi: totals.rbi,
+            baseOnBalls: totals.walks, intentionalWalks: totals.intentional_walks,
+            strikeOuts: totals.strikeouts, hitByPitch: totals.hit_by_pitch,
+            stolenBases: totals.stolen_bases, caughtStealing: totals.caught_stealing,
+            totalBases: totals.total_bases, sacFlies: totals.sac_flies,
+            avg: fmtRate(totals.avg), obp: fmtRate(totals.obp), slg: fmtRate(totals.slg), ops: fmtRate(totals.ops),
           };
         }
       }
