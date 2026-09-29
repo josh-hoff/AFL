@@ -482,11 +482,32 @@
   }
   .bs-header, .bs-row {
     display: grid;
-    grid-template-columns: 26px 2fr repeat(12, 0.62fr);
+    grid-template-columns: 26px 2fr repeat(13, 0.62fr);
     gap: 4px;
     padding: 0.35rem 0.55rem;
     font-size: 0.76rem;
     align-items: center;
+  }
+  .bs-team-tabs {
+    display: flex;
+    gap: 0.4rem;
+    margin: 0.2rem 0 0.6rem;
+  }
+  .bs-team-tab {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: inherit;
+  }
+  .bs-team-tab.active {
+    background: var(--tab-active);
+    border-color: var(--tab-active);
+    color: #ffffff;
   }
   .bs-header-p, .bs-row-p {
     display: grid;
@@ -523,7 +544,8 @@
     text-decoration: underline;
   }
   @media (max-width: 560px) {
-    .bs-header, .bs-row, .bs-header-p, .bs-row-p { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(12, 1fr); overflow-x: auto; }
+    .bs-header, .bs-row { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(13, 1fr); overflow-x: auto; }
+    .bs-header-p, .bs-row-p { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(10, 1fr); overflow-x: auto; }
   }
 </style>
 </head>
@@ -1041,12 +1063,27 @@
 
   function buildBoxScoreHtml(g) {
     const gamePk = g.game_pk;
-    return [
-      { side: 'away', teamName: g.away_team },
-      { side: 'home', teamName: g.home_team },
-    ].map(({ side, teamName }) =>
-      battingSectionHtml(gamePk, side, teamName) + pitchingSectionHtml(gamePk, side, teamName)
-    ).join('');
+    const awayHtml = battingSectionHtml(gamePk, 'away', g.away_team) + pitchingSectionHtml(gamePk, 'away', g.away_team);
+    const homeHtml = battingSectionHtml(gamePk, 'home', g.home_team) + pitchingSectionHtml(gamePk, 'home', g.home_team);
+    return `
+      <div class="bs-team-tabs">
+        <button class="bs-team-tab active" data-side="away" onclick="switchBoxTeam('${gamePk}', 'away'); return false;">${g.away_team || 'Away'}</button>
+        <button class="bs-team-tab" data-side="home" onclick="switchBoxTeam('${gamePk}', 'home'); return false;">${g.home_team || 'Home'}</button>
+      </div>
+      <div class="bs-team-panel" data-side="away">${awayHtml}</div>
+      <div class="bs-team-panel" data-side="home" style="display:none;">${homeHtml}</div>
+    `;
+  }
+
+  function switchBoxTeam(gamePk, side) {
+    const container = document.getElementById(`box-${gamePk}`);
+    if (!container) return;
+    container.querySelectorAll('.bs-team-tab').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.side === side);
+    });
+    container.querySelectorAll('.bs-team-panel').forEach(panel => {
+      panel.style.display = panel.dataset.side === side ? 'block' : 'none';
+    });
   }
 
   function battingSectionHtml(gamePk, side, teamName) {
@@ -1067,7 +1104,7 @@
       <div class="bs-team-title">Batting &mdash; ${teamName || ''}</div>
       <div class="bs-table">
         <div class="bs-header">
-          <div>#</div><div>Player</div><div>AVG</div><div>AB</div><div>R</div><div>H</div><div>RBI</div><div>2B</div><div>3B</div><div>HR</div><div>BB</div><div>IBB</div><div>K</div><div>SB</div>
+          <div>#</div><div>Player</div><div>AVG</div><div>OPS</div><div>AB</div><div>R</div><div>H</div><div>RBI</div><div>2B</div><div>3B</div><div>HR</div><div>BB</div><div>IBB</div><div>K</div><div>SB</div>
         </div>
         ${rows}
       </div>
@@ -1086,6 +1123,7 @@
         <div>${isSub ? '' : slot}</div>
         <div>${subPrefix}${nameHtml}${posLabel}</div>
         <div>${fmtDash(stat.avg)}</div>
+        <div>${fmtDash(stat.ops)}</div>
         <div>${fmtDash(stat.at_bats)}</div>
         <div>${fmtDash(stat.runs)}</div>
         <div>${fmtDash(stat.hits)}</div>

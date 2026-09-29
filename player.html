@@ -102,6 +102,13 @@
   .career-row.mlb { border-top: 1px solid #2f6fb0; font-weight: 700; background: #eaf1fa; }
   .career-row > div { overflow: hidden; text-overflow: ellipsis; }
 
+  .afl-gamelog-toggle { cursor: pointer; color: var(--tab-active); font-weight: 700; display: inline-block; width: 0.9em; }
+  .career-gamelog-wrap { grid-column: 1 / -1; padding: 0.6rem 1rem 0.8rem; border-top: 1px solid var(--border); background: #fffaf5; }
+  .gl-table { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; overflow-x: auto; }
+  .gl-row { display: grid; gap: 4px; padding: 0.35rem 0.6rem; font-size: 0.76rem; align-items: center; white-space: nowrap; }
+  .gl-head { background: #f2f1ee; font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.66rem; }
+  .gl-row:not(.gl-head) { border-top: 1px solid var(--border); color: var(--text); }
+
   .transaction-log-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 2rem 0 0.6rem; }
   .transaction-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
   .transaction-row { display: grid; grid-template-columns: 0.9fr 3fr; padding: 0.8rem 1.2rem; align-items: center; font-size: 0.88rem; }
@@ -485,7 +492,7 @@
     age: 'Age', gamesPlayed: 'G', plateAppearances: 'PA', atBats: 'AB', runs: 'R', hits: 'H',
     doubles: '2B', triples: '3B', homeRuns: 'HR', rbi: 'RBI', stolenBases: 'SB',
     caughtStealing: 'CS', stolenBasePercentage: 'SB%', caughtStealingPercentage: 'CS%',
-    baseOnBalls: 'BB', intentionalWalks: 'IBB', strikeOuts: 'SO', avg: 'BA', obp: 'OBP',
+    baseOnBalls: 'BB', intentionalWalks: 'IBB', strikeOuts: 'K', avg: 'BA', obp: 'OBP',
     slg: 'SLG', ops: 'OPS', babip: 'BABIP', totalBases: 'TB', groundIntoDoublePlay: 'GIDP',
     hitByPitch: 'HBP', sacBunts: 'SH', sacFlies: 'SF', groundOuts: 'GO', airOuts: 'AO',
     groundOutsToAirouts: 'GO/AO', atBatsPerHomeRun: 'AB/HR', numberOfPitches: 'Pit',
@@ -513,7 +520,7 @@
     completeGames: 'CG', shutouts: 'SHO', saves: 'SV', saveOpportunities: 'SVO',
     blownSaves: 'BS', holds: 'HLD', inningsPitched: 'IP', battersFaced: 'BF', outs: 'Outs',
     hits: 'H', runs: 'R', earnedRuns: 'ER', homeRuns: 'HR', doubles: '2B', triples: '3B',
-    baseOnBalls: 'BB', intentionalWalks: 'IBB', strikeOuts: 'SO', hitBatsmen: 'HB',
+    baseOnBalls: 'BB', intentionalWalks: 'IBB', strikeOuts: 'K', hitBatsmen: 'HB',
     hitByPitch: 'HBP', balks: 'BK', wildPitches: 'WP', pickoffs: 'PK',
     whip: 'WHIP', hitsPer9Inn: 'H9', homeRunsPer9: 'HR9', walksPer9Inn: 'BB9',
     strikeoutsPer9Inn: 'SO9', runsScoredPer9: 'R9', strikeoutWalkRatio: 'SO/BB',
@@ -533,7 +540,44 @@
     return [...ordered, ...rest];
   }
 
-  async function loadCareerPath(aflRow, statType) {
+  // Compact per-game log shown when the AFL row in Career Path is expanded.
+  // Uses whichever per-game rows are already in memory -- hitting_gamelogs.csv
+  // rows (snake_case fields) for hitters, pitching_gamelogs.csv rows
+  // (MLB's own camelCase fields, including its cumulative-through-that-game
+  // era/whip/wins/losses) for pitchers. No extra fetch needed.
+  function buildAflGameLogHtml(rows, statType) {
+    const sorted = rows.slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+
+    const cols = statType === 'pitching'
+      ? ['date', 'opponent', 'wins', 'losses', 'saves', 'inningsPitched', 'hits', 'runs', 'earnedRuns', 'baseOnBalls', 'strikeOuts', 'numberOfPitches', 'era', 'whip']
+      : ['date', 'opponent', 'at_bats', 'runs', 'hits', 'rbi', 'doubles', 'triples', 'home_runs', 'walks', 'intentional_walks', 'strikeouts', 'stolen_bases', 'avg', 'obp', 'slg', 'ops'];
+    const labels = statType === 'pitching'
+      ? ['Date', 'Opp', 'W', 'L', 'SV', 'IP', 'H', 'R', 'ER', 'BB', 'K', 'Pit', 'ERA', 'WHIP']
+      : ['Date', 'Opp', 'AB', 'R', 'H', 'RBI', '2B', '3B', 'HR', 'BB', 'IBB', 'K', 'SB', 'AVG', 'OBP', 'SLG', 'OPS'];
+
+    const gridCols = `90px 1.5fr ${cols.slice(2).map(() => '0.65fr').join(' ')}`;
+    const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map(l => `<div>${l}</div>`).join('')}</div>`;
+    const rowsHtml = sorted.map(r => {
+      const cells = cols.map(c => {
+        const v = r[c];
+        return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
+      }).join('');
+      return `<div class="gl-row" style="grid-template-columns:${gridCols};">${cells}</div>`;
+    }).join('');
+
+    return `<div class="gl-table">${headerHtml}${rowsHtml}</div>`;
+  }
+
+  function toggleAflGameLog() {
+    const el = document.getElementById('afl-gamelog-container');
+    const arrow = document.getElementById('afl-gamelog-arrow');
+    if (!el) return;
+    const isOpen = el.style.display !== 'none';
+    el.style.display = isOpen ? 'none' : 'block';
+    if (arrow) arrow.textContent = isOpen ? '▶' : '▼';
+  }
+
+  async function loadCareerPath(aflRow, statType, aflGameLogRows) {
     const container = document.getElementById('career-path-container');
     container.innerHTML = '<p class="loading">Loading career path...</p>';
 
@@ -589,10 +633,24 @@
       <div class="career-table">
         <div class="career-row head" style="grid-template-columns:${gridTemplate}; min-width:${minWidth};">${headerCells}</div>
     `;
+    const hasGameLog = Array.isArray(aflGameLogRows) && aflGameLogRows.length > 0;
     rows.forEach(r => {
-      const rowClass = r.level === 'AFL' ? 'career-row body afl' : r.level === 'MLB' ? 'career-row body mlb' : 'career-row body';
-      const cells = allCols.map(k => `<div>${r[k] !== undefined && r[k] !== null ? r[k] : ''}</div>`).join('');
-      html += `<div class="${rowClass}" style="grid-template-columns:${gridTemplate}; min-width:${minWidth};">${cells}</div>`;
+      const isAfl = r.level === 'AFL';
+      const rowClass = isAfl ? 'career-row body afl' : r.level === 'MLB' ? 'career-row body mlb' : 'career-row body';
+      const showToggle = isAfl && hasGameLog;
+      const cells = allCols.map((k, idx) => {
+        const val = r[k] !== undefined && r[k] !== null ? r[k] : '';
+        if (idx === 0 && showToggle) {
+          return `<div><span id="afl-gamelog-arrow" class="afl-gamelog-toggle" onclick="toggleAflGameLog()">▶</span> ${val}</div>`;
+        }
+        return `<div>${val}</div>`;
+      }).join('');
+      const rowStyleAttr = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
+      const clickAttr = showToggle ? ` onclick="toggleAflGameLog()" style="cursor:pointer; grid-template-columns:${gridTemplate}; min-width:${minWidth};"` : ` ${rowStyleAttr}`;
+      html += `<div class="${rowClass}"${clickAttr}>${cells}</div>`;
+      if (showToggle) {
+        html += `<div class="career-gamelog-wrap" id="afl-gamelog-container" style="display:none;">${buildAflGameLogHtml(aflGameLogRows, statType)}</div>`;
+      }
     });
     html += `</div>`;
     container.innerHTML = html;
@@ -608,16 +666,18 @@
     }
 
     try {
-      const [rosterRes, hittingRes, pitcherStatsRes, txnRes] = await Promise.all([
+      const [rosterRes, hittingRes, pitcherStatsRes, pitchingGameLogsRes, txnRes] = await Promise.all([
         fetch(`data/${currentSeason}/roster.csv`),
         fetch(`data/${currentSeason}/hitting_gamelogs.csv`),
         fetch(`data/${currentSeason}/pitcher_stats.csv`),
+        fetch(`data/${currentSeason}/pitching_gamelogs.csv`),
         fetch(`data/${currentSeason}/transactions.csv`),
       ]);
 
       const roster = rosterRes.ok ? parseCSV(await rosterRes.text()) : [];
       const hitting = hittingRes.ok ? parseCSV(await hittingRes.text()) : [];
       const pitcherStats = pitcherStatsRes.ok ? parseCSV(await pitcherStatsRes.text()) : [];
+      const pitchingGameLogs = pitchingGameLogsRes.ok ? parseCSV(await pitchingGameLogsRes.text()) : [];
       const transactions = txnRes.ok ? parseCSV(await txnRes.text()) : [];
 
       const player = roster.find(p => p.player_id === playerId);
@@ -640,10 +700,12 @@
       let html = renderBio(player);
       let aflRow = null;
       let statType = 'hitting';
+      let aflGameLogRows = [];
 
       if (isPitcher) {
         statType = 'pitching';
         const pStats = pitcherStats.find(p => p.pitcher_id === playerId);
+        aflGameLogRows = pitchingGameLogs.filter(g => g.pitcher_id === playerId);
         if (pStats) {
           html += renderAflSeasonCardPitching(player.team, pStats);
           // pitcher_stats.csv already captures every field MLB gives us
@@ -656,6 +718,7 @@
         }
       } else {
         const playerHitting = hitting.filter(g => g.player_id === playerId);
+        aflGameLogRows = playerHitting;
         const hasHitting = playerHitting.length > 0;
         if (hasHitting) {
           const totals = sumHittingGames(playerHitting);
@@ -694,7 +757,7 @@
       content.innerHTML = html;
       wireTransactionExpand();
 
-      loadCareerPath(aflRow, statType);
+      loadCareerPath(aflRow, statType, aflGameLogRows);
     } catch (err) {
       content.innerHTML = `<p class="error">Couldn't load player: ${err.message}</p>`;
     }
