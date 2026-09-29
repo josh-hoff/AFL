@@ -517,6 +517,10 @@
     rows.forEach(r => {
       Object.keys(r).forEach(k => { if (!PINNED_COLS.includes(k)) statKeySet.add(k); });
     });
+    // MLB's pitching stat block includes both gamesPlayed and gamesPitched
+    // (same value) -- for a pitcher, B-R's single "G" column means games
+    // pitched, so drop the redundant duplicate rather than show it twice.
+    if (statType === 'pitching') statKeySet.delete('gamesPlayed');
     const preferredOrder = statType === 'pitching' ? PITCHING_STAT_ORDER : HITTING_STAT_ORDER;
     const statKeys = orderKeys(Array.from(statKeySet), preferredOrder);
     const allCols = [...PINNED_COLS, ...statKeys];
