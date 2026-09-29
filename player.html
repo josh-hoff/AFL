@@ -296,7 +296,18 @@
     totals.ops = (totals.obp !== null && totals.slg !== null) ? (totals.obp + totals.slg) : null;
     const babip_denominator = ab - totals.strikeouts - totals.home_runs + totals.sac_flies;
     totals.babip = babip_denominator > 0 ? ((totals.hits - totals.home_runs) / babip_denominator) : null;
+
+    const sbAttempts = totals.stolen_bases + totals.caught_stealing;
+    totals.stolen_base_pct = sbAttempts > 0 ? (totals.stolen_bases / sbAttempts) : null;
+    totals.caught_stealing_pct = sbAttempts > 0 ? (totals.caught_stealing / sbAttempts) : null;
+    totals.ground_outs_to_airouts = totals.air_outs > 0 ? (totals.ground_outs / totals.air_outs) : null;
+    totals.at_bats_per_home_run = totals.home_runs > 0 ? (ab / totals.home_runs) : null;
     return totals;
+  }
+
+  function fmtRatio(n) {
+    if (n === null || n === undefined || isNaN(n)) return '';
+    return n.toFixed(2);
   }
 
   function fmtRate(n) {
@@ -448,37 +459,63 @@
   // have no source for, like WAR, Lg, or Awards). Anything MLB's API
   // returns that isn't in these lists still gets captured -- it just gets
   // appended after, alphabetically, so nothing is ever lost.
+  // Both lists below are built directly from a raw dump of MLB's actual
+  // "stat" object for hitting (34 fields) and pitching (62 fields), so
+  // every field MLB can return has a known order slot and abbreviation --
+  // nothing is left to guess at or fall back to a spelled-out label.
   const HITTING_STAT_ORDER = [
+    'age',
     'gamesPlayed', 'plateAppearances', 'atBats', 'runs', 'hits', 'doubles', 'triples',
-    'homeRuns', 'rbi', 'stolenBases', 'caughtStealing', 'baseOnBalls', 'strikeOuts',
-    'avg', 'obp', 'slg', 'ops',
-    'totalBases', 'groundIntoDoublePlay', 'hitByPitch', 'sacBunts', 'sacFlies', 'intentionalWalks',
-    'babip', 'groundOuts', 'airOuts', 'numberOfPitches', 'leftOnBase', 'catchersInterference',
+    'homeRuns', 'rbi', 'stolenBases', 'caughtStealing', 'stolenBasePercentage', 'caughtStealingPercentage',
+    'baseOnBalls', 'intentionalWalks', 'strikeOuts',
+    'avg', 'obp', 'slg', 'ops', 'babip',
+    'totalBases', 'groundIntoDoublePlay', 'hitByPitch', 'sacBunts', 'sacFlies',
+    'groundOuts', 'airOuts', 'groundOutsToAirouts', 'atBatsPerHomeRun',
+    'numberOfPitches', 'leftOnBase', 'catchersInterference',
   ];
   const HITTING_LABELS = {
-    gamesPlayed: 'G', plateAppearances: 'PA', atBats: 'AB', runs: 'R', hits: 'H',
+    age: 'Age', gamesPlayed: 'G', plateAppearances: 'PA', atBats: 'AB', runs: 'R', hits: 'H',
     doubles: '2B', triples: '3B', homeRuns: 'HR', rbi: 'RBI', stolenBases: 'SB',
-    caughtStealing: 'CS', baseOnBalls: 'BB', strikeOuts: 'SO', avg: 'BA', obp: 'OBP',
-    slg: 'SLG', ops: 'OPS', totalBases: 'TB', groundIntoDoublePlay: 'GIDP',
-    hitByPitch: 'HBP', sacBunts: 'SH', sacFlies: 'SF', intentionalWalks: 'IBB',
+    caughtStealing: 'CS', stolenBasePercentage: 'SB%', caughtStealingPercentage: 'CS%',
+    baseOnBalls: 'BB', intentionalWalks: 'IBB', strikeOuts: 'SO', avg: 'BA', obp: 'OBP',
+    slg: 'SLG', ops: 'OPS', babip: 'BABIP', totalBases: 'TB', groundIntoDoublePlay: 'GIDP',
+    hitByPitch: 'HBP', sacBunts: 'SH', sacFlies: 'SF', groundOuts: 'GO', airOuts: 'AO',
+    groundOutsToAirouts: 'GO/AO', atBatsPerHomeRun: 'AB/HR', numberOfPitches: 'Pit',
+    leftOnBase: 'LOB', catchersInterference: 'CI',
   };
   const PITCHING_STAT_ORDER = [
+    'age',
     'wins', 'losses', 'winPercentage', 'era',
-    'gamesPlayed', 'gamesPitched', 'gamesStarted', 'gamesFinished', 'completeGames', 'shutouts', 'saves',
-    'inningsPitched', 'hits', 'runs', 'earnedRuns', 'homeRuns', 'baseOnBalls', 'intentionalWalks',
-    'strikeOuts', 'hitByPitch', 'balks', 'wildPitches', 'battersFaced',
-    'whip', 'hitsPer9Inn', 'homeRunsPer9', 'walksPer9Inn', 'strikeoutsPer9Inn', 'strikeoutWalkRatio',
-    'saveOpportunities', 'blownSaves', 'holds', 'strikePercentage', 'pitchesPerInning',
-    'numberOfPitches', 'strikes', 'balls', 'groundOuts', 'airOuts', 'stolenBases', 'caughtStealing',
+    'gamesPitched', 'gamesStarted', 'gamesFinished', 'completeGames', 'shutouts',
+    'saves', 'saveOpportunities', 'blownSaves', 'holds',
+    'inningsPitched', 'battersFaced', 'outs',
+    'hits', 'runs', 'earnedRuns', 'homeRuns', 'doubles', 'triples',
+    'baseOnBalls', 'intentionalWalks', 'strikeOuts', 'hitBatsmen', 'hitByPitch', 'balks', 'wildPitches', 'pickoffs',
+    'whip', 'hitsPer9Inn', 'homeRunsPer9', 'walksPer9Inn', 'strikeoutsPer9Inn', 'runsScoredPer9', 'strikeoutWalkRatio',
+    'avg', 'obp', 'slg', 'ops',
+    'stolenBases', 'caughtStealing', 'stolenBasePercentage', 'caughtStealingPercentage',
+    'groundOuts', 'airOuts', 'groundOutsToAirouts',
+    'strikes', 'strikePercentage', 'numberOfPitches', 'pitchesPerInning',
+    'inheritedRunners', 'inheritedRunnersScored',
+    'totalBases', 'groundIntoDoublePlay', 'sacBunts', 'sacFlies', 'catchersInterference',
   ];
   const PITCHING_LABELS = {
-    wins: 'W', losses: 'L', winPercentage: 'W-L%', era: 'ERA',
+    age: 'Age', wins: 'W', losses: 'L', winPercentage: 'W-L%', era: 'ERA',
     gamesPlayed: 'G', gamesPitched: 'G', gamesStarted: 'GS', gamesFinished: 'GF',
-    completeGames: 'CG', shutouts: 'SHO', saves: 'SV', inningsPitched: 'IP', hits: 'H',
-    runs: 'R', earnedRuns: 'ER', homeRuns: 'HR', baseOnBalls: 'BB', intentionalWalks: 'IBB',
-    strikeOuts: 'SO', hitByPitch: 'HBP', balks: 'BK', wildPitches: 'WP', battersFaced: 'BF',
+    completeGames: 'CG', shutouts: 'SHO', saves: 'SV', saveOpportunities: 'SVO',
+    blownSaves: 'BS', holds: 'HLD', inningsPitched: 'IP', battersFaced: 'BF', outs: 'Outs',
+    hits: 'H', runs: 'R', earnedRuns: 'ER', homeRuns: 'HR', doubles: '2B', triples: '3B',
+    baseOnBalls: 'BB', intentionalWalks: 'IBB', strikeOuts: 'SO', hitBatsmen: 'HB',
+    hitByPitch: 'HBP', balks: 'BK', wildPitches: 'WP', pickoffs: 'PK',
     whip: 'WHIP', hitsPer9Inn: 'H9', homeRunsPer9: 'HR9', walksPer9Inn: 'BB9',
-    strikeoutsPer9Inn: 'SO9', strikeoutWalkRatio: 'SO/BB',
+    strikeoutsPer9Inn: 'SO9', runsScoredPer9: 'R9', strikeoutWalkRatio: 'SO/BB',
+    avg: 'BA', obp: 'OBP', slg: 'SLG', ops: 'OPS',
+    stolenBases: 'SB', caughtStealing: 'CS', stolenBasePercentage: 'SB%', caughtStealingPercentage: 'CS%',
+    groundOuts: 'GO', airOuts: 'AO', groundOutsToAirouts: 'GO/AO',
+    strikes: 'Strk', strikePercentage: 'Str%', numberOfPitches: 'Pit', pitchesPerInning: 'P/IP',
+    inheritedRunners: 'IR', inheritedRunnersScored: 'IRS',
+    totalBases: 'TB', groundIntoDoublePlay: 'GIDP', sacBunts: 'SH', sacFlies: 'SF',
+    catchersInterference: 'CI',
   };
 
   function orderKeys(keysPresent, preferredOrder) {
@@ -620,14 +657,19 @@
           // in the same columns as the MiLB/MLB rows above.
           aflRow = {
             season: String(currentSeason), level: 'AFL', team: player.team,
+            age: player.age || '',
             gamesPlayed: totals.games, plateAppearances: totals.plate_appearances,
             atBats: totals.at_bats, hits: totals.hits, doubles: totals.doubles, triples: totals.triples,
             homeRuns: totals.home_runs, runs: totals.runs, rbi: totals.rbi,
             baseOnBalls: totals.walks, intentionalWalks: totals.intentional_walks,
             strikeOuts: totals.strikeouts, hitByPitch: totals.hit_by_pitch,
             stolenBases: totals.stolen_bases, caughtStealing: totals.caught_stealing,
+            stolenBasePercentage: fmtRate(totals.stolen_base_pct),
+            caughtStealingPercentage: fmtRate(totals.caught_stealing_pct),
             totalBases: totals.total_bases, sacFlies: totals.sac_flies, sacBunts: totals.sac_bunts,
             groundOuts: totals.ground_outs, airOuts: totals.air_outs,
+            groundOutsToAirouts: fmtRatio(totals.ground_outs_to_airouts),
+            atBatsPerHomeRun: fmtRatio(totals.at_bats_per_home_run),
             groundIntoDoublePlay: totals.ground_into_double_play,
             leftOnBase: totals.left_on_base, catchersInterference: totals.catchers_interference,
             avg: fmtRate(totals.avg), obp: fmtRate(totals.obp), slg: fmtRate(totals.slg), ops: fmtRate(totals.ops),
