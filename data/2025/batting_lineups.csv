@@ -1,0 +1,1740 @@
+game_pk,date,team_side,team_name,player_id,player_name,jersey_number,batting_order,order_slot,sub_sequence,is_starter,position_code,position_abbreviation,position_name
+825618,2025-10-06,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825618,2025-10-06,away,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,4,2B,Second Base
+825618,2025-10-06,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,7,LF,Outfielder
+825618,2025-10-06,away,Peoria Javelinas,701771,Billy Amick,20,400,4,00,True,5,3B,Third Base
+825618,2025-10-06,away,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,3,1B,First Base
+825618,2025-10-06,away,Peoria Javelinas,694230,Hendry Mendez,12,600,6,00,True,9,RF,Outfielder
+825618,2025-10-06,away,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,6,SS,Shortstop
+825618,2025-10-06,away,Peoria Javelinas,702601,Lamar King Jr.,27,800,8,00,True,2,C,Catcher
+825618,2025-10-06,away,Peoria Javelinas,701682,Braedon Karpathios,22,900,9,00,True,10,DH,Designated Hitter
+825618,2025-10-06,home,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825618,2025-10-06,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,6,SS,Shortstop
+825618,2025-10-06,home,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,5,3B,Third Base
+825618,2025-10-06,home,Scottsdale Scorpions,801075,Walker Janek,27,400,4,00,True,2,C,Catcher
+825618,2025-10-06,home,Scottsdale Scorpions,814409,Seaver King,5,500,5,00,True,10,DH,Designated Hitter
+825618,2025-10-06,home,Scottsdale Scorpions,695763,Sam Petersen,2,600,6,00,True,7,LF,Outfielder
+825618,2025-10-06,home,Scottsdale Scorpions,701337,Ethan Petry,28,700,7,00,True,9,RF,Outfielder
+825618,2025-10-06,home,Scottsdale Scorpions,692238,Parks Harber,40,800,8,00,True,3,1B,First Base
+825618,2025-10-06,home,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,4,2B,Second Base
+825635,2025-10-07,away,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,4,2B,Second Base
+825635,2025-10-07,away,Glendale Desert Dogs,805347,Jim Jarvis,2,200,2,00,True,5,3B,Third Base
+825635,2025-10-07,away,Glendale Desert Dogs,688460,Josh Kasevich,4,300,3,00,True,6,SS,Shortstop
+825635,2025-10-07,away,Glendale Desert Dogs,802469,Travis Honeyman,34,400,4,00,True,8,CF,Outfielder
+825635,2025-10-07,away,Glendale Desert Dogs,814436,Ryan Galanie,15,500,5,00,True,3,1B,First Base
+825635,2025-10-07,away,Glendale Desert Dogs,702690,Cutter Coffey,9,600,6,00,True,10,DH,Designated Hitter
+825635,2025-10-07,away,Glendale Desert Dogs,804645,Caden Connor,20,700,7,00,True,9,RF,Outfielder
+825635,2025-10-07,away,Glendale Desert Dogs,815104,Graysen Tarlow,7,800,8,00,True,2,C,Catcher
+825635,2025-10-07,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,900,9,00,True,7,LF,Outfielder
+825635,2025-10-07,home,Salt River Rafters,800306,Jansel Luis,4,100,1,00,True,5,3B,Third Base
+825635,2025-10-07,home,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,7,LF,Outfielder
+825635,2025-10-07,home,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825635,2025-10-07,home,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825635,2025-10-07,home,Salt River Rafters,703190,Johanfran Garcia,30,500,5,00,True,2,C,Catcher
+825635,2025-10-07,home,Salt River Rafters,682981,Derek Diamond,13,501,5,01,False,1,P,Pitcher
+825635,2025-10-07,home,Salt River Rafters,686753,Drey Jameson,99,502,5,02,False,1,P,Pitcher
+825635,2025-10-07,home,Salt River Rafters,703156,Tony Blanco Jr.,99,503,5,03,False,11,PH,Pinch Hitter
+825635,2025-10-07,home,Salt River Rafters,700327,Welinton Herrera,44,504,5,04,False,1,P,Pitcher
+825635,2025-10-07,home,Salt River Rafters,801829,Jay Allmer,52,505,5,05,False,1,P,Pitcher
+825635,2025-10-07,home,Salt River Rafters,804558,Raudi Rodriguez,9,600,6,00,True,8,CF,Outfielder
+825635,2025-10-07,home,Salt River Rafters,687918,Braylen Wimmer,1,700,7,00,True,6,SS,Shortstop
+825635,2025-10-07,home,Salt River Rafters,808129,Juan Flores,19,800,8,00,True,2,C,Catcher
+825635,2025-10-07,home,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825607,2025-10-07,away,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,8,CF,Outfielder
+825607,2025-10-07,away,Surprise Saguaros,806964,Sebastian Walcott,4,200,2,00,True,6,SS,Shortstop
+825607,2025-10-07,away,Surprise Saguaros,805810,Blake Mitchell,8,300,3,00,True,10,DH,Designated Hitter
+825607,2025-10-07,away,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825607,2025-10-07,away,Surprise Saguaros,686404,Wuilfredo Antunez,2,500,5,00,True,9,RF,Outfielder
+825607,2025-10-07,away,Surprise Saguaros,701392,Marco Dinges,77,600,6,00,True,2,C,Catcher
+825607,2025-10-07,away,Surprise Saguaros,694187,Daniel Vazquez,26,700,7,00,True,5,3B,Third Base
+825607,2025-10-07,away,Surprise Saguaros,807276,Dante Nori,5,800,8,00,True,8,CF,Outfielder
+825607,2025-10-07,away,Surprise Saguaros,815304,Josh Adamczewski,14,801,8,01,False,7,LF,Outfielder
+825607,2025-10-07,away,Surprise Saguaros,691405,Juan Benjamin,7,900,9,00,True,4,2B,Second Base
+825607,2025-10-07,home,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825607,2025-10-07,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,101,1,01,False,6,SS,Shortstop
+825607,2025-10-07,home,Mesa Solar Sox,691777,Max Muncy,10,200,2,00,True,5,3B,Third Base
+825607,2025-10-07,home,Mesa Solar Sox,806967,Brailer Guerrero,24,300,3,00,True,9,RF,Outfielder
+825607,2025-10-07,home,Mesa Solar Sox,695720,Tommy White,47,400,4,00,True,3,1B,First Base
+825607,2025-10-07,home,Mesa Solar Sox,689196,Owen Ayers,7,500,5,00,True,2,C,Catcher
+825607,2025-10-07,home,Mesa Solar Sox,806223,Aidan Smith,13,600,6,00,True,10,DH,Designated Hitter
+825607,2025-10-07,home,Mesa Solar Sox,814458,Fenwick Trimble,3,700,7,00,True,8,CF,Outfielder
+825607,2025-10-07,home,Mesa Solar Sox,703563,PJ Morlando,8,800,8,00,True,7,LF,Outfielder
+825607,2025-10-07,home,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,4,2B,Second Base
+825606,2025-10-08,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,10,DH,Designated Hitter
+825606,2025-10-08,away,Peoria Javelinas,813860,Charlie Pagliarini,9,200,2,00,True,4,2B,Second Base
+825606,2025-10-08,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,8,CF,Outfielder
+825606,2025-10-08,away,Peoria Javelinas,694230,Hendry Mendez,12,400,4,00,True,7,LF,Outfielder
+825606,2025-10-08,away,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,3,1B,First Base
+825606,2025-10-08,away,Peoria Javelinas,806263,Brandon Winokur,4,600,6,00,True,5,3B,Third Base
+825606,2025-10-08,away,Peoria Javelinas,800449,Thomas Sosa,3,700,7,00,True,9,RF,Outfielder
+825606,2025-10-08,away,Peoria Javelinas,810838,Ryan Jackson,8,800,8,00,True,6,SS,Shortstop
+825606,2025-10-08,away,Peoria Javelinas,803175,Ethan Anderson,34,900,9,00,True,2,C,Catcher
+825606,2025-10-08,home,Mesa Solar Sox,800285,Enmanuel Tejeda,14,100,1,00,True,4,2B,Second Base
+825606,2025-10-08,home,Mesa Solar Sox,691777,Max Muncy,10,200,2,00,True,5,3B,Third Base
+825606,2025-10-08,home,Mesa Solar Sox,814458,Fenwick Trimble,3,201,2,01,False,7,LF,Outfielder
+825606,2025-10-08,home,Mesa Solar Sox,806967,Brailer Guerrero,24,300,3,00,True,9,RF,Outfielder
+825606,2025-10-08,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,400,4,00,True,6,SS,Shortstop
+825606,2025-10-08,home,Mesa Solar Sox,694966,Brayden Taylor,55,500,5,00,True,10,DH,Designated Hitter
+825606,2025-10-08,home,Mesa Solar Sox,805782,Ryan Lasko,1,600,6,00,True,8,CF,Outfielder
+825606,2025-10-08,home,Mesa Solar Sox,695573,Cole Mathis,16,700,7,00,True,5,3B,Third Base
+825606,2025-10-08,home,Mesa Solar Sox,815089,Coby Morales,19,800,8,00,True,3,1B,First Base
+825606,2025-10-08,home,Mesa Solar Sox,692633,Manuel Palencia,25,900,9,00,True,2,C,Catcher
+825591,2025-10-08,away,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,10,DH,Designated Hitter
+825591,2025-10-08,away,Glendale Desert Dogs,688460,Josh Kasevich,4,200,2,00,True,6,SS,Shortstop
+825591,2025-10-08,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,300,3,00,True,7,LF,Outfielder
+825591,2025-10-08,away,Glendale Desert Dogs,802469,Travis Honeyman,34,400,4,00,True,8,CF,Outfielder
+825591,2025-10-08,away,Glendale Desert Dogs,814436,Ryan Galanie,15,500,5,00,True,3,1B,First Base
+825591,2025-10-08,away,Glendale Desert Dogs,703639,Nico Perez,8,600,6,00,True,4,2B,Second Base
+825591,2025-10-08,away,Glendale Desert Dogs,702690,Cutter Coffey,9,700,7,00,True,5,3B,Third Base
+825591,2025-10-08,away,Glendale Desert Dogs,804645,Caden Connor,20,800,8,00,True,9,RF,Outfielder
+825591,2025-10-08,away,Glendale Desert Dogs,698927,Edward Duran,17,900,9,00,True,2,C,Catcher
+825591,2025-10-08,home,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,8,CF,Outfielder
+825591,2025-10-08,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,6,SS,Shortstop
+825591,2025-10-08,home,Surprise Saguaros,805810,Blake Mitchell,8,300,3,00,True,2,C,Catcher
+825591,2025-10-08,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,5,3B,Third Base
+825591,2025-10-08,home,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,10,DH,Designated Hitter
+825591,2025-10-08,home,Surprise Saguaros,802506,Dylan O'Rae,58,501,5,01,False,10,DH,Designated Hitter
+825591,2025-10-08,home,Surprise Saguaros,815304,Josh Adamczewski,14,600,6,00,True,7,LF,Outfielder
+825591,2025-10-08,home,Surprise Saguaros,694749,Dylan Campbell,10,700,7,00,True,4,2B,Second Base
+825591,2025-10-08,home,Surprise Saguaros,702662,Dylan Dreiling,6,800,8,00,True,9,RF,Outfielder
+825591,2025-10-08,home,Surprise Saguaros,803015,Ben Hartl,40,900,9,00,True,3,1B,First Base
+825619,2025-10-08,away,Salt River Rafters,800306,Jansel Luis,4,100,1,00,True,6,SS,Shortstop
+825619,2025-10-08,away,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,7,LF,Outfielder
+825619,2025-10-08,away,Salt River Rafters,696142,Will Taylor,2,201,2,01,False,7,LF,Outfielder
+825619,2025-10-08,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825619,2025-10-08,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825619,2025-10-08,away,Salt River Rafters,703190,Johanfran Garcia,30,500,5,00,True,2,C,Catcher
+825619,2025-10-08,away,Salt River Rafters,808129,Juan Flores,19,600,6,00,True,2,C,Catcher
+825619,2025-10-08,away,Salt River Rafters,694968,Jack Mahoney,21,601,6,01,False,1,P,Pitcher
+825619,2025-10-08,away,Salt River Rafters,692243,Jaden Woods,17,602,6,02,False,1,P,Pitcher
+825619,2025-10-08,away,Salt River Rafters,700341,Kenny Castillo,77,603,6,03,False,11,PH,Pinch Hitter
+825619,2025-10-08,away,Salt River Rafters,694900,Kyle Amendt,35,604,6,04,False,1,P,Pitcher
+825619,2025-10-08,away,Salt River Rafters,695402,Najer Victor,38,605,6,05,False,1,P,Pitcher
+825619,2025-10-08,away,Salt River Rafters,687918,Braylen Wimmer,1,700,7,00,True,5,3B,Third Base
+825619,2025-10-08,away,Salt River Rafters,807511,Nelly Taylor,3,800,8,00,True,8,CF,Outfielder
+825619,2025-10-08,away,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825619,2025-10-08,home,Scottsdale Scorpions,813896,Joseph Sullivan,8,100,1,00,True,8,CF,Outfielder
+825619,2025-10-08,home,Scottsdale Scorpions,814409,Seaver King,5,200,2,00,True,6,SS,Shortstop
+825619,2025-10-08,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,300,3,00,True,5,3B,Third Base
+825619,2025-10-08,home,Scottsdale Scorpions,694757,Maui Ahuna,1,400,4,00,True,4,2B,Second Base
+825619,2025-10-08,home,Scottsdale Scorpions,801523,Chris Suero,11,500,5,00,True,2,C,Catcher
+825619,2025-10-08,home,Scottsdale Scorpions,806152,Walker Martin,12,600,6,00,True,10,DH,Designated Hitter
+825619,2025-10-08,home,Scottsdale Scorpions,800208,Axiel Plaz,13,700,7,00,True,3,1B,First Base
+825619,2025-10-08,home,Scottsdale Scorpions,701337,Ethan Petry,28,800,8,00,True,9,RF,Outfielder
+825619,2025-10-08,home,Scottsdale Scorpions,694266,D'Andre Smith,6,900,9,00,True,7,LF,Outfielder
+825652,2025-10-09,away,Surprise Saguaros,815304,Josh Adamczewski,14,100,1,00,True,7,LF,Outfielder
+825652,2025-10-09,away,Surprise Saguaros,701392,Marco Dinges,77,200,2,00,True,10,DH,Designated Hitter
+825652,2025-10-09,away,Surprise Saguaros,803015,Ben Hartl,40,201,2,01,False,10,DH,Designated Hitter
+825652,2025-10-09,away,Surprise Saguaros,686404,Wuilfredo Antunez,2,300,3,00,True,9,RF,Outfielder
+825652,2025-10-09,away,Surprise Saguaros,802407,Joe Lampe,15,301,3,01,False,9,RF,Outfielder
+825652,2025-10-09,away,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825652,2025-10-09,away,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,2,C,Catcher
+825652,2025-10-09,away,Surprise Saguaros,694749,Dylan Campbell,10,600,6,00,True,8,CF,Outfielder
+825652,2025-10-09,away,Surprise Saguaros,691405,Juan Benjamin,7,700,7,00,True,5,3B,Third Base
+825652,2025-10-09,away,Surprise Saguaros,804858,Bryan Rincon,13,800,8,00,True,6,SS,Shortstop
+825652,2025-10-09,away,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825652,2025-10-09,home,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825652,2025-10-09,home,Peoria Javelinas,806957,Alfredo Duno,28,200,2,00,True,10,DH,Designated Hitter
+825652,2025-10-09,home,Peoria Javelinas,813860,Charlie Pagliarini,9,300,3,00,True,4,2B,Second Base
+825652,2025-10-09,home,Peoria Javelinas,810838,Ryan Jackson,8,400,4,00,True,6,SS,Shortstop
+825652,2025-10-09,home,Peoria Javelinas,701682,Braedon Karpathios,22,500,5,00,True,7,LF,Outfielder
+825652,2025-10-09,home,Peoria Javelinas,699114,Leo Balcazar,17,600,6,00,True,5,3B,Third Base
+825652,2025-10-09,home,Peoria Javelinas,800449,Thomas Sosa,3,700,7,00,True,9,RF,Outfielder
+825652,2025-10-09,home,Peoria Javelinas,701771,Billy Amick,20,800,8,00,True,3,1B,First Base
+825652,2025-10-09,home,Peoria Javelinas,702601,Lamar King Jr.,27,900,9,00,True,2,C,Catcher
+825666,2025-10-09,away,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825666,2025-10-09,away,Scottsdale Scorpions,802599,Jack Penney,14,200,2,00,True,4,2B,Second Base
+825666,2025-10-09,away,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,5,3B,Third Base
+825666,2025-10-09,away,Scottsdale Scorpions,801075,Walker Janek,27,400,4,00,True,2,C,Catcher
+825666,2025-10-09,away,Scottsdale Scorpions,806152,Walker Martin,12,500,5,00,True,6,SS,Shortstop
+825666,2025-10-09,away,Scottsdale Scorpions,695763,Sam Petersen,2,600,6,00,True,9,RF,Outfielder
+825666,2025-10-09,away,Scottsdale Scorpions,692238,Parks Harber,40,700,7,00,True,3,1B,First Base
+825666,2025-10-09,away,Scottsdale Scorpions,694266,D'Andre Smith,6,800,8,00,True,7,LF,Outfielder
+825666,2025-10-09,away,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,10,DH,Designated Hitter
+825666,2025-10-09,home,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,4,2B,Second Base
+825666,2025-10-09,home,Glendale Desert Dogs,692568,Miguel Ugueto,3,200,2,00,True,7,LF,Outfielder
+825666,2025-10-09,home,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,300,3,00,True,10,DH,Designated Hitter
+825666,2025-10-09,home,Glendale Desert Dogs,702488,Logan Wagner,23,400,4,00,True,3,1B,First Base
+825666,2025-10-09,home,Glendale Desert Dogs,688460,Josh Kasevich,4,500,5,00,True,6,SS,Shortstop
+825666,2025-10-09,home,Glendale Desert Dogs,702690,Cutter Coffey,9,600,6,00,True,5,3B,Third Base
+825666,2025-10-09,home,Glendale Desert Dogs,804645,Caden Connor,20,700,7,00,True,9,RF,Outfielder
+825666,2025-10-09,home,Glendale Desert Dogs,815104,Graysen Tarlow,7,800,8,00,True,2,C,Catcher
+825666,2025-10-09,home,Glendale Desert Dogs,802117,Patrick Clohisy,24,900,9,00,True,8,CF,Outfielder
+825637,2025-10-09,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,100,1,00,True,4,2B,Second Base
+825637,2025-10-09,away,Mesa Solar Sox,695720,Tommy White,47,200,2,00,True,5,3B,Third Base
+825637,2025-10-09,away,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825637,2025-10-09,away,Mesa Solar Sox,806223,Aidan Smith,13,400,4,00,True,10,DH,Designated Hitter
+825637,2025-10-09,away,Mesa Solar Sox,815089,Coby Morales,19,500,5,00,True,9,RF,Outfielder
+825637,2025-10-09,away,Mesa Solar Sox,814458,Fenwick Trimble,3,600,6,00,True,8,CF,Outfielder
+825637,2025-10-09,away,Mesa Solar Sox,703563,PJ Morlando,8,700,7,00,True,7,LF,Outfielder
+825637,2025-10-09,away,Mesa Solar Sox,690992,Ed Howard,9,800,8,00,True,6,SS,Shortstop
+825637,2025-10-09,away,Mesa Solar Sox,804751,Logan Poteet,28,900,9,00,True,3,1B,First Base
+825637,2025-10-09,home,Salt River Rafters,800306,Jansel Luis,4,100,1,00,True,5,3B,Third Base
+825637,2025-10-09,home,Salt River Rafters,696142,Will Taylor,2,200,2,00,True,9,RF,Outfielder
+825637,2025-10-09,home,Salt River Rafters,703156,Tony Blanco Jr.,99,300,3,00,True,3,1B,First Base
+825637,2025-10-09,home,Salt River Rafters,804558,Raudi Rodriguez,9,301,3,01,False,12,PR,Pinch Runner
+825637,2025-10-09,home,Salt River Rafters,703190,Johanfran Garcia,30,400,4,00,True,2,C,Catcher
+825637,2025-10-09,home,Salt River Rafters,700341,Kenny Castillo,77,500,5,00,True,11,PH,Pinch Hitter
+825637,2025-10-09,home,Salt River Rafters,702586,Fulton Lockhart,28,501,5,01,False,1,P,Pitcher
+825637,2025-10-09,home,Salt River Rafters,808054,Yordin Chalas,61,502,5,02,False,1,P,Pitcher
+825637,2025-10-09,home,Salt River Rafters,694518,Austin Smith,12,503,5,03,False,1,P,Pitcher
+825637,2025-10-09,home,Salt River Rafters,694815,Jack Hurley,15,600,6,00,True,7,LF,Outfielder
+825637,2025-10-09,home,Salt River Rafters,687918,Braylen Wimmer,1,700,7,00,True,6,SS,Shortstop
+825637,2025-10-09,home,Salt River Rafters,807511,Nelly Taylor,3,800,8,00,True,8,CF,Outfielder
+825637,2025-10-09,home,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825651,2025-10-10,away,Salt River Rafters,800306,Jansel Luis,4,100,1,00,True,5,3B,Third Base
+825651,2025-10-10,away,Salt River Rafters,804558,Raudi Rodriguez,9,200,2,00,True,8,CF,Outfielder
+825651,2025-10-10,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825651,2025-10-10,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825651,2025-10-10,away,Salt River Rafters,700341,Kenny Castillo,77,500,5,00,True,2,C,Catcher
+825651,2025-10-10,away,Salt River Rafters,808129,Juan Flores,19,600,6,00,True,11,PH,Pinch Hitter
+825651,2025-10-10,away,Salt River Rafters,801829,Jay Allmer,52,601,6,01,False,1,P,Pitcher
+825651,2025-10-10,away,Salt River Rafters,700327,Welinton Herrera,44,602,6,02,False,1,P,Pitcher
+825651,2025-10-10,away,Salt River Rafters,814106,Cade Denton,31,603,6,03,False,1,P,Pitcher
+825651,2025-10-10,away,Salt River Rafters,692243,Jaden Woods,17,604,6,04,False,1,P,Pitcher
+825651,2025-10-10,away,Salt River Rafters,694815,Jack Hurley,15,700,7,00,True,7,LF,Outfielder
+825651,2025-10-10,away,Salt River Rafters,696142,Will Taylor,2,701,7,01,False,7,LF,Outfielder
+825651,2025-10-10,away,Salt River Rafters,687918,Braylen Wimmer,1,800,8,00,True,6,SS,Shortstop
+825651,2025-10-10,away,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825651,2025-10-10,home,Peoria Javelinas,806071,Jonny Farmelo,21,100,1,00,True,8,CF,Outfielder
+825651,2025-10-10,home,Peoria Javelinas,806957,Alfredo Duno,28,200,2,00,True,2,C,Catcher
+825651,2025-10-10,home,Peoria Javelinas,803175,Ethan Anderson,34,300,3,00,True,10,DH,Designated Hitter
+825651,2025-10-10,home,Peoria Javelinas,694230,Hendry Mendez,12,400,4,00,True,7,LF,Outfielder
+825651,2025-10-10,home,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,3,1B,First Base
+825651,2025-10-10,home,Peoria Javelinas,699114,Leo Balcazar,17,600,6,00,True,5,3B,Third Base
+825651,2025-10-10,home,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,6,SS,Shortstop
+825651,2025-10-10,home,Peoria Javelinas,701682,Braedon Karpathios,22,800,8,00,True,9,RF,Outfielder
+825651,2025-10-10,home,Peoria Javelinas,810838,Ryan Jackson,8,900,9,00,True,4,2B,Second Base
+825620,2025-10-10,away,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825620,2025-10-10,away,Mesa Solar Sox,691777,Max Muncy,10,200,2,00,True,5,3B,Third Base
+825620,2025-10-10,away,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825620,2025-10-10,away,Mesa Solar Sox,806223,Aidan Smith,13,400,4,00,True,8,CF,Outfielder
+825620,2025-10-10,away,Mesa Solar Sox,806967,Brailer Guerrero,24,500,5,00,True,9,RF,Outfielder
+825620,2025-10-10,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,10,DH,Designated Hitter
+825620,2025-10-10,away,Mesa Solar Sox,694966,Brayden Taylor,55,700,7,00,True,4,2B,Second Base
+825620,2025-10-10,away,Mesa Solar Sox,805782,Ryan Lasko,1,800,8,00,True,7,LF,Outfielder
+825620,2025-10-10,away,Mesa Solar Sox,695573,Cole Mathis,16,900,9,00,True,3,1B,First Base
+825620,2025-10-10,home,Scottsdale Scorpions,813896,Joseph Sullivan,8,100,1,00,True,8,CF,Outfielder
+825620,2025-10-10,home,Scottsdale Scorpions,814409,Seaver King,5,200,2,00,True,10,DH,Designated Hitter
+825620,2025-10-10,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,300,3,00,True,5,3B,Third Base
+825620,2025-10-10,home,Scottsdale Scorpions,801075,Walker Janek,27,400,4,00,True,2,C,Catcher
+825620,2025-10-10,home,Scottsdale Scorpions,694757,Maui Ahuna,1,500,5,00,True,6,SS,Shortstop
+825620,2025-10-10,home,Scottsdale Scorpions,801523,Chris Suero,11,600,6,00,True,3,1B,First Base
+825620,2025-10-10,home,Scottsdale Scorpions,695763,Sam Petersen,2,700,7,00,True,7,LF,Outfielder
+825620,2025-10-10,home,Scottsdale Scorpions,701337,Ethan Petry,28,800,8,00,True,9,RF,Outfielder
+825620,2025-10-10,home,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,4,2B,Second Base
+825664,2025-10-12,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,7,LF,Outfielder
+825664,2025-10-12,away,Glendale Desert Dogs,803011,Sam Antonacci,10,200,2,00,True,10,DH,Designated Hitter
+825664,2025-10-12,away,Glendale Desert Dogs,814436,Ryan Galanie,15,300,3,00,True,3,1B,First Base
+825664,2025-10-12,away,Glendale Desert Dogs,804645,Caden Connor,20,400,4,00,True,9,RF,Outfielder
+825664,2025-10-12,away,Glendale Desert Dogs,702488,Logan Wagner,23,500,5,00,True,4,2B,Second Base
+825664,2025-10-12,away,Glendale Desert Dogs,805347,Jim Jarvis,2,600,6,00,True,6,SS,Shortstop
+825664,2025-10-12,away,Glendale Desert Dogs,692568,Miguel Ugueto,3,700,7,00,True,8,CF,Outfielder
+825664,2025-10-12,away,Glendale Desert Dogs,702690,Cutter Coffey,9,800,8,00,True,5,3B,Third Base
+825664,2025-10-12,away,Glendale Desert Dogs,815104,Graysen Tarlow,7,900,9,00,True,2,C,Catcher
+825664,2025-10-12,home,Surprise Saguaros,807276,Dante Nori,5,100,1,00,True,8,CF,Outfielder
+825664,2025-10-12,home,Surprise Saguaros,802407,Joe Lampe,15,101,1,01,False,8,CF,Outfielder
+825664,2025-10-12,home,Surprise Saguaros,804858,Bryan Rincon,13,200,2,00,True,6,SS,Shortstop
+825664,2025-10-12,home,Surprise Saguaros,805810,Blake Mitchell,8,300,3,00,True,2,C,Catcher
+825664,2025-10-12,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,10,DH,Designated Hitter
+825664,2025-10-12,home,Surprise Saguaros,694749,Dylan Campbell,10,500,5,00,True,9,RF,Outfielder
+825664,2025-10-12,home,Surprise Saguaros,702662,Dylan Dreiling,6,600,6,00,True,7,LF,Outfielder
+825664,2025-10-12,home,Surprise Saguaros,702550,Chandler Pollard,43,700,7,00,True,5,3B,Third Base
+825664,2025-10-12,home,Surprise Saguaros,803015,Ben Hartl,40,800,8,00,True,3,1B,First Base
+825664,2025-10-12,home,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825605,2025-10-12,away,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825605,2025-10-12,away,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,8,CF,Outfielder
+825605,2025-10-12,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,10,DH,Designated Hitter
+825605,2025-10-12,away,Salt River Rafters,804558,Raudi Rodriguez,9,400,4,00,True,9,RF,Outfielder
+825605,2025-10-12,away,Salt River Rafters,808129,Juan Flores,19,500,5,00,True,2,C,Catcher
+825605,2025-10-12,away,Salt River Rafters,703156,Tony Blanco Jr.,99,600,6,00,True,3,1B,First Base
+825605,2025-10-12,away,Salt River Rafters,694815,Jack Hurley,15,700,7,00,True,7,LF,Outfielder
+825605,2025-10-12,away,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825605,2025-10-12,away,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825605,2025-10-12,away,Salt River Rafters,687918,Braylen Wimmer,1,901,9,01,False,5,3B,Third Base
+825605,2025-10-12,home,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825605,2025-10-12,home,Mesa Solar Sox,694966,Brayden Taylor,55,200,2,00,True,5,3B,Third Base
+825605,2025-10-12,home,Mesa Solar Sox,800285,Enmanuel Tejeda,14,300,3,00,True,4,2B,Second Base
+825605,2025-10-12,home,Mesa Solar Sox,703563,PJ Morlando,8,400,4,00,True,7,LF,Outfielder
+825605,2025-10-12,home,Mesa Solar Sox,695573,Cole Mathis,16,500,5,00,True,3,1B,First Base
+825605,2025-10-12,home,Mesa Solar Sox,806967,Brailer Guerrero,24,600,6,00,True,10,DH,Designated Hitter
+825605,2025-10-12,home,Mesa Solar Sox,814458,Fenwick Trimble,3,700,7,00,True,8,CF,Outfielder
+825605,2025-10-12,home,Mesa Solar Sox,805782,Ryan Lasko,1,800,8,00,True,8,CF,Outfielder
+825605,2025-10-12,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,801,8,01,False,9,RF,Outfielder
+825605,2025-10-12,home,Mesa Solar Sox,692633,Manuel Palencia,25,900,9,00,True,2,C,Catcher
+825616,2025-10-12,away,Scottsdale Scorpions,813896,Joseph Sullivan,8,100,1,00,True,8,CF,Outfielder
+825616,2025-10-12,away,Scottsdale Scorpions,814409,Seaver King,5,200,2,00,True,6,SS,Shortstop
+825616,2025-10-12,away,Scottsdale Scorpions,694757,Maui Ahuna,1,300,3,00,True,4,2B,Second Base
+825616,2025-10-12,away,Scottsdale Scorpions,801075,Walker Janek,27,400,4,00,True,2,C,Catcher
+825616,2025-10-12,away,Scottsdale Scorpions,813844,Will Bush,47,500,5,00,True,10,DH,Designated Hitter
+825616,2025-10-12,away,Scottsdale Scorpions,692238,Parks Harber,40,600,6,00,True,3,1B,First Base
+825616,2025-10-12,away,Scottsdale Scorpions,806152,Walker Martin,12,700,7,00,True,5,3B,Third Base
+825616,2025-10-12,away,Scottsdale Scorpions,701337,Ethan Petry,28,800,8,00,True,9,RF,Outfielder
+825616,2025-10-12,away,Scottsdale Scorpions,695763,Sam Petersen,2,900,9,00,True,7,LF,Outfielder
+825616,2025-10-12,home,Peoria Javelinas,806071,Jonny Farmelo,21,100,1,00,True,8,CF,Outfielder
+825616,2025-10-12,home,Peoria Javelinas,803175,Ethan Anderson,34,200,2,00,True,3,1B,First Base
+825616,2025-10-12,home,Peoria Javelinas,699114,Leo Balcazar,17,300,3,00,True,4,2B,Second Base
+825616,2025-10-12,home,Peoria Javelinas,806957,Alfredo Duno,28,400,4,00,True,2,C,Catcher
+825616,2025-10-12,home,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,10,DH,Designated Hitter
+825616,2025-10-12,home,Peoria Javelinas,810838,Ryan Jackson,8,600,6,00,True,6,SS,Shortstop
+825616,2025-10-12,home,Peoria Javelinas,813860,Charlie Pagliarini,9,700,7,00,True,7,LF,Outfielder
+825616,2025-10-12,home,Peoria Javelinas,701771,Billy Amick,20,800,8,00,True,5,3B,Third Base
+825616,2025-10-12,home,Peoria Javelinas,800449,Thomas Sosa,3,900,9,00,True,9,RF,Outfielder
+825636,2025-10-14,away,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,4,2B,Second Base
+825636,2025-10-14,away,Glendale Desert Dogs,802469,Travis Honeyman,34,200,2,00,True,8,CF,Outfielder
+825636,2025-10-14,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,300,3,00,True,5,3B,Third Base
+825636,2025-10-14,away,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,6,SS,Shortstop
+825636,2025-10-14,away,Glendale Desert Dogs,814436,Ryan Galanie,15,500,5,00,True,3,1B,First Base
+825636,2025-10-14,away,Glendale Desert Dogs,702690,Cutter Coffey,9,600,6,00,True,10,DH,Designated Hitter
+825636,2025-10-14,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,700,7,00,True,7,LF,Outfielder
+825636,2025-10-14,away,Glendale Desert Dogs,694188,Jesus Galiz,35,800,8,00,True,2,C,Catcher
+825636,2025-10-14,away,Glendale Desert Dogs,692568,Miguel Ugueto,3,900,9,00,True,9,RF,Outfielder
+825636,2025-10-14,home,Salt River Rafters,800306,Jansel Luis,4,100,1,00,True,5,3B,Third Base
+825636,2025-10-14,home,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,7,LF,Outfielder
+825636,2025-10-14,home,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825636,2025-10-14,home,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825636,2025-10-14,home,Salt River Rafters,703190,Johanfran Garcia,30,500,5,00,True,2,C,Catcher
+825636,2025-10-14,home,Salt River Rafters,804558,Raudi Rodriguez,9,600,6,00,True,8,CF,Outfielder
+825636,2025-10-14,home,Salt River Rafters,808129,Juan Flores,19,700,7,00,True,10,DH,Designated Hitter
+825636,2025-10-14,home,Salt River Rafters,702574,David Mershon,8,800,8,00,True,6,SS,Shortstop
+825636,2025-10-14,home,Salt River Rafters,687918,Braylen Wimmer,1,801,8,01,False,6,SS,Shortstop
+825636,2025-10-14,home,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825649,2025-10-14,away,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825649,2025-10-14,away,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,6,SS,Shortstop
+825649,2025-10-14,away,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,5,3B,Third Base
+825649,2025-10-14,away,Scottsdale Scorpions,801075,Walker Janek,27,400,4,00,True,2,C,Catcher
+825649,2025-10-14,away,Scottsdale Scorpions,694757,Maui Ahuna,1,500,5,00,True,4,2B,Second Base
+825649,2025-10-14,away,Scottsdale Scorpions,814409,Seaver King,5,600,6,00,True,10,DH,Designated Hitter
+825649,2025-10-14,away,Scottsdale Scorpions,695763,Sam Petersen,2,700,7,00,True,7,LF,Outfielder
+825649,2025-10-14,away,Scottsdale Scorpions,692238,Parks Harber,40,800,8,00,True,3,1B,First Base
+825649,2025-10-14,away,Scottsdale Scorpions,694266,D'Andre Smith,6,900,9,00,True,9,RF,Outfielder
+825649,2025-10-14,home,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825649,2025-10-14,home,Peoria Javelinas,806957,Alfredo Duno,28,200,2,00,True,2,C,Catcher
+825649,2025-10-14,home,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,7,LF,Outfielder
+825649,2025-10-14,home,Peoria Javelinas,702253,Cam Collier,6,400,4,00,True,3,1B,First Base
+825649,2025-10-14,home,Peoria Javelinas,699114,Leo Balcazar,17,500,5,00,True,5,3B,Third Base
+825649,2025-10-14,home,Peoria Javelinas,701682,Braedon Karpathios,22,600,6,00,True,9,RF,Outfielder
+825649,2025-10-14,home,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,6,SS,Shortstop
+825649,2025-10-14,home,Peoria Javelinas,702601,Lamar King Jr.,27,800,8,00,True,10,DH,Designated Hitter
+825649,2025-10-14,home,Peoria Javelinas,801126,Brock Rodden,5,900,9,00,True,4,2B,Second Base
+825604,2025-10-14,away,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,8,CF,Outfielder
+825604,2025-10-14,away,Surprise Saguaros,691405,Juan Benjamin,7,200,2,00,True,4,2B,Second Base
+825604,2025-10-14,away,Surprise Saguaros,805810,Blake Mitchell,8,300,3,00,True,10,DH,Designated Hitter
+825604,2025-10-14,away,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825604,2025-10-14,away,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,2,C,Catcher
+825604,2025-10-14,away,Surprise Saguaros,694187,Daniel Vazquez,26,600,6,00,True,6,SS,Shortstop
+825604,2025-10-14,away,Surprise Saguaros,815304,Josh Adamczewski,14,700,7,00,True,7,LF,Outfielder
+825604,2025-10-14,away,Surprise Saguaros,694749,Dylan Campbell,10,800,8,00,True,5,3B,Third Base
+825604,2025-10-14,away,Surprise Saguaros,702662,Dylan Dreiling,6,900,9,00,True,9,RF,Outfielder
+825604,2025-10-14,home,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825604,2025-10-14,home,Mesa Solar Sox,691777,Max Muncy,10,200,2,00,True,5,3B,Third Base
+825604,2025-10-14,home,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,10,DH,Designated Hitter
+825604,2025-10-14,home,Mesa Solar Sox,806223,Aidan Smith,13,400,4,00,True,8,CF,Outfielder
+825604,2025-10-14,home,Mesa Solar Sox,814458,Fenwick Trimble,3,500,5,00,True,7,LF,Outfielder
+825604,2025-10-14,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,600,6,00,True,4,2B,Second Base
+825604,2025-10-14,home,Mesa Solar Sox,695573,Cole Mathis,16,700,7,00,True,3,1B,First Base
+825604,2025-10-14,home,Mesa Solar Sox,703563,PJ Morlando,8,800,8,00,True,9,RF,Outfielder
+825604,2025-10-14,home,Mesa Solar Sox,692633,Manuel Palencia,25,900,9,00,True,2,C,Catcher
+825648,2025-10-15,away,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,10,DH,Designated Hitter
+825648,2025-10-15,away,Glendale Desert Dogs,802469,Travis Honeyman,34,200,2,00,True,8,CF,Outfielder
+825648,2025-10-15,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,300,3,00,True,5,3B,Third Base
+825648,2025-10-15,away,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,6,SS,Shortstop
+825648,2025-10-15,away,Glendale Desert Dogs,702488,Logan Wagner,23,500,5,00,True,3,1B,First Base
+825648,2025-10-15,away,Glendale Desert Dogs,805347,Jim Jarvis,2,600,6,00,True,4,2B,Second Base
+825648,2025-10-15,away,Glendale Desert Dogs,804645,Caden Connor,20,700,7,00,True,9,RF,Outfielder
+825648,2025-10-15,away,Glendale Desert Dogs,698927,Edward Duran,17,800,8,00,True,2,C,Catcher
+825648,2025-10-15,away,Glendale Desert Dogs,692568,Miguel Ugueto,3,900,9,00,True,7,LF,Outfielder
+825648,2025-10-15,home,Peoria Javelinas,806071,Jonny Farmelo,21,100,1,00,True,8,CF,Outfielder
+825648,2025-10-15,home,Peoria Javelinas,803175,Ethan Anderson,34,200,2,00,True,10,DH,Designated Hitter
+825648,2025-10-15,home,Peoria Javelinas,694230,Hendry Mendez,12,300,3,00,True,7,LF,Outfielder
+825648,2025-10-15,home,Peoria Javelinas,701682,Braedon Karpathios,22,301,3,01,False,7,LF,Outfielder
+825648,2025-10-15,home,Peoria Javelinas,810838,Ryan Jackson,8,400,4,00,True,6,SS,Shortstop
+825648,2025-10-15,home,Peoria Javelinas,800449,Thomas Sosa,3,500,5,00,True,9,RF,Outfielder
+825648,2025-10-15,home,Peoria Javelinas,806263,Brandon Winokur,4,600,6,00,True,5,3B,Third Base
+825648,2025-10-15,home,Peoria Javelinas,813860,Charlie Pagliarini,9,700,7,00,True,4,2B,Second Base
+825648,2025-10-15,home,Peoria Javelinas,701771,Billy Amick,20,800,8,00,True,3,1B,First Base
+825648,2025-10-15,home,Peoria Javelinas,702601,Lamar King Jr.,27,900,9,00,True,2,C,Catcher
+825622,2025-10-15,away,Salt River Rafters,800306,Jansel Luis,4,100,1,00,True,5,3B,Third Base
+825622,2025-10-15,away,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,7,LF,Outfielder
+825622,2025-10-15,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825622,2025-10-15,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825622,2025-10-15,away,Salt River Rafters,807511,Nelly Taylor,3,401,4,01,False,8,CF,Outfielder
+825622,2025-10-15,away,Salt River Rafters,703190,Johanfran Garcia,30,500,5,00,True,10,DH,Designated Hitter
+825622,2025-10-15,away,Salt River Rafters,808129,Juan Flores,19,600,6,00,True,2,C,Catcher
+825622,2025-10-15,away,Salt River Rafters,687918,Braylen Wimmer,1,700,7,00,True,6,SS,Shortstop
+825622,2025-10-15,away,Salt River Rafters,696142,Will Taylor,2,800,8,00,True,9,RF,Outfielder
+825622,2025-10-15,away,Salt River Rafters,702574,David Mershon,8,900,9,00,True,6,SS,Shortstop
+825622,2025-10-15,away,Salt River Rafters,805964,Stanley Tucker,18,901,9,01,False,4,2B,Second Base
+825622,2025-10-15,home,Scottsdale Scorpions,813896,Joseph Sullivan,8,100,1,00,True,8,CF,Outfielder
+825622,2025-10-15,home,Scottsdale Scorpions,814409,Seaver King,5,200,2,00,True,6,SS,Shortstop
+825622,2025-10-15,home,Scottsdale Scorpions,802599,Jack Penney,14,300,3,00,True,4,2B,Second Base
+825622,2025-10-15,home,Scottsdale Scorpions,801523,Chris Suero,11,400,4,00,True,7,LF,Outfielder
+825622,2025-10-15,home,Scottsdale Scorpions,806152,Walker Martin,12,500,5,00,True,5,3B,Third Base
+825622,2025-10-15,home,Scottsdale Scorpions,800208,Axiel Plaz,13,600,6,00,True,2,C,Catcher
+825622,2025-10-15,home,Scottsdale Scorpions,692238,Parks Harber,40,700,7,00,True,3,1B,First Base
+825622,2025-10-15,home,Scottsdale Scorpions,701337,Ethan Petry,28,800,8,00,True,9,RF,Outfielder
+825622,2025-10-15,home,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,10,DH,Designated Hitter
+825589,2025-10-15,away,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825589,2025-10-15,away,Mesa Solar Sox,691777,Max Muncy,10,200,2,00,True,10,DH,Designated Hitter
+825589,2025-10-15,away,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825589,2025-10-15,away,Mesa Solar Sox,695720,Tommy White,47,400,4,00,True,3,1B,First Base
+825589,2025-10-15,away,Mesa Solar Sox,815089,Coby Morales,19,500,5,00,True,9,RF,Outfielder
+825589,2025-10-15,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,4,2B,Second Base
+825589,2025-10-15,away,Mesa Solar Sox,806967,Brailer Guerrero,24,700,7,00,True,7,LF,Outfielder
+825589,2025-10-15,away,Mesa Solar Sox,805782,Ryan Lasko,1,800,8,00,True,8,CF,Outfielder
+825589,2025-10-15,away,Mesa Solar Sox,694966,Brayden Taylor,55,900,9,00,True,5,3B,Third Base
+825589,2025-10-15,home,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,8,CF,Outfielder
+825589,2025-10-15,home,Surprise Saguaros,694749,Dylan Campbell,10,200,2,00,True,9,RF,Outfielder
+825589,2025-10-15,home,Surprise Saguaros,805810,Blake Mitchell,8,300,3,00,True,2,C,Catcher
+825589,2025-10-15,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825589,2025-10-15,home,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,10,DH,Designated Hitter
+825589,2025-10-15,home,Surprise Saguaros,694187,Daniel Vazquez,26,600,6,00,True,5,3B,Third Base
+825589,2025-10-15,home,Surprise Saguaros,815304,Josh Adamczewski,14,700,7,00,True,7,LF,Outfielder
+825589,2025-10-15,home,Surprise Saguaros,804858,Bryan Rincon,13,800,8,00,True,6,SS,Shortstop
+825589,2025-10-15,home,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825603,2025-10-16,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825603,2025-10-16,away,Peoria Javelinas,801126,Brock Rodden,5,200,2,00,True,4,2B,Second Base
+825603,2025-10-16,away,Peoria Javelinas,803175,Ethan Anderson,34,300,3,00,True,2,C,Catcher
+825603,2025-10-16,away,Peoria Javelinas,806957,Alfredo Duno,28,400,4,00,True,10,DH,Designated Hitter
+825603,2025-10-16,away,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,3,1B,First Base
+825603,2025-10-16,away,Peoria Javelinas,810838,Ryan Jackson,8,600,6,00,True,6,SS,Shortstop
+825603,2025-10-16,away,Peoria Javelinas,800449,Thomas Sosa,3,700,7,00,True,9,RF,Outfielder
+825603,2025-10-16,away,Peoria Javelinas,699114,Leo Balcazar,17,800,8,00,True,5,3B,Third Base
+825603,2025-10-16,away,Peoria Javelinas,701682,Braedon Karpathios,22,900,9,00,True,7,LF,Outfielder
+825603,2025-10-16,home,Mesa Solar Sox,814458,Fenwick Trimble,3,100,1,00,True,8,CF,Outfielder
+825603,2025-10-16,home,Mesa Solar Sox,695720,Tommy White,47,200,2,00,True,5,3B,Third Base
+825603,2025-10-16,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,300,3,00,True,10,DH,Designated Hitter
+825603,2025-10-16,home,Mesa Solar Sox,690992,Ed Howard,9,400,4,00,True,6,SS,Shortstop
+825603,2025-10-16,home,Mesa Solar Sox,692633,Manuel Palencia,25,500,5,00,True,2,C,Catcher
+825603,2025-10-16,home,Mesa Solar Sox,703563,PJ Morlando,8,600,6,00,True,7,LF,Outfielder
+825603,2025-10-16,home,Mesa Solar Sox,806967,Brailer Guerrero,24,700,7,00,True,9,RF,Outfielder
+825603,2025-10-16,home,Mesa Solar Sox,694966,Brayden Taylor,55,800,8,00,True,4,2B,Second Base
+825603,2025-10-16,home,Mesa Solar Sox,815089,Coby Morales,19,900,9,00,True,3,1B,First Base
+825633,2025-10-16,away,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,8,CF,Outfielder
+825633,2025-10-16,away,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,5,3B,Third Base
+825633,2025-10-16,away,Surprise Saguaros,805810,Blake Mitchell,8,300,3,00,True,10,DH,Designated Hitter
+825633,2025-10-16,away,Surprise Saguaros,694749,Dylan Campbell,10,400,4,00,True,4,2B,Second Base
+825633,2025-10-16,away,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,2,C,Catcher
+825633,2025-10-16,away,Surprise Saguaros,802407,Joe Lampe,15,600,6,00,True,9,RF,Outfielder
+825633,2025-10-16,away,Surprise Saguaros,702550,Chandler Pollard,43,700,7,00,True,6,SS,Shortstop
+825633,2025-10-16,away,Surprise Saguaros,702662,Dylan Dreiling,6,800,8,00,True,7,LF,Outfielder
+825633,2025-10-16,away,Surprise Saguaros,803015,Ben Hartl,40,900,9,00,True,3,1B,First Base
+825633,2025-10-16,home,Salt River Rafters,800306,Jansel Luis,4,100,1,00,True,6,SS,Shortstop
+825633,2025-10-16,home,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,7,LF,Outfielder
+825633,2025-10-16,home,Salt River Rafters,694815,Jack Hurley,15,201,2,01,False,7,LF,Outfielder
+825633,2025-10-16,home,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825633,2025-10-16,home,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825633,2025-10-16,home,Salt River Rafters,700341,Kenny Castillo,77,500,5,00,True,2,C,Catcher
+825633,2025-10-16,home,Salt River Rafters,703156,Tony Blanco Jr.,99,600,6,00,True,10,DH,Designated Hitter
+825633,2025-10-16,home,Salt River Rafters,696142,Will Taylor,2,700,7,00,True,8,CF,Outfielder
+825633,2025-10-16,home,Salt River Rafters,687918,Braylen Wimmer,1,800,8,00,True,5,3B,Third Base
+825633,2025-10-16,home,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825621,2025-10-16,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,8,CF,Outfielder
+825621,2025-10-16,away,Glendale Desert Dogs,802469,Travis Honeyman,34,200,2,00,True,7,LF,Outfielder
+825621,2025-10-16,away,Glendale Desert Dogs,692568,Miguel Ugueto,3,201,2,01,False,7,LF,Outfielder
+825621,2025-10-16,away,Glendale Desert Dogs,688460,Josh Kasevich,4,300,3,00,True,5,3B,Third Base
+825621,2025-10-16,away,Glendale Desert Dogs,814436,Ryan Galanie,15,400,4,00,True,10,DH,Designated Hitter
+825621,2025-10-16,away,Glendale Desert Dogs,702690,Cutter Coffey,9,500,5,00,True,4,2B,Second Base
+825621,2025-10-16,away,Glendale Desert Dogs,804645,Caden Connor,20,600,6,00,True,9,RF,Outfielder
+825621,2025-10-16,away,Glendale Desert Dogs,805347,Jim Jarvis,2,700,7,00,True,6,SS,Shortstop
+825621,2025-10-16,away,Glendale Desert Dogs,702488,Logan Wagner,23,800,8,00,True,3,1B,First Base
+825621,2025-10-16,away,Glendale Desert Dogs,815104,Graysen Tarlow,7,900,9,00,True,2,C,Catcher
+825621,2025-10-16,home,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825621,2025-10-16,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,5,3B,Third Base
+825621,2025-10-16,home,Scottsdale Scorpions,801075,Walker Janek,27,300,3,00,True,2,C,Catcher
+825621,2025-10-16,home,Scottsdale Scorpions,694757,Maui Ahuna,1,400,4,00,True,6,SS,Shortstop
+825621,2025-10-16,home,Scottsdale Scorpions,694266,D'Andre Smith,6,500,5,00,True,7,LF,Outfielder
+825621,2025-10-16,home,Scottsdale Scorpions,813896,Joseph Sullivan,8,600,6,00,True,10,DH,Designated Hitter
+825621,2025-10-16,home,Scottsdale Scorpions,695763,Sam Petersen,2,700,7,00,True,9,RF,Outfielder
+825621,2025-10-16,home,Scottsdale Scorpions,701337,Ethan Petry,28,701,7,01,False,9,RF,Outfielder
+825621,2025-10-16,home,Scottsdale Scorpions,700784,Jeron Williams,4,800,8,00,True,4,2B,Second Base
+825621,2025-10-16,home,Scottsdale Scorpions,813844,Will Bush,47,900,9,00,True,3,1B,First Base
+825632,2025-10-17,away,Peoria Javelinas,694230,Hendry Mendez,12,100,1,00,True,9,RF,Outfielder
+825632,2025-10-17,away,Peoria Javelinas,806071,Jonny Farmelo,21,200,2,00,True,8,CF,Outfielder
+825632,2025-10-17,away,Peoria Javelinas,699114,Leo Balcazar,17,300,3,00,True,4,2B,Second Base
+825632,2025-10-17,away,Peoria Javelinas,702253,Cam Collier,6,400,4,00,True,5,3B,Third Base
+825632,2025-10-17,away,Peoria Javelinas,810838,Ryan Jackson,8,500,5,00,True,10,DH,Designated Hitter
+825632,2025-10-17,away,Peoria Javelinas,806263,Brandon Winokur,4,600,6,00,True,6,SS,Shortstop
+825632,2025-10-17,away,Peoria Javelinas,813860,Charlie Pagliarini,9,700,7,00,True,7,LF,Outfielder
+825632,2025-10-17,away,Peoria Javelinas,701771,Billy Amick,20,800,8,00,True,3,1B,First Base
+825632,2025-10-17,away,Peoria Javelinas,702601,Lamar King Jr.,27,900,9,00,True,2,C,Catcher
+825632,2025-10-17,home,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825632,2025-10-17,home,Salt River Rafters,694815,Jack Hurley,15,200,2,00,True,7,LF,Outfielder
+825632,2025-10-17,home,Salt River Rafters,804558,Raudi Rodriguez,9,300,3,00,True,9,RF,Outfielder
+825632,2025-10-17,home,Salt River Rafters,703190,Johanfran Garcia,30,400,4,00,True,2,C,Catcher
+825632,2025-10-17,home,Salt River Rafters,808129,Juan Flores,19,500,5,00,True,10,DH,Designated Hitter
+825632,2025-10-17,home,Salt River Rafters,703156,Tony Blanco Jr.,99,600,6,00,True,3,1B,First Base
+825632,2025-10-17,home,Salt River Rafters,687918,Braylen Wimmer,1,700,7,00,True,5,3B,Third Base
+825632,2025-10-17,home,Salt River Rafters,807511,Nelly Taylor,3,800,8,00,True,8,CF,Outfielder
+825632,2025-10-17,home,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825587,2025-10-17,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,8,CF,Outfielder
+825587,2025-10-17,away,Glendale Desert Dogs,803011,Sam Antonacci,10,200,2,00,True,6,SS,Shortstop
+825587,2025-10-17,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,300,3,00,True,5,3B,Third Base
+825587,2025-10-17,away,Glendale Desert Dogs,804645,Caden Connor,20,400,4,00,True,7,LF,Outfielder
+825587,2025-10-17,away,Glendale Desert Dogs,814436,Ryan Galanie,15,500,5,00,True,3,1B,First Base
+825587,2025-10-17,away,Glendale Desert Dogs,702690,Cutter Coffey,9,600,6,00,True,4,2B,Second Base
+825587,2025-10-17,away,Glendale Desert Dogs,702488,Logan Wagner,23,700,7,00,True,10,DH,Designated Hitter
+825587,2025-10-17,away,Glendale Desert Dogs,692568,Miguel Ugueto,3,800,8,00,True,9,RF,Outfielder
+825587,2025-10-17,away,Glendale Desert Dogs,694188,Jesus Galiz,35,900,9,00,True,2,C,Catcher
+825587,2025-10-17,home,Surprise Saguaros,802407,Joe Lampe,15,100,1,00,True,8,CF,Outfielder
+825587,2025-10-17,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,10,DH,Designated Hitter
+825587,2025-10-17,home,Surprise Saguaros,805810,Blake Mitchell,8,300,3,00,True,2,C,Catcher
+825587,2025-10-17,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825587,2025-10-17,home,Surprise Saguaros,815304,Josh Adamczewski,14,500,5,00,True,7,LF,Outfielder
+825587,2025-10-17,home,Surprise Saguaros,691405,Juan Benjamin,7,600,6,00,True,5,3B,Third Base
+825587,2025-10-17,home,Surprise Saguaros,702662,Dylan Dreiling,6,700,7,00,True,9,RF,Outfielder
+825587,2025-10-17,home,Surprise Saguaros,804858,Bryan Rincon,13,800,8,00,True,6,SS,Shortstop
+825587,2025-10-17,home,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825595,2025-10-17,away,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825595,2025-10-17,away,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,10,DH,Designated Hitter
+825595,2025-10-17,away,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,5,3B,Third Base
+825595,2025-10-17,away,Scottsdale Scorpions,814409,Seaver King,5,400,4,00,True,6,SS,Shortstop
+825595,2025-10-17,away,Scottsdale Scorpions,801075,Walker Janek,27,500,5,00,True,2,C,Catcher
+825595,2025-10-17,away,Scottsdale Scorpions,800208,Axiel Plaz,13,600,6,00,True,3,1B,First Base
+825595,2025-10-17,away,Scottsdale Scorpions,802599,Jack Penney,14,700,7,00,True,4,2B,Second Base
+825595,2025-10-17,away,Scottsdale Scorpions,801523,Chris Suero,11,800,8,00,True,7,LF,Outfielder
+825595,2025-10-17,away,Scottsdale Scorpions,701337,Ethan Petry,28,900,9,00,True,9,RF,Outfielder
+825595,2025-10-17,home,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825595,2025-10-17,home,Mesa Solar Sox,691777,Max Muncy,10,200,2,00,True,5,3B,Third Base
+825595,2025-10-17,home,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825595,2025-10-17,home,Mesa Solar Sox,814458,Fenwick Trimble,3,400,4,00,True,9,RF,Outfielder
+825595,2025-10-17,home,Mesa Solar Sox,815089,Coby Morales,19,500,5,00,True,7,LF,Outfielder
+825595,2025-10-17,home,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,4,2B,Second Base
+825595,2025-10-17,home,Mesa Solar Sox,805782,Ryan Lasko,1,700,7,00,True,8,CF,Outfielder
+825595,2025-10-17,home,Mesa Solar Sox,695573,Cole Mathis,16,800,8,00,True,3,1B,First Base
+825595,2025-10-17,home,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,10,DH,Designated Hitter
+825663,2025-10-18,away,Mesa Solar Sox,694966,Brayden Taylor,55,100,1,00,True,5,3B,Third Base
+825663,2025-10-18,away,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,200,2,00,True,6,SS,Shortstop
+825663,2025-10-18,away,Mesa Solar Sox,695720,Tommy White,47,300,3,00,True,3,1B,First Base
+825663,2025-10-18,away,Mesa Solar Sox,805782,Ryan Lasko,1,400,4,00,True,8,CF,Outfielder
+825663,2025-10-18,away,Mesa Solar Sox,806967,Brailer Guerrero,24,500,5,00,True,9,RF,Outfielder
+825663,2025-10-18,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,10,DH,Designated Hitter
+825663,2025-10-18,away,Mesa Solar Sox,703563,PJ Morlando,8,700,7,00,True,7,LF,Outfielder
+825663,2025-10-18,away,Mesa Solar Sox,692633,Manuel Palencia,25,800,8,00,True,2,C,Catcher
+825663,2025-10-18,away,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,4,2B,Second Base
+825663,2025-10-18,home,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,7,LF,Outfielder
+825663,2025-10-18,home,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,10,DH,Designated Hitter
+825663,2025-10-18,home,Glendale Desert Dogs,804645,Caden Connor,20,300,3,00,True,9,RF,Outfielder
+825663,2025-10-18,home,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,6,SS,Shortstop
+825663,2025-10-18,home,Glendale Desert Dogs,692568,Miguel Ugueto,3,500,5,00,True,8,CF,Outfielder
+825663,2025-10-18,home,Glendale Desert Dogs,814436,Ryan Galanie,15,600,6,00,True,3,1B,First Base
+825663,2025-10-18,home,Glendale Desert Dogs,702690,Cutter Coffey,9,700,7,00,True,5,3B,Third Base
+825663,2025-10-18,home,Glendale Desert Dogs,815104,Graysen Tarlow,7,800,8,00,True,2,C,Catcher
+825663,2025-10-18,home,Glendale Desert Dogs,805347,Jim Jarvis,2,900,9,00,True,4,2B,Second Base
+825644,2025-10-18,away,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825644,2025-10-18,away,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,7,LF,Outfielder
+825644,2025-10-18,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825644,2025-10-18,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825644,2025-10-18,away,Salt River Rafters,804558,Raudi Rodriguez,9,500,5,00,True,8,CF,Outfielder
+825644,2025-10-18,away,Salt River Rafters,808129,Juan Flores,19,600,6,00,True,2,C,Catcher
+825644,2025-10-18,away,Salt River Rafters,703156,Tony Blanco Jr.,99,700,7,00,True,10,DH,Designated Hitter
+825644,2025-10-18,away,Salt River Rafters,807511,Nelly Taylor,3,701,7,01,False,12,PR,Pinch Runner
+825644,2025-10-18,away,Salt River Rafters,687918,Braylen Wimmer,1,800,8,00,True,4,2B,Second Base
+825644,2025-10-18,away,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825644,2025-10-18,home,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825644,2025-10-18,home,Peoria Javelinas,801126,Brock Rodden,5,200,2,00,True,4,2B,Second Base
+825644,2025-10-18,home,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,7,LF,Outfielder
+825644,2025-10-18,home,Peoria Javelinas,803175,Ethan Anderson,34,400,4,00,True,10,DH,Designated Hitter
+825644,2025-10-18,home,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,3,1B,First Base
+825644,2025-10-18,home,Peoria Javelinas,806957,Alfredo Duno,28,600,6,00,True,2,C,Catcher
+825644,2025-10-18,home,Peoria Javelinas,699114,Leo Balcazar,17,700,7,00,True,6,SS,Shortstop
+825644,2025-10-18,home,Peoria Javelinas,701682,Braedon Karpathios,22,800,8,00,True,9,RF,Outfielder
+825644,2025-10-18,home,Peoria Javelinas,701771,Billy Amick,20,900,9,00,True,5,3B,Third Base
+825614,2025-10-18,away,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,8,CF,Outfielder
+825614,2025-10-18,away,Surprise Saguaros,694749,Dylan Campbell,10,200,2,00,True,9,RF,Outfielder
+825614,2025-10-18,away,Surprise Saguaros,805810,Blake Mitchell,8,300,3,00,True,10,DH,Designated Hitter
+825614,2025-10-18,away,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825614,2025-10-18,away,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,2,C,Catcher
+825614,2025-10-18,away,Surprise Saguaros,694187,Daniel Vazquez,26,600,6,00,True,6,SS,Shortstop
+825614,2025-10-18,away,Surprise Saguaros,815304,Josh Adamczewski,14,700,7,00,True,7,LF,Outfielder
+825614,2025-10-18,away,Surprise Saguaros,702550,Chandler Pollard,43,800,8,00,True,4,2B,Second Base
+825614,2025-10-18,away,Surprise Saguaros,691405,Juan Benjamin,7,900,9,00,True,5,3B,Third Base
+825614,2025-10-18,home,Scottsdale Scorpions,813896,Joseph Sullivan,8,100,1,00,True,8,CF,Outfielder
+825614,2025-10-18,home,Scottsdale Scorpions,814409,Seaver King,5,200,2,00,True,6,SS,Shortstop
+825614,2025-10-18,home,Scottsdale Scorpions,802599,Jack Penney,14,300,3,00,True,4,2B,Second Base
+825614,2025-10-18,home,Scottsdale Scorpions,801523,Chris Suero,11,400,4,00,True,2,C,Catcher
+825614,2025-10-18,home,Scottsdale Scorpions,806152,Walker Martin,12,500,5,00,True,5,3B,Third Base
+825614,2025-10-18,home,Scottsdale Scorpions,694266,D'Andre Smith,6,600,6,00,True,9,RF,Outfielder
+825614,2025-10-18,home,Scottsdale Scorpions,813844,Will Bush,47,700,7,00,True,10,DH,Designated Hitter
+825614,2025-10-18,home,Scottsdale Scorpions,701337,Ethan Petry,28,800,8,00,True,7,LF,Outfielder
+825614,2025-10-18,home,Scottsdale Scorpions,692238,Parks Harber,40,900,9,00,True,3,1B,First Base
+825647,2025-10-19,away,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825647,2025-10-19,away,Salt River Rafters,694815,Jack Hurley,15,200,2,00,True,7,LF,Outfielder
+825647,2025-10-19,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825647,2025-10-19,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825647,2025-10-19,away,Salt River Rafters,696142,Will Taylor,2,401,4,01,False,9,RF,Outfielder
+825647,2025-10-19,away,Salt River Rafters,703190,Johanfran Garcia,30,500,5,00,True,10,DH,Designated Hitter
+825647,2025-10-19,away,Salt River Rafters,700341,Kenny Castillo,77,600,6,00,True,2,C,Catcher
+825647,2025-10-19,away,Salt River Rafters,807511,Nelly Taylor,3,700,7,00,True,8,CF,Outfielder
+825647,2025-10-19,away,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825647,2025-10-19,away,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825647,2025-10-19,home,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,8,CF,Outfielder
+825647,2025-10-19,home,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825647,2025-10-19,home,Glendale Desert Dogs,803011,Sam Antonacci,10,300,3,00,True,4,2B,Second Base
+825647,2025-10-19,home,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,10,DH,Designated Hitter
+825647,2025-10-19,home,Glendale Desert Dogs,804645,Caden Connor,20,500,5,00,True,7,LF,Outfielder
+825647,2025-10-19,home,Glendale Desert Dogs,692568,Miguel Ugueto,3,600,6,00,True,9,RF,Outfielder
+825647,2025-10-19,home,Glendale Desert Dogs,805347,Jim Jarvis,2,700,7,00,True,6,SS,Shortstop
+825647,2025-10-19,home,Glendale Desert Dogs,702488,Logan Wagner,23,800,8,00,True,3,1B,First Base
+825647,2025-10-19,home,Glendale Desert Dogs,698927,Edward Duran,17,900,9,00,True,2,C,Catcher
+825645,2025-10-19,away,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825645,2025-10-19,away,Mesa Solar Sox,691777,Max Muncy,10,200,2,00,True,5,3B,Third Base
+825645,2025-10-19,away,Mesa Solar Sox,694966,Brayden Taylor,55,201,2,01,False,5,3B,Third Base
+825645,2025-10-19,away,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825645,2025-10-19,away,Mesa Solar Sox,680893,Hueston Morrill,53,301,3,01,False,1,P,Pitcher
+825645,2025-10-19,away,Mesa Solar Sox,814458,Fenwick Trimble,3,400,4,00,True,8,CF,Outfielder
+825645,2025-10-19,away,Mesa Solar Sox,805782,Ryan Lasko,1,500,5,00,True,9,RF,Outfielder
+825645,2025-10-19,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,4,2B,Second Base
+825645,2025-10-19,away,Mesa Solar Sox,703563,PJ Morlando,8,700,7,00,True,7,LF,Outfielder
+825645,2025-10-19,away,Mesa Solar Sox,695573,Cole Mathis,16,800,8,00,True,3,1B,First Base
+825645,2025-10-19,away,Mesa Solar Sox,804751,Logan Poteet,28,900,9,00,True,2,C,Catcher
+825645,2025-10-19,home,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825645,2025-10-19,home,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,5,3B,Third Base
+825645,2025-10-19,home,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,10,DH,Designated Hitter
+825645,2025-10-19,home,Peoria Javelinas,803175,Ethan Anderson,34,400,4,00,True,3,1B,First Base
+825645,2025-10-19,home,Peoria Javelinas,806263,Brandon Winokur,4,500,5,00,True,6,SS,Shortstop
+825645,2025-10-19,home,Peoria Javelinas,810838,Ryan Jackson,8,600,6,00,True,4,2B,Second Base
+825645,2025-10-19,home,Peoria Javelinas,800449,Thomas Sosa,3,700,7,00,True,9,RF,Outfielder
+825645,2025-10-19,home,Peoria Javelinas,813860,Charlie Pagliarini,9,800,8,00,True,7,LF,Outfielder
+825645,2025-10-19,home,Peoria Javelinas,702601,Lamar King Jr.,27,900,9,00,True,2,C,Catcher
+825615,2025-10-19,away,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,10,DH,Designated Hitter
+825615,2025-10-19,away,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,5,3B,Third Base
+825615,2025-10-19,away,Surprise Saguaros,815304,Josh Adamczewski,14,300,3,00,True,7,LF,Outfielder
+825615,2025-10-19,away,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825615,2025-10-19,away,Surprise Saguaros,694749,Dylan Campbell,10,500,5,00,True,8,CF,Outfielder
+825615,2025-10-19,away,Surprise Saguaros,702662,Dylan Dreiling,6,600,6,00,True,9,RF,Outfielder
+825615,2025-10-19,away,Surprise Saguaros,804858,Bryan Rincon,13,700,7,00,True,6,SS,Shortstop
+825615,2025-10-19,away,Surprise Saguaros,803015,Ben Hartl,40,800,8,00,True,2,C,Catcher
+825615,2025-10-19,away,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825615,2025-10-19,home,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825615,2025-10-19,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,5,3B,Third Base
+825615,2025-10-19,home,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,10,DH,Designated Hitter
+825615,2025-10-19,home,Scottsdale Scorpions,694757,Maui Ahuna,1,400,4,00,True,6,SS,Shortstop
+825615,2025-10-19,home,Scottsdale Scorpions,801075,Walker Janek,27,500,5,00,True,2,C,Catcher
+825615,2025-10-19,home,Scottsdale Scorpions,802599,Jack Penney,14,600,6,00,True,4,2B,Second Base
+825615,2025-10-19,home,Scottsdale Scorpions,800208,Axiel Plaz,13,700,7,00,True,3,1B,First Base
+825615,2025-10-19,home,Scottsdale Scorpions,813844,Will Bush,47,701,7,01,False,3,1B,First Base
+825615,2025-10-19,home,Scottsdale Scorpions,694266,D'Andre Smith,6,800,8,00,True,7,LF,Outfielder
+825615,2025-10-19,home,Scottsdale Scorpions,695763,Sam Petersen,2,900,9,00,True,9,RF,Outfielder
+825646,2025-10-21,away,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825646,2025-10-21,away,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,6,SS,Shortstop
+825646,2025-10-21,away,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,5,3B,Third Base
+825646,2025-10-21,away,Scottsdale Scorpions,801523,Chris Suero,11,400,4,00,True,2,C,Catcher
+825646,2025-10-21,away,Scottsdale Scorpions,802599,Jack Penney,14,500,5,00,True,4,2B,Second Base
+825646,2025-10-21,away,Scottsdale Scorpions,800208,Axiel Plaz,13,600,6,00,True,3,1B,First Base
+825646,2025-10-21,away,Scottsdale Scorpions,694266,D'Andre Smith,6,700,7,00,True,7,LF,Outfielder
+825646,2025-10-21,away,Scottsdale Scorpions,701337,Ethan Petry,28,800,8,00,True,9,RF,Outfielder
+825646,2025-10-21,away,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,10,DH,Designated Hitter
+825646,2025-10-21,home,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825646,2025-10-21,home,Peoria Javelinas,806071,Jonny Farmelo,21,200,2,00,True,7,LF,Outfielder
+825646,2025-10-21,home,Peoria Javelinas,699114,Leo Balcazar,17,300,3,00,True,5,3B,Third Base
+825646,2025-10-21,home,Peoria Javelinas,803175,Ethan Anderson,34,400,4,00,True,10,DH,Designated Hitter
+825646,2025-10-21,home,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,3,1B,First Base
+825646,2025-10-21,home,Peoria Javelinas,801126,Brock Rodden,5,600,6,00,True,4,2B,Second Base
+825646,2025-10-21,home,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,6,SS,Shortstop
+825646,2025-10-21,home,Peoria Javelinas,701682,Braedon Karpathios,22,800,8,00,True,9,RF,Outfielder
+825646,2025-10-21,home,Peoria Javelinas,702601,Lamar King Jr.,27,900,9,00,True,2,C,Catcher
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,813896,Joseph Sullivan,8,100,1,00,True,8,CF,Outfielder
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,814409,Seaver King,5,200,2,00,True,6,SS,Shortstop
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,694757,Maui Ahuna,1,300,3,00,True,4,2B,Second Base
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,801075,Walker Janek,27,400,4,00,True,2,C,Catcher
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,813844,Will Bush,47,500,5,00,True,10,DH,Designated Hitter
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,692238,Parks Harber,40,600,6,00,True,3,1B,First Base
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,806152,Walker Martin,12,700,7,00,True,5,3B,Third Base
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,701337,Ethan Petry,28,800,8,00,True,9,RF,Outfielder
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,695763,Sam Petersen,2,900,9,00,True,7,LF,Outfielder
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,806071,Jonny Farmelo,21,100,1,00,True,8,CF,Outfielder
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,803175,Ethan Anderson,34,200,2,00,True,3,1B,First Base
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,699114,Leo Balcazar,17,300,3,00,True,4,2B,Second Base
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,806957,Alfredo Duno,28,400,4,00,True,2,C,Catcher
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,10,DH,Designated Hitter
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,810838,Ryan Jackson,8,600,6,00,True,6,SS,Shortstop
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,813860,Charlie Pagliarini,9,700,7,00,True,7,LF,Outfielder
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,701771,Billy Amick,20,800,8,00,True,5,3B,Third Base
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,800449,Thomas Sosa,3,900,9,00,True,9,RF,Outfielder
+825581,2025-10-21,away,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,4,2B,Second Base
+825581,2025-10-21,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825581,2025-10-21,away,Glendale Desert Dogs,695731,Braden Montgomery,6,300,3,00,True,9,RF,Outfielder
+825581,2025-10-21,away,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,6,SS,Shortstop
+825581,2025-10-21,away,Glendale Desert Dogs,804645,Caden Connor,20,500,5,00,True,3,1B,First Base
+825581,2025-10-21,away,Glendale Desert Dogs,814436,Ryan Galanie,15,600,6,00,True,10,DH,Designated Hitter
+825581,2025-10-21,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,700,7,00,True,8,CF,Outfielder
+825581,2025-10-21,away,Glendale Desert Dogs,692568,Miguel Ugueto,3,800,8,00,True,7,LF,Outfielder
+825581,2025-10-21,away,Glendale Desert Dogs,694188,Jesus Galiz,35,900,9,00,True,2,C,Catcher
+825581,2025-10-21,home,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,8,CF,Outfielder
+825581,2025-10-21,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,6,SS,Shortstop
+825581,2025-10-21,home,Surprise Saguaros,805810,Blake Mitchell,8,300,3,00,True,10,DH,Designated Hitter
+825581,2025-10-21,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825581,2025-10-21,home,Surprise Saguaros,815304,Josh Adamczewski,14,500,5,00,True,7,LF,Outfielder
+825581,2025-10-21,home,Surprise Saguaros,694749,Dylan Campbell,10,600,6,00,True,5,3B,Third Base
+825581,2025-10-21,home,Surprise Saguaros,702270,Malcolm Moore,27,700,7,00,True,2,C,Catcher
+825581,2025-10-21,home,Surprise Saguaros,691405,Juan Benjamin,7,800,8,00,True,4,2B,Second Base
+825581,2025-10-21,home,Surprise Saguaros,802407,Joe Lampe,15,900,9,00,True,9,RF,Outfielder
+825601,2025-10-21,away,Salt River Rafters,800306,Jansel Luis,4,100,1,00,True,6,SS,Shortstop
+825601,2025-10-21,away,Salt River Rafters,696142,Will Taylor,2,200,2,00,True,7,LF,Outfielder
+825601,2025-10-21,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825601,2025-10-21,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825601,2025-10-21,away,Salt River Rafters,703190,Johanfran Garcia,30,500,5,00,True,2,C,Catcher
+825601,2025-10-21,away,Salt River Rafters,700341,Kenny Castillo,77,600,6,00,True,10,DH,Designated Hitter
+825601,2025-10-21,away,Salt River Rafters,807511,Nelly Taylor,3,700,7,00,True,8,CF,Outfielder
+825601,2025-10-21,away,Salt River Rafters,687918,Braylen Wimmer,1,800,8,00,True,5,3B,Third Base
+825601,2025-10-21,away,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825601,2025-10-21,home,Mesa Solar Sox,814458,Fenwick Trimble,3,100,1,00,True,8,CF,Outfielder
+825601,2025-10-21,home,Mesa Solar Sox,691777,Max Muncy,10,200,2,00,True,5,3B,Third Base
+825601,2025-10-21,home,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825601,2025-10-21,home,Mesa Solar Sox,695720,Tommy White,47,400,4,00,True,3,1B,First Base
+825601,2025-10-21,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,500,5,00,True,6,SS,Shortstop
+825601,2025-10-21,home,Mesa Solar Sox,805782,Ryan Lasko,1,600,6,00,True,9,RF,Outfielder
+825601,2025-10-21,home,Mesa Solar Sox,690992,Ed Howard,9,700,7,00,True,4,2B,Second Base
+825601,2025-10-21,home,Mesa Solar Sox,703563,PJ Morlando,8,800,8,00,True,7,LF,Outfielder
+825601,2025-10-21,home,Mesa Solar Sox,804751,Logan Poteet,28,900,9,00,True,10,DH,Designated Hitter
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,7,LF,Outfielder
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,803011,Sam Antonacci,10,200,2,00,True,10,DH,Designated Hitter
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,814436,Ryan Galanie,15,300,3,00,True,3,1B,First Base
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,804645,Caden Connor,20,400,4,00,True,9,RF,Outfielder
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,702488,Logan Wagner,23,500,5,00,True,4,2B,Second Base
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,805347,Jim Jarvis,2,600,6,00,True,6,SS,Shortstop
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,692568,Miguel Ugueto,3,700,7,00,True,8,CF,Outfielder
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,702690,Cutter Coffey,9,800,8,00,True,5,3B,Third Base
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,815104,Graysen Tarlow,7,900,9,00,True,2,C,Catcher
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,807276,Dante Nori,5,100,1,00,True,8,CF,Outfielder
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,802407,Joe Lampe,15,101,1,01,False,8,CF,Outfielder
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,804858,Bryan Rincon,13,200,2,00,True,6,SS,Shortstop
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,805810,Blake Mitchell,8,300,3,00,True,2,C,Catcher
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,10,DH,Designated Hitter
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,694749,Dylan Campbell,10,500,5,00,True,9,RF,Outfielder
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,702662,Dylan Dreiling,6,600,6,00,True,7,LF,Outfielder
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,702550,Chandler Pollard,43,700,7,00,True,5,3B,Third Base
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,803015,Ben Hartl,40,800,8,00,True,3,1B,First Base
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,8,CF,Outfielder
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,10,DH,Designated Hitter
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,804558,Raudi Rodriguez,9,400,4,00,True,9,RF,Outfielder
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,808129,Juan Flores,19,500,5,00,True,2,C,Catcher
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,703156,Tony Blanco Jr.,99,600,6,00,True,3,1B,First Base
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,694815,Jack Hurley,15,700,7,00,True,7,LF,Outfielder
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,687918,Braylen Wimmer,1,901,9,01,False,5,3B,Third Base
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,694966,Brayden Taylor,55,200,2,00,True,5,3B,Third Base
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,800285,Enmanuel Tejeda,14,300,3,00,True,4,2B,Second Base
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,703563,PJ Morlando,8,400,4,00,True,7,LF,Outfielder
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,695573,Cole Mathis,16,500,5,00,True,3,1B,First Base
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,806967,Brailer Guerrero,24,600,6,00,True,10,DH,Designated Hitter
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,814458,Fenwick Trimble,3,700,7,00,True,8,CF,Outfielder
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,805782,Ryan Lasko,1,800,8,00,True,8,CF,Outfielder
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,801,8,01,False,9,RF,Outfielder
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,692633,Manuel Palencia,25,900,9,00,True,2,C,Catcher
+825586,2025-10-22,away,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825586,2025-10-22,away,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,5,3B,Third Base
+825586,2025-10-22,away,Scottsdale Scorpions,814409,Seaver King,5,300,3,00,True,10,DH,Designated Hitter
+825586,2025-10-22,away,Scottsdale Scorpions,801075,Walker Janek,27,400,4,00,True,2,C,Catcher
+825586,2025-10-22,away,Scottsdale Scorpions,694757,Maui Ahuna,1,500,5,00,True,6,SS,Shortstop
+825586,2025-10-22,away,Scottsdale Scorpions,694266,D'Andre Smith,6,600,6,00,True,9,RF,Outfielder
+825586,2025-10-22,away,Scottsdale Scorpions,813844,Will Bush,47,700,7,00,True,3,1B,First Base
+825586,2025-10-22,away,Scottsdale Scorpions,695763,Sam Petersen,2,800,8,00,True,7,LF,Outfielder
+825586,2025-10-22,away,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,4,2B,Second Base
+825586,2025-10-22,home,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,8,CF,Outfielder
+825586,2025-10-22,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,6,SS,Shortstop
+825586,2025-10-22,home,Surprise Saguaros,815304,Josh Adamczewski,14,300,3,00,True,7,LF,Outfielder
+825586,2025-10-22,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825586,2025-10-22,home,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,2,C,Catcher
+825586,2025-10-22,home,Surprise Saguaros,694749,Dylan Campbell,10,600,6,00,True,9,RF,Outfielder
+825586,2025-10-22,home,Surprise Saguaros,802407,Joe Lampe,15,700,7,00,True,10,DH,Designated Hitter
+825586,2025-10-22,home,Surprise Saguaros,691405,Juan Benjamin,7,800,8,00,True,5,3B,Third Base
+825586,2025-10-22,home,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825631,2025-10-22,away,Mesa Solar Sox,694966,Brayden Taylor,55,100,1,00,True,5,3B,Third Base
+825631,2025-10-22,away,Mesa Solar Sox,691777,Max Muncy,10,200,2,00,True,10,DH,Designated Hitter
+825631,2025-10-22,away,Mesa Solar Sox,814458,Fenwick Trimble,3,300,3,00,True,8,CF,Outfielder
+825631,2025-10-22,away,Mesa Solar Sox,695573,Cole Mathis,16,400,4,00,True,3,1B,First Base
+825631,2025-10-22,away,Mesa Solar Sox,703563,PJ Morlando,8,500,5,00,True,9,RF,Outfielder
+825631,2025-10-22,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,4,2B,Second Base
+825631,2025-10-22,away,Mesa Solar Sox,805782,Ryan Lasko,1,700,7,00,True,7,LF,Outfielder
+825631,2025-10-22,away,Mesa Solar Sox,692633,Manuel Palencia,25,800,8,00,True,2,C,Catcher
+825631,2025-10-22,away,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,6,SS,Shortstop
+825631,2025-10-22,home,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825631,2025-10-22,home,Salt River Rafters,804558,Raudi Rodriguez,9,200,2,00,True,8,CF,Outfielder
+825631,2025-10-22,home,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825631,2025-10-22,home,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825631,2025-10-22,home,Salt River Rafters,703190,Johanfran Garcia,30,500,5,00,True,2,C,Catcher
+825631,2025-10-22,home,Salt River Rafters,808129,Juan Flores,19,600,6,00,True,10,DH,Designated Hitter
+825631,2025-10-22,home,Salt River Rafters,807511,Nelly Taylor,3,700,7,00,True,7,LF,Outfielder
+825631,2025-10-22,home,Salt River Rafters,687918,Braylen Wimmer,1,800,8,00,True,5,3B,Third Base
+825631,2025-10-22,home,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825643,2025-10-22,away,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,4,2B,Second Base
+825643,2025-10-22,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,10,DH,Designated Hitter
+825643,2025-10-22,away,Glendale Desert Dogs,695731,Braden Montgomery,6,300,3,00,True,8,CF,Outfielder
+825643,2025-10-22,away,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,5,3B,Third Base
+825643,2025-10-22,away,Glendale Desert Dogs,804645,Caden Connor,20,500,5,00,True,9,RF,Outfielder
+825643,2025-10-22,away,Glendale Desert Dogs,702488,Logan Wagner,23,600,6,00,True,3,1B,First Base
+825643,2025-10-22,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,700,7,00,True,7,LF,Outfielder
+825643,2025-10-22,away,Glendale Desert Dogs,698927,Edward Duran,17,800,8,00,True,2,C,Catcher
+825643,2025-10-22,away,Glendale Desert Dogs,805347,Jim Jarvis,2,900,9,00,True,6,SS,Shortstop
+825643,2025-10-22,home,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825643,2025-10-22,home,Peoria Javelinas,803175,Ethan Anderson,34,200,2,00,True,2,C,Catcher
+825643,2025-10-22,home,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,7,LF,Outfielder
+825643,2025-10-22,home,Peoria Javelinas,806957,Alfredo Duno,28,400,4,00,True,10,DH,Designated Hitter
+825643,2025-10-22,home,Peoria Javelinas,699114,Leo Balcazar,17,500,5,00,True,6,SS,Shortstop
+825643,2025-10-22,home,Peoria Javelinas,801126,Brock Rodden,5,600,6,00,True,4,2B,Second Base
+825643,2025-10-22,home,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,5,3B,Third Base
+825643,2025-10-22,home,Peoria Javelinas,701682,Braedon Karpathios,22,800,8,00,True,9,RF,Outfielder
+825643,2025-10-22,home,Peoria Javelinas,701771,Billy Amick,20,900,9,00,True,3,1B,First Base
+825630,2025-10-23,away,Glendale Desert Dogs,688460,Josh Kasevich,4,100,1,00,True,6,SS,Shortstop
+825630,2025-10-23,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825630,2025-10-23,away,Glendale Desert Dogs,814436,Ryan Galanie,15,300,3,00,True,3,1B,First Base
+825630,2025-10-23,away,Glendale Desert Dogs,702690,Cutter Coffey,9,400,4,00,True,4,2B,Second Base
+825630,2025-10-23,away,Glendale Desert Dogs,702488,Logan Wagner,23,500,5,00,True,10,DH,Designated Hitter
+825630,2025-10-23,away,Glendale Desert Dogs,692568,Miguel Ugueto,3,600,6,00,True,9,RF,Outfielder
+825630,2025-10-23,away,Glendale Desert Dogs,691559,Jose D. Hernandez,70,700,7,00,True,7,LF,Outfielder
+825630,2025-10-23,away,Glendale Desert Dogs,694188,Jesus Galiz,35,800,8,00,True,2,C,Catcher
+825630,2025-10-23,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,900,9,00,True,8,CF,Outfielder
+825630,2025-10-23,home,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825630,2025-10-23,home,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,7,LF,Outfielder
+825630,2025-10-23,home,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825630,2025-10-23,home,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825630,2025-10-23,home,Salt River Rafters,804558,Raudi Rodriguez,9,401,4,01,False,9,RF,Outfielder
+825630,2025-10-23,home,Salt River Rafters,808129,Juan Flores,19,500,5,00,True,2,C,Catcher
+825630,2025-10-23,home,Salt River Rafters,696142,Will Taylor,2,600,6,00,True,8,CF,Outfielder
+825630,2025-10-23,home,Salt River Rafters,694815,Jack Hurley,15,700,7,00,True,10,DH,Designated Hitter
+825630,2025-10-23,home,Salt River Rafters,687918,Braylen Wimmer,1,800,8,00,True,4,2B,Second Base
+825630,2025-10-23,home,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825638,2025-10-23,away,Scottsdale Scorpions,801523,Chris Suero,11,100,1,00,True,7,LF,Outfielder
+825638,2025-10-23,away,Scottsdale Scorpions,814409,Seaver King,5,200,2,00,True,6,SS,Shortstop
+825638,2025-10-23,away,Scottsdale Scorpions,802599,Jack Penney,14,300,3,00,True,4,2B,Second Base
+825638,2025-10-23,away,Scottsdale Scorpions,801194,Max Anderson,25,400,4,00,True,10,DH,Designated Hitter
+825638,2025-10-23,away,Scottsdale Scorpions,806152,Walker Martin,12,500,5,00,True,5,3B,Third Base
+825638,2025-10-23,away,Scottsdale Scorpions,800208,Axiel Plaz,13,600,6,00,True,2,C,Catcher
+825638,2025-10-23,away,Scottsdale Scorpions,701337,Ethan Petry,28,700,7,00,True,9,RF,Outfielder
+825638,2025-10-23,away,Scottsdale Scorpions,692238,Parks Harber,40,800,8,00,True,3,1B,First Base
+825638,2025-10-23,away,Scottsdale Scorpions,695763,Sam Petersen,2,900,9,00,True,8,CF,Outfielder
+825638,2025-10-23,home,Peoria Javelinas,801126,Brock Rodden,5,100,1,00,True,10,DH,Designated Hitter
+825638,2025-10-23,home,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,5,3B,Third Base
+825638,2025-10-23,home,Peoria Javelinas,810838,Ryan Jackson,8,300,3,00,True,4,2B,Second Base
+825638,2025-10-23,home,Peoria Javelinas,702253,Cam Collier,6,400,4,00,True,3,1B,First Base
+825638,2025-10-23,home,Peoria Javelinas,701682,Braedon Karpathios,22,500,5,00,True,8,CF,Outfielder
+825638,2025-10-23,home,Peoria Javelinas,813860,Charlie Pagliarini,9,600,6,00,True,7,LF,Outfielder
+825638,2025-10-23,home,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,6,SS,Shortstop
+825638,2025-10-23,home,Peoria Javelinas,800449,Thomas Sosa,3,800,8,00,True,9,RF,Outfielder
+825638,2025-10-23,home,Peoria Javelinas,702601,Lamar King Jr.,27,900,9,00,True,2,C,Catcher
+825600,2025-10-23,away,Surprise Saguaros,807276,Dante Nori,5,100,1,00,True,8,CF,Outfielder
+825600,2025-10-23,away,Surprise Saguaros,802407,Joe Lampe,15,101,1,01,False,8,CF,Outfielder
+825600,2025-10-23,away,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,10,DH,Designated Hitter
+825600,2025-10-23,away,Surprise Saguaros,702726,Luke Adams,20,300,3,00,True,3,1B,First Base
+825600,2025-10-23,away,Surprise Saguaros,691405,Juan Benjamin,7,301,3,01,False,3,1B,First Base
+825600,2025-10-23,away,Surprise Saguaros,806210,Alfonsin Rosario,2,400,4,00,True,9,RF,Outfielder
+825600,2025-10-23,away,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,2,C,Catcher
+825600,2025-10-23,away,Surprise Saguaros,804858,Bryan Rincon,13,600,6,00,True,6,SS,Shortstop
+825600,2025-10-23,away,Surprise Saguaros,702662,Dylan Dreiling,6,700,7,00,True,7,LF,Outfielder
+825600,2025-10-23,away,Surprise Saguaros,702550,Chandler Pollard,43,800,8,00,True,5,3B,Third Base
+825600,2025-10-23,away,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825600,2025-10-23,home,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825600,2025-10-23,home,Mesa Solar Sox,695720,Tommy White,47,200,2,00,True,5,3B,Third Base
+825600,2025-10-23,home,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825600,2025-10-23,home,Mesa Solar Sox,806223,Aidan Smith,13,400,4,00,True,10,DH,Designated Hitter
+825600,2025-10-23,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,500,5,00,True,4,2B,Second Base
+825600,2025-10-23,home,Mesa Solar Sox,695573,Cole Mathis,16,600,6,00,True,3,1B,First Base
+825600,2025-10-23,home,Mesa Solar Sox,703563,PJ Morlando,8,700,7,00,True,9,RF,Outfielder
+825600,2025-10-23,home,Mesa Solar Sox,814458,Fenwick Trimble,3,800,8,00,True,7,LF,Outfielder
+825600,2025-10-23,home,Mesa Solar Sox,805782,Ryan Lasko,1,900,9,00,True,8,CF,Outfielder
+825629,2025-10-24,away,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825629,2025-10-24,away,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,5,3B,Third Base
+825629,2025-10-24,away,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,10,DH,Designated Hitter
+825629,2025-10-24,away,Scottsdale Scorpions,694757,Maui Ahuna,1,400,4,00,True,6,SS,Shortstop
+825629,2025-10-24,away,Scottsdale Scorpions,801075,Walker Janek,27,500,5,00,True,2,C,Catcher
+825629,2025-10-24,away,Scottsdale Scorpions,802599,Jack Penney,14,600,6,00,True,4,2B,Second Base
+825629,2025-10-24,away,Scottsdale Scorpions,800208,Axiel Plaz,13,700,7,00,True,3,1B,First Base
+825629,2025-10-24,away,Scottsdale Scorpions,813896,Joseph Sullivan,8,800,8,00,True,7,LF,Outfielder
+825629,2025-10-24,away,Scottsdale Scorpions,692238,Parks Harber,40,900,9,00,True,9,RF,Outfielder
+825629,2025-10-24,home,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825629,2025-10-24,home,Salt River Rafters,694815,Jack Hurley,15,200,2,00,True,7,LF,Outfielder
+825629,2025-10-24,home,Salt River Rafters,804558,Raudi Rodriguez,9,300,3,00,True,9,RF,Outfielder
+825629,2025-10-24,home,Salt River Rafters,703190,Johanfran Garcia,30,400,4,00,True,10,DH,Designated Hitter
+825629,2025-10-24,home,Salt River Rafters,700341,Kenny Castillo,77,500,5,00,True,2,C,Catcher
+825629,2025-10-24,home,Salt River Rafters,703156,Tony Blanco Jr.,99,600,6,00,True,3,1B,First Base
+825629,2025-10-24,home,Salt River Rafters,696142,Will Taylor,2,700,7,00,True,8,CF,Outfielder
+825629,2025-10-24,home,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825629,2025-10-24,home,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825585,2025-10-25,away,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825585,2025-10-25,away,Mesa Solar Sox,806223,Aidan Smith,13,200,2,00,True,10,DH,Designated Hitter
+825585,2025-10-25,away,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,9,RF,Outfielder
+825585,2025-10-25,away,Mesa Solar Sox,695720,Tommy White,47,400,4,00,True,3,1B,First Base
+825585,2025-10-25,away,Mesa Solar Sox,694966,Brayden Taylor,55,500,5,00,True,5,3B,Third Base
+825585,2025-10-25,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,4,2B,Second Base
+825585,2025-10-25,away,Mesa Solar Sox,814458,Fenwick Trimble,3,700,7,00,True,7,LF,Outfielder
+825585,2025-10-25,away,Mesa Solar Sox,805782,Ryan Lasko,1,800,8,00,True,8,CF,Outfielder
+825585,2025-10-25,away,Mesa Solar Sox,692633,Manuel Palencia,25,900,9,00,True,2,C,Catcher
+825585,2025-10-25,home,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,9,RF,Outfielder
+825585,2025-10-25,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,6,SS,Shortstop
+825585,2025-10-25,home,Surprise Saguaros,807276,Dante Nori,5,300,3,00,True,8,CF,Outfielder
+825585,2025-10-25,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825585,2025-10-25,home,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,2,C,Catcher
+825585,2025-10-25,home,Surprise Saguaros,806210,Alfonsin Rosario,2,600,6,00,True,10,DH,Designated Hitter
+825585,2025-10-25,home,Surprise Saguaros,815304,Josh Adamczewski,14,700,7,00,True,7,LF,Outfielder
+825585,2025-10-25,home,Surprise Saguaros,694749,Dylan Campbell,10,800,8,00,True,5,3B,Third Base
+825585,2025-10-25,home,Surprise Saguaros,691405,Juan Benjamin,7,900,9,00,True,4,2B,Second Base
+825585,2025-10-25,home,Surprise Saguaros,702550,Chandler Pollard,43,901,9,01,False,4,2B,Second Base
+825662,2025-10-25,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825662,2025-10-25,away,Peoria Javelinas,803175,Ethan Anderson,34,200,2,00,True,2,C,Catcher
+825662,2025-10-25,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,9,RF,Outfielder
+825662,2025-10-25,away,Peoria Javelinas,702253,Cam Collier,6,400,4,00,True,3,1B,First Base
+825662,2025-10-25,away,Peoria Javelinas,699114,Leo Balcazar,17,500,5,00,True,6,SS,Shortstop
+825662,2025-10-25,away,Peoria Javelinas,801126,Brock Rodden,5,600,6,00,True,4,2B,Second Base
+825662,2025-10-25,away,Peoria Javelinas,806957,Alfredo Duno,28,700,7,00,True,2,C,Catcher
+825662,2025-10-25,away,Peoria Javelinas,810838,Ryan Jackson,8,701,7,01,False,11,PH,Pinch Hitter
+825662,2025-10-25,away,Peoria Javelinas,695076,Rhett Lowder,25,702,7,02,False,1,P,Pitcher
+825662,2025-10-25,away,Peoria Javelinas,828471,Jakob Hall,19,703,7,03,False,1,P,Pitcher
+825662,2025-10-25,away,Peoria Javelinas,691629,Miguelangel Boadas,30,704,7,04,False,1,P,Pitcher
+825662,2025-10-25,away,Peoria Javelinas,804592,Hunter Hoopes,40,705,7,05,False,1,P,Pitcher
+825662,2025-10-25,away,Peoria Javelinas,827317,Brandon Downer,29,706,7,06,False,1,P,Pitcher
+825662,2025-10-25,away,Peoria Javelinas,806263,Brandon Winokur,4,800,8,00,True,5,3B,Third Base
+825662,2025-10-25,away,Peoria Javelinas,813860,Charlie Pagliarini,9,900,9,00,True,7,LF,Outfielder
+825662,2025-10-25,home,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,4,2B,Second Base
+825662,2025-10-25,home,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825662,2025-10-25,home,Glendale Desert Dogs,695731,Braden Montgomery,6,300,3,00,True,9,RF,Outfielder
+825662,2025-10-25,home,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,10,DH,Designated Hitter
+825662,2025-10-25,home,Glendale Desert Dogs,802469,Travis Honeyman,34,500,5,00,True,8,CF,Outfielder
+825662,2025-10-25,home,Glendale Desert Dogs,814436,Ryan Galanie,15,600,6,00,True,3,1B,First Base
+825662,2025-10-25,home,Glendale Desert Dogs,804645,Caden Connor,20,700,7,00,True,7,LF,Outfielder
+825662,2025-10-25,home,Glendale Desert Dogs,815104,Graysen Tarlow,7,800,8,00,True,2,C,Catcher
+825662,2025-10-25,home,Glendale Desert Dogs,805347,Jim Jarvis,2,900,9,00,True,6,SS,Shortstop
+825584,2025-10-26,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825584,2025-10-26,away,Peoria Javelinas,702253,Cam Collier,6,200,2,00,True,5,3B,Third Base
+825584,2025-10-26,away,Peoria Javelinas,806957,Alfredo Duno,28,300,3,00,True,10,DH,Designated Hitter
+825584,2025-10-26,away,Peoria Javelinas,813860,Charlie Pagliarini,9,400,4,00,True,4,2B,Second Base
+825584,2025-10-26,away,Peoria Javelinas,806263,Brandon Winokur,4,500,5,00,True,6,SS,Shortstop
+825584,2025-10-26,away,Peoria Javelinas,701682,Braedon Karpathios,22,600,6,00,True,7,LF,Outfielder
+825584,2025-10-26,away,Peoria Javelinas,801126,Brock Rodden,5,601,6,01,False,12,PR,Pinch Runner
+825584,2025-10-26,away,Peoria Javelinas,800449,Thomas Sosa,3,700,7,00,True,9,RF,Outfielder
+825584,2025-10-26,away,Peoria Javelinas,701771,Billy Amick,20,800,8,00,True,3,1B,First Base
+825584,2025-10-26,away,Peoria Javelinas,702601,Lamar King Jr.,27,900,9,00,True,2,C,Catcher
+825584,2025-10-26,home,Surprise Saguaros,802407,Joe Lampe,15,100,1,00,True,10,DH,Designated Hitter
+825584,2025-10-26,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,5,3B,Third Base
+825584,2025-10-26,home,Surprise Saguaros,815304,Josh Adamczewski,14,300,3,00,True,7,LF,Outfielder
+825584,2025-10-26,home,Surprise Saguaros,806210,Alfonsin Rosario,2,400,4,00,True,9,RF,Outfielder
+825584,2025-10-26,home,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,2,C,Catcher
+825584,2025-10-26,home,Surprise Saguaros,702662,Dylan Dreiling,6,600,6,00,True,8,CF,Outfielder
+825584,2025-10-26,home,Surprise Saguaros,804858,Bryan Rincon,13,700,7,00,True,6,SS,Shortstop
+825584,2025-10-26,home,Surprise Saguaros,691405,Juan Benjamin,7,800,8,00,True,3,1B,First Base
+825584,2025-10-26,home,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825660,2025-10-26,away,Salt River Rafters,800306,Jansel Luis,4,100,1,00,True,5,3B,Third Base
+825660,2025-10-26,away,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,7,LF,Outfielder
+825660,2025-10-26,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825660,2025-10-26,away,Salt River Rafters,804558,Raudi Rodriguez,9,400,4,00,True,9,RF,Outfielder
+825660,2025-10-26,away,Salt River Rafters,703190,Johanfran Garcia,30,500,5,00,True,10,DH,Designated Hitter
+825660,2025-10-26,away,Salt River Rafters,808129,Juan Flores,19,600,6,00,True,2,C,Catcher
+825660,2025-10-26,away,Salt River Rafters,807511,Nelly Taylor,3,700,7,00,True,8,CF,Outfielder
+825660,2025-10-26,away,Salt River Rafters,687918,Braylen Wimmer,1,800,8,00,True,6,SS,Shortstop
+825660,2025-10-26,away,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825660,2025-10-26,home,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,7,LF,Outfielder
+825660,2025-10-26,home,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,10,DH,Designated Hitter
+825660,2025-10-26,home,Glendale Desert Dogs,695731,Braden Montgomery,6,300,3,00,True,8,CF,Outfielder
+825660,2025-10-26,home,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,6,SS,Shortstop
+825660,2025-10-26,home,Glendale Desert Dogs,702488,Logan Wagner,23,500,5,00,True,3,1B,First Base
+825660,2025-10-26,home,Glendale Desert Dogs,702690,Cutter Coffey,9,600,6,00,True,5,3B,Third Base
+825660,2025-10-26,home,Glendale Desert Dogs,805347,Jim Jarvis,2,700,7,00,True,4,2B,Second Base
+825660,2025-10-26,home,Glendale Desert Dogs,698927,Edward Duran,17,800,8,00,True,2,C,Catcher
+825660,2025-10-26,home,Glendale Desert Dogs,692568,Miguel Ugueto,3,900,9,00,True,9,RF,Outfielder
+825609,2025-10-26,away,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825609,2025-10-26,away,Mesa Solar Sox,695573,Cole Mathis,16,200,2,00,True,3,1B,First Base
+825609,2025-10-26,away,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825609,2025-10-26,away,Mesa Solar Sox,695720,Tommy White,47,400,4,00,True,5,3B,Third Base
+825609,2025-10-26,away,Mesa Solar Sox,703563,PJ Morlando,8,500,5,00,True,8,CF,Outfielder
+825609,2025-10-26,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,10,DH,Designated Hitter
+825609,2025-10-26,away,Mesa Solar Sox,814458,Fenwick Trimble,3,700,7,00,True,7,LF,Outfielder
+825609,2025-10-26,away,Mesa Solar Sox,805782,Ryan Lasko,1,800,8,00,True,9,RF,Outfielder
+825609,2025-10-26,away,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,4,2B,Second Base
+825609,2025-10-26,home,Scottsdale Scorpions,814409,Seaver King,5,100,1,00,True,6,SS,Shortstop
+825609,2025-10-26,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,5,3B,Third Base
+825609,2025-10-26,home,Scottsdale Scorpions,801075,Walker Janek,27,300,3,00,True,2,C,Catcher
+825609,2025-10-26,home,Scottsdale Scorpions,801523,Chris Suero,11,400,4,00,True,7,LF,Outfielder
+825609,2025-10-26,home,Scottsdale Scorpions,813896,Joseph Sullivan,8,500,5,00,True,8,CF,Outfielder
+825609,2025-10-26,home,Scottsdale Scorpions,692238,Parks Harber,40,600,6,00,True,3,1B,First Base
+825609,2025-10-26,home,Scottsdale Scorpions,701337,Ethan Petry,28,700,7,00,True,9,RF,Outfielder
+825609,2025-10-26,home,Scottsdale Scorpions,806152,Walker Martin,12,800,8,00,True,10,DH,Designated Hitter
+825609,2025-10-26,home,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,4,2B,Second Base
+825639,2025-10-28,away,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825639,2025-10-28,away,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,7,LF,Outfielder
+825639,2025-10-28,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825639,2025-10-28,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825639,2025-10-28,away,Salt River Rafters,804558,Raudi Rodriguez,9,500,5,00,True,8,CF,Outfielder
+825639,2025-10-28,away,Salt River Rafters,703190,Johanfran Garcia,30,600,6,00,True,2,C,Catcher
+825639,2025-10-28,away,Salt River Rafters,808129,Juan Flores,19,700,7,00,True,10,DH,Designated Hitter
+825639,2025-10-28,away,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825639,2025-10-28,away,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825639,2025-10-28,home,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825639,2025-10-28,home,Peoria Javelinas,803175,Ethan Anderson,34,200,2,00,True,10,DH,Designated Hitter
+825639,2025-10-28,home,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,9,RF,Outfielder
+825639,2025-10-28,home,Peoria Javelinas,699114,Leo Balcazar,17,400,4,00,True,6,SS,Shortstop
+825639,2025-10-28,home,Peoria Javelinas,801126,Brock Rodden,5,500,5,00,True,4,2B,Second Base
+825639,2025-10-28,home,Peoria Javelinas,702253,Cam Collier,6,600,6,00,True,3,1B,First Base
+825639,2025-10-28,home,Peoria Javelinas,806957,Alfredo Duno,28,700,7,00,True,2,C,Catcher
+825639,2025-10-28,home,Peoria Javelinas,806263,Brandon Winokur,4,800,8,00,True,5,3B,Third Base
+825639,2025-10-28,home,Peoria Javelinas,813860,Charlie Pagliarini,9,900,9,00,True,7,LF,Outfielder
+825613,2025-10-28,away,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,7,LF,Outfielder
+825613,2025-10-28,away,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,6,SS,Shortstop
+825613,2025-10-28,away,Surprise Saguaros,807276,Dante Nori,5,300,3,00,True,8,CF,Outfielder
+825613,2025-10-28,away,Surprise Saguaros,694749,Dylan Campbell,10,400,4,00,True,3,1B,First Base
+825613,2025-10-28,away,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,10,DH,Designated Hitter
+825613,2025-10-28,away,Surprise Saguaros,702270,Malcolm Moore,27,600,6,00,True,2,C,Catcher
+825613,2025-10-28,away,Surprise Saguaros,815304,Josh Adamczewski,14,700,7,00,True,4,2B,Second Base
+825613,2025-10-28,away,Surprise Saguaros,702662,Dylan Dreiling,6,800,8,00,True,9,RF,Outfielder
+825613,2025-10-28,away,Surprise Saguaros,702550,Chandler Pollard,43,900,9,00,True,5,3B,Third Base
+825613,2025-10-28,home,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825613,2025-10-28,home,Scottsdale Scorpions,694757,Maui Ahuna,1,200,2,00,True,4,2B,Second Base
+825613,2025-10-28,home,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,5,3B,Third Base
+825613,2025-10-28,home,Scottsdale Scorpions,814409,Seaver King,5,400,4,00,True,6,SS,Shortstop
+825613,2025-10-28,home,Scottsdale Scorpions,801075,Walker Janek,27,500,5,00,True,2,C,Catcher
+825613,2025-10-28,home,Scottsdale Scorpions,813844,Will Bush,47,600,6,00,True,10,DH,Designated Hitter
+825613,2025-10-28,home,Scottsdale Scorpions,692238,Parks Harber,40,700,7,00,True,3,1B,First Base
+825613,2025-10-28,home,Scottsdale Scorpions,701337,Ethan Petry,28,800,8,00,True,9,RF,Outfielder
+825613,2025-10-28,home,Scottsdale Scorpions,695763,Sam Petersen,2,900,9,00,True,7,LF,Outfielder
+825599,2025-10-28,away,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,4,2B,Second Base
+825599,2025-10-28,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825599,2025-10-28,away,Glendale Desert Dogs,695731,Braden Montgomery,6,300,3,00,True,9,RF,Outfielder
+825599,2025-10-28,away,Glendale Desert Dogs,802469,Travis Honeyman,34,400,4,00,True,8,CF,Outfielder
+825599,2025-10-28,away,Glendale Desert Dogs,688460,Josh Kasevich,4,500,5,00,True,6,SS,Shortstop
+825599,2025-10-28,away,Glendale Desert Dogs,804645,Caden Connor,20,600,6,00,True,3,1B,First Base
+825599,2025-10-28,away,Glendale Desert Dogs,814436,Ryan Galanie,15,700,7,00,True,10,DH,Designated Hitter
+825599,2025-10-28,away,Glendale Desert Dogs,694188,Jesus Galiz,35,800,8,00,True,2,C,Catcher
+825599,2025-10-28,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,900,9,00,True,7,LF,Outfielder
+825599,2025-10-28,home,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825599,2025-10-28,home,Mesa Solar Sox,695720,Tommy White,47,200,2,00,True,5,3B,Third Base
+825599,2025-10-28,home,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825599,2025-10-28,home,Mesa Solar Sox,695573,Cole Mathis,16,400,4,00,True,3,1B,First Base
+825599,2025-10-28,home,Mesa Solar Sox,694966,Brayden Taylor,55,500,5,00,True,10,DH,Designated Hitter
+825599,2025-10-28,home,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,4,2B,Second Base
+825599,2025-10-28,home,Mesa Solar Sox,703563,PJ Morlando,8,700,7,00,True,7,LF,Outfielder
+825599,2025-10-28,home,Mesa Solar Sox,805782,Ryan Lasko,1,800,8,00,True,8,CF,Outfielder
+825599,2025-10-28,home,Mesa Solar Sox,814458,Fenwick Trimble,3,900,9,00,True,9,RF,Outfielder
+825628,2025-10-29,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825628,2025-10-29,away,Peoria Javelinas,803175,Ethan Anderson,34,200,2,00,True,2,C,Catcher
+825628,2025-10-29,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,9,RF,Outfielder
+825628,2025-10-29,away,Peoria Javelinas,801126,Brock Rodden,5,400,4,00,True,4,2B,Second Base
+825628,2025-10-29,away,Peoria Javelinas,699114,Leo Balcazar,17,500,5,00,True,5,3B,Third Base
+825628,2025-10-29,away,Peoria Javelinas,702253,Cam Collier,6,600,6,00,True,3,1B,First Base
+825628,2025-10-29,away,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,6,SS,Shortstop
+825628,2025-10-29,away,Peoria Javelinas,701682,Braedon Karpathios,22,800,8,00,True,7,LF,Outfielder
+825628,2025-10-29,away,Peoria Javelinas,702601,Lamar King Jr.,27,900,9,00,True,10,DH,Designated Hitter
+825628,2025-10-29,home,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825628,2025-10-29,home,Salt River Rafters,694815,Jack Hurley,15,200,2,00,True,7,LF,Outfielder
+825628,2025-10-29,home,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825628,2025-10-29,home,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825628,2025-10-29,home,Salt River Rafters,808129,Juan Flores,19,500,5,00,True,2,C,Catcher
+825628,2025-10-29,home,Salt River Rafters,703156,Tony Blanco Jr.,99,600,6,00,True,10,DH,Designated Hitter
+825628,2025-10-29,home,Salt River Rafters,696142,Will Taylor,2,700,7,00,True,8,CF,Outfielder
+825628,2025-10-29,home,Salt River Rafters,687918,Braylen Wimmer,1,800,8,00,True,4,2B,Second Base
+825628,2025-10-29,home,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825583,2025-10-29,away,Scottsdale Scorpions,813896,Joseph Sullivan,8,100,1,00,True,8,CF,Outfielder
+825583,2025-10-29,away,Scottsdale Scorpions,695763,Sam Petersen,2,200,2,00,True,7,LF,Outfielder
+825583,2025-10-29,away,Scottsdale Scorpions,802599,Jack Penney,14,300,3,00,True,4,2B,Second Base
+825583,2025-10-29,away,Scottsdale Scorpions,801523,Chris Suero,11,400,4,00,True,2,C,Catcher
+825583,2025-10-29,away,Scottsdale Scorpions,692238,Parks Harber,40,500,5,00,True,5,3B,Third Base
+825583,2025-10-29,away,Scottsdale Scorpions,800208,Axiel Plaz,13,600,6,00,True,3,1B,First Base
+825583,2025-10-29,away,Scottsdale Scorpions,806152,Walker Martin,12,700,7,00,True,6,SS,Shortstop
+825583,2025-10-29,away,Scottsdale Scorpions,701337,Ethan Petry,28,800,8,00,True,9,RF,Outfielder
+825583,2025-10-29,away,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,10,DH,Designated Hitter
+825583,2025-10-29,home,Surprise Saguaros,802407,Joe Lampe,15,100,1,00,True,9,RF,Outfielder
+825583,2025-10-29,home,Surprise Saguaros,804858,Bryan Rincon,13,200,2,00,True,6,SS,Shortstop
+825583,2025-10-29,home,Surprise Saguaros,815304,Josh Adamczewski,14,300,3,00,True,7,LF,Outfielder
+825583,2025-10-29,home,Surprise Saguaros,806210,Alfonsin Rosario,2,400,4,00,True,10,DH,Designated Hitter
+825583,2025-10-29,home,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,2,C,Catcher
+825583,2025-10-29,home,Surprise Saguaros,807276,Dante Nori,5,600,6,00,True,8,CF,Outfielder
+825583,2025-10-29,home,Surprise Saguaros,694749,Dylan Campbell,10,700,7,00,True,3,1B,First Base
+825583,2025-10-29,home,Surprise Saguaros,802506,Dylan O'Rae,58,800,8,00,True,4,2B,Second Base
+825583,2025-10-29,home,Surprise Saguaros,702550,Chandler Pollard,43,900,9,00,True,5,3B,Third Base
+825656,2025-10-29,away,Mesa Solar Sox,806223,Aidan Smith,13,100,1,00,True,10,DH,Designated Hitter
+825656,2025-10-29,away,Mesa Solar Sox,689196,Owen Ayers,7,200,2,00,True,9,RF,Outfielder
+825656,2025-10-29,away,Mesa Solar Sox,695720,Tommy White,47,300,3,00,True,5,3B,Third Base
+825656,2025-10-29,away,Mesa Solar Sox,695573,Cole Mathis,16,400,4,00,True,3,1B,First Base
+825656,2025-10-29,away,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,500,5,00,True,6,SS,Shortstop
+825656,2025-10-29,away,Mesa Solar Sox,805782,Ryan Lasko,1,600,6,00,True,8,CF,Outfielder
+825656,2025-10-29,away,Mesa Solar Sox,703563,PJ Morlando,8,700,7,00,True,7,LF,Outfielder
+825656,2025-10-29,away,Mesa Solar Sox,692633,Manuel Palencia,25,800,8,00,True,2,C,Catcher
+825656,2025-10-29,away,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,4,2B,Second Base
+825656,2025-10-29,home,Glendale Desert Dogs,805347,Jim Jarvis,2,100,1,00,True,6,SS,Shortstop
+825656,2025-10-29,home,Glendale Desert Dogs,803011,Sam Antonacci,10,200,2,00,True,5,3B,Third Base
+825656,2025-10-29,home,Glendale Desert Dogs,692568,Miguel Ugueto,3,300,3,00,True,9,RF,Outfielder
+825656,2025-10-29,home,Glendale Desert Dogs,814436,Ryan Galanie,15,400,4,00,True,3,1B,First Base
+825656,2025-10-29,home,Glendale Desert Dogs,802469,Travis Honeyman,34,500,5,00,True,8,CF,Outfielder
+825656,2025-10-29,home,Glendale Desert Dogs,702690,Cutter Coffey,9,600,6,00,True,10,DH,Designated Hitter
+825656,2025-10-29,home,Glendale Desert Dogs,702488,Logan Wagner,23,700,7,00,True,4,2B,Second Base
+825656,2025-10-29,home,Glendale Desert Dogs,815104,Graysen Tarlow,7,800,8,00,True,2,C,Catcher
+825656,2025-10-29,home,Glendale Desert Dogs,691559,Jose D. Hernandez,70,900,9,00,True,7,LF,Outfielder
+825642,2025-10-30,away,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,8,CF,Outfielder
+825642,2025-10-30,away,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,6,SS,Shortstop
+825642,2025-10-30,away,Surprise Saguaros,802506,Dylan O'Rae,58,300,3,00,True,4,2B,Second Base
+825642,2025-10-30,away,Surprise Saguaros,806210,Alfonsin Rosario,2,400,4,00,True,9,RF,Outfielder
+825642,2025-10-30,away,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,10,DH,Designated Hitter
+825642,2025-10-30,away,Surprise Saguaros,802407,Joe Lampe,15,501,5,01,False,10,DH,Designated Hitter
+825642,2025-10-30,away,Surprise Saguaros,702270,Malcolm Moore,27,600,6,00,True,2,C,Catcher
+825642,2025-10-30,away,Surprise Saguaros,804858,Bryan Rincon,13,700,7,00,True,5,3B,Third Base
+825642,2025-10-30,away,Surprise Saguaros,702662,Dylan Dreiling,6,800,8,00,True,7,LF,Outfielder
+825642,2025-10-30,away,Surprise Saguaros,691405,Juan Benjamin,7,900,9,00,True,3,1B,First Base
+825642,2025-10-30,home,Peoria Javelinas,806071,Jonny Farmelo,21,100,1,00,True,8,CF,Outfielder
+825642,2025-10-30,home,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,5,3B,Third Base
+825642,2025-10-30,home,Peoria Javelinas,810838,Ryan Jackson,8,300,3,00,True,6,SS,Shortstop
+825642,2025-10-30,home,Peoria Javelinas,806957,Alfredo Duno,28,400,4,00,True,10,DH,Designated Hitter
+825642,2025-10-30,home,Peoria Javelinas,813860,Charlie Pagliarini,9,500,5,00,True,4,2B,Second Base
+825642,2025-10-30,home,Peoria Javelinas,701682,Braedon Karpathios,22,600,6,00,True,7,LF,Outfielder
+825642,2025-10-30,home,Peoria Javelinas,702601,Lamar King Jr.,27,700,7,00,True,2,C,Catcher
+825642,2025-10-30,home,Peoria Javelinas,800449,Thomas Sosa,3,800,8,00,True,9,RF,Outfielder
+825642,2025-10-30,home,Peoria Javelinas,701771,Billy Amick,20,900,9,00,True,3,1B,First Base
+825627,2025-10-30,away,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825627,2025-10-30,away,Mesa Solar Sox,806223,Aidan Smith,13,200,2,00,True,10,DH,Designated Hitter
+825627,2025-10-30,away,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825627,2025-10-30,away,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,400,4,00,True,7,LF,Outfielder
+825627,2025-10-30,away,Mesa Solar Sox,694966,Brayden Taylor,55,500,5,00,True,5,3B,Third Base
+825627,2025-10-30,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,4,2B,Second Base
+825627,2025-10-30,away,Mesa Solar Sox,814458,Fenwick Trimble,3,700,7,00,True,8,CF,Outfielder
+825627,2025-10-30,away,Mesa Solar Sox,703563,PJ Morlando,8,800,8,00,True,9,RF,Outfielder
+825627,2025-10-30,away,Mesa Solar Sox,805782,Ryan Lasko,1,801,8,01,False,9,RF,Outfielder
+825627,2025-10-30,away,Mesa Solar Sox,804751,Logan Poteet,28,900,9,00,True,3,1B,First Base
+825627,2025-10-30,home,Salt River Rafters,807511,Nelly Taylor,3,100,1,00,True,8,CF,Outfielder
+825627,2025-10-30,home,Salt River Rafters,702574,David Mershon,8,200,2,00,True,6,SS,Shortstop
+825627,2025-10-30,home,Salt River Rafters,703606,Jared Thomas,14,300,3,00,True,7,LF,Outfielder
+825627,2025-10-30,home,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825627,2025-10-30,home,Salt River Rafters,700341,Kenny Castillo,77,500,5,00,True,2,C,Catcher
+825627,2025-10-30,home,Salt River Rafters,703190,Johanfran Garcia,30,600,6,00,True,10,DH,Designated Hitter
+825627,2025-10-30,home,Salt River Rafters,703156,Tony Blanco Jr.,99,700,7,00,True,3,1B,First Base
+825627,2025-10-30,home,Salt River Rafters,687918,Braylen Wimmer,1,800,8,00,True,5,3B,Third Base
+825627,2025-10-30,home,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825612,2025-10-30,away,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,4,2B,Second Base
+825612,2025-10-30,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825612,2025-10-30,away,Glendale Desert Dogs,695731,Braden Montgomery,6,300,3,00,True,10,DH,Designated Hitter
+825612,2025-10-30,away,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,6,SS,Shortstop
+825612,2025-10-30,away,Glendale Desert Dogs,804645,Caden Connor,20,500,5,00,True,9,RF,Outfielder
+825612,2025-10-30,away,Glendale Desert Dogs,702488,Logan Wagner,23,600,6,00,True,3,1B,First Base
+825612,2025-10-30,away,Glendale Desert Dogs,691559,Jose D. Hernandez,70,700,7,00,True,7,LF,Outfielder
+825612,2025-10-30,away,Glendale Desert Dogs,698927,Edward Duran,17,800,8,00,True,2,C,Catcher
+825612,2025-10-30,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,900,9,00,True,8,CF,Outfielder
+825612,2025-10-30,home,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825612,2025-10-30,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,5,3B,Third Base
+825612,2025-10-30,home,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,10,DH,Designated Hitter
+825612,2025-10-30,home,Scottsdale Scorpions,814409,Seaver King,5,400,4,00,True,6,SS,Shortstop
+825612,2025-10-30,home,Scottsdale Scorpions,802599,Jack Penney,14,401,4,01,False,6,SS,Shortstop
+825612,2025-10-30,home,Scottsdale Scorpions,801075,Walker Janek,27,500,5,00,True,2,C,Catcher
+825612,2025-10-30,home,Scottsdale Scorpions,813896,Joseph Sullivan,8,600,6,00,True,7,LF,Outfielder
+825612,2025-10-30,home,Scottsdale Scorpions,692238,Parks Harber,40,700,7,00,True,9,RF,Outfielder
+825612,2025-10-30,home,Scottsdale Scorpions,813844,Will Bush,47,800,8,00,True,3,1B,First Base
+825612,2025-10-30,home,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,4,2B,Second Base
+825659,2025-10-31,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825659,2025-10-31,away,Peoria Javelinas,803175,Ethan Anderson,34,200,2,00,True,2,C,Catcher
+825659,2025-10-31,away,Peoria Javelinas,801126,Brock Rodden,5,300,3,00,True,4,2B,Second Base
+825659,2025-10-31,away,Peoria Javelinas,699114,Leo Balcazar,17,400,4,00,True,6,SS,Shortstop
+825659,2025-10-31,away,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,3,1B,First Base
+825659,2025-10-31,away,Peoria Javelinas,806263,Brandon Winokur,4,600,6,00,True,5,3B,Third Base
+825659,2025-10-31,away,Peoria Javelinas,701682,Braedon Karpathios,22,700,7,00,True,9,RF,Outfielder
+825659,2025-10-31,away,Peoria Javelinas,810838,Ryan Jackson,8,800,8,00,True,10,DH,Designated Hitter
+825659,2025-10-31,away,Peoria Javelinas,813860,Charlie Pagliarini,9,900,9,00,True,7,LF,Outfielder
+825659,2025-10-31,home,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,7,LF,Outfielder
+825659,2025-10-31,home,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,10,DH,Designated Hitter
+825659,2025-10-31,home,Glendale Desert Dogs,805347,Jim Jarvis,2,300,3,00,True,6,SS,Shortstop
+825659,2025-10-31,home,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,4,2B,Second Base
+825659,2025-10-31,home,Glendale Desert Dogs,814436,Ryan Galanie,15,500,5,00,True,3,1B,First Base
+825659,2025-10-31,home,Glendale Desert Dogs,802469,Travis Honeyman,34,600,6,00,True,8,CF,Outfielder
+825659,2025-10-31,home,Glendale Desert Dogs,702690,Cutter Coffey,9,700,7,00,True,5,3B,Third Base
+825659,2025-10-31,home,Glendale Desert Dogs,815104,Graysen Tarlow,7,800,8,00,True,2,C,Catcher
+825659,2025-10-31,home,Glendale Desert Dogs,692568,Miguel Ugueto,3,900,9,00,True,9,RF,Outfielder
+825626,2025-10-31,away,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825626,2025-10-31,away,Scottsdale Scorpions,802599,Jack Penney,14,200,2,00,True,4,2B,Second Base
+825626,2025-10-31,away,Scottsdale Scorpions,814409,Seaver King,5,300,3,00,True,6,SS,Shortstop
+825626,2025-10-31,away,Scottsdale Scorpions,801523,Chris Suero,11,400,4,00,True,3,1B,First Base
+825626,2025-10-31,away,Scottsdale Scorpions,692238,Parks Harber,40,500,5,00,True,10,DH,Designated Hitter
+825626,2025-10-31,away,Scottsdale Scorpions,800208,Axiel Plaz,13,600,6,00,True,2,C,Catcher
+825626,2025-10-31,away,Scottsdale Scorpions,701337,Ethan Petry,28,700,7,00,True,9,RF,Outfielder
+825626,2025-10-31,away,Scottsdale Scorpions,806152,Walker Martin,12,800,8,00,True,5,3B,Third Base
+825626,2025-10-31,away,Scottsdale Scorpions,695763,Sam Petersen,2,900,9,00,True,7,LF,Outfielder
+825626,2025-10-31,home,Salt River Rafters,702574,David Mershon,8,100,1,00,True,4,2B,Second Base
+825626,2025-10-31,home,Salt River Rafters,696142,Will Taylor,2,200,2,00,True,9,RF,Outfielder
+825626,2025-10-31,home,Salt River Rafters,804558,Raudi Rodriguez,9,300,3,00,True,8,CF,Outfielder
+825626,2025-10-31,home,Salt River Rafters,809707,Charlie Condon,6,400,4,00,True,3,1B,First Base
+825626,2025-10-31,home,Salt River Rafters,703606,Jared Thomas,14,500,5,00,True,7,LF,Outfielder
+825626,2025-10-31,home,Salt River Rafters,703190,Johanfran Garcia,30,600,6,00,True,2,C,Catcher
+825626,2025-10-31,home,Salt River Rafters,808129,Juan Flores,19,700,7,00,True,10,DH,Designated Hitter
+825626,2025-10-31,home,Salt River Rafters,687918,Braylen Wimmer,1,800,8,00,True,5,3B,Third Base
+825626,2025-10-31,home,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,6,SS,Shortstop
+825582,2025-10-31,away,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825582,2025-10-31,away,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,200,2,00,True,7,LF,Outfielder
+825582,2025-10-31,away,Mesa Solar Sox,695720,Tommy White,47,300,3,00,True,3,1B,First Base
+825582,2025-10-31,away,Mesa Solar Sox,695573,Cole Mathis,16,400,4,00,True,5,3B,Third Base
+825582,2025-10-31,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,500,5,00,True,4,2B,Second Base
+825582,2025-10-31,away,Mesa Solar Sox,814458,Fenwick Trimble,3,600,6,00,True,9,RF,Outfielder
+825582,2025-10-31,away,Mesa Solar Sox,805782,Ryan Lasko,1,700,7,00,True,8,CF,Outfielder
+825582,2025-10-31,away,Mesa Solar Sox,692633,Manuel Palencia,25,800,8,00,True,2,C,Catcher
+825582,2025-10-31,away,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,10,DH,Designated Hitter
+825582,2025-10-31,home,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,9,RF,Outfielder
+825582,2025-10-31,home,Surprise Saguaros,807276,Dante Nori,5,200,2,00,True,8,CF,Outfielder
+825582,2025-10-31,home,Surprise Saguaros,815304,Josh Adamczewski,14,300,3,00,True,7,LF,Outfielder
+825582,2025-10-31,home,Surprise Saguaros,694749,Dylan Campbell,10,400,4,00,True,5,3B,Third Base
+825582,2025-10-31,home,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,2,C,Catcher
+825582,2025-10-31,home,Surprise Saguaros,694187,Daniel Vazquez,26,600,6,00,True,6,SS,Shortstop
+825582,2025-10-31,home,Surprise Saguaros,702270,Malcolm Moore,27,700,7,00,True,10,DH,Designated Hitter
+825582,2025-10-31,home,Surprise Saguaros,803015,Ben Hartl,40,800,8,00,True,3,1B,First Base
+825582,2025-10-31,home,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825598,2025-11-01,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,7,LF,Outfielder
+825598,2025-11-01,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825598,2025-11-01,away,Glendale Desert Dogs,803011,Sam Antonacci,10,300,3,00,True,6,SS,Shortstop
+825598,2025-11-01,away,Glendale Desert Dogs,695731,Braden Montgomery,6,400,4,00,True,10,DH,Designated Hitter
+825598,2025-11-01,away,Glendale Desert Dogs,804645,Caden Connor,20,500,5,00,True,9,RF,Outfielder
+825598,2025-11-01,away,Glendale Desert Dogs,702690,Cutter Coffey,9,600,6,00,True,4,2B,Second Base
+825598,2025-11-01,away,Glendale Desert Dogs,802469,Travis Honeyman,34,700,7,00,True,8,CF,Outfielder
+825598,2025-11-01,away,Glendale Desert Dogs,702488,Logan Wagner,23,800,8,00,True,3,1B,First Base
+825598,2025-11-01,away,Glendale Desert Dogs,694188,Jesus Galiz,35,900,9,00,True,2,C,Catcher
+825598,2025-11-01,home,Mesa Solar Sox,806223,Aidan Smith,13,100,1,00,True,10,DH,Designated Hitter
+825598,2025-11-01,home,Mesa Solar Sox,689196,Owen Ayers,7,200,2,00,True,2,C,Catcher
+825598,2025-11-01,home,Mesa Solar Sox,695720,Tommy White,47,300,3,00,True,5,3B,Third Base
+825598,2025-11-01,home,Mesa Solar Sox,694966,Brayden Taylor,55,400,4,00,True,4,2B,Second Base
+825598,2025-11-01,home,Mesa Solar Sox,695573,Cole Mathis,16,500,5,00,True,3,1B,First Base
+825598,2025-11-01,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,600,6,00,True,7,LF,Outfielder
+825598,2025-11-01,home,Mesa Solar Sox,814458,Fenwick Trimble,3,700,7,00,True,8,CF,Outfielder
+825598,2025-11-01,home,Mesa Solar Sox,805782,Ryan Lasko,1,800,8,00,True,9,RF,Outfielder
+825598,2025-11-01,home,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,6,SS,Shortstop
+825578,2025-11-01,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825578,2025-11-01,away,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,5,3B,Third Base
+825578,2025-11-01,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,7,LF,Outfielder
+825578,2025-11-01,away,Peoria Javelinas,803175,Ethan Anderson,34,400,4,00,True,9,RF,Outfielder
+825578,2025-11-01,away,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,3,1B,First Base
+825578,2025-11-01,away,Peoria Javelinas,806263,Brandon Winokur,4,600,6,00,True,6,SS,Shortstop
+825578,2025-11-01,away,Peoria Javelinas,806957,Alfredo Duno,28,700,7,00,True,2,C,Catcher
+825578,2025-11-01,away,Peoria Javelinas,813860,Charlie Pagliarini,9,800,8,00,True,4,2B,Second Base
+825578,2025-11-01,away,Peoria Javelinas,702601,Lamar King Jr.,27,900,9,00,True,10,DH,Designated Hitter
+825578,2025-11-01,home,Surprise Saguaros,802407,Joe Lampe,15,100,1,00,True,8,CF,Outfielder
+825578,2025-11-01,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,5,3B,Third Base
+825578,2025-11-01,home,Surprise Saguaros,815304,Josh Adamczewski,14,300,3,00,True,7,LF,Outfielder
+825578,2025-11-01,home,Surprise Saguaros,806210,Alfonsin Rosario,2,400,4,00,True,10,DH,Designated Hitter
+825578,2025-11-01,home,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,2,C,Catcher
+825578,2025-11-01,home,Surprise Saguaros,691405,Juan Benjamin,7,600,6,00,True,3,1B,First Base
+825578,2025-11-01,home,Surprise Saguaros,702662,Dylan Dreiling,6,700,7,00,True,9,RF,Outfielder
+825578,2025-11-01,home,Surprise Saguaros,804858,Bryan Rincon,13,800,8,00,True,6,SS,Shortstop
+825578,2025-11-01,home,Surprise Saguaros,702550,Chandler Pollard,43,900,9,00,True,4,2B,Second Base
+825611,2025-11-01,away,Salt River Rafters,694815,Jack Hurley,15,100,1,00,True,7,LF,Outfielder
+825611,2025-11-01,away,Salt River Rafters,804558,Raudi Rodriguez,9,200,2,00,True,8,CF,Outfielder
+825611,2025-11-01,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825611,2025-11-01,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825611,2025-11-01,away,Salt River Rafters,808129,Juan Flores,19,500,5,00,True,2,C,Catcher
+825611,2025-11-01,away,Salt River Rafters,703156,Tony Blanco Jr.,99,600,6,00,True,10,DH,Designated Hitter
+825611,2025-11-01,away,Salt River Rafters,702574,David Mershon,8,700,7,00,True,6,SS,Shortstop
+825611,2025-11-01,away,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825611,2025-11-01,away,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825611,2025-11-01,home,Scottsdale Scorpions,813896,Joseph Sullivan,8,100,1,00,True,8,CF,Outfielder
+825611,2025-11-01,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,6,SS,Shortstop
+825611,2025-11-01,home,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,5,3B,Third Base
+825611,2025-11-01,home,Scottsdale Scorpions,801523,Chris Suero,11,400,4,00,True,2,C,Catcher
+825611,2025-11-01,home,Scottsdale Scorpions,802599,Jack Penney,14,500,5,00,True,4,2B,Second Base
+825611,2025-11-01,home,Scottsdale Scorpions,701337,Ethan Petry,28,600,6,00,True,9,RF,Outfielder
+825611,2025-11-01,home,Scottsdale Scorpions,813844,Will Bush,47,700,7,00,True,3,1B,First Base
+825611,2025-11-01,home,Scottsdale Scorpions,695763,Sam Petersen,2,800,8,00,True,7,LF,Outfielder
+825611,2025-11-01,home,Scottsdale Scorpions,806152,Walker Martin,12,900,9,00,True,10,DH,Designated Hitter
+825658,2025-11-02,away,Surprise Saguaros,802407,Joe Lampe,15,100,1,00,True,10,DH,Designated Hitter
+825658,2025-11-02,away,Surprise Saguaros,811287,Carson Roccaforte,1,200,2,00,True,9,RF,Outfielder
+825658,2025-11-02,away,Surprise Saguaros,694187,Daniel Vazquez,26,300,3,00,True,6,SS,Shortstop
+825658,2025-11-02,away,Surprise Saguaros,815304,Josh Adamczewski,14,400,4,00,True,7,LF,Outfielder
+825658,2025-11-02,away,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,2,C,Catcher
+825658,2025-11-02,away,Surprise Saguaros,694749,Dylan Campbell,10,600,6,00,True,5,3B,Third Base
+825658,2025-11-02,away,Surprise Saguaros,807276,Dante Nori,5,700,7,00,True,8,CF,Outfielder
+825658,2025-11-02,away,Surprise Saguaros,803015,Ben Hartl,40,800,8,00,True,3,1B,First Base
+825658,2025-11-02,away,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825658,2025-11-02,home,Glendale Desert Dogs,805347,Jim Jarvis,2,100,1,00,True,6,SS,Shortstop
+825658,2025-11-02,home,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825658,2025-11-02,home,Glendale Desert Dogs,695731,Braden Montgomery,6,300,3,00,True,8,CF,Outfielder
+825658,2025-11-02,home,Glendale Desert Dogs,688460,Josh Kasevich,4,400,4,00,True,4,2B,Second Base
+825658,2025-11-02,home,Glendale Desert Dogs,804645,Caden Connor,20,500,5,00,True,10,DH,Designated Hitter
+825658,2025-11-02,home,Glendale Desert Dogs,814436,Ryan Galanie,15,600,6,00,True,3,1B,First Base
+825658,2025-11-02,home,Glendale Desert Dogs,692568,Miguel Ugueto,3,700,7,00,True,9,RF,Outfielder
+825658,2025-11-02,home,Glendale Desert Dogs,698927,Edward Duran,17,800,8,00,True,2,C,Catcher
+825658,2025-11-02,home,Glendale Desert Dogs,691559,Jose D. Hernandez,70,900,9,00,True,7,LF,Outfielder
+825597,2025-11-02,away,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825597,2025-11-02,away,Salt River Rafters,694815,Jack Hurley,15,200,2,00,True,10,DH,Designated Hitter
+825597,2025-11-02,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825597,2025-11-02,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825597,2025-11-02,away,Salt River Rafters,696142,Will Taylor,2,500,5,00,True,7,LF,Outfielder
+825597,2025-11-02,away,Salt River Rafters,703190,Johanfran Garcia,30,600,6,00,True,2,C,Catcher
+825597,2025-11-02,away,Salt River Rafters,703606,Jared Thomas,14,601,6,01,False,12,PR,Pinch Runner
+825597,2025-11-02,away,Salt River Rafters,800306,Jansel Luis,4,700,7,00,True,5,3B,Third Base
+825597,2025-11-02,away,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825597,2025-11-02,away,Salt River Rafters,807511,Nelly Taylor,3,900,9,00,True,8,CF,Outfielder
+825597,2025-11-02,home,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825597,2025-11-02,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,200,2,00,True,4,2B,Second Base
+825597,2025-11-02,home,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,3,1B,First Base
+825597,2025-11-02,home,Mesa Solar Sox,695720,Tommy White,47,400,4,00,True,5,3B,Third Base
+825597,2025-11-02,home,Mesa Solar Sox,814458,Fenwick Trimble,3,500,5,00,True,8,CF,Outfielder
+825597,2025-11-02,home,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,10,DH,Designated Hitter
+825597,2025-11-02,home,Mesa Solar Sox,805782,Ryan Lasko,1,700,7,00,True,9,RF,Outfielder
+825597,2025-11-02,home,Mesa Solar Sox,692633,Manuel Palencia,25,800,8,00,True,2,C,Catcher
+825597,2025-11-02,home,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,7,LF,Outfielder
+825610,2025-11-02,away,Peoria Javelinas,806071,Jonny Farmelo,21,100,1,00,True,8,CF,Outfielder
+825610,2025-11-02,away,Peoria Javelinas,701682,Braedon Karpathios,22,200,2,00,True,7,LF,Outfielder
+825610,2025-11-02,away,Peoria Javelinas,699114,Leo Balcazar,17,300,3,00,True,6,SS,Shortstop
+825610,2025-11-02,away,Peoria Javelinas,702253,Cam Collier,6,400,4,00,True,3,1B,First Base
+825610,2025-11-02,away,Peoria Javelinas,813860,Charlie Pagliarini,9,500,5,00,True,4,2B,Second Base
+825610,2025-11-02,away,Peoria Javelinas,806957,Alfredo Duno,28,600,6,00,True,10,DH,Designated Hitter
+825610,2025-11-02,away,Peoria Javelinas,810838,Ryan Jackson,8,700,7,00,True,5,3B,Third Base
+825610,2025-11-02,away,Peoria Javelinas,800449,Thomas Sosa,3,800,8,00,True,9,RF,Outfielder
+825610,2025-11-02,away,Peoria Javelinas,702601,Lamar King Jr.,27,900,9,00,True,2,C,Catcher
+825610,2025-11-02,home,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825610,2025-11-02,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,5,3B,Third Base
+825610,2025-11-02,home,Scottsdale Scorpions,814409,Seaver King,5,300,3,00,True,6,SS,Shortstop
+825610,2025-11-02,home,Scottsdale Scorpions,802599,Jack Penney,14,400,4,00,True,10,DH,Designated Hitter
+825610,2025-11-02,home,Scottsdale Scorpions,800208,Axiel Plaz,13,500,5,00,True,2,C,Catcher
+825610,2025-11-02,home,Scottsdale Scorpions,813896,Joseph Sullivan,8,600,6,00,True,7,LF,Outfielder
+825610,2025-11-02,home,Scottsdale Scorpions,695763,Sam Petersen,2,700,7,00,True,9,RF,Outfielder
+825610,2025-11-02,home,Scottsdale Scorpions,813844,Will Bush,47,800,8,00,True,3,1B,First Base
+825610,2025-11-02,home,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,4,2B,Second Base
+825579,2025-11-04,away,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825579,2025-11-04,away,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,7,LF,Outfielder
+825579,2025-11-04,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825579,2025-11-04,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825579,2025-11-04,away,Salt River Rafters,804558,Raudi Rodriguez,9,500,5,00,True,8,CF,Outfielder
+825579,2025-11-04,away,Salt River Rafters,808129,Juan Flores,19,600,6,00,True,2,C,Catcher
+825579,2025-11-04,away,Salt River Rafters,700341,Kenny Castillo,77,700,7,00,True,10,DH,Designated Hitter
+825579,2025-11-04,away,Salt River Rafters,800306,Jansel Luis,4,800,8,00,True,5,3B,Third Base
+825579,2025-11-04,away,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825579,2025-11-04,home,Surprise Saguaros,702550,Chandler Pollard,43,100,1,00,True,8,CF,Outfielder
+825579,2025-11-04,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,5,3B,Third Base
+825579,2025-11-04,home,Surprise Saguaros,702270,Malcolm Moore,27,300,3,00,True,2,C,Catcher
+825579,2025-11-04,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825579,2025-11-04,home,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,10,DH,Designated Hitter
+825579,2025-11-04,home,Surprise Saguaros,806210,Alfonsin Rosario,2,600,6,00,True,9,RF,Outfielder
+825579,2025-11-04,home,Surprise Saguaros,702662,Dylan Dreiling,6,700,7,00,True,7,LF,Outfielder
+825579,2025-11-04,home,Surprise Saguaros,691405,Juan Benjamin,7,800,8,00,True,4,2B,Second Base
+825579,2025-11-04,home,Surprise Saguaros,804858,Bryan Rincon,13,900,9,00,True,6,SS,Shortstop
+825596,2025-11-04,away,Scottsdale Scorpions,805808,Kevin McGonigle,9,100,1,00,True,6,SS,Shortstop
+825596,2025-11-04,away,Scottsdale Scorpions,801194,Max Anderson,25,200,2,00,True,5,3B,Third Base
+825596,2025-11-04,away,Scottsdale Scorpions,802599,Jack Penney,14,300,3,00,True,4,2B,Second Base
+825596,2025-11-04,away,Scottsdale Scorpions,692238,Parks Harber,40,400,4,00,True,3,1B,First Base
+825596,2025-11-04,away,Scottsdale Scorpions,703492,Nick Morabito,3,500,5,00,True,8,CF,Outfielder
+825596,2025-11-04,away,Scottsdale Scorpions,801523,Chris Suero,11,600,6,00,True,2,C,Catcher
+825596,2025-11-04,away,Scottsdale Scorpions,701337,Ethan Petry,28,700,7,00,True,9,RF,Outfielder
+825596,2025-11-04,away,Scottsdale Scorpions,806152,Walker Martin,12,800,8,00,True,10,DH,Designated Hitter
+825596,2025-11-04,away,Scottsdale Scorpions,700083,John Bay,60,900,9,00,True,7,LF,Outfielder
+825596,2025-11-04,home,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825596,2025-11-04,home,Mesa Solar Sox,806223,Aidan Smith,13,200,2,00,True,10,DH,Designated Hitter
+825596,2025-11-04,home,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,3,1B,First Base
+825596,2025-11-04,home,Mesa Solar Sox,695720,Tommy White,47,400,4,00,True,5,3B,Third Base
+825596,2025-11-04,home,Mesa Solar Sox,815089,Coby Morales,19,500,5,00,True,9,RF,Outfielder
+825596,2025-11-04,home,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,4,2B,Second Base
+825596,2025-11-04,home,Mesa Solar Sox,814458,Fenwick Trimble,3,700,7,00,True,8,CF,Outfielder
+825596,2025-11-04,home,Mesa Solar Sox,690992,Ed Howard,9,800,8,00,True,7,LF,Outfielder
+825596,2025-11-04,home,Mesa Solar Sox,692633,Manuel Palencia,25,900,9,00,True,2,C,Catcher
+825657,2025-11-04,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825657,2025-11-04,away,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,5,3B,Third Base
+825657,2025-11-04,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,9,RF,Outfielder
+825657,2025-11-04,away,Peoria Javelinas,803175,Ethan Anderson,34,400,4,00,True,2,C,Catcher
+825657,2025-11-04,away,Peoria Javelinas,813860,Charlie Pagliarini,9,500,5,00,True,7,LF,Outfielder
+825657,2025-11-04,away,Peoria Javelinas,702253,Cam Collier,6,600,6,00,True,3,1B,First Base
+825657,2025-11-04,away,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,6,SS,Shortstop
+825657,2025-11-04,away,Peoria Javelinas,702601,Lamar King Jr.,27,800,8,00,True,10,DH,Designated Hitter
+825657,2025-11-04,away,Peoria Javelinas,810838,Ryan Jackson,8,900,9,00,True,4,2B,Second Base
+825657,2025-11-04,home,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,7,LF,Outfielder
+825657,2025-11-04,home,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825657,2025-11-04,home,Glendale Desert Dogs,803011,Sam Antonacci,10,300,3,00,True,4,2B,Second Base
+825657,2025-11-04,home,Glendale Desert Dogs,695731,Braden Montgomery,6,400,4,00,True,8,CF,Outfielder
+825657,2025-11-04,home,Glendale Desert Dogs,814436,Ryan Galanie,15,500,5,00,True,3,1B,First Base
+825657,2025-11-04,home,Glendale Desert Dogs,804645,Caden Connor,20,600,6,00,True,9,RF,Outfielder
+825657,2025-11-04,home,Glendale Desert Dogs,805347,Jim Jarvis,2,700,7,00,True,6,SS,Shortstop
+825657,2025-11-04,home,Glendale Desert Dogs,815104,Graysen Tarlow,7,800,8,00,True,2,C,Catcher
+825657,2025-11-04,home,Glendale Desert Dogs,683103,Cade Doughty,50,900,9,00,True,10,DH,Designated Hitter
+825577,2025-11-05,away,Scottsdale Scorpions,801523,Chris Suero,11,100,1,00,True,10,DH,Designated Hitter
+825577,2025-11-05,away,Scottsdale Scorpions,814409,Seaver King,5,200,2,00,True,6,SS,Shortstop
+825577,2025-11-05,away,Scottsdale Scorpions,813896,Joseph Sullivan,8,300,3,00,True,8,CF,Outfielder
+825577,2025-11-05,away,Scottsdale Scorpions,692238,Parks Harber,40,400,4,00,True,9,RF,Outfielder
+825577,2025-11-05,away,Scottsdale Scorpions,813844,Will Bush,47,500,5,00,True,3,1B,First Base
+825577,2025-11-05,away,Scottsdale Scorpions,695763,Sam Petersen,2,600,6,00,True,7,LF,Outfielder
+825577,2025-11-05,away,Scottsdale Scorpions,800208,Axiel Plaz,13,700,7,00,True,2,C,Catcher
+825577,2025-11-05,away,Scottsdale Scorpions,806152,Walker Martin,12,800,8,00,True,5,3B,Third Base
+825577,2025-11-05,away,Scottsdale Scorpions,700784,Jeron Williams,4,900,9,00,True,4,2B,Second Base
+825577,2025-11-05,home,Surprise Saguaros,811287,Carson Roccaforte,1,100,1,00,True,9,RF,Outfielder
+825577,2025-11-05,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,6,SS,Shortstop
+825577,2025-11-05,home,Surprise Saguaros,815304,Josh Adamczewski,14,300,3,00,True,7,LF,Outfielder
+825577,2025-11-05,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825577,2025-11-05,home,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,2,C,Catcher
+825577,2025-11-05,home,Surprise Saguaros,806210,Alfonsin Rosario,2,600,6,00,True,10,DH,Designated Hitter
+825577,2025-11-05,home,Surprise Saguaros,807276,Dante Nori,5,700,7,00,True,8,CF,Outfielder
+825577,2025-11-05,home,Surprise Saguaros,694749,Dylan Campbell,10,800,8,00,True,5,3B,Third Base
+825577,2025-11-05,home,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825594,2025-11-05,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,8,CF,Outfielder
+825594,2025-11-05,away,Glendale Desert Dogs,702690,Cutter Coffey,9,200,2,00,True,10,DH,Designated Hitter
+825594,2025-11-05,away,Glendale Desert Dogs,803011,Sam Antonacci,10,300,3,00,True,4,2B,Second Base
+825594,2025-11-05,away,Glendale Desert Dogs,692568,Miguel Ugueto,3,400,4,00,True,9,RF,Outfielder
+825594,2025-11-05,away,Glendale Desert Dogs,805347,Jim Jarvis,2,500,5,00,True,6,SS,Shortstop
+825594,2025-11-05,away,Glendale Desert Dogs,683103,Cade Doughty,50,600,6,00,True,5,3B,Third Base
+825594,2025-11-05,away,Glendale Desert Dogs,702488,Logan Wagner,23,700,7,00,True,3,1B,First Base
+825594,2025-11-05,away,Glendale Desert Dogs,694188,Jesus Galiz,35,800,8,00,True,2,C,Catcher
+825594,2025-11-05,away,Glendale Desert Dogs,691559,Jose D. Hernandez,70,900,9,00,True,7,LF,Outfielder
+825594,2025-11-05,home,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825594,2025-11-05,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,200,2,00,True,7,LF,Outfielder
+825594,2025-11-05,home,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825594,2025-11-05,home,Mesa Solar Sox,804751,Logan Poteet,28,301,3,01,False,2,C,Catcher
+825594,2025-11-05,home,Mesa Solar Sox,695720,Tommy White,47,400,4,00,True,5,3B,Third Base
+825594,2025-11-05,home,Mesa Solar Sox,694966,Brayden Taylor,55,500,5,00,True,10,DH,Designated Hitter
+825594,2025-11-05,home,Mesa Solar Sox,695573,Cole Mathis,16,600,6,00,True,3,1B,First Base
+825594,2025-11-05,home,Mesa Solar Sox,805782,Ryan Lasko,1,700,7,00,True,8,CF,Outfielder
+825594,2025-11-05,home,Mesa Solar Sox,703563,PJ Morlando,8,800,8,00,True,9,RF,Outfielder
+825594,2025-11-05,home,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,4,2B,Second Base
+825625,2025-11-05,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825625,2025-11-05,away,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,6,SS,Shortstop
+825625,2025-11-05,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,7,LF,Outfielder
+825625,2025-11-05,away,Peoria Javelinas,803175,Ethan Anderson,34,400,4,00,True,3,1B,First Base
+825625,2025-11-05,away,Peoria Javelinas,702601,Lamar King Jr.,27,500,5,00,True,2,C,Catcher
+825625,2025-11-05,away,Peoria Javelinas,702253,Cam Collier,6,600,6,00,True,5,3B,Third Base
+825625,2025-11-05,away,Peoria Javelinas,701682,Braedon Karpathios,22,700,7,00,True,9,RF,Outfielder
+825625,2025-11-05,away,Peoria Javelinas,800449,Thomas Sosa,3,800,8,00,True,10,DH,Designated Hitter
+825625,2025-11-05,away,Peoria Javelinas,813860,Charlie Pagliarini,9,900,9,00,True,4,2B,Second Base
+825625,2025-11-05,home,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825625,2025-11-05,home,Salt River Rafters,703606,Jared Thomas,14,200,2,00,True,8,CF,Outfielder
+825625,2025-11-05,home,Salt River Rafters,804558,Raudi Rodriguez,9,300,3,00,True,9,RF,Outfielder
+825625,2025-11-05,home,Salt River Rafters,809707,Charlie Condon,6,400,4,00,True,3,1B,First Base
+825625,2025-11-05,home,Salt River Rafters,694815,Jack Hurley,15,500,5,00,True,7,LF,Outfielder
+825625,2025-11-05,home,Salt River Rafters,703156,Tony Blanco Jr.,99,600,6,00,True,10,DH,Designated Hitter
+825625,2025-11-05,home,Salt River Rafters,703190,Johanfran Garcia,30,700,7,00,True,2,C,Catcher
+825625,2025-11-05,home,Salt River Rafters,800306,Jansel Luis,4,800,8,00,True,5,3B,Third Base
+825625,2025-11-05,home,Salt River Rafters,805964,Stanley Tucker,18,900,9,00,True,4,2B,Second Base
+825641,2025-11-06,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,7,LF,Outfielder
+825641,2025-11-06,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825641,2025-11-06,away,Glendale Desert Dogs,805347,Jim Jarvis,2,300,3,00,True,6,SS,Shortstop
+825641,2025-11-06,away,Glendale Desert Dogs,695731,Braden Montgomery,6,400,4,00,True,10,DH,Designated Hitter
+825641,2025-11-06,away,Glendale Desert Dogs,804645,Caden Connor,20,500,5,00,True,9,RF,Outfielder
+825641,2025-11-06,away,Glendale Desert Dogs,702488,Logan Wagner,23,600,6,00,True,3,1B,First Base
+825641,2025-11-06,away,Glendale Desert Dogs,802469,Travis Honeyman,34,700,7,00,True,8,CF,Outfielder
+825641,2025-11-06,away,Glendale Desert Dogs,702690,Cutter Coffey,9,800,8,00,True,4,2B,Second Base
+825641,2025-11-06,away,Glendale Desert Dogs,698927,Edward Duran,17,900,9,00,True,2,C,Catcher
+825641,2025-11-06,home,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825641,2025-11-06,home,Peoria Javelinas,803175,Ethan Anderson,34,200,2,00,True,2,C,Catcher
+825641,2025-11-06,home,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,9,RF,Outfielder
+825641,2025-11-06,home,Peoria Javelinas,813860,Charlie Pagliarini,9,400,4,00,True,7,LF,Outfielder
+825641,2025-11-06,home,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,5,3B,Third Base
+825641,2025-11-06,home,Peoria Javelinas,702601,Lamar King Jr.,27,600,6,00,True,3,1B,First Base
+825641,2025-11-06,home,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,6,SS,Shortstop
+825641,2025-11-06,home,Peoria Javelinas,810838,Ryan Jackson,8,800,8,00,True,4,2B,Second Base
+825641,2025-11-06,home,Peoria Javelinas,701771,Billy Amick,20,900,9,00,True,10,DH,Designated Hitter
+825624,2025-11-06,away,Surprise Saguaros,802407,Joe Lampe,15,100,1,00,True,9,RF,Outfielder
+825624,2025-11-06,away,Surprise Saguaros,702550,Chandler Pollard,43,200,2,00,True,5,3B,Third Base
+825624,2025-11-06,away,Surprise Saguaros,811287,Carson Roccaforte,1,300,3,00,True,8,CF,Outfielder
+825624,2025-11-06,away,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825624,2025-11-06,away,Surprise Saguaros,702270,Malcolm Moore,27,500,5,00,True,2,C,Catcher
+825624,2025-11-06,away,Surprise Saguaros,807276,Dante Nori,5,600,6,00,True,10,DH,Designated Hitter
+825624,2025-11-06,away,Surprise Saguaros,691405,Juan Benjamin,7,700,7,00,True,4,2B,Second Base
+825624,2025-11-06,away,Surprise Saguaros,702662,Dylan Dreiling,6,800,8,00,True,7,LF,Outfielder
+825624,2025-11-06,away,Surprise Saguaros,804858,Bryan Rincon,13,900,9,00,True,6,SS,Shortstop
+825624,2025-11-06,home,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825624,2025-11-06,home,Salt River Rafters,694815,Jack Hurley,15,200,2,00,True,10,DH,Designated Hitter
+825624,2025-11-06,home,Salt River Rafters,699013,Esmerlyn Valdez,27,300,3,00,True,9,RF,Outfielder
+825624,2025-11-06,home,Salt River Rafters,703156,Tony Blanco Jr.,99,400,4,00,True,3,1B,First Base
+825624,2025-11-06,home,Salt River Rafters,700341,Kenny Castillo,77,500,5,00,True,2,C,Catcher
+825624,2025-11-06,home,Salt River Rafters,696142,Will Taylor,2,600,6,00,True,7,LF,Outfielder
+825624,2025-11-06,home,Salt River Rafters,807511,Nelly Taylor,3,700,7,00,True,8,CF,Outfielder
+825624,2025-11-06,home,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825624,2025-11-06,home,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825593,2025-11-06,away,Scottsdale Scorpions,805808,Kevin McGonigle,9,100,1,00,True,5,3B,Third Base
+825593,2025-11-06,away,Scottsdale Scorpions,801194,Max Anderson,25,200,2,00,True,10,DH,Designated Hitter
+825593,2025-11-06,away,Scottsdale Scorpions,694757,Maui Ahuna,1,300,3,00,True,4,2B,Second Base
+825593,2025-11-06,away,Scottsdale Scorpions,814409,Seaver King,5,400,4,00,True,6,SS,Shortstop
+825593,2025-11-06,away,Scottsdale Scorpions,703492,Nick Morabito,3,500,5,00,True,8,CF,Outfielder
+825593,2025-11-06,away,Scottsdale Scorpions,801523,Chris Suero,11,600,6,00,True,2,C,Catcher
+825593,2025-11-06,away,Scottsdale Scorpions,701337,Ethan Petry,28,700,7,00,True,9,RF,Outfielder
+825593,2025-11-06,away,Scottsdale Scorpions,813844,Will Bush,47,800,8,00,True,3,1B,First Base
+825593,2025-11-06,away,Scottsdale Scorpions,695763,Sam Petersen,2,900,9,00,True,7,LF,Outfielder
+825593,2025-11-06,home,Mesa Solar Sox,806223,Aidan Smith,13,100,1,00,True,10,DH,Designated Hitter
+825593,2025-11-06,home,Mesa Solar Sox,694966,Brayden Taylor,55,200,2,00,True,5,3B,Third Base
+825593,2025-11-06,home,Mesa Solar Sox,814458,Fenwick Trimble,3,300,3,00,True,8,CF,Outfielder
+825593,2025-11-06,home,Mesa Solar Sox,815089,Coby Morales,19,400,4,00,True,9,RF,Outfielder
+825593,2025-11-06,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,500,5,00,True,6,SS,Shortstop
+825593,2025-11-06,home,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,4,2B,Second Base
+825593,2025-11-06,home,Mesa Solar Sox,690992,Ed Howard,9,700,7,00,True,7,LF,Outfielder
+825593,2025-11-06,home,Mesa Solar Sox,692633,Manuel Palencia,25,800,8,00,True,2,C,Catcher
+825593,2025-11-06,home,Mesa Solar Sox,804751,Logan Poteet,28,900,9,00,True,3,1B,First Base
+825655,2025-11-07,away,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825655,2025-11-07,away,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,5,3B,Third Base
+825655,2025-11-07,away,Scottsdale Scorpions,692238,Parks Harber,40,300,3,00,True,3,1B,First Base
+825655,2025-11-07,away,Scottsdale Scorpions,802599,Jack Penney,14,400,4,00,True,6,SS,Shortstop
+825655,2025-11-07,away,Scottsdale Scorpions,800208,Axiel Plaz,13,500,5,00,True,2,C,Catcher
+825655,2025-11-07,away,Scottsdale Scorpions,813896,Joseph Sullivan,8,600,6,00,True,7,LF,Outfielder
+825655,2025-11-07,away,Scottsdale Scorpions,700784,Jeron Williams,4,700,7,00,True,4,2B,Second Base
+825655,2025-11-07,away,Scottsdale Scorpions,806152,Walker Martin,12,800,8,00,True,10,DH,Designated Hitter
+825655,2025-11-07,away,Scottsdale Scorpions,700083,John Bay,60,900,9,00,True,9,RF,Outfielder
+825655,2025-11-07,home,Glendale Desert Dogs,803011,Sam Antonacci,10,100,1,00,True,6,SS,Shortstop
+825655,2025-11-07,home,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,10,DH,Designated Hitter
+825655,2025-11-07,home,Glendale Desert Dogs,695731,Braden Montgomery,6,300,3,00,True,8,CF,Outfielder
+825655,2025-11-07,home,Glendale Desert Dogs,814436,Ryan Galanie,15,400,4,00,True,3,1B,First Base
+825655,2025-11-07,home,Glendale Desert Dogs,692568,Miguel Ugueto,3,500,5,00,True,9,RF,Outfielder
+825655,2025-11-07,home,Glendale Desert Dogs,702690,Cutter Coffey,9,600,6,00,True,5,3B,Third Base
+825655,2025-11-07,home,Glendale Desert Dogs,802469,Travis Honeyman,34,700,7,00,True,7,LF,Outfielder
+825655,2025-11-07,home,Glendale Desert Dogs,815104,Graysen Tarlow,7,800,8,00,True,2,C,Catcher
+825655,2025-11-07,home,Glendale Desert Dogs,683103,Cade Doughty,50,900,9,00,True,4,2B,Second Base
+825640,2025-11-07,away,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825640,2025-11-07,away,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,200,2,00,True,7,LF,Outfielder
+825640,2025-11-07,away,Mesa Solar Sox,689196,Owen Ayers,7,300,3,00,True,2,C,Catcher
+825640,2025-11-07,away,Mesa Solar Sox,695720,Tommy White,47,400,4,00,True,5,3B,Third Base
+825640,2025-11-07,away,Mesa Solar Sox,694966,Brayden Taylor,55,500,5,00,True,4,2B,Second Base
+825640,2025-11-07,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,10,DH,Designated Hitter
+825640,2025-11-07,away,Mesa Solar Sox,695573,Cole Mathis,16,700,7,00,True,3,1B,First Base
+825640,2025-11-07,away,Mesa Solar Sox,703563,PJ Morlando,8,800,8,00,True,9,RF,Outfielder
+825640,2025-11-07,away,Mesa Solar Sox,805782,Ryan Lasko,1,900,9,00,True,8,CF,Outfielder
+825640,2025-11-07,home,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825640,2025-11-07,home,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,6,SS,Shortstop
+825640,2025-11-07,home,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,7,LF,Outfielder
+825640,2025-11-07,home,Peoria Javelinas,813860,Charlie Pagliarini,9,400,4,00,True,4,2B,Second Base
+825640,2025-11-07,home,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,3,1B,First Base
+825640,2025-11-07,home,Peoria Javelinas,806957,Alfredo Duno,28,600,6,00,True,2,C,Catcher
+825640,2025-11-07,home,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,5,3B,Third Base
+825640,2025-11-07,home,Peoria Javelinas,701682,Braedon Karpathios,22,800,8,00,True,9,RF,Outfielder
+825640,2025-11-07,home,Peoria Javelinas,800449,Thomas Sosa,3,900,9,00,True,10,DH,Designated Hitter
+825576,2025-11-07,away,Salt River Rafters,703606,Jared Thomas,14,100,1,00,True,7,LF,Outfielder
+825576,2025-11-07,away,Salt River Rafters,702574,David Mershon,8,200,2,00,True,6,SS,Shortstop
+825576,2025-11-07,away,Salt River Rafters,804558,Raudi Rodriguez,9,300,3,00,True,9,RF,Outfielder
+825576,2025-11-07,away,Salt River Rafters,703190,Johanfran Garcia,30,400,4,00,True,10,DH,Designated Hitter
+825576,2025-11-07,away,Salt River Rafters,808129,Juan Flores,19,500,5,00,True,2,C,Catcher
+825576,2025-11-07,away,Salt River Rafters,703156,Tony Blanco Jr.,99,600,6,00,True,3,1B,First Base
+825576,2025-11-07,away,Salt River Rafters,696142,Will Taylor,2,700,7,00,True,8,CF,Outfielder
+825576,2025-11-07,away,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825576,2025-11-07,away,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,5,3B,Third Base
+825576,2025-11-07,home,Surprise Saguaros,802407,Joe Lampe,15,100,1,00,True,7,LF,Outfielder
+825576,2025-11-07,home,Surprise Saguaros,702550,Chandler Pollard,43,200,2,00,True,5,3B,Third Base
+825576,2025-11-07,home,Surprise Saguaros,811287,Carson Roccaforte,1,300,3,00,True,10,DH,Designated Hitter
+825576,2025-11-07,home,Surprise Saguaros,815304,Josh Adamczewski,14,400,4,00,True,4,2B,Second Base
+825576,2025-11-07,home,Surprise Saguaros,694187,Daniel Vazquez,26,500,5,00,True,6,SS,Shortstop
+825576,2025-11-07,home,Surprise Saguaros,806210,Alfonsin Rosario,2,600,6,00,True,9,RF,Outfielder
+825576,2025-11-07,home,Surprise Saguaros,694749,Dylan Campbell,10,700,7,00,True,8,CF,Outfielder
+825576,2025-11-07,home,Surprise Saguaros,691405,Juan Benjamin,7,800,8,00,True,3,1B,First Base
+825576,2025-11-07,home,Surprise Saguaros,803015,Ben Hartl,40,900,9,00,True,2,C,Catcher
+825588,2025-11-09,away,National League Fall Stars,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825588,2025-11-09,away,National League Fall Stars,692568,Miguel Ugueto,3,101,1,01,False,8,CF,Outfielder
+825588,2025-11-09,away,National League Fall Stars,814409,Seaver King,5,200,2,00,True,4,2B,Second Base
+825588,2025-11-09,away,National League Fall Stars,802506,Dylan O'Rae,58,201,2,01,False,4,2B,Second Base
+825588,2025-11-09,away,National League Fall Stars,692238,Parks Harber,40,300,3,00,True,3,1B,First Base
+825588,2025-11-09,away,National League Fall Stars,702253,Cam Collier,6,301,3,01,False,3,1B,First Base
+825588,2025-11-09,away,National League Fall Stars,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825588,2025-11-09,away,National League Fall Stars,689196,Owen Ayers,7,500,5,00,True,2,C,Catcher
+825588,2025-11-09,away,National League Fall Stars,806957,Alfredo Duno,28,501,5,01,False,2,C,Catcher
+825588,2025-11-09,away,National League Fall Stars,805373,Nacho Alvarez Jr.,67,600,6,00,True,5,3B,Third Base
+825588,2025-11-09,away,National League Fall Stars,699114,Leo Balcazar,17,601,6,01,False,5,3B,Third Base
+825588,2025-11-09,away,National League Fall Stars,801523,Chris Suero,11,700,7,00,True,10,DH,Designated Hitter
+825588,2025-11-09,away,National League Fall Stars,809707,Charlie Condon,6,701,7,01,False,10,DH,Designated Hitter
+825588,2025-11-09,away,National League Fall Stars,806965,Starlyn Caba,11,800,8,00,True,6,SS,Shortstop
+825588,2025-11-09,away,National League Fall Stars,800306,Jansel Luis,4,801,8,01,False,6,SS,Shortstop
+825588,2025-11-09,away,National League Fall Stars,815304,Josh Adamczewski,14,900,9,00,True,7,LF,Outfielder
+825588,2025-11-09,away,National League Fall Stars,802117,Patrick Clohisy,24,901,9,01,False,7,LF,Outfielder
+825588,2025-11-09,home,American League Fall Stars,805808,Kevin McGonigle,9,100,1,00,True,6,SS,Shortstop
+825588,2025-11-09,home,American League Fall Stars,694187,Daniel Vazquez,26,101,1,01,False,6,SS,Shortstop
+825588,2025-11-09,home,American League Fall Stars,695731,Braden Montgomery,6,200,2,00,True,8,CF,Outfielder
+825588,2025-11-09,home,American League Fall Stars,805964,Stanley Tucker,18,201,2,01,False,4,2B,Second Base
+825588,2025-11-09,home,American League Fall Stars,801194,Max Anderson,25,300,3,00,True,5,3B,Third Base
+825588,2025-11-09,home,American League Fall Stars,694966,Brayden Taylor,55,301,3,01,False,5,3B,Third Base
+825588,2025-11-09,home,American League Fall Stars,806071,Jonny Farmelo,21,400,4,00,True,7,LF,Outfielder
+825588,2025-11-09,home,American League Fall Stars,805782,Ryan Lasko,1,401,4,01,False,7,LF,Outfielder
+825588,2025-11-09,home,American League Fall Stars,805810,Blake Mitchell,8,500,5,00,True,2,C,Catcher
+825588,2025-11-09,home,American League Fall Stars,808129,Juan Flores,19,501,5,01,False,2,C,Catcher
+825588,2025-11-09,home,American League Fall Stars,695720,Tommy White,47,600,6,00,True,3,1B,First Base
+825588,2025-11-09,home,American League Fall Stars,803175,Ethan Anderson,34,601,6,01,False,3,1B,First Base
+825588,2025-11-09,home,American League Fall Stars,803011,Sam Antonacci,10,700,7,00,True,11,PH,Pinch Hitter
+825588,2025-11-09,home,American League Fall Stars,815322,Kai Peterson,22,701,7,01,False,1,P,Pitcher
+825588,2025-11-09,home,American League Fall Stars,691629,Miguelangel Boadas,30,702,7,02,False,1,P,Pitcher
+825588,2025-11-09,home,American League Fall Stars,700675,Jimmy Kingsbury,26,703,7,03,False,1,P,Pitcher
+825588,2025-11-09,home,American League Fall Stars,801802,James Hicks,22,704,7,04,False,1,P,Pitcher
+825588,2025-11-09,home,American League Fall Stars,829338,Dariel Fregio,20,705,7,05,False,1,P,Pitcher
+825588,2025-11-09,home,American League Fall Stars,804558,Raudi Rodriguez,9,800,8,00,True,9,RF,Outfielder
+825588,2025-11-09,home,American League Fall Stars,690961,Enrique Bradfield Jr.,24,900,9,00,True,8,CF,Outfielder
+825575,2025-11-10,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825575,2025-11-10,away,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,6,SS,Shortstop
+825575,2025-11-10,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,7,LF,Outfielder
+825575,2025-11-10,away,Peoria Javelinas,803175,Ethan Anderson,34,400,4,00,True,3,1B,First Base
+825575,2025-11-10,away,Peoria Javelinas,813860,Charlie Pagliarini,9,500,5,00,True,4,2B,Second Base
+825575,2025-11-10,away,Peoria Javelinas,806957,Alfredo Duno,28,600,6,00,True,10,DH,Designated Hitter
+825575,2025-11-10,away,Peoria Javelinas,806263,Brandon Winokur,4,700,7,00,True,5,3B,Third Base
+825575,2025-11-10,away,Peoria Javelinas,702601,Lamar King Jr.,27,800,8,00,True,2,C,Catcher
+825575,2025-11-10,away,Peoria Javelinas,800449,Thomas Sosa,3,900,9,00,True,9,RF,Outfielder
+825575,2025-11-10,home,Surprise Saguaros,807276,Dante Nori,5,100,1,00,True,8,CF,Outfielder
+825575,2025-11-10,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,5,3B,Third Base
+825575,2025-11-10,home,Surprise Saguaros,811287,Carson Roccaforte,1,300,3,00,True,9,RF,Outfielder
+825575,2025-11-10,home,Surprise Saguaros,815304,Josh Adamczewski,14,400,4,00,True,7,LF,Outfielder
+825575,2025-11-10,home,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,10,DH,Designated Hitter
+825575,2025-11-10,home,Surprise Saguaros,694749,Dylan Campbell,10,600,6,00,True,4,2B,Second Base
+825575,2025-11-10,home,Surprise Saguaros,702270,Malcolm Moore,27,700,7,00,True,2,C,Catcher
+825575,2025-11-10,home,Surprise Saguaros,691405,Juan Benjamin,7,800,8,00,True,3,1B,First Base
+825575,2025-11-10,home,Surprise Saguaros,804858,Bryan Rincon,13,900,9,00,True,6,SS,Shortstop
+825623,2025-11-10,away,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825623,2025-11-10,away,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,6,SS,Shortstop
+825623,2025-11-10,away,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,5,3B,Third Base
+825623,2025-11-10,away,Scottsdale Scorpions,694757,Maui Ahuna,1,400,4,00,True,4,2B,Second Base
+825623,2025-11-10,away,Scottsdale Scorpions,814409,Seaver King,5,500,5,00,True,10,DH,Designated Hitter
+825623,2025-11-10,away,Scottsdale Scorpions,801523,Chris Suero,11,600,6,00,True,2,C,Catcher
+825623,2025-11-10,away,Scottsdale Scorpions,701337,Ethan Petry,28,700,7,00,True,9,RF,Outfielder
+825623,2025-11-10,away,Scottsdale Scorpions,800208,Axiel Plaz,13,800,8,00,True,3,1B,First Base
+825623,2025-11-10,away,Scottsdale Scorpions,695763,Sam Petersen,2,900,9,00,True,7,LF,Outfielder
+825623,2025-11-10,home,Salt River Rafters,702574,David Mershon,8,100,1,00,True,6,SS,Shortstop
+825623,2025-11-10,home,Salt River Rafters,694815,Jack Hurley,15,200,2,00,True,7,LF,Outfielder
+825623,2025-11-10,home,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825623,2025-11-10,home,Salt River Rafters,808129,Juan Flores,19,400,4,00,True,10,DH,Designated Hitter
+825623,2025-11-10,home,Salt River Rafters,703190,Johanfran Garcia,30,500,5,00,True,2,C,Catcher
+825623,2025-11-10,home,Salt River Rafters,696142,Will Taylor,2,600,6,00,True,9,RF,Outfielder
+825623,2025-11-10,home,Salt River Rafters,800306,Jansel Luis,4,700,7,00,True,5,3B,Third Base
+825623,2025-11-10,home,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825623,2025-11-10,home,Salt River Rafters,807511,Nelly Taylor,3,900,9,00,True,8,CF,Outfielder
+825653,2025-11-10,away,Mesa Solar Sox,806965,Starlyn Caba,11,100,1,00,True,6,SS,Shortstop
+825653,2025-11-10,away,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,101,1,01,False,6,SS,Shortstop
+825653,2025-11-10,away,Mesa Solar Sox,806223,Aidan Smith,13,200,2,00,True,10,DH,Designated Hitter
+825653,2025-11-10,away,Mesa Solar Sox,695720,Tommy White,47,300,3,00,True,5,3B,Third Base
+825653,2025-11-10,away,Mesa Solar Sox,800285,Enmanuel Tejeda,14,400,4,00,True,4,2B,Second Base
+825653,2025-11-10,away,Mesa Solar Sox,805782,Ryan Lasko,1,500,5,00,True,8,CF,Outfielder
+825653,2025-11-10,away,Mesa Solar Sox,695573,Cole Mathis,16,600,6,00,True,3,1B,First Base
+825653,2025-11-10,away,Mesa Solar Sox,703563,PJ Morlando,8,700,7,00,True,9,RF,Outfielder
+825653,2025-11-10,away,Mesa Solar Sox,692633,Manuel Palencia,25,800,8,00,True,2,C,Catcher
+825653,2025-11-10,away,Mesa Solar Sox,690992,Ed Howard,9,900,9,00,True,7,LF,Outfielder
+825653,2025-11-10,home,Glendale Desert Dogs,805347,Jim Jarvis,2,100,1,00,True,6,SS,Shortstop
+825653,2025-11-10,home,Glendale Desert Dogs,683103,Cade Doughty,50,200,2,00,True,10,DH,Designated Hitter
+825653,2025-11-10,home,Glendale Desert Dogs,804645,Caden Connor,20,300,3,00,True,9,RF,Outfielder
+825653,2025-11-10,home,Glendale Desert Dogs,814436,Ryan Galanie,15,400,4,00,True,3,1B,First Base
+825653,2025-11-10,home,Glendale Desert Dogs,702488,Logan Wagner,23,500,5,00,True,4,2B,Second Base
+825653,2025-11-10,home,Glendale Desert Dogs,702690,Cutter Coffey,9,600,6,00,True,5,3B,Third Base
+825653,2025-11-10,home,Glendale Desert Dogs,802469,Travis Honeyman,34,700,7,00,True,8,CF,Outfielder
+825653,2025-11-10,home,Glendale Desert Dogs,694188,Jesus Galiz,35,800,8,00,True,2,C,Catcher
+825653,2025-11-10,home,Glendale Desert Dogs,691559,Jose D. Hernandez,70,900,9,00,True,7,LF,Outfielder
+825592,2025-11-11,away,Peoria Javelinas,701682,Braedon Karpathios,22,100,1,00,True,9,RF,Outfielder
+825592,2025-11-11,away,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,6,SS,Shortstop
+825592,2025-11-11,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,8,CF,Outfielder
+825592,2025-11-11,away,Peoria Javelinas,803175,Ethan Anderson,34,400,4,00,True,2,C,Catcher
+825592,2025-11-11,away,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,10,DH,Designated Hitter
+825592,2025-11-11,away,Peoria Javelinas,813860,Charlie Pagliarini,9,600,6,00,True,7,LF,Outfielder
+825592,2025-11-11,away,Peoria Javelinas,810838,Ryan Jackson,8,700,7,00,True,4,2B,Second Base
+825592,2025-11-11,away,Peoria Javelinas,806263,Brandon Winokur,4,800,8,00,True,5,3B,Third Base
+825592,2025-11-11,away,Peoria Javelinas,701771,Billy Amick,20,900,9,00,True,3,1B,First Base
+825592,2025-11-11,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,100,1,00,True,6,SS,Shortstop
+825592,2025-11-11,home,Mesa Solar Sox,689196,Owen Ayers,7,200,2,00,True,2,C,Catcher
+825592,2025-11-11,home,Mesa Solar Sox,695720,Tommy White,47,300,3,00,True,5,3B,Third Base
+825592,2025-11-11,home,Mesa Solar Sox,815089,Coby Morales,19,400,4,00,True,3,1B,First Base
+825592,2025-11-11,home,Mesa Solar Sox,814458,Fenwick Trimble,3,500,5,00,True,8,CF,Outfielder
+825592,2025-11-11,home,Mesa Solar Sox,800285,Enmanuel Tejeda,14,600,6,00,True,10,DH,Designated Hitter
+825592,2025-11-11,home,Mesa Solar Sox,694966,Brayden Taylor,55,700,7,00,True,4,2B,Second Base
+825592,2025-11-11,home,Mesa Solar Sox,690992,Ed Howard,9,800,8,00,True,7,LF,Outfielder
+825592,2025-11-11,home,Mesa Solar Sox,703563,PJ Morlando,8,900,9,00,True,9,RF,Outfielder
+825617,2025-11-11,away,Surprise Saguaros,807276,Dante Nori,5,100,1,00,True,8,CF,Outfielder
+825617,2025-11-11,away,Surprise Saguaros,702550,Chandler Pollard,43,200,2,00,True,5,3B,Third Base
+825617,2025-11-11,away,Surprise Saguaros,802407,Joe Lampe,15,300,3,00,True,10,DH,Designated Hitter
+825617,2025-11-11,away,Surprise Saguaros,806210,Alfonsin Rosario,2,400,4,00,True,9,RF,Outfielder
+825617,2025-11-11,away,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,2,C,Catcher
+825617,2025-11-11,away,Surprise Saguaros,694749,Dylan Campbell,10,600,6,00,True,4,2B,Second Base
+825617,2025-11-11,away,Surprise Saguaros,702662,Dylan Dreiling,6,700,7,00,True,7,LF,Outfielder
+825617,2025-11-11,away,Surprise Saguaros,803015,Ben Hartl,40,800,8,00,True,3,1B,First Base
+825617,2025-11-11,away,Surprise Saguaros,804858,Bryan Rincon,13,900,9,00,True,6,SS,Shortstop
+825617,2025-11-11,home,Salt River Rafters,700341,Kenny Castillo,77,100,1,00,True,5,3B,Third Base
+825617,2025-11-11,home,Salt River Rafters,804558,Raudi Rodriguez,9,200,2,00,True,8,CF,Outfielder
+825617,2025-11-11,home,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825617,2025-11-11,home,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825617,2025-11-11,home,Salt River Rafters,808129,Juan Flores,19,500,5,00,True,2,C,Catcher
+825617,2025-11-11,home,Salt River Rafters,703606,Jared Thomas,14,600,6,00,True,7,LF,Outfielder
+825617,2025-11-11,home,Salt River Rafters,703190,Johanfran Garcia,30,700,7,00,True,10,DH,Designated Hitter
+825617,2025-11-11,home,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825617,2025-11-11,home,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,6,SS,Shortstop
+825608,2025-11-11,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,7,LF,Outfielder
+825608,2025-11-11,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,200,2,00,True,5,3B,Third Base
+825608,2025-11-11,away,Glendale Desert Dogs,803011,Sam Antonacci,10,300,3,00,True,4,2B,Second Base
+825608,2025-11-11,away,Glendale Desert Dogs,695731,Braden Montgomery,6,400,4,00,True,8,CF,Outfielder
+825608,2025-11-11,away,Glendale Desert Dogs,692568,Miguel Ugueto,3,500,5,00,True,9,RF,Outfielder
+825608,2025-11-11,away,Glendale Desert Dogs,702690,Cutter Coffey,9,600,6,00,True,10,DH,Designated Hitter
+825608,2025-11-11,away,Glendale Desert Dogs,702488,Logan Wagner,23,700,7,00,True,3,1B,First Base
+825608,2025-11-11,away,Glendale Desert Dogs,683103,Cade Doughty,50,800,8,00,True,6,SS,Shortstop
+825608,2025-11-11,away,Glendale Desert Dogs,698927,Edward Duran,17,900,9,00,True,2,C,Catcher
+825608,2025-11-11,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,100,1,00,True,5,3B,Third Base
+825608,2025-11-11,home,Scottsdale Scorpions,692238,Parks Harber,40,200,2,00,True,9,RF,Outfielder
+825608,2025-11-11,home,Scottsdale Scorpions,813896,Joseph Sullivan,8,300,3,00,True,8,CF,Outfielder
+825608,2025-11-11,home,Scottsdale Scorpions,800208,Axiel Plaz,13,400,4,00,True,2,C,Catcher
+825608,2025-11-11,home,Scottsdale Scorpions,802599,Jack Penney,14,500,5,00,True,6,SS,Shortstop
+825608,2025-11-11,home,Scottsdale Scorpions,700784,Jeron Williams,4,600,6,00,True,4,2B,Second Base
+825608,2025-11-11,home,Scottsdale Scorpions,806152,Walker Martin,12,700,7,00,True,10,DH,Designated Hitter
+825608,2025-11-11,home,Scottsdale Scorpions,813844,Will Bush,47,800,8,00,True,3,1B,First Base
+825608,2025-11-11,home,Scottsdale Scorpions,700083,John Bay,60,900,9,00,True,7,LF,Outfielder
+825574,2025-11-12,away,Salt River Rafters,703606,Jared Thomas,14,100,1,00,True,7,LF,Outfielder
+825574,2025-11-12,away,Salt River Rafters,804558,Raudi Rodriguez,9,200,2,00,True,8,CF,Outfielder
+825574,2025-11-12,away,Salt River Rafters,809707,Charlie Condon,6,300,3,00,True,3,1B,First Base
+825574,2025-11-12,away,Salt River Rafters,699013,Esmerlyn Valdez,27,400,4,00,True,9,RF,Outfielder
+825574,2025-11-12,away,Salt River Rafters,808129,Juan Flores,19,500,5,00,True,2,C,Catcher
+825574,2025-11-12,away,Salt River Rafters,703190,Johanfran Garcia,30,600,6,00,True,10,DH,Designated Hitter
+825574,2025-11-12,away,Salt River Rafters,700341,Kenny Castillo,77,700,7,00,True,5,3B,Third Base
+825574,2025-11-12,away,Salt River Rafters,805964,Stanley Tucker,18,800,8,00,True,4,2B,Second Base
+825574,2025-11-12,away,Salt River Rafters,800306,Jansel Luis,4,900,9,00,True,6,SS,Shortstop
+825574,2025-11-12,home,Mesa Solar Sox,806223,Aidan Smith,13,100,1,00,True,10,DH,Designated Hitter
+825574,2025-11-12,home,Mesa Solar Sox,689196,Owen Ayers,7,200,2,00,True,2,C,Catcher
+825574,2025-11-12,home,Mesa Solar Sox,695720,Tommy White,47,300,3,00,True,5,3B,Third Base
+825574,2025-11-12,home,Mesa Solar Sox,694966,Brayden Taylor,55,400,4,00,True,4,2B,Second Base
+825574,2025-11-12,home,Mesa Solar Sox,814458,Fenwick Trimble,3,500,5,00,True,7,LF,Outfielder
+825574,2025-11-12,home,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,600,6,00,True,6,SS,Shortstop
+825574,2025-11-12,home,Mesa Solar Sox,815089,Coby Morales,19,700,7,00,True,9,RF,Outfielder
+825574,2025-11-12,home,Mesa Solar Sox,805782,Ryan Lasko,1,800,8,00,True,8,CF,Outfielder
+825574,2025-11-12,home,Mesa Solar Sox,695573,Cole Mathis,16,900,9,00,True,3,1B,First Base
+825573,2025-11-12,away,Glendale Desert Dogs,802117,Patrick Clohisy,24,100,1,00,True,7,LF,Outfielder
+825573,2025-11-12,away,Glendale Desert Dogs,803011,Sam Antonacci,10,200,2,00,True,4,2B,Second Base
+825573,2025-11-12,away,Glendale Desert Dogs,805373,Nacho Alvarez Jr.,67,300,3,00,True,5,3B,Third Base
+825573,2025-11-12,away,Glendale Desert Dogs,695731,Braden Montgomery,6,400,4,00,True,9,RF,Outfielder
+825573,2025-11-12,away,Glendale Desert Dogs,692568,Miguel Ugueto,3,500,5,00,True,8,CF,Outfielder
+825573,2025-11-12,away,Glendale Desert Dogs,805347,Jim Jarvis,2,600,6,00,True,6,SS,Shortstop
+825573,2025-11-12,away,Glendale Desert Dogs,702690,Cutter Coffey,9,700,7,00,True,10,DH,Designated Hitter
+825573,2025-11-12,away,Glendale Desert Dogs,804645,Caden Connor,20,800,8,00,True,3,1B,First Base
+825573,2025-11-12,away,Glendale Desert Dogs,815104,Graysen Tarlow,7,900,9,00,True,2,C,Catcher
+825573,2025-11-12,home,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825573,2025-11-12,home,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,6,SS,Shortstop
+825573,2025-11-12,home,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,9,RF,Outfielder
+825573,2025-11-12,home,Peoria Javelinas,806957,Alfredo Duno,28,400,4,00,True,2,C,Catcher
+825573,2025-11-12,home,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,10,DH,Designated Hitter
+825573,2025-11-12,home,Peoria Javelinas,803175,Ethan Anderson,34,600,6,00,True,3,1B,First Base
+825573,2025-11-12,home,Peoria Javelinas,813860,Charlie Pagliarini,9,700,7,00,True,7,LF,Outfielder
+825573,2025-11-12,home,Peoria Javelinas,806263,Brandon Winokur,4,800,8,00,True,5,3B,Third Base
+825573,2025-11-12,home,Peoria Javelinas,810838,Ryan Jackson,8,900,9,00,True,4,2B,Second Base
+825580,2025-11-13,away,Mesa Solar Sox,806223,Aidan Smith,13,100,1,00,True,10,DH,Designated Hitter
+825580,2025-11-13,away,Mesa Solar Sox,689196,Owen Ayers,7,200,2,00,True,2,C,Catcher
+825580,2025-11-13,away,Mesa Solar Sox,695720,Tommy White,47,300,3,00,True,5,3B,Third Base
+825580,2025-11-13,away,Mesa Solar Sox,694966,Brayden Taylor,55,400,4,00,True,4,2B,Second Base
+825580,2025-11-13,away,Mesa Solar Sox,814458,Fenwick Trimble,3,500,5,00,True,7,LF,Outfielder
+825580,2025-11-13,away,Mesa Solar Sox,811965,Joshua Kuroda-Grauer,2,600,6,00,True,6,SS,Shortstop
+825580,2025-11-13,away,Mesa Solar Sox,815089,Coby Morales,19,700,7,00,True,9,RF,Outfielder
+825580,2025-11-13,away,Mesa Solar Sox,805782,Ryan Lasko,1,800,8,00,True,8,CF,Outfielder
+825580,2025-11-13,away,Mesa Solar Sox,695573,Cole Mathis,16,900,9,00,True,3,1B,First Base
+825580,2025-11-13,home,Surprise Saguaros,807276,Dante Nori,5,100,1,00,True,8,CF,Outfielder
+825580,2025-11-13,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,6,SS,Shortstop
+825580,2025-11-13,home,Surprise Saguaros,802407,Joe Lampe,15,300,3,00,True,9,RF,Outfielder
+825580,2025-11-13,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825580,2025-11-13,home,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,2,C,Catcher
+825580,2025-11-13,home,Surprise Saguaros,815304,Josh Adamczewski,14,600,6,00,True,7,LF,Outfielder
+825580,2025-11-13,home,Surprise Saguaros,694749,Dylan Campbell,10,700,7,00,True,5,3B,Third Base
+825580,2025-11-13,home,Surprise Saguaros,702270,Malcolm Moore,27,800,8,00,True,10,DH,Designated Hitter
+825580,2025-11-13,home,Surprise Saguaros,702550,Chandler Pollard,43,801,8,01,False,10,DH,Designated Hitter
+825580,2025-11-13,home,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base
+825571,2025-11-13,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825571,2025-11-13,away,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,6,SS,Shortstop
+825571,2025-11-13,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,9,RF,Outfielder
+825571,2025-11-13,away,Peoria Javelinas,806957,Alfredo Duno,28,400,4,00,True,2,C,Catcher
+825571,2025-11-13,away,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,10,DH,Designated Hitter
+825571,2025-11-13,away,Peoria Javelinas,803175,Ethan Anderson,34,600,6,00,True,3,1B,First Base
+825571,2025-11-13,away,Peoria Javelinas,813860,Charlie Pagliarini,9,700,7,00,True,7,LF,Outfielder
+825571,2025-11-13,away,Peoria Javelinas,806263,Brandon Winokur,4,800,8,00,True,5,3B,Third Base
+825571,2025-11-13,away,Peoria Javelinas,810838,Ryan Jackson,8,900,9,00,True,4,2B,Second Base
+825571,2025-11-13,home,Scottsdale Scorpions,703492,Nick Morabito,3,100,1,00,True,8,CF,Outfielder
+825571,2025-11-13,home,Scottsdale Scorpions,805808,Kevin McGonigle,9,200,2,00,True,5,3B,Third Base
+825571,2025-11-13,home,Scottsdale Scorpions,801194,Max Anderson,25,300,3,00,True,10,DH,Designated Hitter
+825571,2025-11-13,home,Scottsdale Scorpions,692238,Parks Harber,40,400,4,00,True,3,1B,First Base
+825571,2025-11-13,home,Scottsdale Scorpions,814409,Seaver King,5,500,5,00,True,6,SS,Shortstop
+825571,2025-11-13,home,Scottsdale Scorpions,802599,Jack Penney,14,600,6,00,True,4,2B,Second Base
+825571,2025-11-13,home,Scottsdale Scorpions,801523,Chris Suero,11,700,7,00,True,2,C,Catcher
+825571,2025-11-13,home,Scottsdale Scorpions,701337,Ethan Petry,28,800,8,00,True,9,RF,Outfielder
+825571,2025-11-13,home,Scottsdale Scorpions,695763,Sam Petersen,2,900,9,00,True,7,LF,Outfielder
+825572,2025-11-14,away,Peoria Javelinas,690961,Enrique Bradfield Jr.,24,100,1,00,True,8,CF,Outfielder
+825572,2025-11-14,away,Peoria Javelinas,699114,Leo Balcazar,17,200,2,00,True,6,SS,Shortstop
+825572,2025-11-14,away,Peoria Javelinas,806071,Jonny Farmelo,21,300,3,00,True,9,RF,Outfielder
+825572,2025-11-14,away,Peoria Javelinas,806957,Alfredo Duno,28,400,4,00,True,2,C,Catcher
+825572,2025-11-14,away,Peoria Javelinas,702253,Cam Collier,6,500,5,00,True,10,DH,Designated Hitter
+825572,2025-11-14,away,Peoria Javelinas,803175,Ethan Anderson,34,600,6,00,True,3,1B,First Base
+825572,2025-11-14,away,Peoria Javelinas,813860,Charlie Pagliarini,9,700,7,00,True,7,LF,Outfielder
+825572,2025-11-14,away,Peoria Javelinas,806263,Brandon Winokur,4,800,8,00,True,5,3B,Third Base
+825572,2025-11-14,away,Peoria Javelinas,810838,Ryan Jackson,8,900,9,00,True,4,2B,Second Base
+825572,2025-11-14,home,Surprise Saguaros,807276,Dante Nori,5,100,1,00,True,8,CF,Outfielder
+825572,2025-11-14,home,Surprise Saguaros,702550,Chandler Pollard,43,101,1,01,False,8,CF,Outfielder
+825572,2025-11-14,home,Surprise Saguaros,694187,Daniel Vazquez,26,200,2,00,True,6,SS,Shortstop
+825572,2025-11-14,home,Surprise Saguaros,802407,Joe Lampe,15,300,3,00,True,9,RF,Outfielder
+825572,2025-11-14,home,Surprise Saguaros,702662,Dylan Dreiling,6,301,3,01,False,9,RF,Outfielder
+825572,2025-11-14,home,Surprise Saguaros,702726,Luke Adams,20,400,4,00,True,3,1B,First Base
+825572,2025-11-14,home,Surprise Saguaros,805810,Blake Mitchell,8,500,5,00,True,2,C,Catcher
+825572,2025-11-14,home,Surprise Saguaros,694749,Dylan Campbell,10,600,6,00,True,10,DH,Designated Hitter
+825572,2025-11-14,home,Surprise Saguaros,815304,Josh Adamczewski,14,700,7,00,True,7,LF,Outfielder
+825572,2025-11-14,home,Surprise Saguaros,691405,Juan Benjamin,7,800,8,00,True,5,3B,Third Base
+825572,2025-11-14,home,Surprise Saguaros,802506,Dylan O'Rae,58,900,9,00,True,4,2B,Second Base

@@ -1,0 +1,1009 @@
+game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_starter
+825618,2025-10-06,away,Peoria Javelinas,691000,Carson Montgomery,1,True
+825618,2025-10-06,away,Peoria Javelinas,823801,Tanner Smith,2,False
+825618,2025-10-06,away,Peoria Javelinas,814491,Tucker Musgrove,3,False
+825618,2025-10-06,away,Peoria Javelinas,695569,Luke Hayden,4,False
+825618,2025-10-06,away,Peoria Javelinas,808052,Johan Moreno,5,False
+825618,2025-10-06,away,Peoria Javelinas,688609,Hunter Parks,6,False
+825618,2025-10-06,away,Peoria Javelinas,805321,Trevor Kuncl,7,False
+825618,2025-10-06,home,Scottsdale Scorpions,687562,Jake Bennett,1,True
+825618,2025-10-06,home,Scottsdale Scorpions,800344,Sean Paul Liñan,2,False
+825618,2025-10-06,home,Scottsdale Scorpions,688692,Jared Simpson,3,False
+825618,2025-10-06,home,Scottsdale Scorpions,694544,Austin Amaral,4,False
+825635,2025-10-07,away,Glendale Desert Dogs,806334,Alex Amalfi,1,True
+825635,2025-10-07,away,Glendale Desert Dogs,702910,Jhancarlos Lara,2,False
+825635,2025-10-07,away,Glendale Desert Dogs,815322,Kai Peterson,3,False
+825635,2025-10-07,away,Glendale Desert Dogs,690229,LJ McDonough,4,False
+825635,2025-10-07,away,Glendale Desert Dogs,807410,Chay Yeager,5,False
+825635,2025-10-07,away,Glendale Desert Dogs,700292,Yondrei Rojas,6,False
+825635,2025-10-07,home,Salt River Rafters,691384,Luis Perales,1,True
+825635,2025-10-07,home,Salt River Rafters,814106,Cade Denton,2,False
+825635,2025-10-07,home,Salt River Rafters,695632,Brandon Neely,3,False
+825635,2025-10-07,home,Salt River Rafters,682981,Derek Diamond,4,False
+825635,2025-10-07,home,Salt River Rafters,686753,Drey Jameson,5,False
+825635,2025-10-07,home,Salt River Rafters,700327,Welinton Herrera,6,False
+825635,2025-10-07,home,Salt River Rafters,801829,Jay Allmer,7,False
+825607,2025-10-07,away,Surprise Saguaros,682982,Daniel Espino,1,True
+825607,2025-10-07,away,Surprise Saguaros,702045,Rorik Maltrud,2,False
+825607,2025-10-07,away,Surprise Saguaros,671143,Trenton Denholm,3,False
+825607,2025-10-07,away,Surprise Saguaros,694725,Michael Fowler,4,False
+825607,2025-10-07,away,Surprise Saguaros,683720,Edwin Jimenez,5,False
+825607,2025-10-07,away,Surprise Saguaros,800260,Anthony Flores,6,False
+825607,2025-10-07,away,Surprise Saguaros,693713,Emiliano Teodo,7,False
+825607,2025-10-07,home,Mesa Solar Sox,701480,Bryce Cunningham,1,True
+825607,2025-10-07,home,Mesa Solar Sox,695366,Holt Jones,2,False
+825607,2025-10-07,home,Mesa Solar Sox,687020,Mason Auer,3,False
+825607,2025-10-07,home,Mesa Solar Sox,806281,Blaze Pontes,4,False
+825607,2025-10-07,home,Mesa Solar Sox,690658,Will Johnston,5,False
+825607,2025-10-07,home,Mesa Solar Sox,815292,Luis Martinez-Gomez,6,False
+825607,2025-10-07,home,Mesa Solar Sox,686672,Mark Adamiak,7,False
+825607,2025-10-07,home,Mesa Solar Sox,681415,Jack Sellinger,8,False
+825606,2025-10-08,away,Peoria Javelinas,801725,Luis De León,1,True
+825606,2025-10-08,away,Peoria Javelinas,700675,Jimmy Kingsbury,2,False
+825606,2025-10-08,away,Peoria Javelinas,805955,Carson Dorsey,3,False
+825606,2025-10-08,away,Peoria Javelinas,804663,Tyler Cleveland,4,False
+825606,2025-10-08,away,Peoria Javelinas,827317,Brandon Downer,5,False
+825606,2025-10-08,home,Mesa Solar Sox,691103,Koen Moreno,1,True
+825606,2025-10-08,home,Mesa Solar Sox,703596,Karson Milbrandt,2,False
+825606,2025-10-08,home,Mesa Solar Sox,802963,Mathew Peters,3,False
+825606,2025-10-08,home,Mesa Solar Sox,802374,Brady Kirtner,4,False
+825606,2025-10-08,home,Mesa Solar Sox,701604,Andrew Lindsey,5,False
+825591,2025-10-08,away,Glendale Desert Dogs,696146,Hagen Smith,1,True
+825591,2025-10-08,away,Glendale Desert Dogs,681410,Connor McCullough,2,False
+825591,2025-10-08,away,Glendale Desert Dogs,801317,Alex Makarewich,3,False
+825591,2025-10-08,away,Glendale Desert Dogs,806293,Payton Martin,4,False
+825591,2025-10-08,away,Glendale Desert Dogs,695316,Jarold Rosado,5,False
+825591,2025-10-08,away,Glendale Desert Dogs,801941,Carson Jacobs,6,False
+825591,2025-10-08,away,Glendale Desert Dogs,699823,Tyler Davis,7,False
+825591,2025-10-08,away,Glendale Desert Dogs,695003,Randel Clemente,8,False
+825591,2025-10-08,home,Surprise Saguaros,814803,Logan Martin,1,True
+825591,2025-10-08,home,Surprise Saguaros,694818,Hunter Owen,2,False
+825591,2025-10-08,home,Surprise Saguaros,692838,Jaydenn Estanista,3,False
+825591,2025-10-08,home,Surprise Saguaros,822067,A.J. Causey,4,False
+825591,2025-10-08,home,Surprise Saguaros,701207,Dennis Colleran Jr.,5,False
+825591,2025-10-08,home,Surprise Saguaros,692137,L.P. Langevin,6,False
+825591,2025-10-08,home,Surprise Saguaros,695294,Tommy McCollum,7,False
+825619,2025-10-08,away,Salt River Rafters,695293,Jojo Ingrassia,1,True
+825619,2025-10-08,away,Salt River Rafters,700380,Joshua Loeschorn,2,False
+825619,2025-10-08,away,Salt River Rafters,694968,Jack Mahoney,3,False
+825619,2025-10-08,away,Salt River Rafters,692243,Jaden Woods,4,False
+825619,2025-10-08,away,Salt River Rafters,694900,Kyle Amendt,5,False
+825619,2025-10-08,away,Salt River Rafters,695402,Najer Victor,6,False
+825619,2025-10-08,home,Scottsdale Scorpions,692454,Pablo Aldonis,1,True
+825619,2025-10-08,home,Scottsdale Scorpions,809340,Austin Troesser,2,False
+825619,2025-10-08,home,Scottsdale Scorpions,688781,Brett Banks,3,False
+825619,2025-10-08,home,Scottsdale Scorpions,808743,Bryce Jenkins,4,False
+825619,2025-10-08,home,Scottsdale Scorpions,701557,Carlos Lequerica,5,False
+825619,2025-10-08,home,Scottsdale Scorpions,829338,Dariel Fregio,6,False
+825652,2025-10-09,away,Surprise Saguaros,682769,Eiberson Castellano,1,True
+825652,2025-10-09,away,Surprise Saguaros,806585,Jack Dallas,2,False
+825652,2025-10-09,away,Surprise Saguaros,689557,Zane Morehouse,3,False
+825652,2025-10-09,away,Surprise Saguaros,828506,Joey Danielson,4,False
+825652,2025-10-09,away,Surprise Saguaros,679702,Daniel Harper,5,False
+825652,2025-10-09,home,Peoria Javelinas,801333,Johnathan Harmon,1,True
+825652,2025-10-09,home,Peoria Javelinas,801415,Zander Sechrist,2,False
+825652,2025-10-09,home,Peoria Javelinas,807748,Kannon Kemp,3,False
+825652,2025-10-09,home,Peoria Javelinas,808063,Maikel Miralles,4,False
+825652,2025-10-09,home,Peoria Javelinas,687040,Sayer Diederich,5,False
+825666,2025-10-09,away,Scottsdale Scorpions,694885,Ryan Murphy,1,True
+825666,2025-10-09,away,Scottsdale Scorpions,678738,Juan Sanchez,2,False
+825666,2025-10-09,away,Scottsdale Scorpions,694544,Austin Amaral,3,False
+825666,2025-10-09,away,Scottsdale Scorpions,691028,Nate Wohlgemuth,4,False
+825666,2025-10-09,away,Scottsdale Scorpions,698952,Jose T. Perez,5,False
+825666,2025-10-09,away,Scottsdale Scorpions,698962,Ricardo Estrada,6,False
+825666,2025-10-09,away,Scottsdale Scorpions,693686,Spencer Miles,7,False
+825666,2025-10-09,home,Glendale Desert Dogs,813820,Chen-Wei Lin,1,True
+825666,2025-10-09,home,Glendale Desert Dogs,696505,Cory Wall,2,False
+825666,2025-10-09,home,Glendale Desert Dogs,692404,Darlin Saladin,3,False
+825666,2025-10-09,home,Glendale Desert Dogs,802680,Tyler Bradt,4,False
+825666,2025-10-09,home,Glendale Desert Dogs,830485,Trent Buchanan,5,False
+825666,2025-10-09,home,Glendale Desert Dogs,681884,D.J. Carpenter,6,False
+825666,2025-10-09,home,Glendale Desert Dogs,690229,LJ McDonough,7,False
+825637,2025-10-09,away,Mesa Solar Sox,813895,Corey Avant,1,True
+825637,2025-10-09,away,Mesa Solar Sox,700579,Nathan Dettmer,2,False
+825637,2025-10-09,away,Mesa Solar Sox,806281,Blaze Pontes,3,False
+825637,2025-10-09,away,Mesa Solar Sox,688636,Adam Stone,4,False
+825637,2025-10-09,away,Mesa Solar Sox,680893,Hueston Morrill,5,False
+825637,2025-10-09,away,Mesa Solar Sox,801270,Darwin Rodriguez,6,False
+825637,2025-10-09,away,Mesa Solar Sox,686672,Mark Adamiak,7,False
+825637,2025-10-09,home,Salt River Rafters,701908,David Hagaman,1,True
+825637,2025-10-09,home,Salt River Rafters,679555,Brandon Dufault,2,False
+825637,2025-10-09,home,Salt River Rafters,809138,Isaac Stebens,3,False
+825637,2025-10-09,home,Salt River Rafters,702586,Fulton Lockhart,4,False
+825637,2025-10-09,home,Salt River Rafters,808054,Yordin Chalas,5,False
+825637,2025-10-09,home,Salt River Rafters,694518,Austin Smith,6,False
+825651,2025-10-10,away,Salt River Rafters,695065,Ryan Costeiu,1,True
+825651,2025-10-10,away,Salt River Rafters,682981,Derek Diamond,2,False
+825651,2025-10-10,away,Salt River Rafters,686753,Drey Jameson,3,False
+825651,2025-10-10,away,Salt River Rafters,801829,Jay Allmer,4,False
+825651,2025-10-10,away,Salt River Rafters,700327,Welinton Herrera,5,False
+825651,2025-10-10,away,Salt River Rafters,814106,Cade Denton,6,False
+825651,2025-10-10,away,Salt River Rafters,692243,Jaden Woods,7,False
+825651,2025-10-10,home,Peoria Javelinas,695076,Rhett Lowder,1,True
+825651,2025-10-10,home,Peoria Javelinas,806288,Stefan Raeth,2,False
+825651,2025-10-10,home,Peoria Javelinas,691629,Miguelangel Boadas,3,False
+825651,2025-10-10,home,Peoria Javelinas,805812,Dylan Questad,4,False
+825651,2025-10-10,home,Peoria Javelinas,828471,Jakob Hall,5,False
+825651,2025-10-10,home,Peoria Javelinas,804592,Hunter Hoopes,6,False
+825620,2025-10-10,away,Mesa Solar Sox,801995,Aiden May,1,True
+825620,2025-10-10,away,Mesa Solar Sox,702516,JP Wheat,2,False
+825620,2025-10-10,away,Mesa Solar Sox,681415,Jack Sellinger,3,False
+825620,2025-10-10,away,Mesa Solar Sox,694793,Jadon Bercovich,4,False
+825620,2025-10-10,away,Mesa Solar Sox,812163,Jonathan Russell,5,False
+825620,2025-10-10,home,Scottsdale Scorpions,820901,Anderson Brito,1,True
+825620,2025-10-10,home,Scottsdale Scorpions,813865,Hudson Leach,2,False
+825620,2025-10-10,home,Scottsdale Scorpions,801802,James Hicks,3,False
+825620,2025-10-10,home,Scottsdale Scorpions,689223,Derek True,4,False
+825620,2025-10-10,home,Scottsdale Scorpions,688692,Jared Simpson,5,False
+825664,2025-10-12,away,Glendale Desert Dogs,815794,Hyun-Seok Jang,1,True
+825664,2025-10-12,away,Glendale Desert Dogs,806293,Payton Martin,2,False
+825664,2025-10-12,away,Glendale Desert Dogs,801941,Carson Jacobs,3,False
+825664,2025-10-12,away,Glendale Desert Dogs,801317,Alex Makarewich,4,False
+825664,2025-10-12,away,Glendale Desert Dogs,815322,Kai Peterson,5,False
+825664,2025-10-12,home,Surprise Saguaros,692437,Winston Santos,1,True
+825664,2025-10-12,home,Surprise Saguaros,828506,Joey Danielson,2,False
+825664,2025-10-12,home,Surprise Saguaros,692838,Jaydenn Estanista,3,False
+825664,2025-10-12,home,Surprise Saguaros,683720,Edwin Jimenez,4,False
+825605,2025-10-12,away,Salt River Rafters,700380,Joshua Loeschorn,1,True
+825605,2025-10-12,away,Salt River Rafters,808054,Yordin Chalas,2,False
+825605,2025-10-12,away,Salt River Rafters,809138,Isaac Stebens,3,False
+825605,2025-10-12,away,Salt River Rafters,702586,Fulton Lockhart,4,False
+825605,2025-10-12,home,Mesa Solar Sox,694696,Cade Smith,1,True
+825605,2025-10-12,home,Mesa Solar Sox,806281,Blaze Pontes,2,False
+825605,2025-10-12,home,Mesa Solar Sox,695366,Holt Jones,3,False
+825616,2025-10-12,away,Scottsdale Scorpions,690162,Kenny Serwa,1,True
+825616,2025-10-12,away,Scottsdale Scorpions,701557,Carlos Lequerica,2,False
+825616,2025-10-12,away,Scottsdale Scorpions,808743,Bryce Jenkins,3,False
+825616,2025-10-12,home,Peoria Javelinas,807748,Kannon Kemp,1,True
+825616,2025-10-12,home,Peoria Javelinas,827317,Brandon Downer,2,False
+825616,2025-10-12,home,Peoria Javelinas,808052,Johan Moreno,3,False
+825616,2025-10-12,home,Peoria Javelinas,823801,Tanner Smith,4,False
+825616,2025-10-12,home,Peoria Javelinas,814491,Tucker Musgrove,5,False
+825616,2025-10-12,home,Peoria Javelinas,805321,Trevor Kuncl,6,False
+825636,2025-10-14,away,Glendale Desert Dogs,820827,Luke Sinnard,1,True
+825636,2025-10-14,away,Glendale Desert Dogs,800811,Jacob Kroeger,2,False
+825636,2025-10-14,away,Glendale Desert Dogs,815794,Hyun-Seok Jang,3,False
+825636,2025-10-14,away,Glendale Desert Dogs,801317,Alex Makarewich,4,False
+825636,2025-10-14,away,Glendale Desert Dogs,809915,Jakob Wright,5,False
+825636,2025-10-14,away,Glendale Desert Dogs,807724,Justin Chambers,6,False
+825636,2025-10-14,away,Glendale Desert Dogs,702910,Jhancarlos Lara,7,False
+825636,2025-10-14,away,Glendale Desert Dogs,815322,Kai Peterson,8,False
+825636,2025-10-14,home,Salt River Rafters,691384,Luis Perales,1,True
+825636,2025-10-14,home,Salt River Rafters,806270,Dominic Perachi,2,False
+825636,2025-10-14,home,Salt River Rafters,686753,Drey Jameson,3,False
+825636,2025-10-14,home,Salt River Rafters,702586,Fulton Lockhart,4,False
+825636,2025-10-14,home,Salt River Rafters,694900,Kyle Amendt,5,False
+825636,2025-10-14,home,Salt River Rafters,695402,Najer Victor,6,False
+825649,2025-10-14,away,Scottsdale Scorpions,690162,Kenny Serwa,1,True
+825649,2025-10-14,away,Scottsdale Scorpions,687562,Jake Bennett,2,False
+825649,2025-10-14,away,Scottsdale Scorpions,701557,Carlos Lequerica,3,False
+825649,2025-10-14,away,Scottsdale Scorpions,829338,Dariel Fregio,4,False
+825649,2025-10-14,home,Peoria Javelinas,681041,Marcelo Perez,1,True
+825649,2025-10-14,home,Peoria Javelinas,700675,Jimmy Kingsbury,2,False
+825649,2025-10-14,home,Peoria Javelinas,686470,Ryan Hawks,3,False
+825649,2025-10-14,home,Peoria Javelinas,823801,Tanner Smith,4,False
+825649,2025-10-14,home,Peoria Javelinas,814491,Tucker Musgrove,5,False
+825649,2025-10-14,home,Peoria Javelinas,808052,Johan Moreno,6,False
+825649,2025-10-14,home,Peoria Javelinas,688609,Hunter Parks,7,False
+825649,2025-10-14,home,Peoria Javelinas,805321,Trevor Kuncl,8,False
+825604,2025-10-14,away,Surprise Saguaros,692030,Jose Corniell,1,True
+825604,2025-10-14,away,Surprise Saguaros,692437,Winston Santos,2,False
+825604,2025-10-14,away,Surprise Saguaros,801367,Matt Jachec,3,False
+825604,2025-10-14,home,Mesa Solar Sox,691765,Jackson Baumeister,1,True
+825604,2025-10-14,home,Mesa Solar Sox,701604,Andrew Lindsey,2,False
+825604,2025-10-14,home,Mesa Solar Sox,694696,Cade Smith,3,False
+825604,2025-10-14,home,Mesa Solar Sox,690658,Will Johnston,4,False
+825604,2025-10-14,home,Mesa Solar Sox,815292,Luis Martinez-Gomez,5,False
+825648,2025-10-15,away,Glendale Desert Dogs,806334,Alex Amalfi,1,True
+825648,2025-10-15,away,Glendale Desert Dogs,681884,D.J. Carpenter,2,False
+825648,2025-10-15,away,Glendale Desert Dogs,806293,Payton Martin,3,False
+825648,2025-10-15,away,Glendale Desert Dogs,695316,Jarold Rosado,4,False
+825648,2025-10-15,away,Glendale Desert Dogs,801941,Carson Jacobs,5,False
+825648,2025-10-15,away,Glendale Desert Dogs,807410,Chay Yeager,6,False
+825648,2025-10-15,away,Glendale Desert Dogs,699823,Tyler Davis,7,False
+825648,2025-10-15,home,Peoria Javelinas,691000,Carson Montgomery,1,True
+825648,2025-10-15,home,Peoria Javelinas,804663,Tyler Cleveland,2,False
+825648,2025-10-15,home,Peoria Javelinas,687040,Sayer Diederich,3,False
+825648,2025-10-15,home,Peoria Javelinas,695569,Luke Hayden,4,False
+825648,2025-10-15,home,Peoria Javelinas,806288,Stefan Raeth,5,False
+825648,2025-10-15,home,Peoria Javelinas,801415,Zander Sechrist,6,False
+825648,2025-10-15,home,Peoria Javelinas,827317,Brandon Downer,7,False
+825622,2025-10-15,away,Salt River Rafters,695632,Brandon Neely,1,True
+825622,2025-10-15,away,Salt River Rafters,700380,Joshua Loeschorn,2,False
+825622,2025-10-15,away,Salt River Rafters,694788,Carlson Reed,3,False
+825622,2025-10-15,away,Salt River Rafters,809138,Isaac Stebens,4,False
+825622,2025-10-15,away,Salt River Rafters,694518,Austin Smith,5,False
+825622,2025-10-15,away,Salt River Rafters,808054,Yordin Chalas,6,False
+825622,2025-10-15,away,Salt River Rafters,692243,Jaden Woods,7,False
+825622,2025-10-15,home,Scottsdale Scorpions,800344,Sean Paul Liñan,1,True
+825622,2025-10-15,home,Scottsdale Scorpions,692454,Pablo Aldonis,2,False
+825622,2025-10-15,home,Scottsdale Scorpions,809340,Austin Troesser,3,False
+825622,2025-10-15,home,Scottsdale Scorpions,813865,Hudson Leach,4,False
+825622,2025-10-15,home,Scottsdale Scorpions,688781,Brett Banks,5,False
+825622,2025-10-15,home,Scottsdale Scorpions,808743,Bryce Jenkins,6,False
+825622,2025-10-15,home,Scottsdale Scorpions,694544,Austin Amaral,7,False
+825589,2025-10-15,away,Mesa Solar Sox,701480,Bryce Cunningham,1,True
+825589,2025-10-15,away,Mesa Solar Sox,694793,Jadon Bercovich,2,False
+825589,2025-10-15,away,Mesa Solar Sox,680893,Hueston Morrill,3,False
+825589,2025-10-15,away,Mesa Solar Sox,806281,Blaze Pontes,4,False
+825589,2025-10-15,away,Mesa Solar Sox,695366,Holt Jones,5,False
+825589,2025-10-15,home,Surprise Saguaros,682982,Daniel Espino,1,True
+825589,2025-10-15,home,Surprise Saguaros,695871,Jesús Broca,2,False
+825589,2025-10-15,home,Surprise Saguaros,822067,A.J. Causey,3,False
+825589,2025-10-15,home,Surprise Saguaros,685396,Nate Peterson,4,False
+825589,2025-10-15,home,Surprise Saguaros,806585,Jack Dallas,5,False
+825589,2025-10-15,home,Surprise Saguaros,806641,Kolton Curtis,6,False
+825589,2025-10-15,home,Surprise Saguaros,693713,Emiliano Teodo,7,False
+825603,2025-10-16,away,Peoria Javelinas,801725,Luis De León,1,True
+825603,2025-10-16,away,Peoria Javelinas,828471,Jakob Hall,2,False
+825603,2025-10-16,away,Peoria Javelinas,805955,Carson Dorsey,3,False
+825603,2025-10-16,away,Peoria Javelinas,807748,Kannon Kemp,4,False
+825603,2025-10-16,home,Mesa Solar Sox,703596,Karson Milbrandt,1,True
+825603,2025-10-16,home,Mesa Solar Sox,802963,Mathew Peters,2,False
+825603,2025-10-16,home,Mesa Solar Sox,687020,Mason Auer,3,False
+825603,2025-10-16,home,Mesa Solar Sox,691103,Koen Moreno,4,False
+825603,2025-10-16,home,Mesa Solar Sox,688636,Adam Stone,5,False
+825603,2025-10-16,home,Mesa Solar Sox,802374,Brady Kirtner,6,False
+825603,2025-10-16,home,Mesa Solar Sox,801270,Darwin Rodriguez,7,False
+825633,2025-10-16,away,Surprise Saguaros,671143,Trenton Denholm,1,True
+825633,2025-10-16,away,Surprise Saguaros,689557,Zane Morehouse,2,False
+825633,2025-10-16,away,Surprise Saguaros,702045,Rorik Maltrud,3,False
+825633,2025-10-16,away,Surprise Saguaros,800260,Anthony Flores,4,False
+825633,2025-10-16,away,Surprise Saguaros,692137,L.P. Langevin,5,False
+825633,2025-10-16,away,Surprise Saguaros,695294,Tommy McCollum,6,False
+825633,2025-10-16,away,Surprise Saguaros,701207,Dennis Colleran Jr.,7,False
+825633,2025-10-16,away,Surprise Saguaros,694725,Michael Fowler,8,False
+825633,2025-10-16,home,Salt River Rafters,694968,Jack Mahoney,1,True
+825633,2025-10-16,home,Salt River Rafters,695293,Jojo Ingrassia,2,False
+825633,2025-10-16,home,Salt River Rafters,682981,Derek Diamond,3,False
+825633,2025-10-16,home,Salt River Rafters,801829,Jay Allmer,4,False
+825633,2025-10-16,home,Salt River Rafters,814106,Cade Denton,5,False
+825633,2025-10-16,home,Salt River Rafters,695402,Najer Victor,6,False
+825633,2025-10-16,home,Salt River Rafters,700327,Welinton Herrera,7,False
+825621,2025-10-16,away,Glendale Desert Dogs,696146,Hagen Smith,1,True
+825621,2025-10-16,away,Glendale Desert Dogs,681410,Connor McCullough,2,False
+825621,2025-10-16,away,Glendale Desert Dogs,690229,LJ McDonough,3,False
+825621,2025-10-16,away,Glendale Desert Dogs,695003,Randel Clemente,4,False
+825621,2025-10-16,home,Scottsdale Scorpions,693686,Spencer Miles,1,True
+825621,2025-10-16,home,Scottsdale Scorpions,698962,Ricardo Estrada,2,False
+825621,2025-10-16,home,Scottsdale Scorpions,694885,Ryan Murphy,3,False
+825621,2025-10-16,home,Scottsdale Scorpions,678738,Juan Sanchez,4,False
+825621,2025-10-16,home,Scottsdale Scorpions,698952,Jose T. Perez,5,False
+825621,2025-10-16,home,Scottsdale Scorpions,691028,Nate Wohlgemuth,6,False
+825632,2025-10-17,away,Peoria Javelinas,801333,Johnathan Harmon,1,True
+825632,2025-10-17,away,Peoria Javelinas,808063,Maikel Miralles,2,False
+825632,2025-10-17,away,Peoria Javelinas,804592,Hunter Hoopes,3,False
+825632,2025-10-17,away,Peoria Javelinas,823801,Tanner Smith,4,False
+825632,2025-10-17,home,Salt River Rafters,701908,David Hagaman,1,True
+825632,2025-10-17,home,Salt River Rafters,809138,Isaac Stebens,2,False
+825632,2025-10-17,home,Salt River Rafters,700380,Joshua Loeschorn,3,False
+825632,2025-10-17,home,Salt River Rafters,694518,Austin Smith,4,False
+825632,2025-10-17,home,Salt River Rafters,686753,Drey Jameson,5,False
+825632,2025-10-17,home,Salt River Rafters,702586,Fulton Lockhart,6,False
+825632,2025-10-17,home,Salt River Rafters,692243,Jaden Woods,7,False
+825587,2025-10-17,away,Glendale Desert Dogs,813820,Chen-Wei Lin,1,True
+825587,2025-10-17,away,Glendale Desert Dogs,700292,Yondrei Rojas,2,False
+825587,2025-10-17,away,Glendale Desert Dogs,692404,Darlin Saladin,3,False
+825587,2025-10-17,away,Glendale Desert Dogs,702910,Jhancarlos Lara,4,False
+825587,2025-10-17,away,Glendale Desert Dogs,801317,Alex Makarewich,5,False
+825587,2025-10-17,away,Glendale Desert Dogs,802680,Tyler Bradt,6,False
+825587,2025-10-17,home,Surprise Saguaros,814803,Logan Martin,1,True
+825587,2025-10-17,home,Surprise Saguaros,801367,Matt Jachec,2,False
+825587,2025-10-17,home,Surprise Saguaros,694818,Hunter Owen,3,False
+825587,2025-10-17,home,Surprise Saguaros,692838,Jaydenn Estanista,4,False
+825587,2025-10-17,home,Surprise Saguaros,683720,Edwin Jimenez,5,False
+825587,2025-10-17,home,Surprise Saguaros,828506,Joey Danielson,6,False
+825587,2025-10-17,home,Surprise Saguaros,679702,Daniel Harper,7,False
+825595,2025-10-17,away,Scottsdale Scorpions,820901,Anderson Brito,1,True
+825595,2025-10-17,away,Scottsdale Scorpions,688692,Jared Simpson,2,False
+825595,2025-10-17,away,Scottsdale Scorpions,689223,Derek True,3,False
+825595,2025-10-17,away,Scottsdale Scorpions,701557,Carlos Lequerica,4,False
+825595,2025-10-17,away,Scottsdale Scorpions,829338,Dariel Fregio,5,False
+825595,2025-10-17,home,Mesa Solar Sox,813895,Corey Avant,1,True
+825595,2025-10-17,home,Mesa Solar Sox,700579,Nathan Dettmer,2,False
+825595,2025-10-17,home,Mesa Solar Sox,690658,Will Johnston,3,False
+825595,2025-10-17,home,Mesa Solar Sox,812163,Jonathan Russell,4,False
+825595,2025-10-17,home,Mesa Solar Sox,806281,Blaze Pontes,5,False
+825595,2025-10-17,home,Mesa Solar Sox,686672,Mark Adamiak,6,False
+825663,2025-10-18,away,Mesa Solar Sox,801995,Aiden May,1,True
+825663,2025-10-18,away,Mesa Solar Sox,702516,JP Wheat,2,False
+825663,2025-10-18,away,Mesa Solar Sox,687020,Mason Auer,3,False
+825663,2025-10-18,away,Mesa Solar Sox,695366,Holt Jones,4,False
+825663,2025-10-18,home,Glendale Desert Dogs,820827,Luke Sinnard,1,True
+825663,2025-10-18,home,Glendale Desert Dogs,800811,Jacob Kroeger,2,False
+825663,2025-10-18,home,Glendale Desert Dogs,696505,Cory Wall,3,False
+825663,2025-10-18,home,Glendale Desert Dogs,815322,Kai Peterson,4,False
+825663,2025-10-18,home,Glendale Desert Dogs,830485,Trent Buchanan,5,False
+825663,2025-10-18,home,Glendale Desert Dogs,695316,Jarold Rosado,6,False
+825644,2025-10-18,away,Salt River Rafters,679555,Brandon Dufault,1,True
+825644,2025-10-18,away,Salt River Rafters,694900,Kyle Amendt,2,False
+825644,2025-10-18,away,Salt River Rafters,695065,Ryan Costeiu,3,False
+825644,2025-10-18,away,Salt River Rafters,808054,Yordin Chalas,4,False
+825644,2025-10-18,home,Peoria Javelinas,695076,Rhett Lowder,1,True
+825644,2025-10-18,home,Peoria Javelinas,691629,Miguelangel Boadas,2,False
+825644,2025-10-18,home,Peoria Javelinas,808052,Johan Moreno,3,False
+825644,2025-10-18,home,Peoria Javelinas,805812,Dylan Questad,4,False
+825644,2025-10-18,home,Peoria Javelinas,805321,Trevor Kuncl,5,False
+825614,2025-10-18,away,Surprise Saguaros,682769,Eiberson Castellano,1,True
+825614,2025-10-18,away,Surprise Saguaros,689557,Zane Morehouse,2,False
+825614,2025-10-18,away,Surprise Saguaros,822067,A.J. Causey,3,False
+825614,2025-10-18,away,Surprise Saguaros,701207,Dennis Colleran Jr.,4,False
+825614,2025-10-18,home,Scottsdale Scorpions,801802,James Hicks,1,True
+825614,2025-10-18,home,Scottsdale Scorpions,692454,Pablo Aldonis,2,False
+825614,2025-10-18,home,Scottsdale Scorpions,808743,Bryce Jenkins,3,False
+825614,2025-10-18,home,Scottsdale Scorpions,688781,Brett Banks,4,False
+825614,2025-10-18,home,Scottsdale Scorpions,691028,Nate Wohlgemuth,5,False
+825647,2025-10-19,away,Salt River Rafters,691384,Luis Perales,1,True
+825647,2025-10-19,away,Salt River Rafters,682981,Derek Diamond,2,False
+825647,2025-10-19,away,Salt River Rafters,814106,Cade Denton,3,False
+825647,2025-10-19,away,Salt River Rafters,700327,Welinton Herrera,4,False
+825647,2025-10-19,home,Glendale Desert Dogs,809915,Jakob Wright,1,True
+825647,2025-10-19,home,Glendale Desert Dogs,801941,Carson Jacobs,2,False
+825647,2025-10-19,home,Glendale Desert Dogs,801317,Alex Makarewich,3,False
+825647,2025-10-19,home,Glendale Desert Dogs,807724,Justin Chambers,4,False
+825647,2025-10-19,home,Glendale Desert Dogs,681884,D.J. Carpenter,5,False
+825647,2025-10-19,home,Glendale Desert Dogs,690229,LJ McDonough,6,False
+825647,2025-10-19,home,Glendale Desert Dogs,700292,Yondrei Rojas,7,False
+825647,2025-10-19,home,Glendale Desert Dogs,807410,Chay Yeager,8,False
+825647,2025-10-19,home,Glendale Desert Dogs,695003,Randel Clemente,9,False
+825647,2025-10-19,home,Glendale Desert Dogs,699823,Tyler Davis,10,False
+825645,2025-10-19,away,Mesa Solar Sox,701604,Andrew Lindsey,1,True
+825645,2025-10-19,away,Mesa Solar Sox,802374,Brady Kirtner,2,False
+825645,2025-10-19,away,Mesa Solar Sox,802963,Mathew Peters,3,False
+825645,2025-10-19,away,Mesa Solar Sox,801270,Darwin Rodriguez,4,False
+825645,2025-10-19,away,Mesa Solar Sox,680893,Hueston Morrill,5,False
+825645,2025-10-19,home,Peoria Javelinas,686470,Ryan Hawks,1,True
+825645,2025-10-19,home,Peoria Javelinas,681041,Marcelo Perez,2,False
+825645,2025-10-19,home,Peoria Javelinas,828471,Jakob Hall,3,False
+825645,2025-10-19,home,Peoria Javelinas,700675,Jimmy Kingsbury,4,False
+825645,2025-10-19,home,Peoria Javelinas,801415,Zander Sechrist,5,False
+825645,2025-10-19,home,Peoria Javelinas,695569,Luke Hayden,6,False
+825645,2025-10-19,home,Peoria Javelinas,806288,Stefan Raeth,7,False
+825615,2025-10-19,away,Surprise Saguaros,806641,Kolton Curtis,1,True
+825615,2025-10-19,away,Surprise Saguaros,679702,Daniel Harper,2,False
+825615,2025-10-19,away,Surprise Saguaros,692137,L.P. Langevin,3,False
+825615,2025-10-19,away,Surprise Saguaros,800260,Anthony Flores,4,False
+825615,2025-10-19,away,Surprise Saguaros,693713,Emiliano Teodo,5,False
+825615,2025-10-19,away,Surprise Saguaros,695294,Tommy McCollum,6,False
+825615,2025-10-19,home,Scottsdale Scorpions,687562,Jake Bennett,1,True
+825615,2025-10-19,home,Scottsdale Scorpions,694544,Austin Amaral,2,False
+825615,2025-10-19,home,Scottsdale Scorpions,698952,Jose T. Perez,3,False
+825615,2025-10-19,home,Scottsdale Scorpions,809340,Austin Troesser,4,False
+825646,2025-10-21,away,Scottsdale Scorpions,698962,Ricardo Estrada,1,True
+825646,2025-10-21,away,Scottsdale Scorpions,678738,Juan Sanchez,2,False
+825646,2025-10-21,away,Scottsdale Scorpions,688692,Jared Simpson,3,False
+825646,2025-10-21,away,Scottsdale Scorpions,689223,Derek True,4,False
+825646,2025-10-21,home,Peoria Javelinas,691000,Carson Montgomery,1,True
+825646,2025-10-21,home,Peoria Javelinas,804592,Hunter Hoopes,2,False
+825646,2025-10-21,home,Peoria Javelinas,687040,Sayer Diederich,3,False
+825646,2025-10-21,home,Peoria Javelinas,804663,Tyler Cleveland,4,False
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,690162,Kenny Serwa,1,True
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,701557,Carlos Lequerica,2,False
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,808743,Bryce Jenkins,3,False
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,807748,Kannon Kemp,1,True
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,827317,Brandon Downer,2,False
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,808052,Johan Moreno,3,False
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,823801,Tanner Smith,4,False
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,814491,Tucker Musgrove,5,False
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,805321,Trevor Kuncl,6,False
+825581,2025-10-21,away,Glendale Desert Dogs,806334,Alex Amalfi,1,True
+825581,2025-10-21,away,Glendale Desert Dogs,696505,Cory Wall,2,False
+825581,2025-10-21,away,Glendale Desert Dogs,830485,Trent Buchanan,3,False
+825581,2025-10-21,away,Glendale Desert Dogs,802680,Tyler Bradt,4,False
+825581,2025-10-21,away,Glendale Desert Dogs,695316,Jarold Rosado,5,False
+825581,2025-10-21,home,Surprise Saguaros,692030,Jose Corniell,1,True
+825581,2025-10-21,home,Surprise Saguaros,694725,Michael Fowler,2,False
+825581,2025-10-21,home,Surprise Saguaros,801367,Matt Jachec,3,False
+825601,2025-10-21,away,Salt River Rafters,806270,Dominic Perachi,1,True
+825601,2025-10-21,away,Salt River Rafters,686753,Drey Jameson,2,False
+825601,2025-10-21,away,Salt River Rafters,694900,Kyle Amendt,3,False
+825601,2025-10-21,away,Salt River Rafters,692243,Jaden Woods,4,False
+825601,2025-10-21,home,Mesa Solar Sox,691765,Jackson Baumeister,1,True
+825601,2025-10-21,home,Mesa Solar Sox,690658,Will Johnston,2,False
+825601,2025-10-21,home,Mesa Solar Sox,688636,Adam Stone,3,False
+825601,2025-10-21,home,Mesa Solar Sox,812163,Jonathan Russell,4,False
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,815794,Hyun-Seok Jang,1,True
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,806293,Payton Martin,2,False
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,801941,Carson Jacobs,3,False
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,801317,Alex Makarewich,4,False
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,815322,Kai Peterson,5,False
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,692437,Winston Santos,1,True
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,828506,Joey Danielson,2,False
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,692838,Jaydenn Estanista,3,False
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,683720,Edwin Jimenez,4,False
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,700380,Joshua Loeschorn,1,True
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,808054,Yordin Chalas,2,False
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,809138,Isaac Stebens,3,False
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,702586,Fulton Lockhart,4,False
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,694696,Cade Smith,1,True
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,806281,Blaze Pontes,2,False
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,695366,Holt Jones,3,False
+825586,2025-10-22,away,Scottsdale Scorpions,694885,Ryan Murphy,1,True
+825586,2025-10-22,away,Scottsdale Scorpions,813865,Hudson Leach,2,False
+825586,2025-10-22,away,Scottsdale Scorpions,691028,Nate Wohlgemuth,3,False
+825586,2025-10-22,away,Scottsdale Scorpions,688781,Brett Banks,4,False
+825586,2025-10-22,away,Scottsdale Scorpions,829338,Dariel Fregio,5,False
+825586,2025-10-22,home,Surprise Saguaros,682982,Daniel Espino,1,True
+825586,2025-10-22,home,Surprise Saguaros,685396,Nate Peterson,2,False
+825586,2025-10-22,home,Surprise Saguaros,689557,Zane Morehouse,3,False
+825586,2025-10-22,home,Surprise Saguaros,695871,Jesús Broca,4,False
+825586,2025-10-22,home,Surprise Saguaros,822067,A.J. Causey,5,False
+825631,2025-10-22,away,Mesa Solar Sox,701480,Bryce Cunningham,1,True
+825631,2025-10-22,away,Mesa Solar Sox,802374,Brady Kirtner,2,False
+825631,2025-10-22,away,Mesa Solar Sox,813895,Corey Avant,3,False
+825631,2025-10-22,away,Mesa Solar Sox,687020,Mason Auer,4,False
+825631,2025-10-22,away,Mesa Solar Sox,680893,Hueston Morrill,5,False
+825631,2025-10-22,away,Mesa Solar Sox,802963,Mathew Peters,6,False
+825631,2025-10-22,home,Salt River Rafters,694788,Carlson Reed,1,True
+825631,2025-10-22,home,Salt River Rafters,695632,Brandon Neely,2,False
+825631,2025-10-22,home,Salt River Rafters,694518,Austin Smith,3,False
+825631,2025-10-22,home,Salt River Rafters,802967,Benny Thompson,4,False
+825631,2025-10-22,home,Salt River Rafters,695402,Najer Victor,5,False
+825643,2025-10-22,away,Glendale Desert Dogs,696146,Hagen Smith,1,True
+825643,2025-10-22,away,Glendale Desert Dogs,681410,Connor McCullough,2,False
+825643,2025-10-22,away,Glendale Desert Dogs,690229,LJ McDonough,3,False
+825643,2025-10-22,away,Glendale Desert Dogs,702910,Jhancarlos Lara,4,False
+825643,2025-10-22,away,Glendale Desert Dogs,807724,Justin Chambers,5,False
+825643,2025-10-22,away,Glendale Desert Dogs,681884,D.J. Carpenter,6,False
+825643,2025-10-22,home,Peoria Javelinas,801725,Luis De León,1,True
+825643,2025-10-22,home,Peoria Javelinas,801415,Zander Sechrist,2,False
+825643,2025-10-22,home,Peoria Javelinas,674265,Kevin Abel,3,False
+825643,2025-10-22,home,Peoria Javelinas,805955,Carson Dorsey,4,False
+825630,2025-10-23,away,Glendale Desert Dogs,813820,Chen-Wei Lin,1,True
+825630,2025-10-23,away,Glendale Desert Dogs,700292,Yondrei Rojas,2,False
+825630,2025-10-23,away,Glendale Desert Dogs,695316,Jarold Rosado,3,False
+825630,2025-10-23,away,Glendale Desert Dogs,692404,Darlin Saladin,4,False
+825630,2025-10-23,away,Glendale Desert Dogs,807410,Chay Yeager,5,False
+825630,2025-10-23,away,Glendale Desert Dogs,699823,Tyler Davis,6,False
+825630,2025-10-23,away,Glendale Desert Dogs,695003,Randel Clemente,7,False
+825630,2025-10-23,home,Salt River Rafters,695293,Jojo Ingrassia,1,True
+825630,2025-10-23,home,Salt River Rafters,809138,Isaac Stebens,2,False
+825630,2025-10-23,home,Salt River Rafters,694968,Jack Mahoney,3,False
+825630,2025-10-23,home,Salt River Rafters,682981,Derek Diamond,4,False
+825630,2025-10-23,home,Salt River Rafters,700327,Welinton Herrera,5,False
+825638,2025-10-23,away,Scottsdale Scorpions,693686,Spencer Miles,1,True
+825638,2025-10-23,away,Scottsdale Scorpions,692454,Pablo Aldonis,2,False
+825638,2025-10-23,away,Scottsdale Scorpions,802363,Jordan Geber,3,False
+825638,2025-10-23,away,Scottsdale Scorpions,694544,Austin Amaral,4,False
+825638,2025-10-23,away,Scottsdale Scorpions,809340,Austin Troesser,5,False
+825638,2025-10-23,home,Peoria Javelinas,808063,Maikel Miralles,1,True
+825638,2025-10-23,home,Peoria Javelinas,695569,Luke Hayden,2,False
+825638,2025-10-23,home,Peoria Javelinas,700675,Jimmy Kingsbury,3,False
+825638,2025-10-23,home,Peoria Javelinas,801333,Johnathan Harmon,4,False
+825638,2025-10-23,home,Peoria Javelinas,805812,Dylan Questad,5,False
+825638,2025-10-23,home,Peoria Javelinas,806288,Stefan Raeth,6,False
+825600,2025-10-23,away,Surprise Saguaros,702045,Rorik Maltrud,1,True
+825600,2025-10-23,away,Surprise Saguaros,671143,Trenton Denholm,2,False
+825600,2025-10-23,away,Surprise Saguaros,679702,Daniel Harper,3,False
+825600,2025-10-23,away,Surprise Saguaros,695294,Tommy McCollum,4,False
+825600,2025-10-23,away,Surprise Saguaros,693713,Emiliano Teodo,5,False
+825600,2025-10-23,home,Mesa Solar Sox,691103,Koen Moreno,1,True
+825600,2025-10-23,home,Mesa Solar Sox,686672,Mark Adamiak,2,False
+825600,2025-10-23,home,Mesa Solar Sox,703596,Karson Milbrandt,3,False
+825600,2025-10-23,home,Mesa Solar Sox,815292,Luis Martinez-Gomez,4,False
+825600,2025-10-23,home,Mesa Solar Sox,694793,Jadon Bercovich,5,False
+825600,2025-10-23,home,Mesa Solar Sox,701604,Andrew Lindsey,6,False
+825629,2025-10-24,away,Scottsdale Scorpions,801802,James Hicks,1,True
+825629,2025-10-24,away,Scottsdale Scorpions,820901,Anderson Brito,2,False
+825629,2025-10-24,away,Scottsdale Scorpions,688692,Jared Simpson,3,False
+825629,2025-10-24,away,Scottsdale Scorpions,701557,Carlos Lequerica,4,False
+825629,2025-10-24,home,Salt River Rafters,701908,David Hagaman,1,True
+825629,2025-10-24,home,Salt River Rafters,814106,Cade Denton,2,False
+825629,2025-10-24,home,Salt River Rafters,686753,Drey Jameson,3,False
+825629,2025-10-24,home,Salt River Rafters,695065,Ryan Costeiu,4,False
+825629,2025-10-24,home,Salt River Rafters,692243,Jaden Woods,5,False
+825629,2025-10-24,home,Salt River Rafters,694900,Kyle Amendt,6,False
+825629,2025-10-24,home,Salt River Rafters,695402,Najer Victor,7,False
+825585,2025-10-25,away,Mesa Solar Sox,700579,Nathan Dettmer,1,True
+825585,2025-10-25,away,Mesa Solar Sox,813895,Corey Avant,2,False
+825585,2025-10-25,away,Mesa Solar Sox,702516,JP Wheat,3,False
+825585,2025-10-25,away,Mesa Solar Sox,801270,Darwin Rodriguez,4,False
+825585,2025-10-25,away,Mesa Solar Sox,687020,Mason Auer,5,False
+825585,2025-10-25,away,Mesa Solar Sox,690658,Will Johnston,6,False
+825585,2025-10-25,away,Mesa Solar Sox,812163,Jonathan Russell,7,False
+825585,2025-10-25,away,Mesa Solar Sox,680893,Hueston Morrill,8,False
+825585,2025-10-25,home,Surprise Saguaros,814803,Logan Martin,1,True
+825585,2025-10-25,home,Surprise Saguaros,692838,Jaydenn Estanista,2,False
+825585,2025-10-25,home,Surprise Saguaros,806641,Kolton Curtis,3,False
+825585,2025-10-25,home,Surprise Saguaros,701207,Dennis Colleran Jr.,4,False
+825585,2025-10-25,home,Surprise Saguaros,692137,L.P. Langevin,5,False
+825585,2025-10-25,home,Surprise Saguaros,801367,Matt Jachec,6,False
+825585,2025-10-25,home,Surprise Saguaros,800260,Anthony Flores,7,False
+825585,2025-10-25,home,Surprise Saguaros,689557,Zane Morehouse,8,False
+825585,2025-10-25,home,Surprise Saguaros,694725,Michael Fowler,9,False
+825662,2025-10-25,away,Peoria Javelinas,695076,Rhett Lowder,1,True
+825662,2025-10-25,away,Peoria Javelinas,828471,Jakob Hall,2,False
+825662,2025-10-25,away,Peoria Javelinas,691629,Miguelangel Boadas,3,False
+825662,2025-10-25,away,Peoria Javelinas,804592,Hunter Hoopes,4,False
+825662,2025-10-25,away,Peoria Javelinas,827317,Brandon Downer,5,False
+825662,2025-10-25,home,Glendale Desert Dogs,820827,Luke Sinnard,1,True
+825662,2025-10-25,home,Glendale Desert Dogs,694989,Kelena Sauer,2,False
+825662,2025-10-25,home,Glendale Desert Dogs,696505,Cory Wall,3,False
+825662,2025-10-25,home,Glendale Desert Dogs,800811,Jacob Kroeger,4,False
+825662,2025-10-25,home,Glendale Desert Dogs,830485,Trent Buchanan,5,False
+825662,2025-10-25,home,Glendale Desert Dogs,802680,Tyler Bradt,6,False
+825662,2025-10-25,home,Glendale Desert Dogs,690229,LJ McDonough,7,False
+825662,2025-10-25,home,Glendale Desert Dogs,815322,Kai Peterson,8,False
+825584,2025-10-26,away,Peoria Javelinas,686470,Ryan Hawks,1,True
+825584,2025-10-26,away,Peoria Javelinas,681041,Marcelo Perez,2,False
+825584,2025-10-26,away,Peoria Javelinas,687040,Sayer Diederich,3,False
+825584,2025-10-26,away,Peoria Javelinas,814491,Tucker Musgrove,4,False
+825584,2025-10-26,away,Peoria Javelinas,807748,Kannon Kemp,5,False
+825584,2025-10-26,away,Peoria Javelinas,823801,Tanner Smith,6,False
+825584,2025-10-26,home,Surprise Saguaros,682769,Eiberson Castellano,1,True
+825584,2025-10-26,home,Surprise Saguaros,806585,Jack Dallas,2,False
+825584,2025-10-26,home,Surprise Saguaros,683720,Edwin Jimenez,3,False
+825584,2025-10-26,home,Surprise Saguaros,828506,Joey Danielson,4,False
+825584,2025-10-26,home,Surprise Saguaros,822067,A.J. Causey,5,False
+825660,2025-10-26,away,Salt River Rafters,691384,Luis Perales,1,True
+825660,2025-10-26,away,Salt River Rafters,802967,Benny Thompson,2,False
+825660,2025-10-26,away,Salt River Rafters,679555,Brandon Dufault,3,False
+825660,2025-10-26,away,Salt River Rafters,702586,Fulton Lockhart,4,False
+825660,2025-10-26,away,Salt River Rafters,808054,Yordin Chalas,5,False
+825660,2025-10-26,away,Salt River Rafters,682981,Derek Diamond,6,False
+825660,2025-10-26,home,Glendale Desert Dogs,815794,Hyun-Seok Jang,1,True
+825660,2025-10-26,home,Glendale Desert Dogs,809915,Jakob Wright,2,False
+825660,2025-10-26,home,Glendale Desert Dogs,681884,D.J. Carpenter,3,False
+825660,2025-10-26,home,Glendale Desert Dogs,702910,Jhancarlos Lara,4,False
+825660,2025-10-26,home,Glendale Desert Dogs,699823,Tyler Davis,5,False
+825660,2025-10-26,home,Glendale Desert Dogs,807724,Justin Chambers,6,False
+825660,2025-10-26,home,Glendale Desert Dogs,801317,Alex Makarewich,7,False
+825609,2025-10-26,away,Mesa Solar Sox,801995,Aiden May,1,True
+825609,2025-10-26,away,Mesa Solar Sox,695366,Holt Jones,2,False
+825609,2025-10-26,away,Mesa Solar Sox,681415,Jack Sellinger,3,False
+825609,2025-10-26,away,Mesa Solar Sox,688636,Adam Stone,4,False
+825609,2025-10-26,away,Mesa Solar Sox,815292,Luis Martinez-Gomez,5,False
+825609,2025-10-26,away,Mesa Solar Sox,806281,Blaze Pontes,6,False
+825609,2025-10-26,home,Scottsdale Scorpions,687562,Jake Bennett,1,True
+825609,2025-10-26,home,Scottsdale Scorpions,829338,Dariel Fregio,2,False
+825609,2025-10-26,home,Scottsdale Scorpions,800233,Ernesto Mercedes,3,False
+825609,2025-10-26,home,Scottsdale Scorpions,813865,Hudson Leach,4,False
+825609,2025-10-26,home,Scottsdale Scorpions,698952,Jose T. Perez,5,False
+825609,2025-10-26,home,Scottsdale Scorpions,689223,Derek True,6,False
+825639,2025-10-28,away,Salt River Rafters,806270,Dominic Perachi,1,True
+825639,2025-10-28,away,Salt River Rafters,809138,Isaac Stebens,2,False
+825639,2025-10-28,away,Salt River Rafters,700380,Joshua Loeschorn,3,False
+825639,2025-10-28,away,Salt River Rafters,699230,Lorenzo Encarnacion,4,False
+825639,2025-10-28,away,Salt River Rafters,801829,Jay Allmer,5,False
+825639,2025-10-28,home,Peoria Javelinas,691000,Carson Montgomery,1,True
+825639,2025-10-28,home,Peoria Javelinas,700675,Jimmy Kingsbury,2,False
+825639,2025-10-28,home,Peoria Javelinas,674265,Kevin Abel,3,False
+825639,2025-10-28,home,Peoria Javelinas,804663,Tyler Cleveland,4,False
+825639,2025-10-28,home,Peoria Javelinas,805321,Trevor Kuncl,5,False
+825639,2025-10-28,home,Peoria Javelinas,808052,Johan Moreno,6,False
+825613,2025-10-28,away,Surprise Saguaros,692030,Jose Corniell,1,True
+825613,2025-10-28,away,Surprise Saguaros,692437,Winston Santos,2,False
+825613,2025-10-28,away,Surprise Saguaros,679702,Daniel Harper,3,False
+825613,2025-10-28,home,Scottsdale Scorpions,694885,Ryan Murphy,1,True
+825613,2025-10-28,home,Scottsdale Scorpions,698962,Ricardo Estrada,2,False
+825613,2025-10-28,home,Scottsdale Scorpions,678738,Juan Sanchez,3,False
+825613,2025-10-28,home,Scottsdale Scorpions,688781,Brett Banks,4,False
+825613,2025-10-28,home,Scottsdale Scorpions,688692,Jared Simpson,5,False
+825599,2025-10-28,away,Glendale Desert Dogs,806334,Alex Amalfi,1,True
+825599,2025-10-28,away,Glendale Desert Dogs,690229,LJ McDonough,2,False
+825599,2025-10-28,away,Glendale Desert Dogs,802680,Tyler Bradt,3,False
+825599,2025-10-28,away,Glendale Desert Dogs,702910,Jhancarlos Lara,4,False
+825599,2025-10-28,away,Glendale Desert Dogs,815322,Kai Peterson,5,False
+825599,2025-10-28,away,Glendale Desert Dogs,830485,Trent Buchanan,6,False
+825599,2025-10-28,away,Glendale Desert Dogs,807410,Chay Yeager,7,False
+825599,2025-10-28,away,Glendale Desert Dogs,695003,Randel Clemente,8,False
+825599,2025-10-28,home,Mesa Solar Sox,694696,Cade Smith,1,True
+825599,2025-10-28,home,Mesa Solar Sox,691765,Jackson Baumeister,2,False
+825599,2025-10-28,home,Mesa Solar Sox,802963,Mathew Peters,3,False
+825599,2025-10-28,home,Mesa Solar Sox,701604,Andrew Lindsey,4,False
+825599,2025-10-28,home,Mesa Solar Sox,686672,Mark Adamiak,5,False
+825628,2025-10-29,away,Peoria Javelinas,801725,Luis De León,1,True
+825628,2025-10-29,away,Peoria Javelinas,805955,Carson Dorsey,2,False
+825628,2025-10-29,home,Salt River Rafters,815456,Ben Shields,1,True
+825628,2025-10-29,home,Salt River Rafters,694900,Kyle Amendt,2,False
+825628,2025-10-29,home,Salt River Rafters,695632,Brandon Neely,3,False
+825628,2025-10-29,home,Salt River Rafters,802967,Benny Thompson,4,False
+825628,2025-10-29,home,Salt River Rafters,694788,Carlson Reed,5,False
+825583,2025-10-29,away,Scottsdale Scorpions,690162,Kenny Serwa,1,True
+825583,2025-10-29,away,Scottsdale Scorpions,701557,Carlos Lequerica,2,False
+825583,2025-10-29,away,Scottsdale Scorpions,801221,Pedro Garcia,3,False
+825583,2025-10-29,home,Surprise Saguaros,682982,Daniel Espino,1,True
+825583,2025-10-29,home,Surprise Saguaros,695871,Jesús Broca,2,False
+825583,2025-10-29,home,Surprise Saguaros,685396,Nate Peterson,3,False
+825583,2025-10-29,home,Surprise Saguaros,692137,L.P. Langevin,4,False
+825583,2025-10-29,home,Surprise Saguaros,695294,Tommy McCollum,5,False
+825583,2025-10-29,home,Surprise Saguaros,689557,Zane Morehouse,6,False
+825656,2025-10-29,away,Mesa Solar Sox,701480,Bryce Cunningham,1,True
+825656,2025-10-29,away,Mesa Solar Sox,702516,JP Wheat,2,False
+825656,2025-10-29,away,Mesa Solar Sox,801270,Darwin Rodriguez,3,False
+825656,2025-10-29,away,Mesa Solar Sox,694793,Jadon Bercovich,4,False
+825656,2025-10-29,home,Glendale Desert Dogs,696146,Hagen Smith,1,True
+825656,2025-10-29,home,Glendale Desert Dogs,694989,Kelena Sauer,2,False
+825656,2025-10-29,home,Glendale Desert Dogs,801941,Carson Jacobs,3,False
+825656,2025-10-29,home,Glendale Desert Dogs,695316,Jarold Rosado,4,False
+825656,2025-10-29,home,Glendale Desert Dogs,699823,Tyler Davis,5,False
+825642,2025-10-30,away,Surprise Saguaros,671143,Trenton Denholm,1,True
+825642,2025-10-30,away,Surprise Saguaros,702045,Rorik Maltrud,2,False
+825642,2025-10-30,away,Surprise Saguaros,800260,Anthony Flores,3,False
+825642,2025-10-30,away,Surprise Saguaros,701207,Dennis Colleran Jr.,4,False
+825642,2025-10-30,away,Surprise Saguaros,692838,Jaydenn Estanista,5,False
+825642,2025-10-30,away,Surprise Saguaros,822067,A.J. Causey,6,False
+825642,2025-10-30,home,Peoria Javelinas,801333,Johnathan Harmon,1,True
+825642,2025-10-30,home,Peoria Javelinas,801415,Zander Sechrist,2,False
+825642,2025-10-30,home,Peoria Javelinas,808063,Maikel Miralles,3,False
+825642,2025-10-30,home,Peoria Javelinas,806288,Stefan Raeth,4,False
+825627,2025-10-30,away,Mesa Solar Sox,691103,Koen Moreno,1,True
+825627,2025-10-30,away,Mesa Solar Sox,813895,Corey Avant,2,False
+825627,2025-10-30,away,Mesa Solar Sox,815292,Luis Martinez-Gomez,3,False
+825627,2025-10-30,away,Mesa Solar Sox,802374,Brady Kirtner,4,False
+825627,2025-10-30,away,Mesa Solar Sox,690658,Will Johnston,5,False
+825627,2025-10-30,home,Salt River Rafters,694968,Jack Mahoney,1,True
+825627,2025-10-30,home,Salt River Rafters,695293,Jojo Ingrassia,2,False
+825627,2025-10-30,home,Salt River Rafters,692243,Jaden Woods,3,False
+825627,2025-10-30,home,Salt River Rafters,700327,Welinton Herrera,4,False
+825612,2025-10-30,away,Glendale Desert Dogs,813820,Chen-Wei Lin,1,True
+825612,2025-10-30,away,Glendale Desert Dogs,801317,Alex Makarewich,2,False
+825612,2025-10-30,away,Glendale Desert Dogs,807724,Justin Chambers,3,False
+825612,2025-10-30,away,Glendale Desert Dogs,830485,Trent Buchanan,4,False
+825612,2025-10-30,away,Glendale Desert Dogs,681884,D.J. Carpenter,5,False
+825612,2025-10-30,home,Scottsdale Scorpions,693686,Spencer Miles,1,True
+825612,2025-10-30,home,Scottsdale Scorpions,692454,Pablo Aldonis,2,False
+825612,2025-10-30,home,Scottsdale Scorpions,694544,Austin Amaral,3,False
+825612,2025-10-30,home,Scottsdale Scorpions,808743,Bryce Jenkins,4,False
+825612,2025-10-30,home,Scottsdale Scorpions,829338,Dariel Fregio,5,False
+825612,2025-10-30,home,Scottsdale Scorpions,691028,Nate Wohlgemuth,6,False
+825659,2025-10-31,away,Peoria Javelinas,805812,Dylan Questad,1,True
+825659,2025-10-31,away,Peoria Javelinas,828471,Jakob Hall,2,False
+825659,2025-10-31,away,Peoria Javelinas,804592,Hunter Hoopes,3,False
+825659,2025-10-31,away,Peoria Javelinas,827317,Brandon Downer,4,False
+825659,2025-10-31,away,Peoria Javelinas,814491,Tucker Musgrove,5,False
+825659,2025-10-31,away,Peoria Javelinas,807748,Kannon Kemp,6,False
+825659,2025-10-31,home,Glendale Desert Dogs,692404,Darlin Saladin,1,True
+825659,2025-10-31,home,Glendale Desert Dogs,815322,Kai Peterson,2,False
+825659,2025-10-31,home,Glendale Desert Dogs,802680,Tyler Bradt,3,False
+825659,2025-10-31,home,Glendale Desert Dogs,702910,Jhancarlos Lara,4,False
+825659,2025-10-31,home,Glendale Desert Dogs,695003,Randel Clemente,5,False
+825626,2025-10-31,away,Scottsdale Scorpions,820901,Anderson Brito,1,True
+825626,2025-10-31,away,Scottsdale Scorpions,801802,James Hicks,2,False
+825626,2025-10-31,away,Scottsdale Scorpions,689223,Derek True,3,False
+825626,2025-10-31,home,Salt River Rafters,701908,David Hagaman,1,True
+825626,2025-10-31,home,Salt River Rafters,694518,Austin Smith,2,False
+825626,2025-10-31,home,Salt River Rafters,695065,Ryan Costeiu,3,False
+825626,2025-10-31,home,Salt River Rafters,682981,Derek Diamond,4,False
+825626,2025-10-31,home,Salt River Rafters,695402,Najer Victor,5,False
+825582,2025-10-31,away,Mesa Solar Sox,703596,Karson Milbrandt,1,True
+825582,2025-10-31,away,Mesa Solar Sox,695366,Holt Jones,2,False
+825582,2025-10-31,away,Mesa Solar Sox,681415,Jack Sellinger,3,False
+825582,2025-10-31,away,Mesa Solar Sox,688636,Adam Stone,4,False
+825582,2025-10-31,away,Mesa Solar Sox,687020,Mason Auer,5,False
+825582,2025-10-31,away,Mesa Solar Sox,686672,Mark Adamiak,6,False
+825582,2025-10-31,home,Surprise Saguaros,814803,Logan Martin,1,True
+825582,2025-10-31,home,Surprise Saguaros,806641,Kolton Curtis,2,False
+825582,2025-10-31,home,Surprise Saguaros,801367,Matt Jachec,3,False
+825582,2025-10-31,home,Surprise Saguaros,828506,Joey Danielson,4,False
+825582,2025-10-31,home,Surprise Saguaros,683720,Edwin Jimenez,5,False
+825598,2025-11-01,away,Glendale Desert Dogs,820827,Luke Sinnard,1,True
+825598,2025-11-01,away,Glendale Desert Dogs,800811,Jacob Kroeger,2,False
+825598,2025-11-01,away,Glendale Desert Dogs,695316,Jarold Rosado,3,False
+825598,2025-11-01,away,Glendale Desert Dogs,807410,Chay Yeager,4,False
+825598,2025-11-01,away,Glendale Desert Dogs,801941,Carson Jacobs,5,False
+825598,2025-11-01,away,Glendale Desert Dogs,699823,Tyler Davis,6,False
+825598,2025-11-01,away,Glendale Desert Dogs,690229,LJ McDonough,7,False
+825598,2025-11-01,home,Mesa Solar Sox,700579,Nathan Dettmer,1,True
+825598,2025-11-01,home,Mesa Solar Sox,701604,Andrew Lindsey,2,False
+825598,2025-11-01,home,Mesa Solar Sox,812163,Jonathan Russell,3,False
+825598,2025-11-01,home,Mesa Solar Sox,806281,Blaze Pontes,4,False
+825598,2025-11-01,home,Mesa Solar Sox,680893,Hueston Morrill,5,False
+825578,2025-11-01,away,Peoria Javelinas,695076,Rhett Lowder,1,True
+825578,2025-11-01,away,Peoria Javelinas,691629,Miguelangel Boadas,2,False
+825578,2025-11-01,away,Peoria Javelinas,700675,Jimmy Kingsbury,3,False
+825578,2025-11-01,away,Peoria Javelinas,823801,Tanner Smith,4,False
+825578,2025-11-01,away,Peoria Javelinas,687040,Sayer Diederich,5,False
+825578,2025-11-01,home,Surprise Saguaros,806585,Jack Dallas,1,True
+825578,2025-11-01,home,Surprise Saguaros,689557,Zane Morehouse,2,False
+825578,2025-11-01,home,Surprise Saguaros,694725,Michael Fowler,3,False
+825578,2025-11-01,home,Surprise Saguaros,679702,Daniel Harper,4,False
+825578,2025-11-01,home,Surprise Saguaros,692838,Jaydenn Estanista,5,False
+825578,2025-11-01,home,Surprise Saguaros,692137,L.P. Langevin,6,False
+825578,2025-11-01,home,Surprise Saguaros,822067,A.J. Causey,7,False
+825611,2025-11-01,away,Salt River Rafters,691384,Luis Perales,1,True
+825611,2025-11-01,away,Salt River Rafters,814106,Cade Denton,2,False
+825611,2025-11-01,away,Salt River Rafters,801829,Jay Allmer,3,False
+825611,2025-11-01,away,Salt River Rafters,808054,Yordin Chalas,4,False
+825611,2025-11-01,away,Salt River Rafters,699230,Lorenzo Encarnacion,5,False
+825611,2025-11-01,away,Salt River Rafters,700327,Welinton Herrera,6,False
+825611,2025-11-01,home,Scottsdale Scorpions,687562,Jake Bennett,1,True
+825611,2025-11-01,home,Scottsdale Scorpions,802363,Jordan Geber,2,False
+825611,2025-11-01,home,Scottsdale Scorpions,800233,Ernesto Mercedes,3,False
+825611,2025-11-01,home,Scottsdale Scorpions,688692,Jared Simpson,4,False
+825611,2025-11-01,home,Scottsdale Scorpions,813865,Hudson Leach,5,False
+825658,2025-11-02,away,Surprise Saguaros,682769,Eiberson Castellano,1,True
+825658,2025-11-02,away,Surprise Saguaros,800260,Anthony Flores,2,False
+825658,2025-11-02,away,Surprise Saguaros,701207,Dennis Colleran Jr.,3,False
+825658,2025-11-02,home,Glendale Desert Dogs,815794,Hyun-Seok Jang,1,True
+825658,2025-11-02,home,Glendale Desert Dogs,830485,Trent Buchanan,2,False
+825658,2025-11-02,home,Glendale Desert Dogs,809915,Jakob Wright,3,False
+825658,2025-11-02,home,Glendale Desert Dogs,702910,Jhancarlos Lara,4,False
+825658,2025-11-02,home,Glendale Desert Dogs,694989,Kelena Sauer,5,False
+825658,2025-11-02,home,Glendale Desert Dogs,681884,D.J. Carpenter,6,False
+825597,2025-11-02,away,Salt River Rafters,679555,Brandon Dufault,1,True
+825597,2025-11-02,away,Salt River Rafters,700380,Joshua Loeschorn,2,False
+825597,2025-11-02,away,Salt River Rafters,809138,Isaac Stebens,3,False
+825597,2025-11-02,away,Salt River Rafters,702586,Fulton Lockhart,4,False
+825597,2025-11-02,away,Salt River Rafters,802967,Benny Thompson,5,False
+825597,2025-11-02,away,Salt River Rafters,694518,Austin Smith,6,False
+825597,2025-11-02,home,Mesa Solar Sox,801995,Aiden May,1,True
+825597,2025-11-02,home,Mesa Solar Sox,694793,Jadon Bercovich,2,False
+825597,2025-11-02,home,Mesa Solar Sox,702516,JP Wheat,3,False
+825597,2025-11-02,home,Mesa Solar Sox,802963,Mathew Peters,4,False
+825597,2025-11-02,home,Mesa Solar Sox,815292,Luis Martinez-Gomez,5,False
+825597,2025-11-02,home,Mesa Solar Sox,802374,Brady Kirtner,6,False
+825610,2025-11-02,away,Peoria Javelinas,681041,Marcelo Perez,1,True
+825610,2025-11-02,away,Peoria Javelinas,686470,Ryan Hawks,2,False
+825610,2025-11-02,away,Peoria Javelinas,674265,Kevin Abel,3,False
+825610,2025-11-02,away,Peoria Javelinas,808052,Johan Moreno,4,False
+825610,2025-11-02,away,Peoria Javelinas,805321,Trevor Kuncl,5,False
+825610,2025-11-02,home,Scottsdale Scorpions,694885,Ryan Murphy,1,True
+825610,2025-11-02,home,Scottsdale Scorpions,698962,Ricardo Estrada,2,False
+825610,2025-11-02,home,Scottsdale Scorpions,698952,Jose T. Perez,3,False
+825610,2025-11-02,home,Scottsdale Scorpions,678738,Juan Sanchez,4,False
+825610,2025-11-02,home,Scottsdale Scorpions,688781,Brett Banks,5,False
+825579,2025-11-04,away,Salt River Rafters,806270,Dominic Perachi,1,True
+825579,2025-11-04,away,Salt River Rafters,682981,Derek Diamond,2,False
+825579,2025-11-04,away,Salt River Rafters,801829,Jay Allmer,3,False
+825579,2025-11-04,away,Salt River Rafters,692243,Jaden Woods,4,False
+825579,2025-11-04,away,Salt River Rafters,695402,Najer Victor,5,False
+825579,2025-11-04,away,Salt River Rafters,700327,Welinton Herrera,6,False
+825579,2025-11-04,home,Surprise Saguaros,692030,Jose Corniell,1,True
+825579,2025-11-04,home,Surprise Saguaros,801367,Matt Jachec,2,False
+825579,2025-11-04,home,Surprise Saguaros,692437,Winston Santos,3,False
+825579,2025-11-04,home,Surprise Saguaros,822067,A.J. Causey,4,False
+825596,2025-11-04,away,Scottsdale Scorpions,692454,Pablo Aldonis,1,True
+825596,2025-11-04,away,Scottsdale Scorpions,801221,Pedro Garcia,2,False
+825596,2025-11-04,away,Scottsdale Scorpions,808743,Bryce Jenkins,3,False
+825596,2025-11-04,away,Scottsdale Scorpions,694544,Austin Amaral,4,False
+825596,2025-11-04,away,Scottsdale Scorpions,829338,Dariel Fregio,5,False
+825596,2025-11-04,away,Scottsdale Scorpions,701557,Carlos Lequerica,6,False
+825596,2025-11-04,away,Scottsdale Scorpions,691028,Nate Wohlgemuth,7,False
+825596,2025-11-04,home,Mesa Solar Sox,691765,Jackson Baumeister,1,True
+825596,2025-11-04,home,Mesa Solar Sox,690658,Will Johnston,2,False
+825596,2025-11-04,home,Mesa Solar Sox,694696,Cade Smith,3,False
+825596,2025-11-04,home,Mesa Solar Sox,686672,Mark Adamiak,4,False
+825596,2025-11-04,home,Mesa Solar Sox,801270,Darwin Rodriguez,5,False
+825596,2025-11-04,home,Mesa Solar Sox,681415,Jack Sellinger,6,False
+825596,2025-11-04,home,Mesa Solar Sox,687020,Mason Auer,7,False
+825657,2025-11-04,away,Peoria Javelinas,801725,Luis De León,1,True
+825657,2025-11-04,away,Peoria Javelinas,828471,Jakob Hall,2,False
+825657,2025-11-04,away,Peoria Javelinas,804663,Tyler Cleveland,3,False
+825657,2025-11-04,away,Peoria Javelinas,814491,Tucker Musgrove,4,False
+825657,2025-11-04,away,Peoria Javelinas,806288,Stefan Raeth,5,False
+825657,2025-11-04,away,Peoria Javelinas,801415,Zander Sechrist,6,False
+825657,2025-11-04,away,Peoria Javelinas,804592,Hunter Hoopes,7,False
+825657,2025-11-04,home,Glendale Desert Dogs,696146,Hagen Smith,1,True
+825657,2025-11-04,home,Glendale Desert Dogs,695316,Jarold Rosado,2,False
+825657,2025-11-04,home,Glendale Desert Dogs,807724,Justin Chambers,3,False
+825657,2025-11-04,home,Glendale Desert Dogs,801941,Carson Jacobs,4,False
+825657,2025-11-04,home,Glendale Desert Dogs,690229,LJ McDonough,5,False
+825657,2025-11-04,home,Glendale Desert Dogs,699823,Tyler Davis,6,False
+825577,2025-11-05,away,Scottsdale Scorpions,690162,Kenny Serwa,1,True
+825577,2025-11-05,away,Scottsdale Scorpions,800233,Ernesto Mercedes,2,False
+825577,2025-11-05,away,Scottsdale Scorpions,802363,Jordan Geber,3,False
+825577,2025-11-05,away,Scottsdale Scorpions,689223,Derek True,4,False
+825577,2025-11-05,away,Scottsdale Scorpions,688692,Jared Simpson,5,False
+825577,2025-11-05,home,Surprise Saguaros,695871,Jesús Broca,1,True
+825577,2025-11-05,home,Surprise Saguaros,685396,Nate Peterson,2,False
+825577,2025-11-05,home,Surprise Saguaros,692137,L.P. Langevin,3,False
+825577,2025-11-05,home,Surprise Saguaros,683720,Edwin Jimenez,4,False
+825577,2025-11-05,home,Surprise Saguaros,694725,Michael Fowler,5,False
+825594,2025-11-05,away,Glendale Desert Dogs,806334,Alex Amalfi,1,True
+825594,2025-11-05,away,Glendale Desert Dogs,815322,Kai Peterson,2,False
+825594,2025-11-05,away,Glendale Desert Dogs,830485,Trent Buchanan,3,False
+825594,2025-11-05,away,Glendale Desert Dogs,702910,Jhancarlos Lara,4,False
+825594,2025-11-05,away,Glendale Desert Dogs,801317,Alex Makarewich,5,False
+825594,2025-11-05,away,Glendale Desert Dogs,695003,Randel Clemente,6,False
+825594,2025-11-05,home,Mesa Solar Sox,813895,Corey Avant,1,True
+825594,2025-11-05,home,Mesa Solar Sox,700579,Nathan Dettmer,2,False
+825594,2025-11-05,home,Mesa Solar Sox,695366,Holt Jones,3,False
+825594,2025-11-05,home,Mesa Solar Sox,806281,Blaze Pontes,4,False
+825594,2025-11-05,home,Mesa Solar Sox,701604,Andrew Lindsey,5,False
+825594,2025-11-05,home,Mesa Solar Sox,680893,Hueston Morrill,6,False
+825625,2025-11-05,away,Peoria Javelinas,805955,Carson Dorsey,1,True
+825625,2025-11-05,away,Peoria Javelinas,700675,Jimmy Kingsbury,2,False
+825625,2025-11-05,away,Peoria Javelinas,823801,Tanner Smith,3,False
+825625,2025-11-05,away,Peoria Javelinas,687040,Sayer Diederich,4,False
+825625,2025-11-05,home,Salt River Rafters,694788,Carlson Reed,1,True
+825625,2025-11-05,home,Salt River Rafters,695632,Brandon Neely,2,False
+825625,2025-11-05,home,Salt River Rafters,814106,Cade Denton,3,False
+825625,2025-11-05,home,Salt River Rafters,694518,Austin Smith,4,False
+825625,2025-11-05,home,Salt River Rafters,699230,Lorenzo Encarnacion,5,False
+825641,2025-11-06,away,Glendale Desert Dogs,813820,Chen-Wei Lin,1,True
+825641,2025-11-06,away,Glendale Desert Dogs,692404,Darlin Saladin,2,False
+825641,2025-11-06,away,Glendale Desert Dogs,694989,Kelena Sauer,3,False
+825641,2025-11-06,away,Glendale Desert Dogs,802680,Tyler Bradt,4,False
+825641,2025-11-06,away,Glendale Desert Dogs,807410,Chay Yeager,5,False
+825641,2025-11-06,home,Peoria Javelinas,808063,Maikel Miralles,1,True
+825641,2025-11-06,home,Peoria Javelinas,808052,Johan Moreno,2,False
+825641,2025-11-06,home,Peoria Javelinas,801333,Johnathan Harmon,3,False
+825641,2025-11-06,home,Peoria Javelinas,827317,Brandon Downer,4,False
+825624,2025-11-06,away,Surprise Saguaros,671143,Trenton Denholm,1,True
+825624,2025-11-06,away,Surprise Saguaros,692838,Jaydenn Estanista,2,False
+825624,2025-11-06,away,Surprise Saguaros,699707,Danyony Pulido,3,False
+825624,2025-11-06,away,Surprise Saguaros,689557,Zane Morehouse,4,False
+825624,2025-11-06,away,Surprise Saguaros,828506,Joey Danielson,5,False
+825624,2025-11-06,home,Salt River Rafters,694968,Jack Mahoney,1,True
+825624,2025-11-06,home,Salt River Rafters,700380,Joshua Loeschorn,2,False
+825624,2025-11-06,home,Salt River Rafters,695293,Jojo Ingrassia,3,False
+825624,2025-11-06,home,Salt River Rafters,695065,Ryan Costeiu,4,False
+825593,2025-11-06,away,Scottsdale Scorpions,693686,Spencer Miles,1,True
+825593,2025-11-06,away,Scottsdale Scorpions,698962,Ricardo Estrada,2,False
+825593,2025-11-06,away,Scottsdale Scorpions,678738,Juan Sanchez,3,False
+825593,2025-11-06,away,Scottsdale Scorpions,813865,Hudson Leach,4,False
+825593,2025-11-06,home,Mesa Solar Sox,701480,Bryce Cunningham,1,True
+825593,2025-11-06,home,Mesa Solar Sox,703596,Karson Milbrandt,2,False
+825593,2025-11-06,home,Mesa Solar Sox,691103,Koen Moreno,3,False
+825593,2025-11-06,home,Mesa Solar Sox,688636,Adam Stone,4,False
+825593,2025-11-06,home,Mesa Solar Sox,802374,Brady Kirtner,5,False
+825593,2025-11-06,home,Mesa Solar Sox,694793,Jadon Bercovich,6,False
+825655,2025-11-07,away,Scottsdale Scorpions,829338,Dariel Fregio,1,True
+825655,2025-11-07,away,Scottsdale Scorpions,801221,Pedro Garcia,2,False
+825655,2025-11-07,away,Scottsdale Scorpions,701557,Carlos Lequerica,3,False
+825655,2025-11-07,away,Scottsdale Scorpions,698952,Jose T. Perez,4,False
+825655,2025-11-07,away,Scottsdale Scorpions,808743,Bryce Jenkins,5,False
+825655,2025-11-07,away,Scottsdale Scorpions,691028,Nate Wohlgemuth,6,False
+825655,2025-11-07,away,Scottsdale Scorpions,694544,Austin Amaral,7,False
+825655,2025-11-07,home,Glendale Desert Dogs,820827,Luke Sinnard,1,True
+825655,2025-11-07,home,Glendale Desert Dogs,800811,Jacob Kroeger,2,False
+825655,2025-11-07,home,Glendale Desert Dogs,702910,Jhancarlos Lara,3,False
+825655,2025-11-07,home,Glendale Desert Dogs,807724,Justin Chambers,4,False
+825655,2025-11-07,home,Glendale Desert Dogs,681884,D.J. Carpenter,5,False
+825655,2025-11-07,home,Glendale Desert Dogs,699823,Tyler Davis,6,False
+825640,2025-11-07,away,Mesa Solar Sox,815292,Luis Martinez-Gomez,1,True
+825640,2025-11-07,away,Mesa Solar Sox,702516,JP Wheat,2,False
+825640,2025-11-07,away,Mesa Solar Sox,802963,Mathew Peters,3,False
+825640,2025-11-07,away,Mesa Solar Sox,812163,Jonathan Russell,4,False
+825640,2025-11-07,away,Mesa Solar Sox,681415,Jack Sellinger,5,False
+825640,2025-11-07,away,Mesa Solar Sox,690658,Will Johnston,6,False
+825640,2025-11-07,home,Peoria Javelinas,807748,Kannon Kemp,1,True
+825640,2025-11-07,home,Peoria Javelinas,805812,Dylan Questad,2,False
+825640,2025-11-07,home,Peoria Javelinas,681041,Marcelo Perez,3,False
+825640,2025-11-07,home,Peoria Javelinas,805321,Trevor Kuncl,4,False
+825640,2025-11-07,home,Peoria Javelinas,804663,Tyler Cleveland,5,False
+825576,2025-11-07,away,Salt River Rafters,691384,Luis Perales,1,True
+825576,2025-11-07,away,Salt River Rafters,809138,Isaac Stebens,2,False
+825576,2025-11-07,away,Salt River Rafters,701908,David Hagaman,3,False
+825576,2025-11-07,away,Salt River Rafters,702586,Fulton Lockhart,4,False
+825576,2025-11-07,away,Salt River Rafters,802967,Benny Thompson,5,False
+825576,2025-11-07,away,Salt River Rafters,692243,Jaden Woods,6,False
+825576,2025-11-07,away,Salt River Rafters,808054,Yordin Chalas,7,False
+825576,2025-11-07,home,Surprise Saguaros,814803,Logan Martin,1,True
+825576,2025-11-07,home,Surprise Saguaros,806641,Kolton Curtis,2,False
+825576,2025-11-07,home,Surprise Saguaros,800260,Anthony Flores,3,False
+825576,2025-11-07,home,Surprise Saguaros,679702,Daniel Harper,4,False
+825576,2025-11-07,home,Surprise Saguaros,701207,Dennis Colleran Jr.,5,False
+825576,2025-11-07,home,Surprise Saguaros,801367,Matt Jachec,6,False
+825588,2025-11-09,away,National League Fall Stars,703596,Karson Milbrandt,1,True
+825588,2025-11-09,away,National League Fall Stars,806585,Jack Dallas,2,False
+825588,2025-11-09,away,National League Fall Stars,695871,Jesús Broca,3,False
+825588,2025-11-09,away,National League Fall Stars,814106,Cade Denton,4,False
+825588,2025-11-09,away,National League Fall Stars,801317,Alex Makarewich,5,False
+825588,2025-11-09,away,National League Fall Stars,691103,Koen Moreno,6,False
+825588,2025-11-09,away,National League Fall Stars,687562,Jake Bennett,7,False
+825588,2025-11-09,away,National League Fall Stars,691000,Carson Montgomery,8,False
+825588,2025-11-09,away,National League Fall Stars,814491,Tucker Musgrove,9,False
+825588,2025-11-09,away,National League Fall Stars,692404,Darlin Saladin,10,False
+825588,2025-11-09,home,American League Fall Stars,801725,Luis De León,1,True
+825588,2025-11-09,home,American League Fall Stars,696146,Hagen Smith,2,False
+825588,2025-11-09,home,American League Fall Stars,820901,Anderson Brito,3,False
+825588,2025-11-09,home,American League Fall Stars,694696,Cade Smith,4,False
+825588,2025-11-09,home,American League Fall Stars,823801,Tanner Smith,5,False
+825588,2025-11-09,home,American League Fall Stars,815322,Kai Peterson,6,False
+825588,2025-11-09,home,American League Fall Stars,691629,Miguelangel Boadas,7,False
+825588,2025-11-09,home,American League Fall Stars,700675,Jimmy Kingsbury,8,False
+825588,2025-11-09,home,American League Fall Stars,801802,James Hicks,9,False
+825588,2025-11-09,home,American League Fall Stars,829338,Dariel Fregio,10,False
+825575,2025-11-10,away,Peoria Javelinas,686470,Ryan Hawks,1,True
+825575,2025-11-10,away,Peoria Javelinas,827317,Brandon Downer,2,False
+825575,2025-11-10,away,Peoria Javelinas,804592,Hunter Hoopes,3,False
+825575,2025-11-10,away,Peoria Javelinas,687040,Sayer Diederich,4,False
+825575,2025-11-10,home,Surprise Saguaros,692437,Winston Santos,1,True
+825575,2025-11-10,home,Surprise Saguaros,699707,Danyony Pulido,2,False
+825575,2025-11-10,home,Surprise Saguaros,822067,A.J. Causey,3,False
+825575,2025-11-10,home,Surprise Saguaros,683720,Edwin Jimenez,4,False
+825623,2025-11-10,away,Scottsdale Scorpions,694885,Ryan Murphy,1,True
+825623,2025-11-10,away,Scottsdale Scorpions,694544,Austin Amaral,2,False
+825623,2025-11-10,away,Scottsdale Scorpions,678738,Juan Sanchez,3,False
+825623,2025-11-10,away,Scottsdale Scorpions,688692,Jared Simpson,4,False
+825623,2025-11-10,away,Scottsdale Scorpions,813865,Hudson Leach,5,False
+825623,2025-11-10,home,Salt River Rafters,679555,Brandon Dufault,1,True
+825623,2025-11-10,home,Salt River Rafters,699230,Lorenzo Encarnacion,2,False
+825623,2025-11-10,home,Salt River Rafters,694518,Austin Smith,3,False
+825623,2025-11-10,home,Salt River Rafters,801829,Jay Allmer,4,False
+825623,2025-11-10,home,Salt River Rafters,808054,Yordin Chalas,5,False
+825623,2025-11-10,home,Salt River Rafters,695402,Najer Victor,6,False
+825623,2025-11-10,home,Salt River Rafters,700327,Welinton Herrera,7,False
+825653,2025-11-10,away,Mesa Solar Sox,801995,Aiden May,1,True
+825653,2025-11-10,away,Mesa Solar Sox,687020,Mason Auer,2,False
+825653,2025-11-10,away,Mesa Solar Sox,681415,Jack Sellinger,3,False
+825653,2025-11-10,away,Mesa Solar Sox,690658,Will Johnston,4,False
+825653,2025-11-10,away,Mesa Solar Sox,695366,Holt Jones,5,False
+825653,2025-11-10,away,Mesa Solar Sox,680893,Hueston Morrill,6,False
+825653,2025-11-10,home,Glendale Desert Dogs,809915,Jakob Wright,1,True
+825653,2025-11-10,home,Glendale Desert Dogs,695316,Jarold Rosado,2,False
+825653,2025-11-10,home,Glendale Desert Dogs,807724,Justin Chambers,3,False
+825653,2025-11-10,home,Glendale Desert Dogs,802680,Tyler Bradt,4,False
+825653,2025-11-10,home,Glendale Desert Dogs,702910,Jhancarlos Lara,5,False
+825653,2025-11-10,home,Glendale Desert Dogs,807410,Chay Yeager,6,False
+825592,2025-11-11,away,Peoria Javelinas,805955,Carson Dorsey,1,True
+825592,2025-11-11,away,Peoria Javelinas,828471,Jakob Hall,2,False
+825592,2025-11-11,away,Peoria Javelinas,801415,Zander Sechrist,3,False
+825592,2025-11-11,home,Mesa Solar Sox,700579,Nathan Dettmer,1,True
+825592,2025-11-11,home,Mesa Solar Sox,688636,Adam Stone,2,False
+825592,2025-11-11,home,Mesa Solar Sox,806281,Blaze Pontes,3,False
+825592,2025-11-11,home,Mesa Solar Sox,801270,Darwin Rodriguez,4,False
+825592,2025-11-11,home,Mesa Solar Sox,802963,Mathew Peters,5,False
+825617,2025-11-11,away,Surprise Saguaros,692030,Jose Corniell,1,True
+825617,2025-11-11,away,Surprise Saguaros,692838,Jaydenn Estanista,2,False
+825617,2025-11-11,away,Surprise Saguaros,702045,Rorik Maltrud,3,False
+825617,2025-11-11,away,Surprise Saguaros,828506,Joey Danielson,4,False
+825617,2025-11-11,home,Salt River Rafters,806270,Dominic Perachi,1,True
+825617,2025-11-11,home,Salt River Rafters,682981,Derek Diamond,2,False
+825617,2025-11-11,home,Salt River Rafters,700380,Joshua Loeschorn,3,False
+825608,2025-11-11,away,Glendale Desert Dogs,815794,Hyun-Seok Jang,1,True
+825608,2025-11-11,away,Glendale Desert Dogs,690229,LJ McDonough,2,False
+825608,2025-11-11,away,Glendale Desert Dogs,830485,Trent Buchanan,3,False
+825608,2025-11-11,away,Glendale Desert Dogs,801941,Carson Jacobs,4,False
+825608,2025-11-11,away,Glendale Desert Dogs,695003,Randel Clemente,5,False
+825608,2025-11-11,home,Scottsdale Scorpions,689223,Derek True,1,True
+825608,2025-11-11,home,Scottsdale Scorpions,808743,Bryce Jenkins,2,False
+825608,2025-11-11,home,Scottsdale Scorpions,800233,Ernesto Mercedes,3,False
+825608,2025-11-11,home,Scottsdale Scorpions,698952,Jose T. Perez,4,False
+825608,2025-11-11,home,Scottsdale Scorpions,801221,Pedro Garcia,5,False
+825608,2025-11-11,home,Scottsdale Scorpions,691028,Nate Wohlgemuth,6,False
+825608,2025-11-11,home,Scottsdale Scorpions,802363,Jordan Geber,7,False
+825574,2025-11-12,away,Salt River Rafters,694968,Jack Mahoney,1,True
+825574,2025-11-12,away,Salt River Rafters,695632,Brandon Neely,2,False
+825574,2025-11-12,away,Salt River Rafters,814106,Cade Denton,3,False
+825574,2025-11-12,home,Mesa Solar Sox,701480,Bryce Cunningham,1,True
+825574,2025-11-12,home,Mesa Solar Sox,815292,Luis Martinez-Gomez,2,False
+825574,2025-11-12,home,Mesa Solar Sox,690658,Will Johnston,3,False
+825574,2025-11-12,home,Mesa Solar Sox,680893,Hueston Morrill,4,False
+825573,2025-11-12,away,Glendale Desert Dogs,806334,Alex Amalfi,1,True
+825573,2025-11-12,away,Glendale Desert Dogs,694989,Kelena Sauer,2,False
+825573,2025-11-12,away,Glendale Desert Dogs,801317,Alex Makarewich,3,False
+825573,2025-11-12,away,Glendale Desert Dogs,807724,Justin Chambers,4,False
+825573,2025-11-12,away,Glendale Desert Dogs,815322,Kai Peterson,5,False
+825573,2025-11-12,home,Peoria Javelinas,808063,Maikel Miralles,1,True
+825573,2025-11-12,home,Peoria Javelinas,700675,Jimmy Kingsbury,2,False
+825573,2025-11-12,home,Peoria Javelinas,807748,Kannon Kemp,3,False
+825573,2025-11-12,home,Peoria Javelinas,805321,Trevor Kuncl,4,False
+825573,2025-11-12,home,Peoria Javelinas,674265,Kevin Abel,5,False
+825573,2025-11-12,home,Peoria Javelinas,806288,Stefan Raeth,6,False
+825580,2025-11-13,away,Mesa Solar Sox,694696,Cade Smith,1,True
+825580,2025-11-13,away,Mesa Solar Sox,694793,Jadon Bercovich,2,False
+825580,2025-11-13,away,Mesa Solar Sox,691103,Koen Moreno,3,False
+825580,2025-11-13,away,Mesa Solar Sox,681415,Jack Sellinger,4,False
+825580,2025-11-13,away,Mesa Solar Sox,695366,Holt Jones,5,False
+825580,2025-11-13,home,Surprise Saguaros,671143,Trenton Denholm,1,True
+825580,2025-11-13,home,Surprise Saguaros,806585,Jack Dallas,2,False
+825580,2025-11-13,home,Surprise Saguaros,801367,Matt Jachec,3,False
+825580,2025-11-13,home,Surprise Saguaros,701207,Dennis Colleran Jr.,4,False
+825580,2025-11-13,home,Surprise Saguaros,822067,A.J. Causey,5,False
+825571,2025-11-13,away,Peoria Javelinas,691000,Carson Montgomery,1,True
+825571,2025-11-13,away,Peoria Javelinas,801333,Johnathan Harmon,2,False
+825571,2025-11-13,away,Peoria Javelinas,814491,Tucker Musgrove,3,False
+825571,2025-11-13,away,Peoria Javelinas,823801,Tanner Smith,4,False
+825571,2025-11-13,away,Peoria Javelinas,804663,Tyler Cleveland,5,False
+825571,2025-11-13,home,Scottsdale Scorpions,693686,Spencer Miles,1,True
+825571,2025-11-13,home,Scottsdale Scorpions,698962,Ricardo Estrada,2,False
+825571,2025-11-13,home,Scottsdale Scorpions,829338,Dariel Fregio,3,False
+825571,2025-11-13,home,Scottsdale Scorpions,692454,Pablo Aldonis,4,False
+825571,2025-11-13,home,Scottsdale Scorpions,813865,Hudson Leach,5,False
+825571,2025-11-13,home,Scottsdale Scorpions,688692,Jared Simpson,6,False
+825571,2025-11-13,home,Scottsdale Scorpions,694544,Austin Amaral,7,False
+825572,2025-11-14,away,Peoria Javelinas,691629,Miguelangel Boadas,1,True
+825572,2025-11-14,away,Peoria Javelinas,808052,Johan Moreno,2,False
+825572,2025-11-14,away,Peoria Javelinas,687040,Sayer Diederich,3,False
+825572,2025-11-14,away,Peoria Javelinas,674265,Kevin Abel,4,False
+825572,2025-11-14,away,Peoria Javelinas,805321,Trevor Kuncl,5,False
+825572,2025-11-14,away,Peoria Javelinas,827317,Brandon Downer,6,False
+825572,2025-11-14,home,Surprise Saguaros,814803,Logan Martin,1,True
+825572,2025-11-14,home,Surprise Saguaros,695871,Jesús Broca,2,False
+825572,2025-11-14,home,Surprise Saguaros,679702,Daniel Harper,3,False
+825572,2025-11-14,home,Surprise Saguaros,800260,Anthony Flores,4,False
+825572,2025-11-14,home,Surprise Saguaros,692838,Jaydenn Estanista,5,False
+825572,2025-11-14,home,Surprise Saguaros,683720,Edwin Jimenez,6,False
