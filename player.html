@@ -436,29 +436,43 @@
 
   const PINNED_COLS = ['season', 'level', 'team'];
 
-  // Conventional box-score reading order for the common fields. Anything
-  // MLB's API returns that isn't in this list still gets captured -- it
-  // just gets appended after, alphabetically, so nothing is ever lost,
-  // it's just not left to a scrambled A-Z sort for the stats everyone
-  // actually expects to read left-to-right.
+  // Column order and abbreviations follow Baseball-Reference's "Standard
+  // Batting" / "Standard Pitching" career tables (minus the columns we
+  // have no source for, like WAR, Lg, or Awards). Anything MLB's API
+  // returns that isn't in these lists still gets captured -- it just gets
+  // appended after, alphabetically, so nothing is ever lost.
   const HITTING_STAT_ORDER = [
     'gamesPlayed', 'plateAppearances', 'atBats', 'runs', 'hits', 'doubles', 'triples',
-    'homeRuns', 'totalBases', 'rbi', 'stolenBases', 'caughtStealing',
-    'baseOnBalls', 'intentionalWalks', 'strikeOuts', 'hitByPitch', 'sacBunts', 'sacFlies',
-    'avg', 'obp', 'slg', 'ops', 'babip',
-    'groundOuts', 'airOuts', 'groundIntoDoublePlay', 'numberOfPitches', 'leftOnBase',
-    'catchersInterference',
+    'homeRuns', 'rbi', 'stolenBases', 'caughtStealing', 'baseOnBalls', 'strikeOuts',
+    'avg', 'obp', 'slg', 'ops',
+    'totalBases', 'groundIntoDoublePlay', 'hitByPitch', 'sacBunts', 'sacFlies', 'intentionalWalks',
+    'babip', 'groundOuts', 'airOuts', 'numberOfPitches', 'leftOnBase', 'catchersInterference',
   ];
+  const HITTING_LABELS = {
+    gamesPlayed: 'G', plateAppearances: 'PA', atBats: 'AB', runs: 'R', hits: 'H',
+    doubles: '2B', triples: '3B', homeRuns: 'HR', rbi: 'RBI', stolenBases: 'SB',
+    caughtStealing: 'CS', baseOnBalls: 'BB', strikeOuts: 'SO', avg: 'BA', obp: 'OBP',
+    slg: 'SLG', ops: 'OPS', totalBases: 'TB', groundIntoDoublePlay: 'GIDP',
+    hitByPitch: 'HBP', sacBunts: 'SH', sacFlies: 'SF', intentionalWalks: 'IBB',
+  };
   const PITCHING_STAT_ORDER = [
-    'gamesPlayed', 'gamesPitched', 'gamesStarted', 'gamesFinished', 'completeGames', 'shutouts',
-    'wins', 'losses', 'winPercentage', 'saves', 'saveOpportunities', 'blownSaves', 'holds',
-    'era', 'whip', 'inningsPitched', 'battersFaced',
-    'hits', 'runs', 'earnedRuns', 'homeRuns', 'baseOnBalls', 'intentionalWalks',
-    'strikeOuts', 'hitByPitch', 'wildPitches', 'balks',
-    'avg', 'obp', 'slg', 'ops', 'strikeoutWalkRatio', 'strikeoutsPer9Inn', 'walksPer9Inn',
-    'hitsPer9Inn', 'homeRunsPer9', 'strikePercentage', 'pitchesPerInning',
+    'wins', 'losses', 'winPercentage', 'era',
+    'gamesPlayed', 'gamesPitched', 'gamesStarted', 'gamesFinished', 'completeGames', 'shutouts', 'saves',
+    'inningsPitched', 'hits', 'runs', 'earnedRuns', 'homeRuns', 'baseOnBalls', 'intentionalWalks',
+    'strikeOuts', 'hitByPitch', 'balks', 'wildPitches', 'battersFaced',
+    'whip', 'hitsPer9Inn', 'homeRunsPer9', 'walksPer9Inn', 'strikeoutsPer9Inn', 'strikeoutWalkRatio',
+    'saveOpportunities', 'blownSaves', 'holds', 'strikePercentage', 'pitchesPerInning',
     'numberOfPitches', 'strikes', 'balls', 'groundOuts', 'airOuts', 'stolenBases', 'caughtStealing',
   ];
+  const PITCHING_LABELS = {
+    wins: 'W', losses: 'L', winPercentage: 'W-L%', era: 'ERA',
+    gamesPlayed: 'G', gamesPitched: 'G', gamesStarted: 'GS', gamesFinished: 'GF',
+    completeGames: 'CG', shutouts: 'SHO', saves: 'SV', inningsPitched: 'IP', hits: 'H',
+    runs: 'R', earnedRuns: 'ER', homeRuns: 'HR', baseOnBalls: 'BB', intentionalWalks: 'IBB',
+    strikeOuts: 'SO', hitByPitch: 'HBP', balks: 'BK', wildPitches: 'WP', battersFaced: 'BF',
+    whip: 'WHIP', hitsPer9Inn: 'H9', homeRunsPer9: 'HR9', walksPer9Inn: 'BB9',
+    strikeoutsPer9Inn: 'SO9', strikeoutWalkRatio: 'SO/BB',
+  };
 
   function orderKeys(keysPresent, preferredOrder) {
     const present = new Set(keysPresent);
@@ -510,7 +524,9 @@
     const gridTemplate = `0.6fr 0.55fr 1.6fr ${statKeys.map(() => 'minmax(75px, 1fr)').join(' ')}`;
     const minWidth = `${3 * 90 + statKeys.length * 85}px`;
 
-    const colLabel = (k) => k === 'season' ? 'Yr' : k === 'level' ? 'Lvl' : k === 'team' ? 'Team' : prettifyKey(k);
+    const labelMap = statType === 'pitching' ? PITCHING_LABELS : HITTING_LABELS;
+    const colLabel = (k) => k === 'season' ? 'Yr' : k === 'level' ? 'Lvl' : k === 'team' ? 'Team'
+      : (labelMap[k] || prettifyKey(k));
     const headerCells = allCols.map(k => `<div>${colLabel(k)}</div>`).join('');
 
     let html = `
