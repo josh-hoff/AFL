@@ -436,6 +436,37 @@
 
   const PINNED_COLS = ['season', 'level', 'team'];
 
+  // Conventional box-score reading order for the common fields. Anything
+  // MLB's API returns that isn't in this list still gets captured -- it
+  // just gets appended after, alphabetically, so nothing is ever lost,
+  // it's just not left to a scrambled A-Z sort for the stats everyone
+  // actually expects to read left-to-right.
+  const HITTING_STAT_ORDER = [
+    'gamesPlayed', 'plateAppearances', 'atBats', 'runs', 'hits', 'doubles', 'triples',
+    'homeRuns', 'totalBases', 'rbi', 'stolenBases', 'caughtStealing',
+    'baseOnBalls', 'intentionalWalks', 'strikeOuts', 'hitByPitch', 'sacBunts', 'sacFlies',
+    'avg', 'obp', 'slg', 'ops', 'babip',
+    'groundOuts', 'airOuts', 'groundIntoDoublePlay', 'numberOfPitches', 'leftOnBase',
+    'catchersInterference',
+  ];
+  const PITCHING_STAT_ORDER = [
+    'gamesPlayed', 'gamesPitched', 'gamesStarted', 'gamesFinished', 'completeGames', 'shutouts',
+    'wins', 'losses', 'winPercentage', 'saves', 'saveOpportunities', 'blownSaves', 'holds',
+    'era', 'whip', 'inningsPitched', 'battersFaced',
+    'hits', 'runs', 'earnedRuns', 'homeRuns', 'baseOnBalls', 'intentionalWalks',
+    'strikeOuts', 'hitByPitch', 'wildPitches', 'balks',
+    'avg', 'obp', 'slg', 'ops', 'strikeoutWalkRatio', 'strikeoutsPer9Inn', 'walksPer9Inn',
+    'hitsPer9Inn', 'homeRunsPer9', 'strikePercentage', 'pitchesPerInning',
+    'numberOfPitches', 'strikes', 'balls', 'groundOuts', 'airOuts', 'stolenBases', 'caughtStealing',
+  ];
+
+  function orderKeys(keysPresent, preferredOrder) {
+    const present = new Set(keysPresent);
+    const ordered = preferredOrder.filter(k => present.has(k));
+    const rest = keysPresent.filter(k => !preferredOrder.includes(k)).sort();
+    return [...ordered, ...rest];
+  }
+
   async function loadCareerPath(aflRow, statType) {
     const container = document.getElementById('career-path-container');
     container.innerHTML = '<p class="loading">Loading career path...</p>';
@@ -472,7 +503,8 @@
     rows.forEach(r => {
       Object.keys(r).forEach(k => { if (!PINNED_COLS.includes(k)) statKeySet.add(k); });
     });
-    const statKeys = Array.from(statKeySet).sort();
+    const preferredOrder = statType === 'pitching' ? PITCHING_STAT_ORDER : HITTING_STAT_ORDER;
+    const statKeys = orderKeys(Array.from(statKeySet), preferredOrder);
     const allCols = [...PINNED_COLS, ...statKeys];
 
     const gridTemplate = `0.6fr 0.55fr 1.6fr ${statKeys.map(() => 'minmax(75px, 1fr)').join(' ')}`;
