@@ -102,7 +102,7 @@
   .career-row.mlb { border-top: 1px solid #2f6fb0; font-weight: 700; background: #eaf1fa; }
   .career-row > div { overflow: hidden; text-overflow: ellipsis; }
 
-  .afl-gamelog-toggle { cursor: pointer; color: var(--tab-active); font-weight: 700; display: inline-block; width: 0.9em; }
+  .afl-gamelog-toggle { cursor: pointer; color: var(--tab-active); font-weight: 700; text-decoration: underline dashed; text-underline-offset: 3px; }
   .career-gamelog-wrap { grid-column: 1 / -1; padding: 0.6rem 1rem 0.8rem; border-top: 1px solid var(--border); background: #fffaf5; }
   .gl-table { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; overflow-x: auto; }
   .gl-row { display: grid; gap: 4px; padding: 0.35rem 0.6rem; font-size: 0.76rem; align-items: center; white-space: nowrap; }
@@ -540,6 +540,23 @@
     return [...ordered, ...rest];
   }
 
+  // Opponent names come through as full team names (e.g. "Scottsdale
+  // Scorpions"), sometimes with a trailing game/doubleheader number MLB
+  // appends to the opponent field (e.g. "Scottsdale Scorpions 2") -- the
+  // per-game log just needs the city for a compact column.
+  const TEAM_CITY = {
+    'Peoria Javelinas': 'Peoria',
+    'Mesa Solar Sox': 'Mesa',
+    'Scottsdale Scorpions': 'Scottsdale',
+    'Salt River Rafters': 'Salt River',
+    'Surprise Saguaros': 'Surprise',
+    'Glendale Desert Dogs': 'Glendale',
+  };
+  function cityFromOpponent(raw) {
+    const cleaned = (raw || '').replace(/\s+\d+\s*$/, '').trim();
+    return TEAM_CITY[cleaned] || cleaned;
+  }
+
   // Compact per-game log shown when the AFL row in Career Path is expanded.
   // Uses whichever per-game rows are already in memory -- hitting_gamelogs.csv
   // rows (snake_case fields) for hitters, pitching_gamelogs.csv rows
@@ -555,10 +572,11 @@
       ? ['Date', 'Opp', 'W', 'L', 'SV', 'IP', 'H', 'R', 'ER', 'BB', 'K', 'Pit', 'ERA', 'WHIP']
       : ['Date', 'Opp', 'AB', 'R', 'H', 'RBI', '2B', '3B', 'HR', 'BB', 'IBB', 'K', 'SB', 'AVG', 'OBP', 'SLG', 'OPS'];
 
-    const gridCols = `90px 1.5fr ${cols.slice(2).map(() => '0.65fr').join(' ')}`;
+    const gridCols = `90px 1.1fr ${cols.slice(2).map(() => '0.65fr').join(' ')}`;
     const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map(l => `<div>${l}</div>`).join('')}</div>`;
     const rowsHtml = sorted.map(r => {
       const cells = cols.map(c => {
+        if (c === 'opponent') return `<div>${cityFromOpponent(r[c])}</div>`;
         const v = r[c];
         return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
       }).join('');
@@ -570,11 +588,8 @@
 
   function toggleAflGameLog() {
     const el = document.getElementById('afl-gamelog-container');
-    const arrow = document.getElementById('afl-gamelog-arrow');
     if (!el) return;
-    const isOpen = el.style.display !== 'none';
-    el.style.display = isOpen ? 'none' : 'block';
-    if (arrow) arrow.textContent = isOpen ? '▶' : '▼';
+    el.style.display = (el.style.display !== 'none') ? 'none' : 'block';
   }
 
   async function loadCareerPath(aflRow, statType, aflGameLogRows) {
@@ -640,8 +655,8 @@
       const showToggle = isAfl && hasGameLog;
       const cells = allCols.map((k, idx) => {
         const val = r[k] !== undefined && r[k] !== null ? r[k] : '';
-        if (idx === 0 && showToggle) {
-          return `<div><span id="afl-gamelog-arrow" class="afl-gamelog-toggle" onclick="toggleAflGameLog()">▶</span> ${val}</div>`;
+        if (k === 'level' && showToggle) {
+          return `<div><span class="afl-gamelog-toggle" onclick="toggleAflGameLog()">${val}</span></div>`;
         }
         return `<div>${val}</div>`;
       }).join('');
