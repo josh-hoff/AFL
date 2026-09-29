@@ -447,6 +447,84 @@
     .game-row { grid-template-columns: 55px 1fr; }
     .status { grid-column: 1 / -1; justify-self: start; margin-top: 0.3rem; }
   }
+  .box-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 0.3rem 0 0;
+    margin-top: 0.3rem;
+    color: var(--tab-active);
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .box-score {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--border);
+  }
+  .bs-team-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    margin: 0.75rem 0 0.35rem;
+  }
+  .bs-table {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0.4rem;
+  }
+  .bs-header, .bs-row {
+    display: grid;
+    grid-template-columns: 26px 2fr repeat(12, 0.62fr);
+    gap: 4px;
+    padding: 0.35rem 0.55rem;
+    font-size: 0.76rem;
+    align-items: center;
+  }
+  .bs-header-p, .bs-row-p {
+    display: grid;
+    grid-template-columns: 26px 2fr repeat(10, 0.62fr);
+    gap: 4px;
+    padding: 0.35rem 0.55rem;
+    font-size: 0.76rem;
+    align-items: center;
+  }
+  .bs-header, .bs-header-p {
+    background: #f2f1ee;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 0.66rem;
+  }
+  .bs-row, .bs-row-p {
+    border-top: 1px solid var(--border);
+    color: var(--text);
+  }
+  .bs-note {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin: 0.1rem 0 0.5rem;
+  }
+  .player-link {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .player-link:hover {
+    color: var(--tab-active);
+    text-decoration: underline;
+  }
+  @media (max-width: 560px) {
+    .bs-header, .bs-row, .bs-header-p, .bs-row-p { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(12, 1fr); overflow-x: auto; }
+  }
 </style>
 </head>
 <body>
@@ -506,6 +584,11 @@
   let allGames = [];
   let decisionsByGame = {};
   let pitcherStatsById = {};
+  let pitchingGameLogsByKey = {};
+  let pitchingGameLogsByGame = {};
+  let hittingGameLogsByKey = {};
+  let lineupsByGame = {};
+  let pitcherAppearancesByGame = {};
 
   function getArizonaTodayISO() {
     const parts = new Intl.DateTimeFormat('en-CA', {
@@ -856,6 +939,22 @@
     return parts.length ? ` (${parts.join(', ')})` : '';
   }
 
+  // Cumulative record + ERA for a pitcher through a specific game. Prefers
+  // pitching_gamelogs.csv (MLB's own cumulative numbers, correct for every
+  // appearance) and only falls back to decisions.csv's running record
+  // (which skips no-decision appearances) when the new data isn't loaded
+  // for this season yet.
+  function pitcherCumulativeSuffix(gamePk, pitcherId, fallbackWins, fallbackLosses, fallbackEra) {
+    const row = pitchingGameLogsByKey[`${gamePk}_${pitcherId}`];
+    const wins = row && row.wins !== '' ? row.wins : fallbackWins;
+    const losses = row && row.losses !== '' ? row.losses : fallbackLosses;
+    const era = row && row.era !== '' ? row.era : fallbackEra;
+    const parts = [];
+    if (wins !== undefined && losses !== undefined && wins !== '' && losses !== '') parts.push(`${wins}-${losses}`);
+    if (era !== undefined && era !== '') parts.push(`${era} ERA`);
+    return parts.length ? ` (${parts.join(', ')})` : '';
+  }
+
   function decisionLine(gamePk, status) {
     const s = (status || '').toLowerCase();
     const wasPlayed = s.includes('final') || s.includes('completed');
@@ -864,24 +963,185 @@
     const d = decisionsByGame[gamePk];
     if (!d || !d.winning_pitcher_name) return '';
 
-    const wParts = [];
-    if (d.winning_pitcher_wins !== '' && d.winning_pitcher_losses !== '') wParts.push(`${d.winning_pitcher_wins}-${d.winning_pitcher_losses}`);
-    if (d.winning_pitcher_era !== '') wParts.push(`${d.winning_pitcher_era} ERA`);
-    const wRecord = wParts.length ? ` (${wParts.join(', ')})` : '';
+    const wRecord = pitcherCumulativeSuffix(gamePk, d.winning_pitcher_id, d.winning_pitcher_wins, d.winning_pitcher_losses, d.winning_pitcher_era);
     let line = `<span class="decision-label-win">W</span> ${d.winning_pitcher_name}${wRecord}`;
 
     if (d.losing_pitcher_name) {
-      const lParts = [];
-      if (d.losing_pitcher_wins !== '' && d.losing_pitcher_losses !== '') lParts.push(`${d.losing_pitcher_wins}-${d.losing_pitcher_losses}`);
-      if (d.losing_pitcher_era !== '') lParts.push(`${d.losing_pitcher_era} ERA`);
-      const lRecord = lParts.length ? ` (${lParts.join(', ')})` : '';
+      const lRecord = pitcherCumulativeSuffix(gamePk, d.losing_pitcher_id, d.losing_pitcher_wins, d.losing_pitcher_losses, d.losing_pitcher_era);
       line += ` &nbsp; <span class="decision-label-loss">L</span> ${d.losing_pitcher_name}${lRecord}`;
     }
     if (d.save_pitcher_name) {
-      const saveSuffix = d.save_pitcher_saves !== '' ? ` (${d.save_pitcher_saves} SV)` : '';
+      const saveRow = pitchingGameLogsByKey[`${gamePk}_${d.save_pitcher_id}`];
+      const saves = saveRow && saveRow.saves !== '' ? saveRow.saves : d.save_pitcher_saves;
+      const saveSuffix = (saves !== '' && saves !== undefined) ? ` (${saves} SV)` : '';
       line += ` &nbsp; <span class="decision-label-save">SV</span> ${d.save_pitcher_name}${saveSuffix}`;
     }
     return `<div class="decisions">${line}</div>`;
+  }
+
+  // ---- Box score (collapsible, in place on the schedule page) ----
+
+  function fmtDash(v) {
+    return (v === undefined || v === '' || v === null) ? '-' : v;
+  }
+
+  function ipToOuts(ip) {
+    if (!ip) return 0;
+    const [whole, frac] = String(ip).split('.');
+    const wholeOuts = whole ? parseInt(whole, 10) * 3 : 0;
+    const fracOuts = frac ? parseInt(frac, 10) : 0;
+    return wholeOuts + fracOuts;
+  }
+
+  function gameEraDisplay(er, ip) {
+    const outs = ipToOuts(ip);
+    if (!outs) return '-.--';
+    const earnedRuns = Number(er) || 0;
+    return ((earnedRuns * 27) / outs).toFixed(2);
+  }
+
+  function hasBoxScoreData(gamePk) {
+    return !!((lineupsByGame[gamePk] && lineupsByGame[gamePk].length) ||
+      (pitcherAppearancesByGame[gamePk] && pitcherAppearancesByGame[gamePk].length));
+  }
+
+  function boxScoreSection(g) {
+    const s = (g.status || '').toLowerCase();
+    const wasPlayed = s.includes('final') || s.includes('completed');
+    if (!wasPlayed || !hasBoxScoreData(g.game_pk)) return '';
+    const gamePk = g.game_pk;
+    return `
+      <button class="box-toggle-btn" onclick="toggleBoxScore('${gamePk}'); return false;">
+        <span id="box-caret-${gamePk}">&#9654;</span> Box Score
+      </button>
+      <div class="box-score" id="box-${gamePk}" style="display:none;"></div>
+    `;
+  }
+
+  function toggleBoxScore(gamePk) {
+    const container = document.getElementById(`box-${gamePk}`);
+    const caret = document.getElementById(`box-caret-${gamePk}`);
+    if (!container) return;
+
+    const isOpen = container.style.display !== 'none';
+    if (isOpen) {
+      container.style.display = 'none';
+      if (caret) caret.innerHTML = '&#9654;';
+      return;
+    }
+
+    if (!container.dataset.built) {
+      const g = allGames.find(x => String(x.game_pk) === String(gamePk));
+      container.innerHTML = g ? buildBoxScoreHtml(g) : '';
+      container.dataset.built = '1';
+    }
+    container.style.display = 'block';
+    if (caret) caret.innerHTML = '&#9660;';
+  }
+
+  function buildBoxScoreHtml(g) {
+    const gamePk = g.game_pk;
+    return [
+      { side: 'away', teamName: g.away_team },
+      { side: 'home', teamName: g.home_team },
+    ].map(({ side, teamName }) =>
+      battingSectionHtml(gamePk, side, teamName) + pitchingSectionHtml(gamePk, side, teamName)
+    ).join('');
+  }
+
+  function battingSectionHtml(gamePk, side, teamName) {
+    const lineup = (lineupsByGame[gamePk] || []).filter(r => r.team_side === side);
+    if (!lineup.length) return '';
+
+    const bySlot = {};
+    lineup.forEach(r => { (bySlot[r.order_slot] = bySlot[r.order_slot] || []).push(r); });
+    const slots = Object.keys(bySlot).sort((a, b) => Number(a) - Number(b));
+
+    let rows = '';
+    slots.forEach(slot => {
+      const entries = bySlot[slot].slice().sort((a, b) => a.sub_sequence.localeCompare(b.sub_sequence));
+      entries.forEach((entry, idx) => { rows += battingRowHtml(gamePk, slot, entry, idx > 0); });
+    });
+
+    return `
+      <div class="bs-team-title">Batting &mdash; ${teamName || ''}</div>
+      <div class="bs-table">
+        <div class="bs-header">
+          <div>#</div><div>Player</div><div>AVG</div><div>AB</div><div>R</div><div>H</div><div>RBI</div><div>2B</div><div>3B</div><div>HR</div><div>BB</div><div>IBB</div><div>K</div><div>SB</div>
+        </div>
+        ${rows}
+      </div>
+    `;
+  }
+
+  function battingRowHtml(gamePk, slot, entry, isSub) {
+    const stat = hittingGameLogsByKey[`${gamePk}_${entry.player_id}`] || {};
+    const nameHtml = `<a class="player-link" href="player.html?id=${entry.player_id}&season=${currentSeason}">${entry.player_name}</a>`;
+    const subPrefix = isSub ? '<span style="color: var(--text-muted);">&#8618; </span>' : '';
+    const posLabel = entry.position_abbreviation
+      ? ` <span style="color: var(--text-muted); font-size: 0.7rem;">${entry.position_abbreviation}</span>`
+      : '';
+    return `
+      <div class="bs-row">
+        <div>${isSub ? '' : slot}</div>
+        <div>${subPrefix}${nameHtml}${posLabel}</div>
+        <div>${fmtDash(stat.avg)}</div>
+        <div>${fmtDash(stat.at_bats)}</div>
+        <div>${fmtDash(stat.runs)}</div>
+        <div>${fmtDash(stat.hits)}</div>
+        <div>${fmtDash(stat.rbi)}</div>
+        <div>${fmtDash(stat.doubles)}</div>
+        <div>${fmtDash(stat.triples)}</div>
+        <div>${fmtDash(stat.home_runs)}</div>
+        <div>${fmtDash(stat.walks)}</div>
+        <div>${fmtDash(stat.intentional_walks)}</div>
+        <div>${fmtDash(stat.strikeouts)}</div>
+        <div>${fmtDash(stat.stolen_bases)}</div>
+      </div>
+    `;
+  }
+
+  function pitchingSectionHtml(gamePk, side, teamName) {
+    const appearances = (pitcherAppearancesByGame[gamePk] || [])
+      .filter(r => r.team_side === side)
+      .slice()
+      .sort((a, b) => Number(a.appearance_order) - Number(b.appearance_order));
+    if (!appearances.length) return '';
+
+    const rows = appearances.map(app => pitchingRowHtml(gamePk, app)).join('');
+
+    return `
+      <div class="bs-team-title">Pitching &mdash; ${teamName || ''}</div>
+      <div class="bs-table">
+        <div class="bs-header-p">
+          <div>#</div><div>Pitcher</div><div>ERA</div><div>Gm ERA</div><div>IP</div><div>H</div><div>R</div><div>ER</div><div>BB</div><div>K</div><div>Pit</div><div>WHIP</div>
+        </div>
+        ${rows}
+      </div>
+      <div class="bs-note">ERA and WHIP shown are cumulative through this game; Gm ERA is this game only.</div>
+    `;
+  }
+
+  function pitchingRowHtml(gamePk, app) {
+    const stat = pitchingGameLogsByKey[`${gamePk}_${app.pitcher_id}`] || {};
+    const nameHtml = `<a class="player-link" href="player.html?id=${app.pitcher_id}&season=${currentSeason}">${app.pitcher_name}</a>`;
+    const gmEra = gameEraDisplay(stat.earnedRuns, stat.inningsPitched);
+    return `
+      <div class="bs-row-p">
+        <div>${app.appearance_order}</div>
+        <div>${nameHtml}</div>
+        <div>${fmtDash(stat.era)}</div>
+        <div>${gmEra}</div>
+        <div>${fmtDash(stat.inningsPitched)}</div>
+        <div>${fmtDash(stat.hits)}</div>
+        <div>${fmtDash(stat.runs)}</div>
+        <div>${fmtDash(stat.earnedRuns)}</div>
+        <div>${fmtDash(stat.baseOnBalls)}</div>
+        <div>${fmtDash(stat.strikeOuts)}</div>
+        <div>${fmtDash(stat.numberOfPitches)}</div>
+        <div>${fmtDash(stat.whip)}</div>
+      </div>
+    `;
   }
 
   function probableLine(g) {
@@ -1020,6 +1280,7 @@
             <div class="venue">${g.venue || ''}</div>
             ${decisionLine(g.game_pk, g.status)}
             ${probableLine(g)}
+            ${boxScoreSection(g)}
           </div>
           <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
         `;
@@ -1070,6 +1331,60 @@
         }
       } catch (e) {
         // pitcher_stats.csv is optional -- schedule still renders without it
+      }
+
+      pitchingGameLogsByKey = {};
+      pitchingGameLogsByGame = {};
+      try {
+        const res = await fetch(`data/${currentSeason}/pitching_gamelogs.csv`);
+        if (res.ok) {
+          const text = await res.text();
+          parseCSV(text).forEach(r => {
+            pitchingGameLogsByKey[`${r.game_pk}_${r.pitcher_id}`] = r;
+            (pitchingGameLogsByGame[r.game_pk] = pitchingGameLogsByGame[r.game_pk] || []).push(r);
+          });
+        }
+      } catch (e) {
+        // pitching_gamelogs.csv is optional -- older seasons may not have it yet
+      }
+
+      hittingGameLogsByKey = {};
+      try {
+        const res = await fetch(`data/${currentSeason}/hitting_gamelogs.csv`);
+        if (res.ok) {
+          const text = await res.text();
+          parseCSV(text).forEach(r => {
+            hittingGameLogsByKey[`${r.game_pk}_${r.player_id}`] = r;
+          });
+        }
+      } catch (e) {
+        // hitting_gamelogs.csv is optional
+      }
+
+      lineupsByGame = {};
+      try {
+        const res = await fetch(`data/${currentSeason}/batting_lineups.csv`);
+        if (res.ok) {
+          const text = await res.text();
+          parseCSV(text).forEach(r => {
+            (lineupsByGame[r.game_pk] = lineupsByGame[r.game_pk] || []).push(r);
+          });
+        }
+      } catch (e) {
+        // batting_lineups.csv is optional -- older seasons may not have it yet
+      }
+
+      pitcherAppearancesByGame = {};
+      try {
+        const res = await fetch(`data/${currentSeason}/pitcher_appearances.csv`);
+        if (res.ok) {
+          const text = await res.text();
+          parseCSV(text).forEach(r => {
+            (pitcherAppearancesByGame[r.game_pk] = pitcherAppearancesByGame[r.game_pk] || []).push(r);
+          });
+        }
+      } catch (e) {
+        // pitcher_appearances.csv is optional -- older seasons may not have it yet
       }
 
       renderBanner();

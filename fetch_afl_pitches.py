@@ -32,6 +32,25 @@ DECISION_FIELDS = [
 ]
 
 
+# Batting lineup + substitutions, and pitcher appearance order, both read
+# straight out of liveData.boxscore in the same game feed this script
+# already fetches for pitches/decisions -- no extra API calls needed.
+# MLB's "battingOrder" field is a 3-digit string: the first digit is the
+# lineup spot (1-9), the next two are a substitution counter ("00" = the
+# starter in that spot, "01" = the first player who replaced them, etc).
+LINEUP_FIELDS = [
+    "game_pk", "date", "team_side", "team_name",
+    "player_id", "player_name", "jersey_number",
+    "batting_order", "order_slot", "sub_sequence", "is_starter",
+    "position_code", "position_abbreviation", "position_name",
+]
+
+PITCHER_APPEARANCE_FIELDS = [
+    "game_pk", "date", "team_side", "team_name",
+    "pitcher_id", "pitcher_name", "appearance_order", "is_starter",
+]
+
+
 def load_schedule(season, output_dir):
     path = os.path.join(output_dir, str(season), "schedule.csv")
     if not os.path.exists(path):
@@ -39,7 +58,7 @@ def load_schedule(season, output_dir):
             f"No schedule found at {path}. "
             f"Run fetch_afl_schedule.py {season} first."
         )
-    with open(path, "r", newline="", encoding="utf-8") as f:
+    with open(path, "r", newline="") as f:
         return list(csv.DictReader(f))
 
 
@@ -56,7 +75,7 @@ def load_game_feed_from_file(feeds_dir, game_pk):
     path = os.path.join(feeds_dir, f"{game_pk}.json")
     if not os.path.exists(path):
         return None
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, "r") as f:
         return json.load(f)
 
 
@@ -149,6 +168,76 @@ def extract_decisions(feed, game_info):
         "save_pitcher_name": save.get("fullName", ""),
         "save_pitcher_saves": "",
     }
+
+
+def extract_lineups(feed, game_info):
+    rows = []
+    teams = feed.get("liveData", {}).get("boxscore", {}).get("teams", {})
+
+    for side in ("away", "home"):
+        team_block = teams.get(side, {})
+        team_name = team_block.get("team", {}).get("name", "")
+        players = team_block.get("players", {})
+
+        for player in players.values():
+            batting_order = player.get("battingOrder")
+            if not batting_order:
+                # No batting order means this player never came up as a
+                # batter in this game (e.g. a pitcher who didn't bat).
+                continue
+
+            person = player.get("person", {})
+            position = player.get("position", {})
+            order_slot = batting_order[0]
+            sub_sequence = batting_order[1:3] if len(batting_order) >= 3 else "00"
+
+            rows.append({
+                "game_pk": game_info.get("game_pk"),
+                "date": game_info.get("date"),
+                "team_side": side,
+                "team_name": team_name,
+                "player_id": person.get("id", ""),
+                "player_name": person.get("fullName", ""),
+                "jersey_number": player.get("jerseyNumber", ""),
+                "batting_order": batting_order,
+                "order_slot": order_slot,
+                "sub_sequence": sub_sequence,
+                "is_starter": sub_sequence == "00",
+                "position_code": position.get("code", ""),
+                "position_abbreviation": position.get("abbreviation", ""),
+                "position_name": position.get("name", ""),
+            })
+
+    # Sort for readability: team side, then lineup spot, then sub order.
+    rows.sort(key=lambda r: (r["team_side"], r["order_slot"], r["sub_sequence"]))
+    return rows
+
+
+def extract_pitcher_appearances(feed, game_info):
+    rows = []
+    teams = feed.get("liveData", {}).get("boxscore", {}).get("teams", {})
+
+    for side in ("away", "home"):
+        team_block = teams.get(side, {})
+        team_name = team_block.get("team", {}).get("name", "")
+        players = team_block.get("players", {})
+        pitcher_ids = team_block.get("pitchers", [])
+
+        for order, pid in enumerate(pitcher_ids, 1):
+            player = players.get(f"ID{pid}", {})
+            person = player.get("person", {})
+            rows.append({
+                "game_pk": game_info.get("game_pk"),
+                "date": game_info.get("date"),
+                "team_side": side,
+                "team_name": team_name,
+                "pitcher_id": pid,
+                "pitcher_name": person.get("fullName", ""),
+                "appearance_order": order,
+                "is_starter": order == 1,
+            })
+
+    return rows
 
 
 def innings_pitched_to_outs(ip_str):
@@ -250,6 +339,8 @@ def main():
 
     all_rows = []
     all_decisions = []
+    all_lineups = []
+    all_pitcher_appearances = []
     pitcher_records = {}
     skipped_no_plays = 0
     skipped_missing = 0
@@ -279,6 +370,9 @@ def main():
             apply_running_record(decision, feed, pitcher_records, game.get("game_type", ""))
             all_decisions.append(decision)
 
+        all_lineups.extend(extract_lineups(feed, game))
+        all_pitcher_appearances.extend(extract_pitcher_appearances(feed, game))
+
         if not rows:
             print("no pitches (likely cancelled/postponed).")
             skipped_no_plays += 1
@@ -291,22 +385,38 @@ def main():
     os.makedirs(season_dir, exist_ok=True)
     out_path = os.path.join(season_dir, "pitches.csv")
 
-    with open(out_path, "w", newline="", encoding="utf-8") as f:
+    with open(out_path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=PITCH_FIELDS)
         writer.writeheader()
         for row in all_rows:
             writer.writerow(row)
 
     decisions_path = os.path.join(season_dir, "decisions.csv")
-    with open(decisions_path, "w", newline="", encoding="utf-8") as f:
+    with open(decisions_path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=DECISION_FIELDS)
         writer.writeheader()
         for row in all_decisions:
             writer.writerow(row)
 
+    lineups_path = os.path.join(season_dir, "batting_lineups.csv")
+    with open(lineups_path, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=LINEUP_FIELDS)
+        writer.writeheader()
+        for row in all_lineups:
+            writer.writerow(row)
+
+    pitcher_appearances_path = os.path.join(season_dir, "pitcher_appearances.csv")
+    with open(pitcher_appearances_path, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=PITCHER_APPEARANCE_FIELDS)
+        writer.writeheader()
+        for row in all_pitcher_appearances:
+            writer.writerow(row)
+
     print()
     print(f"Done. {len(all_rows)} total pitches saved to {out_path}")
     print(f"{len(all_decisions)} game decisions saved to {decisions_path}")
+    print(f"{len(all_lineups)} lineup/substitution rows saved to {lineups_path}")
+    print(f"{len(all_pitcher_appearances)} pitcher-appearance rows saved to {pitcher_appearances_path}")
     print(f"Games with no data: {skipped_no_plays} (cancelled/postponed)")
     if skipped_missing:
         print(f"Games skipped due to fetch/file errors: {skipped_missing}")
