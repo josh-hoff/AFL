@@ -279,8 +279,13 @@
 
   function sumHittingGames(games) {
     const totals = { games: games.length };
-    const numericFields = ['at_bats', 'hits', 'doubles', 'triples', 'home_runs', 'runs', 'rbi', 'walks',
-      'intentional_walks', 'strikeouts', 'hit_by_pitch', 'stolen_bases', 'caught_stealing', 'total_bases', 'sac_flies'];
+    // Sum every counting field hitting_gamelogs.csv actually has per game --
+    // not just the handful used for the AFL summary card -- so the Career
+    // Path AFL row can carry every stat too, not just AVG/OBP/SLG/OPS/HR.
+    const numericFields = ['at_bats', 'plate_appearances', 'hits', 'doubles', 'triples', 'home_runs',
+      'runs', 'rbi', 'walks', 'intentional_walks', 'strikeouts', 'hit_by_pitch', 'stolen_bases',
+      'caught_stealing', 'total_bases', 'sac_flies', 'sac_bunts', 'ground_outs', 'air_outs',
+      'ground_into_double_play', 'left_on_base', 'catchers_interference'];
     numericFields.forEach(f => { totals[f] = games.reduce((sum, g) => sum + (Number(g[f]) || 0), 0); });
 
     const ab = totals.at_bats;
@@ -289,6 +294,8 @@
     totals.obp = pa_denominator > 0 ? ((totals.hits + totals.walks + totals.hit_by_pitch) / pa_denominator) : null;
     totals.slg = ab > 0 ? (totals.total_bases / ab) : null;
     totals.ops = (totals.obp !== null && totals.slg !== null) ? (totals.obp + totals.slg) : null;
+    const babip_denominator = ab - totals.strikeouts - totals.home_runs + totals.sac_flies;
+    totals.babip = babip_denominator > 0 ? ((totals.hits - totals.home_runs) / babip_denominator) : null;
     return totals;
   }
 
@@ -613,14 +620,18 @@
           // in the same columns as the MiLB/MLB rows above.
           aflRow = {
             season: String(currentSeason), level: 'AFL', team: player.team,
-            gamesPlayed: totals.games,
+            gamesPlayed: totals.games, plateAppearances: totals.plate_appearances,
             atBats: totals.at_bats, hits: totals.hits, doubles: totals.doubles, triples: totals.triples,
             homeRuns: totals.home_runs, runs: totals.runs, rbi: totals.rbi,
             baseOnBalls: totals.walks, intentionalWalks: totals.intentional_walks,
             strikeOuts: totals.strikeouts, hitByPitch: totals.hit_by_pitch,
             stolenBases: totals.stolen_bases, caughtStealing: totals.caught_stealing,
-            totalBases: totals.total_bases, sacFlies: totals.sac_flies,
+            totalBases: totals.total_bases, sacFlies: totals.sac_flies, sacBunts: totals.sac_bunts,
+            groundOuts: totals.ground_outs, airOuts: totals.air_outs,
+            groundIntoDoublePlay: totals.ground_into_double_play,
+            leftOnBase: totals.left_on_base, catchersInterference: totals.catchers_interference,
             avg: fmtRate(totals.avg), obp: fmtRate(totals.obp), slg: fmtRate(totals.slg), ops: fmtRate(totals.ops),
+            babip: fmtRate(totals.babip),
           };
         }
       }
