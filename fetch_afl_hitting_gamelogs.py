@@ -16,6 +16,7 @@ HITTING_GAMELOG_FIELDS = [
     "hit_by_pitch", "stolen_bases", "caught_stealing", "avg", "obp", "slg",
     "ops", "babip", "ground_outs", "air_outs", "ground_into_double_play",
     "sac_bunts", "sac_flies", "left_on_base", "catchers_interference",
+    "number_of_pitches",
 ]
 
 
@@ -84,6 +85,7 @@ def extract_hitting_rows(data, player_id, player_name, team):
             "sac_flies": stat.get("sacFlies", ""),
             "left_on_base": stat.get("leftOnBase", ""),
             "catchers_interference": stat.get("catchersInterference", ""),
+            "number_of_pitches": stat.get("numberOfPitches", ""),
         })
     return rows
 

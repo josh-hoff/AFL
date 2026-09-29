@@ -285,7 +285,7 @@
     const numericFields = ['at_bats', 'plate_appearances', 'hits', 'doubles', 'triples', 'home_runs',
       'runs', 'rbi', 'walks', 'intentional_walks', 'strikeouts', 'hit_by_pitch', 'stolen_bases',
       'caught_stealing', 'total_bases', 'sac_flies', 'sac_bunts', 'ground_outs', 'air_outs',
-      'ground_into_double_play', 'left_on_base', 'catchers_interference'];
+      'ground_into_double_play', 'left_on_base', 'catchers_interference', 'number_of_pitches'];
     numericFields.forEach(f => { totals[f] = games.reduce((sum, g) => sum + (Number(g[f]) || 0), 0); });
 
     const ab = totals.at_bats;
@@ -305,9 +305,17 @@
     return totals;
   }
 
+  // MLB's own API shows "-.--" / ".---" rather than a blank when a rate
+  // stat's denominator is zero (e.g. AB/HR with 0 home runs) -- match that
+  // convention on our own computed AFL row instead of leaving it empty.
   function fmtRatio(n) {
-    if (n === null || n === undefined || isNaN(n)) return '';
+    if (n === null || n === undefined || isNaN(n)) return '-.--';
     return n.toFixed(2);
+  }
+
+  function fmtRatePct(n) {
+    if (n === null || n === undefined || isNaN(n)) return '.---';
+    return fmtRate(n);
   }
 
   function fmtRate(n) {
@@ -664,14 +672,15 @@
             baseOnBalls: totals.walks, intentionalWalks: totals.intentional_walks,
             strikeOuts: totals.strikeouts, hitByPitch: totals.hit_by_pitch,
             stolenBases: totals.stolen_bases, caughtStealing: totals.caught_stealing,
-            stolenBasePercentage: fmtRate(totals.stolen_base_pct),
-            caughtStealingPercentage: fmtRate(totals.caught_stealing_pct),
+            stolenBasePercentage: fmtRatePct(totals.stolen_base_pct),
+            caughtStealingPercentage: fmtRatePct(totals.caught_stealing_pct),
             totalBases: totals.total_bases, sacFlies: totals.sac_flies, sacBunts: totals.sac_bunts,
             groundOuts: totals.ground_outs, airOuts: totals.air_outs,
             groundOutsToAirouts: fmtRatio(totals.ground_outs_to_airouts),
             atBatsPerHomeRun: fmtRatio(totals.at_bats_per_home_run),
             groundIntoDoublePlay: totals.ground_into_double_play,
             leftOnBase: totals.left_on_base, catchersInterference: totals.catchers_interference,
+            numberOfPitches: totals.number_of_pitches,
             avg: fmtRate(totals.avg), obp: fmtRate(totals.obp), slg: fmtRate(totals.slg), ops: fmtRate(totals.ops),
             babip: fmtRate(totals.babip),
           };
