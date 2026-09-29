@@ -108,6 +108,7 @@
   .gl-row { display: grid; gap: 4px; padding: 0.35rem 0.6rem; font-size: 0.76rem; align-items: center; white-space: nowrap; }
   .gl-head { background: #f2f1ee; font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.66rem; }
   .gl-row:not(.gl-head) { border-top: 1px solid var(--border); color: var(--text); }
+  .gl-row.gl-total { border-top: 2px solid var(--tab-active); background: #fff2e6; font-weight: 700; }
 
   .transaction-log-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 2rem 0 0.6rem; }
   .transaction-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
@@ -557,12 +558,24 @@
     return TEAM_CITY[cleaned] || cleaned;
   }
 
+  // The per-game log's hitting columns use hitting_gamelogs.csv's snake_case
+  // field names, but the season-total AFL row (built from the same "capture
+  // everything" totals used for the Career Path table) uses MLB's own
+  // camelCase field names -- this maps one to the other for the totals row.
+  const HITTING_COL_TO_TOTALS_KEY = {
+    at_bats: 'atBats', runs: 'runs', hits: 'hits', rbi: 'rbi', doubles: 'doubles', triples: 'triples',
+    home_runs: 'homeRuns', walks: 'baseOnBalls', intentional_walks: 'intentionalWalks',
+    strikeouts: 'strikeOuts', stolen_bases: 'stolenBases', avg: 'avg', obp: 'obp', slg: 'slg', ops: 'ops',
+  };
+
   // Compact per-game log shown when the AFL row in Career Path is expanded.
   // Uses whichever per-game rows are already in memory -- hitting_gamelogs.csv
   // rows (snake_case fields) for hitters, pitching_gamelogs.csv rows
   // (MLB's own camelCase fields, including its cumulative-through-that-game
-  // era/whip/wins/losses) for pitchers. No extra fetch needed.
-  function buildAflGameLogHtml(rows, statType) {
+  // era/whip/wins/losses) for pitchers. No extra fetch needed. `totalsRow`
+  // is the same season-total AFL row shown in the Career Path table above --
+  // its full-season numbers get appended as a final row here.
+  function buildAflGameLogHtml(rows, statType, totalsRow) {
     const sorted = rows.slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
 
     const cols = statType === 'pitching'
@@ -583,7 +596,19 @@
       return `<div class="gl-row" style="grid-template-columns:${gridCols};">${cells}</div>`;
     }).join('');
 
-    return `<div class="gl-table">${headerHtml}${rowsHtml}</div>`;
+    let totalsHtml = '';
+    if (totalsRow) {
+      const cells = cols.map(c => {
+        if (c === 'date') return `<div>${totalsRow.season || ''} Total</div>`;
+        if (c === 'opponent') return `<div></div>`;
+        const key = statType === 'pitching' ? c : (HITTING_COL_TO_TOTALS_KEY[c] || c);
+        const v = totalsRow[key];
+        return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
+      }).join('');
+      totalsHtml = `<div class="gl-row gl-total" style="grid-template-columns:${gridCols};">${cells}</div>`;
+    }
+
+    return `<div class="gl-table">${headerHtml}${rowsHtml}${totalsHtml}</div>`;
   }
 
   function toggleAflGameLog() {
@@ -649,6 +674,7 @@
         <div class="career-row head" style="grid-template-columns:${gridTemplate}; min-width:${minWidth};">${headerCells}</div>
     `;
     const hasGameLog = Array.isArray(aflGameLogRows) && aflGameLogRows.length > 0;
+    const aflTotalsRow = rows.find(r => r.level === 'AFL');
     rows.forEach(r => {
       const isAfl = r.level === 'AFL';
       const rowClass = isAfl ? 'career-row body afl' : r.level === 'MLB' ? 'career-row body mlb' : 'career-row body';
@@ -664,7 +690,7 @@
       const clickAttr = showToggle ? ` onclick="toggleAflGameLog()" style="cursor:pointer; grid-template-columns:${gridTemplate}; min-width:${minWidth};"` : ` ${rowStyleAttr}`;
       html += `<div class="${rowClass}"${clickAttr}>${cells}</div>`;
       if (showToggle) {
-        html += `<div class="career-gamelog-wrap" id="afl-gamelog-container" style="display:none;">${buildAflGameLogHtml(aflGameLogRows, statType)}</div>`;
+        html += `<div class="career-gamelog-wrap" id="afl-gamelog-container" style="display:none;">${buildAflGameLogHtml(aflGameLogRows, statType, aflTotalsRow)}</div>`;
       }
     });
     html += `</div>`;
