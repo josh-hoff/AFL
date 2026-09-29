@@ -543,6 +543,18 @@
     color: var(--tab-active);
     text-decoration: underline;
   }
+  .postseason-tag {
+    background: #2c4a7c;
+    color: #ffb38a;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    display: inline-block;
+    vertical-align: middle;
+  }
   @media (max-width: 560px) {
     .bs-header, .bs-row { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(13, 1fr); overflow-x: auto; }
     .bs-header-p, .bs-row-p { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(10, 1fr); overflow-x: auto; }
@@ -609,6 +621,8 @@
   let pitchingGameLogsByKey = {};
   let pitchingGameLogsByGame = {};
   let hittingGameLogsByKey = {};
+  let hittingGameLogsByPlayer = {};
+  let pitchingGameLogsByPlayer = {};
   let lineupsByGame = {};
   let pitcherAppearancesByGame = {};
 
@@ -977,24 +991,47 @@
     return parts.length ? ` (${parts.join(', ')})` : '';
   }
 
-  function decisionLine(gamePk, status) {
-    const s = (status || '').toLowerCase();
+  // For a playoff game, "cumulative" record/ERA means playoff-only, chained
+  // across First Round/Semifinal/Championship -- not MLB's own per-round
+  // reset fields, and not the regular-season record either.
+  function decisionPitcherSuffix(g, pitcherId, fallbackWins, fallbackLosses, fallbackEra) {
+    if (isPlayoffGame(g)) {
+      const cum = playoffPitchingCumulative(pitcherId, g.game_pk);
+      const parts = [];
+      if (cum.games > 0) parts.push(`${cum.wins}-${cum.losses}`);
+      parts.push(`${fmtRatio(cum.era)} ERA`);
+      return ` (${parts.join(', ')})`;
+    }
+    return pitcherCumulativeSuffix(g.game_pk, pitcherId, fallbackWins, fallbackLosses, fallbackEra);
+  }
+
+  function decisionLine(g) {
+    const s = (g.status || '').toLowerCase();
     const wasPlayed = s.includes('final') || s.includes('completed');
     if (!wasPlayed) return '';
 
-    const d = decisionsByGame[gamePk];
+    const d = decisionsByGame[g.game_pk];
     if (!d || !d.winning_pitcher_name) return '';
 
-    const wRecord = pitcherCumulativeSuffix(gamePk, d.winning_pitcher_id, d.winning_pitcher_wins, d.winning_pitcher_losses, d.winning_pitcher_era);
-    let line = `<span class="decision-label-win">W</span> ${d.winning_pitcher_name}${wRecord}`;
+    const playoff = isPlayoffGame(g);
+    const tag = playoff ? '<span class="postseason-tag">Postseason</span> ' : '';
+
+    const wRecord = decisionPitcherSuffix(g, d.winning_pitcher_id, d.winning_pitcher_wins, d.winning_pitcher_losses, d.winning_pitcher_era);
+    let line = `${tag}<span class="decision-label-win">W</span> ${d.winning_pitcher_name}${wRecord}`;
 
     if (d.losing_pitcher_name) {
-      const lRecord = pitcherCumulativeSuffix(gamePk, d.losing_pitcher_id, d.losing_pitcher_wins, d.losing_pitcher_losses, d.losing_pitcher_era);
+      const lRecord = decisionPitcherSuffix(g, d.losing_pitcher_id, d.losing_pitcher_wins, d.losing_pitcher_losses, d.losing_pitcher_era);
       line += ` &nbsp; <span class="decision-label-loss">L</span> ${d.losing_pitcher_name}${lRecord}`;
     }
     if (d.save_pitcher_name) {
-      const saveRow = pitchingGameLogsByKey[`${gamePk}_${d.save_pitcher_id}`];
-      const saves = saveRow && saveRow.saves !== '' ? saveRow.saves : d.save_pitcher_saves;
+      let saves;
+      if (playoff) {
+        const cum = playoffPitchingCumulative(d.save_pitcher_id, g.game_pk);
+        saves = cum.saves;
+      } else {
+        const saveRow = pitchingGameLogsByKey[`${g.game_pk}_${d.save_pitcher_id}`];
+        saves = saveRow && saveRow.saves !== '' ? saveRow.saves : d.save_pitcher_saves;
+      }
       const saveSuffix = (saves !== '' && saves !== undefined) ? ` (${saves} SV)` : '';
       line += ` &nbsp; <span class="decision-label-save">SV</span> ${d.save_pitcher_name}${saveSuffix}`;
     }
@@ -1020,6 +1057,83 @@
     if (!outs) return '-.--';
     const earnedRuns = Number(er) || 0;
     return ((earnedRuns * 27) / outs).toFixed(2);
+  }
+
+  // ---- Regular season vs. postseason split ----
+  //
+  // hitting_gamelogs.csv / pitching_gamelogs.csv rows carry MLB's raw
+  // gameType code ("R" = regular season; "D"/"L"/"W" = the AFL's First
+  // Round / Semifinal / Championship). schedule.csv's own game_type field
+  // is the human-readable label from fetch_afl_schedule.py's
+  // GAME_TYPE_LABELS -- these three mark a playoff game there.
+  const POSTSEASON_GAME_TYPES = new Set(['D', 'L', 'W']);
+  function isPostseasonRow(r) { return POSTSEASON_GAME_TYPES.has(r.game_type); }
+  const POSTSEASON_TYPE_LABELS = new Set(['First Round', 'Semifinal', 'Championship']);
+  function isPlayoffGame(g) { return POSTSEASON_TYPE_LABELS.has(g.game_type); }
+
+  function fmtRate(n) {
+    if (n === null || n === undefined || isNaN(n)) return '';
+    return n.toFixed(3).replace(/^0\./, '.');
+  }
+  function fmtRatio(n) {
+    if (n === null || n === undefined || isNaN(n)) return '-.--';
+    return n.toFixed(2);
+  }
+
+  // Same summation approach as player.html's sumHittingGames/sumPitchingGames
+  // -- MLB's own cumulative rate fields (avg/obp/slg/ops, era/whip/W-L) reset
+  // independently at the start of each postseason round, so a genuine
+  // chained-across-rounds postseason cumulative has to be recomputed from
+  // each game's raw counting stats rather than read off the row directly.
+  function sumHittingGames(games) {
+    const totals = { games: games.length, at_bats: 0, hits: 0, walks: 0, hit_by_pitch: 0, sac_flies: 0, total_bases: 0 };
+    games.forEach(g => {
+      totals.at_bats += Number(g.at_bats) || 0;
+      totals.hits += Number(g.hits) || 0;
+      totals.walks += Number(g.walks) || 0;
+      totals.hit_by_pitch += Number(g.hit_by_pitch) || 0;
+      totals.sac_flies += Number(g.sac_flies) || 0;
+      totals.total_bases += Number(g.total_bases) || 0;
+    });
+    const ab = totals.at_bats;
+    const pa_denominator = ab + totals.walks + totals.hit_by_pitch + totals.sac_flies;
+    totals.avg = ab > 0 ? (totals.hits / ab) : null;
+    totals.obp = pa_denominator > 0 ? ((totals.hits + totals.walks + totals.hit_by_pitch) / pa_denominator) : null;
+    totals.slg = ab > 0 ? (totals.total_bases / ab) : null;
+    totals.ops = (totals.obp !== null && totals.slg !== null) ? (totals.obp + totals.slg) : null;
+    return totals;
+  }
+
+  function sumPitchingGames(games) {
+    const totals = { games: games.length, wins: 0, losses: 0, saves: 0, hits: 0, earnedRuns: 0, baseOnBalls: 0, outs: 0 };
+    games.forEach(g => {
+      totals.wins += Number(g.wins) || 0;
+      totals.losses += Number(g.losses) || 0;
+      totals.saves += Number(g.saves) || 0;
+      totals.hits += Number(g.hits) || 0;
+      totals.earnedRuns += Number(g.earnedRuns) || 0;
+      totals.baseOnBalls += Number(g.baseOnBalls) || 0;
+      totals.outs += ipToOuts(g.inningsPitched);
+    });
+    totals.era = totals.outs > 0 ? (totals.earnedRuns * 27 / totals.outs) : null;
+    totals.whip = totals.outs > 0 ? ((totals.hits + totals.baseOnBalls) * 3 / totals.outs) : null;
+    return totals;
+  }
+
+  // Every postseason game (across all rounds, in date order) for a player up
+  // through and including gamePk -- the prefix we chain the cumulative over.
+  function postseasonGamesThrough(games, gamePk) {
+    const sorted = games.filter(isPostseasonRow).slice()
+      .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+    const idx = sorted.findIndex(r => String(r.game_pk) === String(gamePk));
+    return idx === -1 ? sorted : sorted.slice(0, idx + 1);
+  }
+
+  function playoffHittingCumulative(playerId, gamePk) {
+    return sumHittingGames(postseasonGamesThrough(hittingGameLogsByPlayer[playerId] || [], gamePk));
+  }
+  function playoffPitchingCumulative(pitcherId, gamePk) {
+    return sumPitchingGames(postseasonGamesThrough(pitchingGameLogsByPlayer[pitcherId] || [], gamePk));
   }
 
   function hasBoxScoreData(gamePk) {
@@ -1063,8 +1177,9 @@
 
   function buildBoxScoreHtml(g) {
     const gamePk = g.game_pk;
-    const awayHtml = battingSectionHtml(gamePk, 'away', g.away_team) + pitchingSectionHtml(gamePk, 'away', g.away_team);
-    const homeHtml = battingSectionHtml(gamePk, 'home', g.home_team) + pitchingSectionHtml(gamePk, 'home', g.home_team);
+    const isPlayoff = isPlayoffGame(g);
+    const awayHtml = battingSectionHtml(gamePk, 'away', g.away_team, isPlayoff) + pitchingSectionHtml(gamePk, 'away', g.away_team, isPlayoff);
+    const homeHtml = battingSectionHtml(gamePk, 'home', g.home_team, isPlayoff) + pitchingSectionHtml(gamePk, 'home', g.home_team, isPlayoff);
     return `
       <div class="bs-team-tabs">
         <button class="bs-team-tab active" data-side="away" onclick="switchBoxTeam('${gamePk}', 'away'); return false;">${g.away_team || 'Away'}</button>
@@ -1086,7 +1201,7 @@
     });
   }
 
-  function battingSectionHtml(gamePk, side, teamName) {
+  function battingSectionHtml(gamePk, side, teamName, isPlayoff) {
     const lineup = (lineupsByGame[gamePk] || []).filter(r => r.team_side === side);
     if (!lineup.length) return '';
 
@@ -1097,33 +1212,42 @@
     let rows = '';
     slots.forEach(slot => {
       const entries = bySlot[slot].slice().sort((a, b) => a.sub_sequence.localeCompare(b.sub_sequence));
-      entries.forEach((entry, idx) => { rows += battingRowHtml(gamePk, slot, entry, idx > 0); });
+      entries.forEach((entry, idx) => { rows += battingRowHtml(gamePk, slot, entry, idx > 0, isPlayoff); });
     });
 
+    const tag = isPlayoff ? ' <span class="postseason-tag">Postseason</span>' : '';
     return `
-      <div class="bs-team-title">Batting &mdash; ${teamName || ''}</div>
+      <div class="bs-team-title">Batting &mdash; ${teamName || ''}${tag}</div>
       <div class="bs-table">
         <div class="bs-header">
           <div>#</div><div>Player</div><div>AVG</div><div>OPS</div><div>AB</div><div>R</div><div>H</div><div>RBI</div><div>2B</div><div>3B</div><div>HR</div><div>BB</div><div>IBB</div><div>K</div><div>SB</div>
         </div>
         ${rows}
       </div>
+      ${isPlayoff ? '<div class="bs-note">AVG and OPS shown are playoff-only, chained across rounds through this game.</div>' : ''}
     `;
   }
 
-  function battingRowHtml(gamePk, slot, entry, isSub) {
+  function battingRowHtml(gamePk, slot, entry, isSub, isPlayoff) {
     const stat = hittingGameLogsByKey[`${gamePk}_${entry.player_id}`] || {};
     const nameHtml = `<a class="player-link" href="player.html?id=${entry.player_id}&season=${currentSeason}">${entry.player_name}</a>`;
     const subPrefix = isSub ? '<span style="color: var(--text-muted);">&#8618; </span>' : '';
     const posLabel = entry.position_abbreviation
       ? ` <span style="color: var(--text-muted); font-size: 0.7rem;">${entry.position_abbreviation}</span>`
       : '';
+    let avgDisplay = fmtDash(stat.avg);
+    let opsDisplay = fmtDash(stat.ops);
+    if (isPlayoff) {
+      const cum = playoffHittingCumulative(entry.player_id, gamePk);
+      avgDisplay = fmtDash(fmtRate(cum.avg));
+      opsDisplay = fmtDash(fmtRate(cum.ops));
+    }
     return `
       <div class="bs-row">
         <div>${isSub ? '' : slot}</div>
         <div>${subPrefix}${nameHtml}${posLabel}</div>
-        <div>${fmtDash(stat.avg)}</div>
-        <div>${fmtDash(stat.ops)}</div>
+        <div>${avgDisplay}</div>
+        <div>${opsDisplay}</div>
         <div>${fmtDash(stat.at_bats)}</div>
         <div>${fmtDash(stat.runs)}</div>
         <div>${fmtDash(stat.hits)}</div>
@@ -1139,36 +1263,47 @@
     `;
   }
 
-  function pitchingSectionHtml(gamePk, side, teamName) {
+  function pitchingSectionHtml(gamePk, side, teamName, isPlayoff) {
     const appearances = (pitcherAppearancesByGame[gamePk] || [])
       .filter(r => r.team_side === side)
       .slice()
       .sort((a, b) => Number(a.appearance_order) - Number(b.appearance_order));
     if (!appearances.length) return '';
 
-    const rows = appearances.map(app => pitchingRowHtml(gamePk, app)).join('');
+    const rows = appearances.map(app => pitchingRowHtml(gamePk, app, isPlayoff)).join('');
 
+    const tag = isPlayoff ? ' <span class="postseason-tag">Postseason</span>' : '';
+    const note = isPlayoff
+      ? 'ERA and WHIP shown are playoff-only, chained across rounds through this game; Gm ERA is this game only.'
+      : 'ERA and WHIP shown are cumulative through this game; Gm ERA is this game only.';
     return `
-      <div class="bs-team-title">Pitching &mdash; ${teamName || ''}</div>
+      <div class="bs-team-title">Pitching &mdash; ${teamName || ''}${tag}</div>
       <div class="bs-table">
         <div class="bs-header-p">
           <div>#</div><div>Pitcher</div><div>ERA</div><div>Gm ERA</div><div>IP</div><div>H</div><div>R</div><div>ER</div><div>BB</div><div>K</div><div>Pit</div><div>WHIP</div>
         </div>
         ${rows}
       </div>
-      <div class="bs-note">ERA and WHIP shown are cumulative through this game; Gm ERA is this game only.</div>
+      <div class="bs-note">${note}</div>
     `;
   }
 
-  function pitchingRowHtml(gamePk, app) {
+  function pitchingRowHtml(gamePk, app, isPlayoff) {
     const stat = pitchingGameLogsByKey[`${gamePk}_${app.pitcher_id}`] || {};
     const nameHtml = `<a class="player-link" href="player.html?id=${app.pitcher_id}&season=${currentSeason}">${app.pitcher_name}</a>`;
     const gmEra = gameEraDisplay(stat.earnedRuns, stat.inningsPitched);
+    let eraDisplay = fmtDash(stat.era);
+    let whipDisplay = fmtDash(stat.whip);
+    if (isPlayoff) {
+      const cum = playoffPitchingCumulative(app.pitcher_id, gamePk);
+      eraDisplay = fmtRatio(cum.era);
+      whipDisplay = fmtRatio(cum.whip);
+    }
     return `
       <div class="bs-row-p">
         <div>${app.appearance_order}</div>
         <div>${nameHtml}</div>
-        <div>${fmtDash(stat.era)}</div>
+        <div>${eraDisplay}</div>
         <div>${gmEra}</div>
         <div>${fmtDash(stat.inningsPitched)}</div>
         <div>${fmtDash(stat.hits)}</div>
@@ -1177,7 +1312,7 @@
         <div>${fmtDash(stat.baseOnBalls)}</div>
         <div>${fmtDash(stat.strikeOuts)}</div>
         <div>${fmtDash(stat.numberOfPitches)}</div>
-        <div>${fmtDash(stat.whip)}</div>
+        <div>${whipDisplay}</div>
       </div>
     `;
   }
@@ -1316,7 +1451,7 @@
           <div>
             <div class="matchup">${teamLink(g.away_team, awayWon)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team, homeWon)}${scoreSpan(g.home_score, g.away_score)}</div>
             <div class="venue">${g.venue || ''}</div>
-            ${decisionLine(g.game_pk, g.status)}
+            ${decisionLine(g)}
             ${probableLine(g)}
             ${boxScoreSection(g)}
           </div>
@@ -1380,6 +1515,7 @@
           parseCSV(text).forEach(r => {
             pitchingGameLogsByKey[`${r.game_pk}_${r.pitcher_id}`] = r;
             (pitchingGameLogsByGame[r.game_pk] = pitchingGameLogsByGame[r.game_pk] || []).push(r);
+            (pitchingGameLogsByPlayer[r.pitcher_id] = pitchingGameLogsByPlayer[r.pitcher_id] || []).push(r);
           });
         }
       } catch (e) {
@@ -1387,12 +1523,14 @@
       }
 
       hittingGameLogsByKey = {};
+      hittingGameLogsByPlayer = {};
       try {
         const res = await fetch(`data/${currentSeason}/hitting_gamelogs.csv`);
         if (res.ok) {
           const text = await res.text();
           parseCSV(text).forEach(r => {
             hittingGameLogsByKey[`${r.game_pk}_${r.player_id}`] = r;
+            (hittingGameLogsByPlayer[r.player_id] = hittingGameLogsByPlayer[r.player_id] || []).push(r);
           });
         }
       } catch (e) {

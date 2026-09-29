@@ -72,7 +72,15 @@ def collect_pitcher_ids(output_dir, season):
 def fetch_pitching_gamelog(person_id, season):
     import requests
 
-    params = {"stats": "gameLog", "group": "pitching", "season": season, "sportId": AFL_SPORT_ID}
+    # gameType defaults to regular season ("R") only if left off -- the AFL's
+    # crossover/championship round uses postseason codes (D = First Round,
+    # L = Semifinal, W = Championship), which would otherwise silently be
+    # missing from every pitcher's game log. "A" (Fall Stars Game, the
+    # exhibition all-star game) is deliberately left out.
+    params = {
+        "stats": "gameLog", "group": "pitching", "season": season, "sportId": AFL_SPORT_ID,
+        "gameType": "R,D,L,W",
+    }
     resp = requests.get(STATS_URL.format(person_id=person_id), params=params, timeout=30)
     resp.raise_for_status()
     return resp.json()

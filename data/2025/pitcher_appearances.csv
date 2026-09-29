@@ -7,7 +7,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825618,2025-10-06,away,Peoria Javelinas,688609,Hunter Parks,6,False
 825618,2025-10-06,away,Peoria Javelinas,805321,Trevor Kuncl,7,False
 825618,2025-10-06,home,Scottsdale Scorpions,687562,Jake Bennett,1,True
-825618,2025-10-06,home,Scottsdale Scorpions,800344,Sean Paul Li馻n,2,False
+825618,2025-10-06,home,Scottsdale Scorpions,800344,Sean Paul Li帽an,2,False
 825618,2025-10-06,home,Scottsdale Scorpions,688692,Jared Simpson,3,False
 825618,2025-10-06,home,Scottsdale Scorpions,694544,Austin Amaral,4,False
 825635,2025-10-07,away,Glendale Desert Dogs,806334,Alex Amalfi,1,True
@@ -38,7 +38,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825607,2025-10-07,home,Mesa Solar Sox,815292,Luis Martinez-Gomez,6,False
 825607,2025-10-07,home,Mesa Solar Sox,686672,Mark Adamiak,7,False
 825607,2025-10-07,home,Mesa Solar Sox,681415,Jack Sellinger,8,False
-825606,2025-10-08,away,Peoria Javelinas,801725,Luis De Le髇,1,True
+825606,2025-10-08,away,Peoria Javelinas,801725,Luis De Le贸n,1,True
 825606,2025-10-08,away,Peoria Javelinas,700675,Jimmy Kingsbury,2,False
 825606,2025-10-08,away,Peoria Javelinas,805955,Carson Dorsey,3,False
 825606,2025-10-08,away,Peoria Javelinas,804663,Tyler Cleveland,4,False
@@ -215,7 +215,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825622,2025-10-15,away,Salt River Rafters,694518,Austin Smith,5,False
 825622,2025-10-15,away,Salt River Rafters,808054,Yordin Chalas,6,False
 825622,2025-10-15,away,Salt River Rafters,692243,Jaden Woods,7,False
-825622,2025-10-15,home,Scottsdale Scorpions,800344,Sean Paul Li馻n,1,True
+825622,2025-10-15,home,Scottsdale Scorpions,800344,Sean Paul Li帽an,1,True
 825622,2025-10-15,home,Scottsdale Scorpions,692454,Pablo Aldonis,2,False
 825622,2025-10-15,home,Scottsdale Scorpions,809340,Austin Troesser,3,False
 825622,2025-10-15,home,Scottsdale Scorpions,813865,Hudson Leach,4,False
@@ -228,13 +228,13 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825589,2025-10-15,away,Mesa Solar Sox,806281,Blaze Pontes,4,False
 825589,2025-10-15,away,Mesa Solar Sox,695366,Holt Jones,5,False
 825589,2025-10-15,home,Surprise Saguaros,682982,Daniel Espino,1,True
-825589,2025-10-15,home,Surprise Saguaros,695871,Jes鷖 Broca,2,False
+825589,2025-10-15,home,Surprise Saguaros,695871,Jes煤s Broca,2,False
 825589,2025-10-15,home,Surprise Saguaros,822067,A.J. Causey,3,False
 825589,2025-10-15,home,Surprise Saguaros,685396,Nate Peterson,4,False
 825589,2025-10-15,home,Surprise Saguaros,806585,Jack Dallas,5,False
 825589,2025-10-15,home,Surprise Saguaros,806641,Kolton Curtis,6,False
 825589,2025-10-15,home,Surprise Saguaros,693713,Emiliano Teodo,7,False
-825603,2025-10-16,away,Peoria Javelinas,801725,Luis De Le髇,1,True
+825603,2025-10-16,away,Peoria Javelinas,801725,Luis De Le贸n,1,True
 825603,2025-10-16,away,Peoria Javelinas,828471,Jakob Hall,2,False
 825603,2025-10-16,away,Peoria Javelinas,805955,Carson Dorsey,3,False
 825603,2025-10-16,away,Peoria Javelinas,807748,Kannon Kemp,4,False
@@ -426,7 +426,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825586,2025-10-22,home,Surprise Saguaros,682982,Daniel Espino,1,True
 825586,2025-10-22,home,Surprise Saguaros,685396,Nate Peterson,2,False
 825586,2025-10-22,home,Surprise Saguaros,689557,Zane Morehouse,3,False
-825586,2025-10-22,home,Surprise Saguaros,695871,Jes鷖 Broca,4,False
+825586,2025-10-22,home,Surprise Saguaros,695871,Jes煤s Broca,4,False
 825586,2025-10-22,home,Surprise Saguaros,822067,A.J. Causey,5,False
 825631,2025-10-22,away,Mesa Solar Sox,701480,Bryce Cunningham,1,True
 825631,2025-10-22,away,Mesa Solar Sox,802374,Brady Kirtner,2,False
@@ -445,7 +445,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825643,2025-10-22,away,Glendale Desert Dogs,702910,Jhancarlos Lara,4,False
 825643,2025-10-22,away,Glendale Desert Dogs,807724,Justin Chambers,5,False
 825643,2025-10-22,away,Glendale Desert Dogs,681884,D.J. Carpenter,6,False
-825643,2025-10-22,home,Peoria Javelinas,801725,Luis De Le髇,1,True
+825643,2025-10-22,home,Peoria Javelinas,801725,Luis De Le贸n,1,True
 825643,2025-10-22,home,Peoria Javelinas,801415,Zander Sechrist,2,False
 825643,2025-10-22,home,Peoria Javelinas,674265,Kevin Abel,3,False
 825643,2025-10-22,home,Peoria Javelinas,805955,Carson Dorsey,4,False
@@ -592,7 +592,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825599,2025-10-28,home,Mesa Solar Sox,802963,Mathew Peters,3,False
 825599,2025-10-28,home,Mesa Solar Sox,701604,Andrew Lindsey,4,False
 825599,2025-10-28,home,Mesa Solar Sox,686672,Mark Adamiak,5,False
-825628,2025-10-29,away,Peoria Javelinas,801725,Luis De Le髇,1,True
+825628,2025-10-29,away,Peoria Javelinas,801725,Luis De Le贸n,1,True
 825628,2025-10-29,away,Peoria Javelinas,805955,Carson Dorsey,2,False
 825628,2025-10-29,home,Salt River Rafters,815456,Ben Shields,1,True
 825628,2025-10-29,home,Salt River Rafters,694900,Kyle Amendt,2,False
@@ -603,7 +603,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825583,2025-10-29,away,Scottsdale Scorpions,701557,Carlos Lequerica,2,False
 825583,2025-10-29,away,Scottsdale Scorpions,801221,Pedro Garcia,3,False
 825583,2025-10-29,home,Surprise Saguaros,682982,Daniel Espino,1,True
-825583,2025-10-29,home,Surprise Saguaros,695871,Jes鷖 Broca,2,False
+825583,2025-10-29,home,Surprise Saguaros,695871,Jes煤s Broca,2,False
 825583,2025-10-29,home,Surprise Saguaros,685396,Nate Peterson,3,False
 825583,2025-10-29,home,Surprise Saguaros,692137,L.P. Langevin,4,False
 825583,2025-10-29,home,Surprise Saguaros,695294,Tommy McCollum,5,False
@@ -767,7 +767,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825596,2025-11-04,home,Mesa Solar Sox,801270,Darwin Rodriguez,5,False
 825596,2025-11-04,home,Mesa Solar Sox,681415,Jack Sellinger,6,False
 825596,2025-11-04,home,Mesa Solar Sox,687020,Mason Auer,7,False
-825657,2025-11-04,away,Peoria Javelinas,801725,Luis De Le髇,1,True
+825657,2025-11-04,away,Peoria Javelinas,801725,Luis De Le贸n,1,True
 825657,2025-11-04,away,Peoria Javelinas,828471,Jakob Hall,2,False
 825657,2025-11-04,away,Peoria Javelinas,804663,Tyler Cleveland,3,False
 825657,2025-11-04,away,Peoria Javelinas,814491,Tucker Musgrove,4,False
@@ -785,7 +785,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825577,2025-11-05,away,Scottsdale Scorpions,802363,Jordan Geber,3,False
 825577,2025-11-05,away,Scottsdale Scorpions,689223,Derek True,4,False
 825577,2025-11-05,away,Scottsdale Scorpions,688692,Jared Simpson,5,False
-825577,2025-11-05,home,Surprise Saguaros,695871,Jes鷖 Broca,1,True
+825577,2025-11-05,home,Surprise Saguaros,695871,Jes煤s Broca,1,True
 825577,2025-11-05,home,Surprise Saguaros,685396,Nate Peterson,2,False
 825577,2025-11-05,home,Surprise Saguaros,692137,L.P. Langevin,3,False
 825577,2025-11-05,home,Surprise Saguaros,683720,Edwin Jimenez,4,False
@@ -878,7 +878,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825576,2025-11-07,home,Surprise Saguaros,801367,Matt Jachec,6,False
 825588,2025-11-09,away,National League Fall Stars,703596,Karson Milbrandt,1,True
 825588,2025-11-09,away,National League Fall Stars,806585,Jack Dallas,2,False
-825588,2025-11-09,away,National League Fall Stars,695871,Jes鷖 Broca,3,False
+825588,2025-11-09,away,National League Fall Stars,695871,Jes煤s Broca,3,False
 825588,2025-11-09,away,National League Fall Stars,814106,Cade Denton,4,False
 825588,2025-11-09,away,National League Fall Stars,801317,Alex Makarewich,5,False
 825588,2025-11-09,away,National League Fall Stars,691103,Koen Moreno,6,False
@@ -886,7 +886,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825588,2025-11-09,away,National League Fall Stars,691000,Carson Montgomery,8,False
 825588,2025-11-09,away,National League Fall Stars,814491,Tucker Musgrove,9,False
 825588,2025-11-09,away,National League Fall Stars,692404,Darlin Saladin,10,False
-825588,2025-11-09,home,American League Fall Stars,801725,Luis De Le髇,1,True
+825588,2025-11-09,home,American League Fall Stars,801725,Luis De Le贸n,1,True
 825588,2025-11-09,home,American League Fall Stars,696146,Hagen Smith,2,False
 825588,2025-11-09,home,American League Fall Stars,820901,Anderson Brito,3,False
 825588,2025-11-09,home,American League Fall Stars,694696,Cade Smith,4,False
@@ -1002,7 +1002,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825572,2025-11-14,away,Peoria Javelinas,805321,Trevor Kuncl,5,False
 825572,2025-11-14,away,Peoria Javelinas,827317,Brandon Downer,6,False
 825572,2025-11-14,home,Surprise Saguaros,814803,Logan Martin,1,True
-825572,2025-11-14,home,Surprise Saguaros,695871,Jes鷖 Broca,2,False
+825572,2025-11-14,home,Surprise Saguaros,695871,Jes煤s Broca,2,False
 825572,2025-11-14,home,Surprise Saguaros,679702,Daniel Harper,3,False
 825572,2025-11-14,home,Surprise Saguaros,800260,Anthony Flores,4,False
 825572,2025-11-14,home,Surprise Saguaros,692838,Jaydenn Estanista,5,False

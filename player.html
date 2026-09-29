@@ -109,6 +109,8 @@
   .gl-head { background: #f2f1ee; font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.66rem; }
   .gl-row:not(.gl-head) { border-top: 1px solid var(--border); color: var(--text); }
   .gl-row.gl-total { border-top: 2px solid var(--tab-active); background: #fff2e6; font-weight: 700; }
+  .gl-row.post { background: #eaf1fa; }
+  .gl-row.gl-total.post-final { border-top: 2px solid #2f6fb0; background: #eaf1fa; font-weight: 700; }
 
   .transaction-log-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 2rem 0 0.6rem; }
   .transaction-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
@@ -568,15 +570,82 @@
     strikeouts: 'strikeOuts', stolen_bases: 'stolenBases', avg: 'avg', obp: 'obp', slg: 'slg', ops: 'ops',
   };
 
+  // Raw MLB gameType codes. "R" = regular season; the AFL's postseason round
+  // is one of these three (First Round / Semifinal / Championship). "A" (the
+  // Fall Stars exhibition game) is excluded from both buckets entirely.
+  const POSTSEASON_GAME_TYPES = new Set(['D', 'L', 'W']);
+  function isPostseasonRow(r) { return POSTSEASON_GAME_TYPES.has(r.game_type); }
+
+  function ipToOuts(ip) {
+    if (!ip) return 0;
+    const [whole, frac] = String(ip).split('.');
+    return (whole ? parseInt(whole, 10) * 3 : 0) + (frac ? parseInt(frac, 10) : 0);
+  }
+  function outsToIp(outs) {
+    return `${Math.floor(outs / 3)}.${outs % 3}`;
+  }
+
+  // Season totals for a set of pitching_gamelogs.csv rows -- mirrors
+  // sumHittingGames's approach. IP/H/R/ER/BB/K/pitches are always single-game
+  // counting stats (safe to sum regardless of season vs. postseason); wins/
+  // losses/saves on each row are MLB's own cumulative-within-that-gameType
+  // count, which for the AFL's single-elimination postseason (at most one
+  // game per round) equals whether THAT game itself was the decision, so
+  // summing them across postseason rows gives the right postseason total.
+  function sumPitchingGames(games) {
+    const totals = { games: games.length, wins: 0, losses: 0, saves: 0, hits: 0, runs: 0, earnedRuns: 0, baseOnBalls: 0, strikeOuts: 0, numberOfPitches: 0, outs: 0 };
+    games.forEach(g => {
+      totals.wins += Number(g.wins) || 0;
+      totals.losses += Number(g.losses) || 0;
+      totals.saves += Number(g.saves) || 0;
+      totals.hits += Number(g.hits) || 0;
+      totals.runs += Number(g.runs) || 0;
+      totals.earnedRuns += Number(g.earnedRuns) || 0;
+      totals.baseOnBalls += Number(g.baseOnBalls) || 0;
+      totals.strikeOuts += Number(g.strikeOuts) || 0;
+      totals.numberOfPitches += Number(g.numberOfPitches) || 0;
+      totals.outs += ipToOuts(g.inningsPitched);
+    });
+    totals.inningsPitched = outsToIp(totals.outs);
+    totals.era = totals.outs > 0 ? (totals.earnedRuns * 27 / totals.outs) : null;
+    totals.whip = totals.outs > 0 ? ((totals.hits + totals.baseOnBalls) * 3 / totals.outs) : null;
+    return totals;
+  }
+
+  // For the postseason segment of the per-game log, MLB's own avg/obp/slg/ops
+  // (hitting) and era/whip/wins/losses (pitching) fields reset independently
+  // at the start of each round (First Round vs. Semifinal vs. Championship),
+  // so they can't be read off the row directly the way regular-season rows
+  // can. Recompute our own running cumulative through each successive
+  // postseason game instead, chaining across rounds.
+  function withRunningHittingCumulative(sortedRows) {
+    return sortedRows.map((row, i) => {
+      const t = sumHittingGames(sortedRows.slice(0, i + 1));
+      return { ...row, avg: fmtRate(t.avg), obp: fmtRate(t.obp), slg: fmtRate(t.slg), ops: fmtRate(t.ops) };
+    });
+  }
+  function withRunningPitchingCumulative(sortedRows) {
+    return sortedRows.map((row, i) => {
+      const t = sumPitchingGames(sortedRows.slice(0, i + 1));
+      return { ...row, wins: t.wins, losses: t.losses, saves: t.saves, era: fmtRatio(t.era), whip: fmtRatio(t.whip) };
+    });
+  }
+
   // Compact per-game log shown when the AFL row in Career Path is expanded.
-  // Uses whichever per-game rows are already in memory -- hitting_gamelogs.csv
-  // rows (snake_case fields) for hitters, pitching_gamelogs.csv rows
-  // (MLB's own camelCase fields, including its cumulative-through-that-game
-  // era/whip/wins/losses) for pitchers. No extra fetch needed. `totalsRow`
-  // is the same season-total AFL row shown in the Career Path table above --
-  // its full-season numbers get appended as a final row here.
-  function buildAflGameLogHtml(rows, statType, totalsRow) {
-    const sorted = rows.slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+  // Regular-season rows and their "2025 Total" render exactly as before
+  // (MLB's own cumulative fields are correct across the whole regular
+  // season); any postseason rows continue directly below in the same list,
+  // colored differently, using OUR OWN chained cumulative (see above),
+  // ending in a separate "2025 Postseason Total" row.
+  function buildAflGameLogHtml(regRows, postRows, statType, regTotalsRow) {
+    const sortedReg = regRows.slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+    const sortedPost = postRows.slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+    const displayPost = statType === 'pitching'
+      ? withRunningPitchingCumulative(sortedPost)
+      : withRunningHittingCumulative(sortedPost);
+    const postTotals = sortedPost.length
+      ? (statType === 'pitching' ? sumPitchingGames(sortedPost) : sumHittingGames(sortedPost))
+      : null;
 
     const cols = statType === 'pitching'
       ? ['date', 'opponent', 'wins', 'losses', 'saves', 'inningsPitched', 'hits', 'runs', 'earnedRuns', 'baseOnBalls', 'strikeOuts', 'numberOfPitches', 'era', 'whip']
@@ -587,28 +656,45 @@
 
     const gridCols = `90px 1.1fr ${cols.slice(2).map(() => '0.65fr').join(' ')}`;
     const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map(l => `<div>${l}</div>`).join('')}</div>`;
-    const rowsHtml = sorted.map(r => {
+
+    const rowHtml = (r, extraClass) => {
       const cells = cols.map(c => {
         if (c === 'opponent') return `<div>${cityFromOpponent(r[c])}</div>`;
         const v = r[c];
         return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
       }).join('');
-      return `<div class="gl-row" style="grid-template-columns:${gridCols};">${cells}</div>`;
-    }).join('');
+      return `<div class="gl-row${extraClass ? ' ' + extraClass : ''}" style="grid-template-columns:${gridCols};">${cells}</div>`;
+    };
 
-    let totalsHtml = '';
-    if (totalsRow) {
+    const regRowsHtml = sortedReg.map(r => rowHtml(r, '')).join('');
+
+    let regTotalsHtml = '';
+    if (regTotalsRow) {
       const cells = cols.map(c => {
-        if (c === 'date') return `<div>${totalsRow.season || ''} Total</div>`;
+        if (c === 'date') return `<div>${regTotalsRow.season || ''} Total</div>`;
         if (c === 'opponent') return `<div></div>`;
         const key = statType === 'pitching' ? c : (HITTING_COL_TO_TOTALS_KEY[c] || c);
-        const v = totalsRow[key];
+        const v = regTotalsRow[key];
         return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
       }).join('');
-      totalsHtml = `<div class="gl-row gl-total" style="grid-template-columns:${gridCols};">${cells}</div>`;
+      regTotalsHtml = `<div class="gl-row gl-total" style="grid-template-columns:${gridCols};">${cells}</div>`;
     }
 
-    return `<div class="gl-table">${headerHtml}${rowsHtml}${totalsHtml}</div>`;
+    const postRowsHtml = displayPost.map(r => rowHtml(r, 'post')).join('');
+
+    let postTotalsHtml = '';
+    if (postTotals) {
+      const cells = cols.map(c => {
+        if (c === 'date') return `<div>${(regTotalsRow && regTotalsRow.season) || ''} Postseason Total</div>`;
+        if (c === 'opponent') return `<div></div>`;
+        const key = statType === 'pitching' ? c : (HITTING_COL_TO_TOTALS_KEY[c] || c);
+        const v = statType === 'pitching' ? postTotals[key] : (key === 'avg' || key === 'obp' || key === 'slg' || key === 'ops' ? fmtRate(postTotals[key]) : postTotals[key]);
+        return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
+      }).join('');
+      postTotalsHtml = `<div class="gl-row gl-total post-final" style="grid-template-columns:${gridCols};">${cells}</div>`;
+    }
+
+    return `<div class="gl-table">${headerHtml}${regRowsHtml}${regTotalsHtml}${postRowsHtml}${postTotalsHtml}</div>`;
   }
 
   function toggleAflGameLog() {
@@ -690,7 +776,9 @@
       const clickAttr = showToggle ? ` onclick="toggleAflGameLog()" style="cursor:pointer; grid-template-columns:${gridTemplate}; min-width:${minWidth};"` : ` ${rowStyleAttr}`;
       html += `<div class="${rowClass}"${clickAttr}>${cells}</div>`;
       if (showToggle) {
-        html += `<div class="career-gamelog-wrap" id="afl-gamelog-container" style="display:none;">${buildAflGameLogHtml(aflGameLogRows, statType, aflTotalsRow)}</div>`;
+        const regGames = aflGameLogRows.filter(g => !isPostseasonRow(g));
+        const postGames = aflGameLogRows.filter(g => isPostseasonRow(g));
+        html += `<div class="career-gamelog-wrap" id="afl-gamelog-container" style="display:none;">${buildAflGameLogHtml(regGames, postGames, statType, aflTotalsRow)}</div>`;
       }
     });
     html += `</div>`;
@@ -760,9 +848,12 @@
       } else {
         const playerHitting = hitting.filter(g => g.player_id === playerId);
         aflGameLogRows = playerHitting;
-        const hasHitting = playerHitting.length > 0;
+        // Season card + Career Path AFL row stay regular-season-only, now that
+        // hitting_gamelogs.csv also includes postseason rows (see gameType fix).
+        const regSeasonHitting = playerHitting.filter(g => !isPostseasonRow(g));
+        const hasHitting = regSeasonHitting.length > 0;
         if (hasHitting) {
-          const totals = sumHittingGames(playerHitting);
+          const totals = sumHittingGames(regSeasonHitting);
           html += renderAflSeasonCard(player.team, totals);
           // Every field we sum from hitting_gamelogs.csv, carried through
           // with the same field names MLB's own API uses, so it lines up

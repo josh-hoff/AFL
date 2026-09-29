@@ -10,7 +10,7 @@ PITCHER_POSITION_CODE = "1"
 
 HITTING_GAMELOG_FIELDS = [
     "season", "player_id", "player_name", "team", "date", "opponent",
-    "is_home", "is_win", "game_pk",
+    "is_home", "is_win", "game_pk", "game_type",
     "at_bats", "plate_appearances", "hits", "doubles", "triples", "home_runs",
     "total_bases", "runs", "rbi", "walks", "intentional_walks", "strikeouts",
     "hit_by_pitch", "stolen_bases", "caught_stealing", "avg", "obp", "slg",
@@ -31,7 +31,15 @@ def load_roster(season, output_dir):
 def fetch_hitting_gamelog(person_id, season):
     import requests
 
-    params = {"stats": "gameLog", "group": "hitting", "season": season, "sportId": AFL_SPORT_ID}
+    # gameType defaults to regular season ("R") only if left off -- the AFL's
+    # crossover/championship round uses postseason codes (D = First Round,
+    # L = Semifinal, W = Championship), which would otherwise silently be
+    # missing from every player's game log. "A" (Fall Stars Game, the
+    # exhibition all-star game) is deliberately left out.
+    params = {
+        "stats": "gameLog", "group": "hitting", "season": season, "sportId": AFL_SPORT_ID,
+        "gameType": "R,D,L,W",
+    }
     resp = requests.get(STATS_URL.format(person_id=person_id), params=params, timeout=30)
     resp.raise_for_status()
     return resp.json()
@@ -58,6 +66,9 @@ def extract_hitting_rows(data, player_id, player_name, team):
             "is_home": split.get("isHome", ""),
             "is_win": split.get("isWin", ""),
             "game_pk": game.get("gamePk", ""),
+            # Raw MLB code -- "R" = regular season, "D"/"L"/"W" = the AFL's
+            # postseason rounds (First Round / Semifinal / Championship).
+            "game_type": split.get("gameType", ""),
             "at_bats": stat.get("atBats", ""),
             "plate_appearances": stat.get("plateAppearances", ""),
             "hits": stat.get("hits", ""),
