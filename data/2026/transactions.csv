@@ -1,6 +1,4 @@
 season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,description
-2026,Glendale Desert Dogs,2026-09-15,827610,Brandon Cain,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brandon Cain.
-2026,Glendale Desert Dogs,2026-09-15,701333,Colby Shelton,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 2B Colby Shelton.
 2026,Glendale Desert Dogs,2026-09-15,815352,Caleb Bonemer,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 3B Caleb Bonemer.
 2026,Glendale Desert Dogs,2026-09-15,827665,Dillon Lewis,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated OF Dillon Lewis.
 2026,Glendale Desert Dogs,2026-09-15,703637,Max Williams,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated DH Max Williams.
@@ -41,6 +39,8 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Glendale Desert Dogs,2026-09-15,805892,Nick Altermatt,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Nick Altermatt.
 2026,Glendale Desert Dogs,2026-09-15,824624,Brooks Auger,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brooks Auger.
 2026,Glendale Desert Dogs,2026-09-15,703748,Tanner Bauman,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Tanner Bauman.
+2026,Glendale Desert Dogs,2026-09-15,827610,Brandon Cain,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brandon Cain.
+2026,Glendale Desert Dogs,2026-09-15,701333,Colby Shelton,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 2B Colby Shelton.
 2026,Mesa Solar Sox,2026-09-15,807625,Gilberto Batista,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Gilberto Batista.
 2026,Mesa Solar Sox,2026-09-15,701839,Jay Dill,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jay Dill.
 2026,Mesa Solar Sox,2026-09-15,814005,Jake Bloss,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jake Bloss from the 60-day injured list.
