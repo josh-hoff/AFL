@@ -456,11 +456,13 @@
             ${team || ''}
           </div>
         </div>
-        <div class="afl-stats-grid" style="grid-template-columns: repeat(5, 1fr);">
+        <div class="afl-stats-grid" style="grid-template-columns: repeat(7, 1fr);">
           <div><div class="afl-stat-label">GP</div><div class="afl-stat-value">${stats.gamesPitched !== '' && stats.gamesPitched !== undefined ? stats.gamesPitched : '\u2014'}</div></div>
           <div><div class="afl-stat-label">W</div><div class="afl-stat-value">${stats.wins !== '' ? stats.wins : '\u2014'}</div></div>
           <div><div class="afl-stat-label">L</div><div class="afl-stat-value">${stats.losses !== '' ? stats.losses : '\u2014'}</div></div>
           <div><div class="afl-stat-label">ERA</div><div class="afl-stat-value">${stats.era || '\u2014'}</div></div>
+          <div><div class="afl-stat-label">IP</div><div class="afl-stat-value">${stats.inningsPitched !== '' && stats.inningsPitched !== undefined ? formatIP(stats.inningsPitched) : '\u2014'}</div></div>
+          <div><div class="afl-stat-label">WHIP</div><div class="afl-stat-value">${stats.whip || '\u2014'}</div></div>
           <div><div class="afl-stat-label">SV</div><div class="afl-stat-value">${stats.saves !== '' ? stats.saves : '\u2014'}</div></div>
         </div>
       </div>
