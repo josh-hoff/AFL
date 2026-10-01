@@ -98,9 +98,10 @@
   .career-row { display: grid; padding: 0.55rem 1rem; gap: 0.5rem; align-items: center; white-space: nowrap; }
   .career-row.head { background: #f2f1ee; color: var(--text-muted); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; }
   .career-row.body { border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text); align-items: center; }
-  .career-row.afl { border-top: 1px solid var(--tab-active); font-weight: 700; background: #fff8f2; }
+  .career-row.afl { border-top: 2px solid var(--tab-active); border-left: 5px solid var(--tab-active); font-weight: 700; background: #ffe3c4; }
   .career-row.mlb { border-top: 1px solid #2f6fb0; font-weight: 700; background: #eaf1fa; }
   .career-row.post-season { background: #eaf1fa; }
+  .gl-row.fld-game { background: #fff; }
   .career-row > div { overflow: hidden; text-overflow: ellipsis; }
 
   .tab-row { display: flex; gap: 0.5rem; margin: 0 0 0.75rem; }
@@ -137,7 +138,7 @@
   }
   .glossary-columns {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1.5rem;
     margin-top: 0.6rem;
   }
@@ -167,6 +168,9 @@
   }
   @media (max-width: 560px) {
     .glossary-columns { grid-template-columns: 1fr; gap: 1rem; }
+  }
+  @media (min-width: 561px) and (max-width: 760px) {
+    .glossary-columns { grid-template-columns: 1fr 1fr; }
   }
 
   .transaction-log-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 2rem 0 0.6rem; }
@@ -571,6 +575,9 @@
           groups.set(key, { season: s.season, level: (s.sport && s.sport.abbreviation) || '', team, positions: [] });
         }
         const posAbbr = (s.position && s.position.abbreviation) || '';
+        // DH is a batting-only designation -- MLB's fielding API shouldn't
+        // ever return a DH split, but skip it defensively if it ever does.
+        if (posAbbr === 'DH') return;
         // flattenStatBlock(s.stat) also carries a "position" key of its own
         // (stat.position is an {code,name,type,abbreviation} object, which
         // flattenStatBlock stringifies since it's an object) -- spreading it
@@ -579,16 +586,18 @@
         // setting position explicitly, makes the clean abbreviation win.
         groups.get(key).positions.push({ ...flattenStatBlock(s.stat), position: posAbbr });
       });
-      return Array.from(groups.values()).map(g => ({
-        season: g.season, level: g.level, team: g.team,
-        // Each position split carries its own "age" field (same value every
-        // position shares that season) -- the combined totals object from
-        // sumFieldingStints doesn't compute one, so pull it from the first
-        // position split, otherwise every MiLB/MLB row's Age column is blank.
-        age: (g.positions[0] && g.positions[0].age !== undefined) ? g.positions[0].age : '',
-        ...sumFieldingStints(g.positions),
-        positions: g.positions,
-      }));
+      return Array.from(groups.values())
+        .filter(g => g.positions.length > 0)
+        .map(g => ({
+          season: g.season, level: g.level, team: g.team,
+          // Each position split carries its own "age" field (same value every
+          // position shares that season) -- the combined totals object from
+          // sumFieldingStints doesn't compute one, so pull it from the first
+          // position split, otherwise every MiLB/MLB row's Age column is blank.
+          age: (g.positions[0] && g.positions[0].age !== undefined) ? g.positions[0].age : '',
+          ...sumFieldingStints(g.positions),
+          positions: g.positions,
+        }));
     } catch (e) {
       return [];
     }
@@ -725,6 +734,11 @@
   // feature works), so this just covers the common counting + rate stats;
   // anything else MLB returns still gets captured and appended after.
   const FIELDING_STAT_ORDER = ['age', 'games', 'innings', 'putOuts', 'assists', 'errors', 'fielding', 'doublePlays', 'rangeFactorPer9Inn'];
+  // Full key order for the glossary -- FIELDING_STAT_ORDER plus the stats
+  // that currently just get appended after it (same alphabetical order
+  // orderKeys() produces), so the glossary covers everything the table can
+  // show, not just the first 9 curated columns.
+  const FIELDING_GLOSSARY_ORDER = [...FIELDING_STAT_ORDER, 'chances', 'rangeFactorPerGame', 'throwingErrors', 'triplePlays'];
   const FIELDING_HIDDEN_KEYS = new Set();
   const FIELDING_LABELS = {
     age: 'Age', games: 'G', innings: 'Inn', putOuts: 'PO', assists: 'A', errors: 'E',
@@ -811,17 +825,26 @@
   }
 
   // Builds the Fielding tab's Career Path table: one row per season/level/
-  // team (combined across every position played that stint), expandable to
-  // a per-position breakdown only when the player logged time at 2+
-  // positions. The breakdown reuses the exact same grid column template as
-  // the season rows above it, so every stat column stays aligned whether a
-  // row is expanded or not; "Position" is centered across the merged
-  // Season+Lvl+Team span, and Age gets its own column, repeating the
-  // stint's age on every expanded row for consistency.
+  // team (combined across every position played that stint) -- ALWAYS
+  // expandable to a per-position breakdown, even a single-position season,
+  // so it's always clear which position(s) the season's totals came from.
+  // The breakdown reuses the exact same grid column template as the season
+  // rows above it, so every stat column stays aligned whether a row is
+  // expanded or not; "Position" is centered across the merged Season+Lvl+
+  // Team span, and Age gets its own column, repeating the stint's age on
+  // every expanded row for consistency.
+  //
+  // AFL position rows get a further 3rd level: each position entry carries
+  // its raw per-game rows (rawGames), so clicking the position itself
+  // expands into the individual games that made up that total. MiLB/MLB
+  // position rows never get this -- the season-level API has no per-game
+  // fielding data to expand into, so they stop at two levels.
   function buildFieldingTableHtml(rows, allCols, gridTemplate, minWidth) {
     const headerCells = allCols.map(k => `<div>${colLabelFielding(k)}</div>`).join('');
     let html = `<div class="career-table">
       <div class="career-row head" style="grid-template-columns:${gridTemplate}; min-width:${minWidth};">${headerCells}</div>`;
+
+    const styleAttr = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
 
     rows.forEach((r, i) => {
       const isAfl = r.level === 'AFL';
@@ -830,7 +853,7 @@
       else if (r.level === 'MLB') rowClasses.push('mlb');
       if (r.isPostseason) rowClasses.push('post-season');
       const positions = r.positions || [];
-      const showToggle = positions.length >= 2;
+      const showToggle = positions.length > 0;
       const rowId = `fld-row-${i}`;
 
       const cells = allCols.map(k => {
@@ -842,7 +865,6 @@
         return `<div>${fmtFieldingCell(k, r[k])}</div>`;
       }).join('');
 
-      const styleAttr = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
       const clickAttr = showToggle ? ` onclick="toggleFieldingRow('${rowId}')" ${styleAttr.replace('style="', 'style="cursor:pointer; ')}` : ` ${styleAttr}`;
       html += `<div class="${rowClasses.join(' ')}"${clickAttr}>${cells}</div>`;
 
@@ -850,10 +872,32 @@
         const posHeadCells = [`<div class="gl-pos-label">Position</div>`, `<div>${colLabelFielding('age')}</div>`]
           .concat(allCols.slice(4).map(k => `<div>${colLabelFielding(k)}</div>`));
         let posHtml = `<div class="gl-table"><div class="gl-row gl-head" ${styleAttr}>${posHeadCells.join('')}</div>`;
-        positions.forEach(p => {
-          const posCells = [`<div class="gl-pos-label">${p.position || ''}</div>`, `<div>${r.age !== undefined && r.age !== null ? r.age : ''}</div>`]
+        positions.forEach((p, pIdx) => {
+          const posRowId = `${rowId}-pos-${pIdx}`;
+          const hasGames = isAfl && Array.isArray(p.rawGames) && p.rawGames.length > 0;
+          const posLabel = hasGames
+            ? `<span class="afl-gamelog-toggle" onclick="toggleFieldingRow('${posRowId}')">${p.position || ''}</span>`
+            : (p.position || '');
+          const posCells = [`<div class="gl-pos-label">${posLabel}</div>`, `<div>${r.age !== undefined && r.age !== null ? r.age : ''}</div>`]
             .concat(allCols.slice(4).map(k => `<div>${fmtFieldingCell(k, p[k])}</div>`));
-          posHtml += `<div class="gl-row" ${styleAttr}>${posCells.join('')}</div>`;
+          const posClickAttr = hasGames ? ` onclick="toggleFieldingRow('${posRowId}')" ${styleAttr.replace('style="', 'style="cursor:pointer; ')}` : ` ${styleAttr}`;
+          posHtml += `<div class="gl-row"${posClickAttr}>${posCells.join('')}</div>`;
+
+          if (hasGames) {
+            const gameHeadCells = [`<div class="gl-pos-label">Date / Opp</div>`, `<div>${colLabelFielding('age')}</div>`]
+              .concat(allCols.slice(4).map(k => `<div>${colLabelFielding(k)}</div>`));
+            let gameHtml = `<div class="gl-table"><div class="gl-row gl-head" ${styleAttr}>${gameHeadCells.join('')}</div>`;
+            const sortedGames = p.rawGames.slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+            sortedGames.forEach(g => {
+              const gTotals = sumFieldingGames([g]);
+              const label = `${formatShortDate(g.date)}${g.opponent ? ' @ ' + cityFromOpponent(g.opponent) : ''}`;
+              const gameCells = [`<div class="gl-pos-label">${label}</div>`, `<div>${r.age !== undefined && r.age !== null ? r.age : ''}</div>`]
+                .concat(allCols.slice(4).map(k => `<div>${fmtFieldingCell(k, gTotals[k])}</div>`));
+              gameHtml += `<div class="gl-row fld-game" ${styleAttr}>${gameCells.join('')}</div>`;
+            });
+            gameHtml += `</div>`;
+            posHtml += `<div class="career-gamelog-wrap" id="${posRowId}" style="display:none;">${gameHtml}</div>`;
+          }
         });
         posHtml += `</div>`;
         html += `<div class="career-gamelog-wrap" id="${rowId}" style="display:none;">${posHtml}</div>`;
@@ -874,12 +918,16 @@
     rows = rows.filter(r => r.team && r.team.trim() !== '');
 
     if (ctx.regFieldingByPos.size) {
-      const positions = Array.from(ctx.regFieldingByPos.entries()).map(([pos, games]) => ({ position: pos, ...sumFieldingGames(games) }));
+      // rawGames is kept on each position entry (AFL only) so the position
+      // row can expand a 3rd level into the individual games it came from --
+      // MiLB/MLB position splits never get this since the season-level API
+      // doesn't give us game-by-game fielding data to expand into.
+      const positions = Array.from(ctx.regFieldingByPos.entries()).map(([pos, games]) => ({ position: pos, rawGames: games, ...sumFieldingGames(games) }));
       const allGames = Array.from(ctx.regFieldingByPos.values()).flat();
       rows.push({ season: String(currentSeason), level: 'AFL', team: ctx.team, age: ctx.playerAge, ...sumFieldingGames(allGames), positions });
     }
     if (ctx.postFieldingByPos.size) {
-      const positions = Array.from(ctx.postFieldingByPos.entries()).map(([pos, games]) => ({ position: pos, ...sumFieldingGames(games) }));
+      const positions = Array.from(ctx.postFieldingByPos.entries()).map(([pos, games]) => ({ position: pos, rawGames: games, ...sumFieldingGames(games) }));
       const allGames = Array.from(ctx.postFieldingByPos.values()).flat();
       rows.push({
         season: String(currentSeason), seasonLabel: `${currentSeason} Postseason`, level: 'AFL', team: ctx.team,
@@ -918,6 +966,16 @@
     container.innerHTML = buildFieldingTableHtml(rows, allCols, gridTemplate, minWidth);
   }
 
+  const FIELDING_GLOSSARY = {
+    age: 'Age', games: 'Games played at this position', innings: 'Innings played',
+    putOuts: 'Putouts', assists: 'Assists', errors: 'Errors',
+    fielding: 'Fielding percentage ((putouts + assists) ÷ total chances)',
+    doublePlays: 'Double plays taken part in', triplePlays: 'Triple plays taken part in',
+    chances: 'Total chances (putouts + assists + errors)', throwingErrors: 'Throwing errors',
+    rangeFactorPerGame: 'Range factor per game ((putouts + assists) ÷ games)',
+    rangeFactorPer9Inn: 'Range factor per 9 innings ((putouts + assists) × 9 ÷ innings)',
+  };
+
   function glossaryEntriesHtml(order, labels, glossary, hidden) {
     return order
       .filter(k => !hidden.has(k))
@@ -928,6 +986,7 @@
   function renderStatGlossary() {
     const hittingHtml = glossaryEntriesHtml(HITTING_STAT_ORDER, HITTING_LABELS, HITTING_GLOSSARY, HITTING_HIDDEN_KEYS);
     const pitchingHtml = glossaryEntriesHtml(PITCHING_STAT_ORDER, PITCHING_LABELS, PITCHING_GLOSSARY, PITCHING_HIDDEN_KEYS);
+    const fieldingHtml = glossaryEntriesHtml(FIELDING_GLOSSARY_ORDER, FIELDING_LABELS, FIELDING_GLOSSARY, FIELDING_HIDDEN_KEYS);
     return `
       <details class="stat-glossary">
         <summary>Stat Glossary</summary>
@@ -939,6 +998,10 @@
           <div class="glossary-col">
             <div class="glossary-col-title">Pitching</div>
             ${pitchingHtml}
+          </div>
+          <div class="glossary-col">
+            <div class="glossary-col-title">Fielding</div>
+            ${fieldingHtml}
           </div>
         </div>
       </details>
@@ -1327,7 +1390,9 @@
         }
       }
 
-      const playerFielding = fieldingGameLogs.filter(g => g.player_id === playerId);
+      // DH is batting-only -- there shouldn't be fielding rows for it, but
+      // filter defensively in case one ever slips through.
+      const playerFielding = fieldingGameLogs.filter(g => g.player_id === playerId && g.position !== 'DH');
       const regFielding = playerFielding.filter(g => !isPostseasonRow(g));
       const postFielding = playerFielding.filter(g => isPostseasonRow(g));
 
