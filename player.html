@@ -111,6 +111,53 @@
   .gl-row.gl-total { border-top: 2px solid var(--tab-active); background: #fff2e6; font-weight: 700; }
   .gl-row.post { background: #eaf1fa; }
   .gl-row.gl-total.post-final { border-top: 2px solid #2f6fb0; background: #eaf1fa; font-weight: 700; }
+  .stat-glossary {
+    margin: 1.5rem 0 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    background: var(--bg-card, #fff);
+  }
+  .stat-glossary summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+    padding: 0.3rem 0;
+  }
+  .glossary-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 0.6rem;
+  }
+  .glossary-col-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3rem;
+  }
+  .glossary-row {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 0.5rem;
+    padding: 0.2rem 0;
+    font-size: 0.8rem;
+  }
+  .glossary-abbr {
+    font-weight: 700;
+    color: var(--tab-active, #f26522);
+  }
+  .glossary-desc {
+    color: var(--text-muted);
+  }
+  @media (max-width: 560px) {
+    .glossary-columns { grid-template-columns: 1fr; gap: 1rem; }
+  }
 
   .transaction-log-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 2rem 0 0.6rem; }
   .transaction-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
@@ -481,16 +528,28 @@
   // "stat" object for hitting (34 fields) and pitching (62 fields), so
   // every field MLB can return has a known order slot and abbreviation --
   // nothing is left to guess at or fall back to a spelled-out label.
+  // User-specified display order for the Career Path hitting columns.
+  // caughtStealingPercentage (CS%) is intentionally left out of this list --
+  // see HITTING_HIDDEN_KEYS below, which drops it from the table entirely.
   const HITTING_STAT_ORDER = [
-    'age',
-    'gamesPlayed', 'plateAppearances', 'atBats', 'runs', 'hits', 'doubles', 'triples',
-    'homeRuns', 'rbi', 'stolenBases', 'caughtStealing', 'stolenBasePercentage', 'caughtStealingPercentage',
+    'age', 'gamesPlayed', 'avg', 'obp', 'slg', 'ops', 'plateAppearances', 'atBats',
+    'runs', 'hits', 'doubles', 'triples', 'homeRuns', 'rbi',
     'baseOnBalls', 'intentionalWalks', 'strikeOuts',
-    'avg', 'obp', 'slg', 'ops', 'babip',
-    'totalBases', 'groundIntoDoublePlay', 'hitByPitch', 'sacBunts', 'sacFlies',
-    'groundOuts', 'airOuts', 'groundOutsToAirouts', 'atBatsPerHomeRun',
-    'numberOfPitches', 'leftOnBase', 'catchersInterference',
+    'stolenBases', 'caughtStealing', 'stolenBasePercentage',
+    'babip', 'totalBases', 'hitByPitch', 'leftOnBase',
+    'groundOuts', 'groundIntoDoublePlay', 'airOuts', 'groundOutsToAirouts',
+    'sacBunts', 'sacFlies', 'atBatsPerHomeRun', 'numberOfPitches', 'catchersInterference',
   ];
+  // Stats to never show in the Career Path table, per statType, even though
+  // MLB's API returns them on every row.
+  const HITTING_HIDDEN_KEYS = new Set(['caughtStealingPercentage']);
+  // Dropped per user request: GF/SVO (gamesFinished/saveOpportunities, not
+  // tracked for this use case), CS/CS% (caughtStealing/caughtStealingPercentage,
+  // redundant with the hitting side), and HB (hitBatsmen -- an exact duplicate
+  // of HBP/hitByPitch in MLB's pitching stat block, so only HBP is kept).
+  const PITCHING_HIDDEN_KEYS = new Set([
+    'gamesFinished', 'saveOpportunities', 'caughtStealing', 'caughtStealingPercentage', 'hitBatsmen',
+  ]);
   const HITTING_LABELS = {
     age: 'Age', gamesPlayed: 'G', plateAppearances: 'PA', atBats: 'AB', runs: 'R', hits: 'H',
     doubles: '2B', triples: '3B', homeRuns: 'HR', rbi: 'RBI', stolenBases: 'SB',
@@ -501,40 +560,109 @@
     groundOutsToAirouts: 'GO/AO', atBatsPerHomeRun: 'AB/HR', numberOfPitches: 'Pit',
     leftOnBase: 'LOB', catchersInterference: 'CI',
   };
+  // User-specified display order for the Career Path pitching columns.
+  // gamesFinished, saveOpportunities, caughtStealing, caughtStealingPercentage,
+  // and hitBatsmen are intentionally left out -- see PITCHING_HIDDEN_KEYS above.
   const PITCHING_STAT_ORDER = [
-    'age',
-    'wins', 'losses', 'winPercentage', 'era',
-    'gamesPitched', 'gamesStarted', 'gamesFinished', 'completeGames', 'shutouts',
-    'saves', 'saveOpportunities', 'blownSaves', 'holds',
-    'inningsPitched', 'battersFaced', 'outs',
-    'hits', 'runs', 'earnedRuns', 'homeRuns', 'doubles', 'triples',
-    'baseOnBalls', 'intentionalWalks', 'strikeOuts', 'hitBatsmen', 'hitByPitch', 'balks', 'wildPitches', 'pickoffs',
-    'whip', 'hitsPer9Inn', 'homeRunsPer9', 'walksPer9Inn', 'strikeoutsPer9Inn', 'runsScoredPer9', 'strikeoutWalkRatio',
-    'avg', 'obp', 'slg', 'ops',
-    'stolenBases', 'caughtStealing', 'stolenBasePercentage', 'caughtStealingPercentage',
-    'groundOuts', 'airOuts', 'groundOutsToAirouts',
-    'strikes', 'strikePercentage', 'numberOfPitches', 'pitchesPerInning',
-    'inheritedRunners', 'inheritedRunnersScored',
+    'age', 'wins', 'losses', 'winPercentage', 'era', 'whip', 'inningsPitched',
+    'strikeOuts', 'baseOnBalls', 'runs', 'earnedRuns', 'saves', 'blownSaves',
+    'strikePercentage', 'gamesPitched', 'gamesStarted', 'completeGames', 'shutouts',
+    'holds', 'hits', 'battersFaced', 'outs', 'homeRuns', 'doubles', 'triples',
+    'avg', 'obp', 'slg', 'ops', 'stolenBases', 'stolenBasePercentage',
+    'intentionalWalks', 'hitByPitch',
+    'hitsPer9Inn', 'homeRunsPer9', 'walksPer9Inn', 'strikeoutsPer9Inn', 'runsScoredPer9', 'strikeoutWalkRatio',
+    'wildPitches', 'pickoffs', 'balks',
+    'groundOuts', 'airOuts', 'groundOutsToAirouts', 'strikes',
+    'numberOfPitches', 'pitchesPerInning', 'inheritedRunners', 'inheritedRunnersScored',
     'totalBases', 'groundIntoDoublePlay', 'sacBunts', 'sacFlies', 'catchersInterference',
   ];
   const PITCHING_LABELS = {
     age: 'Age', wins: 'W', losses: 'L', winPercentage: 'W-L%', era: 'ERA',
     gamesPlayed: 'G', gamesPitched: 'G', gamesStarted: 'GS', gamesFinished: 'GF',
-    completeGames: 'CG', shutouts: 'SHO', saves: 'SV', saveOpportunities: 'SVO',
+    completeGames: 'CG', shutouts: 'SO', saves: 'SV', saveOpportunities: 'SVO',
     blownSaves: 'BS', holds: 'HLD', inningsPitched: 'IP', battersFaced: 'BF', outs: 'Outs',
     hits: 'H', runs: 'R', earnedRuns: 'ER', homeRuns: 'HR', doubles: '2B', triples: '3B',
     baseOnBalls: 'BB', intentionalWalks: 'IBB', strikeOuts: 'K', hitBatsmen: 'HB',
     hitByPitch: 'HBP', balks: 'BK', wildPitches: 'WP', pickoffs: 'PK',
-    whip: 'WHIP', hitsPer9Inn: 'H9', homeRunsPer9: 'HR9', walksPer9Inn: 'BB9',
-    strikeoutsPer9Inn: 'SO9', runsScoredPer9: 'R9', strikeoutWalkRatio: 'SO/BB',
+    whip: 'WHIP', hitsPer9Inn: 'H/9 IP', homeRunsPer9: 'HR/9 IP', walksPer9Inn: 'BB/9 IP',
+    strikeoutsPer9Inn: 'SO/9 IP', runsScoredPer9: 'R/9 IP', strikeoutWalkRatio: 'SO/BB',
     avg: 'BA', obp: 'OBP', slg: 'SLG', ops: 'OPS',
     stolenBases: 'SB', caughtStealing: 'CS', stolenBasePercentage: 'SB%', caughtStealingPercentage: 'CS%',
     groundOuts: 'GO', airOuts: 'AO', groundOutsToAirouts: 'GO/AO',
-    strikes: 'Strk', strikePercentage: 'Str%', numberOfPitches: 'Pit', pitchesPerInning: 'P/IP',
+    strikes: 'Strk', strikePercentage: 'Strike %', numberOfPitches: 'Pit', pitchesPerInning: 'P/IP',
     inheritedRunners: 'IR', inheritedRunnersScored: 'IRS',
     totalBases: 'TB', groundIntoDoublePlay: 'GIDP', sacBunts: 'SH', sacFlies: 'SF',
     catchersInterference: 'CI',
   };
+
+  // Plain-English descriptions for the stat glossary at the bottom of the
+  // page, keyed the same way as HITTING_STAT_ORDER/PITCHING_STAT_ORDER.
+  const HITTING_GLOSSARY = {
+    age: 'Age', gamesPlayed: 'Games played', avg: 'Batting average (hits ÷ at-bats)',
+    obp: 'On-base percentage', slg: 'Slugging percentage', ops: 'On-base plus slugging (OBP + SLG)',
+    plateAppearances: 'Plate appearances', atBats: 'At-bats', runs: 'Runs scored', hits: 'Hits',
+    doubles: 'Doubles', triples: 'Triples', homeRuns: 'Home runs', rbi: 'Runs batted in',
+    baseOnBalls: 'Walks (bases on balls)', intentionalWalks: 'Intentional walks', strikeOuts: 'Strikeouts',
+    stolenBases: 'Stolen bases', caughtStealing: 'Caught stealing', stolenBasePercentage: 'Stolen base percentage',
+    babip: 'Batting average on balls in play', totalBases: 'Total bases', hitByPitch: 'Hit by pitch',
+    leftOnBase: 'Runners left on base', groundOuts: 'Ground outs', groundIntoDoublePlay: 'Grounded into double play',
+    airOuts: 'Air outs (fly outs)', groundOutsToAirouts: 'Ground-out to air-out ratio',
+    sacBunts: 'Sacrifice bunts (sacrifice hits)', sacFlies: 'Sacrifice flies',
+    atBatsPerHomeRun: 'At-bats per home run', numberOfPitches: 'Pitches seen',
+    catchersInterference: "Times reached on catcher's interference",
+  };
+  const PITCHING_GLOSSARY = {
+    age: 'Age', wins: 'Wins', losses: 'Losses', winPercentage: 'Win percentage', era: 'Earned run average',
+    gamesPitched: 'Games pitched', gamesStarted: 'Games started', gamesFinished: 'Games finished',
+    completeGames: 'Complete games', shutouts: 'Shutouts', saves: 'Saves', saveOpportunities: 'Save opportunities',
+    blownSaves: 'Blown saves', holds: 'Holds', inningsPitched: 'Innings pitched', battersFaced: 'Batters faced',
+    outs: 'Total outs recorded', hits: 'Hits allowed', runs: 'Runs allowed', earnedRuns: 'Earned runs allowed',
+    homeRuns: 'Home runs allowed', doubles: 'Doubles allowed', triples: 'Triples allowed',
+    baseOnBalls: 'Walks allowed', intentionalWalks: 'Intentional walks allowed', strikeOuts: 'Strikeouts',
+    hitBatsmen: 'Batters hit by a pitch', hitByPitch: 'Batters hit by a pitch',
+    balks: 'Balks', wildPitches: 'Wild pitches', pickoffs: 'Pickoffs',
+    whip: 'Walks plus hits per inning pitched', hitsPer9Inn: 'Hits allowed per 9 innings',
+    homeRunsPer9: 'Home runs allowed per 9 innings', walksPer9Inn: 'Walks allowed per 9 innings',
+    strikeoutsPer9Inn: 'Strikeouts per 9 innings', runsScoredPer9: 'Runs allowed per 9 innings',
+    strikeoutWalkRatio: 'Strikeout-to-walk ratio', avg: "Opponents' batting average",
+    obp: "Opponents' on-base percentage", slg: "Opponents' slugging percentage", ops: "Opponents' OPS",
+    stolenBases: 'Stolen bases allowed', caughtStealing: 'Runners caught stealing',
+    stolenBasePercentage: "Opponents' stolen base success rate", caughtStealingPercentage: "Opponents' caught-stealing rate",
+    groundOuts: 'Ground outs induced', airOuts: 'Air outs induced', groundOutsToAirouts: 'Ground-out to air-out ratio',
+    strikes: 'Strikes thrown', strikePercentage: 'Percentage of pitches thrown for strikes',
+    numberOfPitches: 'Pitches thrown', pitchesPerInning: 'Pitches thrown per inning',
+    inheritedRunners: 'Inherited runners', inheritedRunnersScored: 'Inherited runners who scored',
+    totalBases: 'Total bases allowed', groundIntoDoublePlay: 'Double plays induced',
+    sacBunts: 'Sacrifice bunts allowed', sacFlies: 'Sacrifice flies allowed',
+    catchersInterference: "Times reached on catcher's interference",
+  };
+
+  function glossaryEntriesHtml(order, labels, glossary, hidden) {
+    return order
+      .filter(k => !hidden.has(k))
+      .map(k => `<div class="glossary-row"><div class="glossary-abbr">${labels[k] || k}</div><div class="glossary-desc">${glossary[k] || ''}</div></div>`)
+      .join('');
+  }
+
+  function renderStatGlossary() {
+    const hittingHtml = glossaryEntriesHtml(HITTING_STAT_ORDER, HITTING_LABELS, HITTING_GLOSSARY, HITTING_HIDDEN_KEYS);
+    const pitchingHtml = glossaryEntriesHtml(PITCHING_STAT_ORDER, PITCHING_LABELS, PITCHING_GLOSSARY, PITCHING_HIDDEN_KEYS);
+    return `
+      <details class="stat-glossary">
+        <summary>Stat Glossary</summary>
+        <div class="glossary-columns">
+          <div class="glossary-col">
+            <div class="glossary-col-title">Hitting</div>
+            ${hittingHtml}
+          </div>
+          <div class="glossary-col">
+            <div class="glossary-col-title">Pitching</div>
+            ${pitchingHtml}
+          </div>
+        </div>
+      </details>
+    `;
+  }
 
   function orderKeys(keysPresent, preferredOrder) {
     const present = new Set(keysPresent);
@@ -583,6 +711,21 @@
   }
   function outsToIp(outs) {
     return `${Math.floor(outs / 3)}.${outs % 3}`;
+  }
+
+  // MLB's innings-pitched notation ("5.1", "5.2") uses the digit after the
+  // decimal to mean thirds of an inning, not tenths -- display that as a
+  // proper fraction glyph (U+2153/U+2154) instead, which every modern font
+  // already renders compact: "5.1" -> "5⅓", "5.2" -> "5⅔", "6.0" -> "6".
+  function formatIP(ip) {
+    if (ip === undefined || ip === null || ip === '') return '-';
+    const str = String(ip);
+    const dot = str.indexOf('.');
+    if (dot === -1) return str;
+    const whole = str.slice(0, dot) || '0';
+    const fracDigit = str.slice(dot + 1);
+    const fracGlyph = fracDigit === '1' ? '⅓' : fracDigit === '2' ? '⅔' : '';
+    return fracGlyph ? `${whole}${fracGlyph}` : whole;
   }
 
   // Season totals for a set of pitching_gamelogs.csv rows -- mirrors
@@ -660,6 +803,7 @@
     const rowHtml = (r, extraClass) => {
       const cells = cols.map(c => {
         if (c === 'opponent') return `<div>${cityFromOpponent(r[c])}</div>`;
+        if (c === 'inningsPitched') return `<div>${formatIP(r[c])}</div>`;
         const v = r[c];
         return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
       }).join('');
@@ -674,6 +818,7 @@
         if (c === 'date') return `<div>${regTotalsRow.season || ''} Total</div>`;
         if (c === 'opponent') return `<div></div>`;
         const key = statType === 'pitching' ? c : (HITTING_COL_TO_TOTALS_KEY[c] || c);
+        if (c === 'inningsPitched') return `<div>${formatIP(regTotalsRow[key])}</div>`;
         const v = regTotalsRow[key];
         return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
       }).join('');
@@ -684,11 +829,25 @@
 
     let postTotalsHtml = '';
     if (postTotals) {
+      // postTotals (from sumHittingGames/sumPitchingGames) already uses the
+      // same field names as the per-game columns themselves (snake_case for
+      // hitting, camelCase for pitching) -- unlike regTotalsRow, which comes
+      // from the season-totals object shaped like MLB's own camelCase API
+      // response and needs HITTING_COL_TO_TOTALS_KEY to translate. Looking
+      // postTotals up through that same translation was the bug: it mapped
+      // e.g. "walks" to "baseOnBalls", a key postTotals doesn't have, so AB/
+      // HR/BB/IBB/K/SB came back blank while AVG/OBP/SLG/OPS (whose names
+      // happen to be identical either way) looked fine. era/whip need their
+      // own fmtRatio pass too, same as regTotalsRow already gets from
+      // pitcher_stats.csv's pre-formatted strings -- otherwise a 0 ERA prints
+      // as the bare number "0" instead of "0.00".
       const cells = cols.map(c => {
         if (c === 'date') return `<div>${(regTotalsRow && regTotalsRow.season) || ''} Postseason Total</div>`;
         if (c === 'opponent') return `<div></div>`;
-        const key = statType === 'pitching' ? c : (HITTING_COL_TO_TOTALS_KEY[c] || c);
-        const v = statType === 'pitching' ? postTotals[key] : (key === 'avg' || key === 'obp' || key === 'slg' || key === 'ops' ? fmtRate(postTotals[key]) : postTotals[key]);
+        if (c === 'inningsPitched') return `<div>${formatIP(postTotals[c])}</div>`;
+        if (c === 'era' || c === 'whip') return `<div>${fmtRatio(postTotals[c])}</div>`;
+        const isRate = c === 'avg' || c === 'obp' || c === 'slg' || c === 'ops';
+        const v = isRate ? fmtRate(postTotals[c]) : postTotals[c];
         return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
       }).join('');
       postTotalsHtml = `<div class="gl-row gl-total post-final" style="grid-template-columns:${gridCols};">${cells}</div>`;
@@ -743,6 +902,8 @@
     // (same value) -- for a pitcher, B-R's single "G" column means games
     // pitched, so drop the redundant duplicate rather than show it twice.
     if (statType === 'pitching') statKeySet.delete('gamesPlayed');
+    const hiddenKeys = statType === 'pitching' ? PITCHING_HIDDEN_KEYS : HITTING_HIDDEN_KEYS;
+    hiddenKeys.forEach(k => statKeySet.delete(k));
     const preferredOrder = statType === 'pitching' ? PITCHING_STAT_ORDER : HITTING_STAT_ORDER;
     const statKeys = orderKeys(Array.from(statKeySet), preferredOrder);
     const allCols = [...PINNED_COLS, ...statKeys];
@@ -770,6 +931,7 @@
         if (k === 'level' && showToggle) {
           return `<div><span class="afl-gamelog-toggle" onclick="toggleAflGameLog()">${val}</span></div>`;
         }
+        if (k === 'inningsPitched') return `<div>${formatIP(val)}</div>`;
         return `<div>${val}</div>`;
       }).join('');
       const rowStyleAttr = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
@@ -885,6 +1047,7 @@
       html += `<div class="section-title">Career Path <span class="section-note">(live from MLB, ${currentSeason} AFL row highlighted)</span></div>`;
       html += `<div id="career-path-container"><p class="loading">Loading career path...</p></div>`;
       html += renderTransactionTable(playerTransactions);
+      html += renderStatGlossary();
 
       content.innerHTML = html;
       wireTransactionExpand();
