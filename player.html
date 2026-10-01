@@ -469,6 +469,174 @@
     `;
   }
 
+  // ---- Statcast (pitches.csv already carries per-pitch velo/spin/break and
+  // per-batted-ball exit velo/launch angle/distance, straight from the MLB
+  // game feed -- this just aggregates it into a season card + collapsible
+  // per-game log, the same shape as the Hitting/Pitching AFL game log. ----
+
+  function fmtStatcastNum(n, decimals) {
+    if (n === null || n === undefined || isNaN(n)) return '\u2014';
+    return n.toFixed(decimals);
+  }
+  function fmtStatcastPct(n) {
+    if (n === null || n === undefined || isNaN(n)) return '\u2014';
+    return Math.round(n) + '%';
+  }
+  function avgOf(nums) { return nums.length ? nums.reduce((a, b) => a + b, 0) / nums.length : null; }
+  function maxOf(nums) { return nums.length ? Math.max(...nums) : null; }
+
+  // A game-by-game opponent lookup, same approach as the per-game hitting/
+  // pitching log -- pitches.csv has no team/opponent column of its own
+  // (unlike hitting_gamelogs.csv/pitching_gamelogs.csv), so it's derived
+  // from schedule.csv's home/away team names for the player's own team.
+  function buildGamePkOpponentMap(schedule, team) {
+    const map = new Map();
+    schedule.forEach(g => {
+      if (!g.game_pk) return;
+      let opponent = '';
+      if (g.home_team === team) opponent = g.away_team;
+      else if (g.away_team === team) opponent = g.home_team;
+      map.set(g.game_pk, opponent);
+    });
+    return map;
+  }
+
+  function hitterStatcastTotals(rows) {
+    const bip = rows.filter(r => r.launch_speed !== '' && r.launch_speed !== undefined && r.launch_speed !== null);
+    if (bip.length === 0) return null;
+    const evs = bip.map(r => Number(r.launch_speed)).filter(v => !isNaN(v));
+    const las = bip.map(r => Number(r.launch_angle)).filter(v => !isNaN(v));
+    const hardHitCount = evs.filter(v => v >= 95).length;
+    return {
+      battedBalls: bip.length,
+      avgEV: avgOf(evs), maxEV: maxOf(evs), avgLA: avgOf(las),
+      hardHitPct: evs.length ? (hardHitCount / evs.length * 100) : null,
+    };
+  }
+
+  function pitcherStatcastTotals(rows) {
+    const withVelo = rows.filter(r => r.start_speed !== '' && r.start_speed !== undefined && r.start_speed !== null);
+    if (withVelo.length === 0) return null;
+    const velos = withVelo.map(r => Number(r.start_speed)).filter(v => !isNaN(v));
+    const spins = rows.map(r => Number(r.spin_rate)).filter(v => !isNaN(v) && v > 0);
+
+    const byType = new Map();
+    rows.forEach(r => {
+      const t = r.pitch_type_desc || 'Unknown';
+      if (!byType.has(t)) byType.set(t, []);
+      byType.get(t).push(r);
+    });
+    const pitchMix = Array.from(byType.entries()).map(([type, trows]) => {
+      const tVelos = trows.map(r => Number(r.start_speed)).filter(v => !isNaN(v));
+      const tSpins = trows.map(r => Number(r.spin_rate)).filter(v => !isNaN(v) && v > 0);
+      return {
+        type, count: trows.length, pct: (trows.length / rows.length * 100),
+        avgVelo: avgOf(tVelos), maxVelo: maxOf(tVelos), avgSpin: avgOf(tSpins),
+      };
+    }).sort((a, b) => b.count - a.count);
+
+    return { totalPitches: rows.length, avgVelo: avgOf(velos), maxVelo: maxOf(velos), avgSpin: avgOf(spins), pitchMix };
+  }
+
+  function buildStatcastPerGameRows(playerPitches, opponentMap, statType) {
+    const byGame = new Map();
+    playerPitches.forEach(r => {
+      if (!byGame.has(r.game_pk)) byGame.set(r.game_pk, []);
+      byGame.get(r.game_pk).push(r);
+    });
+    const rows = Array.from(byGame.entries()).map(([gamePk, gRows]) => {
+      const totals = statType === 'pitching' ? pitcherStatcastTotals(gRows) : hitterStatcastTotals(gRows);
+      if (!totals) return null;
+      return { gamePk, date: gRows[0].date, opponent: opponentMap.get(gamePk) || '', ...totals };
+    }).filter(Boolean);
+    rows.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+    return rows;
+  }
+
+  function buildStatcastGameLogHtml(perGameRows, statType) {
+    const cols = statType === 'pitching'
+      ? ['date', 'opponent', 'totalPitches', 'avgVelo', 'maxVelo', 'avgSpin']
+      : ['date', 'opponent', 'battedBalls', 'avgEV', 'maxEV', 'avgLA', 'hardHitPct'];
+    const labels = statType === 'pitching'
+      ? ['Date', 'Opp', 'Pitches', 'Avg Velo', 'Max Velo', 'Avg Spin']
+      : ['Date', 'Opp', 'BIP', 'Avg EV', 'Max EV', 'Avg LA', 'Hard-Hit%'];
+    const gridCols = `90px 1.1fr ${cols.slice(2).map(() => '0.8fr').join(' ')}`;
+    const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map(l => `<div>${l}</div>`).join('')}</div>`;
+    const rowsHtml = perGameRows.map(r => {
+      const cells = cols.map(c => {
+        if (c === 'date') return `<div>${r.date || ''}</div>`;
+        if (c === 'opponent') return `<div>${cityFromOpponent(r.opponent)}</div>`;
+        if (c === 'avgVelo' || c === 'maxVelo' || c === 'avgEV' || c === 'maxEV' || c === 'avgLA') return `<div>${fmtStatcastNum(r[c], 1)}</div>`;
+        if (c === 'avgSpin') return `<div>${fmtStatcastNum(r[c], 0)}</div>`;
+        if (c === 'hardHitPct') return `<div>${fmtStatcastPct(r[c])}</div>`;
+        return `<div>${r[c] !== undefined && r[c] !== null ? r[c] : '-'}</div>`;
+      }).join('');
+      return `<div class="gl-row" style="grid-template-columns:${gridCols};">${cells}</div>`;
+    }).join('');
+    return `<div class="gl-table">${headerHtml}${rowsHtml}</div>`;
+  }
+
+  function renderPitchMixTable(pitchMix) {
+    const gridCols = '1.4fr 0.7fr 0.7fr 0.8fr 0.8fr 0.8fr';
+    const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">
+      <div>Pitch</div><div>Count</div><div>Usage</div><div>Avg Velo</div><div>Max Velo</div><div>Avg Spin</div>
+    </div>`;
+    const rowsHtml = pitchMix.map(p => `
+      <div class="gl-row" style="grid-template-columns:${gridCols};">
+        <div>${p.type}</div><div>${p.count}</div><div>${fmtStatcastPct(p.pct)}</div>
+        <div>${fmtStatcastNum(p.avgVelo, 1)}</div><div>${fmtStatcastNum(p.maxVelo, 1)}</div><div>${fmtStatcastNum(p.avgSpin, 0)}</div>
+      </div>
+    `).join('');
+    return `<div class="gl-table">${headerHtml}${rowsHtml}</div>`;
+  }
+
+  function renderStatcastSection(team, totals, perGameRows, statType, toggleId) {
+    const statsGrid = statType === 'pitching'
+      ? `
+        <div class="afl-stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div><div class="afl-stat-label">Avg Velo</div><div class="afl-stat-value">${fmtStatcastNum(totals.avgVelo, 1)}</div></div>
+          <div><div class="afl-stat-label">Max Velo</div><div class="afl-stat-value">${fmtStatcastNum(totals.maxVelo, 1)}</div></div>
+          <div><div class="afl-stat-label">Avg Spin</div><div class="afl-stat-value">${fmtStatcastNum(totals.avgSpin, 0)}</div></div>
+        </div>
+      `
+      : `
+        <div class="afl-stats-grid" style="grid-template-columns: repeat(5, 1fr);">
+          <div><div class="afl-stat-label">BIP</div><div class="afl-stat-value">${totals.battedBalls}</div></div>
+          <div><div class="afl-stat-label">Avg EV</div><div class="afl-stat-value">${fmtStatcastNum(totals.avgEV, 1)}</div></div>
+          <div><div class="afl-stat-label">Max EV</div><div class="afl-stat-value">${fmtStatcastNum(totals.maxEV, 1)}</div></div>
+          <div><div class="afl-stat-label">Avg LA</div><div class="afl-stat-value">${fmtStatcastNum(totals.avgLA, 1)}</div></div>
+          <div><div class="afl-stat-label">Hard-Hit%</div><div class="afl-stat-value">${fmtStatcastPct(totals.hardHitPct)}</div></div>
+        </div>
+      `;
+
+    // The gl-table/pitch-mix tables use light-background colors (dark text,
+    // light gray headers) matching the rest of the page's Career Path
+    // tables -- they can't live inside .afl-season-card itself, which is
+    // dark navy with white text for the stat tiles. Nested there, the table
+    // text would be unreadable (dark-on-dark). They go in their own light
+    // panel underneath instead, same convention as career-gamelog-wrap.
+    const pitchMixHtml = statType === 'pitching' ? renderPitchMixTable(totals.pitchMix) : '';
+    return `
+      <div class="afl-season-card">
+        <div class="afl-season-top">
+          <div class="afl-season-title">${currentSeason} Statcast</div>
+          <div class="afl-season-team">
+            ${TEAM_LOGOS[team] ? `<img src="${TEAM_LOGOS[team]}" alt="" onerror="this.style.display='none'">` : ''}
+            ${team || ''}
+          </div>
+        </div>
+        ${statsGrid}
+      </div>
+      ${pitchMixHtml}
+      <div class="transaction-expand-wrap" style="margin: -0.75rem 0 1.5rem;">
+        <a href="#" onclick="toggleFieldingRow('${toggleId}'); return false;" class="transaction-expand-link">View Game-by-Game Statcast &#9662;</a>
+      </div>
+      <div id="${toggleId}" class="career-gamelog-wrap" style="display:none; margin: -0.75rem 0 1.5rem; border-top:none;">
+        ${buildStatcastGameLogHtml(perGameRows, statType)}
+      </div>
+    `;
+  }
+
   function buildTransactionRowHtml(r) {
     const desc = highlightPlayerName(r.description, r.player_name, r.player_id, r.season);
     return `<div class="transaction-row body"><div>${formatShortDate(r.date)}</div><div>${desc}</div></div>`;
@@ -1304,12 +1472,14 @@
     }
 
     try {
-      const [rosterRes, hittingRes, pitcherStatsRes, pitchingGameLogsRes, fieldingGameLogsRes, txnRes] = await Promise.all([
+      const [rosterRes, hittingRes, pitcherStatsRes, pitchingGameLogsRes, fieldingGameLogsRes, pitchesRes, scheduleRes, txnRes] = await Promise.all([
         fetch(`data/${currentSeason}/roster.csv`),
         fetch(`data/${currentSeason}/hitting_gamelogs.csv`),
         fetch(`data/${currentSeason}/pitcher_stats.csv`),
         fetch(`data/${currentSeason}/pitching_gamelogs.csv`),
         fetch(`data/${currentSeason}/fielding_gamelogs.csv`),
+        fetch(`data/${currentSeason}/pitches.csv`),
+        fetch(`data/${currentSeason}/schedule.csv`),
         fetch(`data/${currentSeason}/transactions.csv`),
       ]);
 
@@ -1318,6 +1488,8 @@
       const pitcherStats = pitcherStatsRes.ok ? parseCSV(await pitcherStatsRes.text()) : [];
       const pitchingGameLogs = pitchingGameLogsRes.ok ? parseCSV(await pitchingGameLogsRes.text()) : [];
       const fieldingGameLogs = fieldingGameLogsRes.ok ? parseCSV(await fieldingGameLogsRes.text()) : [];
+      const pitches = pitchesRes.ok ? parseCSV(await pitchesRes.text()) : [];
+      const schedule = scheduleRes.ok ? parseCSV(await scheduleRes.text()) : [];
       const transactions = txnRes.ok ? parseCSV(await txnRes.text()) : [];
 
       const player = roster.find(p => p.player_id === playerId);
@@ -1391,6 +1563,23 @@
             babip: fmtRate(totals.babip),
           };
         }
+      }
+
+      // Statcast section -- pulled straight from pitches.csv, which already
+      // captures velocity/spin/exit-velo/launch-angle data for every pitch
+      // thrown or put in play. Filter to this player's pitches (as pitcher
+      // or as batter), build the per-game opponent lookup from schedule.csv,
+      // and only render the section when there's qualifying data (AFL
+      // Statcast/Hawkeye coverage isn't 100%, so plenty of players will have
+      // none this season).
+      const playerPitches = isPitcher
+        ? pitches.filter(p => p.pitcher_id === playerId)
+        : pitches.filter(p => p.batter_id === playerId);
+      const opponentMap = buildGamePkOpponentMap(schedule, player.team);
+      const statcastTotals = isPitcher ? pitcherStatcastTotals(playerPitches) : hitterStatcastTotals(playerPitches);
+      if (statcastTotals) {
+        const statcastPerGame = buildStatcastPerGameRows(playerPitches, opponentMap, statType);
+        html += renderStatcastSection(player.team, statcastTotals, statcastPerGame, statType, 'statcast-gamelog');
       }
 
       // DH is batting-only -- there shouldn't be fielding rows for it, but
