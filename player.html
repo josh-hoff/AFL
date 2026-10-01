@@ -391,18 +391,31 @@
   // MLB's own API shows "-.--" / ".---" rather than a blank when a rate
   // stat's denominator is zero (e.g. AB/HR with 0 home runs) -- match that
   // convention on our own computed AFL row instead of leaving it empty.
+  // Both of these need to accept either a raw number (what our own summed
+  // totals produce) OR a value MLB's API already hands back pre-formatted
+  // as a string (e.g. fielding: ".979", rangeFactorPer9Inn: "5.07" on a
+  // per-position fielding split) -- calling .toFixed() straight on a string
+  // throws, which is exactly what was silently crashing the Fielding tab's
+  // render for any multi-position stint and leaving it stuck on "Loading
+  // fielding...". Coercing with Number() first (after the null/undefined
+  // check, so a real null still falls through to its own blank/placeholder
+  // rather than becoming 0) fixes both sources uniformly.
   function fmtRatio(n) {
-    if (n === null || n === undefined || isNaN(n)) return '-.--';
+    if (n === null || n === undefined || n === '') return '-.--';
+    n = Number(n);
+    if (isNaN(n)) return '-.--';
     return n.toFixed(2);
   }
 
   function fmtRatePct(n) {
-    if (n === null || n === undefined || isNaN(n)) return '.---';
+    if (n === null || n === undefined || n === '') return '.---';
     return fmtRate(n);
   }
 
   function fmtRate(n) {
-    if (n === null || n === undefined || isNaN(n)) return '';
+    if (n === null || n === undefined || n === '') return '';
+    n = Number(n);
+    if (isNaN(n)) return '';
     return n.toFixed(3).replace(/^0\./, '.');
   }
 
@@ -558,10 +571,21 @@
           groups.set(key, { season: s.season, level: (s.sport && s.sport.abbreviation) || '', team, positions: [] });
         }
         const posAbbr = (s.position && s.position.abbreviation) || '';
-        groups.get(key).positions.push({ position: posAbbr, ...flattenStatBlock(s.stat) });
+        // flattenStatBlock(s.stat) also carries a "position" key of its own
+        // (stat.position is an {code,name,type,abbreviation} object, which
+        // flattenStatBlock stringifies since it's an object) -- spreading it
+        // AFTER setting position:posAbbr silently overwrote the clean "2B"/
+        // "SS" abbreviation with that JSON blob. Spreading first, then
+        // setting position explicitly, makes the clean abbreviation win.
+        groups.get(key).positions.push({ ...flattenStatBlock(s.stat), position: posAbbr });
       });
       return Array.from(groups.values()).map(g => ({
         season: g.season, level: g.level, team: g.team,
+        // Each position split carries its own "age" field (same value every
+        // position shares that season) -- the combined totals object from
+        // sumFieldingStints doesn't compute one, so pull it from the first
+        // position split, otherwise every MiLB/MLB row's Age column is blank.
+        age: (g.positions[0] && g.positions[0].age !== undefined) ? g.positions[0].age : '',
         ...sumFieldingStints(g.positions),
         positions: g.positions,
       }));
@@ -885,8 +909,11 @@
     const statKeys = orderKeys(Array.from(statKeySet), FIELDING_STAT_ORDER);
     const allCols = ['season', 'level', 'team', 'age', ...statKeys];
 
-    const gridTemplate = `0.7fr 0.5fr 1.6fr 0.5fr ${statKeys.map(() => 'minmax(65px, 1fr)').join(' ')}`;
-    const minWidth = `${4 * 80 + statKeys.length * 75}px`;
+    // Season column needs to be wide enough for "2025 Postseason", not just
+    // a bare 4-digit year, or that label truncates to "2025 ..." the way
+    // the regular-season row never does.
+    const gridTemplate = `minmax(110px, 0.9fr) 0.5fr 1.6fr 0.5fr ${statKeys.map(() => 'minmax(65px, 1fr)').join(' ')}`;
+    const minWidth = `${4 * 90 + statKeys.length * 75}px`;
 
     container.innerHTML = buildFieldingTableHtml(rows, allCols, gridTemplate, minWidth);
   }
