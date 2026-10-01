@@ -87,7 +87,7 @@
   .afl-season-title { color: var(--header-text); font-size: 1.1rem; font-weight: 700; }
   .afl-season-team { display: flex; align-items: center; gap: 0.5rem; color: var(--header-text); font-size: 0.85rem; }
   .afl-season-team img { width: 20px; height: 20px; object-fit: contain; }
-  .afl-stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem; text-align: center; }
+  .afl-stats-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.75rem; text-align: center; }
   .afl-stat-label { color: #9fb3d1; font-size: 0.7rem; text-transform: uppercase; font-weight: 600; }
   .afl-stat-value { color: var(--header-text); font-size: 1.15rem; font-weight: 700; }
 
@@ -440,6 +440,7 @@
           <div><div class="afl-stat-label">SLG</div><div class="afl-stat-value">${fmtRate(totals.slg) || '\u2014'}</div></div>
           <div><div class="afl-stat-label">OPS</div><div class="afl-stat-value">${fmtRate(totals.ops) || '\u2014'}</div></div>
           <div><div class="afl-stat-label">HR</div><div class="afl-stat-value">${totals.home_runs}</div></div>
+          <div><div class="afl-stat-label">RBI</div><div class="afl-stat-value">${totals.rbi}</div></div>
         </div>
       </div>
     `;
