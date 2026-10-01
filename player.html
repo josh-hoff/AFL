@@ -100,7 +100,17 @@
   .career-row.body { border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text); align-items: center; }
   .career-row.afl { border-top: 1px solid var(--tab-active); font-weight: 700; background: #fff8f2; }
   .career-row.mlb { border-top: 1px solid #2f6fb0; font-weight: 700; background: #eaf1fa; }
+  .career-row.post-season { background: #eaf1fa; }
   .career-row > div { overflow: hidden; text-overflow: ellipsis; }
+
+  .tab-row { display: flex; gap: 0.5rem; margin: 0 0 0.75rem; }
+  .stat-tab {
+    background: none; border: 1px solid var(--border); color: var(--text-muted);
+    padding: 0.4rem 1rem; border-radius: 999px; cursor: pointer; font-size: 0.82rem; font-weight: 700;
+    font-family: inherit;
+  }
+  .stat-tab.active { background: var(--tab-active); border-color: var(--tab-active); color: #fff; }
+  .gl-pos-label { grid-column: span 3; text-align: center; font-weight: 700; }
 
   .afl-gamelog-toggle { cursor: pointer; color: var(--tab-active); font-weight: 700; text-decoration: underline dashed; text-underline-offset: 3px; }
   .career-gamelog-wrap { grid-column: 1 / -1; padding: 0.6rem 1rem 0.8rem; border-top: 1px solid var(--border); background: #fffaf5; }
@@ -223,6 +233,22 @@
   const playerId = params.get('id');
   let currentSeason = parseInt(params.get('season'), 10) || new Date().getFullYear();
   let lastKnownTeam = null;
+  let careerCtx = null;
+  let activeCareerTab = 'primary';
+
+  function switchCareerTab(view) {
+    activeCareerTab = view;
+    const primaryBtn = document.getElementById('tab-btn-primary');
+    const fieldingBtn = document.getElementById('tab-btn-fielding');
+    if (primaryBtn) primaryBtn.classList.toggle('active', view === 'primary');
+    if (fieldingBtn) fieldingBtn.classList.toggle('active', view === 'fielding');
+    if (!careerCtx) return;
+    if (view === 'primary') {
+      loadCareerPath(careerCtx.aflRow, careerCtx.statType, careerCtx.aflGameLogRows);
+    } else {
+      loadFieldingCareerPath(careerCtx);
+    }
+  }
 
   function parseCSVLine(line) {
     const result = [];
@@ -511,6 +537,39 @@
     }
   }
 
+  // MLB's fielding yearByYear API returns one split PER POSITION a player
+  // played that season/team -- there's no single combined row the way
+  // hitting/pitching get. fetchLevelFielding groups those position splits
+  // by season+team, keeps each one (for the position breakdown), and also
+  // sums them into a combined row (for the main Career Path line), the
+  // same two-level shape the AFL fielding gamelogs build below.
+  async function fetchLevelFielding(sportId) {
+    try {
+      const res = await fetch(`https://statsapi.mlb.com/api/v1/people/${playerId}/stats?stats=yearByYear&group=fielding&sportId=${sportId}`);
+      if (!res.ok) return [];
+      const data = await res.json();
+      const splits = (data.stats && data.stats[0] && data.stats[0].splits) || [];
+      const groups = new Map();
+      splits.forEach(s => {
+        const team = (s.team && s.team.name) || '';
+        if (!team) return;
+        const key = `${s.season}|${team}`;
+        if (!groups.has(key)) {
+          groups.set(key, { season: s.season, level: (s.sport && s.sport.abbreviation) || '', team, positions: [] });
+        }
+        const posAbbr = (s.position && s.position.abbreviation) || '';
+        groups.get(key).positions.push({ position: posAbbr, ...flattenStatBlock(s.stat) });
+      });
+      return Array.from(groups.values()).map(g => ({
+        season: g.season, level: g.level, team: g.team,
+        ...sumFieldingStints(g.positions),
+        positions: g.positions,
+      }));
+    } catch (e) {
+      return [];
+    }
+  }
+
   function prettifyKey(key) {
     return key
       .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
@@ -636,6 +695,201 @@
     sacBunts: 'Sacrifice bunts allowed', sacFlies: 'Sacrifice flies allowed',
     catchersInterference: "Times reached on catcher's interference",
   };
+
+  // Default fielding column order/labels -- not yet curated by user request
+  // (column trimming/reordering is explicitly deferred until the base
+  // feature works), so this just covers the common counting + rate stats;
+  // anything else MLB returns still gets captured and appended after.
+  const FIELDING_STAT_ORDER = ['age', 'games', 'innings', 'putOuts', 'assists', 'errors', 'fielding', 'doublePlays', 'rangeFactorPer9Inn'];
+  const FIELDING_HIDDEN_KEYS = new Set();
+  const FIELDING_LABELS = {
+    age: 'Age', games: 'G', innings: 'Inn', putOuts: 'PO', assists: 'A', errors: 'E',
+    fielding: 'FPCT', doublePlays: 'DP', triplePlays: 'TP', chances: 'TC',
+    throwingErrors: 'TE', rangeFactorPerGame: 'RF/G', rangeFactorPer9Inn: 'RF/9',
+  };
+
+  // Sums a set of per-position MLB-API season stat blocks (camelCase keys,
+  // as returned by fetchLevelFielding) into one combined total -- used for
+  // the main Career Path row covering every position played that stint.
+  function sumFieldingStints(statBlocks) {
+    const totals = { games: 0, putOuts: 0, assists: 0, errors: 0, throwingErrors: 0, doublePlays: 0, triplePlays: 0 };
+    let outs = 0;
+    statBlocks.forEach(b => {
+      totals.games += Number(b.games) || 0;
+      totals.putOuts += Number(b.putOuts) || 0;
+      totals.assists += Number(b.assists) || 0;
+      totals.errors += Number(b.errors) || 0;
+      totals.throwingErrors += Number(b.throwingErrors) || 0;
+      totals.doublePlays += Number(b.doublePlays) || 0;
+      totals.triplePlays += Number(b.triplePlays) || 0;
+      outs += ipToOuts(b.innings);
+    });
+    totals.innings = outsToIp(outs);
+    const po = totals.putOuts, a = totals.assists, e = totals.errors;
+    totals.chances = po + a + e;
+    totals.fielding = totals.chances > 0 ? ((po + a) / totals.chances) : null;
+    totals.rangeFactorPer9Inn = outs > 0 ? ((po + a) * 27 / outs) : null;
+    totals.rangeFactorPerGame = totals.games > 0 ? ((po + a) / totals.games) : null;
+    return totals;
+  }
+
+  // Sums a set of raw fielding_gamelogs.csv rows (snake_case keys, one row
+  // per game at ONE position) into a total -- used for both a single
+  // position's AFL season total and, when passed every row regardless of
+  // position, the combined AFL season row across all positions.
+  function sumFieldingGames(games) {
+    const totals = { games: games.length, putOuts: 0, assists: 0, errors: 0, throwingErrors: 0, doublePlays: 0, triplePlays: 0 };
+    let outs = 0;
+    games.forEach(g => {
+      totals.putOuts += Number(g.putouts) || 0;
+      totals.assists += Number(g.assists) || 0;
+      totals.errors += Number(g.errors) || 0;
+      totals.throwingErrors += Number(g.throwing_errors) || 0;
+      totals.doublePlays += Number(g.double_plays) || 0;
+      totals.triplePlays += Number(g.triple_plays) || 0;
+      outs += ipToOuts(g.innings);
+    });
+    totals.innings = outsToIp(outs);
+    const po = totals.putOuts, a = totals.assists, e = totals.errors;
+    totals.chances = po + a + e;
+    totals.fielding = totals.chances > 0 ? ((po + a) / totals.chances) : null;
+    totals.rangeFactorPer9Inn = outs > 0 ? ((po + a) * 27 / outs) : null;
+    totals.rangeFactorPerGame = totals.games > 0 ? ((po + a) / totals.games) : null;
+    return totals;
+  }
+
+  function groupFieldingByPosition(games) {
+    const map = new Map();
+    games.forEach(g => {
+      const pos = g.position || '';
+      if (!map.has(pos)) map.set(pos, []);
+      map.get(pos).push(g);
+    });
+    return map;
+  }
+
+  function colLabelFielding(k) {
+    return k === 'season' ? 'Season' : k === 'level' ? 'Lvl' : k === 'team' ? 'Team'
+      : (FIELDING_LABELS[k] || prettifyKey(k));
+  }
+
+  function fmtFieldingCell(k, val) {
+    if (k === 'innings') return formatIP(val);
+    if (k === 'fielding') return fmtRate(val);
+    if (k === 'rangeFactorPer9Inn' || k === 'rangeFactorPerGame') return fmtRatio(val);
+    return (val !== undefined && val !== null && val !== '') ? val : '-';
+  }
+
+  function toggleFieldingRow(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = (el.style.display !== 'none') ? 'none' : 'block';
+  }
+
+  // Builds the Fielding tab's Career Path table: one row per season/level/
+  // team (combined across every position played that stint), expandable to
+  // a per-position breakdown only when the player logged time at 2+
+  // positions. The breakdown reuses the exact same grid column template as
+  // the season rows above it, so every stat column stays aligned whether a
+  // row is expanded or not; "Position" is centered across the merged
+  // Season+Lvl+Team span, and Age gets its own column, repeating the
+  // stint's age on every expanded row for consistency.
+  function buildFieldingTableHtml(rows, allCols, gridTemplate, minWidth) {
+    const headerCells = allCols.map(k => `<div>${colLabelFielding(k)}</div>`).join('');
+    let html = `<div class="career-table">
+      <div class="career-row head" style="grid-template-columns:${gridTemplate}; min-width:${minWidth};">${headerCells}</div>`;
+
+    rows.forEach((r, i) => {
+      const isAfl = r.level === 'AFL';
+      const rowClasses = ['career-row', 'body'];
+      if (isAfl) rowClasses.push('afl');
+      else if (r.level === 'MLB') rowClasses.push('mlb');
+      if (r.isPostseason) rowClasses.push('post-season');
+      const positions = r.positions || [];
+      const showToggle = positions.length >= 2;
+      const rowId = `fld-row-${i}`;
+
+      const cells = allCols.map(k => {
+        if (k === 'season') return `<div>${r.seasonLabel || r.season || ''}</div>`;
+        if (k === 'team' && showToggle) {
+          return `<div><span class="afl-gamelog-toggle" onclick="toggleFieldingRow('${rowId}')">${r.team || ''}</span></div>`;
+        }
+        if (k === 'team' || k === 'level') return `<div>${r[k] || ''}</div>`;
+        return `<div>${fmtFieldingCell(k, r[k])}</div>`;
+      }).join('');
+
+      const styleAttr = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
+      const clickAttr = showToggle ? ` onclick="toggleFieldingRow('${rowId}')" ${styleAttr.replace('style="', 'style="cursor:pointer; ')}` : ` ${styleAttr}`;
+      html += `<div class="${rowClasses.join(' ')}"${clickAttr}>${cells}</div>`;
+
+      if (showToggle) {
+        const posHeadCells = [`<div class="gl-pos-label">Position</div>`, `<div>${colLabelFielding('age')}</div>`]
+          .concat(allCols.slice(4).map(k => `<div>${colLabelFielding(k)}</div>`));
+        let posHtml = `<div class="gl-table"><div class="gl-row gl-head" ${styleAttr}>${posHeadCells.join('')}</div>`;
+        positions.forEach(p => {
+          const posCells = [`<div class="gl-pos-label">${p.position || ''}</div>`, `<div>${r.age !== undefined && r.age !== null ? r.age : ''}</div>`]
+            .concat(allCols.slice(4).map(k => `<div>${fmtFieldingCell(k, p[k])}</div>`));
+          posHtml += `<div class="gl-row" ${styleAttr}>${posCells.join('')}</div>`;
+        });
+        posHtml += `</div>`;
+        html += `<div class="career-gamelog-wrap" id="${rowId}" style="display:none;">${posHtml}</div>`;
+      }
+    });
+
+    html += `</div>`;
+    return html;
+  }
+
+  async function loadFieldingCareerPath(ctx) {
+    const container = document.getElementById('career-path-container');
+    container.innerHTML = '<p class="loading">Loading fielding...</p>';
+
+    const allSportIds = [...MILB_SPORT_IDS, MLB_SPORT_ID];
+    const results = await Promise.all(allSportIds.map(fetchLevelFielding));
+    let rows = results.flat();
+    rows = rows.filter(r => r.team && r.team.trim() !== '');
+
+    if (ctx.regFieldingByPos.size) {
+      const positions = Array.from(ctx.regFieldingByPos.entries()).map(([pos, games]) => ({ position: pos, ...sumFieldingGames(games) }));
+      const allGames = Array.from(ctx.regFieldingByPos.values()).flat();
+      rows.push({ season: String(currentSeason), level: 'AFL', team: ctx.team, age: ctx.playerAge, ...sumFieldingGames(allGames), positions });
+    }
+    if (ctx.postFieldingByPos.size) {
+      const positions = Array.from(ctx.postFieldingByPos.entries()).map(([pos, games]) => ({ position: pos, ...sumFieldingGames(games) }));
+      const allGames = Array.from(ctx.postFieldingByPos.values()).flat();
+      rows.push({
+        season: String(currentSeason), seasonLabel: `${currentSeason} Postseason`, level: 'AFL', team: ctx.team,
+        age: ctx.playerAge, isPostseason: true, ...sumFieldingGames(allGames), positions,
+      });
+    }
+
+    rows.sort((a, b) => {
+      if (a.season !== b.season) return a.season < b.season ? -1 : 1;
+      const rankA = LEVEL_RANK[a.level] !== undefined ? LEVEL_RANK[a.level] : 99;
+      const rankB = LEVEL_RANK[b.level] !== undefined ? LEVEL_RANK[b.level] : 99;
+      return rankA - rankB;
+    });
+
+    if (rows.length === 0) {
+      container.innerHTML = '<p class="section-note">No fielding stats found.</p>';
+      return;
+    }
+
+    const statKeySet = new Set();
+    rows.forEach(r => {
+      Object.keys(r).forEach(k => {
+        if (!['season', 'level', 'team', 'age', 'positions', 'seasonLabel', 'isPostseason'].includes(k)) statKeySet.add(k);
+      });
+    });
+    FIELDING_HIDDEN_KEYS.forEach(k => statKeySet.delete(k));
+    const statKeys = orderKeys(Array.from(statKeySet), FIELDING_STAT_ORDER);
+    const allCols = ['season', 'level', 'team', 'age', ...statKeys];
+
+    const gridTemplate = `0.7fr 0.5fr 1.6fr 0.5fr ${statKeys.map(() => 'minmax(65px, 1fr)').join(' ')}`;
+    const minWidth = `${4 * 80 + statKeys.length * 75}px`;
+
+    container.innerHTML = buildFieldingTableHtml(rows, allCols, gridTemplate, minWidth);
+  }
 
   function glossaryEntriesHtml(order, labels, glossary, hidden) {
     return order
@@ -912,7 +1166,7 @@
     const minWidth = `${3 * 90 + statKeys.length * 85}px`;
 
     const labelMap = statType === 'pitching' ? PITCHING_LABELS : HITTING_LABELS;
-    const colLabel = (k) => k === 'season' ? 'Yr' : k === 'level' ? 'Lvl' : k === 'team' ? 'Team'
+    const colLabel = (k) => k === 'season' ? 'Season' : k === 'level' ? 'Lvl' : k === 'team' ? 'Team'
       : (labelMap[k] || prettifyKey(k));
     const headerCells = allCols.map(k => `<div>${colLabel(k)}</div>`).join('');
 
@@ -957,11 +1211,12 @@
     }
 
     try {
-      const [rosterRes, hittingRes, pitcherStatsRes, pitchingGameLogsRes, txnRes] = await Promise.all([
+      const [rosterRes, hittingRes, pitcherStatsRes, pitchingGameLogsRes, fieldingGameLogsRes, txnRes] = await Promise.all([
         fetch(`data/${currentSeason}/roster.csv`),
         fetch(`data/${currentSeason}/hitting_gamelogs.csv`),
         fetch(`data/${currentSeason}/pitcher_stats.csv`),
         fetch(`data/${currentSeason}/pitching_gamelogs.csv`),
+        fetch(`data/${currentSeason}/fielding_gamelogs.csv`),
         fetch(`data/${currentSeason}/transactions.csv`),
       ]);
 
@@ -969,6 +1224,7 @@
       const hitting = hittingRes.ok ? parseCSV(await hittingRes.text()) : [];
       const pitcherStats = pitcherStatsRes.ok ? parseCSV(await pitcherStatsRes.text()) : [];
       const pitchingGameLogs = pitchingGameLogsRes.ok ? parseCSV(await pitchingGameLogsRes.text()) : [];
+      const fieldingGameLogs = fieldingGameLogsRes.ok ? parseCSV(await fieldingGameLogsRes.text()) : [];
       const transactions = txnRes.ok ? parseCSV(await txnRes.text()) : [];
 
       const player = roster.find(p => p.player_id === playerId);
@@ -1044,7 +1300,25 @@
         }
       }
 
+      const playerFielding = fieldingGameLogs.filter(g => g.player_id === playerId);
+      const regFielding = playerFielding.filter(g => !isPostseasonRow(g));
+      const postFielding = playerFielding.filter(g => isPostseasonRow(g));
+
+      careerCtx = {
+        statType, aflRow, aflGameLogRows,
+        team: player.team, playerAge: player.age || '',
+        regFieldingByPos: groupFieldingByPosition(regFielding),
+        postFieldingByPos: groupFieldingByPosition(postFielding),
+      };
+      activeCareerTab = 'primary';
+
       html += `<div class="section-title">Career Path <span class="section-note">(live from MLB, ${currentSeason} AFL row highlighted)</span></div>`;
+      html += `
+        <div class="tab-row">
+          <button class="stat-tab active" id="tab-btn-primary" onclick="switchCareerTab('primary')">${isPitcher ? 'Pitching' : 'Hitting'}</button>
+          <button class="stat-tab" id="tab-btn-fielding" onclick="switchCareerTab('fielding')">Fielding</button>
+        </div>
+      `;
       html += `<div id="career-path-container"><p class="loading">Loading career path...</p></div>`;
       html += renderTransactionTable(playerTransactions);
       html += renderStatGlossary();

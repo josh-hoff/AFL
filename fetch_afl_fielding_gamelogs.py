@@ -9,7 +9,7 @@ AFL_SPORT_ID = 17
 
 FIELDING_GAMELOG_FIELDS = [
     "season", "player_id", "player_name", "team", "date", "opponent",
-    "is_home", "is_win", "game_pk", "position",
+    "is_home", "is_win", "game_pk", "game_type", "position",
     "innings", "putouts", "assists", "errors", "throwing_errors",
     "chances", "fielding_pct", "double_plays", "triple_plays",
     "range_factor_per_game", "range_factor_per_9",
@@ -20,14 +20,22 @@ def load_roster(season, output_dir):
     path = os.path.join(output_dir, str(season), "roster.csv")
     if not os.path.exists(path):
         raise FileNotFoundError(f"No roster found at {path}. Run fetch_afl_roster.py {season} first.")
-    with open(path, "r", newline="") as f:
+    with open(path, "r", newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 
 def fetch_fielding_gamelog(person_id, season):
     import requests
 
-    params = {"stats": "gameLog", "group": "fielding", "season": season, "sportId": AFL_SPORT_ID}
+    # Same fix already applied to the hitting/pitching gamelog scripts --
+    # gameType defaults to regular season ("R") only if left off, which would
+    # otherwise silently drop the AFL's postseason rounds (D = First Round,
+    # L = Semifinal, W = Championship) from every player's fielding log.
+    # "A" (Fall Stars Game) is deliberately left out.
+    params = {
+        "stats": "gameLog", "group": "fielding", "season": season, "sportId": AFL_SPORT_ID,
+        "gameType": "R,D,L,W",
+    }
     resp = requests.get(STATS_URL.format(person_id=person_id), params=params, timeout=30)
     resp.raise_for_status()
     return resp.json()
@@ -55,6 +63,7 @@ def extract_fielding_rows(data, player_id, player_name, team):
             "is_home": split.get("isHome", ""),
             "is_win": split.get("isWin", ""),
             "game_pk": game.get("gamePk", ""),
+            "game_type": split.get("gameType", ""),
             "position": position.get("abbreviation", ""),
             "innings": stat.get("innings", ""),
             "putouts": stat.get("putOuts", ""),
