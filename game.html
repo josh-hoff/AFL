@@ -616,7 +616,7 @@
     if (caption) {
       caption.innerHTML = `
         <div class="mv-axis-sides">${leftSide} &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; ${rightSide}</div>
-        <div class="mv-axis-title">Horizontal Break (in)</div>
+        <div class="mv-axis-title">Horizontal Break (Inches)</div>
       `;
     }
   }
@@ -708,7 +708,7 @@
     if (releaseCaption) {
       releaseCaption.innerHTML = `
         <div class="rp-axis-sides">${leftSide} &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; ${rightSide}</div>
-        <div class="rp-axis-title">Horizontal Release (ft)</div>
+        <div class="rp-axis-title">Horizontal Release (Feet)</div>
       `;
     }
     if (pitches.length === 0) { document.getElementById('releaseLegend').innerHTML = ''; return; }
@@ -807,7 +807,7 @@
               <div class="heatmap-card" data-slide="1">
                 <div class="heatmap-title">Pitch Movement</div>
                 <div class="mv-plot-row">
-                  <div class="mv-y-axis-title">Vertical Break (in)</div>
+                  <div class="mv-y-axis-title">Induced Vertical Break (Inches)</div>
                   <div class="movement-plot-wrap" id="movementWrap"></div>
                 </div>
                 <div class="mv-axis-caption-row">
@@ -819,7 +819,7 @@
               <div class="heatmap-card" data-slide="2">
                 <div class="heatmap-title">Release Point</div>
                 <div class="rp-plot-row">
-                  <div class="rp-y-axis-title">Vertical Release (ft)</div>
+                  <div class="rp-y-axis-title">Vertical Release (Feet)</div>
                   <div class="rp-plot-wrap" id="releaseWrap"></div>
                 </div>
                 <div class="rp-axis-caption-row">
