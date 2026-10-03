@@ -652,10 +652,12 @@
   // ---- Release Point -- real per-pitch release_x/release_z, axis auto-
   // fit to THIS pitcher's own cluster (computed once from his whole outing,
   // not re-zoomed per filter) rather than a hardcoded range, per the
-  // "zoom to the data, not to a hand-based rule" discussion. x is field-
-  // relative (3B side/1B side) and is never relabeled by hand -- unlike
-  // Pitch Movement, a RHP and LHP are expected to land on opposite sides
-  // here, since their arms come from opposite sides of their bodies. ----
+  // "zoom to the data, not to a hand-based rule" discussion. The raw x
+  // values themselves are never touched by hand (same field-fixed sign
+  // convention as Pitch Movement's raw break_horizontal) -- only the
+  // caption's arm-side/glove-side text swaps sides per hand, same as
+  // Pitch Movement, since a pitcher's release point is naturally biased
+  // toward their own arm side. ----
   function computeReleaseAxis(pitches) {
     const xs = pitches.map(p => p.releaseX).filter(v => v !== null);
     const zs = pitches.map(p => p.releaseZ).filter(v => v !== null);
@@ -695,6 +697,20 @@
       html += `<div class="rp-gridline h" style="top:${pct}%;"></div><div class="rp-tick-label y-label" style="left:0%; top:${pct}%;">${t.toFixed(1)}</div>`;
     }
     wrap.innerHTML = html;
+    // Same arm-side/glove-side swap-by-hand as Pitch Movement -- the axis
+    // itself already reads 3B side on the right / 1B side on the left
+    // (post-flip), and for a given hand that right/left split lines up
+    // with arm-side/glove-side exactly the way it does for horizontal
+    // break, so this reuses the identical left/right assignment.
+    const leftSide = PITCHER_THROWS === 'R' ? 'glove-side' : 'arm-side';
+    const rightSide = PITCHER_THROWS === 'R' ? 'arm-side' : 'glove-side';
+    const releaseCaption = document.getElementById('releaseAxisCaption');
+    if (releaseCaption) {
+      releaseCaption.innerHTML = `
+        <div class="rp-axis-sides">${leftSide} &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; ${rightSide}</div>
+        <div class="rp-axis-title">Horizontal Release (ft)</div>
+      `;
+    }
     if (pitches.length === 0) { document.getElementById('releaseLegend').innerHTML = ''; return; }
     const typesPresent = Array.from(new Set(pitches.map(p => p.type)));
     const avgs = {};
@@ -808,10 +824,7 @@
                 </div>
                 <div class="rp-axis-caption-row">
                   <div class="rp-axis-caption-spacer"></div>
-                  <div class="rp-axis-caption">
-                    <div class="rp-axis-sides">1B side &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; 3B side</div>
-                    <div class="rp-axis-title">Horizontal Release (ft)</div>
-                  </div>
+                  <div class="rp-axis-caption" id="releaseAxisCaption"></div>
                 </div>
                 <div class="rp-ext-caption">Extension (ft from rubber toward plate)</div>
                 <div class="rp-legend" id="releaseLegend"></div>
