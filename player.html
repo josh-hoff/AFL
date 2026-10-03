@@ -1584,16 +1584,14 @@
       // or as batter), build the per-game opponent lookup from schedule.csv,
       // and only render the section when there's qualifying data (AFL
       // Statcast/Hawkeye coverage isn't 100%, so plenty of players will have
-      // none this season).
+      // none this season). Computed here (before Career Path builds its
+      // context) but actually appended to html further down, between the
+      // Career Path section and the Transaction Log.
       const playerPitches = isPitcher
         ? pitches.filter(p => p.pitcher_id === playerId)
         : pitches.filter(p => p.batter_id === playerId);
       const opponentMap = buildGamePkOpponentMap(schedule, player.team);
       const statcastTotals = isPitcher ? pitcherStatcastTotals(playerPitches) : hitterStatcastTotals(playerPitches);
-      if (statcastTotals) {
-        const statcastPerGame = buildStatcastPerGameRows(playerPitches, opponentMap, statType);
-        html += renderStatcastSection(player.team, statcastTotals, statcastPerGame, statType, 'statcast-gamelog', playerId);
-      }
 
       // DH is batting-only -- there shouldn't be fielding rows for it, but
       // filter defensively in case one ever slips through.
@@ -1617,6 +1615,12 @@
         </div>
       `;
       html += `<div id="career-path-container"><p class="loading">Loading career path...</p></div>`;
+
+      if (statcastTotals) {
+        const statcastPerGame = buildStatcastPerGameRows(playerPitches, opponentMap, statType);
+        html += renderStatcastSection(player.team, statcastTotals, statcastPerGame, statType, 'statcast-gamelog', playerId);
+      }
+
       html += renderTransactionTable(playerTransactions);
       html += renderStatGlossary();
 
