@@ -17,6 +17,7 @@ PITCH_FIELDS = [
     "break_angle", "break_length", "break_vertical",
     "break_vertical_induced", "break_horizontal",
     "zone", "plate_time", "type_confidence",
+    "plate_x", "plate_z",
     "launch_speed", "launch_angle", "total_distance",
     "trajectory", "hardness", "hit_location",
 ]
@@ -131,6 +132,15 @@ def extract_pitches(feed, game_info):
                 "zone": pitch_data.get("zone"),
                 "plate_time": pitch_data.get("plateTime"),
                 "type_confidence": pitch_data.get("typeConfidence"),
+                # Real plate-crossing location (feet, catcher's-eye view) --
+                # pX/pZ, distinct from the release point (x0/y0/z0) already
+                # captured above. Same "coordinates" object the game feed
+                # already returns, just two more keys read off it -- no new
+                # API call. This is what game.html's Pitch Location chart
+                # should plot directly once re-fetched, replacing its
+                # current zone-centroid approximation.
+                "plate_x": coords.get("pX"),
+                "plate_z": coords.get("pZ"),
                 "launch_speed": hit_data.get("launchSpeed"),
                 "launch_angle": hit_data.get("launchAngle"),
                 "total_distance": hit_data.get("totalDistance"),

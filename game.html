@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arizona Fall League Central - Game Statcast</title>
+<style>
+  :root {
+    --bg: #FDFCFB; --bg-card: #FFFFFF; --border: #e8e6e2; --text: #111418; --text-muted: #5a6472;
+    --accent: #b8860b; --header-bg: #0d1b3a; --header-card-bg: #16305c; --header-border: #2c4a7c;
+    --header-text: #ffffff; --tab-active: #f26522;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  header { padding: 1.5rem 1.5rem 0; }
+  .header-inner { display: flex; align-items: center; justify-content: center; gap: 2.5rem; max-width: 900px; margin: 0 auto; background: var(--header-bg); border-radius: 16px; padding: 2.25rem 1.5rem; }
+  h1 { font-size: 2.2rem; font-weight: 600; margin: 0; letter-spacing: -0.01em; text-align: center; color: var(--header-text); }
+  .league-logo { height: 100px; width: auto; flex-shrink: 0; }
+  .header-inner > a { display: inline-flex; flex-shrink: 0; line-height: 0; }
+  .title-line { display: block; line-height: 1.3; }
+  .title-central { display: inline-block; border-bottom: 2px solid var(--header-text); padding-bottom: 0.2rem; width: fit-content; }
+  .nav-tabs { display: flex; justify-content: center; gap: 2rem; max-width: 900px; margin: 1.25rem auto 0; padding: 0 1.5rem; border-bottom: 1px solid var(--border); }
+  .nav-tab { display: inline-block; padding: 0.6rem 0.2rem; color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--tab-active); border-bottom-color: var(--tab-active); }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
+
+  .back-link { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
+
+  .game-header { background: var(--header-bg); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .game-header-left { display: flex; flex-direction: column; gap: 0.3rem; }
+  .game-matchup { color: var(--header-text); font-size: 1.25rem; font-weight: 700; }
+  .game-sub { color: #9fb3d1; font-size: 0.82rem; }
+  .game-result { text-align: right; }
+  .game-result .line { color: #9fb3d1; font-size: 0.72rem; text-transform: uppercase; font-weight: 600; }
+  .game-result .pitcher-line { color: var(--header-text); font-size: 1rem; font-weight: 700; margin-top: 0.15rem; }
+
+  .section-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 0 0 0.6rem; }
+  .section-note { color: var(--text-muted); font-weight: 400; font-size: 0.8rem; }
+
+  .pitch-filter-row { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .pitch-filter-chip { display: inline-flex; align-items: center; gap: 0.45rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.9rem; border-radius: 999px; cursor: pointer; font-size: 0.82rem; font-weight: 700; font-family: inherit; }
+  .pitch-filter-chip .count { color: var(--text-muted); font-weight: 600; }
+  .pitch-filter-chip.active { background: var(--tab-active); border-color: var(--tab-active); color: #fff; }
+  .pitch-filter-chip.active .count { color: rgba(255,255,255,0.85); }
+  .pitch-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+  .afl-stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem; text-align: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.5rem; margin-bottom: 1.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .afl-stat-label { color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase; font-weight: 600; }
+  .afl-stat-value { color: var(--text); font-size: 1.2rem; font-weight: 700; margin-top: 0.15rem; }
+  .afl-stat-value.flash { color: var(--tab-active); }
+
+  .ab-group { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 0.9rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .ab-head { display: flex; align-items: center; justify-content: space-between; padding: 0.55rem 1rem; background: #f2f1ee; cursor: pointer; }
+  .ab-inning { font-weight: 700; font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; }
+  .ab-batter { font-weight: 700; font-size: 0.92rem; color: var(--text); }
+  .ab-outcome { font-size: 0.8rem; font-weight: 700; }
+  .ab-outcome.out, .ab-outcome.k { color: #c0392b; }
+  .ab-outcome.hit, .ab-outcome.walk { color: #1a8a4a; }
+  .ab-head.selected { background: #fdeee3; }
+  .ab-select-hint { color: var(--text-muted); font-size: 0.68rem; font-weight: 600; margin-left: 0.5rem; }
+  .ab-head.selected .ab-select-hint { color: var(--tab-active); }
+
+  .pitch-row { display: grid; grid-template-columns: 34px 90px 70px 90px 70px 56px 1fr; gap: 0.5rem; padding: 0.4rem 1rem; align-items: center; font-size: 0.82rem; }
+  .pitch-row.head { background: #fafaf8; font-size: 0.64rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); }
+  .pitch-row:not(.head) { border-top: 1px solid var(--border); cursor: pointer; }
+  .pitch-row:not(.head):hover { background: #fafaf8; }
+  .pitch-expand-hint { color: var(--tab-active); font-size: 0.7rem; }
+
+  .pitch-detail { background: #fafaf8; border-top: 1px dashed var(--border); padding: 0.7rem 1rem 0.8rem 2.6rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem 1rem; }
+  .pitch-detail-item .pd-label { color: var(--text-muted); font-size: 0.62rem; text-transform: uppercase; font-weight: 700; }
+  .pitch-detail-item .pd-value { color: var(--text); font-size: 0.82rem; font-weight: 600; margin-top: 0.1rem; }
+  .pitch-num { color: var(--text-muted); font-weight: 600; }
+  .pitch-type-cell { display: flex; align-items: center; gap: 0.4rem; font-weight: 600; }
+  .pitch-velo { font-weight: 700; }
+  .pitch-result { font-size: 0.78rem; color: var(--text-muted); }
+  .pitch-result.in-play { color: var(--text); font-weight: 600; }
+  .pitch-result.strike { color: #c0392b; }
+  .pitch-result.ball { color: #2f6fb0; }
+  .bip-note { font-size: 0.76rem; color: var(--accent); font-weight: 600; margin-top: 0.1rem; }
+
+  .charts-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 1.75rem; align-items: stretch; }
+  @media (max-width: 920px) { .charts-row { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .charts-row { grid-template-columns: 1fr; } }
+
+  .statcast-layout { display: grid; grid-template-columns: 360px 1fr; gap: 1.5rem; align-items: start; margin-bottom: 1.75rem; }
+  @media (max-width: 860px) { .statcast-layout { grid-template-columns: 1fr; } }
+  .statcast-left .pitch-filter-row { margin-bottom: 1rem; }
+  .statcast-left .afl-stats-grid { grid-template-columns: repeat(2, 1fr); margin-bottom: 0; gap: 1.5rem 1.25rem; padding: 2rem 1.75rem; }
+  .statcast-left .afl-stat-label { font-size: 0.8rem; }
+  .statcast-left .afl-stat-value { font-size: 1.8rem; margin-top: 0.3rem; }
+  .statcast-right { display: flex; flex-direction: column; }
+
+  .chart-carousel { display: flex; align-items: center; gap: 0.75rem; }
+  .chart-carousel-viewport { flex: 1; min-width: 0; }
+  .chart-carousel-viewport .heatmap-card { display: none; max-width: 460px; width: 100%; min-height: 690px; margin: 0 auto; padding: 1.75rem 2rem; }
+  .chart-carousel-viewport .heatmap-card.active { display: flex; }
+  .chart-nav-btn { background: var(--bg-card); border: 1px solid var(--border); border-radius: 50%; width: 34px; height: 34px; font-size: 1.15rem; font-weight: 700; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: inherit; line-height: 1; }
+  .chart-nav-btn:hover { background: #f2f1ee; color: var(--text); }
+  .chart-dots { display: flex; gap: 0.4rem; }
+  .chart-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); cursor: pointer; padding: 0; border: none; }
+  .chart-dot.active { background: var(--tab-active); }
+  .charts-row-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+
+  .heatmap-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; box-sizing: border-box; }
+  .heatmap-title { font-size: 0.72rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin-bottom: 0.6rem; align-self: center; }
+
+  .heatmap-wrap { position: relative; width: 100%; max-width: 380px; aspect-ratio: 1 / 1; margin-bottom: 0.2rem; }
+  .sz-box { position: absolute; left: 26.4%; top: 16.7%; width: 47.2%; height: 66.7%; border: 3px solid var(--text); border-radius: 2px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); }
+  .sz-limit-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .sz-box .sz-cell { border: 1px solid rgba(17,20,24,0.3); }
+  .sz-box .sz-cell:nth-child(3n+1) { border-left: none; }
+  .sz-box .sz-cell:nth-child(3n) { border-right: none; }
+  .sz-box .sz-cell:nth-child(-n+3) { border-top: none; }
+  .sz-box .sz-cell:nth-child(n+7) { border-bottom: none; }
+  .pitch-dot-plot { position: absolute; width: 9px; height: 9px; border-radius: 50%; transform: translate(-50%, -50%); }
+  .pitch-x-mark { position: absolute; font-size: 12px; font-weight: 900; line-height: 1; transform: translate(-50%, -50%); user-select: none; }
+  .heatmap-legend { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.85rem; font-size: 0.72rem; color: var(--text-muted); flex-wrap: wrap; justify-content: center; }
+  .heatmap-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .legend-x { font-size: 12px; font-weight: 900; line-height: 1; }
+
+  .movement-plot-wrap { position: relative; width: 100%; max-width: 380px; aspect-ratio: 1 / 1; margin: 0.5rem auto 1.5rem; }
+  .mv-gridline { position: absolute; background: #d8d5cf; }
+  .mv-gridline.v { width: 1px; top: 0; bottom: 0; }
+  .mv-gridline.h { height: 1px; left: 0; right: 0; }
+  .mv-axis { position: absolute; background: #9aa2ac; }
+  .mv-axis.v { width: 1.5px; top: 0; bottom: 0; }
+  .mv-axis.h { height: 1.5px; left: 0; right: 0; }
+  .mv-tick-label { position: absolute; font-size: 0.62rem; color: var(--text-muted); font-weight: 600; transform: translate(-50%, 0); }
+  .mv-tick-label.y-label { transform: translate(-100%, -50%); padding-right: 4px; }
+  .mv-pitch-mark { position: absolute; width: 5px; height: 5px; border-radius: 50%; transform: translate(-50%, -50%); }
+  .mv-avg-cross { position: absolute; width: 26px; height: 26px; transform: translate(-50%, -50%); }
+  .mv-avg-cross .bar { position: absolute; background: currentColor; }
+  .mv-avg-cross .bar.h { left: 0; right: 0; top: 50%; height: 2px; transform: translateY(-50%); }
+  .mv-avg-cross .bar.v { top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-50%); }
+  .mv-avg-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
+  .mv-plot-area-labels { position: absolute; font-size: 0.56rem; line-height: 1.15; color: var(--text-muted); font-style: italic; opacity: 0.65; max-width: 44%; }
+  .mv-axis-caption { text-align: center; font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-top: 0.4rem; }
+  .movement-legend { display: flex; justify-content: center; gap: 1.2rem; margin-top: 1.1rem; flex-wrap: wrap; }
+  .mv-legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; }
+  .mv-legend-swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+  .mv-legend-text .mv-legend-type { font-weight: 700; color: var(--text); }
+  .mv-legend-text .mv-legend-avg { color: var(--text-muted); font-size: 0.7rem; }
+  .scope-clear { color: var(--tab-active); font-size: 0.7rem; font-weight: 700; cursor: pointer; margin-left: 0.3rem; }
+
+  .rp-plot-wrap { position: relative; width: 100%; max-width: 380px; aspect-ratio: 1 / 1; margin: 0.5rem auto 1.5rem; }
+  .rp-gridline { position: absolute; background: #d8d5cf; }
+  .rp-gridline.v { width: 1px; top: 0; bottom: 0; }
+  .rp-gridline.h { height: 1px; left: 0; right: 0; }
+  .rp-tick-label { position: absolute; font-size: 0.62rem; color: var(--text-muted); font-weight: 600; transform: translate(-50%, 0); }
+  .rp-tick-label.y-label { transform: translate(-100%, -50%); padding-right: 4px; }
+  .rp-pitch-mark { position: absolute; width: 5px; height: 5px; border-radius: 50%; transform: translate(-50%, -50%); }
+  .rp-avg-cross { position: absolute; width: 26px; height: 26px; transform: translate(-50%, -50%); }
+  .rp-avg-cross .bar { position: absolute; background: currentColor; }
+  .rp-avg-cross .bar.h { left: 0; right: 0; top: 50%; height: 2px; transform: translateY(-50%); }
+  .rp-avg-cross .bar.v { top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-50%); }
+  .rp-avg-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
+  .rp-spread-ring { position: absolute; border-radius: 50%; transform: translate(-50%, -50%); border: 1.5px dashed currentColor; background: none; pointer-events: none; }
+  .rp-axis-caption { text-align: center; font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-top: 0.4rem; }
+  .rp-ext-caption { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-top: 0.7rem; text-align: center; }
+  .rp-legend { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.7rem; width: 100%; max-width: 420px; }
+  .rp-legend-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; }
+  .rp-legend-swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+  .rp-legend-text { min-width: 140px; }
+  .rp-legend-text .rp-legend-type { font-weight: 700; color: var(--text); }
+  .rp-legend-text .rp-legend-avg { color: var(--text-muted); font-size: 0.68rem; }
+  .rp-ext-bar-wrap { flex: 1; display: flex; align-items: center; gap: 0.5rem; }
+  .rp-ext-bar-track { flex: 1; height: 6px; background: #ece9e4; border-radius: 999px; position: relative; }
+  .rp-ext-bar-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 999px; }
+  .rp-ext-value { font-size: 0.72rem; font-weight: 700; color: var(--text); min-width: 50px; text-align: right; }
+
+  .loading, .error { color: var(--text-muted); }
+  .error { color: #c0392b; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html"><img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'"></a>
+    <h1>
+      <span class="title-line">Arizona Fall League</span>
+      <span class="title-line"><span class="title-central">Central</span></span>
+    </h1>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <a class="nav-tab" href="index.html">Home</a>
+  <a class="nav-tab" href="schedule.html">Schedule</a>
+  <a class="nav-tab" href="standings.html">Standings</a>
+  <a class="nav-tab" href="roster.html">Rosters</a>
+</nav>
+
+<main id="content">
+  <p class="loading">Loading game...</p>
+</main>
+
+<script>
+  // ---- CSV parsing: identical to player.html's parseCSVLine/parseCSV, so
+  // the same CSV files on this static site are read the same way everywhere. ----
+  function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"') {
+        if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+        else inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        result.push(current);
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    result.push(current);
+    return result;
+  }
+  function parseCSV(text) {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    const headers = parseCSVLine(lines[0]);
+    return lines.slice(1).map(line => {
+      const values = parseCSVLine(line);
+      const row = {};
+      headers.forEach((h, i) => { row[h] = values[i] !== undefined ? values[i] : ''; });
+      return row;
+    });
+  }
+  const num = v => (v === '' || v === undefined || v === null ? null : Number(v));
+
+  const params = new URLSearchParams(window.location.search);
+  const gamePk = params.get('game_pk');
+  const pitcherId = params.get('pitcher_id');
+  const season = params.get('season') || new Date().getFullYear();
+
+  // ---- Count-based, category-priority pitch-type color assignment --
+  // ported exactly from the dashboard-wide convention (see
+  // game_statcast_filter_mockup.html / afl-statcast-dashboard memory):
+  // colors are handed out in a fixed master sequence to whichever pitch
+  // types THIS pitcher actually throws, in category-priority order, so a
+  // type's color depends on his own arsenal, not a fixed global mapping. ----
+  const MASTER_ORDER = [
+    { code: 'FF', label: 'Four-Seam',     category: 'Fastball' },
+    { code: 'FT', label: 'Two-Seam',      category: 'Fastball' },
+    { code: 'SI', label: 'Sinker',        category: 'Fastball' },
+    { code: 'FC', label: 'Cutter',        category: 'Fastball' },
+    { code: 'CH', label: 'Changeup',      category: 'Changeup/Splitter' },
+    { code: 'FS', label: 'Splitter',      category: 'Changeup/Splitter' },
+    { code: 'FO', label: 'Forkball',      category: 'Changeup/Splitter' },
+    { code: 'CU', label: 'Curveball',     category: 'Off-Speed' },
+    { code: 'KC', label: 'Knuckle-Curve', category: 'Off-Speed' },
+    { code: 'SL', label: 'Slider',        category: 'Off-Speed' },
+    { code: 'ST', label: 'Sweeper',       category: 'Off-Speed' },
+    { code: 'SV', label: 'Slurve',        category: 'Off-Speed' },
+    { code: 'KN', label: 'Knuckle Ball',  category: 'Off-Speed' },
+  ];
+  const PITCH_LABELS = Object.fromEntries(MASTER_ORDER.map(t => [t.code, t.label]));
+  const DARK_HUES  = ['#26598d', '#c2511b', '#1a7a52', '#553f91', '#8c3535'];
+  const LIGHT_HUES = ['#4e85bc', '#f47c43', '#32a087', '#8069c0', '#c3685f'];
+  function assignPitchColors(typesPresent) {
+    const present = MASTER_ORDER.filter(t => typesPresent.has(t.code));
+    const colors = {};
+    present.forEach((t, i) => { colors[t.code] = i < 5 ? DARK_HUES[i] : LIGHT_HUES[i - 5]; });
+    return colors;
+  }
+  function lighten(hex, amt) {
+    const n = parseInt(hex.slice(1), 16);
+    const r = Math.round(((n >> 16) & 255) * (1 - amt) + 255 * amt);
+    const g = Math.round(((n >> 8) & 255) * (1 - amt) + 255 * amt);
+    const b = Math.round((n & 255) * (1 - amt) + 255 * amt);
+    return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+  }
+
+  // ---- Call-type classification straight off pitches.csv's own "call"
+  // column (MLB's raw description: "Called Strike", "Swinging Strike",
+  // "Ball", "In play, out(s)", etc.) -- confirmed distinct values in the
+  // 2025 data: Ball, Ball In Dirt, Called Strike, Foul, Foul Bunt, Foul
+  // Tip, Hit By Pitch, In play (no out/out(s)/run(s)), Missed Bunt,
+  // Swinging Strike, Swinging Strike (Blocked). ----
+  const CALL_TYPES = {
+    CALLED: { label: 'Called Strike', color: '#c0392b' },
+    SWINGING: { label: 'Swinging Strike', color: '#c0392b' },
+    BALL: { label: 'Ball', color: '#1a8a4a' },
+    IN_PLAY: { label: 'In Play', color: '#2f6fb0' },
+  };
+  function classifyCall(call) {
+    if (/^in play/i.test(call)) return 'IN_PLAY';
+    if (call === 'Ball' || call === 'Ball In Dirt' || call === 'Hit By Pitch') return 'BALL';
+    if (/^swinging strike/i.test(call)) return 'SWINGING';
+    return 'CALLED'; // Called Strike, Foul(+Bunt/Tip), Missed Bunt
+  }
+  function resultClassFor(callType) {
+    if (callType === 'IN_PLAY') return 'in-play';
+    if (callType === 'BALL') return 'ball';
+    return 'strike'; // CALLED or SWINGING
+  }
+
+  // ---- Discrete strike-zone "zone" (1-14, standard MLB numbering) is all
+  // pitches.csv carries -- no continuous plate_x/plate_z like the mockup's
+  // demo data assumed. Approximate plate coordinates (feet) are each
+  // zone's centroid within the same 3ft x 3ft plot box the mockup used
+  // (sz-box = 17in wide x 2ft tall, centered), with a little deterministic
+  // jitter so multiple pitches in the same zone don't stack exactly on top
+  // of each other. Replace this with real plate_x/plate_z once the fetch
+  // script captures them. ----
+  const ZONE_CENTROID = {
+    1: [-0.472, 3.1665], 2: [0, 3.1665], 3: [0.472, 3.1665],
+    4: [-0.472, 2.5],    5: [0, 2.5],    6: [0.472, 2.5],
+    7: [-0.472, 1.8335], 8: [0, 1.8335], 9: [0.472, 1.8335],
+    11: [-1.0, 3.7], 12: [1.0, 3.7], 13: [-1.0, 1.3], 14: [1.0, 1.3],
+  };
+  function approxPlateCoords(zone, jitterIdx) {
+    const c = ZONE_CENTROID[zone] || [0, 2.5];
+    const angle = jitterIdx * 2.4;
+    const r = 0.04 + (jitterIdx % 3) * 0.015;
+    return { px: c[0] + Math.cos(angle) * r, pz: c[1] + Math.sin(angle) * r };
+  }
+
+  function titleCaseTrajectory(t) {
+    if (!t) return '';
+    return t.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  }
+
+  // ---- Group this pitcher's pitches (already in game order) into at-bats
+  // by consecutive batter_id, then derive an outcome label by walking the
+  // ball/strike count -- pitches.csv has no separate "at-bat result" field,
+  // so this is reconstructed from the call sequence rather than read
+  // directly. Good enough for "Strikeout/Walk/In Play (...)"; doesn't
+  // distinguish hit types (single vs. double, etc.) since that needs an
+  // "events" field this data doesn't have. ----
+  function buildAtBats(pitches) {
+    const atBats = [];
+    let current = null;
+    pitches.forEach((p, i) => {
+      if (!current || current.batterId !== p.batter_id) {
+        current = { batterId: p.batter_id, batter: p.batter_name, inning: p.inning, half: p.half_inning, pitches: [], balls: 0, strikes: 0 };
+        atBats.push(current);
+      }
+      current.pitches.push(p);
+    });
+    atBats.forEach(ab => {
+      let balls = 0, strikes = 0, outcome = 'In Play', outcomeClass = '';
+      ab.pitches.forEach((p, i) => {
+        const callType = classifyCall(p.call);
+        const isLast = i === ab.pitches.length - 1;
+        if (callType === 'BALL') {
+          if (p.call === 'Hit By Pitch') { if (isLast) { outcome = 'Hit By Pitch'; outcomeClass = 'walk'; } return; }
+          balls++;
+          if (isLast && balls >= 4) { outcome = 'Walk'; outcomeClass = 'walk'; }
+        } else if (callType === 'CALLED') {
+          // A real Called Strike always advances the count (it can be the
+          // 3rd strike); a foul-type result (Foul, Foul Bunt, Foul Tip,
+          // Missed Bunt) caps at 2 strikes like a real at-bat, since a foul
+          // can't be strike three on its own.
+          const isFoulType = p.call !== 'Called Strike';
+          if (isFoulType) {
+            if (strikes < 2) strikes++;
+            if (isLast) { outcome = p.call; outcomeClass = ''; }
+          } else {
+            strikes++;
+            if (isLast) {
+              if (strikes >= 3) { outcome = 'Strikeout (looking)'; outcomeClass = 'k'; }
+              else { outcome = p.call; outcomeClass = ''; }
+            }
+          }
+        } else if (callType === 'SWINGING') {
+          strikes++;
+          if (isLast) { outcome = strikes >= 3 ? 'Strikeout (swinging)' : p.call; outcomeClass = strikes >= 3 ? 'k' : ''; }
+        } else if (callType === 'IN_PLAY') {
+          if (isLast) {
+            if (p.call === 'In play, run(s)') { outcome = 'In Play (run scored)'; outcomeClass = 'hit'; }
+            else if (p.call === 'In play, no out') { outcome = 'In Play (no out)'; outcomeClass = 'hit'; }
+            else { outcome = 'In Play (out)'; outcomeClass = 'out'; }
+          }
+        }
+      });
+      ab.outcome = outcome;
+      ab.outcomeClass = outcomeClass;
+      ab.inningLabel = `${ab.half === 'top' ? 'Top' : 'Bot'} ${ab.inning}`;
+    });
+    return atBats;
+  }
+
+  let PITCHER_THROWS = 'R';
+  let PITCH_COLORS = {}, PITCH_TINTS = {};
+  let atBats = [], allPitches = [], typeCounts = {};
+  let activeFilter = 'ALL';
+  let selectedAtBat = null;
+  let RELEASE_AXIS = { xMin: -2.5, xMax: -1.5, zMin: 5.5, zMax: 6.5 };
+  let EXT_AXIS = { min: 5.0, max: 7.5 };
+
+  function getScopedPitches() {
+    const base = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
+    return activeFilter === 'ALL' ? base : base.filter(p => p.type === activeFilter);
+  }
+  function selectAtBat(idx) {
+    selectedAtBat = selectedAtBat === idx ? null : idx;
+    renderAll();
+  }
+  function isWhiff(p) { return classifyCall(p.call) === 'SWINGING'; }
+  function isHardHit(p) { return p.launch_speed !== null && p.launch_speed >= 95; }
+
+  function computeStats() {
+    const pitches = getScopedPitches();
+    if (pitches.length === 0) return null;
+    const velos = pitches.map(p => p.velo).filter(v => v !== null);
+    const spins = pitches.map(p => p.spin).filter(v => v !== null);
+    const avg = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null;
+    return {
+      count: pitches.length,
+      avgVelo: avg(velos) !== null ? avg(velos).toFixed(1) : '—',
+      maxVelo: velos.length ? Math.max(...velos).toFixed(1) : '—',
+      avgSpin: avg(spins) !== null ? Math.round(avg(spins)) : '—',
+      whiffs: pitches.filter(isWhiff).length,
+      hardHit: pitches.filter(isHardHit).length,
+    };
+  }
+
+  function renderFilterRow() {
+    const row = document.getElementById('filterRow');
+    const types = ['ALL', ...Object.keys(typeCounts)];
+    row.innerHTML = types.map(t => {
+      const label = t === 'ALL' ? 'All Pitches' : (PITCH_LABELS[t] || t);
+      const count = t === 'ALL' ? allPitches.length : typeCounts[t];
+      const dot = t === 'ALL' ? '' : `<span class="pitch-dot" style="background:${PITCH_COLORS[t]}"></span>`;
+      return `<button class="pitch-filter-chip${activeFilter === t ? ' active' : ''}" data-type="${t}">${dot}${label} <span class="count">(${count})</span></button>`;
+    }).join('');
+    row.querySelectorAll('.pitch-filter-chip').forEach(btn => {
+      btn.addEventListener('click', () => { activeFilter = btn.dataset.type; renderAll(); });
+    });
+  }
+
+  function renderStats() {
+    const s = computeStats();
+    const grid = document.getElementById('statsGrid');
+    if (!s) { grid.innerHTML = '<div class="section-note">No pitches in this selection.</div>'; return; }
+    const tiles = [['Pitches', s.count], ['Avg Velo', s.avgVelo], ['Max Velo', s.maxVelo], ['Avg Spin', s.avgSpin], ['Whiffs', s.whiffs], ['Hard-Hit', s.hardHit]];
+    grid.innerHTML = tiles.map(([label, val]) => `<div><div class="afl-stat-label">${label}</div><div class="afl-stat-value flash">${val}</div></div>`).join('');
+  }
+
+  function renderPitchDetail(p) {
+    const fields = [
+      ['Release Pt (x,y,z)', p.releaseX !== null ? `${p.releaseX.toFixed(2)}, ${p.releaseY !== null ? p.releaseY.toFixed(1) : '—'}, ${p.releaseZ.toFixed(2)} ft` : '—'],
+      ['Extension', p.extension !== null ? `${p.extension.toFixed(1)} ft` : '—'],
+      ['Plate Time', p.plateTime !== null ? `${p.plateTime.toFixed(3)} s` : '—'],
+      ['Type Confidence', p.typeConfidence !== null ? p.typeConfidence : '—'],
+      ['Spin Direction', p.spinDirection !== null ? `${p.spinDirection}°` : '—'],
+      ['Break Angle', p.breakAngle !== null ? `${p.breakAngle}°` : '—'],
+      ['Break Length', p.breakLength !== null ? `${p.breakLength}"` : '—'],
+      ['Vert. Break', p.breakVertical !== null ? `${p.breakVertical}"` : '—'],
+      ['Vert. Break (Induced)', p.ivb !== null ? `${p.ivb}"` : '—'],
+      ['Horiz. Break', p.hb !== null ? `${p.hb}"` : '—'],
+      ['Zone', p.zone !== null ? p.zone : '—'],
+      [p.plateIsReal ? 'Plate X, Z' : 'Plate X, Z (approx.)', `${p.px.toFixed(2)}, ${p.pz.toFixed(2)} ft`],
+    ];
+    return fields.map(([label, val]) => `<div class="pitch-detail-item"><div class="pd-label">${label}</div><div class="pd-value">${val}</div></div>`).join('');
+  }
+  function togglePitchDetail(id) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = el.style.display === 'none' ? 'grid' : 'none';
+  }
+
+  function renderAtBats() {
+    const container = document.getElementById('abContainer');
+    container.innerHTML = atBats.map((ab, abIdx) => {
+      const visiblePitches = ab.pitches.map((p, i) => ({ p, i })).filter(({ p }) => activeFilter === 'ALL' || p.type === activeFilter);
+      if (visiblePitches.length === 0) return '';
+      const rows = visiblePitches.map(({ p, i }) => {
+        const callType = classifyCall(p.call);
+        const resultClass = resultClassFor(callType);
+        let bip = '';
+        if (callType === 'IN_PLAY' && p.launch_speed !== null) {
+          bip = `<div class="bip-note">${p.launch_speed.toFixed(1)} mph${p.launch_angle !== null ? ' · ' + p.launch_angle.toFixed(0) + '° LA' : ''}${p.trajectory ? ' · ' + titleCaseTrajectory(p.trajectory) : ''}</div>`;
+        }
+        const move = `${p.ivb !== null ? (p.ivb > 0 ? '+' : '') + p.ivb.toFixed(1) : '—'}" / ${p.hb !== null ? (p.hb > 0 ? '+' : '') + p.hb.toFixed(1) : '—'}"`;
+        const detailId = `pd-${abIdx}-${i}`;
+        return `
+          <div class="pitch-row" onclick="togglePitchDetail('${detailId}')">
+            <div class="pitch-num">${i + 1}</div>
+            <div class="pitch-type-cell"><span class="pitch-dot" style="background:${PITCH_COLORS[p.type] || '#888'}"></span>${p.type}</div>
+            <div class="pitch-velo">${p.velo !== null ? p.velo.toFixed(1) : '—'}</div>
+            <div>${move}</div>
+            <div>${p.spin !== null ? p.spin : '—'}</div>
+            <div>${p.zone !== null ? p.zone : '—'}</div>
+            <div class="pitch-result ${resultClass}">${p.call}${bip}</div>
+          </div>
+          <div class="pitch-detail" id="${detailId}" style="display:none;">${renderPitchDetail(p)}</div>
+        `;
+      }).join('');
+      const isSelected = selectedAtBat === abIdx;
+      return `
+        <div class="ab-group">
+          <div class="ab-head${isSelected ? ' selected' : ''}" onclick="selectAtBat(${abIdx})">
+            <div><span class="ab-inning">${ab.inningLabel}</span> &nbsp; <span class="ab-batter">vs. ${ab.batter}</span><span class="ab-select-hint">${isSelected ? '(shown above — click to clear)' : '(click to show only this at-bat)'}</span></div>
+            <div class="ab-outcome ${ab.outcomeClass}">${ab.outcome}</div>
+          </div>
+          <div class="pitch-row head">
+            <div>#</div><div>Type</div><div>Velo</div><div>Movement</div><div>Spin</div><div>Zone</div><div>Result <span class="pitch-expand-hint">(click row for full Statcast)</span></div>
+          </div>
+          ${rows}
+        </div>
+      `;
+    }).join('');
+  }
+
+  const PLOT_X_MIN = -1.5, PLOT_X_MAX = 1.5;
+  const PLOT_Z_MIN = 1.0, PLOT_Z_MAX = 4.0;
+  function toPlotPercent(px, pz) {
+    return { left: ((px - PLOT_X_MIN) / (PLOT_X_MAX - PLOT_X_MIN)) * 100, top: 100 - ((pz - PLOT_Z_MIN) / (PLOT_Z_MAX - PLOT_Z_MIN)) * 100 };
+  }
+  function renderHeatmap() {
+    const pitches = getScopedPitches();
+    const scopeLabel = document.getElementById('heatmapScope');
+    const scopeParts = [];
+    if (activeFilter !== 'ALL') scopeParts.push(PITCH_LABELS[activeFilter] || activeFilter);
+    if (selectedAtBat !== null) scopeParts.push(`${atBats[selectedAtBat].inningLabel} at-bat`);
+    scopeLabel.innerHTML = scopeParts.length
+      ? `— ${scopeParts.join(', ')}${selectedAtBat !== null ? ' <span class="scope-clear" onclick="selectAtBat(' + selectedAtBat + ')">(clear)</span>' : ''}`
+      : '';
+    const gridCells = Array.from({ length: 9 }, () => '<div class="sz-cell"></div>').join('');
+    const marks = pitches.map(p => {
+      const { left, top } = toPlotPercent(p.px, p.pz);
+      const callType = classifyCall(p.call);
+      const color = CALL_TYPES[callType].color;
+      const title = `${p.type} · ${p.velo !== null ? p.velo.toFixed(1) : '—'} mph · ${p.call}`;
+      if (callType === 'SWINGING') return `<div class="pitch-x-mark" style="left:${left}%; top:${top}%; color:${color};" title="${title}">&#10005;</div>`;
+      return `<div class="pitch-dot-plot" style="left:${left}%; top:${top}%; background:${color};" title="${title}"></div>`;
+    }).join('');
+    const wrap = document.getElementById('heatmapWrap');
+    const limitSvg = `<svg class="sz-limit-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(90,100,114,0.48)" stroke-width="0.65" stroke-dasharray="1.5 3.5" vector-effect="non-scaling-stroke" /></svg>`;
+    wrap.innerHTML = `${limitSvg}<div class="sz-box">${gridCells}</div>${marks}`;
+    const presentTypes = Array.from(new Set(pitches.map(p => classifyCall(p.call))));
+    const legend = document.getElementById('heatmapLegend');
+    legend.innerHTML = presentTypes.map(t => {
+      const marker = t === 'SWINGING' ? `<span class="legend-x" style="color:${CALL_TYPES[t].color};">&#10005;</span>` : `<span class="legend-dot" style="background:${CALL_TYPES[t].color};"></span>`;
+      return `<span>${marker}${CALL_TYPES[t].label}</span>`;
+    }).join('');
+  }
+
+  // ---- Pitch Movement -- hb/ivb read straight from pitches.csv's
+  // break_horizontal / break_vertical_induced columns, exactly as Statcast
+  // reports them (never flipped). Only the glove-side/arm-side LABELS swap
+  // sides based on PITCHER_THROWS (from roster.csv), because those are
+  // pitcher-relative directions that mirror between a RHP and a LHP --
+  // see the handedness-flip discussion this page's labeling follows. ----
+  const MV_AXIS_MIN = -22, MV_AXIS_MAX = 22;
+  function mvToPercent(v) { return ((v - MV_AXIS_MIN) / (MV_AXIS_MAX - MV_AXIS_MIN)) * 100; }
+  function renderMovementGridAndAxes(wrap, hand) {
+    const ticks = [-20, -10, 0, 10, 20];
+    let html = '';
+    ticks.forEach(t => {
+      const pct = mvToPercent(t);
+      html += `<div class="mv-gridline v" style="left:${pct}%;"></div>`;
+      html += `<div class="mv-gridline h" style="top:${100 - pct}%;"></div>`;
+      html += `<div class="mv-tick-label" style="left:${pct}%; top:100%; margin-top:4px;">${t}</div>`;
+      html += `<div class="mv-tick-label y-label" style="left:0%; top:${100 - pct}%;">${t}</div>`;
+    });
+    html += `<div class="mv-axis v" style="left:${mvToPercent(0)}%;"></div>`;
+    html += `<div class="mv-axis h" style="top:${mvToPercent(0)}%;"></div>`;
+    const leftSide = hand === 'R' ? 'glove-side' : 'arm-side';
+    const rightSide = hand === 'R' ? 'arm-side' : 'glove-side';
+    html += `<div class="mv-plot-area-labels" style="left:6%; top:4%;">rise &amp; ${leftSide}</div>`;
+    html += `<div class="mv-plot-area-labels" style="right:4%; top:4%; text-align:right;">rise &amp; ${rightSide}</div>`;
+    html += `<div class="mv-plot-area-labels" style="left:6%; bottom:4%;">drop &amp; ${leftSide}</div>`;
+    html += `<div class="mv-plot-area-labels" style="right:4%; bottom:4%; text-align:right;">drop &amp; ${rightSide}</div>`;
+    wrap.innerHTML = html;
+    const caption = document.getElementById('movementAxisCaption');
+    if (caption) caption.innerHTML = `Horizontal Break (in) &mdash; ${leftSide} &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; ${rightSide}`;
+  }
+  function renderMovement() {
+    const pitches = getScopedPitches().filter(p => p.hb !== null && p.ivb !== null);
+    const wrap = document.getElementById('movementWrap');
+    renderMovementGridAndAxes(wrap, PITCHER_THROWS);
+    let marksHtml = '';
+    pitches.forEach(p => {
+      const left = mvToPercent(p.hb), top = 100 - mvToPercent(p.ivb);
+      const title = `${p.type} · ${p.velo !== null ? p.velo.toFixed(1) : '—'} mph · ${p.hb > 0 ? '+' : ''}${p.hb.toFixed(1)}" horiz / ${p.ivb > 0 ? '+' : ''}${p.ivb.toFixed(1)}" vert`;
+      marksHtml += `<div class="mv-pitch-mark" style="left:${left}%; top:${top}%; background:${PITCH_TINTS[p.type] || '#aaa'};" title="${title}"></div>`;
+    });
+    const typesToAverage = Array.from(new Set(pitches.map(p => p.type)));
+    typesToAverage.forEach(t => {
+      const group = pitches.filter(p => p.type === t);
+      const avgHb = group.reduce((s, p) => s + p.hb, 0) / group.length;
+      const avgIvb = group.reduce((s, p) => s + p.ivb, 0) / group.length;
+      const left = mvToPercent(avgHb), top = 100 - mvToPercent(avgIvb);
+      const title = `${PITCH_LABELS[t] || t} average: ${avgHb > 0 ? '+' : ''}${avgHb.toFixed(1)}" horiz / ${avgIvb > 0 ? '+' : ''}${avgIvb.toFixed(1)}" vert`;
+      marksHtml += `<div class="mv-avg-cross" style="left:${left}%; top:${top}%; color:${PITCH_COLORS[t] || '#555'};" title="${title}"><div class="bar h"></div><div class="bar v"></div><div class="mv-avg-center" style="color:${PITCH_COLORS[t] || '#555'};"></div></div>`;
+    });
+    wrap.insertAdjacentHTML('beforeend', marksHtml);
+    const legend = document.getElementById('movementLegend');
+    legend.innerHTML = typesToAverage.map(t => {
+      const group = pitches.filter(p => p.type === t);
+      const avgHb = (group.reduce((s, p) => s + p.hb, 0) / group.length).toFixed(1);
+      const avgIvb = (group.reduce((s, p) => s + p.ivb, 0) / group.length).toFixed(1);
+      return `<div class="mv-legend-item"><span class="mv-legend-swatch" style="background:${PITCH_COLORS[t] || '#888'};"></span><span class="mv-legend-text"><div class="mv-legend-type">${PITCH_LABELS[t] || t}</div><div class="mv-legend-avg">avg ${avgIvb > 0 ? '+' : ''}${avgIvb}" vert / ${avgHb > 0 ? '+' : ''}${avgHb}" horiz</div></span></div>`;
+    }).join('');
+  }
+
+  // ---- Release Point -- real per-pitch release_x/release_z, axis auto-
+  // fit to THIS pitcher's own cluster (computed once from his whole outing,
+  // not re-zoomed per filter) rather than a hardcoded range, per the
+  // "zoom to the data, not to a hand-based rule" discussion. x is field-
+  // relative (3B side/1B side) and is never relabeled by hand -- unlike
+  // Pitch Movement, a RHP and LHP are expected to land on opposite sides
+  // here, since their arms come from opposite sides of their bodies. ----
+  function computeReleaseAxis(pitches) {
+    const xs = pitches.map(p => p.releaseX).filter(v => v !== null);
+    const zs = pitches.map(p => p.releaseZ).filter(v => v !== null);
+    if (!xs.length || !zs.length) return { xMin: -2.5, xMax: -1.5, zMin: 5.5, zMax: 6.5 };
+    const xMinRaw = Math.min(...xs), xMaxRaw = Math.max(...xs);
+    const zMinRaw = Math.min(...zs), zMaxRaw = Math.max(...zs);
+    const xSpan = Math.max(0.3, xMaxRaw - xMinRaw);
+    const zSpan = Math.max(0.3, zMaxRaw - zMinRaw);
+    const xPad = xSpan * 0.3, zPad = zSpan * 0.3;
+    return { xMin: xMinRaw - xPad, xMax: xMaxRaw + xPad, zMin: zMinRaw - zPad, zMax: zMaxRaw + zPad };
+  }
+  function computeExtAxis(pitches) {
+    const exts = pitches.map(p => p.extension).filter(v => v !== null);
+    if (!exts.length) return { min: 5.0, max: 7.5 };
+    const minRaw = Math.min(...exts), maxRaw = Math.max(...exts);
+    const span = Math.max(0.5, maxRaw - minRaw);
+    const pad = span * 0.3;
+    return { min: minRaw - pad, max: maxRaw + pad };
+  }
+  function renderReleasePoint() {
+    const pitches = getScopedPitches().filter(p => p.releaseX !== null && p.releaseZ !== null);
+    const wrap = document.getElementById('releaseWrap');
+    const { xMin, xMax, zMin, zMax } = RELEASE_AXIS;
+    function xToPct(x) { return ((x - xMin) / (xMax - xMin)) * 100; }
+    function zToPct(z) { return 100 - ((z - zMin) / (zMax - zMin)) * 100; }
+    const xStep = (xMax - xMin) / 6, zStep = (zMax - zMin) / 4;
+    let html = '';
+    for (let i = 0; i <= 6; i++) {
+      const t = xMin + i * xStep, pct = xToPct(t);
+      html += `<div class="rp-gridline v" style="left:${pct}%;"></div><div class="rp-tick-label" style="left:${pct}%; top:100%; margin-top:4px;">${t.toFixed(2)}</div>`;
+    }
+    for (let i = 0; i <= 4; i++) {
+      const t = zMin + i * zStep, pct = zToPct(t);
+      html += `<div class="rp-gridline h" style="top:${pct}%;"></div><div class="rp-tick-label y-label" style="left:0%; top:${pct}%;">${t.toFixed(1)}</div>`;
+    }
+    wrap.innerHTML = html;
+    if (pitches.length === 0) { document.getElementById('releaseLegend').innerHTML = ''; return; }
+    const typesPresent = Array.from(new Set(pitches.map(p => p.type)));
+    const avgs = {};
+    typesPresent.forEach(t => {
+      const group = pitches.filter(p => p.type === t);
+      const avgX = group.reduce((s, p) => s + p.releaseX, 0) / group.length;
+      const avgZ = group.reduce((s, p) => s + p.releaseZ, 0) / group.length;
+      const maxDist = Math.max(0.03, ...group.map(p => Math.hypot(p.releaseX - avgX, p.releaseZ - avgZ)));
+      avgs[t] = { avgX, avgZ, maxDist };
+    });
+    let ringsHtml = '';
+    typesPresent.forEach(t => {
+      const a = avgs[t];
+      const left = xToPct(a.avgX), top = zToPct(a.avgZ);
+      const radiusPct = (a.maxDist / (xMax - xMin)) * 100;
+      ringsHtml += `<div class="rp-spread-ring" style="left:${left}%; top:${top}%; width:${radiusPct * 2}%; height:${radiusPct * 2}%; border-color:${PITCH_COLORS[t] || '#555'}; opacity:0.8;"></div>`;
+    });
+    wrap.insertAdjacentHTML('beforeend', ringsHtml);
+    let marksHtml = '';
+    pitches.forEach(p => {
+      const left = xToPct(p.releaseX), top = zToPct(p.releaseZ);
+      marksHtml += `<div class="rp-pitch-mark" style="left:${left}%; top:${top}%; background:${PITCH_TINTS[p.type] || '#aaa'};" title="${(PITCH_LABELS[p.type] || p.type)}: ${p.releaseX.toFixed(2)}, ${p.releaseZ.toFixed(2)} ft"></div>`;
+    });
+    typesPresent.forEach(t => {
+      const a = avgs[t];
+      const left = xToPct(a.avgX), top = zToPct(a.avgZ);
+      marksHtml += `<div class="rp-avg-cross" style="left:${left}%; top:${top}%; color:${PITCH_COLORS[t] || '#555'};" title="${PITCH_LABELS[t] || t} average"><div class="bar h"></div><div class="bar v"></div><div class="rp-avg-center" style="color:${PITCH_COLORS[t] || '#555'};"></div></div>`;
+    });
+    wrap.insertAdjacentHTML('beforeend', marksHtml);
+    const { min: extMin, max: extMax } = EXT_AXIS;
+    function extToPct(e) { return ((e - extMin) / (extMax - extMin)) * 100; }
+    const legend = document.getElementById('releaseLegend');
+    legend.innerHTML = typesPresent.map(t => {
+      const a = avgs[t];
+      const group = pitches.filter(p => p.type === t).map(p => p.extension).filter(v => v !== null);
+      const avgExt = group.length ? group.reduce((s, v) => s + v, 0) / group.length : null;
+      return `
+        <div class="rp-legend-item">
+          <span class="rp-legend-swatch" style="background:${PITCH_COLORS[t] || '#888'};"></span>
+          <span class="rp-legend-text"><div class="rp-legend-type">${PITCH_LABELS[t] || t}</div><div class="rp-legend-avg">release ${a.avgX.toFixed(2)}, ${a.avgZ.toFixed(2)} ft</div></span>
+          <span class="rp-ext-bar-wrap">
+            <span class="rp-ext-bar-track"><span class="rp-ext-bar-fill" style="width:${avgExt !== null ? extToPct(avgExt) : 0}%; background:${PITCH_COLORS[t] || '#888'};"></span></span>
+            <span class="rp-ext-value">${avgExt !== null ? avgExt.toFixed(1) + ' ft' : '—'}</span>
+          </span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  const CHART_SLIDES = ['Pitch Location', 'Pitch Movement', 'Release Point'];
+  let currentSlide = 0;
+  function renderChartDots() {
+    const dots = document.getElementById('chartDots');
+    dots.innerHTML = CHART_SLIDES.map((label, i) => `<button class="chart-dot${i === currentSlide ? ' active' : ''}" aria-label="${label}" onclick="goToSlide(${i})"></button>`).join('');
+  }
+  function showSlide() {
+    document.querySelectorAll('.chart-carousel-viewport .heatmap-card').forEach(card => {
+      card.classList.toggle('active', Number(card.dataset.slide) === currentSlide);
+    });
+    document.getElementById('carouselTitle').innerHTML = `Statcast Charts &mdash; ${CHART_SLIDES[currentSlide]}`;
+    renderChartDots();
+  }
+  function shiftChart(delta) { currentSlide = (currentSlide + delta + CHART_SLIDES.length) % CHART_SLIDES.length; showSlide(); }
+  function goToSlide(i) { currentSlide = i; showSlide(); }
+
+  function renderAll() {
+    renderFilterRow();
+    renderStats();
+    renderHeatmap();
+    renderMovement();
+    renderReleasePoint();
+    renderAtBats();
+    showSlide();
+  }
+
+  function renderShell(headerHtml) {
+    document.getElementById('content').innerHTML = `
+      ${headerHtml}
+      <div class="statcast-layout">
+        <div class="statcast-left">
+          <div class="section-title">Game Statcast</div>
+          <div class="pitch-filter-row" id="filterRow"></div>
+          <div class="afl-stats-grid" id="statsGrid"></div>
+        </div>
+        <div class="statcast-right">
+          <div class="charts-row-header">
+            <div class="section-title" style="margin: 0;" id="carouselTitle">Statcast Charts &mdash; Pitch Location</div>
+            <div class="chart-dots" id="chartDots"></div>
+          </div>
+          <div class="chart-carousel">
+            <button class="chart-nav-btn" onclick="shiftChart(-1)" aria-label="Previous chart">&#8249;</button>
+            <div class="chart-carousel-viewport" id="chartsRow">
+              <div class="heatmap-card active" data-slide="0">
+                <div class="heatmap-title" style="text-align: center;">Pitch Location <span id="heatmapScope"></span></div>
+                <div class="heatmap-wrap" id="heatmapWrap"></div>
+                <div class="heatmap-legend" id="heatmapLegend"></div>
+              </div>
+              <div class="heatmap-card" data-slide="1">
+                <div class="heatmap-title">Pitch Movement</div>
+                <div class="movement-plot-wrap" id="movementWrap"></div>
+                <div class="mv-axis-caption" id="movementAxisCaption"></div>
+                <div class="movement-legend" id="movementLegend"></div>
+              </div>
+              <div class="heatmap-card" data-slide="2">
+                <div class="heatmap-title">Release Point</div>
+                <div class="rp-plot-wrap" id="releaseWrap"></div>
+                <div class="rp-axis-caption">Horizontal Release (ft) &mdash; 3B side &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; 1B side</div>
+                <div class="rp-ext-caption">Extension (ft from rubber toward plate)</div>
+                <div class="rp-legend" id="releaseLegend"></div>
+              </div>
+            </div>
+            <button class="chart-nav-btn" onclick="shiftChart(1)" aria-label="Next chart">&#8250;</button>
+          </div>
+        </div>
+      </div>
+      <div class="section-title">Pitch-by-Pitch <span class="section-note">grouped by at-bat</span></div>
+      <div id="abContainer"></div>
+    `;
+  }
+
+  async function init() {
+    const content = document.getElementById('content');
+    if (!gamePk || !pitcherId) {
+      content.innerHTML = '<p class="error">Missing game_pk or pitcher_id in the URL.</p>';
+      return;
+    }
+    try {
+      const [rosterRes, pitchesRes, scheduleRes, pLogsRes] = await Promise.all([
+        fetch(`data/${season}/roster.csv`),
+        fetch(`data/${season}/pitches.csv`),
+        fetch(`data/${season}/schedule.csv`),
+        fetch(`data/${season}/pitching_gamelogs.csv`),
+      ]);
+      const [rosterRows, pitchRows, scheduleRows, pLogRows] = await Promise.all([
+        rosterRes.text().then(parseCSV),
+        pitchesRes.text().then(parseCSV),
+        scheduleRes.text().then(parseCSV),
+        pLogsRes.text().then(parseCSV),
+      ]);
+
+      const rosterRow = rosterRows.find(r => r.player_id === pitcherId);
+      PITCHER_THROWS = rosterRow && rosterRow.throws === 'Left' ? 'L' : 'R';
+      const pitcherName = rosterRow ? rosterRow.full_name : 'Pitcher';
+      const team = rosterRow ? rosterRow.team : '';
+
+      const scheduleRow = scheduleRows.find(r => r.game_pk === gamePk);
+      const gameLogRow = pLogRows.find(r => r.pitcher_id === pitcherId && r.game_pk === gamePk);
+
+      const rawPitches = pitchRows.filter(r => r.game_pk === gamePk && r.pitcher_id === pitcherId);
+      if (rawPitches.length === 0) {
+        content.innerHTML = '<p class="error">No Statcast pitches found for this pitcher in this game.</p>';
+        return;
+      }
+
+      allPitches = rawPitches.map((r, i) => {
+        const zone = num(r.zone);
+        // Use the real plate-crossing coordinates once pitches.csv has
+        // them (plate_x/plate_z, added by fetch_afl_pitches.py reading
+        // pitchData.coordinates.pX/pZ) -- fall back to the zone-centroid
+        // approximation for any row fetched before that column existed.
+        const realPlateX = num(r.plate_x), realPlateZ = num(r.plate_z);
+        const hasRealPlate = realPlateX !== null && realPlateZ !== null;
+        const { px, pz } = hasRealPlate ? { px: realPlateX, pz: realPlateZ } : approxPlateCoords(zone, i);
+        return {
+          type: r.pitch_type_code, velo: num(r.start_speed), spin: num(r.spin_rate) !== null ? Math.round(num(r.spin_rate)) : null,
+          zone, call: r.call, batter_id: r.batter_id, batter_name: r.batter_name, inning: r.inning, half_inning: r.half_inning,
+          hb: num(r.break_horizontal), ivb: num(r.break_vertical_induced), breakVertical: num(r.break_vertical),
+          breakAngle: num(r.break_angle) !== null ? Math.round(num(r.break_angle)) : null, breakLength: num(r.break_length),
+          releaseX: num(r.release_x), releaseY: num(r.release_y), releaseZ: num(r.release_z),
+          extension: num(r.extension), plateTime: num(r.plate_time), typeConfidence: num(r.type_confidence),
+          spinDirection: num(r.spin_direction) !== null ? Math.round(num(r.spin_direction)) : null,
+          launch_speed: num(r.launch_speed), launch_angle: num(r.launch_angle), trajectory: r.trajectory,
+          px, pz, plateIsReal: hasRealPlate,
+        };
+      });
+
+      atBats = buildAtBats(allPitches);
+      typeCounts = {};
+      allPitches.forEach(p => { typeCounts[p.type] = (typeCounts[p.type] || 0) + 1; });
+      PITCH_COLORS = assignPitchColors(new Set(Object.keys(typeCounts)));
+      PITCH_TINTS = Object.fromEntries(Object.keys(PITCH_COLORS).map(code => [code, lighten(PITCH_COLORS[code], 0.55)]));
+      RELEASE_AXIS = computeReleaseAxis(allPitches);
+      EXT_AXIS = computeExtAxis(allPitches);
+
+      const dateStr = scheduleRow ? scheduleRow.date : '';
+      const venue = scheduleRow ? scheduleRow.venue : '';
+      const matchup = scheduleRow ? `${scheduleRow.away_team} @ ${scheduleRow.home_team}` : '';
+      const finalLine = scheduleRow && scheduleRow.status === 'Final'
+        ? `Final &middot; ${scheduleRow.away_team.split(' ').pop()} ${scheduleRow.away_score}, ${scheduleRow.home_team.split(' ').pop()} ${scheduleRow.home_score}`
+        : (scheduleRow ? scheduleRow.status : '');
+      const pitcherLine = gameLogRow
+        ? `${pitcherName} &mdash; ${gameLogRow.inningsPitched} IP, ${gameLogRow.earnedRuns} ER, ${gameLogRow.strikeOuts} K`
+        : pitcherName;
+
+      renderShell(`
+        <a href="player.html?id=${pitcherId}&season=${season}" class="back-link">&larr; Back to ${pitcherName}</a>
+        <div class="game-header">
+          <div class="game-header-left">
+            <div class="game-matchup">${matchup}</div>
+            <div class="game-sub">${dateStr}${venue ? ' &middot; ' + venue : ''}</div>
+          </div>
+          <div class="game-result">
+            <div class="line">${finalLine}</div>
+            <div class="pitcher-line">${pitcherLine}</div>
+          </div>
+        </div>
+      `);
+
+      renderAll();
+    } catch (err) {
+      content.innerHTML = `<p class="error">Couldn't load this game: ${err.message}</p>`;
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>

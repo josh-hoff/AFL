@@ -122,6 +122,11 @@
   .gl-row.gl-total { border-top: 2px solid var(--tab-active); background: #fff2e6; font-weight: 700; }
   .gl-row.post { background: #eaf1fa; }
   .gl-row.gl-total.post-final { border-top: 2px solid #2f6fb0; background: #eaf1fa; font-weight: 700; }
+  /* Pitching per-game Statcast rows link through to that game's full
+     Pitch Location/Movement/Release Point page -- same hover affordance
+     already used for pitch-row/ab-head elsewhere on the site. */
+  .gl-row.gl-row-link { cursor: pointer; }
+  .gl-row.gl-row-link:hover { background: #fafaf8; }
   .stat-glossary {
     margin: 1.5rem 0 0.5rem;
     border: 1px solid var(--border);
@@ -553,7 +558,7 @@
     return rows;
   }
 
-  function buildStatcastGameLogHtml(perGameRows, statType) {
+  function buildStatcastGameLogHtml(perGameRows, statType, playerId) {
     const cols = statType === 'pitching'
       ? ['date', 'opponent', 'totalPitches', 'avgVelo', 'maxVelo', 'avgSpin']
       : ['date', 'opponent', 'battedBalls', 'avgEV', 'maxEV', 'avgLA', 'hardHitPct'];
@@ -562,6 +567,10 @@
       : ['Date', 'Opp', 'BIP', 'Avg EV', 'Max EV', 'Avg LA', 'Hard-Hit%'];
     const gridCols = `90px 1.1fr ${cols.slice(2).map(() => '0.8fr').join(' ')}`;
     const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map(l => `<div>${l}</div>`).join('')}</div>`;
+    // Pitching rows link through to the full per-game Statcast page (Pitch
+    // Location/Movement/Release Point charts) for that outing -- hitting
+    // rows don't yet have an equivalent page, so they stay plain. Only
+    // rows with a real game_pk (Statcast data exists for that game) link.
     const rowsHtml = perGameRows.map(r => {
       const cells = cols.map(c => {
         if (c === 'date') return `<div>${r.date || ''}</div>`;
@@ -571,7 +580,11 @@
         if (c === 'hardHitPct') return `<div>${fmtStatcastPct(r[c])}</div>`;
         return `<div>${r[c] !== undefined && r[c] !== null ? r[c] : '-'}</div>`;
       }).join('');
-      return `<div class="gl-row" style="grid-template-columns:${gridCols};">${cells}</div>`;
+      const linkable = statType === 'pitching' && r.gamePk;
+      const rowAttrs = linkable
+        ? ` class="gl-row gl-row-link" style="grid-template-columns:${gridCols};" onclick="window.location.href='game.html?game_pk=${r.gamePk}&pitcher_id=${playerId}&season=${currentSeason}'" title="View full Statcast for this game"`
+        : ` class="gl-row" style="grid-template-columns:${gridCols};"`;
+      return `<div${rowAttrs}>${cells}</div>`;
     }).join('');
     return `<div class="gl-table">${headerHtml}${rowsHtml}</div>`;
   }
@@ -590,7 +603,7 @@
     return `<div class="gl-table">${headerHtml}${rowsHtml}</div>`;
   }
 
-  function renderStatcastSection(team, totals, perGameRows, statType, toggleId) {
+  function renderStatcastSection(team, totals, perGameRows, statType, toggleId, playerId) {
     const statsGrid = statType === 'pitching'
       ? `
         <div class="afl-stats-grid" style="grid-template-columns: repeat(3, 1fr);">
@@ -632,7 +645,7 @@
         <a href="#" onclick="toggleFieldingRow('${toggleId}'); return false;" class="transaction-expand-link">View Game-by-Game Statcast &#9662;</a>
       </div>
       <div id="${toggleId}" class="career-gamelog-wrap" style="display:none; margin: -0.75rem 0 1.5rem; border-top:none;">
-        ${buildStatcastGameLogHtml(perGameRows, statType)}
+        ${buildStatcastGameLogHtml(perGameRows, statType, playerId)}
       </div>
     `;
   }
@@ -1579,7 +1592,7 @@
       const statcastTotals = isPitcher ? pitcherStatcastTotals(playerPitches) : hitterStatcastTotals(playerPitches);
       if (statcastTotals) {
         const statcastPerGame = buildStatcastPerGameRows(playerPitches, opponentMap, statType);
-        html += renderStatcastSection(player.team, statcastTotals, statcastPerGame, statType, 'statcast-gamelog');
+        html += renderStatcastSection(player.team, statcastTotals, statcastPerGame, statType, 'statcast-gamelog', playerId);
       }
 
       // DH is batting-only -- there shouldn't be fielding rows for it, but
