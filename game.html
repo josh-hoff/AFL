@@ -62,22 +62,29 @@
   .ab-select-hint { color: var(--text-muted); font-size: 0.68rem; font-weight: 600; margin-left: 0.5rem; }
   .ab-head.selected .ab-select-hint { color: var(--tab-active); }
 
-  .pitch-row { display: grid; grid-template-columns: 34px 90px 70px 90px 70px 56px 1fr; gap: 0.5rem; padding: 0.4rem 1rem; align-items: center; font-size: 0.82rem; }
-  .pitch-row.head { background: #fafaf8; font-size: 0.64rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); }
+  /* Main row shows the 10 always-visible Statcast columns per pitch; a 3px
+     left-edge accent (ball/strike/in-play color) stands in for a dedicated
+     Result column so the outcome is still readable at a glance -- the full
+     Result text (and everything else: zone, release point, extension,
+     plate time, type confidence, plate x/z) lives in the collapsible row
+     below, same click-to-expand behavior as before. */
+  .pitch-row { display: grid; grid-template-columns: 34px 1.3fr 0.85fr 0.95fr 0.95fr 0.95fr 0.95fr 0.95fr 0.95fr 0.95fr; gap: 0.9rem; padding: 0.55rem 1.4rem 0.55rem 1rem; align-items: center; font-size: 0.86rem; position: relative; }
+  .pitch-row.head { background: #fafaf8; font-size: 0.6rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); line-height: 1.15; }
   .pitch-row:not(.head) { border-top: 1px solid var(--border); cursor: pointer; }
   .pitch-row:not(.head):hover { background: #fafaf8; }
+  .pitch-row:not(.head)::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--row-accent, transparent); }
   .pitch-expand-hint { color: var(--tab-active); font-size: 0.7rem; }
 
-  .pitch-detail { background: #fafaf8; border-top: 1px dashed var(--border); padding: 0.7rem 1rem 0.8rem 2.6rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem 1rem; }
+  .pitch-detail { background: #fafaf8; border-top: 1px dashed var(--border); padding: 0.7rem 1rem 0.8rem 1.6rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem 1rem; }
   .pitch-detail-item .pd-label { color: var(--text-muted); font-size: 0.62rem; text-transform: uppercase; font-weight: 700; }
   .pitch-detail-item .pd-value { color: var(--text); font-size: 0.82rem; font-weight: 600; margin-top: 0.1rem; }
+  .pitch-detail-item .pd-value.result-strike { color: #c0392b; }
+  .pitch-detail-item .pd-value.result-ball { color: #2f6fb0; }
+  .pitch-detail-item .pd-value.result-inplay { color: #1a8a4a; }
   .pitch-num { color: var(--text-muted); font-weight: 600; }
-  .pitch-type-cell { display: flex; align-items: center; gap: 0.4rem; font-weight: 600; }
+  .pitch-type-cell { display: flex; align-items: center; gap: 0.4rem; font-weight: 700; white-space: nowrap; }
   .pitch-velo { font-weight: 700; }
-  .pitch-result { font-size: 0.78rem; color: var(--text-muted); }
-  .pitch-result.in-play { color: var(--text); font-weight: 600; }
-  .pitch-result.strike { color: #c0392b; }
-  .pitch-result.ball { color: #2f6fb0; }
+  .pitch-numcell { font-variant-numeric: tabular-nums; }
   .bip-note { font-size: 0.76rem; color: var(--accent); font-weight: 600; margin-top: 0.1rem; }
 
   .charts-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 1.75rem; align-items: stretch; }
@@ -145,7 +152,19 @@
   .mv-legend-text .mv-legend-avg { color: var(--text-muted); font-size: 0.7rem; }
   .scope-clear { color: var(--tab-active); font-size: 0.7rem; font-weight: 700; cursor: pointer; margin-left: 0.3rem; }
 
-  .rp-plot-wrap { position: relative; width: 100%; max-width: 380px; aspect-ratio: 1 / 1; margin: 0.5rem auto 1.5rem; }
+  /* Plot gets a left gutter for the rotated y-axis title running alongside
+     the tick labels. */
+  .rp-plot-row { display: flex; align-items: stretch; gap: 0.3rem; width: 100%; max-width: 380px; margin: 0.5rem auto 0; }
+  .rp-y-axis-title {
+    writing-mode: vertical-rl; transform: rotate(180deg); text-align: center;
+    font-size: 0.64rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: 0.03em; flex-shrink: 0; width: 14px; padding: 0.4rem 0;
+  }
+  /* The y tick labels sit outside the plot's own box (left:0% + translateX(-100%)),
+     and the x tick labels sit below it (top:100%), so the wrap needs real
+     reserved space on those edges or they collide with the y-axis title and
+     the caption below. */
+  .rp-plot-wrap { position: relative; width: 100%; aspect-ratio: 1 / 1; flex: 1; margin-left: 30px; margin-bottom: 20px; }
   .rp-gridline { position: absolute; background: #d8d5cf; }
   .rp-gridline.v { width: 1px; top: 0; bottom: 0; }
   .rp-gridline.h { height: 1px; left: 0; right: 0; }
@@ -157,7 +176,14 @@
   .rp-avg-cross .bar.h { left: 0; right: 0; top: 50%; height: 2px; transform: translateY(-50%); }
   .rp-avg-cross .bar.v { top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-50%); }
   .rp-avg-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
-  .rp-axis-caption { text-align: center; font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-top: 0.4rem; }
+  /* The caption row mirrors .rp-plot-row's geometry (same spacer width +
+     gap) so its "plot column" lines up exactly with .rp-plot-wrap's box,
+     and centers under the plot itself rather than the whole row. */
+  .rp-axis-caption-row { display: flex; align-items: flex-start; gap: 0.3rem; width: 100%; max-width: 380px; margin: 0.5rem auto 0; }
+  .rp-axis-caption-spacer { flex-shrink: 0; width: 14px; }
+  .rp-axis-caption { flex: 1; margin-left: 30px; text-align: center; }
+  .rp-axis-sides { font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; }
+  .rp-axis-title { font-size: 0.66rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; margin-top: 0.15rem; opacity: 0.85; }
   .rp-ext-caption { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-top: 0.7rem; text-align: center; }
   .rp-legend { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.7rem; width: 100%; max-width: 420px; }
   .rp-legend-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; }
@@ -443,21 +469,22 @@
   }
 
   function renderPitchDetail(p) {
+    const callType = classifyCall(p.call);
+    const resultClass = callType === 'IN_PLAY' ? 'result-inplay' : callType === 'BALL' ? 'result-ball' : 'result-strike';
+    let resultVal = p.call;
+    if (callType === 'IN_PLAY' && p.launch_speed !== null) {
+      resultVal += ` — ${p.launch_speed.toFixed(1)} mph${p.launch_angle !== null ? ' · ' + p.launch_angle.toFixed(0) + '° LA' : ''}${p.trajectory ? ' · ' + titleCaseTrajectory(p.trajectory) : ''}`;
+    }
     const fields = [
+      ['Result', resultVal, resultClass],
+      ['Zone', p.zone !== null ? p.zone : '—'],
       ['Release Pt (x,y,z)', p.releaseX !== null ? `${p.releaseX.toFixed(2)}, ${p.releaseY !== null ? p.releaseY.toFixed(1) : '—'}, ${p.releaseZ.toFixed(2)} ft` : '—'],
       ['Extension', p.extension !== null ? `${p.extension.toFixed(1)} ft` : '—'],
       ['Plate Time', p.plateTime !== null ? `${p.plateTime.toFixed(3)} s` : '—'],
       ['Type Confidence', p.typeConfidence !== null ? p.typeConfidence : '—'],
-      ['Spin Direction', p.spinDirection !== null ? `${p.spinDirection}°` : '—'],
-      ['Break Angle', p.breakAngle !== null ? `${p.breakAngle}°` : '—'],
-      ['Break Length', p.breakLength !== null ? `${p.breakLength}"` : '—'],
-      ['Vert. Break', p.breakVertical !== null ? `${p.breakVertical}"` : '—'],
-      ['Vert. Break (Induced)', p.ivb !== null ? `${p.ivb}"` : '—'],
-      ['Horiz. Break', p.hb !== null ? `${p.hb}"` : '—'],
-      ['Zone', p.zone !== null ? p.zone : '—'],
       [p.plateIsReal ? 'Plate X, Z' : 'Plate X, Z (approx.)', `${p.px.toFixed(2)}, ${p.pz.toFixed(2)} ft`],
     ];
-    return fields.map(([label, val]) => `<div class="pitch-detail-item"><div class="pd-label">${label}</div><div class="pd-value">${val}</div></div>`).join('');
+    return fields.map(([label, val, cls]) => `<div class="pitch-detail-item"><div class="pd-label">${label}</div><div class="pd-value${cls ? ' ' + cls : ''}">${val}</div></div>`).join('');
   }
   function togglePitchDetail(id) {
     const el = document.getElementById(id);
@@ -471,22 +498,21 @@
       if (visiblePitches.length === 0) return '';
       const rows = visiblePitches.map(({ p, i }) => {
         const callType = classifyCall(p.call);
-        const resultClass = resultClassFor(callType);
-        let bip = '';
-        if (callType === 'IN_PLAY' && p.launch_speed !== null) {
-          bip = `<div class="bip-note">${p.launch_speed.toFixed(1)} mph${p.launch_angle !== null ? ' · ' + p.launch_angle.toFixed(0) + '° LA' : ''}${p.trajectory ? ' · ' + titleCaseTrajectory(p.trajectory) : ''}</div>`;
-        }
-        const move = `${p.ivb !== null ? (p.ivb > 0 ? '+' : '') + p.ivb.toFixed(1) : '—'}" / ${p.hb !== null ? (p.hb > 0 ? '+' : '') + p.hb.toFixed(1) : '—'}"`;
+        const accentColor = CALL_TYPES[callType].color;
+        const sign = (v, decimals) => v !== null ? `${v > 0 ? '+' : ''}${v.toFixed(decimals)}` : '—';
         const detailId = `pd-${abIdx}-${i}`;
         return `
-          <div class="pitch-row" onclick="togglePitchDetail('${detailId}')">
+          <div class="pitch-row" style="--row-accent:${accentColor}" onclick="togglePitchDetail('${detailId}')">
             <div class="pitch-num">${i + 1}</div>
-            <div class="pitch-type-cell"><span class="pitch-dot" style="background:${PITCH_COLORS[p.type] || '#888'}"></span>${p.type}</div>
-            <div class="pitch-velo">${p.velo !== null ? p.velo.toFixed(1) : '—'}</div>
-            <div>${move}</div>
-            <div>${p.spin !== null ? p.spin : '—'}</div>
-            <div>${p.zone !== null ? p.zone : '—'}</div>
-            <div class="pitch-result ${resultClass}">${p.call}${bip}</div>
+            <div class="pitch-type-cell"><span class="pitch-dot" style="background:${PITCH_COLORS[p.type] || '#888'}"></span>${PITCH_LABELS[p.type] || p.type}</div>
+            <div class="pitch-velo pitch-numcell">${p.velo !== null ? p.velo.toFixed(1) : '—'}</div>
+            <div class="pitch-numcell">${p.spin !== null ? p.spin : '—'}</div>
+            <div class="pitch-numcell">${p.spinDirection !== null ? p.spinDirection + '°' : '—'}</div>
+            <div class="pitch-numcell">${sign(p.ivb, 1)}${p.ivb !== null ? '"' : ''}</div>
+            <div class="pitch-numcell">${sign(p.breakVertical, 1)}${p.breakVertical !== null ? '"' : ''}</div>
+            <div class="pitch-numcell">${sign(p.hb, 1)}${p.hb !== null ? '"' : ''}</div>
+            <div class="pitch-numcell">${p.breakAngle !== null ? p.breakAngle + '°' : '—'}</div>
+            <div class="pitch-numcell">${p.breakLength !== null ? p.breakLength + '"' : '—'}</div>
           </div>
           <div class="pitch-detail" id="${detailId}" style="display:none;">${renderPitchDetail(p)}</div>
         `;
@@ -499,7 +525,7 @@
             <div class="ab-outcome ${ab.outcomeClass}">${ab.outcome}</div>
           </div>
           <div class="pitch-row head">
-            <div>#</div><div>Type</div><div>Velo</div><div>Movement</div><div>Spin</div><div>Zone</div><div>Result <span class="pitch-expand-hint">(click row for full Statcast)</span></div>
+            <div>#</div><div>Type</div><div>Velo</div><div>Spin Rate</div><div>Spin Dir</div><div>VB (Ind)</div><div>Vert Break</div><div>Horiz Break</div><div>Break Angle</div><div>Break Length <span class="pitch-expand-hint">(click row for full Statcast)</span></div>
           </div>
           ${rows}
         </div>
@@ -744,8 +770,17 @@
               </div>
               <div class="heatmap-card" data-slide="2">
                 <div class="heatmap-title">Release Point</div>
-                <div class="rp-plot-wrap" id="releaseWrap"></div>
-                <div class="rp-axis-caption">Horizontal Release (ft) &mdash; 3B side &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; 1B side</div>
+                <div class="rp-plot-row">
+                  <div class="rp-y-axis-title">Vertical Release (ft)</div>
+                  <div class="rp-plot-wrap" id="releaseWrap"></div>
+                </div>
+                <div class="rp-axis-caption-row">
+                  <div class="rp-axis-caption-spacer"></div>
+                  <div class="rp-axis-caption">
+                    <div class="rp-axis-sides">3B side &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; 1B side</div>
+                    <div class="rp-axis-title">Horizontal Release (ft)</div>
+                  </div>
+                </div>
                 <div class="rp-ext-caption">Extension (ft from rubber toward plate)</div>
                 <div class="rp-legend" id="releaseLegend"></div>
               </div>
