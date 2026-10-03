@@ -117,8 +117,20 @@
   .heatmap-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; box-sizing: border-box; }
   .heatmap-title { font-size: 0.72rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin-bottom: 0.6rem; align-self: center; }
 
-  .heatmap-wrap { position: relative; width: 100%; max-width: 380px; aspect-ratio: 1 / 1; margin-bottom: 0.2rem; }
-  .sz-box { position: absolute; left: 26.4%; top: 16.7%; width: 47.2%; height: 66.7%; border: 3px solid var(--text); border-radius: 2px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); }
+  /* overflow: hidden is a safety net -- even with the wider plot window
+     below, a genuinely wild pitch (backstop, errant bounce) can still fall
+     outside it, and without clipping that dot escapes the card entirely
+     and overlaps the rest of the page. */
+  .heatmap-wrap { position: relative; width: 100%; max-width: 380px; aspect-ratio: 1 / 1; margin-bottom: 0.2rem; overflow: hidden; border-radius: 4px; }
+  /* Just enough inset that a dot/x-mark plotted right at the outer limit
+     of PLOT_X/Z_MIN/MAX doesn't get visually clipped by the card edge --
+     sized to roughly the marker's own half-width (~6-7px) at this card's
+     max width, not a generous margin, so the plot still uses as much of
+     the card as it safely can. Everything (dashed limit box, strike zone,
+     dots) is positioned in percentages relative to this, not the wrap
+     itself, so the whole plot shrinks in by the same small margin together. */
+  .heatmap-plot-area { position: absolute; inset: 1.8%; }
+  .sz-box { position: absolute; left: 35.8%; top: 33.3%; width: 28.3%; height: 33.3%; border: 3px solid var(--text); border-radius: 2px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); }
   .sz-limit-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
   .sz-box .sz-cell { border: 1px solid rgba(17,20,24,0.3); }
   .sz-box .sz-cell:nth-child(3n+1) { border-left: none; }
@@ -345,9 +357,9 @@
   // ---- Discrete strike-zone "zone" (1-14, standard MLB numbering) is all
   // pitches.csv carries -- no continuous plate_x/plate_z like the mockup's
   // demo data assumed. Approximate plate coordinates (feet) are each
-  // zone's centroid within the same 3ft x 3ft plot box the mockup used
-  // (sz-box = 17in wide x 2ft tall, centered), with a little deterministic
-  // jitter so multiple pitches in the same zone don't stack exactly on top
+  // zone's centroid in real-world feet (sz-box = 17in wide x 2ft tall,
+  // centered) -- independent of the plot window's scale below, with a
+  // little deterministic jitter so multiple pitches in the same zone don't stack exactly on top
   // of each other. Replace this with real plate_x/plate_z once the fetch
   // script captures them. ----
   const ZONE_CENTROID = {
@@ -551,8 +563,12 @@
     }).join('');
   }
 
-  const PLOT_X_MIN = -1.5, PLOT_X_MAX = 1.5;
-  const PLOT_Z_MIN = 1.0, PLOT_Z_MAX = 4.0;
+  // Wide enough to hold the large majority of real pitches (including
+  // clear balls off the plate), not just the zone itself -- real plate_x/
+  // plate_z can still occasionally fall outside even this on a truly wild
+  // pitch, which is what .heatmap-wrap's overflow:hidden is for.
+  const PLOT_X_MIN = -2.5, PLOT_X_MAX = 2.5;
+  const PLOT_Z_MIN = -0.5, PLOT_Z_MAX = 5.5;
   function toPlotPercent(px, pz) {
     return { left: ((px - PLOT_X_MIN) / (PLOT_X_MAX - PLOT_X_MIN)) * 100, top: 100 - ((pz - PLOT_Z_MIN) / (PLOT_Z_MAX - PLOT_Z_MIN)) * 100 };
   }
@@ -576,7 +592,7 @@
     }).join('');
     const wrap = document.getElementById('heatmapWrap');
     const limitSvg = `<svg class="sz-limit-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(90,100,114,0.48)" stroke-width="0.65" stroke-dasharray="1.5 3.5" vector-effect="non-scaling-stroke" /></svg>`;
-    wrap.innerHTML = `${limitSvg}<div class="sz-box">${gridCells}</div>${marks}`;
+    wrap.innerHTML = `<div class="heatmap-plot-area">${limitSvg}<div class="sz-box">${gridCells}</div>${marks}</div>`;
     const presentTypes = Array.from(new Set(pitches.map(p => classifyCall(p.call))));
     const legend = document.getElementById('heatmapLegend');
     legend.innerHTML = presentTypes.map(t => {
