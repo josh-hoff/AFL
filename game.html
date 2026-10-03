@@ -661,7 +661,10 @@
     const pitches = getScopedPitches().filter(p => p.releaseX !== null && p.releaseZ !== null);
     const wrap = document.getElementById('releaseWrap');
     const { xMin, xMax, zMin, zMax } = RELEASE_AXIS;
-    function xToPct(x) { return ((x - xMin) / (xMax - xMin)) * 100; }
+    // Flipped so 1B side reads left-to-right as 3B side -- purely a display
+    // mirror (field-relative meaning is unchanged, RHP/LHP still land on
+    // whichever side matches their actual release point).
+    function xToPct(x) { return 100 - ((x - xMin) / (xMax - xMin)) * 100; }
     function zToPct(z) { return 100 - ((z - zMin) / (zMax - zMin)) * 100; }
     const xStep = (xMax - xMin) / 6, zStep = (zMax - zMin) / 4;
     let html = '';
@@ -782,7 +785,7 @@
                 <div class="rp-axis-caption-row">
                   <div class="rp-axis-caption-spacer"></div>
                   <div class="rp-axis-caption">
-                    <div class="rp-axis-sides">3B side &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; 1B side</div>
+                    <div class="rp-axis-sides">1B side &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; 3B side</div>
                     <div class="rp-axis-title">Horizontal Release (ft)</div>
                   </div>
                 </div>
