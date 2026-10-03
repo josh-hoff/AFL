@@ -132,7 +132,16 @@
   .legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
   .legend-x { font-size: 12px; font-weight: 900; line-height: 1; }
 
-  .movement-plot-wrap { position: relative; width: 100%; max-width: 380px; aspect-ratio: 1 / 1; margin: 0.5rem auto 1.5rem; }
+  /* Same row + spacer pattern as the Release Point chart: a left gutter for
+     the rotated y-axis title, and a caption row below that mirrors that
+     gutter so the two-line caption centers under the plot itself. */
+  .mv-plot-row { display: flex; align-items: stretch; gap: 0.3rem; width: 100%; max-width: 380px; margin: 0.5rem auto 0; }
+  .mv-y-axis-title {
+    writing-mode: vertical-rl; transform: rotate(180deg); text-align: center;
+    font-size: 0.64rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: 0.03em; flex-shrink: 0; width: 14px; padding: 0.4rem 0;
+  }
+  .movement-plot-wrap { position: relative; width: 100%; aspect-ratio: 1 / 1; flex: 1; margin-left: 30px; margin-bottom: 20px; }
   .mv-gridline { position: absolute; background: #d8d5cf; }
   .mv-gridline.v { width: 1px; top: 0; bottom: 0; }
   .mv-gridline.h { height: 1px; left: 0; right: 0; }
@@ -148,7 +157,11 @@
   .mv-avg-cross .bar.v { top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-50%); }
   .mv-avg-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
   .mv-plot-area-labels { position: absolute; font-size: 0.56rem; line-height: 1.15; color: var(--text-muted); font-style: italic; opacity: 0.65; max-width: 44%; }
-  .mv-axis-caption { text-align: center; font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-top: 0.4rem; }
+  .mv-axis-caption-row { display: flex; align-items: flex-start; gap: 0.3rem; width: 100%; max-width: 380px; margin: 0.5rem auto 0; }
+  .mv-axis-caption-spacer { flex-shrink: 0; width: 14px; }
+  .mv-axis-caption { flex: 1; margin-left: 30px; text-align: center; }
+  .mv-axis-sides { font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; }
+  .mv-axis-title { font-size: 0.66rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; margin-top: 0.15rem; opacity: 0.85; }
   .movement-legend { display: flex; justify-content: center; gap: 1.2rem; margin-top: 1.1rem; flex-wrap: wrap; }
   .mv-legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; }
   .mv-legend-swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
@@ -600,7 +613,12 @@
     html += `<div class="mv-plot-area-labels" style="right:4%; bottom:4%; text-align:right;">drop &amp; ${rightSide}</div>`;
     wrap.innerHTML = html;
     const caption = document.getElementById('movementAxisCaption');
-    if (caption) caption.innerHTML = `Horizontal Break (in) &mdash; ${leftSide} &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; ${rightSide}`;
+    if (caption) {
+      caption.innerHTML = `
+        <div class="mv-axis-sides">${leftSide} &larr;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; ${rightSide}</div>
+        <div class="mv-axis-title">Horizontal Break (in)</div>
+      `;
+    }
   }
   function renderMovement() {
     const pitches = getScopedPitches().filter(p => p.hb !== null && p.ivb !== null);
@@ -772,8 +790,14 @@
               </div>
               <div class="heatmap-card" data-slide="1">
                 <div class="heatmap-title">Pitch Movement</div>
-                <div class="movement-plot-wrap" id="movementWrap"></div>
-                <div class="mv-axis-caption" id="movementAxisCaption"></div>
+                <div class="mv-plot-row">
+                  <div class="mv-y-axis-title">Vertical Break (in)</div>
+                  <div class="movement-plot-wrap" id="movementWrap"></div>
+                </div>
+                <div class="mv-axis-caption-row">
+                  <div class="mv-axis-caption-spacer"></div>
+                  <div class="mv-axis-caption" id="movementAxisCaption"></div>
+                </div>
                 <div class="movement-legend" id="movementLegend"></div>
               </div>
               <div class="heatmap-card" data-slide="2">
