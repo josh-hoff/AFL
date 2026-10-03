@@ -130,7 +130,7 @@
      dots) is positioned in percentages relative to this, not the wrap
      itself, so the whole plot shrinks in by the same small margin together. */
   .heatmap-plot-area { position: absolute; inset: 1.8%; }
-  .sz-box { position: absolute; left: 35.8%; top: 33.3%; width: 28.3%; height: 33.3%; border: 3px solid var(--text); border-radius: 2px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); }
+  .sz-box { position: absolute; border: 3px solid var(--text); border-radius: 2px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); }
   .sz-limit-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
   .sz-box .sz-cell { border: 1px solid rgba(17,20,24,0.3); }
   .sz-box .sz-cell:nth-child(3n+1) { border-left: none; }
@@ -447,6 +447,7 @@
   let selectedAtBat = null;
   let RELEASE_AXIS = { xMin: -2.5, xMax: -1.5, zMin: 5.5, zMax: 6.5 };
   let EXT_AXIS = { min: 5.0, max: 7.5 };
+  let LOCATION_AXIS = { xMin: -2.5, xMax: 2.5, zMin: -0.5, zMax: 5.5 };
 
   function getScopedPitches() {
     const base = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
@@ -563,14 +564,45 @@
     }).join('');
   }
 
-  // Wide enough to hold the large majority of real pitches (including
-  // clear balls off the plate), not just the zone itself -- real plate_x/
-  // plate_z can still occasionally fall outside even this on a truly wild
-  // pitch, which is what .heatmap-wrap's overflow:hidden is for.
-  const PLOT_X_MIN = -2.5, PLOT_X_MAX = 2.5;
-  const PLOT_Z_MIN = -0.5, PLOT_Z_MAX = 5.5;
+  // Plot window now auto-fits to THIS pitcher's own outing (computed once
+  // in init() from allPitches, same convention as RELEASE_AXIS/EXT_AXIS)
+  // instead of a fixed window sized to cover any possible pitcher. Real
+  // plate_x/plate_z can still occasionally fall outside the fitted window
+  // on a truly wild pitch within a filtered sub-view, which is what
+  // .heatmap-wrap's overflow:hidden is for.
+  const ZONE_X_MIN = -0.7083, ZONE_X_MAX = 0.7083; // true 17in strike zone width, feet
+  const ZONE_Z_MIN = 1.5, ZONE_Z_MAX = 3.5;        // true 2ft strike zone height, feet
+  function computeLocationAxis(pitches) {
+    const xs = pitches.map(p => p.px).filter(v => v !== null && v !== undefined);
+    const zs = pitches.map(p => p.pz).filter(v => v !== null && v !== undefined);
+    // The real strike zone is always included in the fit, even if every
+    // pitch in a small sample happened to land outside it, so the zone
+    // itself is never cut off.
+    const xMinRaw = Math.min(ZONE_X_MIN, ...(xs.length ? xs : [ZONE_X_MIN]));
+    const xMaxRaw = Math.max(ZONE_X_MAX, ...(xs.length ? xs : [ZONE_X_MAX]));
+    const zMinRaw = Math.min(ZONE_Z_MIN, ...(zs.length ? zs : [ZONE_Z_MIN]));
+    const zMaxRaw = Math.max(ZONE_Z_MAX, ...(zs.length ? zs : [ZONE_Z_MAX]));
+    const xPad = (xMaxRaw - xMinRaw) * 0.14, zPad = (zMaxRaw - zMinRaw) * 0.14;
+    let xMin = xMinRaw - xPad, xMax = xMaxRaw + xPad;
+    let zMin = zMinRaw - zPad, zMax = zMaxRaw + zPad;
+    // Minimum span floor (same 5:6 x:z ratio as the old fixed window) so a
+    // tightly-clustered outing doesn't zoom the zone down to a sliver.
+    const MIN_X_SPAN = 3.5, MIN_Z_SPAN = 4.2;
+    if (xMax - xMin < MIN_X_SPAN) { const c = (xMax + xMin) / 2; xMin = c - MIN_X_SPAN / 2; xMax = c + MIN_X_SPAN / 2; }
+    if (zMax - zMin < MIN_Z_SPAN) { const c = (zMax + zMin) / 2; zMin = c - MIN_Z_SPAN / 2; zMax = c + MIN_Z_SPAN / 2; }
+    return { xMin, xMax, zMin, zMax };
+  }
   function toPlotPercent(px, pz) {
-    return { left: ((px - PLOT_X_MIN) / (PLOT_X_MAX - PLOT_X_MIN)) * 100, top: 100 - ((pz - PLOT_Z_MIN) / (PLOT_Z_MAX - PLOT_Z_MIN)) * 100 };
+    const { xMin, xMax, zMin, zMax } = LOCATION_AXIS;
+    return { left: ((px - xMin) / (xMax - xMin)) * 100, top: 100 - ((pz - zMin) / (zMax - zMin)) * 100 };
+  }
+  function szBoxStyle() {
+    const { xMin, xMax, zMin, zMax } = LOCATION_AXIS;
+    const left = ((ZONE_X_MIN - xMin) / (xMax - xMin)) * 100;
+    const right = ((ZONE_X_MAX - xMin) / (xMax - xMin)) * 100;
+    const top = 100 - ((ZONE_Z_MAX - zMin) / (zMax - zMin)) * 100;
+    const bottom = 100 - ((ZONE_Z_MIN - zMin) / (zMax - zMin)) * 100;
+    return `left:${left}%; top:${top}%; width:${right - left}%; height:${bottom - top}%;`;
   }
   function renderHeatmap() {
     const pitches = getScopedPitches();
@@ -592,7 +624,7 @@
     }).join('');
     const wrap = document.getElementById('heatmapWrap');
     const limitSvg = `<svg class="sz-limit-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(90,100,114,0.48)" stroke-width="0.65" stroke-dasharray="1.5 3.5" vector-effect="non-scaling-stroke" /></svg>`;
-    wrap.innerHTML = `<div class="heatmap-plot-area">${limitSvg}<div class="sz-box">${gridCells}</div>${marks}</div>`;
+    wrap.innerHTML = `<div class="heatmap-plot-area">${limitSvg}<div class="sz-box" style="${szBoxStyle()}">${gridCells}</div>${marks}</div>`;
     const presentTypes = Array.from(new Set(pitches.map(p => classifyCall(p.call))));
     const legend = document.getElementById('heatmapLegend');
     legend.innerHTML = presentTypes.map(t => {
@@ -918,6 +950,7 @@
       PITCH_TINTS = Object.fromEntries(Object.keys(PITCH_COLORS).map(code => [code, lighten(PITCH_COLORS[code], 0.55)]));
       RELEASE_AXIS = computeReleaseAxis(allPitches);
       EXT_AXIS = computeExtAxis(allPitches);
+      LOCATION_AXIS = computeLocationAxis(allPitches);
 
       const dateStr = scheduleRow ? scheduleRow.date : '';
       const venue = scheduleRow ? scheduleRow.venue : '';
