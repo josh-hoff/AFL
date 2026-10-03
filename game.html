@@ -157,7 +157,6 @@
   .rp-avg-cross .bar.h { left: 0; right: 0; top: 50%; height: 2px; transform: translateY(-50%); }
   .rp-avg-cross .bar.v { top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-50%); }
   .rp-avg-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
-  .rp-spread-ring { position: absolute; border-radius: 50%; transform: translate(-50%, -50%); border: 1.5px dashed currentColor; background: none; pointer-events: none; }
   .rp-axis-caption { text-align: center; font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-top: 0.4rem; }
   .rp-ext-caption { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-top: 0.7rem; text-align: center; }
   .rp-legend { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.7rem; width: 100%; max-width: 420px; }
@@ -651,21 +650,17 @@
       const group = pitches.filter(p => p.type === t);
       const avgX = group.reduce((s, p) => s + p.releaseX, 0) / group.length;
       const avgZ = group.reduce((s, p) => s + p.releaseZ, 0) / group.length;
-      const maxDist = Math.max(0.03, ...group.map(p => Math.hypot(p.releaseX - avgX, p.releaseZ - avgZ)));
-      avgs[t] = { avgX, avgZ, maxDist };
+      avgs[t] = { avgX, avgZ };
     });
-    let ringsHtml = '';
-    typesPresent.forEach(t => {
-      const a = avgs[t];
-      const left = xToPct(a.avgX), top = zToPct(a.avgZ);
-      const radiusPct = (a.maxDist / (xMax - xMin)) * 100;
-      ringsHtml += `<div class="rp-spread-ring" style="left:${left}%; top:${top}%; width:${radiusPct * 2}%; height:${radiusPct * 2}%; border-color:${PITCH_COLORS[t] || '#555'}; opacity:0.8;"></div>`;
-    });
-    wrap.insertAdjacentHTML('beforeend', ringsHtml);
+    // No spread rings -- with real per-pitch release points already shown
+    // as individual dots, a dashed radius around the average didn't add
+    // information, just visual clutter. Individual dots use the type's
+    // full color (not a lightened tint) so they stay legible against the
+    // white card background, same color as their crosshair average.
     let marksHtml = '';
     pitches.forEach(p => {
       const left = xToPct(p.releaseX), top = zToPct(p.releaseZ);
-      marksHtml += `<div class="rp-pitch-mark" style="left:${left}%; top:${top}%; background:${PITCH_TINTS[p.type] || '#aaa'};" title="${(PITCH_LABELS[p.type] || p.type)}: ${p.releaseX.toFixed(2)}, ${p.releaseZ.toFixed(2)} ft"></div>`;
+      marksHtml += `<div class="rp-pitch-mark" style="left:${left}%; top:${top}%; background:${PITCH_COLORS[p.type] || '#555'};" title="${(PITCH_LABELS[p.type] || p.type)}: ${p.releaseX.toFixed(2)}, ${p.releaseZ.toFixed(2)} ft"></div>`;
     });
     typesPresent.forEach(t => {
       const a = avgs[t];
