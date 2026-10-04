@@ -646,8 +646,8 @@
         ${statsGrid}
       </div>
       ${pitchMixHtml}
-      <div class="transaction-expand-wrap" style="margin: -0.75rem 0 1.5rem;">
-        <a href="#" onclick="toggleFieldingRow('${toggleId}'); return false;" class="transaction-expand-link">View Game-by-Game Statcast &#9662;</a>
+      <div class="transaction-expand-wrap" style="margin: 0.75rem 0 1.5rem;">
+        <a href="#" onclick="toggleFieldingRow('${toggleId}'); return false;" class="transaction-expand-link" style="color: var(--tab-active); border-bottom-color: var(--tab-active);">View Game-by-Game Statcast &#9662;</a>
       </div>
       <div id="${toggleId}" class="career-gamelog-wrap" style="display:none; margin: -0.75rem 0 1.5rem; border-top:none;">
         ${buildStatcastGameLogHtml(perGameRows, statType, playerId)}
