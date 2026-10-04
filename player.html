@@ -115,10 +115,27 @@
 
   .afl-gamelog-toggle { cursor: pointer; color: var(--tab-active); font-weight: 700; text-decoration: underline dashed; text-underline-offset: 3px; }
   .career-gamelog-wrap { grid-column: 1 / -1; padding: 0.6rem 1rem 0.8rem; border-top: 1px solid var(--border); background: #fffaf5; }
+  /* #afl-gamelog-container breaks out of main's 900px page cap -- it's
+     appended as a sibling AFTER .career-table closes specifically so this
+     works (an ancestor with its own overflow-x:auto, like .career-table,
+     would clip a width:100vw breakout). With 50+ stat columns the table
+     needs far more width than the rest of the page; this still leaves
+     .gl-table's own horizontal scroll for whatever doesn't fit even at
+     this width, but drastically cuts how much scrolling that is. Capped
+     around 1700px of usable content so it doesn't run edge-to-edge on an
+     ultra-wide monitor. */
+  #afl-gamelog-container.career-gamelog-wrap {
+    width: 100vw; position: relative; left: 50%; margin-left: -50vw; box-sizing: border-box;
+    padding-left: max(1.5rem, calc((100vw - 1700px) / 2));
+    padding-right: max(1.5rem, calc((100vw - 1700px) / 2));
+  }
   .gl-table { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; overflow-x: auto; }
   .gl-row { display: grid; gap: 10px; padding: 0.4rem 0.9rem; font-size: 0.76rem; align-items: center; white-space: nowrap; }
   .gl-row > div { text-align: right; }
-  .gl-row > div:nth-child(-n+2) { text-align: left; }
+  /* Explicit class, not nth-child -- the totals rows' Date+Opp cell is a
+     single spanning div (DOM child #1), so nth-child(-n+2) would also
+     catch the first STAT cell (DOM child #2) and wrongly left-align it. */
+  .gl-row > div.gl-cell-left { text-align: left; }
   .gl-head { background: #f2f1ee; font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.01em; white-space: normal; line-height: 1.2; align-items: end; }
   .gl-row:not(.gl-head) { border-top: 1px solid var(--border); color: var(--text); }
   .gl-row.gl-total { border-top: 2px solid var(--tab-active); background: #fff2e6; font-weight: 700; }
@@ -128,7 +145,11 @@
      column alone, so it spans Date+Opp (same pattern as .gl-pos-label on
      the Fielding table's position-group header) instead of overflowing
      into the first stat column. */
-  .gl-total-label { grid-column: span 2; text-align: left; }
+  /* Specificity note: .gl-row > div.gl-cell-left (0,2,1) beats the bare
+     .gl-total-label class (0,1,0) against .gl-row > div's own text-align:
+     right (0,1,1) -- so left-alignment is driven by the shared .gl-cell-
+     left class below, not by a rule on .gl-total-label itself. */
+  .gl-total-label { grid-column: span 2; }
   /* Pitching per-game Statcast rows link through to that game's full
      Pitch Location/Movement/Release Point page -- same hover affordance
      already used for pitch-row/ab-head elsewhere on the site. */
@@ -1392,14 +1413,15 @@
     // dead space past the last column), while still flooring at a readable
     // 58px and scrolling once there's genuinely no more room to give.
     const gridCols = `96px 110px ${cols.slice(2).map(() => 'minmax(58px, 1fr)').join(' ')}`;
-    const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map(l => `<div>${l}</div>`).join('')}</div>`;
+    const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map((l, i) => `<div${i < 2 ? ' class="gl-cell-left"' : ''}>${l}</div>`).join('')}</div>`;
 
     const rowHtml = (r, extraClass) => {
-      const cells = cols.map(c => {
-        if (c === 'opponent') return `<div>${cityFromOpponent(r[c])}</div>`;
-        if (c === 'inningsPitched') return `<div>${formatIP(r[c])}</div>`;
+      const cells = cols.map((c, i) => {
+        const cls = i < 2 ? ' class="gl-cell-left"' : '';
+        if (c === 'opponent') return `<div${cls}>${cityFromOpponent(r[c])}</div>`;
+        if (c === 'inningsPitched') return `<div${cls}>${formatIP(r[c])}</div>`;
         const v = r[c];
-        return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
+        return `<div${cls}>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
       }).join('');
       return `<div class="gl-row${extraClass ? ' ' + extraClass : ''}" style="grid-template-columns:${gridCols};">${cells}</div>`;
     };
@@ -1408,7 +1430,7 @@
 
     let regTotalsHtml = '';
     if (regTotalsRow) {
-      const label = `<div class="gl-total-label">${regTotalsRow.season || ''} Season Total</div>`;
+      const label = `<div class="gl-total-label gl-cell-left">${regTotalsRow.season || ''} Season Total</div>`;
       const statCells = cols.slice(2).map(c => {
         const key = statType === 'pitching' ? c : (HITTING_COL_TO_TOTALS_KEY[c] || c);
         if (c === 'inningsPitched') return `<div>${formatIP(regTotalsRow[key])}</div>`;
@@ -1434,7 +1456,7 @@
       // own fmtRatio pass too, same as regTotalsRow already gets from
       // pitcher_stats.csv's pre-formatted strings -- otherwise a 0 ERA prints
       // as the bare number "0" instead of "0.00".
-      const label = `<div class="gl-total-label">${(regTotalsRow && regTotalsRow.season) || ''} Postseason Total</div>`;
+      const label = `<div class="gl-total-label gl-cell-left">${(regTotalsRow && regTotalsRow.season) || ''} Postseason Total</div>`;
       const statCells = cols.slice(2).map(c => {
         if (c === 'inningsPitched') return `<div>${formatIP(postTotals[c])}</div>`;
         if (statType === 'pitching') {
@@ -1539,13 +1561,19 @@
       const rowStyleAttr = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
       const clickAttr = showToggle ? ` onclick="toggleAflGameLog()" style="cursor:pointer; grid-template-columns:${gridTemplate}; min-width:${minWidth};"` : ` ${rowStyleAttr}`;
       html += `<div class="${rowClass}"${clickAttr}>${cells}</div>`;
-      if (showToggle) {
-        const regGames = aflGameLogRows.filter(g => !isPostseasonRow(g));
-        const postGames = aflGameLogRows.filter(g => isPostseasonRow(g));
-        html += `<div class="career-gamelog-wrap" id="afl-gamelog-container" style="display:none;">${buildAflGameLogHtml(regGames, postGames, statType, aflTotalsRow)}</div>`;
-      }
     });
     html += `</div>`;
+    // The per-game log is appended AFTER .career-table closes (not nested
+    // inside it) specifically so it can break out of both .career-table's
+    // own overflow-x:auto and main's 900px page cap (see #afl-gamelog-
+    // container's CSS) -- with 50+ stat columns it needs far more width
+    // than the rest of the page, and nesting it inside an ancestor with its
+    // own overflow-x:auto would have clipped that breakout entirely.
+    if (hasGameLog) {
+      const regGames = aflGameLogRows.filter(g => !isPostseasonRow(g));
+      const postGames = aflGameLogRows.filter(g => isPostseasonRow(g));
+      html += `<div class="career-gamelog-wrap" id="afl-gamelog-container" style="display:none;">${buildAflGameLogHtml(regGames, postGames, statType, aflTotalsRow)}</div>`;
+    }
     container.innerHTML = html;
   }
 
