@@ -108,7 +108,6 @@
   .career-row.afl { border-top: 2px solid var(--tab-active); box-shadow: inset 5px 0 0 0 var(--tab-active); font-weight: 700; background: #ffe3c4; }
   .career-row.mlb { border-top: 1px solid #2f6fb0; font-weight: 700; background: #eaf1fa; }
   .career-row.post-season { background: #eaf1fa; }
-  .gl-row.fld-game { background: #fff; }
   .career-row > div { overflow: hidden; text-overflow: ellipsis; }
 
   .tab-row { display: flex; gap: 0.5rem; margin: 0 0 0.75rem; }
@@ -118,13 +117,10 @@
     font-family: inherit;
   }
   .stat-tab.active { background: var(--tab-active); border-color: var(--tab-active); color: #fff; }
-  .gl-pos-label { grid-column: span 3; text-align: center; font-weight: 700; }
 
-  .afl-gamelog-toggle { cursor: pointer; color: var(--tab-active); font-weight: 700; text-decoration: underline dashed; text-underline-offset: 3px; }
   .career-gamelog-wrap { grid-column: 1 / -1; padding: 0.6rem 1rem 0.8rem; border-top: 1px solid var(--border); background: #fffaf5; }
-  /* Used for the totals-row label in the AFL Game Log card below the
-     Career Path table -- that row's Date+Opp cell is a single div
-     spanning both columns, same pattern as .gl-pos-label further down. */
+  /* Used for the totals-row label in the AFL Game Log section's tables --
+     that row's Date+Opp cell is a single div spanning both columns. */
   .career-row .col-span-2 { grid-column: span 2; }
   .gl-table { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; overflow-x: auto; }
   .gl-row { display: grid; gap: 10px; padding: 0.4rem 0.9rem; font-size: 0.76rem; align-items: center; white-space: nowrap; }
@@ -1018,21 +1014,13 @@
     el.style.display = (el.style.display !== 'none') ? 'none' : 'block';
   }
 
-  // Builds the Fielding tab's Career Path table: one row per season/level/
-  // team (combined across every position played that stint) -- ALWAYS
-  // expandable to a per-position breakdown, even a single-position season,
-  // so it's always clear which position(s) the season's totals came from.
-  // The breakdown reuses the exact same grid column template as the season
-  // rows above it, so every stat column stays aligned whether a row is
-  // expanded or not; "Position" is centered across the merged Season+Lvl+
-  // Team span, and Age gets its own column, repeating the stint's age on
-  // every expanded row for consistency.
-  //
-  // AFL position rows get a further 3rd level: each position entry carries
-  // its raw per-game rows (rawGames), so clicking the position itself
-  // expands into the individual games that made up that total. MiLB/MLB
-  // position rows never get this -- the season-level API has no per-game
-  // fielding data to expand into, so they stop at two levels.
+  // Builds the Fielding tab's Career Path table: one flat row per season/
+  // level/team (combined across every position played that stint), exactly
+  // like the Pitching/Hitting tab's rows -- no per-position or per-game
+  // expansion here. That detail (and the AFL row's own position/game
+  // breakdown, which used to nest 3 levels deep inside this table) now
+  // lives in the separate AFL Game Log section's Fielding tab, so every
+  // Career Path row behaves the same way regardless of level.
   function buildFieldingTableHtml(rows, allCols, gridTemplate, minWidth) {
     const headerCells = allCols.map(k => `<div>${colLabelFielding(k)}</div>`).join('');
     let html = `<div class="career-table">
@@ -1040,62 +1028,20 @@
 
     const styleAttr = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
 
-    rows.forEach((r, i) => {
+    rows.forEach((r) => {
       const isAfl = r.level === 'AFL';
       const rowClasses = ['career-row', 'body'];
       if (isAfl) rowClasses.push('afl');
       else if (r.level === 'MLB') rowClasses.push('mlb');
       if (r.isPostseason) rowClasses.push('post-season');
-      const positions = r.positions || [];
-      const showToggle = positions.length > 0;
-      const rowId = `fld-row-${i}`;
 
       const cells = allCols.map(k => {
         if (k === 'season') return `<div>${r.seasonLabel || r.season || ''}</div>`;
-        if (k === 'team' && showToggle) {
-          return `<div><span class="afl-gamelog-toggle" onclick="toggleFieldingRow('${rowId}')">${r.team || ''}</span></div>`;
-        }
         if (k === 'team' || k === 'level') return `<div>${r[k] || ''}</div>`;
         return `<div>${fmtFieldingCell(k, r[k])}</div>`;
       }).join('');
 
-      const clickAttr = showToggle ? ` onclick="toggleFieldingRow('${rowId}')" ${styleAttr.replace('style="', 'style="cursor:pointer; ')}` : ` ${styleAttr}`;
-      html += `<div class="${rowClasses.join(' ')}"${clickAttr}>${cells}</div>`;
-
-      if (showToggle) {
-        const posHeadCells = [`<div class="gl-pos-label">Position</div>`, `<div>${colLabelFielding('age')}</div>`]
-          .concat(allCols.slice(4).map(k => `<div>${colLabelFielding(k)}</div>`));
-        let posHtml = `<div class="gl-table"><div class="gl-row gl-head" ${styleAttr}>${posHeadCells.join('')}</div>`;
-        positions.forEach((p, pIdx) => {
-          const posRowId = `${rowId}-pos-${pIdx}`;
-          const hasGames = isAfl && Array.isArray(p.rawGames) && p.rawGames.length > 0;
-          const posLabel = hasGames
-            ? `<span class="afl-gamelog-toggle" onclick="toggleFieldingRow('${posRowId}')">${p.position || ''}</span>`
-            : (p.position || '');
-          const posCells = [`<div class="gl-pos-label">${posLabel}</div>`, `<div>${r.age !== undefined && r.age !== null ? r.age : ''}</div>`]
-            .concat(allCols.slice(4).map(k => `<div>${fmtFieldingCell(k, p[k])}</div>`));
-          const posClickAttr = hasGames ? ` onclick="toggleFieldingRow('${posRowId}')" ${styleAttr.replace('style="', 'style="cursor:pointer; ')}` : ` ${styleAttr}`;
-          posHtml += `<div class="gl-row"${posClickAttr}>${posCells.join('')}</div>`;
-
-          if (hasGames) {
-            const gameHeadCells = [`<div class="gl-pos-label">Date / Opp</div>`, `<div>${colLabelFielding('age')}</div>`]
-              .concat(allCols.slice(4).map(k => `<div>${colLabelFielding(k)}</div>`));
-            let gameHtml = `<div class="gl-table"><div class="gl-row gl-head" ${styleAttr}>${gameHeadCells.join('')}</div>`;
-            const sortedGames = p.rawGames.slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
-            sortedGames.forEach(g => {
-              const gTotals = sumFieldingGames([g]);
-              const label = `${formatShortDate(g.date)}${g.opponent ? ' @ ' + cityFromOpponent(g.opponent) : ''}`;
-              const gameCells = [`<div class="gl-pos-label">${label}</div>`, `<div>${r.age !== undefined && r.age !== null ? r.age : ''}</div>`]
-                .concat(allCols.slice(4).map(k => `<div>${fmtFieldingCell(k, gTotals[k])}</div>`));
-              gameHtml += `<div class="gl-row fld-game" ${styleAttr}>${gameCells.join('')}</div>`;
-            });
-            gameHtml += `</div>`;
-            posHtml += `<div class="career-gamelog-wrap" id="${posRowId}" style="display:none;">${gameHtml}</div>`;
-          }
-        });
-        posHtml += `</div>`;
-        html += `<div class="career-gamelog-wrap" id="${rowId}" style="display:none;">${posHtml}</div>`;
-      }
+      html += `<div class="${rowClasses.join(' ')}" ${styleAttr}>${cells}</div>`;
     });
 
     html += `</div>`;
@@ -1112,20 +1058,14 @@
     rows = rows.filter(r => r.team && r.team.trim() !== '');
 
     if (ctx.regFieldingByPos.size) {
-      // rawGames is kept on each position entry (AFL only) so the position
-      // row can expand a 3rd level into the individual games it came from --
-      // MiLB/MLB position splits never get this since the season-level API
-      // doesn't give us game-by-game fielding data to expand into.
-      const positions = Array.from(ctx.regFieldingByPos.entries()).map(([pos, games]) => ({ position: pos, rawGames: games, ...sumFieldingGames(games) }));
       const allGames = Array.from(ctx.regFieldingByPos.values()).flat();
-      rows.push({ season: String(currentSeason), level: 'AFL', team: ctx.team, age: ctx.playerAge, ...sumFieldingGames(allGames), positions });
+      rows.push({ season: String(currentSeason), level: 'AFL', team: ctx.team, age: ctx.playerAge, ...sumFieldingGames(allGames) });
     }
     if (ctx.postFieldingByPos.size) {
-      const positions = Array.from(ctx.postFieldingByPos.entries()).map(([pos, games]) => ({ position: pos, rawGames: games, ...sumFieldingGames(games) }));
       const allGames = Array.from(ctx.postFieldingByPos.values()).flat();
       rows.push({
         season: String(currentSeason), seasonLabel: `${currentSeason} Postseason`, level: 'AFL', team: ctx.team,
-        age: ctx.playerAge, isPostseason: true, ...sumFieldingGames(allGames), positions,
+        age: ctx.playerAge, isPostseason: true, ...sumFieldingGames(allGames),
       });
     }
 
@@ -1358,16 +1298,16 @@
     });
   }
 
-  // Separate "AFL Game Log" card rendered directly below the Career Path
-  // table -- same .career-table/.career-row markup as Career Path itself
-  // (same card width, same scroll-inside-the-card behavior, same row
-  // styling), not a different-looking toggle panel nested inside it.
+  // Pitching/Hitting table for the AFL Game Log section's primary tab --
+  // same .career-table/.career-row markup as Career Path itself (same card
+  // width, same scroll-inside-the-card behavior, same row styling).
   // Regular-season rows and their "<season> Season Total" row use MLB's
   // own cumulative season totals (regTotalsRow, same object the Career
   // Path AFL row uses); any postseason rows are chained with our own
   // running cumulative (postseason totals reset per round in MLB's API)
-  // and get their own "<season> Postseason Total" row.
-  function buildAflGameLogCard(aflGameLogRows, statType, regTotalsRow) {
+  // and get their own "<season> Postseason Total" row. Returns just the
+  // table markup (no title/tabs -- renderAflGameLogSection wraps it).
+  function buildAflGameLogTable(aflGameLogRows, statType, regTotalsRow) {
     if (!Array.isArray(aflGameLogRows) || aflGameLogRows.length === 0) return '';
 
     const sortedReg = aflGameLogRows.filter(g => !isPostseasonRow(g))
@@ -1468,9 +1408,109 @@
 
     html += `</div>`;
 
-    return `<div class="section-title">${season} AFL Game Log</div>${html}`;
+    return html;
   }
 
+  // Per-position AFL fielding game log for the AFL Game Log section's
+  // Fielding tab -- moved here from the Career Path Fielding tab's old
+  // AFL row/position toggle so the Fielding view is consistent with the
+  // Pitching/Hitting view (a plain career-table of per-game rows ending in
+  // a highlighted total row), not a separately-styled nested panel.
+  // Fielding totals are tracked per position, so each position played gets
+  // its own table -- regular-season games, a "<season> Season Total" row,
+  // then any postseason games for that position and a "<season> Postseason
+  // Total" row, same reg/post layout the Pitching/Hitting table uses.
+  function buildAflFieldingGameLogHtml(regFieldingByPos, postFieldingByPos) {
+    const hasReg = regFieldingByPos && regFieldingByPos.size > 0;
+    const hasPost = postFieldingByPos && postFieldingByPos.size > 0;
+    if (!hasReg && !hasPost) return '';
+
+    const statKeys = FIELDING_GLOSSARY_ORDER.filter(k => k !== 'age');
+    const labels = statKeys.map(k => FIELDING_LABELS[k] || k);
+    const gridTemplate = `0.75fr 1.4fr ${statKeys.map(() => 'minmax(65px, 1fr)').join(' ')}`;
+    const minWidth = `${2 * 90 + statKeys.length * 75}px`;
+    const rowStyle = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
+    const headerCells = `<div>Date</div><div>Opp</div>${labels.map(l => `<div>${l}</div>`).join('')}`;
+
+    const dataRow = (g, rowClass) => {
+      const totals = sumFieldingGames([g]);
+      const cells = statKeys.map(k => `<div>${fmtFieldingCell(k, totals[k])}</div>`).join('');
+      return `<div class="${rowClass}" ${rowStyle}><div>${g.date || ''}</div><div>${cityFromOpponent(g.opponent)}</div>${cells}</div>`;
+    };
+
+    // Union of every position played, regular season or postseason, in the
+    // order first encountered -- a position fielded only in the postseason
+    // still gets its own table.
+    const positions = [];
+    (hasReg ? Array.from(regFieldingByPos.keys()) : []).forEach(p => { if (!positions.includes(p)) positions.push(p); });
+    (hasPost ? Array.from(postFieldingByPos.keys()) : []).forEach(p => { if (!positions.includes(p)) positions.push(p); });
+
+    const firstGame = positions.length
+      ? ((hasReg && regFieldingByPos.get(positions[0]) && regFieldingByPos.get(positions[0])[0])
+        || (hasPost && postFieldingByPos.get(positions[0]) && postFieldingByPos.get(positions[0])[0]))
+      : null;
+    const season = (firstGame && firstGame.season) || String(currentSeason);
+
+    let html = '';
+    positions.forEach(pos => {
+      const sortedReg = ((hasReg && regFieldingByPos.get(pos)) || []).slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+      const sortedPost = ((hasPost && postFieldingByPos.get(pos)) || []).slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+
+      if (positions.length > 1) {
+        html += `<div class="section-note" style="font-weight:700; color:var(--text); margin:0.8rem 0 0.4rem; font-size:0.85rem;">${pos}</div>`;
+      }
+
+      html += `<div class="career-table"><div class="career-row head" ${rowStyle}>${headerCells}</div>`;
+      html += sortedReg.map(g => dataRow(g, 'career-row body')).join('');
+      if (sortedReg.length) {
+        const totals = sumFieldingGames(sortedReg);
+        const statCells = statKeys.map(k => `<div>${fmtFieldingCell(k, totals[k])}</div>`).join('');
+        html += `<div class="career-row body afl" ${rowStyle}><div class="col-span-2">${season} Season Total</div>${statCells}</div>`;
+      }
+      html += sortedPost.map(g => dataRow(g, 'career-row body post-season')).join('');
+      if (sortedPost.length) {
+        const totals = sumFieldingGames(sortedPost);
+        const statCells = statKeys.map(k => `<div>${fmtFieldingCell(k, totals[k])}</div>`).join('');
+        html += `<div class="career-row body mlb" ${rowStyle}><div class="col-span-2">${season} Postseason Total</div>${statCells}</div>`;
+      }
+      html += `</div>`;
+    });
+
+    return html;
+  }
+
+  // Assembles the full "AFL Game Log" section: title, the Pitching/Hitting
+  // + Fielding tab row (same tab-row markup Career Path uses), and both
+  // views pre-rendered up front (switching is a pure show/hide -- unlike
+  // Career Path's tabs, nothing here needs a fresh fetch).
+  function renderAflGameLogSection(aflGameLogRows, statType, regTotalsRow, regFieldingByPos, postFieldingByPos, isPitcher) {
+    const primaryTableHtml = buildAflGameLogTable(aflGameLogRows, statType, regTotalsRow);
+    const fieldingTableHtml = buildAflFieldingGameLogHtml(regFieldingByPos, postFieldingByPos);
+    if (!primaryTableHtml && !fieldingTableHtml) return '';
+
+    const season = (regTotalsRow && regTotalsRow.season) || String(currentSeason);
+
+    return `
+      <div class="section-title">${season} AFL Game Log</div>
+      <div class="tab-row">
+        <button class="stat-tab active" id="tab-btn-afl-primary" onclick="switchAflGameLogTab('primary')">${isPitcher ? 'Pitching' : 'Hitting'}</button>
+        <button class="stat-tab" id="tab-btn-afl-fielding" onclick="switchAflGameLogTab('fielding')">Fielding</button>
+      </div>
+      <div id="afl-gamelog-primary-view">${primaryTableHtml || '<p class="section-note">No game log available.</p>'}</div>
+      <div id="afl-gamelog-fielding-view" style="display:none;">${fieldingTableHtml || '<p class="section-note">No fielding game log available.</p>'}</div>
+    `;
+  }
+
+  function switchAflGameLogTab(view) {
+    const primaryBtn = document.getElementById('tab-btn-afl-primary');
+    const fieldingBtn = document.getElementById('tab-btn-afl-fielding');
+    const primaryView = document.getElementById('afl-gamelog-primary-view');
+    const fieldingView = document.getElementById('afl-gamelog-fielding-view');
+    if (primaryBtn) primaryBtn.classList.toggle('active', view === 'primary');
+    if (fieldingBtn) fieldingBtn.classList.toggle('active', view === 'fielding');
+    if (primaryView) primaryView.style.display = view === 'primary' ? '' : 'none';
+    if (fieldingView) fieldingView.style.display = view === 'fielding' ? '' : 'none';
+  }
 
   async function loadCareerPath(aflRow, statType, aflGameLogRows) {
     const container = document.getElementById('career-path-container');
@@ -1677,7 +1717,7 @@
       };
       activeCareerTab = 'primary';
 
-      html += buildAflGameLogCard(aflGameLogRows, statType, aflRow);
+      html += renderAflGameLogSection(aflGameLogRows, statType, aflRow, careerCtx.regFieldingByPos, careerCtx.postFieldingByPos, isPitcher);
 
       if (statcastTotals) {
         const statcastPerGame = buildStatcastPerGameRows(playerPitches, opponentMap, statType);
