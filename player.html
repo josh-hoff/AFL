@@ -1003,7 +1003,7 @@
 
   function fmtFieldingCell(k, val) {
     if (k === 'innings') return formatIP(val);
-    if (k === 'fielding') return fmtRate(val);
+    if (k === 'fielding') return fmtRatePct(val);
     if (k === 'rangeFactorPer9Inn' || k === 'rangeFactorPerGame') return fmtRatio(val);
     return (val !== undefined && val !== null && val !== '') ? val : '-';
   }
@@ -1288,7 +1288,7 @@
   function withRunningHittingCumulative(sortedRows) {
     return sortedRows.map((row, i) => {
       const t = sumHittingGames(sortedRows.slice(0, i + 1));
-      return { ...row, avg: fmtRate(t.avg), obp: fmtRate(t.obp), slg: fmtRate(t.slg), ops: fmtRate(t.ops) };
+      return { ...row, avg: fmtRatePct(t.avg), obp: fmtRatePct(t.obp), slg: fmtRatePct(t.slg), ops: fmtRatePct(t.ops) };
     });
   }
   function withRunningPitchingCumulative(sortedRows) {
@@ -1685,8 +1685,8 @@
             groundIntoDoublePlay: totals.ground_into_double_play,
             leftOnBase: totals.left_on_base, catchersInterference: totals.catchers_interference,
             numberOfPitches: totals.number_of_pitches,
-            avg: fmtRate(totals.avg), obp: fmtRate(totals.obp), slg: fmtRate(totals.slg), ops: fmtRate(totals.ops),
-            babip: fmtRate(totals.babip),
+            avg: fmtRatePct(totals.avg), obp: fmtRatePct(totals.obp), slg: fmtRatePct(totals.slg), ops: fmtRatePct(totals.ops),
+            babip: fmtRatePct(totals.babip),
           };
         }
       }
