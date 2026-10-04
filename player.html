@@ -1387,7 +1387,11 @@
       ? ['Date', 'Opp', ...pitchingStatKeys.map(k => PITCHING_LABELS[k] || k)]
       : ['Date', 'Opp', ...hittingStatKeys.map(k => HITTING_LABELS[k] || k)];
 
-    const gridCols = `96px 110px ${cols.slice(2).map(() => '58px').join(' ')}`;
+    // minmax(58px, 1fr) rather than a flat 58px so the columns stretch to
+    // fill the full width of the card when there's room (instead of leaving
+    // dead space past the last column), while still flooring at a readable
+    // 58px and scrolling once there's genuinely no more room to give.
+    const gridCols = `96px 110px ${cols.slice(2).map(() => 'minmax(58px, 1fr)').join(' ')}`;
     const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map(l => `<div>${l}</div>`).join('')}</div>`;
 
     const rowHtml = (r, extraClass) => {
@@ -1404,7 +1408,7 @@
 
     let regTotalsHtml = '';
     if (regTotalsRow) {
-      const label = `<div class="gl-total-label">${regTotalsRow.season || ''} Total</div>`;
+      const label = `<div class="gl-total-label">${regTotalsRow.season || ''} Season Total</div>`;
       const statCells = cols.slice(2).map(c => {
         const key = statType === 'pitching' ? c : (HITTING_COL_TO_TOTALS_KEY[c] || c);
         if (c === 'inningsPitched') return `<div>${formatIP(regTotalsRow[key])}</div>`;
@@ -1435,12 +1439,17 @@
         if (c === 'inningsPitched') return `<div>${formatIP(postTotals[c])}</div>`;
         if (statType === 'pitching') {
           if (c === 'era' || c === 'whip' || PITCHING_RATIO2_FIELDS.has(c)) return `<div>${fmtRatio(postTotals[c])}</div>`;
-          if (PITCHING_RATE3_FIELDS.has(c)) return `<div>${fmtRate(postTotals[c]) || '-'}</div>`;
+          // fmtRatePct (not fmtRate) so a zero-denominator rate shows the
+          // same ".---" the regular-season rows already use (pre-formatted
+          // that way straight from pitching_gamelogs.csv), instead of a
+          // bare "-" that reads as a different, inconsistent placeholder.
+          if (PITCHING_RATE3_FIELDS.has(c)) return `<div>${fmtRatePct(postTotals[c])}</div>`;
           const v = postTotals[c];
           return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
         }
         const isRate = c === 'avg' || c === 'obp' || c === 'slg' || c === 'ops' || c === 'babip';
-        const v = isRate ? fmtRate(postTotals[c]) : postTotals[c];
+        if (isRate) return `<div>${fmtRatePct(postTotals[c])}</div>`;
+        const v = postTotals[c];
         return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
       }).join('');
       postTotalsHtml = `<div class="gl-row gl-total post-final" style="grid-template-columns:${gridCols};">${label}${statCells}</div>`;
