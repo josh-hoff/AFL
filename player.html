@@ -1676,6 +1676,11 @@
       };
       activeCareerTab = 'primary';
 
+      if (statcastTotals) {
+        const statcastPerGame = buildStatcastPerGameRows(playerPitches, opponentMap, statType);
+        html += renderStatcastSection(player.team, statcastTotals, statcastPerGame, statType, 'statcast-gamelog', playerId);
+      }
+
       html += `<div class="section-title">Career Path <span class="section-note">(live from MLB, ${currentSeason} AFL row highlighted)</span></div>`;
       html += `
         <div class="tab-row">
@@ -1686,11 +1691,6 @@
       html += `<div id="career-path-container"><p class="loading">Loading career path...</p></div>`;
 
       html += buildAflGameLogCard(aflGameLogRows, statType, aflRow);
-
-      if (statcastTotals) {
-        const statcastPerGame = buildStatcastPerGameRows(playerPitches, opponentMap, statType);
-        html += renderStatcastSection(player.team, statcastTotals, statcastPerGame, statType, 'statcast-gamelog', playerId);
-      }
 
       html += renderTransactionTable(playerTransactions);
       html += renderStatGlossary();
