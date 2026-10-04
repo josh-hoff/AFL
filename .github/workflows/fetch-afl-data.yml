@@ -44,6 +44,9 @@ jobs:
       - name: Fetch current season fielding game logs
         run: python fetch_afl_fielding_gamelogs.py
 
+      - name: Fetch current season pitching game logs
+        run: python fetch_afl_pitching_gamelogs.py
+
       - name: Fetch current season transactions
         run: python fetch_afl_transactions.py
 
