@@ -878,6 +878,7 @@
       const rosterRow = rosterRows.find(r => r.player_id === pitcherId);
       PITCHER_THROWS = rosterRow && rosterRow.throws === 'Left' ? 'L' : 'R';
       const pitcherName = rosterRow ? rosterRow.full_name : 'Pitcher';
+      const pitcherNameWithThrows = rosterRow ? `${pitcherName} (${PITCHER_THROWS}HP)` : pitcherName;
       const team = rosterRow ? rosterRow.team : '';
 
       const scheduleRow = scheduleRows.find(r => r.game_pk === gamePk);
@@ -925,9 +926,15 @@
       const finalLine = scheduleRow && scheduleRow.status === 'Final'
         ? `Final &middot; ${scheduleRow.away_team.split(' ').pop()} ${scheduleRow.away_score}, ${scheduleRow.home_team.split(' ').pop()} ${scheduleRow.home_score}`
         : (scheduleRow ? scheduleRow.status : '');
+      const numberOfPitches = num(gameLogRow && gameLogRow.numberOfPitches);
+      const strikesThrown = num(gameLogRow && gameLogRow.strikes);
+      const ballsThrown = numberOfPitches !== null && strikesThrown !== null ? numberOfPitches - strikesThrown : null;
+      const pitchCountLine = strikesThrown !== null && ballsThrown !== null
+        ? ` &mdash; ${strikesThrown} strikes, ${ballsThrown} balls`
+        : '';
       const pitcherLine = gameLogRow
-        ? `${pitcherName} &mdash; ${gameLogRow.inningsPitched} IP, ${gameLogRow.earnedRuns} ER, ${gameLogRow.strikeOuts} K`
-        : pitcherName;
+        ? `${pitcherNameWithThrows} &mdash; ${gameLogRow.inningsPitched} IP, ${gameLogRow.earnedRuns} ER, ${gameLogRow.strikeOuts} K${pitchCountLine}`
+        : pitcherNameWithThrows;
 
       renderShell(`
         <a href="player.html?id=${pitcherId}&season=${season}" class="back-link">&larr; Back to ${pitcherName}</a>
