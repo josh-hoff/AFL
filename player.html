@@ -98,7 +98,14 @@
   .career-row { display: grid; padding: 0.55rem 1rem; gap: 0.5rem; align-items: center; white-space: nowrap; }
   .career-row.head { background: #f2f1ee; color: var(--text-muted); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; }
   .career-row.body { border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text); align-items: center; }
-  .career-row.afl { border-top: 2px solid var(--tab-active); border-left: 5px solid var(--tab-active); font-weight: 700; background: #ffe3c4; }
+  /* box-shadow (not border-left) for the accent bar -- a real border-left,
+     combined with the page's box-sizing:border-box, shrinks this row's own
+     content box by 5px versus every other row (including the header),
+     shifting EVERY cell in an AFL-highlighted row a few px right of where
+     its header sits -- worst on the earliest columns, tapering off toward
+     the end. box-shadow draws the same accent bar without taking up any
+     layout space, so the row's grid lines back up with the header exactly. */
+  .career-row.afl { border-top: 2px solid var(--tab-active); box-shadow: inset 5px 0 0 0 var(--tab-active); font-weight: 700; background: #ffe3c4; }
   .career-row.mlb { border-top: 1px solid #2f6fb0; font-weight: 700; background: #eaf1fa; }
   .career-row.post-season { background: #eaf1fa; }
   .gl-row.fld-game { background: #fff; }
@@ -846,7 +853,7 @@
     'strikeOuts', 'baseOnBalls', 'runs', 'earnedRuns', 'saves', 'blownSaves',
     'strikePercentage', 'gamesPitched', 'gamesStarted', 'completeGames', 'shutouts',
     'holds', 'hits', 'battersFaced', 'outs', 'homeRuns', 'doubles', 'triples',
-    'avg', 'obp', 'slg', 'ops', 'stolenBases', 'stolenBasePercentage',
+    'atBats', 'avg', 'obp', 'slg', 'ops', 'stolenBases', 'stolenBasePercentage',
     'intentionalWalks', 'hitByPitch',
     'hitsPer9Inn', 'homeRunsPer9', 'walksPer9Inn', 'strikeoutsPer9Inn', 'runsScoredPer9', 'strikeoutWalkRatio',
     'wildPitches', 'pickoffs', 'balks',
@@ -860,7 +867,7 @@
     completeGames: 'CG', shutouts: 'SO', saves: 'SV', saveOpportunities: 'SVO',
     blownSaves: 'BS', holds: 'HLD', inningsPitched: 'IP', battersFaced: 'BF', outs: 'Outs',
     hits: 'H', runs: 'R', earnedRuns: 'ER', homeRuns: 'HR', doubles: '2B', triples: '3B',
-    baseOnBalls: 'BB', intentionalWalks: 'IBB', strikeOuts: 'K', hitBatsmen: 'HB',
+    baseOnBalls: 'BB', intentionalWalks: 'IBB', strikeOuts: 'K', hitBatsmen: 'HB', atBats: 'AB',
     hitByPitch: 'HBP', balks: 'BK', wildPitches: 'WP', pickoffs: 'PK',
     whip: 'WHIP', hitsPer9Inn: 'H/9 IP', homeRunsPer9: 'HR/9 IP', walksPer9Inn: 'BB/9 IP',
     strikeoutsPer9Inn: 'SO/9 IP', runsScoredPer9: 'R/9 IP', strikeoutWalkRatio: 'SO/BB',
