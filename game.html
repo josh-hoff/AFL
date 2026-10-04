@@ -930,7 +930,7 @@
       const strikesThrown = num(gameLogRow && gameLogRow.strikes);
       const ballsThrown = numberOfPitches !== null && strikesThrown !== null ? numberOfPitches - strikesThrown : null;
       const pitchCountLine = strikesThrown !== null && ballsThrown !== null
-        ? ` &mdash; ${strikesThrown} strikes, ${ballsThrown} balls`
+        ? ` &mdash; Strikes: ${strikesThrown}, Balls: ${ballsThrown}`
         : '';
       const pitcherLine = gameLogRow
         ? `${pitcherNameWithThrows} &mdash; ${gameLogRow.inningsPitched} IP, ${gameLogRow.earnedRuns} ER, ${gameLogRow.strikeOuts} K${pitchCountLine}`
