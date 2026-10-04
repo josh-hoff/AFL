@@ -1336,12 +1336,13 @@
     const labels = statKeys.map(k => labelMap[k] || k);
 
     // Same column-sizing convention the Career Path table above uses
-    // (minmax(75px, 1fr) per stat column, Date/Opp sized like its own
-    // first few pinned columns) -- same card chrome, same horizontal
-    // scroll-inside-the-card behavior as that table, rather than a
-    // differently-sized table.
-    const gridTemplate = `0.75fr 1.4fr ${cols.map(() => 'minmax(75px, 1fr)').join(' ')}`;
-    const minWidth = `${2 * 90 + cols.length * 85}px`;
+    // (minmax(75px, 1fr) per stat column) -- same card chrome, same
+    // horizontal scroll-inside-the-card behavior as that table. Date gets
+    // an explicit floor wide enough for the full "2025-10-18" (a plain fr
+    // share could get squeezed below that by the many stat columns and
+    // truncate to "2025-1…" with no way to read the rest).
+    const gridTemplate = `minmax(98px, 0.9fr) minmax(110px, 1.4fr) ${cols.map(() => 'minmax(75px, 1fr)').join(' ')}`;
+    const minWidth = `${(98 + 110) + cols.length * 85}px`;
     const rowStyle = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
 
     const headerCells = `<div>Date</div><div>Opp</div>${labels.map(l => `<div>${l}</div>`).join('')}`;
@@ -1427,8 +1428,10 @@
 
     const statKeys = FIELDING_GLOSSARY_ORDER.filter(k => k !== 'age');
     const labels = statKeys.map(k => FIELDING_LABELS[k] || k);
-    const gridTemplate = `0.75fr 1.4fr ${statKeys.map(() => 'minmax(65px, 1fr)').join(' ')}`;
-    const minWidth = `${2 * 90 + statKeys.length * 75}px`;
+    // Date gets an explicit floor (see buildAflGameLogTable) so it never
+    // truncates to "2025-1…".
+    const gridTemplate = `minmax(98px, 0.9fr) minmax(110px, 1.4fr) ${statKeys.map(() => 'minmax(65px, 1fr)').join(' ')}`;
+    const minWidth = `${(98 + 110) + statKeys.length * 75}px`;
     const rowStyle = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
     const headerCells = `<div>Date</div><div>Opp</div>${labels.map(l => `<div>${l}</div>`).join('')}`;
 
