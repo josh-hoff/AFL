@@ -2,18 +2,38 @@ name: Fetch AFL data
 
 on:
   schedule:
-    # Once a month, Jan-Jun (1st of the month at 12:00 UTC)
-    - cron: '0 12 1 1-6 *'
-    # Every day, Jul-Dec, at 12:00 UTC
-    - cron: '0 12 * 7-12 *'
+    # AFL data pull. All times are MST (UTC-7, no daylight saving).
+    # Minute is :07, not :00, because GitHub delays scheduled runs at the top of the hour.
+    #
+    # Once a day at 2:07 AM MST (09:07 UTC), Sep 1 - Nov 30: catches lingering data from the
+    # prior day/night's games and any transaction log updates.
+    - cron: '7 9 * 9-11 *'
+    #
+    # Plus every 2 hours through game night, Sep 28 - Nov 28: 6:07 PM, 8:07 PM, 10:07 PM and
+    # 12:07 AM MST (01:07, 03:07, 05:07 and 07:07 UTC). Together with the 2:07 AM run that is
+    # a run every 2 hours from 6 PM to 2 AM. These UTC times fall on the date AFTER the
+    # Phoenix evening, so the UTC dates are Sep 29 - Nov 29 (the 12:07 AM run on Nov 29 is
+    # the last one, covering the Nov 28 games).
+    # Cron can't express a range that crosses months, so this is split by month.
+    - cron: '7 1,3,5,7 29-30 9 *'
+    - cron: '7 1,3,5,7 * 10 *'
+    - cron: '7 1,3,5,7 1-29 11 *'
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
+# Queue runs instead of running two at once, so two runs never race to push.
+concurrency:
+  group: fetch-afl-data
+  cancel-in-progress: false
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    # Stop a stuck run after 1h45m so it can't overlap the next 2-hourly run.
+    # (Normal runs take under 10 minutes.)
+    timeout-minutes: 105
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -59,4 +79,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
           git diff --cached --quiet && echo "No data changes to commit." || git commit -m "Automated AFL data update"
+          git pull --rebase origin main
           git push
