@@ -141,6 +141,8 @@
   .pitch-x-mark { position: absolute; font-size: 12px; font-weight: 900; line-height: 1; transform: translate(-50%, -50%); user-select: none; }
   .heatmap-legend { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.85rem; font-size: 0.72rem; color: var(--text-muted); flex-wrap: wrap; justify-content: center; }
   .heatmap-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .pitch-sq-plot { position: absolute; width: 9px; height: 9px; transform: translate(-50%, -50%); }
+  .legend-sq { width: 9px; height: 9px; display: inline-block; }
   .legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
   .legend-x { font-size: 12px; font-weight: 900; line-height: 1; }
 
@@ -346,6 +348,12 @@
     if (call === 'Ball' || call === 'Ball In Dirt' || call === 'Hit By Pitch') return 'BALL';
     if (/^swinging strike/i.test(call)) return 'SWINGING';
     return 'CALLED'; // Called Strike, Foul(+Bunt/Tip), Missed Bunt
+  }
+  // Chart marker only (does not affect count logic): fouls plot as squares.
+  function markerKind(call) {
+    const t = classifyCall(call);
+    if (t === 'CALLED' && /^foul/i.test(call)) return 'FOUL';
+    return t;
   }
   function resultClassFor(callType) {
     if (callType === 'IN_PLAY') return 'in-play';
@@ -587,16 +595,18 @@
       const color = CALL_TYPES[callType].color;
       const title = `${p.type} · ${p.velo !== null ? p.velo.toFixed(1) : '—'} mph · ${p.call}`;
       if (callType === 'SWINGING') return `<div class="pitch-x-mark" style="left:${left}%; top:${top}%; color:${color};" title="${title}">&#10005;</div>`;
+      if (markerKind(p.call) === 'FOUL') return `<div class="pitch-sq-plot" style="left:${left}%; top:${top}%; background:${color};" title="${title}"></div>`;
       return `<div class="pitch-dot-plot" style="left:${left}%; top:${top}%; background:${color};" title="${title}"></div>`;
     }).join('');
     const wrap = document.getElementById('heatmapWrap');
     const limitSvg = `<svg class="sz-limit-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(90,100,114,0.48)" stroke-width="0.65" stroke-dasharray="1.5 3.5" vector-effect="non-scaling-stroke" /></svg>`;
     wrap.innerHTML = `<div class="heatmap-plot-area">${limitSvg}<div class="sz-box">${gridCells}</div>${marks}</div>`;
-    const presentTypes = Array.from(new Set(pitches.map(p => classifyCall(p.call))));
+    const presentTypes = Array.from(new Set(pitches.map(p => markerKind(p.call))));
     const legend = document.getElementById('heatmapLegend');
     legend.innerHTML = presentTypes.map(t => {
-      const marker = t === 'SWINGING' ? `<span class="legend-x" style="color:${CALL_TYPES[t].color};">&#10005;</span>` : `<span class="legend-dot" style="background:${CALL_TYPES[t].color};"></span>`;
-      return `<span>${marker}${CALL_TYPES[t].label}</span>`;
+      const info = t === 'FOUL' ? { label: 'Foul', color: CALL_TYPES.CALLED.color } : CALL_TYPES[t];
+      const marker = t === 'SWINGING' ? `<span class="legend-x" style="color:${info.color};">&#10005;</span>` : t === 'FOUL' ? `<span class="legend-sq" style="background:${info.color};"></span>` : `<span class="legend-dot" style="background:${info.color};"></span>`;
+      return `<span>${marker}${info.label}</span>`;
     }).join('');
   }
 
