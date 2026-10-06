@@ -118,7 +118,7 @@
   }
   .stat-tab.active { background: var(--tab-active); border-color: var(--tab-active); color: #fff; }
 
-  .career-gamelog-wrap { grid-column: 1 / -1; padding: 0.6rem 1rem 0.8rem; border-top: 1px solid var(--border); background: #fffaf5; }
+  .career-gamelog-wrap { grid-column: 1 / -1; padding: 0; border-top: none; background: none; }
   /* Used for the totals-row label in the AFL Game Log section's tables --
      that row's Date+Opp cell is a single div spanning both columns. */
   .career-row .col-span-2 { grid-column: span 2; }
@@ -130,6 +130,11 @@
   /* Pitching per-game Statcast rows link through to that game's full
      Pitch Location/Movement/Release Point page -- same hover affordance
      already used for pitch-row/ab-head elsewhere on the site. */
+  /* Per-game Statcast table: the table itself is orange (no tan panel). */
+  .gl-table.gl-orange { border: 1.5px solid var(--tab-active); background: #fff1e6; }
+  .gl-table.gl-orange .gl-head { background: var(--tab-active); color: #fff; letter-spacing: 0.02em; }
+  .gl-table.gl-orange .gl-row:not(.gl-head) { border-top: 1px solid #f9cfb0; }
+  .gl-table.gl-orange .gl-row.gl-row-link:hover { background: #ffe3cc; }
   .gl-row.gl-row-link { cursor: pointer; }
   .gl-row.gl-row-link:hover { background: #fafaf8; }
   .stat-glossary {
@@ -590,7 +595,7 @@
         : ` class="gl-row" style="grid-template-columns:${gridCols};"`;
       return `<div${rowAttrs}>${cells}</div>`;
     }).join('');
-    return `<div class="gl-table">${headerHtml}${rowsHtml}</div>`;
+    return `<div class="gl-table gl-orange">${headerHtml}${rowsHtml}</div>`;
   }
 
   function renderPitchMixTable(pitchMix) {
