@@ -284,10 +284,16 @@
   .roster-table.has-stats .roster-avatar { width: 60px; height: 60px; justify-self: center; }
   .roster-table.has-stats .roster-org-badge { width: 22px; height: 22px; }
   .roster-table.has-stats .nowrap { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .roster-key { display: flex; align-items: center; gap: 0.5rem; margin: 0.25rem 0 0.75rem; font-size: 0.8rem; color: var(--text-muted); }
+  .roster-key { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin: 0.25rem 0 0.75rem; font-size: 0.8rem; color: var(--text-muted); }
+  .roster-key-item { display: flex; align-items: center; gap: 0.5rem; }
   .roster-key-swatch { width: 22px; height: 14px; border-radius: 3px; background: #eaf1fa; border: 1px solid #2f6fb0; flex-shrink: 0; }
+  .roster-key-swatch.top100 { background: #ffe9d6; border-color: var(--tab-active); }
   .roster-player { border-top: 1px solid var(--border); }
-  .roster-player.mlb { background: #eaf1fa; border-top: 1px solid #2f6fb0; }
+  .roster-player.top100 { background: #fff0e2; border-top: 1px solid var(--tab-active); box-shadow: inset 5px 0 0 0 var(--tab-active); }
+  .roster-player.top100 .roster-stat { background: #ffffff; }
+  .roster-player.top100 .roster-stats-divider { border-top-color: #f3cfae; }
+  .top100-tag { display: inline-block; margin-top: 2px; font-size: 0.64rem; font-weight: 800; letter-spacing: 0.02em; padding: 1px 8px; border-radius: 10px; background: var(--tab-active); color: #fff; white-space: nowrap; }
+  .roster-player.mlb { box-shadow: none; background: #eaf1fa; border-top: 1px solid #2f6fb0; }
   .roster-player.mlb .roster-stat { background: #ffffff; }
   .roster-player.mlb .roster-stats-divider { border-top-color: #b9cde4; }
   .roster-stats-row {
@@ -433,6 +439,7 @@
   let allTransactions = [];
   let pitcherStatsById = {};
   let hitterStatsById = {};
+  let top100ById = {};
 
   function parseCSV(text) {
     const lines = text.trim().split(/\r?\n/);
@@ -598,6 +605,11 @@
   }
   const PITCHER_STAT_LABELS = ['G', 'GS', 'IP', 'ERA', 'WHIP', 'K', 'BB'];
   const HITTER_STAT_LABELS = ['G', 'AVG', 'OBP', 'SLG', 'OPS', 'HR', 'RBI', 'SB'];
+  function top100Tags(id) {
+    const ranks = top100ById[id];
+    if (!ranks) return '';
+    return Object.keys(ranks).sort().map(y => `<br><span class="top100-tag">${y} Top 100 #${ranks[y]}</span>`).join('');
+  }
   function heightWeight(p) { return (p.height ? p.height.replace(/ /g, '') : '—') + (p.weight ? ' / ' + p.weight : ''); }
   function hometown(p) { return [p.birth_city, p.birth_state || p.birth_country].filter(Boolean).join(', ') || '—'; }
   function batsThrows(p) { return (p.bats ? p.bats[0] : '—') + '/' + (p.throws ? p.throws[0] : '—'); }
@@ -625,7 +637,7 @@
         ${teamLogoImg(currentTeam, 'roster-heading-logo')}
         <div class="roster-heading-name">${currentTeam} Roster</div>
       </div>
-      <div class="roster-key"><span class="roster-key-swatch"></span>Blue card = player has appeared in an MLB game (based on MLB debut date).</div>
+      <div class="roster-key"><span class="roster-key-item"><span class="roster-key-swatch"></span>Blue card = player has appeared in an MLB game (based on MLB debut date)</span><span class="roster-key-item"><span class="roster-key-swatch top100"></span>Orange card / label = MLB Pipeline Top 100 prospect (rank as of the list's last update)</span></div>
     `;
 
     POSITION_GROUPS.forEach(group => {
@@ -651,11 +663,11 @@
         const st = (isPitcherGroup ? pitcherStatsById : hitterStatsById)[p.player_id];
         const vals = st || statLabels.map(() => '—');
         html += `
-          <div class="roster-player${p.mlb_debut_date ? ' mlb' : ''}">
+          <div class="roster-player${top100ById[p.player_id] ? ' top100' : ''}${p.mlb_debut_date ? ' mlb' : ''}">
           <div class="roster-row body">
             <a href="${link}"><div class="roster-avatar"><img class="roster-photo" src="${photoUrl}" alt="" onerror="this.style.display='none'">${orgBadge}</div></a>
             <div class="jersey">${p.jersey_number || ''}</div>
-            <div><a class="player-link" href="${link}">${p.full_name}</a> <span class="pos">${p.position_abbreviation}</span></div>
+            <div><a class="player-link" href="${link}">${p.full_name}</a> <span class="pos">${p.position_abbreviation}</span>${top100Tags(p.player_id)}</div>
             <div class="nowrap">${p.org_name || '—'}</div>
             <div>${p.age || '—'}</div>
             <div>${batsThrows(p)}</div>
@@ -700,6 +712,9 @@
     content.innerHTML = '<p class="loading">Loading roster...</p>';
 
     try {
+      // Top 100 lists exist per year; a player gets a label for every year's list he was on
+      // (each file holds the most recent pull of that year's ranking).
+      const top100Fetches = SEASONS.map(y => fetch(`data/${y}/top100.csv`).then(r => (r.ok ? r.text() : null)).catch(() => null));
       const [rosterRes, txnRes, pStatRes, hLogRes] = await Promise.all([
         fetch(`data/${currentSeason}/roster.csv`),
         fetch(`data/${currentSeason}/transactions.csv`),
@@ -712,6 +727,12 @@
       pitcherStatsById = {};
       if (pStatRes.ok) parseCSV(await pStatRes.text()).forEach(r => {
         pitcherStatsById[r.pitcher_id] = [r.gamesPitched, r.gamesStarted, r.inningsPitched, r.era, r.whip, r.strikeOuts, r.baseOnBalls];
+      });
+      top100ById = {};
+      const top100Texts = await Promise.all(top100Fetches);
+      SEASONS.forEach((y, i) => {
+        if (!top100Texts[i]) return;
+        parseCSV(top100Texts[i]).forEach(r => { (top100ById[r.player_id] = top100ById[r.player_id] || {})[y] = r.rank; });
       });
       hitterStatsById = hLogRes.ok ? buildHitterStats(parseCSV(await hLogRes.text())) : {};
 

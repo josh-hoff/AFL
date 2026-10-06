@@ -1,0 +1,44 @@
+name: Fetch Top 100 prospects
+
+on:
+  schedule:
+    # Once a week, Mondays at 2:07 AM MST (09:07 UTC; MST has no daylight saving).
+    # MLB only updates the list a few times a year, so weekly is plenty.
+    - cron: '7 9 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+# Share the main data workflow's queue so the two never race to push.
+concurrency:
+  group: fetch-afl-data
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch current year Top 100 prospects
+        run: python fetch_afl_top100.py
+
+      - name: Commit and push updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet && echo "No Top 100 changes to commit." || git commit -m "Automated Top 100 prospects update"
+          git pull --rebase origin main
+          git push
