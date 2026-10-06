@@ -60,6 +60,8 @@
   .play-desc { word-wrap: break-word; }
   .player-link { color: inherit; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; }
   .player-link:hover { color: var(--tab-active); border-bottom-color: var(--tab-active); }
+  .dia-wrap { width: 40px; display: flex; justify-content: center; align-self: center; flex: none; }
+  .dia-wrap svg { display: block; }
   .play-meta { margin-left: auto; text-align: right; flex: none; font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
   .play-score { font-weight: 700; color: var(--text); font-size: 0.8rem; }
 
@@ -121,6 +123,27 @@
       Object.values(bp).forEach(p => { const per = p && p.person; if (per && per.id && per.fullName) players[per.fullName] = per.id; });
     });
 
+    // Who is on base after each play. MLB's matchup.postOnFirst/Second/Third
+    // gives that directly; if a feed doesn't carry those, rebuild it from the
+    // runner movements, resetting at the start of every half-inning.
+    const hasPostOn = allPlays.some(p => p.matchup && ('postOnFirst' in p.matchup || 'postOnSecond' in p.matchup || 'postOnThird' in p.matchup));
+    let tracked = {}, trackedKey = null;
+    const basesAfter = (p, key) => {
+      if (hasPostOn) {
+        const mu = p.matchup || {};
+        return { b1: !!mu.postOnFirst, b2: !!mu.postOnSecond, b3: !!mu.postOnThird };
+      }
+      if (key !== trackedKey) { tracked = {}; trackedKey = key; }
+      (p.runners || []).forEach(r => {
+        const mv = r.movement || {};
+        const id = r.details && r.details.runner && r.details.runner.id;
+        if (id === undefined) return;
+        Object.keys(tracked).forEach(b => { if (tracked[b] === id) delete tracked[b]; });
+        if (!mv.isOut && (mv.end === '1B' || mv.end === '2B' || mv.end === '3B')) tracked[mv.end] = id;
+      });
+      return { b1: !!tracked['1B'], b2: !!tracked['2B'], b3: !!tracked['3B'] };
+    };
+
     const halves = [];
     const byKey = {};
     allPlays.forEach(p => {
@@ -140,6 +163,7 @@
         outs: p.count ? p.count.outs : null,
         awayScore: res.awayScore,
         homeScore: res.homeScore,
+        bases: basesAfter(p, key),
       });
     });
 
@@ -215,6 +239,17 @@
     return `${esc(m.awayAbbr)} ${esc(p.awayScore)}, ${esc(m.homeAbbr)} ${esc(p.homeScore)}`;
   }
 
+  function diamondSvg(b) {
+    const f = on => on ? '#f26522' : '#ffffff';
+    const names = [b.b1 && '1st', b.b2 && '2nd', b.b3 && '3rd'].filter(Boolean);
+    const label = names.length ? `Runners on ${names.join(' and ')}` : 'Bases empty';
+    return `<svg width="34" height="34" viewBox="0 0 40 40" role="img" aria-label="${label}"><title>${label}</title><g stroke="#c9c5bb" stroke-width="1.5" stroke-linejoin="round">
+      <rect x="14.5" y="1.5" width="11" height="11" transform="rotate(45 20 7)" fill="${f(b.b2)}"/>
+      <rect x="1.5" y="14.5" width="11" height="11" transform="rotate(45 7 20)" fill="${f(b.b3)}"/>
+      <rect x="27.5" y="14.5" width="11" height="11" transform="rotate(45 33 20)" fill="${f(b.b1)}"/>
+      <path d="M20 38 L15 33 L15 30 L25 30 L25 33 Z" fill="#fff"/></g></svg>`;
+  }
+
   function playHtml(m, p, showOuts) {
     const meta = [];
     if (p.scoring) meta.push(`<div class="play-score">${scoreText(m, p)}</div>`);
@@ -225,6 +260,7 @@
         <div class="play-desc">${linkify(p.description, m)}</div>
       </div>
       ${meta.length ? `<div class="play-meta">${meta.join('')}</div>` : ''}
+      ${showOuts && p.bases ? `<div class="dia-wrap">${diamondSvg(p.bases)}</div>` : ''}
     </div>`;
   }
 
