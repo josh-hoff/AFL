@@ -58,6 +58,8 @@
   .play-event { display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted); margin-bottom: 0.1rem; }
   .play.scoring .play-event { color: var(--tab-active); }
   .play-desc { word-wrap: break-word; }
+  .player-link { color: inherit; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; }
+  .player-link:hover { color: var(--tab-active); border-bottom-color: var(--tab-active); }
   .play-meta { margin-left: auto; text-align: right; flex: none; font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
   .play-score { font-weight: 700; color: var(--text); font-size: 0.8rem; }
 
@@ -111,6 +113,14 @@
     const teamAbbr = side => (side === 'away' ? awayT : homeT).abbreviation || teamName(side);
     const allPlays = (ld.plays && ld.plays.allPlays) || [];
 
+    // name -> MLB player id, from everyone listed in this game's feed.
+    const players = {};
+    Object.values(gd.players || {}).forEach(p => { if (p && p.id && p.fullName) players[p.fullName] = p.id; });
+    ['away', 'home'].forEach(side => {
+      const bp = (((ld.boxscore || {}).teams || {})[side] || {}).players || {};
+      Object.values(bp).forEach(p => { const per = p && p.person; if (per && per.id && per.fullName) players[per.fullName] = per.id; });
+    });
+
     const halves = [];
     const byKey = {};
     allPlays.forEach(p => {
@@ -145,7 +155,29 @@
       innings: ls.innings || [],
       lineTeams: ls.teams || {},
       halves,
+      players,
+      season: season || (gd.game && gd.game.season) || '',
     };
+  }
+
+  // Turns each player's full name inside a play description into a link to
+  // their player page. Longest names first so "Stu Flesland III" wins over
+  // "Stu Flesland"; names only match as whole words.
+  function linkify(text, m) {
+    const names = Object.keys(m.players).sort((a, b) => b.length - a.length);
+    if (!names.length) return esc(text);
+    const re = new RegExp(names.map(n => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'), 'g');
+    const isWord = ch => !!ch && /[A-Za-z0-9]/.test(ch);
+    let out = '', last = 0, match;
+    while ((match = re.exec(text)) !== null) {
+      const start = match.index, end = start + match[0].length;
+      if (isWord(text[start - 1]) || isWord(text[end])) continue;
+      out += esc(text.slice(last, start));
+      const q = m.season ? `&season=${encodeURIComponent(m.season)}` : '';
+      out += `<a class="player-link" href="player.html?id=${encodeURIComponent(m.players[match[0]])}${q}">${esc(match[0])}</a>`;
+      last = end;
+    }
+    return out + esc(text.slice(last));
   }
 
   function halfLabel(h) { return `${h.half} ${ordinal(h.inning)}`; }
@@ -190,7 +222,7 @@
     return `<div class="play${p.scoring ? ' scoring' : ''}">
       <div class="play-body">
         ${p.event ? `<div class="play-event">${esc(p.event)}</div>` : ''}
-        <div class="play-desc">${esc(p.description)}</div>
+        <div class="play-desc">${linkify(p.description, m)}</div>
       </div>
       ${meta.length ? `<div class="play-meta">${meta.join('')}</div>` : ''}
     </div>`;
