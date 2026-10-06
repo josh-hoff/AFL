@@ -218,13 +218,18 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Scottsdale Scorpions,2026-09-28,702518,Jett Williams,ASG,Assigned,,Scottsdale Scorpions,SS Jett Williams assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-10-02,802105,Yeriel Santos,ASG,Assigned,,Scottsdale Scorpions,RHP Yeriel Santos assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-10-03,807726,John Peck,ASG,Assigned,,Scottsdale Scorpions,SS John Peck assigned to Scottsdale Scorpions.
+2026,Surprise Saguaros,2026-09-15,806522,Irving Cota,ASG,Assigned,,Surprise Saguaros,RHP Irving Cota assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-15,800607,Kehden Hettiger,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated C Kehden Hettiger from the 7-day injured list.
 2026,Surprise Saguaros,2026-09-15,805799,Zion Rose,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated CF Zion Rose.
-2026,Surprise Saguaros,2026-09-15,687930,Tyresse Turner,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Tyresse Turner from the 7-day injured list.
-2026,Surprise Saguaros,2026-09-15,702265,Paxton Kling,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Paxton Kling.
-2026,Surprise Saguaros,2026-09-15,807276,Dante Nori,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Dante Nori.
-2026,Surprise Saguaros,2026-09-15,800169,Aroon Escobar,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Aroon Escobar.
-2026,Surprise Saguaros,2026-09-15,805951,Boston Baro,ASG,Assigned,,Surprise Saguaros,SS Boston Baro assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-15,695517,Casey Cook,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Casey Cook.
+2026,Surprise Saguaros,2026-09-15,805951,Boston Baro,ASG,Assigned,,Surprise Saguaros,SS Boston Baro assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-15,800169,Aroon Escobar,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Aroon Escobar.
+2026,Surprise Saguaros,2026-09-15,807276,Dante Nori,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Dante Nori.
+2026,Surprise Saguaros,2026-09-15,702265,Paxton Kling,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Paxton Kling.
+2026,Surprise Saguaros,2026-09-15,687930,Tyresse Turner,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Tyresse Turner from the 7-day injured list.
+2026,Surprise Saguaros,2026-09-15,695573,Cole Mathis,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 3B Cole Mathis.
+2026,Surprise Saguaros,2026-09-15,702619,Luke Hill,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 3B Luke Hill.
+2026,Surprise Saguaros,2026-09-15,806988,Welbyn Francisca,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated SS Welbyn Francisca.
 2026,Surprise Saguaros,2026-09-15,804871,Brooks Bryan,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated C Brooks Bryan from the 60-day injured list.
 2026,Surprise Saguaros,2026-09-15,800051,Austin Charles,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated SS Austin Charles.
 2026,Surprise Saguaros,2026-09-15,828202,Bruin Agbayani,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated SS Bruin Agbayani.
@@ -254,12 +259,7 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Surprise Saguaros,2026-09-15,702126,Aaron Davenport,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Aaron Davenport from the 60-day injured list.
 2026,Surprise Saguaros,2026-09-15,823330,Alejandro Chiquillo,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Alejandro Chiquillo.
 2026,Surprise Saguaros,2026-09-15,700176,Keegan Batka,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Keegan Batka.
-2026,Surprise Saguaros,2026-09-15,806522,Irving Cota,ASG,Assigned,,Surprise Saguaros,RHP Irving Cota assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-15,695573,Cole Mathis,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 3B Cole Mathis.
-2026,Surprise Saguaros,2026-09-15,702619,Luke Hill,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 3B Luke Hill.
-2026,Surprise Saguaros,2026-09-15,806988,Welbyn Francisca,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated SS Welbyn Francisca.
-2026,Surprise Saguaros,2026-09-15,800607,Kehden Hettiger,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated C Kehden Hettiger from the 7-day injured list.
-2026,Surprise Saguaros,2026-09-28,681003,Andrew Walling,ASG,Assigned,,Surprise Saguaros,LHP Andrew Walling assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-28,806964,Sebastian Walcott,ASG,Assigned,,Surprise Saguaros,DH Sebastian Walcott assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-28,825412,Angeibel Gomez,ASG,Assigned,,Surprise Saguaros,OF Angeibel Gomez assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-28,805795,Aidan Miller,ASG,Assigned,,Surprise Saguaros,SS Aidan Miller assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-28,681003,Andrew Walling,ASG,Assigned,,Surprise Saguaros,LHP Andrew Walling assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-28,825412,Angeibel Gomez,ASG,Assigned,,Surprise Saguaros,OF Angeibel Gomez assigned to Surprise Saguaros.
