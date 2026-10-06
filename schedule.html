@@ -239,7 +239,7 @@
   }
   .game-row {
     display: grid;
-    grid-template-columns: 120px 1fr auto;
+    grid-template-columns: 120px 1fr;
     align-items: center;
     gap: 1rem;
     padding: 0.7rem 0.9rem;
@@ -297,6 +297,13 @@
     color: var(--header-bg);
     font-weight: 600;
   }
+  .game-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .game-top > div:first-child { min-width: 0; }
   .status {
     font-size: 0.78rem;
     padding: 0.25rem 0.6rem;
@@ -445,7 +452,8 @@
   }
   @media (max-width: 560px) {
     .game-row { grid-template-columns: 55px 1fr; }
-    .status { grid-column: 1 / -1; justify-self: start; margin-top: 0.3rem; }
+    .game-top { flex-wrap: wrap; }
+    .status { margin-top: 0.3rem; }
   }
   .box-toggle-btn {
     background: none;
@@ -511,7 +519,7 @@
   }
   .bs-header-p, .bs-row-p {
     display: grid;
-    grid-template-columns: 26px 2fr repeat(10, 0.62fr);
+    grid-template-columns: 26px 2fr repeat(10, 0.62fr) 86px;
     gap: 4px;
     padding: 0.35rem 0.55rem;
     font-size: 0.76rem;
@@ -541,6 +549,19 @@
     font-style: italic;
     margin: 0.1rem 0 0.5rem;
   }
+  .statcast-pill {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--tab-active);
+    border: 1.5px solid var(--tab-active);
+    border-radius: 999px;
+    padding: 1px 9px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .statcast-pill:hover { background: var(--tab-active); color: #ffffff; }
+  .statcast-pill .sp-chev { font-size: 0.82rem; line-height: 1; }
   .player-link {
     color: var(--text);
     text-decoration: none;
@@ -564,7 +585,9 @@
   }
   @media (max-width: 560px) {
     .bs-header, .bs-row { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(13, 1fr); overflow-x: auto; }
-    .bs-header-p, .bs-row-p { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(10, 1fr); overflow-x: auto; }
+    .bs-header-p, .bs-row-p { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(10, 1fr) 40px; overflow-x: auto; }
+    .statcast-pill { padding: 1px 8px; }
+    .statcast-pill .sp-text { display: none; }
   }
 </style>
 </head>
@@ -1286,7 +1309,7 @@
       <div class="bs-team-title">Pitching &mdash; ${teamName || ''}${tag}</div>
       <div class="bs-table">
         <div class="bs-header-p">
-          <div>#</div><div>Pitcher</div><div>ERA</div><div>Gm ERA</div><div>IP</div><div>H</div><div>R</div><div>ER</div><div>BB</div><div>K</div><div>Pit</div><div>WHIP</div>
+          <div>#</div><div>Pitcher</div><div>ERA</div><div>Gm ERA</div><div>IP</div><div>H</div><div>R</div><div>ER</div><div>BB</div><div>K</div><div>Pit</div><div>WHIP</div><div></div>
         </div>
         ${rows}
       </div>
@@ -1319,6 +1342,7 @@
         <div>${fmtDash(stat.strikeOuts)}</div>
         <div>${fmtDash(stat.numberOfPitches)}</div>
         <div>${whipDisplay}</div>
+        <div><a class="statcast-pill" href="game.html?game_pk=${gamePk}&pitcher_id=${app.pitcher_id}&season=${currentSeason}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a></div>
       </div>
     `;
   }
@@ -1455,13 +1479,17 @@
         row.innerHTML = `
           <div class="game-time">${formatBothTimes(g.date, g.time_az)}</div>
           <div>
-            <div class="matchup">${teamLink(g.away_team, awayWon)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team, homeWon)}${scoreSpan(g.home_score, g.away_score)}</div>
-            <div class="venue">${g.venue || ''}</div>
-            ${decisionLine(g)}
-            ${probableLine(g)}
+            <div class="game-top">
+              <div>
+                <div class="matchup">${teamLink(g.away_team, awayWon)}${scoreSpan(g.away_score, g.home_score)} @ ${teamLink(g.home_team, homeWon)}${scoreSpan(g.home_score, g.away_score)}</div>
+                <div class="venue">${g.venue || ''}</div>
+                ${decisionLine(g)}
+                ${probableLine(g)}
+              </div>
+              <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
+            </div>
             ${boxScoreSection(g)}
           </div>
-          <div class="status ${statusClass(g.status)}">${g.status || ''}</div>
         `;
         section.appendChild(row);
       });
