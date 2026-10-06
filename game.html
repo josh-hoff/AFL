@@ -57,6 +57,8 @@
   .afl-stat-value { color: var(--text); font-size: 1.2rem; font-weight: 700; margin-top: 0.15rem; }
   .spin-notice { color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin: -0.35rem 0 0.75rem; }
   .spin-notice[hidden] { display: none; }
+  .spin-footnote { color: var(--text-muted); font-size: 0.78rem; line-height: 1.45; margin: 1.5rem 0 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+  .spin-footnote[hidden] { display: none; }
   .afl-stat-note { color: var(--text-muted); font-size: 0.7rem; font-weight: 500; margin-top: 0.1rem; }
   .statcast-left .afl-stat-note { font-size: 0.74rem; white-space: nowrap; }
   .afl-stat-value.flash { color: var(--tab-active); }
@@ -920,6 +922,7 @@
     const pct = total ? Math.round(n / total * 100) : 0;
     let label = '';
     if (n > 0) label = `${pct < 50 ? 'Small' : (pct <= 70 ? 'Decent' : 'Sufficient')} Sample Size: ${pct}%`;
+    else if (total > 0) label = 'No Spin Data Available';
     return { pct, label, partial: n < total };
   }
   function renderSpinNotice() {
@@ -931,6 +934,8 @@
     else if (n < allPitches.length) msg = n / allPitches.length < 0.5 ? 'Spin Data not tracked for most pitches' : 'Spin Data tracked for most pitches';
     el.textContent = msg;
     el.hidden = !msg;
+    const fn = document.getElementById('spinFootnote');
+    if (fn) fn.hidden = n >= allPitches.length;
   }
   function renderAll() {
     renderSpinNotice();
@@ -1000,6 +1005,9 @@
       </div>
       <div class="section-title">Pitch-by-Pitch <span class="section-note">grouped by at-bat</span></div>
       <div id="abContainer"></div>
+      <div class="spin-footnote" id="spinFootnote" hidden>
+        <strong>*</strong> An asterisk means some pitches in the sample have no spin data. Average spin rate (rpm) uses only pitches that have spin data, and the count under the number (for example, &ldquo;2 of 35 pitches&rdquo;) shows how many that is. MLB doesn't/can't track every spin at every park, so some games have little or no spin data. Sample labels: Small Sample Size (under 50% of pitches have spin), Decent Sample Size (50% to 70%), Sufficient Sample Size (over 70%).
+      </div>
     `;
   }
 

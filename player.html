@@ -506,6 +506,7 @@
     const pct = total ? Math.round(n / total * 100) : 0;
     let label = '';
     if (n > 0) label = `${pct < 50 ? 'Small' : (pct <= 70 ? 'Decent' : 'Sufficient')} Sample Size: ${pct}%`;
+    else if (total > 0) label = 'No Spin Data Available';
     return { pct, label, partial: n < total };
   }
   function spinValue(avg, n, total) {
