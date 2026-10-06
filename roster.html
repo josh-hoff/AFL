@@ -270,6 +270,44 @@
     object-fit: contain;
     padding: 2px;
   }
+
+  .roster-table.has-stats .roster-row.head, .roster-table.has-stats .roster-row.body {
+    grid-template-columns: 76px 34px minmax(130px, 1.2fr) minmax(140px, 1.2fr) 40px 44px 84px minmax(170px, 1.6fr) 48px;
+    gap: 6px;
+    text-align: center;
+  }
+  .roster-table.has-stats .roster-row.head > div,
+  .roster-table.has-stats .roster-row.body > div { text-align: center; }
+  .roster-table.has-stats .roster-row.head > div:nth-child(3),
+  .roster-table.has-stats .roster-row.body > div:nth-child(3) { text-align: left; }
+  .roster-table.has-stats .roster-row.body { border-top: none; padding-top: 0.55rem; padding-bottom: 0.2rem; font-size: 0.86rem; }
+  .roster-table.has-stats .roster-avatar { width: 60px; height: 60px; justify-self: center; }
+  .roster-table.has-stats .roster-org-badge { width: 22px; height: 22px; }
+  .roster-table.has-stats .nowrap { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .roster-player { border-top: 1px solid var(--border); }
+  .roster-stats-row {
+    display: grid;
+    gap: 10px;
+    align-items: center;
+    padding: 0.5rem 1.1rem 0.65rem;
+    margin: 0 0.1rem;
+  }
+  .roster-stats-row .rs-wrap { display: contents; }
+  .roster-stats-label {
+    font-size: 0.62rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--tab-active); text-align: center; line-height: 1.2;
+  }
+  .roster-stat {
+    background: #faf8f5; border: 1px solid var(--border); border-radius: 6px;
+    text-align: center; padding: 4px 6px;
+  }
+  .roster-stat b { display: block; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+  .roster-stat span { font-size: 0.6rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+  .roster-stats-divider { border-top: 1px dashed var(--border); margin: 0 1.1rem; }
+  @media (max-width: 900px) {
+    .roster-table.has-stats { overflow-x: auto; }
+    .roster-table.has-stats .roster-row, .roster-table.has-stats .roster-stats-row, .roster-table.has-stats .roster-stats-divider { min-width: 940px; }
+  }
   .player-link {
     color: var(--text);
     text-decoration: none;
@@ -388,6 +426,8 @@
   let currentTeam = params.get('team') || null;
   let allRoster = [];
   let allTransactions = [];
+  let pitcherStatsById = {};
+  let hitterStatsById = {};
 
   function parseCSV(text) {
     const lines = text.trim().split(/\r?\n/);
@@ -536,6 +576,27 @@
     });
   }
 
+  function num(v) { const n = parseFloat(v); return isNaN(n) ? 0 : n; }
+  function fmtRate(v) { const t = v.toFixed(3); return v < 1 ? t.replace(/^0/, '') : t; }
+  function buildHitterStats(rows) {
+    const by = {};
+    rows.filter(r => !r.game_type || r.game_type === 'R').forEach(r => { (by[r.player_id] = by[r.player_id] || []).push(r); });
+    const out = {};
+    Object.keys(by).forEach(id => {
+      const g = by[id], sum = k => g.reduce((a, r) => a + num(r[k]), 0);
+      const ab = sum('at_bats'), h = sum('hits'), bb = sum('walks'), hbp = sum('hit_by_pitch'), sf = sum('sac_flies'), tb = sum('total_bases');
+      const pa = ab + bb + hbp + sf;
+      const obp = pa ? (h + bb + hbp) / pa : 0, slg = ab ? tb / ab : 0;
+      out[id] = [g.length, fmtRate(ab ? h / ab : 0), fmtRate(obp), fmtRate(slg), fmtRate(obp + slg), sum('home_runs'), sum('rbi'), sum('stolen_bases')];
+    });
+    return out;
+  }
+  const PITCHER_STAT_LABELS = ['G', 'GS', 'IP', 'ERA', 'WHIP', 'K', 'BB'];
+  const HITTER_STAT_LABELS = ['G', 'AVG', 'OBP', 'SLG', 'OPS', 'HR', 'RBI', 'SB'];
+  function heightWeight(p) { return (p.height ? p.height.replace(/ /g, '') : '—') + (p.weight ? ' / ' + p.weight : ''); }
+  function hometown(p) { return [p.birth_city, p.birth_state || p.birth_country].filter(Boolean).join(', ') || '—'; }
+  function batsThrows(p) { return (p.bats ? p.bats[0] : '—') + '/' + (p.throws ? p.throws[0] : '—'); }
+
   function renderRoster() {
     const content = document.getElementById('content');
 
@@ -570,21 +631,37 @@
         <div class="position-group-label" data-target="${groupId}">
           <span class="position-group-arrow">&#9662;</span> ${group.label} <span class="position-group-count">(${playersInGroup.length})</span>
         </div>
-        <div class="roster-table" id="${groupId}">
+        <div class="roster-table has-stats" id="${groupId}">
       `;
-      html += `<div class="roster-row head"><div></div><div>#</div><div>Name</div><div>Pos</div></div>`;
+      const isPitcherGroup = group.label === 'Pitchers';
+      const statLabels = isPitcherGroup ? PITCHER_STAT_LABELS : HITTER_STAT_LABELS;
+      html += `<div class="roster-row head"><div></div><div>#</div><div>Name</div><div>Org</div><div>Age</div><div>B/T</div><div>Ht / Wt</div><div>Hometown</div><div>Draft</div></div>`;
       playersInGroup.forEach(p => {
         const link = `player.html?id=${p.player_id}&season=${currentSeason}`;
         const photoUrl = `https://img.mlbstatic.com/mlb-photos/image/upload/c_fill,g_auto/w_360/v1/people/${p.player_id}/headshot/milb/current`;
         const orgBadge = p.org_id
           ? `<img class="roster-org-badge" src="https://www.mlbstatic.com/team-logos/${p.org_id}.svg" alt="" onerror="this.style.display='none'">`
           : '';
+        const st = (isPitcherGroup ? pitcherStatsById : hitterStatsById)[p.player_id];
+        const vals = st || statLabels.map(() => '—');
         html += `
+          <div class="roster-player">
           <div class="roster-row body">
             <a href="${link}"><div class="roster-avatar"><img class="roster-photo" src="${photoUrl}" alt="" onerror="this.style.display='none'">${orgBadge}</div></a>
             <div class="jersey">${p.jersey_number || ''}</div>
-            <div><a class="player-link" href="${link}">${p.full_name}</a></div>
-            <div class="pos">${p.position_abbreviation}</div>
+            <div><a class="player-link" href="${link}">${p.full_name}</a> <span class="pos">${p.position_abbreviation}</span></div>
+            <div class="nowrap">${p.org_name || '—'}</div>
+            <div>${p.age || '—'}</div>
+            <div>${batsThrows(p)}</div>
+            <div class="nowrap">${heightWeight(p)}</div>
+            <div class="nowrap" title="${hometown(p)}">${hometown(p)}</div>
+            <div>${p.draft_year || '—'}</div>
+          </div>
+          <div class="roster-stats-divider"></div>
+          <div class="roster-stats-row" style="grid-template-columns: 76px repeat(${statLabels.length}, 1fr);">
+            <div class="roster-stats-label">${currentSeason}<br>Stats</div>
+            ${statLabels.map((l, i) => `<div class="roster-stat"><b>${vals[i]}</b><span>${l}</span></div>`).join('')}
+          </div>
           </div>
         `;
       });
@@ -617,13 +694,20 @@
     content.innerHTML = '<p class="loading">Loading roster...</p>';
 
     try {
-      const [rosterRes, txnRes] = await Promise.all([
+      const [rosterRes, txnRes, pStatRes, hLogRes] = await Promise.all([
         fetch(`data/${currentSeason}/roster.csv`),
         fetch(`data/${currentSeason}/transactions.csv`),
+        fetch(`data/${currentSeason}/pitcher_stats.csv`),
+        fetch(`data/${currentSeason}/hitting_gamelogs.csv`),
       ]);
 
       allRoster = rosterRes.ok ? parseCSV(await rosterRes.text()) : [];
       allTransactions = txnRes.ok ? parseCSV(await txnRes.text()) : [];
+      pitcherStatsById = {};
+      if (pStatRes.ok) parseCSV(await pStatRes.text()).forEach(r => {
+        pitcherStatsById[r.pitcher_id] = [r.gamesPitched, r.gamesStarted, r.inningsPitched, r.era, r.whip, r.strikeOuts, r.baseOnBalls];
+      });
+      hitterStatsById = hLogRes.ok ? buildHitterStats(parseCSV(await hLogRes.text())) : {};
 
       if (allRoster.length === 0) {
         content.innerHTML = '<p class="error">No roster available for this season yet.</p>';
