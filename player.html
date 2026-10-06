@@ -1146,7 +1146,7 @@
     rangeFactorPer9Inn: 'Range factor per 9 innings ((putouts + assists) × 9 ÷ innings)',
   };
 
-  const SPIN_GLOSSARY_ROW = `<div class="glossary-row"><div class="glossary-abbr">Avg Spin *</div><div class="glossary-desc">Average spin rate (rpm), using only pitches that have spin data. MLB doesn't track spin at every park, so some games have little or none. "N of M pitches" shows how many pitches the average is based on. An asterisk (*) means some pitches in the sample have no spin data. Sample labels: Small Sample Size (under 50% of pitches have spin), Decent Sample Size (50% to 70%), Sufficient Sample Size (over 70%).</div></div>`;
+  const SPIN_GLOSSARY_ROW = `<div class="glossary-row"><div class="glossary-abbr">Avg Spin *</div><div class="glossary-desc">Average spin rate (rpm), using only pitches that have spin data. MLB doesn't/can't track every spin at every park, so some games have little or no spin data, and some will be completely tracked. The count under the number shows how many pitches the average is based on; for example, "2 of 35 pitches" means 2 of the 35 pitches had spin data. An asterisk (*) means some pitches in the sample have no spin data. Sample labels: Small Sample Size (under 50% of pitches have spin), Decent Sample Size (50% to 70%), Sufficient Sample Size (over 70%).</div></div>`;
   function glossaryEntriesHtml(order, labels, glossary, hidden) {
     return order
       .filter(k => !hidden.has(k))
