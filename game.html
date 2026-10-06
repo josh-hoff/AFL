@@ -98,9 +98,22 @@
   .statcast-layout { display: grid; grid-template-columns: 360px 1fr; gap: 1.5rem; align-items: start; margin-bottom: 1.75rem; }
   @media (max-width: 860px) { .statcast-layout { grid-template-columns: 1fr; } }
   .outcome-row { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.9rem; }
-  .outcome-row label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); }
-  .outcome-row select { font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--text); background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.45rem 0.7rem; min-width: 12.5rem; cursor: pointer; }
-  .outcome-row select:focus { outline: none; border-color: var(--tab-active); box-shadow: 0 0 0 2px rgba(242,101,34,0.15); }
+  .oc-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); }
+  .oc-dd { position: relative; }
+  .oc-btn { display: inline-flex; align-items: center; gap: 0.5rem; min-width: 13.5rem; font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--text); background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.45rem 0.7rem; cursor: pointer; text-align: left; }
+  .oc-btn.active, .oc-btn:focus-visible { border-color: var(--tab-active); box-shadow: 0 0 0 2px rgba(242,101,34,0.15); outline: none; }
+  .oc-text { flex: 1; }
+  .oc-caret { color: var(--text-muted); font-size: 0.8rem; }
+  .oc-menu { position: absolute; left: 0; top: calc(100% + 4px); min-width: 15rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 5px; z-index: 20; }
+  .oc-menu[hidden] { display: none; }
+  .oc-opt { display: flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.55rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; }
+  .oc-opt:hover { background: #f5f3ee; }
+  .oc-opt.sel { background: #fdeadb; color: #b8460f; font-weight: 700; }
+  .oc-count { margin-left: auto; color: var(--text-muted); font-weight: 500; }
+  .oc-mark { width: 12px; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .oc-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .oc-sq { width: 9px; height: 9px; display: inline-block; }
+  .oc-x { font-size: 12px; font-weight: 900; line-height: 1; }
   .statcast-left .pitch-filter-row { margin-bottom: 1rem; }
   .statcast-left .afl-stats-grid { grid-template-columns: repeat(2, 1fr); margin-bottom: 0; gap: 1.5rem 1.25rem; padding: 2rem 1.75rem; }
   .statcast-left .afl-stat-label { font-size: 0.8rem; }
@@ -462,12 +475,22 @@
 
   const OUTCOME_OPTIONS = [
     ['ALL', 'All Results'],
-    ['BALL', '\u25CF Ball'],
-    ['IN_PLAY', '\u25CF Ball In Play'],
-    ['FOUL', '\u25A0 Foul'],
-    ['CALLED', '\u25CF Called Strike'],
-    ['SWINGING', '\u2715 Swinging Strike'],
+    ['CALLED', 'Called Strike'],
+    ['SWINGING', 'Swinging Strike'],
+    ['FOUL', 'Foul'],
+    ['BALL', 'Ball'],
+    ['IN_PLAY', 'Ball In Play'],
   ];
+  // Chart key order; also the dropdown order.
+  const KEY_ORDER = ['CALLED', 'SWINGING', 'FOUL', 'BALL', 'IN_PLAY'];
+  function outcomeColor(k) { return k === 'FOUL' ? CALL_TYPES.CALLED.color : (CALL_TYPES[k] || {}).color; }
+  function outcomeMarkerHtml(k) {
+    if (k === 'ALL') return '<span class="oc-mark"></span>';
+    const c = outcomeColor(k);
+    if (k === 'SWINGING') return `<span class="oc-mark oc-x" style="color:${c};">&#10005;</span>`;
+    if (k === 'FOUL') return `<span class="oc-mark"><span class="oc-sq" style="background:${c};"></span></span>`;
+    return `<span class="oc-mark"><span class="oc-dot" style="background:${c};"></span></span>`;
+  }
   // Pitches scoped by at-bat and pitch type only (the outcome dropdown is applied separately).
   function getTypeScopedPitches() {
     const base = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
@@ -506,9 +529,19 @@
     const base = getTypeScopedPitches();
     const counts = {};
     base.forEach(p => { const k = markerKind(p.call); counts[k] = (counts[k] || 0) + 1; });
-    wrap.innerHTML = `<label for="outcomeSelect">Result</label><select id="outcomeSelect">${OUTCOME_OPTIONS.map(([k, label]) => `<option value="${k}"${activeOutcome === k ? ' selected' : ''}>${label} (${k === 'ALL' ? base.length : (counts[k] || 0)})</option>`).join('')}</select>`;
-    document.getElementById('outcomeSelect').addEventListener('change', e => { activeOutcome = e.target.value; renderAll(); });
+    const countFor = k => k === 'ALL' ? base.length : (counts[k] || 0);
+    const cur = OUTCOME_OPTIONS.find(o => o[0] === activeOutcome) || OUTCOME_OPTIONS[0];
+    wrap.innerHTML = `<span class="oc-label">Result</span>
+      <div class="oc-dd">
+        <button type="button" class="oc-btn${activeOutcome !== 'ALL' ? ' active' : ''}" id="ocBtn" aria-haspopup="listbox" aria-expanded="false">${outcomeMarkerHtml(cur[0])}<span class="oc-text">${cur[1]} (${countFor(cur[0])})</span><span class="oc-caret">&#9662;</span></button>
+        <div class="oc-menu" id="ocMenu" role="listbox" hidden>${OUTCOME_OPTIONS.map(([k, label]) => `<div class="oc-opt${k === activeOutcome ? ' sel' : ''}" role="option" data-k="${k}">${outcomeMarkerHtml(k)}<span>${label}</span><span class="oc-count">${countFor(k)}</span></div>`).join('')}</div>
+      </div>`;
+    const btn = document.getElementById('ocBtn'), menu = document.getElementById('ocMenu');
+    btn.addEventListener('click', e => { e.stopPropagation(); const open = menu.hidden; menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); });
+    menu.querySelectorAll('.oc-opt').forEach(el => el.addEventListener('click', () => { activeOutcome = el.dataset.k; renderAll(); }));
   }
+  document.addEventListener('click', () => { const m = document.getElementById('ocMenu'); if (m && !m.hidden) { m.hidden = true; document.getElementById('ocBtn').setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { const m = document.getElementById('ocMenu'); if (m) m.hidden = true; } });
 
   function renderFilterRow() {
     const row = document.getElementById('filterRow');
@@ -612,7 +645,7 @@
     const scopeLabel = document.getElementById('heatmapScope');
     const scopeParts = [];
     if (activeFilter !== 'ALL') scopeParts.push(PITCH_LABELS[activeFilter] || activeFilter);
-    if (activeOutcome !== 'ALL') scopeParts.push((OUTCOME_OPTIONS.find(o => o[0] === activeOutcome) || [0, activeOutcome])[1].replace(/^\S+\s/, ''));
+    if (activeOutcome !== 'ALL') scopeParts.push((OUTCOME_OPTIONS.find(o => o[0] === activeOutcome) || [0, activeOutcome])[1]);
     if (selectedAtBat !== null) scopeParts.push(`${atBats[selectedAtBat].inningLabel} at-bat`);
     scopeLabel.innerHTML = scopeParts.length
       ? `— ${scopeParts.join(', ')}${selectedAtBat !== null ? ' <span class="scope-clear" onclick="selectAtBat(' + selectedAtBat + ')">(clear)</span>' : ''}`
@@ -631,10 +664,11 @@
     const wrap = document.getElementById('heatmapWrap');
     const limitSvg = `<svg class="sz-limit-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(90,100,114,0.48)" stroke-width="0.65" stroke-dasharray="1.5 3.5" vector-effect="non-scaling-stroke" /></svg>`;
     wrap.innerHTML = `<div class="heatmap-plot-area">${limitSvg}<div class="sz-box">${gridCells}</div>${marks}</div>`;
-    const presentTypes = Array.from(new Set(pitches.map(p => markerKind(p.call))));
+    const presentSet = new Set(pitches.map(p => markerKind(p.call)));
+    const presentTypes = KEY_ORDER.filter(t => presentSet.has(t));
     const legend = document.getElementById('heatmapLegend');
     legend.innerHTML = presentTypes.map(t => {
-      const info = t === 'FOUL' ? { label: 'Foul', color: CALL_TYPES.CALLED.color } : CALL_TYPES[t];
+      const info = t === 'FOUL' ? { label: 'Foul', color: CALL_TYPES.CALLED.color } : t === 'IN_PLAY' ? { label: 'Ball In Play', color: CALL_TYPES[t].color } : CALL_TYPES[t];
       const marker = t === 'SWINGING' ? `<span class="legend-x" style="color:${info.color};">&#10005;</span>` : t === 'FOUL' ? `<span class="legend-sq" style="background:${info.color};"></span>` : `<span class="legend-dot" style="background:${info.color};"></span>`;
       return `<span>${marker}${info.label}</span>`;
     }).join('');
