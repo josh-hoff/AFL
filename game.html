@@ -272,6 +272,11 @@
 </main>
 
 <script>
+  // Team name without the city ("Mesa Solar Sox" -> "Solar Sox", "Glendale Desert Dogs" -> "Desert Dogs")
+  function teamNick(name) {
+    return String(name || '').replace(/^(Salt River|Glendale|Mesa|Peoria|Scottsdale|Surprise)\s+/, '');
+  }
+
   // ---- CSV parsing: identical to player.html's parseCSVLine/parseCSV, so
   // the same CSV files on this static site are read the same way everywhere. ----
   function parseCSVLine(line) {
@@ -1003,7 +1008,7 @@
       const teamHtml = name => (pitcherTeam && name === pitcherTeam) ? `<span class="team-hl">${name}</span>` : name;
       const matchup = scheduleRow ? `${teamHtml(scheduleRow.away_team)} @ ${teamHtml(scheduleRow.home_team)}` : '';
       const finalLine = scheduleRow && scheduleRow.status === 'Final'
-        ? `Final &middot; ${scheduleRow.away_team.split(' ').pop()} ${scheduleRow.away_score}, ${scheduleRow.home_team.split(' ').pop()} ${scheduleRow.home_score}`
+        ? `Final &middot; ${teamNick(scheduleRow.away_team)} ${scheduleRow.away_score}, ${teamNick(scheduleRow.home_team)} ${scheduleRow.home_score}`
         : (scheduleRow ? scheduleRow.status : '');
       const numberOfPitches = num(gameLogRow && gameLogRow.numberOfPitches);
       const strikesThrown = num(gameLogRow && gameLogRow.strikes);
