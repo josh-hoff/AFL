@@ -43,6 +43,11 @@
   .pitch-filter-row { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
   .pitch-filter-chip { display: inline-flex; align-items: center; gap: 0.45rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.9rem; border-radius: 999px; cursor: pointer; font-size: 0.82rem; font-weight: 700; font-family: inherit; }
   .pitch-filter-chip .count { color: var(--text-muted); font-weight: 600; }
+  .reset-filters { display: inline-flex; align-items: center; background: var(--header-bg); border: 1px solid var(--header-bg); color: #fff; padding: 0.4rem 0.9rem; border-radius: 999px; cursor: pointer; font-size: 0.82rem; font-weight: 700; font-family: inherit; }
+  .reset-filters:hover:not(:disabled) { background: var(--header-card-bg); border-color: var(--header-card-bg); }
+  .reset-filters.idle { opacity: 0.35; cursor: default; }
+  .pitch-filter-chip { transition: opacity 0.15s; }
+  .pitch-filter-chip.unavailable { opacity: 0.35; cursor: default; }
   .pitch-filter-chip.active { background: var(--tab-active); border-color: var(--tab-active); color: #fff; }
   .pitch-filter-chip.active .count { color: rgba(255,255,255,0.85); }
   .pitch-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
@@ -556,8 +561,15 @@
       const label = t === 'ALL' ? 'All Pitches' : (PITCH_LABELS[t] || t);
       const count = t === 'ALL' ? allPitches.length : typeCounts[t];
       const dot = t === 'ALL' ? '' : `<span class="pitch-dot" style="background:${PITCH_COLORS[t]}"></span>`;
-      return `<button class="pitch-filter-chip${activeFilter === t ? ' active' : ''}" data-type="${t}">${dot}${label} <span class="count">(${count})</span></button>`;
+      const hasMatch = activeOutcome === 'ALL' || t === 'ALL' || allPitches.some(p => p.type === t && matchesOutcome(p));
+      const unavailable = !hasMatch && activeFilter !== t;
+      return `<button class="pitch-filter-chip${activeFilter === t ? ' active' : ''}${unavailable ? ' unavailable' : ''}" data-type="${t}"${unavailable ? ' disabled aria-disabled="true"' : ''}>${dot}${label} <span class="count">(${count})</span></button>`;
     }).join('');
+    const dirty = activeFilter !== 'ALL' || activeOutcome !== 'ALL' || selectedAtBat !== null;
+    row.insertAdjacentHTML('beforeend', `<button type="button" class="reset-filters${dirty ? '' : ' idle'}" id="resetFilters"${dirty ? '' : ' disabled'}>Reset Filters</button>`);
+    document.getElementById('resetFilters').addEventListener('click', () => {
+      activeFilter = 'ALL'; activeOutcome = 'ALL'; selectedAtBat = null; renderAll();
+    });
     row.querySelectorAll('.pitch-filter-chip').forEach(btn => {
       btn.addEventListener('click', () => { activeFilter = btn.dataset.type; renderAll(); });
     });
