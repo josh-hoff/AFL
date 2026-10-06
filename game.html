@@ -55,6 +55,10 @@
   .afl-stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem; text-align: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.5rem; margin-bottom: 1.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
   .afl-stat-label { color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase; font-weight: 600; }
   .afl-stat-value { color: var(--text); font-size: 1.2rem; font-weight: 700; margin-top: 0.15rem; }
+  .spin-notice { color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin: -0.35rem 0 0.75rem; }
+  .spin-notice[hidden] { display: none; }
+  .afl-stat-note { color: var(--text-muted); font-size: 0.7rem; font-weight: 500; margin-top: 0.1rem; }
+  .statcast-left .afl-stat-note { font-size: 0.74rem; white-space: nowrap; }
   .afl-stat-value.flash { color: var(--tab-active); }
 
   .ab-group { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 0.9rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
@@ -537,7 +541,8 @@
       count: pitches.length,
       avgVelo: avg(velos) !== null ? avg(velos).toFixed(1) : '—',
       maxVelo: velos.length ? Math.max(...velos).toFixed(1) : '—',
-      avgSpin: avg(spins) !== null ? Math.round(avg(spins)) : '—',
+      avgSpin: avg(spins) !== null ? Math.round(avg(spins)) : 'N/A',
+      spinCount: spins.length,
       whiffs: pitches.filter(isWhiff).length,
       hardHit: pitches.filter(isHardHit).length,
     };
@@ -590,7 +595,7 @@
     const types = ['ALL', ...Object.keys(typeCounts)];
     const chipBase = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
     row.innerHTML = types.map(t => {
-      const label = t === 'ALL' ? 'All Pitches' : (PITCH_LABELS[t] || t);
+      const label = t === 'ALL' ? 'All Pitches' : (PITCH_LABELS[t] || t || 'Unknown');
       const count = chipBase.filter(p => (t === 'ALL' || p.type === t) && matchesOutcome(p)).length;
       const dot = t === 'ALL' ? '' : `<span class="pitch-dot" style="background:${PITCH_COLORS[t]}"></span>`;
       const unavailable = t !== 'ALL' && count === 0 && activeFilter !== t;
@@ -610,14 +615,14 @@
     const s = computeStats();
     const grid = document.getElementById('statsGrid');
     if (!s) { grid.innerHTML = `<div class="section-note">No pitches in this selection.${selectedAtBat !== null ? ' An at-bat is selected below; click Reset Filters to clear it.' : ''}</div>`; return; }
-    const tiles = [['Pitches', s.count], ['Avg Velo', s.avgVelo], ['Max Velo', s.maxVelo], ['Avg Spin', s.avgSpin], ['Whiffs', s.whiffs], ['Hard-Hit', s.hardHit]];
-    grid.innerHTML = tiles.map(([label, val]) => `<div><div class="afl-stat-label">${label}</div><div class="afl-stat-value flash">${val}</div></div>`).join('');
+    const tiles = [['Pitches', s.count], ['Avg Velo', s.avgVelo], ['Max Velo', s.maxVelo], ['Avg Spin', s.avgSpin + (s.spinCount < s.count ? '*' : ''), (() => { const ss = spinSample(s.spinCount, s.count); return `${s.spinCount} of ${s.count} pitches` + (ss.label ? `<br>${ss.label}` : ''); })()], ['Whiffs', s.whiffs], ['Hard-Hit', s.hardHit]];
+    grid.innerHTML = tiles.map(([label, val, note]) => `<div><div class="afl-stat-label">${label}</div><div class="afl-stat-value flash">${val}</div>${note ? `<div class="afl-stat-note">${note}</div>` : ''}</div>`).join('');
   }
 
   function renderPitchDetail(p) {
     const fields = [
       ['Zone', p.zone !== null ? p.zone : '—'],
-      ['Spin Direction', p.spinDirection !== null ? `${p.spinDirection}°` : '—'],
+      ['Spin Direction', p.spinDirection !== null ? `${p.spinDirection}°` : 'N/A'],
       ['Break Angle', p.breakAngle !== null ? `${p.breakAngle}°` : '—'],
       ['Break Length', p.breakLength !== null ? `${p.breakLength}"` : '—'],
       ['Release Pt (x,y,z)', p.releaseX !== null ? `${p.releaseX.toFixed(2)}, ${p.releaseY !== null ? p.releaseY.toFixed(1) : '—'}, ${p.releaseZ.toFixed(2)} ft` : '—'],
@@ -653,7 +658,7 @@
             <div class="pitch-num">${i + 1}</div>
             <div class="pitch-type-cell"><span class="pitch-dot" style="background:${PITCH_COLORS[p.type] || '#888'}"></span>${PITCH_LABELS[p.type] || p.type}</div>
             <div class="pitch-velo pitch-numcell">${p.velo !== null ? p.velo.toFixed(1) : '—'}</div>
-            <div class="pitch-numcell">${p.spin !== null ? p.spin : '—'}</div>
+            <div class="pitch-numcell">${p.spin !== null ? p.spin : 'N/A'}</div>
             <div class="pitch-numcell">${releasePt}</div>
             <div class="pitch-numcell">${p.extension !== null ? p.extension.toFixed(1) + ' ft' : '—'}</div>
             <div class="pitch-numcell">${sign(p.ivb, 1)}${p.ivb !== null ? '"' : ''}</div>
@@ -910,7 +915,25 @@
   function shiftChart(delta) { currentSlide = (currentSlide + delta + CHART_SLIDES.length) % CHART_SLIDES.length; showSlide(); }
   function goToSlide(i) { currentSlide = i; showSlide(); }
 
+  // Spin coverage helpers: MLB's feed lacks spin for some games, so always say how much we have.
+  function spinSample(n, total) {
+    const pct = total ? Math.round(n / total * 100) : 0;
+    let label = '';
+    if (n > 0) label = `${pct < 50 ? 'Small' : (pct <= 70 ? 'Decent' : 'Sufficient')} Sample Size: ${pct}%`;
+    return { pct, label, partial: n < total };
+  }
+  function renderSpinNotice() {
+    const el = document.getElementById('spinNotice');
+    if (!el) return;
+    const n = allPitches.filter(p => p.spin !== null).length;
+    let msg = '';
+    if (n === 0) msg = 'Spin Data was not tracked this game';
+    else if (n < allPitches.length) msg = n / allPitches.length < 0.5 ? 'Spin Data not tracked for most pitches' : 'Spin Data tracked for most pitches';
+    el.textContent = msg;
+    el.hidden = !msg;
+  }
   function renderAll() {
+    renderSpinNotice();
     renderFilterRow();
     renderStats();
     renderOutcomeSelect();
@@ -927,6 +950,7 @@
       <div class="statcast-layout">
         <div class="statcast-left">
           <div class="section-title">Game Statcast</div>
+          <div class="spin-notice" id="spinNotice" hidden></div>
           <div class="pitch-filter-row" id="filterRow"></div>
           <div class="afl-stats-grid" id="statsGrid"></div>
           <div class="outcome-row" id="outcomeRow"></div>

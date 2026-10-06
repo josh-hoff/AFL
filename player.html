@@ -89,6 +89,9 @@
   .afl-season-team img { width: 20px; height: 20px; object-fit: contain; }
   .afl-stats-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.75rem; text-align: center; }
   .afl-stat-label { color: #9fb3d1; font-size: 0.7rem; text-transform: uppercase; font-weight: 600; }
+  .afl-stat-note { color: #9fb3d1; font-size: 0.68rem; font-weight: 500; margin-top: 0.1rem; }
+  .spin-cell { display: flex; flex-direction: column; line-height: 1.15; }
+  .spin-note { font-size: 0.64rem; color: #8a8a80; font-weight: 500; }
   .afl-stat-value { color: var(--header-text); font-size: 1.15rem; font-weight: 700; }
 
   .section-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 0 0 0.6rem; }
@@ -497,6 +500,22 @@
     if (n === null || n === undefined || isNaN(n)) return '\u2014';
     return Math.round(n) + '%';
   }
+  // Spin is missing for some games (MLB doesn't track it at every park), so
+  // always show how many pitches the average is built from.
+  function spinSample(n, total) {
+    const pct = total ? Math.round(n / total * 100) : 0;
+    let label = '';
+    if (n > 0) label = `${pct < 50 ? 'Small' : (pct <= 70 ? 'Decent' : 'Sufficient')} Sample Size: ${pct}%`;
+    return { pct, label, partial: n < total };
+  }
+  function spinValue(avg, n, total) {
+    const val = (avg === null || avg === undefined || isNaN(avg)) ? 'N/A' : Math.round(avg);
+    return val + (n < total ? '*' : '');
+  }
+  function fmtSpinCell(avg, n, total) {
+    const ss = spinSample(n, total);
+    return `<span class="spin-val">${spinValue(avg, n, total)}</span><span class="spin-note">${n} of ${total}</span>${ss.label ? `<span class="spin-note">${ss.label}</span>` : ''}`;
+  }
   function avgOf(nums) { return nums.length ? nums.reduce((a, b) => a + b, 0) / nums.length : null; }
   function maxOf(nums) { return nums.length ? Math.max(...nums) : null; }
 
@@ -546,11 +565,11 @@
       const tSpins = trows.map(r => Number(r.spin_rate)).filter(v => !isNaN(v) && v > 0);
       return {
         type, count: trows.length, pct: (trows.length / rows.length * 100),
-        avgVelo: avgOf(tVelos), maxVelo: maxOf(tVelos), avgSpin: avgOf(tSpins),
+        avgVelo: avgOf(tVelos), maxVelo: maxOf(tVelos), avgSpin: avgOf(tSpins), spinCount: tSpins.length,
       };
     }).sort((a, b) => b.count - a.count);
 
-    return { totalPitches: rows.length, avgVelo: avgOf(velos), maxVelo: maxOf(velos), avgSpin: avgOf(spins), pitchMix };
+    return { totalPitches: rows.length, avgVelo: avgOf(velos), maxVelo: maxOf(velos), avgSpin: avgOf(spins), spinCount: spins.length, pitchMix };
   }
 
   function buildStatcastPerGameRows(playerPitches, opponentMap, statType) {
@@ -576,7 +595,7 @@
       ? ['Date', 'Opp', 'Pitches', 'Avg Velo', 'Max Velo', 'Avg Spin']
       : ['Date', 'Opp', 'BIP', 'Avg EV', 'Max EV', 'Avg LA', 'Hard-Hit%'];
     const withPill = statType === 'pitching';
-    const gridCols = `90px 1.1fr ${cols.slice(2).map(() => '0.8fr').join(' ')}${withPill ? ' var(--pillcol)' : ''}`;
+    const gridCols = `90px 1.1fr ${cols.slice(2).map(c => c === 'avgSpin' ? '1.5fr' : '0.8fr').join(' ')}${withPill ? ' var(--pillcol)' : ''}`;
     const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map(l => `<div>${l}</div>`).join('')}${withPill ? '<div></div>' : ''}</div>`;
     // Pitching rows link through to the full per-game Statcast page (Pitch
     // Location/Movement/Release Point charts) for that outing -- hitting
@@ -587,7 +606,7 @@
         if (c === 'date') return `<div>${r.date || ''}</div>`;
         if (c === 'opponent') return `<div>${cityFromOpponent(r.opponent)}</div>`;
         if (c === 'avgVelo' || c === 'maxVelo' || c === 'avgEV' || c === 'maxEV' || c === 'avgLA') return `<div>${fmtStatcastNum(r[c], 1)}</div>`;
-        if (c === 'avgSpin') return `<div>${fmtStatcastNum(r[c], 0)}</div>`;
+        if (c === 'avgSpin') return `<div class="spin-cell">${fmtSpinCell(r.avgSpin, r.spinCount, r.totalPitches)}</div>`;
         if (c === 'hardHitPct') return `<div>${fmtStatcastPct(r[c])}</div>`;
         return `<div>${r[c] !== undefined && r[c] !== null ? r[c] : '-'}</div>`;
       }).join('');
@@ -601,14 +620,14 @@
   }
 
   function renderPitchMixTable(pitchMix) {
-    const gridCols = '1.4fr 0.7fr 0.7fr 0.8fr 0.8fr 0.8fr';
+    const gridCols = '1.4fr 0.7fr 0.7fr 0.8fr 0.8fr 1.5fr';
     const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">
       <div>Pitch</div><div>Count</div><div>Usage</div><div>Avg Velo</div><div>Max Velo</div><div>Avg Spin</div>
     </div>`;
     const rowsHtml = pitchMix.map(p => `
       <div class="gl-row" style="grid-template-columns:${gridCols};">
         <div>${p.type}</div><div>${p.count}</div><div>${fmtStatcastPct(p.pct)}</div>
-        <div>${fmtStatcastNum(p.avgVelo, 1)}</div><div>${fmtStatcastNum(p.maxVelo, 1)}</div><div>${fmtStatcastNum(p.avgSpin, 0)}</div>
+        <div>${fmtStatcastNum(p.avgVelo, 1)}</div><div>${fmtStatcastNum(p.maxVelo, 1)}</div><div class="spin-cell">${fmtSpinCell(p.avgSpin, p.spinCount, p.count)}</div>
       </div>
     `).join('');
     return `<div class="gl-table">${headerHtml}${rowsHtml}</div>`;
@@ -620,7 +639,7 @@
         <div class="afl-stats-grid" style="grid-template-columns: repeat(3, 1fr);">
           <div><div class="afl-stat-label">Avg Velo</div><div class="afl-stat-value">${fmtStatcastNum(totals.avgVelo, 1)}</div></div>
           <div><div class="afl-stat-label">Max Velo</div><div class="afl-stat-value">${fmtStatcastNum(totals.maxVelo, 1)}</div></div>
-          <div><div class="afl-stat-label">Avg Spin</div><div class="afl-stat-value">${fmtStatcastNum(totals.avgSpin, 0)}</div></div>
+          <div><div class="afl-stat-label">Avg Spin</div><div class="afl-stat-value">${spinValue(totals.avgSpin, totals.spinCount, totals.totalPitches)}</div><div class="afl-stat-note">${totals.spinCount} of ${totals.totalPitches} pitches${spinSample(totals.spinCount, totals.totalPitches).label ? '<br>' + spinSample(totals.spinCount, totals.totalPitches).label : ''}</div></div>
         </div>
       `
       : `
@@ -1127,6 +1146,7 @@
     rangeFactorPer9Inn: 'Range factor per 9 innings ((putouts + assists) × 9 ÷ innings)',
   };
 
+  const SPIN_GLOSSARY_ROW = `<div class="glossary-row"><div class="glossary-abbr">Avg Spin *</div><div class="glossary-desc">Average spin rate (rpm), using only pitches that have spin data. MLB doesn't track spin at every park, so some games have little or none. "N of M pitches" shows how many pitches the average is based on. An asterisk (*) means some pitches in the sample have no spin data. Sample labels: Small Sample Size (under 50% of pitches have spin), Decent Sample Size (50% to 70%), Sufficient Sample Size (over 70%).</div></div>`;
   function glossaryEntriesHtml(order, labels, glossary, hidden) {
     return order
       .filter(k => !hidden.has(k))
@@ -1149,6 +1169,7 @@
           <div class="glossary-col">
             <div class="glossary-col-title">Pitching</div>
             ${pitchingHtml}
+            ${SPIN_GLOSSARY_ROW}
           </div>
           <div class="glossary-col">
             <div class="glossary-col-title">Fielding</div>
