@@ -284,7 +284,7 @@
   .roster-table.has-stats .roster-avatar { width: 60px; height: 60px; justify-self: center; }
   .roster-table.has-stats .roster-org-badge { width: 22px; height: 22px; }
   .roster-table.has-stats .nowrap { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .roster-key { display: flex; align-items: center; gap: 0.5rem; margin: 1.5rem 0 0.5rem; font-size: 0.8rem; color: var(--text-muted); }
+  .roster-key { display: flex; align-items: center; gap: 0.5rem; margin: 0.25rem 0 0.75rem; font-size: 0.8rem; color: var(--text-muted); }
   .roster-key-swatch { width: 22px; height: 14px; border-radius: 3px; background: #eaf1fa; border: 1px solid #2f6fb0; flex-shrink: 0; }
   .roster-player { border-top: 1px solid var(--border); }
   .roster-player.mlb { background: #eaf1fa; border-top: 1px solid #2f6fb0; }
@@ -625,6 +625,7 @@
         ${teamLogoImg(currentTeam, 'roster-heading-logo')}
         <div class="roster-heading-name">${currentTeam} Roster</div>
       </div>
+      <div class="roster-key"><span class="roster-key-swatch"></span>Blue card = player has appeared in an MLB game (based on MLB debut date).</div>
     `;
 
     POSITION_GROUPS.forEach(group => {
@@ -674,7 +675,6 @@
     });
 
     html += renderTransactionTable(teamTransactions);
-    html += `<div class="roster-key"><span class="roster-key-swatch"></span>Blue card = player has appeared in an MLB game (based on MLB debut date).</div>`;
 
     content.innerHTML = html;
     wireCollapsibleGroups();
