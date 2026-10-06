@@ -284,7 +284,12 @@
   .roster-table.has-stats .roster-avatar { width: 60px; height: 60px; justify-self: center; }
   .roster-table.has-stats .roster-org-badge { width: 22px; height: 22px; }
   .roster-table.has-stats .nowrap { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .roster-key { display: flex; align-items: center; gap: 0.5rem; margin: 1.5rem 0 0.5rem; font-size: 0.8rem; color: var(--text-muted); }
+  .roster-key-swatch { width: 22px; height: 14px; border-radius: 3px; background: #eaf1fa; border: 1px solid #2f6fb0; flex-shrink: 0; }
   .roster-player { border-top: 1px solid var(--border); }
+  .roster-player.mlb { background: #eaf1fa; border-top: 1px solid #2f6fb0; }
+  .roster-player.mlb .roster-stat { background: #ffffff; }
+  .roster-player.mlb .roster-stats-divider { border-top-color: #b9cde4; }
   .roster-stats-row {
     display: grid;
     gap: 10px;
@@ -645,7 +650,7 @@
         const st = (isPitcherGroup ? pitcherStatsById : hitterStatsById)[p.player_id];
         const vals = st || statLabels.map(() => '—');
         html += `
-          <div class="roster-player">
+          <div class="roster-player${p.mlb_debut_date ? ' mlb' : ''}">
           <div class="roster-row body">
             <a href="${link}"><div class="roster-avatar"><img class="roster-photo" src="${photoUrl}" alt="" onerror="this.style.display='none'">${orgBadge}</div></a>
             <div class="jersey">${p.jersey_number || ''}</div>
@@ -669,6 +674,7 @@
     });
 
     html += renderTransactionTable(teamTransactions);
+    html += `<div class="roster-key"><span class="roster-key-swatch"></span>Blue card = player has appeared in an MLB game (based on MLB debut date).</div>`;
 
     content.innerHTML = html;
     wireCollapsibleGroups();
