@@ -108,9 +108,15 @@
   .oc-dd { position: relative; }
   .oc-btn { display: inline-flex; align-items: center; gap: 0.5rem; min-width: 13.5rem; font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--text); background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.45rem 0.7rem; cursor: pointer; text-align: left; }
   .oc-btn.active, .oc-btn:focus-visible { border-color: var(--tab-active); box-shadow: 0 0 0 2px rgba(242,101,34,0.15); outline: none; }
-  .oc-text { flex: 1; }
+  .oc-text { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 16rem; }
+  .oc-check { width: 15px; height: 15px; flex: none; border: 1.5px solid #b9b4a8; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; line-height: 1; color: #fff; background: #fff; }
+  .oc-check.on { background: var(--tab-active); border-color: var(--tab-active); }
+  .oc-top { display: flex; align-items: center; gap: 0.4rem; padding-bottom: 4px; margin-bottom: 4px; border-bottom: 1px solid var(--border); }
+  .oc-top .oc-opt { flex: 1; }
+  .oc-multi { display: flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.55rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); cursor: pointer; white-space: nowrap; }
+  .oc-multi:hover { color: var(--text); background: #f5f3ee; }
   .oc-caret { color: var(--text-muted); font-size: 0.8rem; }
-  .oc-menu { position: absolute; left: 0; top: calc(100% + 4px); min-width: 15rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 5px; z-index: 20; }
+  .oc-menu { position: absolute; left: 0; top: calc(100% + 4px); min-width: 21rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 5px; z-index: 20; }
   .oc-menu[hidden] { display: none; }
   .oc-opt { display: flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.55rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; }
   .oc-opt:hover { background: #f5f3ee; }
@@ -479,7 +485,9 @@
   let PITCH_COLORS = {}, PITCH_TINTS = {};
   let atBats = [], allPitches = [], typeCounts = {};
   let activeFilter = 'ALL';
-  let activeOutcome = 'ALL';
+  let activeOutcomes = [];   // empty = all results
+  let multiMode = false;     // false = pick one result (default); true = tick several
+  let ocOpen = false;
   let selectedAtBat = null;
   let RELEASE_AXIS = { xMin: -2.5, xMax: -1.5, zMin: 5.5, zMax: 6.5 };
   let EXT_AXIS = { min: 5.0, max: 7.5 };
@@ -507,7 +515,8 @@
     const base = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
     return activeFilter === 'ALL' ? base : base.filter(p => p.type === activeFilter);
   }
-  function matchesOutcome(p) { return activeOutcome === 'ALL' || markerKind(p.call) === activeOutcome; }
+  function matchesOutcome(p) { return activeOutcomes.length === 0 || activeOutcomes.includes(markerKind(p.call)); }
+  function outcomeLabels() { return activeOutcomes.map(k => (OUTCOME_OPTIONS.find(o => o[0] === k) || [0, k])[1]); }
   function getScopedPitches() {
     return getTypeScopedPitches().filter(matchesOutcome);
   }
@@ -541,34 +550,56 @@
     const counts = {};
     base.forEach(p => { const k = markerKind(p.call); counts[k] = (counts[k] || 0) + 1; });
     const countFor = k => k === 'ALL' ? base.length : (counts[k] || 0);
-    const cur = OUTCOME_OPTIONS.find(o => o[0] === activeOutcome) || OUTCOME_OPTIONS[0];
+    const selCount = activeOutcomes.reduce((n, k) => n + countFor(k), 0);
+    const btnText = activeOutcomes.length === 0 ? `All Results (${base.length})` : `${outcomeLabels().join(', ')} (${selCount})`;
+    const btnMarks = activeOutcomes.length === 0 ? outcomeMarkerHtml('ALL') : activeOutcomes.map(outcomeMarkerHtml).join('');
+    const check = on => `<span class="oc-check${on ? ' on' : ''}">${on ? '&#10003;' : ''}</span>`;
+    const multiBox = `<div class="oc-multi" id="ocMulti" role="checkbox" aria-checked="${multiMode}">${check(multiMode)}<span>Multiple Selections</span></div>`;
+    const opts = OUTCOME_OPTIONS.map(([k, label]) => {
+      const on = k === 'ALL' ? activeOutcomes.length === 0 : activeOutcomes.includes(k);
+      const row = `<div class="oc-opt${on ? ' sel' : ''}" role="option" aria-selected="${on}" data-k="${k}">${multiMode && k !== 'ALL' ? check(on) : ''}${outcomeMarkerHtml(k)}<span>${label}</span><span class="oc-count">${countFor(k)}</span></div>`;
+      return k === 'ALL' ? `<div class="oc-top">${row}${multiBox}</div>` : row;
+    }).join('');
     wrap.innerHTML = `<span class="oc-label">Result</span>
       <div class="oc-dd">
-        <button type="button" class="oc-btn${activeOutcome !== 'ALL' ? ' active' : ''}" id="ocBtn" aria-haspopup="listbox" aria-expanded="false">${outcomeMarkerHtml(cur[0])}<span class="oc-text">${cur[1]} (${countFor(cur[0])})</span><span class="oc-caret">&#9662;</span></button>
-        <div class="oc-menu" id="ocMenu" role="listbox" hidden>${OUTCOME_OPTIONS.map(([k, label]) => `<div class="oc-opt${k === activeOutcome ? ' sel' : ''}" role="option" data-k="${k}">${outcomeMarkerHtml(k)}<span>${label}</span><span class="oc-count">${countFor(k)}</span></div>`).join('')}</div>
+        <button type="button" class="oc-btn${activeOutcomes.length ? ' active' : ''}" id="ocBtn" aria-haspopup="listbox" aria-expanded="${ocOpen}" title="${btnText.replace(/"/g, '')}">${btnMarks}<span class="oc-text">${btnText}</span><span class="oc-caret">&#9662;</span></button>
+        <div class="oc-menu" id="ocMenu" role="listbox" aria-multiselectable="${multiMode}"${ocOpen ? '' : ' hidden'}>${opts}</div>
       </div>`;
     const btn = document.getElementById('ocBtn'), menu = document.getElementById('ocMenu');
-    btn.addEventListener('click', e => { e.stopPropagation(); const open = menu.hidden; menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); });
-    menu.querySelectorAll('.oc-opt').forEach(el => el.addEventListener('click', () => { activeOutcome = el.dataset.k; renderAll(); }));
+    btn.addEventListener('click', e => { e.stopPropagation(); ocOpen = menu.hidden; menu.hidden = !ocOpen; btn.setAttribute('aria-expanded', String(ocOpen)); });
+    menu.addEventListener('click', e => e.stopPropagation());
+    menu.querySelectorAll('.oc-opt').forEach(el => el.addEventListener('click', () => {
+      const k = el.dataset.k;
+      if (k === 'ALL') activeOutcomes = [];
+      else if (multiMode) activeOutcomes = activeOutcomes.includes(k) ? activeOutcomes.filter(x => x !== k) : [...activeOutcomes, k];
+      else activeOutcomes = [k];
+      if (!multiMode) ocOpen = false;
+      renderAll();
+    }));
+    document.getElementById('ocMulti').addEventListener('click', () => {
+      multiMode = !multiMode;
+      if (!multiMode && activeOutcomes.length > 1) activeOutcomes = [activeOutcomes[0]];
+      renderAll();
+    });
   }
-  document.addEventListener('click', () => { const m = document.getElementById('ocMenu'); if (m && !m.hidden) { m.hidden = true; document.getElementById('ocBtn').setAttribute('aria-expanded', 'false'); } });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { const m = document.getElementById('ocMenu'); if (m) m.hidden = true; } });
+  document.addEventListener('click', () => { const m = document.getElementById('ocMenu'); if (m && !m.hidden) { m.hidden = true; ocOpen = false; document.getElementById('ocBtn').setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { const m = document.getElementById('ocMenu'); if (m) { m.hidden = true; ocOpen = false; } } });
 
   function renderFilterRow() {
     const row = document.getElementById('filterRow');
     const types = ['ALL', ...Object.keys(typeCounts)];
+    const chipBase = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
     row.innerHTML = types.map(t => {
       const label = t === 'ALL' ? 'All Pitches' : (PITCH_LABELS[t] || t);
-      const count = t === 'ALL' ? allPitches.length : typeCounts[t];
+      const count = chipBase.filter(p => (t === 'ALL' || p.type === t) && matchesOutcome(p)).length;
       const dot = t === 'ALL' ? '' : `<span class="pitch-dot" style="background:${PITCH_COLORS[t]}"></span>`;
-      const hasMatch = activeOutcome === 'ALL' || t === 'ALL' || allPitches.some(p => p.type === t && matchesOutcome(p));
-      const unavailable = !hasMatch && activeFilter !== t;
+      const unavailable = t !== 'ALL' && count === 0 && activeFilter !== t;
       return `<button class="pitch-filter-chip${activeFilter === t ? ' active' : ''}${unavailable ? ' unavailable' : ''}" data-type="${t}"${unavailable ? ' disabled aria-disabled="true"' : ''}>${dot}${label} <span class="count">(${count})</span></button>`;
     }).join('');
-    const dirty = activeFilter !== 'ALL' || activeOutcome !== 'ALL' || selectedAtBat !== null;
+    const dirty = activeFilter !== 'ALL' || activeOutcomes.length > 0 || multiMode || selectedAtBat !== null;
     row.insertAdjacentHTML('beforeend', `<button type="button" class="reset-filters${dirty ? '' : ' idle'}" id="resetFilters"${dirty ? '' : ' disabled'}>Reset Filters</button>`);
     document.getElementById('resetFilters').addEventListener('click', () => {
-      activeFilter = 'ALL'; activeOutcome = 'ALL'; selectedAtBat = null; renderAll();
+      activeFilter = 'ALL'; activeOutcomes = []; multiMode = false; selectedAtBat = null; renderAll();
     });
     row.querySelectorAll('.pitch-filter-chip').forEach(btn => {
       btn.addEventListener('click', () => { activeFilter = btn.dataset.type; renderAll(); });
@@ -578,7 +609,7 @@
   function renderStats() {
     const s = computeStats();
     const grid = document.getElementById('statsGrid');
-    if (!s) { grid.innerHTML = '<div class="section-note">No pitches in this selection.</div>'; return; }
+    if (!s) { grid.innerHTML = `<div class="section-note">No pitches in this selection.${selectedAtBat !== null ? ' An at-bat is selected below; click Reset Filters to clear it.' : ''}</div>`; return; }
     const tiles = [['Pitches', s.count], ['Avg Velo', s.avgVelo], ['Max Velo', s.maxVelo], ['Avg Spin', s.avgSpin], ['Whiffs', s.whiffs], ['Hard-Hit', s.hardHit]];
     grid.innerHTML = tiles.map(([label, val]) => `<div><div class="afl-stat-label">${label}</div><div class="afl-stat-value flash">${val}</div></div>`).join('');
   }
@@ -663,7 +694,7 @@
     const scopeLabel = document.getElementById('heatmapScope');
     const scopeParts = [];
     if (activeFilter !== 'ALL') scopeParts.push(PITCH_LABELS[activeFilter] || activeFilter);
-    if (activeOutcome !== 'ALL') scopeParts.push((OUTCOME_OPTIONS.find(o => o[0] === activeOutcome) || [0, activeOutcome])[1]);
+    if (activeOutcomes.length) scopeParts.push(outcomeLabels().join(' + '));
     if (selectedAtBat !== null) scopeParts.push(`${atBats[selectedAtBat].inningLabel} at-bat`);
     scopeLabel.innerHTML = scopeParts.length
       ? `— ${scopeParts.join(', ')}${selectedAtBat !== null ? ' <span class="scope-clear" onclick="selectAtBat(' + selectedAtBat + ')">(clear)</span>' : ''}`
