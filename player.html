@@ -127,16 +127,17 @@
   .gl-row > div { text-align: right; }
   .gl-head { background: #f2f1ee; font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.01em; white-space: normal; line-height: 1.2; align-items: end; }
   .gl-row:not(.gl-head) { border-top: 1px solid var(--border); color: var(--text); }
-  /* Pitching per-game Statcast rows link through to that game's full
-     Pitch Location/Movement/Release Point page -- same hover affordance
-     already used for pitch-row/ab-head elsewhere on the site. */
-  /* Per-game Statcast table: the table itself is orange (no tan panel). */
-  .gl-table.gl-orange { border: 1.5px solid var(--tab-active); background: #fff1e6; }
-  .gl-table.gl-orange .gl-head { background: var(--tab-active); color: #fff; letter-spacing: 0.02em; }
-  .gl-table.gl-orange .gl-row:not(.gl-head) { border-top: 1px solid #f9cfb0; }
-  .gl-table.gl-orange .gl-row.gl-row-link:hover { background: #ffe3cc; }
-  .gl-row.gl-row-link { cursor: pointer; }
-  .gl-row.gl-row-link:hover { background: #fafaf8; }
+  .gl-row > div.gl-pill-cell { text-align: center; }
+  .statcast-pill { display: inline-block; font-size: 0.7rem; font-weight: 700; color: var(--tab-active); border: 1.5px solid var(--tab-active); border-radius: 999px; padding: 1px 10px; text-decoration: none; white-space: nowrap; }
+  .statcast-pill:hover { background: var(--tab-active); color: #fff; }
+  .statcast-pill .sp-chev { font-size: 0.85rem; line-height: 1; }
+  .gl-table { --pillcol: 96px; }
+  @media (max-width: 560px) {
+    .gl-table { --pillcol: 40px; }
+    .statcast-pill { padding: 1px 8px; }
+    .statcast-pill .sp-text { display: none; }
+  }
+  .statcast-toggle-link { color: var(--tab-active); font-size: 1.275rem; font-weight: 600; text-decoration: none; border-bottom: 1.5px dashed var(--tab-active); cursor: pointer; }
   .stat-glossary {
     margin: 1.5rem 0 0.5rem;
     border: 1px solid var(--border);
@@ -574,8 +575,9 @@
     const labels = statType === 'pitching'
       ? ['Date', 'Opp', 'Pitches', 'Avg Velo', 'Max Velo', 'Avg Spin']
       : ['Date', 'Opp', 'BIP', 'Avg EV', 'Max EV', 'Avg LA', 'Hard-Hit%'];
-    const gridCols = `90px 1.1fr ${cols.slice(2).map(() => '0.8fr').join(' ')}`;
-    const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map(l => `<div>${l}</div>`).join('')}</div>`;
+    const withPill = statType === 'pitching';
+    const gridCols = `90px 1.1fr ${cols.slice(2).map(() => '0.8fr').join(' ')}${withPill ? ' var(--pillcol)' : ''}`;
+    const headerHtml = `<div class="gl-row gl-head" style="grid-template-columns:${gridCols};">${labels.map(l => `<div>${l}</div>`).join('')}${withPill ? '<div></div>' : ''}</div>`;
     // Pitching rows link through to the full per-game Statcast page (Pitch
     // Location/Movement/Release Point charts) for that outing -- hitting
     // rows don't yet have an equivalent page, so they stay plain. Only
@@ -590,12 +592,12 @@
         return `<div>${r[c] !== undefined && r[c] !== null ? r[c] : '-'}</div>`;
       }).join('');
       const linkable = statType === 'pitching' && r.gamePk;
-      const rowAttrs = linkable
-        ? ` class="gl-row gl-row-link" style="grid-template-columns:${gridCols};" onclick="window.location.href='game.html?game_pk=${r.gamePk}&pitcher_id=${playerId}&season=${currentSeason}'" title="View full Statcast for this game"`
-        : ` class="gl-row" style="grid-template-columns:${gridCols};"`;
-      return `<div${rowAttrs}>${cells}</div>`;
+      const pillCell = withPill
+        ? (linkable ? `<div class="gl-pill-cell"><a class="statcast-pill" href="game.html?game_pk=${r.gamePk}&pitcher_id=${playerId}&season=${currentSeason}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a></div>` : '<div class="gl-pill-cell"></div>')
+        : '';
+      return `<div class="gl-row" style="grid-template-columns:${gridCols};">${cells}${pillCell}</div>`;
     }).join('');
-    return `<div class="gl-table gl-orange">${headerHtml}${rowsHtml}</div>`;
+    return `<div class="gl-table">${headerHtml}${rowsHtml}</div>`;
   }
 
   function renderPitchMixTable(pitchMix) {
@@ -651,7 +653,7 @@
       </div>
       ${pitchMixHtml}
       <div class="transaction-expand-wrap" style="margin: 0.75rem 0 1.5rem;">
-        <a href="#" onclick="toggleFieldingRow('${toggleId}'); return false;" class="transaction-expand-link" style="color: var(--tab-active); border-bottom-color: var(--tab-active);">View Game-by-Game Statcast &#9662;</a>
+        <a href="#" onclick="toggleStatcastGameLog('${toggleId}', this); return false;" class="statcast-toggle-link" aria-expanded="false">View Game-by-Game Statcast <span class="stc-arrow">&#9662;</span></a>
       </div>
       <div id="${toggleId}" class="career-gamelog-wrap" style="display:none; margin: -0.75rem 0 1.5rem; border-top:none;">
         ${buildStatcastGameLogHtml(perGameRows, statType, playerId)}
@@ -1012,6 +1014,17 @@
     return (val !== undefined && val !== null && val !== '') ? val : '-';
   }
 
+  function toggleStatcastGameLog(id, linkEl) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const open = el.style.display === 'none';
+    el.style.display = open ? 'block' : 'none';
+    if (linkEl) {
+      linkEl.setAttribute('aria-expanded', String(open));
+      const arrow = linkEl.querySelector('.stc-arrow');
+      if (arrow) arrow.innerHTML = open ? '&#9652;' : '&#9662;';
+    }
+  }
   function toggleFieldingRow(id) {
     const el = document.getElementById(id);
     if (!el) return;
