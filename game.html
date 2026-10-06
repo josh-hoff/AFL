@@ -97,6 +97,10 @@
 
   .statcast-layout { display: grid; grid-template-columns: 360px 1fr; gap: 1.5rem; align-items: start; margin-bottom: 1.75rem; }
   @media (max-width: 860px) { .statcast-layout { grid-template-columns: 1fr; } }
+  .outcome-row { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.9rem; }
+  .outcome-row label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); }
+  .outcome-row select { font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--text); background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.45rem 0.7rem; min-width: 12.5rem; cursor: pointer; }
+  .outcome-row select:focus { outline: none; border-color: var(--tab-active); box-shadow: 0 0 0 2px rgba(242,101,34,0.15); }
   .statcast-left .pitch-filter-row { margin-bottom: 1rem; }
   .statcast-left .afl-stats-grid { grid-template-columns: repeat(2, 1fr); margin-bottom: 0; gap: 1.5rem 1.25rem; padding: 2rem 1.75rem; }
   .statcast-left .afl-stat-label { font-size: 0.8rem; }
@@ -451,13 +455,27 @@
   let PITCH_COLORS = {}, PITCH_TINTS = {};
   let atBats = [], allPitches = [], typeCounts = {};
   let activeFilter = 'ALL';
+  let activeOutcome = 'ALL';
   let selectedAtBat = null;
   let RELEASE_AXIS = { xMin: -2.5, xMax: -1.5, zMin: 5.5, zMax: 6.5 };
   let EXT_AXIS = { min: 5.0, max: 7.5 };
 
-  function getScopedPitches() {
+  const OUTCOME_OPTIONS = [
+    ['ALL', 'All Results'],
+    ['BALL', '\u25CF Ball'],
+    ['IN_PLAY', '\u25CF Ball In Play'],
+    ['FOUL', '\u25A0 Foul'],
+    ['CALLED', '\u25CF Called Strike'],
+    ['SWINGING', '\u2715 Swinging Strike'],
+  ];
+  // Pitches scoped by at-bat and pitch type only (the outcome dropdown is applied separately).
+  function getTypeScopedPitches() {
     const base = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
     return activeFilter === 'ALL' ? base : base.filter(p => p.type === activeFilter);
+  }
+  function matchesOutcome(p) { return activeOutcome === 'ALL' || markerKind(p.call) === activeOutcome; }
+  function getScopedPitches() {
+    return getTypeScopedPitches().filter(matchesOutcome);
   }
   function selectAtBat(idx) {
     selectedAtBat = selectedAtBat === idx ? null : idx;
@@ -480,6 +498,16 @@
       whiffs: pitches.filter(isWhiff).length,
       hardHit: pitches.filter(isHardHit).length,
     };
+  }
+
+  function renderOutcomeSelect() {
+    const wrap = document.getElementById('outcomeRow');
+    if (!wrap) return;
+    const base = getTypeScopedPitches();
+    const counts = {};
+    base.forEach(p => { const k = markerKind(p.call); counts[k] = (counts[k] || 0) + 1; });
+    wrap.innerHTML = `<label for="outcomeSelect">Result</label><select id="outcomeSelect">${OUTCOME_OPTIONS.map(([k, label]) => `<option value="${k}"${activeOutcome === k ? ' selected' : ''}>${label} (${k === 'ALL' ? base.length : (counts[k] || 0)})</option>`).join('')}</select>`;
+    document.getElementById('outcomeSelect').addEventListener('change', e => { activeOutcome = e.target.value; renderAll(); });
   }
 
   function renderFilterRow() {
@@ -580,10 +608,11 @@
     return { left: ((px - PLOT_X_MIN) / (PLOT_X_MAX - PLOT_X_MIN)) * 100, top: 100 - ((pz - PLOT_Z_MIN) / (PLOT_Z_MAX - PLOT_Z_MIN)) * 100 };
   }
   function renderHeatmap() {
-    const pitches = getScopedPitches();
+    const pitches = getTypeScopedPitches();
     const scopeLabel = document.getElementById('heatmapScope');
     const scopeParts = [];
     if (activeFilter !== 'ALL') scopeParts.push(PITCH_LABELS[activeFilter] || activeFilter);
+    if (activeOutcome !== 'ALL') scopeParts.push((OUTCOME_OPTIONS.find(o => o[0] === activeOutcome) || [0, activeOutcome])[1].replace(/^\S+\s/, ''));
     if (selectedAtBat !== null) scopeParts.push(`${atBats[selectedAtBat].inningLabel} at-bat`);
     scopeLabel.innerHTML = scopeParts.length
       ? `— ${scopeParts.join(', ')}${selectedAtBat !== null ? ' <span class="scope-clear" onclick="selectAtBat(' + selectedAtBat + ')">(clear)</span>' : ''}`
@@ -594,9 +623,10 @@
       const callType = classifyCall(p.call);
       const color = CALL_TYPES[callType].color;
       const title = `${p.type} · ${p.velo !== null ? p.velo.toFixed(1) : '—'} mph · ${p.call}`;
-      if (callType === 'SWINGING') return `<div class="pitch-x-mark" style="left:${left}%; top:${top}%; color:${color};" title="${title}">&#10005;</div>`;
-      if (markerKind(p.call) === 'FOUL') return `<div class="pitch-sq-plot" style="left:${left}%; top:${top}%; background:${color};" title="${title}"></div>`;
-      return `<div class="pitch-dot-plot" style="left:${left}%; top:${top}%; background:${color};" title="${title}"></div>`;
+      const fade = matchesOutcome(p) ? '' : ' opacity:0.13;';
+      if (callType === 'SWINGING') return `<div class="pitch-x-mark" style="left:${left}%; top:${top}%; color:${color};${fade}" title="${title}">&#10005;</div>`;
+      if (markerKind(p.call) === 'FOUL') return `<div class="pitch-sq-plot" style="left:${left}%; top:${top}%; background:${color};${fade}" title="${title}"></div>`;
+      return `<div class="pitch-dot-plot" style="left:${left}%; top:${top}%; background:${color};${fade}" title="${title}"></div>`;
     }).join('');
     const wrap = document.getElementById('heatmapWrap');
     const limitSvg = `<svg class="sz-limit-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(90,100,114,0.48)" stroke-width="0.65" stroke-dasharray="1.5 3.5" vector-effect="non-scaling-stroke" /></svg>`;
@@ -800,6 +830,7 @@
   function renderAll() {
     renderFilterRow();
     renderStats();
+    renderOutcomeSelect();
     renderHeatmap();
     renderMovement();
     renderReleasePoint();
@@ -815,6 +846,7 @@
           <div class="section-title">Game Statcast</div>
           <div class="pitch-filter-row" id="filterRow"></div>
           <div class="afl-stats-grid" id="statsGrid"></div>
+          <div class="outcome-row" id="outcomeRow"></div>
         </div>
         <div class="statcast-right">
           <div class="charts-row-header">
