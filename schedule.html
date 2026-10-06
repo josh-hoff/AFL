@@ -455,6 +455,16 @@
     .game-top { flex-wrap: wrap; }
     .status { margin-top: 0.3rem; }
   }
+  .box-links { display: flex; align-items: center; flex-wrap: wrap; column-gap: 1.25rem; }
+  .box-summary-link {
+    color: var(--tab-active);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.3rem 0 0;
+    margin-top: 0.3rem;
+  }
+  .box-summary-link:hover { text-decoration: underline; }
   .box-toggle-btn {
     background: none;
     border: none;
@@ -1176,9 +1186,12 @@
     if (!wasPlayed || !hasBoxScoreData(g.game_pk)) return '';
     const gamePk = g.game_pk;
     return `
-      <button class="box-toggle-btn" onclick="toggleBoxScore('${gamePk}'); return false;">
-        <span id="box-caret-${gamePk}">&#9654;</span> Box Score
-      </button>
+      <div class="box-links">
+        <button class="box-toggle-btn" onclick="toggleBoxScore('${gamePk}'); return false;">
+          <span id="box-caret-${gamePk}">&#9654;</span> Box Score
+        </button>
+        <a class="box-summary-link" href="game-summary.html?game_pk=${gamePk}&season=${currentSeason}">Scoring Summary &amp; Play-by-Play &rsaquo;</a>
+      </div>
       <div class="box-score" id="box-${gamePk}" style="display:none;"></div>
     `;
   }

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arizona Fall League Central - Scoring Summary &amp; Play-by-Play</title>
+<style>
+  :root {
+    --bg: #FDFCFB; --bg-card: #FFFFFF; --border: #e8e6e2; --text: #111418; --text-muted: #5a6472;
+    --accent: #b8860b; --header-bg: #0d1b3a; --header-card-bg: #16305c; --header-border: #2c4a7c;
+    --header-text: #ffffff; --tab-active: #f26522; --final: #1a8a4a;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+  header { padding: 1.5rem 1.5rem 0; }
+  .header-inner { display: flex; align-items: center; justify-content: center; gap: 2.5rem; max-width: 900px; margin: 0 auto; background: var(--header-bg); border-radius: 16px; padding: 2.25rem 1.5rem; }
+  h1 { font-size: 2.2rem; font-weight: 600; margin: 0; letter-spacing: -0.01em; text-align: center; color: var(--header-text); }
+  .league-logo { height: 100px; width: auto; flex-shrink: 0; }
+  .header-inner > a { display: inline-flex; flex-shrink: 0; line-height: 0; }
+  .title-line { display: block; line-height: 1.3; }
+  .title-central { display: inline-block; border-bottom: 2px solid var(--header-text); padding-bottom: 0.2rem; width: fit-content; }
+  .nav-tabs { display: flex; justify-content: center; gap: 2rem; max-width: 900px; margin: 1.25rem auto 0; padding: 0 1.5rem; border-bottom: 1px solid var(--border); }
+  .nav-tab { display: inline-block; padding: 0.6rem 0.2rem; color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--tab-active); border-bottom-color: var(--tab-active); }
+
+  main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
+  .back-link:hover { color: var(--tab-active); }
+
+  .game-header { background: var(--header-bg); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .game-matchup { color: var(--header-text); font-size: 1.25rem; font-weight: 700; }
+  .game-sub { color: #9fb3d1; font-size: 0.82rem; margin-top: 0.2rem; }
+  .game-status { color: #9fb3d1; font-size: 0.72rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.04em; }
+
+  .linescore { border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card); overflow-x: auto; margin-bottom: 1.5rem; }
+  .linescore table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+  .linescore th, .linescore td { padding: 0.45rem 0.6rem; text-align: center; white-space: nowrap; }
+  .linescore th { background: #f2f1ee; color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; font-weight: 700; }
+  .linescore td:first-child, .linescore th:first-child { text-align: left; font-weight: 700; padding-left: 0.9rem; }
+  .linescore tr + tr td { border-top: 1px solid var(--border); }
+  .linescore .tot { font-weight: 700; }
+  .linescore th.sep, .linescore td.sep { border-left: 1px solid var(--border); }
+
+  .view-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+  .view-tab { background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px; padding: 0.5rem 1.1rem; font: inherit; font-size: 0.85rem; font-weight: 700; color: var(--text); cursor: pointer; }
+  .view-tab.active { background: var(--tab-active); border-color: var(--tab-active); color: #fff; }
+
+  .half { border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card); margin-bottom: 0.75rem; overflow: hidden; }
+  .half > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.9rem; background: #f2f1ee; font-weight: 700; font-size: 0.85rem; }
+  .half > summary::-webkit-details-marker { display: none; }
+  .half > summary .caret { color: var(--tab-active); font-size: 0.7rem; transition: transform .12s; }
+  .half[open] > summary .caret { transform: rotate(90deg); }
+  .half-score { margin-left: auto; color: var(--text-muted); font-weight: 600; font-size: 0.8rem; }
+  .play { display: flex; gap: 0.75rem; padding: 0.6rem 0.9rem; border-top: 1px solid var(--border); font-size: 0.88rem; align-items: flex-start; }
+  .play.scoring { border-left: 3px solid var(--tab-active); background: #fff8f2; padding-left: calc(0.9rem - 3px); }
+  .play-body { flex: 1; min-width: 0; }
+  .play-event { display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted); margin-bottom: 0.1rem; }
+  .play.scoring .play-event { color: var(--tab-active); }
+  .play-desc { word-wrap: break-word; }
+  .play-meta { margin-left: auto; text-align: right; flex: none; font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
+  .play-score { font-weight: 700; color: var(--text); font-size: 0.8rem; }
+
+  .empty, .loading, .error { color: var(--text-muted); text-align: center; padding: 2rem 0; }
+  .error { color: #c0392b; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="schedule.html"><img class="league-logo" src="logos/afl-logo.svg" alt="" onerror="this.style.display='none'"></a>
+    <h1>
+      <span class="title-line">Arizona Fall League</span>
+      <span class="title-line"><span class="title-central">Central</span></span>
+    </h1>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <a class="nav-tab active" href="schedule.html">Schedule</a>
+  <a class="nav-tab" href="standings.html">Standings</a>
+  <a class="nav-tab" href="roster.html">Rosters</a>
+</nav>
+
+<main id="content"><p class="loading">Loading game...</p></main>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const gamePk = params.get('game_pk');
+  const season = params.get('season') || '';
+  let view = 'scoring';
+  let model = null;
+
+  function esc(s) {
+    return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  function ordinal(n) {
+    const v = n % 100;
+    return n + (['th', 'st', 'nd', 'rd'][(v - 20) % 10] || ['th', 'st', 'nd', 'rd'][v] || 'th');
+  }
+
+  // Turns the raw MLB game feed into what the page draws. Everything is
+  // optional-chained so a missing field degrades to a blank, not a crash.
+  function buildModel(feed) {
+    const gd = feed.gameData || {};
+    const ld = feed.liveData || {};
+    const awayT = (gd.teams && gd.teams.away) || {};
+    const homeT = (gd.teams && gd.teams.home) || {};
+    const teamName = side => (side === 'away' ? awayT : homeT).name || (side === 'away' ? 'Away' : 'Home');
+    const teamAbbr = side => (side === 'away' ? awayT : homeT).abbreviation || teamName(side);
+    const allPlays = (ld.plays && ld.plays.allPlays) || [];
+
+    const halves = [];
+    const byKey = {};
+    allPlays.forEach(p => {
+      const about = p.about || {};
+      const side = about.isTopInning === false || about.halfInning === 'bottom' ? 'home' : 'away';
+      const half = side === 'away' ? 'Top' : 'Bottom';
+      const key = `${about.inning}_${half}`;
+      if (!byKey[key]) {
+        byKey[key] = { key, inning: about.inning, half, side, plays: [] };
+        halves.push(byKey[key]);
+      }
+      const res = p.result || {};
+      byKey[key].plays.push({
+        event: res.event || '',
+        description: res.description || '',
+        scoring: !!about.isScoringPlay,
+        outs: p.count ? p.count.outs : null,
+        awayScore: res.awayScore,
+        homeScore: res.homeScore,
+      });
+    });
+
+    const ls = ld.linescore || {};
+    return {
+      awayName: teamName('away'), homeName: teamName('home'),
+      awayAbbr: teamAbbr('away'), homeAbbr: teamAbbr('home'),
+      awayRuns: ls.teams && ls.teams.away ? ls.teams.away.runs : null,
+      homeRuns: ls.teams && ls.teams.home ? ls.teams.home.runs : null,
+      venue: (gd.venue && gd.venue.name) || '',
+      date: (gd.datetime && (gd.datetime.officialDate || gd.datetime.originalDate)) || '',
+      status: (gd.status && gd.status.detailedState) || '',
+      innings: ls.innings || [],
+      lineTeams: ls.teams || {},
+      halves,
+    };
+  }
+
+  function halfLabel(h) { return `${h.half} ${ordinal(h.inning)}`; }
+
+  function headerHtml(m) {
+    const score = (m.awayRuns !== null && m.homeRuns !== null && m.awayRuns !== undefined && m.homeRuns !== undefined)
+      ? ` &nbsp;${esc(m.awayRuns)} &ndash; ${esc(m.homeRuns)}` : '';
+    return `
+      <a class="back-link" href="schedule.html" onclick="if (history.length > 1) { history.back(); return false; }">&larr; Back to schedule</a>
+      <div class="game-header">
+        <div>
+          <div class="game-matchup">${esc(m.awayName)} @ ${esc(m.homeName)}${score}</div>
+          <div class="game-sub">${esc(m.date)}${m.venue ? ' &middot; ' + esc(m.venue) : ''}</div>
+        </div>
+        <div class="game-status">${esc(m.status)}</div>
+      </div>`;
+  }
+
+  function linescoreHtml(m) {
+    if (!m.innings.length) return '';
+    const nums = m.innings.map(i => i.num);
+    const row = (side, abbr) => {
+      const cells = m.innings.map(i => `<td>${i[side] && i[side].runs !== undefined ? esc(i[side].runs) : ''}</td>`).join('');
+      const t = m.lineTeams[side] || {};
+      return `<tr><td>${esc(abbr)}</td>${cells}<td class="tot sep">${esc(t.runs ?? '')}</td><td>${esc(t.hits ?? '')}</td><td>${esc(t.errors ?? '')}</td></tr>`;
+    };
+    return `<div class="linescore"><table>
+      <tr><th></th>${nums.map(n => `<th>${esc(n)}</th>`).join('')}<th class="sep">R</th><th>H</th><th>E</th></tr>
+      ${row('away', m.awayAbbr)}${row('home', m.homeAbbr)}
+    </table></div>`;
+  }
+
+  function scoreText(m, p) {
+    if (p.awayScore === undefined || p.homeScore === undefined) return '';
+    return `${esc(m.awayAbbr)} ${esc(p.awayScore)}, ${esc(m.homeAbbr)} ${esc(p.homeScore)}`;
+  }
+
+  function playHtml(m, p, showOuts) {
+    const meta = [];
+    if (p.scoring) meta.push(`<div class="play-score">${scoreText(m, p)}</div>`);
+    if (showOuts && p.outs !== null && p.outs !== undefined) meta.push(`<div>${esc(p.outs)} out${p.outs === 1 ? '' : 's'}</div>`);
+    return `<div class="play${p.scoring ? ' scoring' : ''}">
+      <div class="play-body">
+        ${p.event ? `<div class="play-event">${esc(p.event)}</div>` : ''}
+        <div class="play-desc">${esc(p.description)}</div>
+      </div>
+      ${meta.length ? `<div class="play-meta">${meta.join('')}</div>` : ''}
+    </div>`;
+  }
+
+  function halfHtml(m, h, plays, showOuts, open) {
+    const battingTeam = h.side === 'away' ? m.awayName : m.homeName;
+    const last = plays[plays.length - 1];
+    const tail = last && last.awayScore !== undefined && last.homeScore !== undefined
+      ? `<span class="half-score">${scoreText(m, last)}</span>` : '';
+    return `<details class="half"${open ? ' open' : ''}>
+      <summary><span class="caret">&#9654;</span>${esc(halfLabel(h))} &mdash; ${esc(battingTeam)}${tail}</summary>
+      ${plays.map(p => playHtml(m, p, showOuts)).join('')}
+    </details>`;
+  }
+
+  function bodyHtml(m) {
+    if (!m.halves.length) return '<p class="empty">No play data is available for this game yet.</p>';
+    if (view === 'scoring') {
+      const parts = m.halves
+        .map(h => ({ h, plays: h.plays.filter(p => p.scoring) }))
+        .filter(x => x.plays.length);
+      if (!parts.length) return '<p class="empty">No runs were scored in this game.</p>';
+      return parts.map(x => halfHtml(m, x.h, x.plays, false, true)).join('');
+    }
+    return m.halves.map(h => halfHtml(m, h, h.plays, true, true)).join('');
+  }
+
+  function render() {
+    const m = model;
+    document.getElementById('content').innerHTML = `
+      ${headerHtml(m)}
+      ${linescoreHtml(m)}
+      <div class="view-tabs">
+        <button class="view-tab${view === 'scoring' ? ' active' : ''}" data-view="scoring">Scoring Summary</button>
+        <button class="view-tab${view === 'pbp' ? ' active' : ''}" data-view="pbp">Play-by-Play</button>
+      </div>
+      <div id="viewBody">${bodyHtml(m)}</div>`;
+    document.querySelectorAll('.view-tab').forEach(b => b.addEventListener('click', () => {
+      view = b.dataset.view;
+      const url = new URL(window.location.href);
+      url.searchParams.set('view', view);
+      history.replaceState(null, '', url);
+      render();
+    }));
+  }
+
+  async function init() {
+    const content = document.getElementById('content');
+    if (!gamePk) { content.innerHTML = '<p class="error">Missing game_pk in the URL.</p>'; return; }
+    if (params.get('view') === 'pbp') view = 'pbp';
+    try {
+      const res = await fetch(`https://statsapi.mlb.com/api/v1.1/game/${encodeURIComponent(gamePk)}/feed/live`);
+      if (!res.ok) throw new Error(`MLB API returned ${res.status}`);
+      model = buildModel(await res.json());
+      render();
+    } catch (e) {
+      content.innerHTML = `<a class="back-link" href="schedule.html">&larr; Back to schedule</a><p class="error">Couldn't load play data for this game right now. Please try again in a moment.</p>`;
+    }
+  }
+  init();
+</script>
+</body>
+</html>
