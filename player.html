@@ -194,10 +194,15 @@
 
   .transaction-log-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 2rem 0 0.6rem; }
   .transaction-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
-  .transaction-row { display: grid; grid-template-columns: 0.9fr 3fr; padding: 0.8rem 1.2rem; align-items: center; font-size: 0.88rem; }
+  .transaction-row { display: grid; grid-template-columns: 90px 170px 1fr; gap: 0.75rem; padding: 0.8rem 1.2rem; align-items: center; font-size: 0.88rem; }
   .transaction-row.head { background: #ececec; font-weight: 700; color: var(--text); font-size: 0.85rem; }
   .transaction-row.body { border-top: 1px solid var(--border); color: var(--text); }
   .transaction-row.body a { color: var(--tab-active); text-decoration: none; font-weight: 600; }
+  .tx-tag { display: inline-block; font-size: 0.66rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #ececec; color: var(--text-muted); margin-right: 0.35rem; }
+  .tx-tag.afl { background: #ffe3c4; color: #a64a10; }
+  .tx-tag.mlb { background: #eaf1fa; color: #2f6fb0; }
+  .tx-note { color: var(--text-muted); font-size: 0.78rem; margin-top: 0.5rem; }
+  @media (max-width: 640px) { .transaction-row { grid-template-columns: 78px 1fr; } .transaction-row > div:nth-child(2) { grid-column: 2; } .transaction-row > div:nth-child(3) { grid-column: 1 / -1; } }
   .transaction-expand-wrap { text-align: center; margin-top: 0.75rem; }
   .transaction-expand-link { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-decoration: none; border-bottom: 1px dashed var(--text-muted); }
 
@@ -681,20 +686,22 @@
     `;
   }
 
+  // Each row: { date, description, type_desc, tag } where tag is 'AFL' | 'MiLB' | 'MLB'.
   function buildTransactionRowHtml(r) {
-    const desc = highlightPlayerName(r.description, r.player_name, r.player_id, r.season);
-    return `<div class="transaction-row body"><div>${formatShortDate(r.date)}</div><div>${desc}</div></div>`;
+    const tagCls = r.tag === 'AFL' ? ' afl' : (r.tag === 'MLB' ? ' mlb' : '');
+    return `<div class="transaction-row body"><div>${formatShortDate(r.date)}</div><div><span class="tx-tag${tagCls}">${r.tag}</span>${r.type_desc || ''}</div><div>${r.description}</div></div>`;
   }
 
   function renderTransactionTable(rows) {
     let html = `
+      <div id="player-transactions">
       <div class="transaction-log-title">Transaction Log</div>
       <div class="transaction-table">
-        <div class="transaction-row head"><div>Date</div><div>Transaction</div></div>
+        <div class="transaction-row head"><div>Date</div><div>Type</div><div>Transaction</div></div>
         <div id="transaction-rows-visible">
     `;
     if (rows.length === 0) {
-      html += `<div class="transaction-row body"><div></div><div>No transactions found.</div></div>`;
+      html += `<div class="transaction-row body"><div></div><div></div><div>No transactions found.</div></div>`;
     } else {
       rows.slice(0, 3).forEach(r => { html += buildTransactionRowHtml(r); });
     }
@@ -708,7 +715,43 @@
         </div>
       `;
     }
+    html += `<div class="tx-note" id="tx-note"></div></div>`;
     return html;
+  }
+
+  // MLB club ids all fall in 108-158; anything else (affiliates, AFL clubs) is minor-league level.
+  function txTagFor(t) {
+    const team = t.toTeam || t.fromTeam || {};
+    if (AFL_TX_TEAMS.has(team.name)) return 'AFL';
+    return team.id >= 108 && team.id <= 158 ? 'MLB' : 'MiLB';
+  }
+  const AFL_TX_TEAMS = new Set(['Glendale Desert Dogs', 'Mesa Solar Sox', 'Peoria Javelinas', 'Salt River Rafters', 'Scottsdale Scorpions', 'Surprise Saguaros']);
+
+  // Upgrade the AFL-only log (from our CSV) with the player's full career of
+  // transactions, pulled live from MLB. If the call fails, the AFL rows stay.
+  async function loadLiveTransactions(aflRows) {
+    const note = () => document.getElementById('tx-note');
+    try {
+      const end = `12/31/${new Date().getFullYear() + 1}`;
+      const res = await fetch(`https://statsapi.mlb.com/api/v1/transactions?playerId=${playerId}&startDate=01/01/2000&endDate=${end}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const live = (data.transactions || []).filter(t => t.description).map(t => ({
+        date: (t.date || t.effectiveDate || '').slice(0, 10),
+        description: t.description,
+        type_desc: t.typeDesc || '',
+        tag: txTagFor(t),
+      }));
+      const seen = new Set(live.map(r => r.date + '|' + r.description));
+      const merged = live.concat(aflRows.filter(r => !seen.has(r.date + '|' + r.description)));
+      merged.sort((a, b) => (a.date < b.date ? 1 : -1));
+      const el = document.getElementById('player-transactions');
+      if (!el || merged.length === 0) return;
+      el.outerHTML = renderTransactionTable(merged);
+      wireTransactionExpand();
+    } catch (err) {
+      if (note()) note().textContent = "Couldn't load transactions outside the AFL right now, so only AFL moves are shown.";
+    }
   }
 
   function wireTransactionExpand() {
@@ -1672,6 +1715,7 @@
 
       const playerTransactions = transactions
         .filter(t => t.player_id === playerId)
+        .map(t => ({ date: t.date, description: t.description, type_desc: t.type_desc, tag: 'AFL' }))
         .sort((a, b) => (a.date < b.date ? 1 : -1));
 
       let html = renderBio(player);
@@ -1782,6 +1826,7 @@
       wireTransactionExpand();
 
       loadCareerPath(aflRow, statType, aflGameLogRows);
+      loadLiveTransactions(playerTransactions);
     } catch (err) {
       content.innerHTML = `<p class="error">Couldn't load player: ${err.message}</p>`;
     }
