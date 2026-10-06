@@ -714,7 +714,11 @@
     try {
       // Top 100 lists exist per year; a player gets a label for every year's list he was on
       // (each file holds the most recent pull of that year's ranking).
-      const top100Fetches = SEASONS.map(y => fetch(`data/${y}/top100.csv`).then(r => (r.ok ? r.text() : null)).catch(() => null));
+      // Covers every year from 2023 (the earliest list we keep) through the newest season on the site;
+      // a year with no file just contributes no labels.
+      const top100Years = [];
+      for (let y = 2023; y <= Math.max(...SEASONS); y++) top100Years.push(y);
+      const top100Fetches = top100Years.map(y => fetch(`data/${y}/top100.csv`).then(r => (r.ok ? r.text() : null)).catch(() => null));
       const [rosterRes, txnRes, pStatRes, hLogRes] = await Promise.all([
         fetch(`data/${currentSeason}/roster.csv`),
         fetch(`data/${currentSeason}/transactions.csv`),
@@ -730,7 +734,7 @@
       });
       top100ById = {};
       const top100Texts = await Promise.all(top100Fetches);
-      SEASONS.forEach((y, i) => {
+      top100Years.forEach((y, i) => {
         if (!top100Texts[i]) return;
         parseCSV(top100Texts[i]).forEach(r => { (top100ById[r.player_id] = top100ById[r.player_id] || {})[y] = r.rank; });
       });
