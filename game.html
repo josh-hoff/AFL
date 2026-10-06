@@ -200,6 +200,7 @@
   .mv-tick-label { position: absolute; font-size: 0.62rem; color: var(--text-muted); font-weight: 600; transform: translate(-50%, 0); }
   .mv-tick-label.y-label { transform: translate(-100%, -50%); padding-right: 4px; }
   .mv-pitch-mark { position: absolute; width: 5px; height: 5px; border-radius: 50%; transform: translate(-50%, -50%); }
+  .sp-mark { position: absolute; width: 9px; height: 9px; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 0 1.5px var(--bg-card); opacity: 0.92; }
   .mv-avg-cross { position: absolute; width: 26px; height: 26px; transform: translate(-50%, -50%); }
   .mv-avg-cross .bar { position: absolute; background: currentColor; }
   .mv-avg-cross .bar.h { left: 0; right: 0; top: 50%; height: 2px; transform: translateY(-50%); }
@@ -901,7 +902,115 @@
     }).join('');
   }
 
-  const CHART_SLIDES = ['Pitch Location', 'Pitch Movement', 'Release Point'];
+  // ---- Spin charts. Chart 4 (Spin Rate vs. Velocity) needs spin + velocity; chart 5
+  // (Spin Direction dial) needs spin direction. Neither exists when the outing has no such data. ----
+  const SPIN_VELO_TITLE = 'Spin Rate vs. Velocity';
+  const SPIN_DIAL_TITLE = 'Spin Direction';
+  let SPIN_AXIS = null, SPIN_DIAL = false, SLIDE_VELO = 3, SLIDE_DIAL = 4;
+  function niceStep(span, steps) { return steps.find(st => span / st <= 6) || steps[steps.length - 1]; }
+  function computeSpinAxis(pitches) {
+    const pts = pitches.filter(p => p.spin !== null && p.velo !== null);
+    if (!pts.length) return null;
+    const fit = (vals, steps, minSpan) => {
+      const mn = Math.min(...vals), mx = Math.max(...vals);
+      const span = Math.max(minSpan, mx - mn), pad = span * 0.2;
+      const step = niceStep(span + 2 * pad, steps);
+      return { min: Math.floor((mn - pad) / step) * step, max: Math.ceil((mx + pad) / step) * step, step };
+    };
+    return { x: fit(pts.map(p => p.velo), [1, 2, 5, 10], 6), y: fit(pts.map(p => p.spin), [50, 100, 200, 250, 500], 300) };
+  }
+  function circMean(dirs) {
+    const r = d => d * Math.PI / 180;
+    const s = dirs.reduce((a, d) => a + Math.sin(r(d)), 0) / dirs.length;
+    const c = dirs.reduce((a, d) => a + Math.cos(r(d)), 0) / dirs.length;
+    return ((Math.atan2(s, c) * 180 / Math.PI) + 360) % 360;
+  }
+  // Clock reading of a spin direction: 180° = 12:00, 270° = 3:00, 0/360° = 6:00, 90° = 9:00.
+  function spinClock(d) {
+    let h = (((d - 180) / 30) % 12 + 12) % 12;
+    if (h < 0.0083) h = 12;
+    let hh = Math.floor(h + 1e-9), mm = Math.round((h - hh) * 60);
+    if (mm === 60) { hh += 1; mm = 0; }
+    if (hh === 0) hh = 12; if (hh === 13) hh = 1;
+    return hh + ':' + String(mm).padStart(2, '0');
+  }
+  function renderSpinChart() {
+    const wrap = document.getElementById('spinWrap');
+    if (!wrap || !SPIN_AXIS) return;
+    const { x, y } = SPIN_AXIS;
+    const px = v => ((v - x.min) / (x.max - x.min)) * 100;
+    const py = v => 100 - ((v - y.min) / (y.max - y.min)) * 100;
+    let html = '';
+    for (let t = x.min; t <= x.max + 1e-9; t += x.step) {
+      html += `<div class="mv-gridline v" style="left:${px(t)}%;"></div><div class="mv-tick-label" style="left:${px(t)}%; top:100%; margin-top:4px;">${t}</div>`;
+    }
+    for (let t = y.min; t <= y.max + 1e-9; t += y.step) {
+      html += `<div class="mv-gridline h" style="top:${py(t)}%;"></div><div class="mv-tick-label y-label" style="left:0%; top:${py(t)}%;">${t}</div>`;
+    }
+    const pitches = getScopedPitches().filter(p => p.spin !== null && p.velo !== null);
+    pitches.forEach(p => {
+      const title = `${PITCH_LABELS[p.type] || p.type} · ${p.velo.toFixed(1)} mph · ${p.spin} rpm`;
+      html += `<div class="sp-mark" style="left:${px(p.velo)}%; top:${py(p.spin)}%; background:${PITCH_TINTS[p.type] || '#aaa'};" title="${title}"></div>`;
+    });
+    const types = Array.from(new Set(pitches.map(p => p.type)));
+    const avgs = types.map(t => {
+      const g = pitches.filter(p => p.type === t);
+      return { t, n: g.length, v: g.reduce((a, p) => a + p.velo, 0) / g.length, s: g.reduce((a, p) => a + p.spin, 0) / g.length };
+    });
+    avgs.forEach(a => {
+      const c = PITCH_COLORS[a.t] || '#555';
+      html += `<div class="mv-avg-cross" style="left:${px(a.v)}%; top:${py(a.s)}%; color:${c};" title="${PITCH_LABELS[a.t] || a.t} average: ${a.v.toFixed(1)} mph · ${Math.round(a.s)} rpm"><div class="bar h"></div><div class="bar v"></div><div class="mv-avg-center" style="color:${c};"></div></div>`;
+    });
+    wrap.innerHTML = html;
+    const cap = document.getElementById('spinAxisCaption');
+    if (cap) cap.innerHTML = '<div class="mv-axis-title">Velocity (MPH)</div>';
+    document.getElementById('spinLegend').innerHTML = avgs.map(a =>
+      `<div class="mv-legend-item"><span class="mv-legend-swatch" style="background:${PITCH_COLORS[a.t] || '#888'};"></span><span class="mv-legend-text"><div class="mv-legend-type">${PITCH_LABELS[a.t] || a.t}</div><div class="mv-legend-avg">avg ${a.v.toFixed(1)} mph &middot; ${Math.round(a.s)} rpm</div></span></div>`).join('');
+  }
+  function dialArrow(cx, cy, deg, len, col, w, op, title) {
+    const a = (deg - 180) * Math.PI / 180, sx = Math.sin(a), sy = -Math.cos(a);
+    const ex = cx + len * sx, ey = cy + len * sy, hl = w * 3.4, hw = w * 1.9;
+    const bx = ex - hl * sx, by = ey - hl * sy, qx = -sy, qy = sx;
+    return `<g opacity="${op}"><title>${title}</title><line x1="${cx}" y1="${cy}" x2="${bx}" y2="${by}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/><polygon points="${ex},${ey} ${bx + hw * qx},${by + hw * qy} ${bx - hw * qx},${by - hw * qy}" fill="${col}"/></g>`;
+  }
+  function renderSpinDial() {
+    const wrap = document.getElementById('dialWrap');
+    if (!wrap || !SPIN_DIAL) return;
+    const W = 520, cx = 260, cy = 260, R = 170;
+    const pos = (d, r) => { const a = (d - 180) * Math.PI / 180; return [cx + r * Math.sin(a), cy - r * Math.cos(a)]; };
+    let s = `<svg viewBox="0 0 ${W} ${W}" style="width:100%;height:100%;display:block;" role="img" aria-label="Spin direction dial">`;
+    for (let k = 1; k <= 5; k++) s += `<circle cx="${cx}" cy="${cy}" r="${R * k / 5}" fill="none" stroke="#e3e6ea"/>`;
+    for (let d = 0; d < 360; d += 15) { const [x2, y2] = pos(d, R); s += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="${d % 30 === 0 ? '#c9ced5' : '#e3e6ea'}"/>`; }
+    s += `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#c9ced5" stroke-width="1.5"/>`;
+    for (let d = 0; d < 360; d += 15) { const [x, y] = pos(d, R + 15); s += `<text x="${x}" y="${y + 3.5}" font-size="10.5" text-anchor="middle" font-weight="600" fill="#6b7280">${d}&deg;</text>`; }
+    for (let h = 1; h <= 12; h++) { const [x, y] = pos((180 + h * 30) % 360, R + 42); s += `<text x="${x}" y="${y + 6}" font-size="17" text-anchor="middle" font-weight="800" fill="#c0392b">${h}</text>`; }
+    const lbl = 'font-size="12" font-weight="800" text-anchor="middle" letter-spacing="1" fill="#1f2937"';
+    s += `<text x="${cx}" y="20" ${lbl}>TOP SPIN</text><text x="${cx}" y="${W - 8}" ${lbl}>BACK SPIN</text>`;
+    s += `<text transform="translate(14 ${cy}) rotate(-90)" ${lbl}>SIDE SPIN</text><text transform="translate(${W - 14} ${cy}) rotate(90)" ${lbl}>SIDE SPIN</text>`;
+    const pitches = getScopedPitches().filter(p => p.spinDirection !== null);
+    const types = Array.from(new Set(pitches.map(p => p.type)));
+    // Individual pitches only appear once a single pitch type is selected; the default is averages only.
+    if (activeFilter !== 'ALL') {
+      pitches.forEach(p => {
+        s += dialArrow(cx, cy, p.spinDirection, R * 0.88, PITCH_COLORS[p.type] || '#888', 1.6, 0.3, `${PITCH_LABELS[p.type] || p.type} · ${p.spinDirection}° (${spinClock(p.spinDirection)}) · ${p.spin !== null ? p.spin + ' rpm' : 'N/A'}`);
+      });
+    }
+    const avgs = types.map(t => {
+      const g = pitches.filter(p => p.type === t);
+      return { t, n: g.length, d: circMean(g.map(p => p.spinDirection)) };
+    });
+    avgs.forEach(a => {
+      s += dialArrow(cx, cy, a.d, R * 0.9, PITCH_COLORS[a.t] || '#555', 4.5, 1, `${PITCH_LABELS[a.t] || a.t} average: ${Math.round(a.d)}° (${spinClock(a.d)}) · ${a.n} pitch${a.n === 1 ? '' : 'es'}`);
+    });
+    s += `<circle cx="${cx}" cy="${cy}" r="5" fill="#1f2937"/></svg>`;
+    wrap.innerHTML = s;
+    document.getElementById('dialLegend').innerHTML = avgs.map(a =>
+      `<div class="mv-legend-item"><span class="mv-legend-swatch" style="background:${PITCH_COLORS[a.t] || '#888'};"></span><span class="mv-legend-text"><div class="mv-legend-type">${PITCH_LABELS[a.t] || a.t}</div><div class="mv-legend-avg">avg ${Math.round(a.d)}&deg; &middot; ${spinClock(a.d)}</div></span></div>`).join('');
+    const note = document.getElementById('dialNote');
+    if (note) note.textContent = activeFilter === 'ALL' ? "Average spin direction of each pitch type. Select a pitch type to see every pitch behind its average." : 'Dark arrow is the average; faded arrows are the individual pitches.';
+  }
+
+  let CHART_SLIDES = ['Pitch Location', 'Pitch Movement', 'Release Point'];
   let currentSlide = 0;
   function renderChartDots() {
     const dots = document.getElementById('chartDots');
@@ -939,6 +1048,8 @@
   }
   function renderAll() {
     renderSpinNotice();
+    renderSpinChart();
+    renderSpinDial();
     renderFilterRow();
     renderStats();
     renderOutcomeSelect();
@@ -998,6 +1109,26 @@
                 <div class="rp-ext-caption">Extension (ft from rubber toward plate)</div>
                 <div class="rp-legend" id="releaseLegend"></div>
               </div>
+              ${SPIN_AXIS ? `<div class="heatmap-card" data-slide="${SLIDE_VELO}">
+                <div class="heatmap-title">${SPIN_VELO_TITLE}</div>
+                <div class="mv-plot-row">
+                  <div class="mv-y-axis-title">Spin Rate (RPM)</div>
+                  <div class="movement-plot-wrap" id="spinWrap"></div>
+                </div>
+                <div class="mv-axis-caption-row">
+                  <div class="mv-axis-caption-spacer"></div>
+                  <div class="mv-axis-caption" id="spinAxisCaption"></div>
+                </div>
+                <div class="movement-legend" id="spinLegend"></div>
+              </div>` : ''}
+              ${SPIN_DIAL ? `<div class="heatmap-card" data-slide="${SLIDE_DIAL}">
+                <div class="heatmap-title">${SPIN_DIAL_TITLE}</div>
+                <div class="mv-plot-row" style="margin-top:0.2rem;">
+                  <div class="movement-plot-wrap" id="dialWrap" style="margin:0;"></div>
+                </div>
+                <div class="movement-legend" id="dialLegend"></div>
+                <div class="mv-axis-title" id="dialNote" style="text-align:center; margin-top:0.5rem; font-size:0.7rem; font-weight:500;"></div>
+              </div>` : ''}
             </div>
             <button class="chart-nav-btn" onclick="shiftChart(1)" aria-label="Next chart">&#8250;</button>
           </div>
@@ -1075,6 +1206,10 @@
       PITCH_TINTS = Object.fromEntries(Object.keys(PITCH_COLORS).map(code => [code, lighten(PITCH_COLORS[code], 0.55)]));
       RELEASE_AXIS = computeReleaseAxis(allPitches);
       EXT_AXIS = computeExtAxis(allPitches);
+      SPIN_AXIS = computeSpinAxis(allPitches);
+      SPIN_DIAL = allPitches.some(p => p.spinDirection !== null);
+      if (SPIN_AXIS) { SLIDE_VELO = CHART_SLIDES.length; CHART_SLIDES.push(SPIN_VELO_TITLE); }
+      if (SPIN_DIAL) { SLIDE_DIAL = CHART_SLIDES.length; CHART_SLIDES.push(SPIN_DIAL_TITLE); }
 
       const dateStr = scheduleRow ? scheduleRow.date : '';
       const venue = scheduleRow ? scheduleRow.venue : '';
