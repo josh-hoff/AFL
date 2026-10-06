@@ -183,7 +183,7 @@
   }
   .standings-row {
     display: grid;
-    grid-template-columns: 1.8fr 0.5fr 0.5fr 0.6fr 0.5fr 0.7fr 0.6fr 0.5fr 0.5fr 0.6fr 0.7fr 0.7fr;
+    grid-template-columns: 1.8fr 0.5fr 0.5fr 0.5fr 0.6fr 0.5fr 0.7fr 0.6fr 0.5fr 0.5fr 0.6fr 0.7fr 0.7fr;
     gap: 0.3rem;
     padding: 0.65rem 1.1rem;
     align-items: center;
@@ -283,6 +283,7 @@
   let availableDates = [];
   let currentDate = null;
   let seasonDateRange = null;
+  let tieGames = []; // {date, teams:[a,b]} for each tied Final game, from schedule.csv
 
   function buildZeroTeams() {
     return AFL_TEAM_NAMES.map(name => ({
@@ -304,6 +305,41 @@
       if (!maxDate || d > maxDate) maxDate = d;
     }
     return minDate && maxDate ? { first: minDate, last: maxDate } : null;
+  }
+
+  function parseCsvLine(line) {
+    const out = []; let cur = '', q = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (q) { if (c === '"' && line[i + 1] === '"') { cur += '"'; i++; } else if (c === '"') q = false; else cur += c; }
+      else if (c === '"') q = true;
+      else if (c === ',') { out.push(cur); cur = ''; }
+      else cur += c;
+    }
+    out.push(cur);
+    return out;
+  }
+
+  // Each snapshot dated D reflects games played before D, and has no ties, so count them from the schedule:
+  // any Final game with equal scores is a tie for both teams.
+  function extractTieGames(csvText) {
+    const lines = csvText.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    const h = parseCsvLine(lines[0]);
+    const ix = n => h.indexOf(n);
+    const iD = ix('date'), iA = ix('away_team'), iH = ix('home_team'), iAs = ix('away_score'), iHs = ix('home_score'), iS = ix('status');
+    const out = [];
+    for (let i = 1; i < lines.length; i++) {
+      const c = parseCsvLine(lines[i]);
+      const date = (c[iD] || '').slice(0, 10);
+      if ((c[iS] || '') !== 'Final' || c[iAs] === '' || c[iHs] === '' || c[iAs] === undefined) continue;
+      if (Number(c[iAs]) === Number(c[iHs])) out.push({ date, teams: [c[iA], c[iH]] });
+    }
+    return out;
+  }
+
+  function tiesFor(teamName, asOf) {
+    return tieGames.filter(g => g.date < asOf && g.teams.includes(teamName)).length;
   }
 
   function findClosestAvailableDate(targetDate) {
@@ -435,6 +471,7 @@
           <div>Team</div>
           <div class="standings-cell">W</div>
           <div class="standings-cell">L</div>
+          <div class="standings-cell">T</div>
           <div class="standings-cell">PCT</div>
           <div class="standings-cell">GB</div>
           <div class="standings-cell">L10</div>
@@ -457,6 +494,7 @@
           </div>
           <div class="standings-cell">${t.wins ?? ''}</div>
           <div class="standings-cell">${t.losses ?? ''}</div>
+          <div class="standings-cell">${t.ties ?? (noDataYet ? 0 : tiesFor(t.team_name, currentDate))}</div>
           <div class="standings-cell">${t.pct ?? ''}</div>
           <div class="standings-cell">${t.games_back ?? ''}</div>
           <div class="standings-cell">${t.last_ten_wins ?? ''}-${t.last_ten_losses ?? ''}</div>
@@ -502,11 +540,13 @@
     content.innerHTML = '<p class="loading">Loading standings...</p>';
 
     seasonDateRange = null;
+    tieGames = [];
     try {
       const schedRes = await fetch(`data/${currentSeason}/schedule.csv`);
       if (schedRes.ok) {
         const text = await schedRes.text();
         seasonDateRange = extractSeasonDateRange(text);
+        tieGames = extractTieGames(text);
       }
     } catch (e) {}
 
