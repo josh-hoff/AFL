@@ -183,6 +183,14 @@
   .sv .clk { cursor: pointer; }
   .sv-empty { padding: 4rem 0.5rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
   .sv-note { font-size: 0.68rem; color: var(--text-muted); text-align: center; margin-top: 0.6rem; }
+.gl-search { width: 100%; max-width: 360px; font: inherit; font-size: 0.85rem; font-weight: 600; padding: 0.5rem 0.75rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); margin-bottom: 0.9rem; }
+  .gl-group { margin-bottom: 1.1rem; }
+  .gl-group h4 { margin: 0 0 0.35rem; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px dashed var(--border); padding-bottom: 0.3rem; }
+  .gl-list { display: grid; grid-template-columns: minmax(120px, 200px) 1fr; gap: 0 1.1rem; margin: 0; }
+  .gl-list dt { font-weight: 800; font-size: 0.84rem; padding: 0.45rem 0; border-top: 1px solid var(--border); }
+  .gl-list dd { margin: 0; font-size: 0.84rem; line-height: 1.45; padding: 0.45rem 0; border-top: 1px solid var(--border); }
+  .gl-list dt:first-of-type, .gl-list dd:first-of-type { border-top: 0; }
+  @media (max-width: 560px) { .gl-list { grid-template-columns: 1fr; } .gl-list dt { padding-bottom: 0; } .gl-list dd { border-top: 0; padding-top: 0.1rem; } }
   #chartTip { position: fixed; pointer-events: none; background: rgba(17,20,24,0.92); color: #fff; font-size: 0.74rem; padding: 5px 9px; border-radius: 6px; z-index: 50; display: none; max-width: 240px; line-height: 1.35; }
 
 
@@ -1195,13 +1203,58 @@
     if (note) note.textContent = activeTypes.length === 0 ? "Average spin direction of each pitch type. Select a pitch type to see every pitch behind its average." : 'Dark arrow is the average; faded arrows are the individual pitches.';
   }
 
+  // ---- Stat glossary (one-line definitions) ----
+  const GLOSSARY = [
+    ['Game Statcast tiles', [
+      ['Avg / Max Velo', 'Average and fastest release speed.'],
+      ['Avg Spin', 'Average spin rate in rpm.'],
+      ['Whiffs', 'Swings that missed.'],
+      ['Hard-Hit', 'Balls in play hit 95+ mph.']]],
+    ['Strikes & discipline', [
+      ['Strike %', 'Share of pitches that were strikes.'],
+      ['Zone %', 'Share of pitches thrown in the strike zone.'],
+      ['Chase %', 'Share of out-of-zone pitches the batter swung at.'],
+      ['CSW %', 'Called strikes plus whiffs, as a share of all pitches.'],
+      ['Whiff %', 'Share of swings that missed.'],
+      ['1st-Pitch Strike', 'Share of first pitches that were strikes.']]],
+    ['Contact allowed', [
+      ['Avg / Max Exit Velo', 'How hard balls were hit off the bat.'],
+      ['Barrel %', "Share of balls in play with an ideal exit velocity and launch angle, per MLB's barrel definition."],
+      ['Ground Ball / Line Drive / Fly Ball / Popup', 'Share of balls in play by trajectory.']]],
+    ['Velocity', [
+      ['Velo Loss', 'Average speed lost from release to the plate.']]],
+    ['Counts', [
+      ['Ahead', 'More strikes than balls.'],
+      ['Even', 'Balls equal strikes (1-1, 2-2).'],
+      ['Behind', 'More balls than strikes, except 3-2.'],
+      ['Full Count', '3 balls and 2 strikes.'],
+      ['Two Strikes', 'Any count with two strikes, including 3-2.']]],
+    ['Pitch characteristics', [
+      ['Induced Vertical Break', 'Vertical movement beyond what gravity alone would cause.'],
+      ['Horizontal Break', 'Sideways movement of the pitch.'],
+      ['Release Point', "Where the ball leaves the pitcher's hand."],
+      ['Extension', 'How far toward the plate the pitcher releases the ball.'],
+      ['Spin Direction', 'The axis the ball spins on, shown like a clock face.'],
+      ['Exit Velocity / Launch Angle', 'Speed and vertical angle of a batted ball off the bat.']]],
+  ];
+  function renderGlossary() {
+    const body = document.getElementById('glossBody');
+    if (!body) return;
+    const q = ((document.getElementById('glSearch') || {}).value || '').trim().toLowerCase();
+    const html = GLOSSARY.map(([group, items]) => {
+      const rows = items.filter(([n, d]) => !q || (n + ' ' + d).toLowerCase().includes(q));
+      return rows.length ? `<div class="gl-group"><h4>${group}</h4><dl class="gl-list">${rows.map(([n, d]) => `<dt>${n}</dt><dd>${d}</dd>`).join('')}</dl></div>` : '';
+    }).join('');
+    body.innerHTML = html || '<div class="sum-note">No matching stats.</div>';
+  }
+
   // ---- Collapsible summary tables ----
   function toggleSection(id) {
     const head = document.querySelector(`.sum-head[data-s="${id}"]`), body = document.getElementById('sum-' + id);
     const open = head.getAttribute('aria-expanded') !== 'true';
     head.setAttribute('aria-expanded', String(open));
     body.hidden = !open;
-    head.querySelector('.sum-hint').hidden = open;
+    const hint = head.querySelector('.sum-hint'); if (hint) hint.hidden = open;
   }
   function pickType(t) {
     if (typeMulti) activeTypes = activeTypes.includes(t) ? activeTypes.filter(x => x !== t) : [...activeTypes, t];
@@ -1523,6 +1576,12 @@
       <div class="spin-footnote" id="spinFootnote" hidden>
         <strong>*</strong> An asterisk means some pitches in the sample have no spin data. Average spin rate (rpm) uses only pitches that have spin data, and the count under the number (for example, &ldquo;2 of 35 pitches&rdquo;) shows how many that is. MLB doesn't/can't track every spin at every park, so some games have little or no spin data. Sample labels: Small Sample Size (under 50% of pitches have spin), Decent Sample Size (50% to 70%), Sufficient Sample Size (over 70%).
       </div>
+      <button type="button" class="sum-head" data-s="gloss" aria-expanded="false" onclick="toggleSection('gloss')"><span class="sum-car">&#9656;</span><span class="section-title">Stat Glossary</span><span class="sum-hint">what each stat means</span></button>
+      <div class="sum-body" id="sum-gloss" hidden>
+        <input class="gl-search" id="glSearch" type="search" placeholder="Search stats (e.g. whiff, barrel, count)" aria-label="Search glossary" oninput="renderGlossary()">
+        <div id="glossBody"></div>
+        <div class="sum-note">Stats are calculated for whichever pitches your filters currently show.</div>
+      </div>
     `;
   }
 
@@ -1634,6 +1693,7 @@
       `);
 
       renderAll();
+      renderGlossary();
     } catch (err) {
       content.innerHTML = `<p class="error">Couldn't load this game: ${err.message}</p>`;
     }
