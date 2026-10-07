@@ -139,6 +139,52 @@
   .statcast-left .afl-stat-label { font-size: 0.8rem; }
   .statcast-left .afl-stat-value { font-size: 1.8rem; margin-top: 0.3rem; }
   .statcast-right { display: flex; flex-direction: column; }
+  /* ---- Filter dropdown row (Result / Count / Inning) ---- */
+  .outcome-row { position: relative; display: flex; align-items: center; gap: 0.4rem; margin: 0 0 1rem; }
+  .oc-dd { position: static; flex: 1 1 0; min-width: 0; }
+  .oc-btn { width: 100%; min-width: 0; padding: 0.45rem 0.55rem; font-size: 0.78rem; gap: 0.35rem; }
+  .oc-text { max-width: none; min-width: 0; }
+  .oc-menu { left: 0; right: auto; top: calc(100% + 4px); min-width: min(21rem, 100%); }
+  /* ---- More Stats ---- */
+  .more-wrap { grid-column: 1 / -1; text-align: center; }
+  .more-btn { background: none; border: 0; border-bottom: 1px dashed var(--text-muted); color: var(--text-muted); font: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer; padding: 0 0 1px; }
+  .more-btn:hover { color: var(--text); border-bottom-color: var(--text); }
+  .more-sub { grid-column: 1 / -1; text-align: left; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); border-top: 1px dashed var(--border); padding-top: 0.9rem; }
+  .statcast-left .afl-stats-grid .more-sub + div .afl-stat-value, .statcast-left .more-tile .afl-stat-value { font-size: 1.45rem; }
+  /* ---- Collapsible summary tables ---- */
+  .sum-head { display: flex; align-items: center; gap: 0.5rem; width: 100%; background: none; border: 0; border-bottom: 1px solid var(--border); padding: 0.35rem 0.15rem; margin: 1.25rem 0 0; cursor: pointer; text-align: left; font-family: inherit; color: var(--text); }
+  .sum-head .section-title { margin: 0; }
+  .sum-head:hover .section-title { color: var(--tab-active); }
+  .sum-car { color: var(--text-muted); font-size: 0.9rem; width: 12px; display: inline-block; transition: transform 0.15s; }
+  .sum-head[aria-expanded="true"] .sum-car { transform: rotate(90deg); }
+  .sum-hint { margin-left: auto; font-size: 0.76rem; color: var(--text-muted); }
+  .sum-body { margin-top: 0.7rem; }
+  .sum-tw { overflow-x: auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; }
+  .sum-tbl { width: 100%; border-collapse: collapse; font-size: 0.84rem; font-variant-numeric: tabular-nums; }
+  .sum-tbl th { background: #f5f3ee; color: var(--text-muted); font-size: 0.66rem; text-transform: uppercase; padding: 0.5rem 0.65rem; white-space: nowrap; text-align: right; user-select: none; }
+  .sum-tbl th.sortable { cursor: pointer; }
+  .sum-tbl th.sorted::after { content: ' \25BE'; color: var(--tab-active); }
+  .sum-tbl th.sorted.asc::after { content: ' \25B4'; }
+  .sum-tbl th:first-child, .sum-tbl td:first-child { text-align: left; }
+  .sum-tbl td { padding: 0.5rem 0.65rem; border-top: 1px solid var(--border); text-align: right; white-space: nowrap; }
+  .sum-tbl tbody tr.row-click { cursor: pointer; }
+  .sum-tbl tbody tr.row-click:hover td { background: #faf8f4; }
+  .sum-tbl tr.sel td { background: #fdeadb; }
+  .sum-tbl tr.dim td { opacity: 0.35; }
+  .sum-tbl tr.dim:hover td { opacity: 0.7; }
+  .sum-tbl tr.tot td { font-weight: 800; background: #f5f3ee; cursor: default; }
+  .sum-tbl td .pitch-dot { margin-right: 0.5rem; }
+  .sum-note { color: var(--text-muted); font-size: 0.76rem; margin: 0.45rem 0.1rem 0; }
+  /* ---- New SVG charts ---- */
+  .sv-wrap { width: 100%; }
+  .sv-wrap svg { width: 100%; height: auto; display: block; }
+  .sv text { fill: var(--text); font-family: inherit; }
+  .sv .m { fill: var(--text-muted); }
+  .sv .clk { cursor: pointer; }
+  .sv-empty { padding: 4rem 0.5rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+  .sv-note { font-size: 0.68rem; color: var(--text-muted); text-align: center; margin-top: 0.6rem; }
+  #chartTip { position: fixed; pointer-events: none; background: rgba(17,20,24,0.92); color: #fff; font-size: 0.74rem; padding: 5px 9px; border-radius: 6px; z-index: 50; display: none; max-width: 240px; line-height: 1.35; }
+
 
   .chart-carousel { display: flex; align-items: center; gap: 0.75rem; }
   .chart-carousel-viewport { flex: 1; min-width: 0; }
@@ -452,6 +498,7 @@
       ab.pitches.forEach((p, i) => {
         const callType = classifyCall(p.call);
         const isLast = i === ab.pitches.length - 1;
+        p.balls = balls; p.strikes = strikes; p.pn = i + 1;   // count before this pitch; pitch number in the at-bat
         if (callType === 'BALL') {
           if (p.call === 'Hit By Pitch') { if (isLast) { outcome = 'Hit By Pitch'; outcomeClass = 'walk'; } return; }
           balls++;
@@ -497,7 +544,14 @@
   let typeMulti = false;     // false = pick one pitch type (click again to clear); true = tick several
   let activeOutcomes = [];   // empty = all results
   let multiMode = false;     // false = pick one result (default); true = tick several
-  let ocOpen = false;
+  let activeCounts = [];     // count buckets selected; empty = all counts
+  let countMulti = false;
+  let activeInnings = [];    // innings selected (as strings); empty = all innings
+  let innMulti = false;
+  let openMenu = null;       // which filter dropdown is open: 'res' | 'cnt' | 'inn' | null
+  let moreOpen = false;      // "More Stats" expanded
+  let typeSortKey = 'n', typeSortAsc = false;
+  let PTYPES = [], INNINGS = [];
   let selectedAtBat = null;
   let RELEASE_AXIS = { xMin: -2.5, xMax: -1.5, zMin: 5.5, zMax: 6.5 };
   let EXT_AXIS = { min: 5.0, max: 7.5 };
@@ -520,16 +574,34 @@
     if (k === 'FOUL') return `<span class="oc-mark"><span class="oc-sq" style="background:${c};"></span></span>`;
     return `<span class="oc-mark"><span class="oc-dot" style="background:${c};"></span></span>`;
   }
-  // Pitches scoped by at-bat and pitch type only (the outcome dropdown is applied separately).
+  // Pitches scoped by at-bat and pitch type only (the Result / Count / Inning dropdowns are applied separately).
   function getTypeScopedPitches() {
     const base = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
     return activeTypes.length === 0 ? base : base.filter(p => activeTypes.includes(p.type));
   }
   function matchesOutcome(p) { return activeOutcomes.length === 0 || activeOutcomes.includes(markerKind(p.call)); }
   function outcomeLabels() { return activeOutcomes.map(k => (OUTCOME_OPTIONS.find(o => o[0] === k) || [0, k])[1]); }
+
+  // Count buckets. balls/strikes on each pitch are the count BEFORE that pitch (set in buildAtBats).
+  const COUNT_OPTIONS = [
+    ['ALL', 'All Counts'], ['FIRST', 'First Pitch (0-0)'], ['AHEAD', 'Ahead (Strikes > Balls)'], ['EVEN', 'Even (1-1, 2-2)'],
+    ['BEHIND', 'Behind (Balls > Strikes)'], ['FULL', 'Full Count (3-2)'], ['TWO', 'Two Strikes'],
+  ];
+  const COUNT_TEST = {
+    FIRST: p => p.balls === 0 && p.strikes === 0,
+    AHEAD: p => p.strikes > p.balls,
+    EVEN: p => p.strikes === p.balls && p.balls > 0,
+    BEHIND: p => p.balls > p.strikes && !(p.balls === 3 && p.strikes === 2),
+    FULL: p => p.balls === 3 && p.strikes === 2,
+    TWO: p => p.strikes === 2,
+  };
+  function matchesCount(p) { return activeCounts.length === 0 || activeCounts.some(k => COUNT_TEST[k](p)); }
+  function matchesInning(p) { return activeInnings.length === 0 || activeInnings.includes(String(p.inning)); }
+  function matchesFilters(p) { return matchesOutcome(p) && matchesCount(p) && matchesInning(p); }
   function getScopedPitches() {
-    return getTypeScopedPitches().filter(matchesOutcome);
+    return getTypeScopedPitches().filter(matchesFilters);
   }
+  function atBatBase() { return selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches; }
   function selectAtBat(idx) {
     selectedAtBat = selectedAtBat === idx ? null : idx;
     renderAll();
@@ -554,47 +626,82 @@
     };
   }
 
+  // Three filter dropdowns (Result / Count / Inning) built from one config each.
+  // Only one menu is open at a time; each has its own Multiple Selections box.
+  function filterDefs() {
+    const check0 = () => '';
+    return {
+      res: {
+        all: 'All Results', opts: OUTCOME_OPTIONS, mark: outcomeMarkerHtml,
+        get v() { return activeOutcomes; }, set v(x) { activeOutcomes = x; },
+        get m() { return multiMode; }, set m(x) { multiMode = x; },
+        test: (p, k) => markerKind(p.call) === k,
+        base: () => getTypeScopedPitches().filter(p => matchesCount(p) && matchesInning(p)),
+      },
+      cnt: {
+        all: 'All Counts', opts: COUNT_OPTIONS, mark: check0,
+        get v() { return activeCounts; }, set v(x) { activeCounts = x; },
+        get m() { return countMulti; }, set m(x) { countMulti = x; },
+        test: (p, k) => COUNT_TEST[k](p),
+        base: () => getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesInning(p)),
+      },
+      inn: {
+        all: 'All Innings', opts: [['ALL', 'All Innings'], ...INNINGS.map(n => [String(n), `Inning ${n}`])], mark: check0,
+        get v() { return activeInnings; }, set v(x) { activeInnings = x; },
+        get m() { return innMulti; }, set m(x) { innMulti = x; },
+        test: (p, k) => String(p.inning) === k,
+        base: () => getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesCount(p)),
+      },
+    };
+  }
   function renderOutcomeSelect() {
     const wrap = document.getElementById('outcomeRow');
     if (!wrap) return;
-    const base = getTypeScopedPitches();
-    const counts = {};
-    base.forEach(p => { const k = markerKind(p.call); counts[k] = (counts[k] || 0) + 1; });
-    const countFor = k => k === 'ALL' ? base.length : (counts[k] || 0);
-    const selCount = activeOutcomes.reduce((n, k) => n + countFor(k), 0);
-    const btnText = activeOutcomes.length === 0 ? `All Results (${base.length})` : `${outcomeLabels().join(', ')} (${selCount})`;
-    const btnMarks = activeOutcomes.length === 0 ? outcomeMarkerHtml('ALL') : activeOutcomes.map(outcomeMarkerHtml).join('');
+    const defs = filterDefs();
     const check = on => `<span class="oc-check${on ? ' on' : ''}">${on ? '&#10003;' : ''}</span>`;
-    const multiBox = `<div class="oc-multi" id="ocMulti" role="checkbox" aria-checked="${multiMode}">${check(multiMode)}<span>Multiple Selections</span></div>`;
-    const opts = OUTCOME_OPTIONS.map(([k, label]) => {
-      const on = k === 'ALL' ? activeOutcomes.length === 0 : activeOutcomes.includes(k);
-      const row = `<div class="oc-opt${on ? ' sel' : ''}" role="option" aria-selected="${on}" data-k="${k}">${multiMode && k !== 'ALL' ? check(on) : ''}${outcomeMarkerHtml(k)}<span>${label}</span><span class="oc-count">${countFor(k)}</span></div>`;
-      return k === 'ALL' ? `<div class="oc-top">${row}${multiBox}</div>` : row;
-    }).join('');
-    wrap.innerHTML = `<span class="oc-label">Result</span>
-      <div class="oc-dd">
-        <button type="button" class="oc-btn${activeOutcomes.length ? ' active' : ''}" id="ocBtn" aria-haspopup="listbox" aria-expanded="${ocOpen}" title="${btnText.replace(/"/g, '')}">${btnMarks}<span class="oc-text">${btnText}</span><span class="oc-caret">&#9662;</span></button>
-        <div class="oc-menu" id="ocMenu" role="listbox" aria-multiselectable="${multiMode}"${ocOpen ? '' : ' hidden'}>${opts}</div>
+    wrap.innerHTML = Object.keys(defs).map(id => {
+      const d = defs[id], base = d.base();
+      const countFor = k => k === 'ALL' ? base.length : base.filter(p => d.test(p, k)).length;
+      const label = k => (d.opts.find(o => o[0] === k) || [0, k])[1];
+      const selCount = base.filter(p => d.v.some(k => d.test(p, k))).length;
+      const btnText = d.v.length === 0 ? d.all : `${d.v.map(label).join(', ')} (${selCount})`;
+      const btnMarks = d.v.length === 0 ? '' : d.v.map(d.mark).join('');
+      const multiBox = `<div class="oc-multi" data-multi="${id}" role="checkbox" aria-checked="${d.m}">${check(d.m)}<span>Multiple Selections</span></div>`;
+      const opts = d.opts.map(([k, l]) => {
+        const on = k === 'ALL' ? d.v.length === 0 : d.v.includes(k);
+        const row = `<div class="oc-opt${on ? ' sel' : ''}" role="option" aria-selected="${on}" data-dd="${id}" data-k="${k}">${d.m && k !== 'ALL' ? check(on) : ''}${d.mark(k)}<span>${l}</span><span class="oc-count">${countFor(k)}</span></div>`;
+        return k === 'ALL' ? `<div class="oc-top">${row}${multiBox}</div>` : row;
+      }).join('');
+      return `<div class="oc-dd">
+        <button type="button" class="oc-btn${d.v.length ? ' active' : ''}" data-btn="${id}" aria-haspopup="listbox" aria-expanded="${openMenu === id}" title="${btnText.replace(/"/g, '')}">${btnMarks}<span class="oc-text">${btnText}</span><span class="oc-caret">&#9662;</span></button>
+        <div class="oc-menu" data-menu="${id}" role="listbox" aria-multiselectable="${d.m}"${openMenu === id ? '' : ' hidden'}>${opts}</div>
       </div>`;
-    const btn = document.getElementById('ocBtn'), menu = document.getElementById('ocMenu');
-    btn.addEventListener('click', e => { e.stopPropagation(); ocOpen = menu.hidden; menu.hidden = !ocOpen; btn.setAttribute('aria-expanded', String(ocOpen)); });
-    menu.addEventListener('click', e => e.stopPropagation());
-    menu.querySelectorAll('.oc-opt').forEach(el => el.addEventListener('click', () => {
-      const k = el.dataset.k;
-      if (k === 'ALL') activeOutcomes = [];
-      else if (multiMode) activeOutcomes = activeOutcomes.includes(k) ? activeOutcomes.filter(x => x !== k) : [...activeOutcomes, k];
-      else activeOutcomes = [k];
-      if (!multiMode) ocOpen = false;
+    }).join('');
+    wrap.querySelectorAll('[data-btn]').forEach(btn => btn.addEventListener('click', e => {
+      e.stopPropagation(); openMenu = openMenu === btn.dataset.btn ? null : btn.dataset.btn; syncMenus();
+    }));
+    wrap.querySelectorAll('[data-menu]').forEach(m => m.addEventListener('click', e => e.stopPropagation()));
+    wrap.querySelectorAll('.oc-opt').forEach(el => el.addEventListener('click', () => {
+      const d = defs[el.dataset.dd], k = el.dataset.k;
+      if (k === 'ALL') d.v = [];
+      else if (d.m) d.v = d.v.includes(k) ? d.v.filter(x => x !== k) : [...d.v, k];
+      else d.v = [k];
+      if (!d.m) openMenu = null;
       renderAll();
     }));
-    document.getElementById('ocMulti').addEventListener('click', () => {
-      multiMode = !multiMode;
-      if (!multiMode && activeOutcomes.length > 1) activeOutcomes = [activeOutcomes[0]];
+    wrap.querySelectorAll('[data-multi]').forEach(el => el.addEventListener('click', () => {
+      const d = defs[el.dataset.multi];
+      d.m = !d.m;
+      if (!d.m && d.v.length > 1) d.v = [d.v[0]];
       renderAll();
-    });
+    }));
   }
-  document.addEventListener('click', () => { const m = document.getElementById('ocMenu'); if (m && !m.hidden) { m.hidden = true; ocOpen = false; document.getElementById('ocBtn').setAttribute('aria-expanded', 'false'); } });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { const m = document.getElementById('ocMenu'); if (m) { m.hidden = true; ocOpen = false; } } });
+  function syncMenus() {
+    document.querySelectorAll('#outcomeRow [data-menu]').forEach(m => { m.hidden = m.dataset.menu !== openMenu; });
+    document.querySelectorAll('#outcomeRow [data-btn]').forEach(b => b.setAttribute('aria-expanded', String(b.dataset.btn === openMenu)));
+  }
+  document.addEventListener('click', () => { if (openMenu) { openMenu = null; syncMenus(); } });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && openMenu) { openMenu = null; syncMenus(); } });
 
   function renderFilterRow() {
     const row = document.getElementById('filterRow');
@@ -602,7 +709,7 @@
     const chipBase = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
     row.innerHTML = types.map(t => {
       const label = t === 'ALL' ? 'All Pitches' : (PITCH_LABELS[t] || t || 'Unknown');
-      const count = chipBase.filter(p => (t === 'ALL' || p.type === t) && matchesOutcome(p)).length;
+      const count = chipBase.filter(p => (t === 'ALL' || p.type === t) && matchesFilters(p)).length;
       const dot = t === 'ALL' ? '' : `<span class="pitch-dot" style="background:${PITCH_COLORS[t]}"></span>`;
       const isActive = t === 'ALL' ? activeTypes.length === 0 : activeTypes.includes(t);
       const unavailable = t !== 'ALL' && count === 0 && !isActive;
@@ -611,10 +718,10 @@
     }).join('');
     const multiBox = `<div class="oc-multi" id="typeMulti" role="checkbox" aria-checked="${typeMulti}"><span class="oc-check${typeMulti ? ' on' : ''}">${typeMulti ? '&#10003;' : ''}</span><span>Multiple Selections</span></div>`;
     row.insertAdjacentHTML('beforeend', multiBox);
-    const dirty = activeTypes.length > 0 || activeOutcomes.length > 0 || multiMode || typeMulti || selectedAtBat !== null;
+    const dirty = activeTypes.length > 0 || activeOutcomes.length > 0 || activeCounts.length > 0 || activeInnings.length > 0 || multiMode || typeMulti || countMulti || innMulti || selectedAtBat !== null;
     row.insertAdjacentHTML('beforeend', `<button type="button" class="reset-filters${dirty ? '' : ' idle'}" id="resetFilters"${dirty ? '' : ' disabled'}>Reset Filters</button>`);
     document.getElementById('resetFilters').addEventListener('click', () => {
-      activeTypes = []; activeOutcomes = []; multiMode = false; typeMulti = false; selectedAtBat = null; renderAll();
+      activeTypes = []; activeOutcomes = []; activeCounts = []; activeInnings = []; multiMode = false; typeMulti = false; countMulti = false; innMulti = false; selectedAtBat = null; renderAll();
     });
     document.getElementById('typeMulti').addEventListener('click', () => {
       typeMulti = !typeMulti;
@@ -632,12 +739,70 @@
     });
   }
 
+  // ---- Extra stats (More Stats tiles + summary tables) ----
+  const mean = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : null;
+  const pctStr = (n, d) => d ? Math.round(100 * n / d) + '%' : '—';
+  const f1 = v => v === null || v === undefined ? '—' : v.toFixed(1);
+  // Statcast barrel zone, per MLB's published definition: 98 mph = 26-30 deg, 99 = 25-31,
+  // 100 = 24-33, then the window widens evenly to 8-50 deg at 116 mph and above.
+  function barrelZone(ev) {
+    if (ev < 98) return null;
+    if (ev <= 98) return [26, 30];
+    if (ev <= 99) return [25, 31];
+    if (ev <= 100) return [24, 33];
+    if (ev >= 116) return [8, 50];
+    return [24 - (ev - 100), 33 + (ev - 100) * 17 / 16];
+  }
+  function statsFor(a) {
+    const n = a.length;
+    if (!n) return null;
+    const kind = p => markerKind(p.call);
+    const isSwing = p => { const k = kind(p); return k === 'SWINGING' || k === 'FOUL' || k === 'IN_PLAY'; };
+    const velos = a.map(p => p.velo).filter(v => v !== null);
+    const spins = a.map(p => p.spin).filter(v => v !== null);
+    const swings = a.filter(isSwing).length;
+    const whiffs = a.filter(p => kind(p) === 'SWINGING').length;
+    const called = a.filter(p => kind(p) === 'CALLED').length;
+    const strikes = a.filter(p => kind(p) !== 'BALL').length;
+    const zoned = a.filter(p => p.zone !== null);
+    const inZone = zoned.filter(p => p.zone >= 1 && p.zone <= 9);
+    const outZone = zoned.filter(p => p.zone > 9);
+    const first = a.filter(p => p.pn === 1);
+    const bip = a.filter(p => p.launch_speed !== null);
+    const traj = re => bip.filter(p => re.test((p.trajectory || '').toLowerCase())).length;
+    const barrels = bip.filter(p => { const z = barrelZone(p.launch_speed); return z && p.launch_angle !== null && p.launch_angle >= z[0] && p.launch_angle <= z[1]; }).length;
+    const loss = a.filter(p => p.velo !== null && p.endVelo !== null).map(p => p.velo - p.endVelo);
+    return {
+      n, avgVelo: mean(velos), maxVelo: velos.length ? Math.max(...velos) : null, avgSpin: mean(spins), spinN: spins.length,
+      whiffs, hardHit: a.filter(isHardHit).length,
+      strikePct: pctStr(strikes, n), zonePct: pctStr(inZone.length, zoned.length), chasePct: pctStr(outZone.filter(isSwing).length, outZone.length),
+      cswPct: pctStr(called + whiffs, n), whiffPct: pctStr(whiffs, swings), fpsPct: pctStr(first.filter(p => kind(p) !== 'BALL').length, first.length),
+      bipN: bip.length, avgEV: mean(bip.map(p => p.launch_speed)), maxEV: bip.length ? Math.max(...bip.map(p => p.launch_speed)) : null,
+      gbPct: pctStr(traj(/ground/), bip.length), ldPct: pctStr(traj(/line/), bip.length), fbPct: pctStr(traj(/fly|popup/), bip.length),
+      barrelPct: pctStr(barrels, bip.length), veloLoss: mean(loss),
+    };
+  }
+
   function renderStats() {
     const s = computeStats();
     const grid = document.getElementById('statsGrid');
     if (!s) { grid.innerHTML = `<div class="section-note">No pitches in this selection.${selectedAtBat !== null ? ' An at-bat is selected below; click Reset Filters to clear it.' : ''}</div>`; return; }
     const tiles = [['Pitches', s.count], ['Avg Velo', s.avgVelo], ['Max Velo', s.maxVelo], ['Avg Spin', s.avgSpin + (s.spinCount < s.count ? '*' : ''), (() => { const ss = spinSample(s.spinCount, s.count); return `${s.spinCount} of ${s.count} pitches` + (ss.label ? `<br>${ss.label}` : ''); })()], ['Whiffs', s.whiffs], ['Hard-Hit', s.hardHit]];
-    grid.innerHTML = tiles.map(([label, val, note]) => `<div><div class="afl-stat-label">${label}</div><div class="afl-stat-value flash">${val}</div>${note ? `<div class="afl-stat-note">${note}</div>` : ''}</div>`).join('');
+    let html = tiles.map(([label, val, note]) => `<div><div class="afl-stat-label">${label}</div><div class="afl-stat-value flash">${val}</div>${note ? `<div class="afl-stat-note">${note}</div>` : ''}</div>`).join('');
+    const x = statsFor(getScopedPitches());
+    html += `<div class="more-wrap"><button type="button" class="more-btn" id="moreBtn" aria-expanded="${moreOpen}">More Stats ${moreOpen ? '&#9652;' : '&#9662;'}</button></div>`;
+    if (moreOpen) {
+      const tile = (l, v, n) => `<div class="more-tile"><div class="afl-stat-label">${l}</div><div class="afl-stat-value flash">${v}</div>${n ? `<div class="afl-stat-note">${n}</div>` : ''}</div>`;
+      html += `<div class="more-sub">Strikes &amp; Discipline</div>`
+        + tile('Strike %', x.strikePct) + tile('Zone %', x.zonePct) + tile('Chase %', x.chasePct)
+        + tile('CSW %', x.cswPct, 'called + whiffs') + tile('Whiff %', x.whiffPct, 'per swing') + tile('1st-Pitch Strike', x.fpsPct);
+      html += `<div class="more-sub">Contact Allowed (${x.bipN} in play)</div>`
+        + tile('Avg Exit Velo', f1(x.avgEV)) + tile('Max Exit Velo', f1(x.maxEV)) + tile('Barrel %', x.barrelPct, 'approx., per MLB def.')
+        + tile('Ground Ball', x.gbPct) + tile('Line Drive', x.ldPct) + tile('Fly Ball / Popup', x.fbPct);
+      html += `<div class="more-sub">Velocity</div>` + tile('Velo Loss', x.veloLoss === null ? '—' : x.veloLoss.toFixed(1) + ' mph', 'release to plate');
+    }
+    grid.innerHTML = html;
+    document.getElementById('moreBtn').addEventListener('click', () => { moreOpen = !moreOpen; renderStats(); });
   }
 
   function renderPitchDetail(p) {
@@ -721,6 +886,8 @@
     const scopeParts = [];
     if (activeTypes.length) scopeParts.push(activeTypes.map(t => PITCH_LABELS[t] || t).join(' + '));
     if (activeOutcomes.length) scopeParts.push(outcomeLabels().join(' + '));
+    if (activeCounts.length) scopeParts.push(activeCounts.map(k => (COUNT_OPTIONS.find(o => o[0] === k) || [0, k])[1]).join(' + '));
+    if (activeInnings.length) scopeParts.push(activeInnings.map(n => `Inning ${n}`).join(' + '));
     if (selectedAtBat !== null) scopeParts.push(`${atBats[selectedAtBat].inningLabel} at-bat`);
     scopeLabel.innerHTML = scopeParts.length
       ? `— ${scopeParts.join(', ')}${selectedAtBat !== null ? ' <span class="scope-clear" onclick="selectAtBat(' + selectedAtBat + ')">(clear)</span>' : ''}`
@@ -731,7 +898,7 @@
       const callType = classifyCall(p.call);
       const color = CALL_TYPES[callType].color;
       const title = `${p.type} · ${p.velo !== null ? p.velo.toFixed(1) : '—'} mph · ${p.call}`;
-      const fade = matchesOutcome(p) ? '' : ' opacity:0.13;';
+      const fade = matchesFilters(p) ? '' : ' opacity:0.13;';
       if (callType === 'SWINGING') return `<div class="pitch-x-mark" style="left:${left}%; top:${top}%; color:${color};${fade}" title="${title}">&#10005;</div>`;
       if (markerKind(p.call) === 'FOUL') return `<div class="pitch-sq-plot" style="left:${left}%; top:${top}%; background:${color};${fade}" title="${title}"></div>`;
       return `<div class="pitch-dot-plot" style="left:${left}%; top:${top}%; background:${color};${fade}" title="${title}"></div>`;
@@ -924,7 +1091,7 @@
   // (Spin Direction dial) needs spin direction. Neither exists when the outing has no such data. ----
   const SPIN_VELO_TITLE = 'Spin Rate vs. Velocity';
   const SPIN_DIAL_TITLE = 'Spin Direction';
-  let SPIN_AXIS = null, SPIN_DIAL = false, SLIDE_VELO = 3, SLIDE_DIAL = 4;
+  let SPIN_AXIS = null, SPIN_DIAL = false, SLIDE_VELO = 3, SLIDE_DIAL = 4, SLIDE_MIX = 0, SLIDE_INNV = 0, SLIDE_EV = 0;
   function niceStep(span, steps) { return steps.find(st => span / st <= 6) || steps[steps.length - 1]; }
   function computeSpinAxis(pitches) {
     const pts = pitches.filter(p => p.spin !== null && p.velo !== null);
@@ -1028,6 +1195,172 @@
     if (note) note.textContent = activeTypes.length === 0 ? "Average spin direction of each pitch type. Select a pitch type to see every pitch behind its average." : 'Dark arrow is the average; faded arrows are the individual pitches.';
   }
 
+  // ---- Collapsible summary tables ----
+  function toggleSection(id) {
+    const head = document.querySelector(`.sum-head[data-s="${id}"]`), body = document.getElementById('sum-' + id);
+    const open = head.getAttribute('aria-expanded') !== 'true';
+    head.setAttribute('aria-expanded', String(open));
+    body.hidden = !open;
+    head.querySelector('.sum-hint').hidden = open;
+  }
+  function pickType(t) {
+    if (typeMulti) activeTypes = activeTypes.includes(t) ? activeTypes.filter(x => x !== t) : [...activeTypes, t];
+    else activeTypes = activeTypes.length === 1 && activeTypes[0] === t ? [] : [t];
+    renderAll();
+  }
+  function pickInning(n) {
+    n = String(n);
+    if (innMulti) activeInnings = activeInnings.includes(n) ? activeInnings.filter(x => x !== n) : [...activeInnings, n];
+    else activeInnings = activeInnings.length === 1 && activeInnings[0] === n ? [] : [n];
+    renderAll();
+  }
+  function pickCount(k) {
+    if (countMulti) activeCounts = activeCounts.includes(k) ? activeCounts.filter(x => x !== k) : [...activeCounts, k];
+    else activeCounts = activeCounts.length === 1 && activeCounts[0] === k ? [] : [k];
+    renderAll();
+  }
+  function sortTypes(k) { if (typeSortKey === k) typeSortAsc = !typeSortAsc; else { typeSortKey = k; typeSortAsc = false; } renderSummaries(); }
+  function renderSummaries() {
+    const typeBox = document.getElementById('typeTbl'), innBox = document.getElementById('innTbl');
+    if (!typeBox || !innBox) return;
+    // Pitch Type Summary: every filter except pitch type itself (so you can compare types).
+    const baseT = atBatBase().filter(matchesFilters);
+    const pn = v => { const x = parseInt(v, 10); return isNaN(x) ? -1 : x; };
+    const nv = v => v === null || v === undefined ? -1 : v;
+    const COLS = [
+      ['n', '#', s => s.n], ['use', 'Usage', s => s.n], ['velo', 'Avg Velo', s => nv(s.avgVelo)], ['max', 'Max', s => nv(s.maxVelo)],
+      ['spin', 'Spin', s => nv(s.avgSpin)], ['whiff', 'Whiff %', s => pn(s.whiffPct)], ['csw', 'CSW %', s => pn(s.cswPct)],
+      ['chase', 'Chase %', s => pn(s.chasePct)], ['zone', 'Zone %', s => pn(s.zonePct)], ['ev', 'Avg EV', s => nv(s.avgEV)],
+    ];
+    const key = COLS.find(c => c[0] === typeSortKey) || COLS[0];
+    const rows = PTYPES.map(t => ({ t, s: statsFor(baseT.filter(p => p.type === t)) })).filter(r => r.s);
+    rows.sort((a, b) => (key[2](a.s) - key[2](b.s)) * (typeSortAsc ? 1 : -1));
+    const cells = s => `<td>${s.n}</td><td>${Math.round(100 * s.n / baseT.length)}%</td><td>${f1(s.avgVelo)}</td><td>${f1(s.maxVelo)}</td><td>${s.avgSpin !== null ? Math.round(s.avgSpin) : 'N/A'}</td><td>${s.whiffPct}</td><td>${s.cswPct}</td><td>${s.chasePct}</td><td>${s.zonePct}</td><td>${f1(s.avgEV)}</td>`;
+    let h = '<thead><tr><th>Pitch</th>' + COLS.map(c => `<th class="sortable${typeSortKey === c[0] ? ' sorted' + (typeSortAsc ? ' asc' : '') : ''}" onclick="sortTypes('${c[0]}')">${c[1]}</th>`).join('') + '</tr></thead><tbody>';
+    if (!rows.length) h += `<tr><td colspan="${COLS.length + 1}" style="text-align:left;color:var(--text-muted)">No pitches in this selection.</td></tr>`;
+    rows.forEach(r => {
+      const cls = activeTypes.includes(r.t) ? 'sel' : (activeTypes.length ? 'dim' : '');
+      h += `<tr class="row-click ${cls}" onclick="pickType('${r.t}')"><td><span class="pitch-dot" style="background:${PITCH_COLORS[r.t] || '#888'}"></span><b>${PITCH_LABELS[r.t] || r.t}</b></td>${cells(r.s)}</tr>`;
+    });
+    if (rows.length) h += `<tr class="tot"><td>All</td>${cells(statsFor(baseT))}</tr>`;
+    typeBox.innerHTML = h + '</tbody>';
+    document.getElementById('hintTypes').textContent = `${rows.length} pitch type${rows.length === 1 ? '' : 's'}`;
+
+    // Inning Summary: every filter except inning itself.
+    const baseI = getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesCount(p));
+    const icells = s => !s ? '<td>0</td><td colspan="8" style="text-align:left;color:var(--text-muted)">No pitches in this selection</td>'
+      : `<td>${s.n}</td><td>${f1(s.avgVelo)}</td><td>${f1(s.maxVelo)}</td><td>${s.strikePct}</td><td>${s.whiffs}</td><td>${s.whiffPct}</td><td>${s.cswPct}</td><td>${s.bipN}</td><td>${s.hardHit}</td>`;
+    let ih = '<thead><tr><th>Inning</th>' + ['#', 'Avg Velo', 'Max', 'Strike %', 'Whiffs', 'Whiff %', 'CSW %', 'In Play', 'Hard-Hit'].map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>';
+    let withPitches = 0;
+    INNINGS.forEach(n => {
+      const s = statsFor(baseI.filter(p => Number(p.inning) === n));
+      if (s) withPitches++;
+      const cls = activeInnings.includes(String(n)) ? 'sel' : (activeInnings.length ? 'dim' : '');
+      ih += `<tr class="row-click ${cls}" onclick="pickInning(${n})"><td><b>Inning ${n}</b></td>${icells(s)}</tr>`;
+    });
+    ih += `<tr class="tot"><td>All</td>${icells(statsFor(baseI))}</tr>`;
+    innBox.innerHTML = ih + '</tbody>';
+    document.getElementById('hintInn').textContent = `${withPitches} inning${withPitches === 1 ? '' : 's'}`;
+  }
+
+  // ---- New charts: Pitch Mix by Count, Velocity by Inning, Exit Velocity vs. Launch Angle ----
+  function hookTips() {
+    const tip = document.getElementById('chartTip');
+    if (!tip) return;
+    tip.style.display = 'none';
+    document.querySelectorAll('.sv [data-tip]').forEach(el => {
+      el.addEventListener('mousemove', ev => { tip.style.display = 'block'; tip.innerHTML = el.dataset.tip; tip.style.left = Math.min(ev.clientX + 14, window.innerWidth - 250) + 'px'; tip.style.top = (ev.clientY + 14) + 'px'; });
+      el.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+    });
+    document.querySelectorAll('.sv [data-cnt]').forEach(el => el.addEventListener('click', () => pickCount(el.dataset.cnt)));
+    document.querySelectorAll('.sv [data-inn]').forEach(el => el.addEventListener('click', () => pickInning(el.dataset.inn)));
+  }
+  function typeLegendHtml(a) {
+    return PTYPES.filter(t => a.some(p => p.type === t)).map(t =>
+      `<div class="mv-legend-item"><span class="mv-legend-swatch" style="background:${PITCH_COLORS[t] || '#888'};"></span><span class="mv-legend-text"><div class="mv-legend-type">${PITCH_LABELS[t] || t}</div></span></div>`).join('');
+  }
+  const MIX_GROUPS = [['FIRST', 'First Pitch (0-0)'], ['AHEAD', 'Ahead (Strikes > Balls)'], ['EVEN', 'Even (1-1, 2-2)'], ['BEHIND', 'Behind (Balls > Strikes)'], ['FULL', 'Full Count (3-2)']];
+  function renderMixChart() {
+    const wrap = document.getElementById('mixWrap');
+    if (!wrap) return;
+    const a = getScopedPitches();
+    const W = 380, rowH = 68, H = MIX_GROUPS.length * rowH, bx = 6, bw = W - 12;
+    let s = `<svg class="sv" viewBox="0 0 ${W} ${H}" role="img" aria-label="Pitch mix by count">`;
+    MIX_GROUPS.forEach(([k, label], i) => {
+      const ps = a.filter(COUNT_TEST[k]), y = i * rowH;
+      s += `<g class="clk" data-cnt="${k}"><rect x="0" y="${y}" width="${W}" height="${rowH - 6}" rx="6" fill="${activeCounts.includes(k) ? '#fdeadb' : 'transparent'}"/>`;
+      s += `<text x="${bx}" y="${y + 18}" font-size="12" font-weight="700">${label}</text><text x="${W - bx}" y="${y + 18}" text-anchor="end" font-size="10.5" class="m">${ps.length} ${ps.length === 1 ? 'pitch' : 'pitches'}</text>`;
+      if (!ps.length) { s += `<text x="${bx}" y="${y + 46}" font-size="11" class="m">No pitches in this selection</text></g>`; return; }
+      let x = bx;
+      PTYPES.forEach(t => {
+        const c = ps.filter(p => p.type === t).length;
+        if (!c) return;
+        const w = bw * c / ps.length;
+        s += `<rect data-tip="<b>${PITCH_LABELS[t] || t}</b><br>${label}<br>${c} of ${ps.length} (${(100 * c / ps.length).toFixed(2)}%)" x="${x}" y="${y + 28}" width="${Math.max(0, w - 2)}" height="26" rx="3" fill="${PITCH_COLORS[t] || '#888'}"/>`;
+        s += `<text x="${x + w / 2 - 1}" y="${y + 45}" text-anchor="middle" font-size="${w < 30 ? 9 : 11}" font-weight="700" style="fill:#fff;pointer-events:none">${Math.round(100 * c / ps.length)}%</text>`;
+        x += w;
+      });
+      s += '</g>';
+    });
+    wrap.innerHTML = s + '</svg>';
+    document.getElementById('mixLegend').innerHTML = typeLegendHtml(a);
+  }
+  function renderInnVeloChart() {
+    const wrap = document.getElementById('innVeloWrap');
+    if (!wrap) return;
+    const a = getScopedPitches().filter(p => p.velo !== null);
+    const legend = document.getElementById('innVeloLegend');
+    if (!a.length) { wrap.innerHTML = '<div class="sv-empty">No pitches in this selection.</div>'; legend.innerHTML = ''; return; }
+    const W = 380, H = 320, L = 40, R = 8, T = 22, B = 44, pw = W - L - R, ph = H - T - B, bw = pw / INNINGS.length;
+    const vs = a.map(p => p.velo);
+    const mn = Math.floor((Math.min(...vs) - 6) / 5) * 5, mx = Math.ceil((Math.max(...vs) + 1) / 5) * 5;
+    const X0 = i => L + (i + 0.5) * bw, Y = v => T + ph - (v - mn) / (mx - mn) * ph;
+    let s = `<svg class="sv" viewBox="0 0 ${W} ${H}" role="img" aria-label="Average velocity by inning">`;
+    for (let v = mn; v <= mx; v += 5) s += `<line x1="${L}" x2="${L + pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--border)"/><text x="${L - 7}" y="${Y(v) + 4}" text-anchor="end" font-size="10.5" class="m">${v}</text>`;
+    INNINGS.forEach((n, i) => { s += `<g class="clk" data-inn="${n}"><rect x="${L + i * bw + 2}" y="${T}" width="${bw - 4}" height="${ph + 26}" rx="6" fill="${activeInnings.includes(String(n)) ? '#fdeadb' : 'transparent'}"/></g>`; });
+    INNINGS.forEach((n, i) => {
+      if (i > 0) s += `<line x1="${L + i * bw}" x2="${L + i * bw}" y1="${T}" y2="${T + ph}" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4" pointer-events="none"/>`;
+      s += `<text x="${X0(i)}" y="${T + ph + 17}" text-anchor="middle" font-size="10.5" class="m" pointer-events="none">${n}</text>`;
+    });
+    s += `<text x="${L + pw / 2}" y="${T + ph + 34}" text-anchor="middle" font-size="10.5" font-weight="700">INNING</text><text transform="translate(11 ${T + ph / 2}) rotate(-90)" text-anchor="middle" font-size="10.5" font-weight="700">AVG VELOCITY (MPH)</text><text x="${L + pw}" y="11" text-anchor="end" font-size="9.5" class="m">axis starts at ${mn} mph</text>`;
+    const barsFor = n => PTYPES.map(tp => { const g = a.filter(p => Number(p.inning) === n && p.type === tp); return g.length ? { tp, av: mean(g.map(p => p.velo)), c: g.length } : null; }).filter(Boolean);
+    const maxBars = Math.max(1, ...INNINGS.map(n => barsFor(n).length));
+    const BW = Math.min(30, bw * 0.82 / maxBars);
+    INNINGS.forEach((n, i) => {
+      const bars = barsFor(n);
+      if (!bars.length) return;
+      const x0 = X0(i) - BW * bars.length / 2;
+      bars.forEach((b, k) => {
+        const bx = x0 + k * BW + 1, ww = Math.max(2, BW - 2), y = Y(b.av), r = Math.min(3, ww / 2);
+        s += `<path data-inn="${n}" class="clk" data-tip="<b>${PITCH_LABELS[b.tp] || b.tp}</b> &middot; inning ${n}<br>${b.av.toFixed(1)} mph avg<br>${b.c} pitch${b.c > 1 ? 'es' : ''}" d="M${bx},${T + ph}V${y + r}Q${bx},${y} ${bx + r},${y}H${bx + ww - r}Q${bx + ww},${y} ${bx + ww},${y + r}V${T + ph}Z" fill="${PITCH_COLORS[b.tp] || '#888'}"/>`;
+        if (ww >= 22) s += `<text x="${bx + ww / 2}" y="${y - 4}" text-anchor="middle" font-size="9.5" font-weight="700" pointer-events="none">${b.av.toFixed(1)}</text>`;
+      });
+    });
+    wrap.innerHTML = s + '</svg>';
+    legend.innerHTML = typeLegendHtml(a);
+  }
+  function renderEvChart() {
+    const wrap = document.getElementById('evWrap');
+    if (!wrap) return;
+    const legend = document.getElementById('evLegend');
+    const b = getScopedPitches().filter(p => p.launch_speed !== null && p.launch_angle !== null);
+    if (!b.length) { wrap.innerHTML = '<div class="sv-empty">No balls in play in this selection.</div>'; legend.innerHTML = ''; return; }
+    const W = 380, H = 340, L = 44, R = 12, T = 14, B = 44, pw = W - L - R, ph = H - T - B, xm = [60, 115], ym = [-40, 70];
+    const X = v => L + (v - xm[0]) / (xm[1] - xm[0]) * pw, Y = v => T + ph - (v - ym[0]) / (ym[1] - ym[0]) * ph;
+    let s = `<svg class="sv" viewBox="0 0 ${W} ${H}" role="img" aria-label="Exit velocity versus launch angle">`;
+    for (let v = 60; v <= 115; v += 10) s += `<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${T + ph}" stroke="var(--border)"/><text x="${X(v)}" y="${T + ph + 15}" text-anchor="middle" font-size="10.5" class="m">${v}</text>`;
+    for (let v = -40; v <= 70; v += 20) s += `<line x1="${L}" x2="${L + pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--border)"/><text x="${L - 7}" y="${Y(v) + 4}" text-anchor="end" font-size="10.5" class="m">${v}</text>`;
+    const pts = [];
+    for (let e = 98; e <= 115; e++) pts.push([X(e), Y(barrelZone(e)[1])]);
+    for (let e = 115; e >= 98; e--) pts.push([X(e), Y(barrelZone(e)[0])]);
+    s += `<polygon points="${pts.map(p => p.join(',')).join(' ')}" fill="var(--tab-active)" opacity=".16" pointer-events="none"/><text x="${X(106)}" y="${Y(30)}" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--tab-active)">BARREL ZONE</text>`;
+    s += `<line x1="${X(95)}" x2="${X(95)}" y1="${T}" y2="${T + ph}" stroke="var(--text-muted)" stroke-dasharray="4 4"/><text x="${X(95) + 4}" y="${T + 11}" font-size="9.5" class="m">95 mph hard-hit</text>`;
+    s += `<text x="${L + pw / 2}" y="${H - 6}" text-anchor="middle" font-size="10.5" font-weight="700">EXIT VELOCITY (MPH)</text><text transform="translate(11 ${T + ph / 2}) rotate(-90)" text-anchor="middle" font-size="10.5" font-weight="700">LAUNCH ANGLE (&deg;)</text>`;
+    b.forEach(p => { s += `<circle data-tip="<b>${PITCH_LABELS[p.type] || p.type}</b> to ${p.batter_name}<br>${p.launch_speed.toFixed(1)} mph &middot; ${p.launch_angle.toFixed(0)}&deg;<br>${p.trajectory ? titleCaseTrajectory(p.trajectory) + ' &middot; ' : ''}${p.call}" cx="${X(p.launch_speed)}" cy="${Y(p.launch_angle)}" r="6.5" fill="${PITCH_COLORS[p.type] || '#888'}" stroke="var(--bg-card)" stroke-width="2"/>`; });
+    wrap.innerHTML = s + '</svg>';
+    legend.innerHTML = typeLegendHtml(b);
+  }
+
   let CHART_SLIDES = ['Pitch Location', 'Pitch Movement', 'Release Point'];
   let currentSlide = 0;
   function renderChartDots() {
@@ -1074,6 +1407,11 @@
     renderHeatmap();
     renderMovement();
     renderReleasePoint();
+    renderMixChart();
+    renderInnVeloChart();
+    renderEvChart();
+    renderSummaries();
+    hookTips();
     renderAtBats();
     showSlide();
   }
@@ -1086,8 +1424,8 @@
           <div class="section-title">Game Statcast</div>
           <div class="spin-notice" id="spinNotice" hidden></div>
           <div class="pitch-filter-row" id="filterRow"></div>
-          <div class="afl-stats-grid" id="statsGrid"></div>
           <div class="outcome-row" id="outcomeRow"></div>
+          <div class="afl-stats-grid" id="statsGrid"></div>
         </div>
         <div class="statcast-right">
           <div class="charts-row-header">
@@ -1147,13 +1485,41 @@
                 <div class="movement-legend" id="dialLegend"></div>
                 <div class="mv-axis-title" id="dialNote" style="text-align:center; margin-top:0.5rem; font-size:0.7rem; font-weight:500;"></div>
               </div>` : ''}
+              <div class="heatmap-card" data-slide="${SLIDE_MIX}">
+                <div class="heatmap-title">Pitch Mix by Count</div>
+                <div class="sv-wrap" id="mixWrap"></div>
+                <div class="movement-legend" id="mixLegend"></div>
+                <div class="sv-note">Click a count to filter by it</div>
+              </div>
+              <div class="heatmap-card" data-slide="${SLIDE_INNV}">
+                <div class="heatmap-title">Velocity by Inning</div>
+                <div class="sv-wrap" id="innVeloWrap"></div>
+                <div class="movement-legend" id="innVeloLegend"></div>
+                <div class="sv-note">Click an inning to filter by it</div>
+              </div>
+              <div class="heatmap-card" data-slide="${SLIDE_EV}">
+                <div class="heatmap-title">Exit Velocity vs. Launch Angle</div>
+                <div class="sv-wrap" id="evWrap"></div>
+                <div class="movement-legend" id="evLegend"></div>
+              </div>
             </div>
             <button class="chart-nav-btn" onclick="shiftChart(1)" aria-label="Next chart">&#8250;</button>
           </div>
         </div>
       </div>
-      <div class="section-title">Pitch-by-Pitch <span class="section-note">grouped by at-bat</span></div>
+      <button type="button" class="sum-head" data-s="types" aria-expanded="false" onclick="toggleSection('types')"><span class="sum-car">&#9656;</span><span class="section-title">Pitch Type Summary</span><span class="sum-hint" id="hintTypes"></span></button>
+      <div class="sum-body" id="sum-types" hidden>
+        <div class="sum-tw"><table class="sum-tbl" id="typeTbl"></table></div>
+        <div class="sum-note">Click a row to select that pitch type (same as its chip). Click a column header to sort. The table follows the Result, Count and Inning filters.</div>
+      </div>
+      <button type="button" class="sum-head" data-s="inn" aria-expanded="false" onclick="toggleSection('inn')"><span class="sum-car">&#9656;</span><span class="section-title">Inning Summary</span><span class="sum-hint" id="hintInn"></span></button>
+      <div class="sum-body" id="sum-inn" hidden>
+        <div class="sum-tw"><table class="sum-tbl" id="innTbl"></table></div>
+        <div class="sum-note">Click a row to filter to that inning (same as the Inning dropdown). The table follows the pitch type, Result and Count filters.</div>
+      </div>
+      <div class="section-title" style="margin-top:1.5rem;">Pitch-by-Pitch <span class="section-note">grouped by at-bat</span></div>
       <div id="abContainer"></div>
+      <div id="chartTip"></div>
       <div class="spin-footnote" id="spinFootnote" hidden>
         <strong>*</strong> An asterisk means some pitches in the sample have no spin data. Average spin rate (rpm) uses only pitches that have spin data, and the count under the number (for example, &ldquo;2 of 35 pitches&rdquo;) shows how many that is. MLB doesn't/can't track every spin at every park, so some games have little or no spin data. Sample labels: Small Sample Size (under 50% of pitches have spin), Decent Sample Size (50% to 70%), Sufficient Sample Size (over 70%).
       </div>
@@ -1205,7 +1571,7 @@
         const hasRealPlate = realPlateX !== null && realPlateZ !== null;
         const { px, pz } = hasRealPlate ? { px: realPlateX, pz: realPlateZ } : approxPlateCoords(zone, i);
         return {
-          type: r.pitch_type_code, velo: num(r.start_speed), spin: num(r.spin_rate) !== null ? Math.round(num(r.spin_rate)) : null,
+          type: r.pitch_type_code, velo: num(r.start_speed), endVelo: num(r.end_speed), spin: num(r.spin_rate) !== null ? Math.round(num(r.spin_rate)) : null,
           zone, call: r.call, batter_id: r.batter_id, batter_name: r.batter_name, inning: r.inning, half_inning: r.half_inning,
           hb: num(r.break_horizontal), ivb: num(r.break_vertical_induced), breakVertical: num(r.break_vertical),
           breakAngle: num(r.break_angle) !== null ? Math.round(num(r.break_angle)) : null, breakLength: num(r.break_length),
@@ -1220,6 +1586,8 @@
       atBats = buildAtBats(allPitches);
       typeCounts = {};
       allPitches.forEach(p => { typeCounts[p.type] = (typeCounts[p.type] || 0) + 1; });
+      PTYPES = Object.keys(typeCounts).sort((a, b) => typeCounts[b] - typeCounts[a]);
+      INNINGS = [...new Set(allPitches.map(p => Number(p.inning)))].sort((a, b) => a - b);
       PITCH_COLORS = assignPitchColors(new Set(Object.keys(typeCounts)));
       PITCH_TINTS = Object.fromEntries(Object.keys(PITCH_COLORS).map(code => [code, lighten(PITCH_COLORS[code], 0.55)]));
       RELEASE_AXIS = computeReleaseAxis(allPitches);
@@ -1228,6 +1596,9 @@
       SPIN_DIAL = allPitches.some(p => p.spinDirection !== null);
       if (SPIN_AXIS) { SLIDE_VELO = CHART_SLIDES.length; CHART_SLIDES.push(SPIN_VELO_TITLE); }
       if (SPIN_DIAL) { SLIDE_DIAL = CHART_SLIDES.length; CHART_SLIDES.push(SPIN_DIAL_TITLE); }
+      SLIDE_MIX = CHART_SLIDES.length; CHART_SLIDES.push('Pitch Mix by Count');
+      SLIDE_INNV = CHART_SLIDES.length; CHART_SLIDES.push('Velocity by Inning');
+      SLIDE_EV = CHART_SLIDES.length; CHART_SLIDES.push('Exit Velocity vs. Launch Angle');
 
       const dateStr = scheduleRow ? scheduleRow.date : '';
       const venue = scheduleRow ? scheduleRow.venue : '';
