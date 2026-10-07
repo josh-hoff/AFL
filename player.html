@@ -74,6 +74,11 @@
     object-fit: contain;
     padding: 2px;
   }
+  .bio-card.top100 { background: #fff0e2; border-color: var(--tab-active); box-shadow: inset 6px 0 0 0 var(--tab-active); }
+  .bio-card.mlb { background: #eaf1fa; border-color: #2f6fb0; box-shadow: inset 6px 0 0 0 #2f6fb0; }
+  .bio-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
+  .bio-tag { display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.02em; padding: 2px 10px; border-radius: 12px; color: #fff; white-space: nowrap; }
+  .bio-tag.top100 { background: var(--tab-active); }
   .bio-name { font-size: 1.6rem; font-weight: 700; color: var(--text); }
   .bio-subline { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.15rem; }
   .bio-details { display: flex; gap: 1.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
@@ -359,6 +364,14 @@
     return `<div><div class="bio-detail-label">${label}</div><div class="bio-detail-value">${value}</div></div>`;
   }
 
+  let top100ById = {};
+  function bioTags(player) {
+    const tags = [];
+    const ranks = top100ById[player.player_id] || {};
+    Object.keys(ranks).sort().forEach(y => tags.push(`<span class="bio-tag top100">${y} Top 100 #${ranks[y]}</span>`));
+    return tags.length ? `<div class="bio-tags">${tags.join('')}</div>` : '';
+  }
+
   function renderBio(player) {
     const hometown = [player.birth_city, player.birth_state, player.birth_country].filter(Boolean).join(', ');
     const heightWeight = [player.height, player.weight ? `${player.weight} lbs` : ''].filter(Boolean).join(', ');
@@ -371,11 +384,12 @@
       : '';
 
     return `
-      <div class="bio-card">
+      <div class="bio-card${top100ById[player.player_id] ? ' top100' : ''}${player.mlb_debut_date ? ' mlb' : ''}">
         <div class="bio-avatar"><img class="bio-photo" src="${photoUrl}" alt="" onerror="this.style.display='none'">${orgBadge}</div>
         <div style="flex:1;">
           <div class="bio-name">${player.full_name}</div>
           <div class="bio-subline">${player.jersey_number ? '#' + player.jersey_number + ' \u00b7 ' : ''}${player.position_name} \u00b7 ${player.org_name}</div>
+          ${bioTags(player)}
           <div class="bio-details">            ${bioDetail('Age', player.age)}
             ${bioDetail('Height/Weight', heightWeight)}
             ${bioDetail('Bats/Throws', batsThrows)}
@@ -1699,6 +1713,15 @@
       const pitches = pitchesRes.ok ? parseCSV(await pitchesRes.text()) : [];
       const schedule = scheduleRes.ok ? parseCSV(await scheduleRes.text()) : [];
       const transactions = txnRes.ok ? parseCSV(await txnRes.text()) : [];
+
+      top100ById = {};
+      const t100Years = [];
+      for (let y = 2023; y <= Math.max(...SEASONS); y++) t100Years.push(y);
+      const t100Texts = await Promise.all(t100Years.map(y => fetch(`data/${y}/top100.csv`).then(r => (r.ok ? r.text() : null)).catch(() => null)));
+      t100Years.forEach((y, i) => {
+        if (!t100Texts[i]) return;
+        parseCSV(t100Texts[i]).forEach(r => { (top100ById[r.player_id] = top100ById[r.player_id] || {})[y] = r.rank; });
+      });
 
       const player = roster.find(p => p.player_id === playerId);
       if (!player) {
