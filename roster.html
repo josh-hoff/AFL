@@ -605,10 +605,25 @@
   }
   const PITCHER_STAT_LABELS = ['G', 'GS', 'IP', 'ERA', 'WHIP', 'K', 'BB'];
   const HITTER_STAT_LABELS = ['G', 'AVG', 'OBP', 'SLG', 'OPS', 'HR', 'RBI', 'SB'];
+  // data/<year>/top100.csv: one row per player, one date column per saved list version.
+  // Current rank = rightmost filled-in date; peak = best (lowest) rank across the dates.
+  function top100Entry(row) {
+    const dates = Object.keys(row).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)).sort();
+    let cur = null, peak = null;
+    dates.forEach(d => {
+      const v = parseInt(row[d], 10);
+      if (!isNaN(v)) { cur = v; peak = peak === null ? v : Math.min(peak, v); }
+    });
+    if (cur === null && row.rank) { cur = peak = parseInt(row.rank, 10); }  // old single-list layout
+    return cur === null ? null : { rank: cur, peak };
+  }
+  function top100Label(year, e) {
+    return `${year} Top 100 #${e.rank}` + (e.peak < e.rank ? ` (peak: ${e.peak})` : '');
+  }
   function top100Tags(id) {
     const ranks = top100ById[id];
     if (!ranks) return '';
-    return Object.keys(ranks).sort().map(y => `<br><span class="top100-tag">${y} Top 100 #${ranks[y]}</span>`).join('');
+    return Object.keys(ranks).sort().map(y => `<br><span class="top100-tag">${top100Label(y, ranks[y])}</span>`).join('');
   }
   function heightWeight(p) { return (p.height ? p.height.replace(/ /g, '') : '—') + (p.weight ? ' / ' + p.weight : ''); }
   function hometown(p) { return [p.birth_city, p.birth_state || p.birth_country].filter(Boolean).join(', ') || '—'; }
@@ -637,7 +652,7 @@
         ${teamLogoImg(currentTeam, 'roster-heading-logo')}
         <div class="roster-heading-name">${currentTeam} Roster</div>
       </div>
-      <div class="roster-key"><span class="roster-key-item"><span class="roster-key-swatch"></span>Blue card = player has appeared in an MLB game (based on MLB debut date)</span><span class="roster-key-item"><span class="roster-key-swatch top100"></span>Orange card / label = MLB Pipeline Top 100 prospect (rank as of the list's last update)</span></div>
+      <div class="roster-key"><span class="roster-key-item"><span class="roster-key-swatch"></span>Blue card = player has appeared in an MLB game (based on MLB debut date)</span><span class="roster-key-item"><span class="roster-key-swatch top100"></span>Orange card / label = MLB Pipeline Top 100 prospect (most recent rank that year, with the year's peak rank if it was higher)</span></div>
     `;
 
     POSITION_GROUPS.forEach(group => {
@@ -736,7 +751,7 @@
       const top100Texts = await Promise.all(top100Fetches);
       top100Years.forEach((y, i) => {
         if (!top100Texts[i]) return;
-        parseCSV(top100Texts[i]).forEach(r => { (top100ById[r.player_id] = top100ById[r.player_id] || {})[y] = r.rank; });
+        parseCSV(top100Texts[i]).forEach(r => { const e = top100Entry(r); if (e) (top100ById[r.player_id] = top100ById[r.player_id] || {})[y] = e; });
       });
       hitterStatsById = hLogRes.ok ? buildHitterStats(parseCSV(await hLogRes.text())) : {};
 

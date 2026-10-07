@@ -364,11 +364,26 @@
     return `<div><div class="bio-detail-label">${label}</div><div class="bio-detail-value">${value}</div></div>`;
   }
 
+  // data/<year>/top100.csv: one row per player, one date column per saved list version.
+  // Current rank = rightmost filled-in date; peak = best (lowest) rank across the dates.
+  function top100Entry(row) {
+    const dates = Object.keys(row).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)).sort();
+    let cur = null, peak = null;
+    dates.forEach(d => {
+      const v = parseInt(row[d], 10);
+      if (!isNaN(v)) { cur = v; peak = peak === null ? v : Math.min(peak, v); }
+    });
+    if (cur === null && row.rank) { cur = peak = parseInt(row.rank, 10); }  // old single-list layout
+    return cur === null ? null : { rank: cur, peak };
+  }
+  function top100Label(year, e) {
+    return `${year} Top 100 #${e.rank}` + (e.peak < e.rank ? ` (peak: ${e.peak})` : '');
+  }
   let top100ById = {};
   function bioTags(player) {
     const tags = [];
     const ranks = top100ById[player.player_id] || {};
-    Object.keys(ranks).sort().forEach(y => tags.push(`<span class="bio-tag top100">${y} Top 100 #${ranks[y]}</span>`));
+    Object.keys(ranks).sort().forEach(y => tags.push(`<span class="bio-tag top100">${top100Label(y, ranks[y])}</span>`));
     return tags.length ? `<div class="bio-tags">${tags.join('')}</div>` : '';
   }
 
@@ -1720,7 +1735,7 @@
       const t100Texts = await Promise.all(t100Years.map(y => fetch(`data/${y}/top100.csv`).then(r => (r.ok ? r.text() : null)).catch(() => null)));
       t100Years.forEach((y, i) => {
         if (!t100Texts[i]) return;
-        parseCSV(t100Texts[i]).forEach(r => { (top100ById[r.player_id] = top100ById[r.player_id] || {})[y] = r.rank; });
+        parseCSV(t100Texts[i]).forEach(r => { const e = top100Entry(r); if (e) (top100ById[r.player_id] = top100ById[r.player_id] || {})[y] = e; });
       });
 
       const player = roster.find(p => p.player_id === playerId);

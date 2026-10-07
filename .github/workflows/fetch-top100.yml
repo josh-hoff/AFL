@@ -3,7 +3,7 @@ name: Fetch Top 100 prospects
 on:
   schedule:
     # Once a week, Mondays at 2:07 AM MST (09:07 UTC; MST has no daylight saving).
-    # MLB only updates the list a few times a year, so weekly is plenty.
+    # The script only saves a new column when the list actually changed, so quiet weeks commit nothing.
     - cron: '7 9 * * 1'
   workflow_dispatch: {}
 
@@ -32,7 +32,7 @@ jobs:
         run: pip install requests
 
       - name: Fetch current year Top 100 prospects
-        run: python fetch_afl_top100.py
+        run: python fetch_afl_top100.py --soft
 
       - name: Commit and push updated data
         run: |
