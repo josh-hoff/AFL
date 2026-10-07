@@ -111,3 +111,25 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867726,2026-10-05,home,Mesa Solar Sox,701329,Luis Rujano,4,False
 867726,2026-10-05,home,Mesa Solar Sox,687991,Jared Johnson,5,False
 867726,2026-10-05,home,Mesa Solar Sox,700292,Yondrei Rojas,6,False
+867724,2026-10-06,away,Surprise Saguaros,703610,Justin Lamkin,1,True
+867724,2026-10-06,away,Surprise Saguaros,825100,Kevin Warunek,2,False
+867724,2026-10-06,away,Surprise Saguaros,702965,Hiro Wyatt,3,False
+867724,2026-10-06,away,Surprise Saguaros,681003,Andrew Walling,4,False
+867724,2026-10-06,away,Surprise Saguaros,700985,Josh Hansell,5,False
+867724,2026-10-06,home,Salt River Rafters,701680,R.J. Sales,1,True
+867724,2026-10-06,home,Salt River Rafters,801842,Fidel Ulloa,2,False
+867724,2026-10-06,home,Salt River Rafters,682625,Antonio Gomez,3,False
+867724,2026-10-06,home,Salt River Rafters,824667,Owen Puk,4,False
+867723,2026-10-06,away,Glendale Desert Dogs,677354,Alex Williams,1,True
+867723,2026-10-06,away,Glendale Desert Dogs,703748,Tanner Bauman,2,False
+867723,2026-10-06,away,Glendale Desert Dogs,802413,Sam Horn,3,False
+867723,2026-10-06,away,Glendale Desert Dogs,813706,Owen Hackman,4,False
+867723,2026-10-06,away,Glendale Desert Dogs,679489,Tyler LaPorte,5,False
+867723,2026-10-06,away,Glendale Desert Dogs,808469,Logan Samuels,6,False
+867723,2026-10-06,away,Glendale Desert Dogs,805892,Nick Altermatt,7,False
+867723,2026-10-06,home,Mesa Solar Sox,814005,Jake Bloss,1,True
+867723,2026-10-06,home,Mesa Solar Sox,814279,Yeferson Vargas,2,False
+867723,2026-10-06,home,Mesa Solar Sox,701791,Caden Vire,3,False
+867723,2026-10-06,home,Mesa Solar Sox,701839,Jay Dill,4,False
+867723,2026-10-06,home,Mesa Solar Sox,702255,Brandon Barriera,5,False
+867723,2026-10-06,home,Mesa Solar Sox,695761,Kenya Huggins,6,False

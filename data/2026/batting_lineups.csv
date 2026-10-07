@@ -173,3 +173,41 @@ game_pk,date,team_side,team_name,player_id,player_name,jersey_number,batting_ord
 867726,2026-10-05,home,Mesa Solar Sox,805801,Nazzan Zanetello,24,700,7,00,True,8,CF,Outfielder
 867726,2026-10-05,home,Mesa Solar Sox,829040,Juan Cabada,16,800,8,00,True,4,2B,Second Base
 867726,2026-10-05,home,Mesa Solar Sox,695664,Harrison Feinberg,47,900,9,00,True,7,LF,Outfielder
+867724,2026-10-06,away,Surprise Saguaros,687930,Tyresse Turner,6,100,1,00,True,8,CF,Outfielder
+867724,2026-10-06,away,Surprise Saguaros,805951,Boston Baro,3,200,2,00,True,4,2B,Second Base
+867724,2026-10-06,away,Surprise Saguaros,828202,Bruin Agbayani,25,201,2,01,False,4,2B,Second Base
+867724,2026-10-06,away,Surprise Saguaros,806964,Sebastian Walcott,12,300,3,00,True,10,DH,Designated Hitter
+867724,2026-10-06,away,Surprise Saguaros,800169,Aroon Escobar,13,400,4,00,True,5,3B,Third Base
+867724,2026-10-06,away,Surprise Saguaros,804871,Brooks Bryan,26,500,5,00,True,3,1B,First Base
+867724,2026-10-06,away,Surprise Saguaros,800051,Austin Charles,1,600,6,00,True,6,SS,Shortstop
+867724,2026-10-06,away,Surprise Saguaros,683149,Julian Brock,9,700,7,00,True,2,C,Catcher
+867724,2026-10-06,away,Surprise Saguaros,695517,Casey Cook,2,800,8,00,True,7,LF,Outfielder
+867724,2026-10-06,away,Surprise Saguaros,825412,Angeibel Gomez,18,900,9,00,True,9,RF,Outfielder
+867724,2026-10-06,home,Salt River Rafters,828076,Dax Kilby,11,100,1,00,True,10,DH,Designated Hitter
+867724,2026-10-06,home,Salt River Rafters,814414,Kyle DeBarge,8,200,2,00,True,4,2B,Second Base
+867724,2026-10-06,home,Salt River Rafters,703606,Jared Thomas,2,300,3,00,True,7,LF,Outfielder
+867724,2026-10-06,home,Salt River Rafters,800195,Jorgelys Mota,31,400,4,00,True,8,CF,Outfielder
+867724,2026-10-06,home,Salt River Rafters,703449,Nathan Hall,29,401,4,01,False,8,CF,Outfielder
+867724,2026-10-06,home,Salt River Rafters,700321,Andy Perez,6,500,5,00,True,6,SS,Shortstop
+867724,2026-10-06,home,Salt River Rafters,692110,Core Jackson,12,600,6,00,True,5,3B,Third Base
+867724,2026-10-06,home,Salt River Rafters,823918,Kyle West,24,700,7,00,True,3,1B,First Base
+867724,2026-10-06,home,Salt River Rafters,691942,Jack O'Dowd,18,800,8,00,True,2,C,Catcher
+867724,2026-10-06,home,Salt River Rafters,695493,Teo Banks,20,900,9,00,True,9,RF,Outfielder
+867723,2026-10-06,away,Glendale Desert Dogs,815608,Wyatt Sanford,3,100,1,00,True,6,SS,Shortstop
+867723,2026-10-06,away,Glendale Desert Dogs,815352,Caleb Bonemer,27,200,2,00,True,8,CF,Outfielder
+867723,2026-10-06,away,Glendale Desert Dogs,804560,Charles Davalan,6,300,3,00,True,4,2B,Second Base
+867723,2026-10-06,away,Glendale Desert Dogs,827665,Dillon Lewis,22,400,4,00,True,7,LF,Outfielder
+867723,2026-10-06,away,Glendale Desert Dogs,808234,Eduardo Quintero,16,500,5,00,True,10,DH,Designated Hitter
+867723,2026-10-06,away,Glendale Desert Dogs,701333,Colby Shelton,12,600,6,00,True,5,3B,Third Base
+867723,2026-10-06,away,Glendale Desert Dogs,826928,Owen Carey,9,700,7,00,True,9,RF,Outfielder
+867723,2026-10-06,away,Glendale Desert Dogs,686944,Grant Magill,20,800,8,00,True,2,C,Catcher
+867723,2026-10-06,away,Glendale Desert Dogs,695484,Anson Aroz,77,900,9,00,True,3,1B,First Base
+867723,2026-10-06,home,Mesa Solar Sox,834404,Jake Cook,9,100,1,00,True,8,CF,Outfielder
+867723,2026-10-06,home,Mesa Solar Sox,696286,Davis Diaz,8,200,2,00,True,2,C,Catcher
+867723,2026-10-06,home,Mesa Solar Sox,702517,Mason White,5,300,3,00,True,6,SS,Shortstop
+867723,2026-10-06,home,Mesa Solar Sox,695301,Ryland Zaborowski,17,400,4,00,True,3,1B,First Base
+867723,2026-10-06,home,Mesa Solar Sox,814457,Jake Casey,4,500,5,00,True,9,RF,Outfielder
+867723,2026-10-06,home,Mesa Solar Sox,805801,Nazzan Zanetello,24,600,6,00,True,10,DH,Designated Hitter
+867723,2026-10-06,home,Mesa Solar Sox,829052,Breyson Guedez,18,700,7,00,True,7,LF,Outfielder
+867723,2026-10-06,home,Mesa Solar Sox,702995,Antonio Anderson,10,800,8,00,True,5,3B,Third Base
+867723,2026-10-06,home,Mesa Solar Sox,829040,Juan Cabada,16,900,9,00,True,4,2B,Second Base
