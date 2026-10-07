@@ -49,6 +49,8 @@
   .pitch-filter-chip { transition: opacity 0.15s; }
   .pitch-filter-chip.unavailable { opacity: 0.35; cursor: default; }
   .pitch-filter-chip.active { background: var(--tab-active); border-color: var(--tab-active); color: #fff; }
+  .pitch-filter-chip.active .oc-check { background: #fff; border-color: #fff; color: var(--tab-active); font-weight: 800; }
+  #filterRow .oc-multi { align-self: center; }
   .pitch-filter-chip.active .count { color: rgba(255,255,255,0.85); }
   .pitch-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
 
@@ -491,7 +493,8 @@
   let PITCHER_THROWS = 'R';
   let PITCH_COLORS = {}, PITCH_TINTS = {};
   let atBats = [], allPitches = [], typeCounts = {};
-  let activeFilter = 'ALL';
+  let activeTypes = [];      // pitch types selected; empty = all pitches
+  let typeMulti = false;     // false = pick one pitch type (click again to clear); true = tick several
   let activeOutcomes = [];   // empty = all results
   let multiMode = false;     // false = pick one result (default); true = tick several
   let ocOpen = false;
@@ -520,7 +523,7 @@
   // Pitches scoped by at-bat and pitch type only (the outcome dropdown is applied separately).
   function getTypeScopedPitches() {
     const base = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
-    return activeFilter === 'ALL' ? base : base.filter(p => p.type === activeFilter);
+    return activeTypes.length === 0 ? base : base.filter(p => activeTypes.includes(p.type));
   }
   function matchesOutcome(p) { return activeOutcomes.length === 0 || activeOutcomes.includes(markerKind(p.call)); }
   function outcomeLabels() { return activeOutcomes.map(k => (OUTCOME_OPTIONS.find(o => o[0] === k) || [0, k])[1]); }
@@ -601,16 +604,31 @@
       const label = t === 'ALL' ? 'All Pitches' : (PITCH_LABELS[t] || t || 'Unknown');
       const count = chipBase.filter(p => (t === 'ALL' || p.type === t) && matchesOutcome(p)).length;
       const dot = t === 'ALL' ? '' : `<span class="pitch-dot" style="background:${PITCH_COLORS[t]}"></span>`;
-      const unavailable = t !== 'ALL' && count === 0 && activeFilter !== t;
-      return `<button class="pitch-filter-chip${activeFilter === t ? ' active' : ''}${unavailable ? ' unavailable' : ''}" data-type="${t}"${unavailable ? ' disabled aria-disabled="true"' : ''}>${dot}${label} <span class="count">(${count})</span></button>`;
+      const isActive = t === 'ALL' ? activeTypes.length === 0 : activeTypes.includes(t);
+      const unavailable = t !== 'ALL' && count === 0 && !isActive;
+      const box = typeMulti && t !== 'ALL' ? `<span class="oc-check${isActive ? ' on' : ''}">${isActive ? '&#10003;' : ''}</span>` : '';
+      return `<button class="pitch-filter-chip${isActive ? ' active' : ''}${unavailable ? ' unavailable' : ''}" data-type="${t}"${unavailable ? ' disabled aria-disabled="true"' : ''}>${box}${dot}${label} <span class="count">(${count})</span></button>`;
     }).join('');
-    const dirty = activeFilter !== 'ALL' || activeOutcomes.length > 0 || multiMode || selectedAtBat !== null;
+    const multiBox = `<div class="oc-multi" id="typeMulti" role="checkbox" aria-checked="${typeMulti}"><span class="oc-check${typeMulti ? ' on' : ''}">${typeMulti ? '&#10003;' : ''}</span><span>Multiple Selections</span></div>`;
+    row.insertAdjacentHTML('beforeend', multiBox);
+    const dirty = activeTypes.length > 0 || activeOutcomes.length > 0 || multiMode || typeMulti || selectedAtBat !== null;
     row.insertAdjacentHTML('beforeend', `<button type="button" class="reset-filters${dirty ? '' : ' idle'}" id="resetFilters"${dirty ? '' : ' disabled'}>Reset Filters</button>`);
     document.getElementById('resetFilters').addEventListener('click', () => {
-      activeFilter = 'ALL'; activeOutcomes = []; multiMode = false; selectedAtBat = null; renderAll();
+      activeTypes = []; activeOutcomes = []; multiMode = false; typeMulti = false; selectedAtBat = null; renderAll();
+    });
+    document.getElementById('typeMulti').addEventListener('click', () => {
+      typeMulti = !typeMulti;
+      if (!typeMulti && activeTypes.length > 1) activeTypes = [activeTypes[0]];
+      renderAll();
     });
     row.querySelectorAll('.pitch-filter-chip').forEach(btn => {
-      btn.addEventListener('click', () => { activeFilter = btn.dataset.type; renderAll(); });
+      btn.addEventListener('click', () => {
+        const t = btn.dataset.type;
+        if (t === 'ALL') activeTypes = [];
+        else if (typeMulti) activeTypes = activeTypes.includes(t) ? activeTypes.filter(x => x !== t) : [...activeTypes, t];
+        else activeTypes = activeTypes.length === 1 && activeTypes[0] === t ? [] : [t];   // click again to go back to all pitches
+        renderAll();
+      });
     });
   }
 
@@ -643,7 +661,7 @@
   function renderAtBats() {
     const container = document.getElementById('abContainer');
     container.innerHTML = atBats.map((ab, abIdx) => {
-      const visiblePitches = ab.pitches.map((p, i) => ({ p, i })).filter(({ p }) => activeFilter === 'ALL' || p.type === activeFilter);
+      const visiblePitches = ab.pitches.map((p, i) => ({ p, i })).filter(({ p }) => activeTypes.length === 0 || activeTypes.includes(p.type));
       if (visiblePitches.length === 0) return '';
       const rows = visiblePitches.map(({ p, i }) => {
         const callType = classifyCall(p.call);
@@ -701,7 +719,7 @@
     const pitches = getTypeScopedPitches();
     const scopeLabel = document.getElementById('heatmapScope');
     const scopeParts = [];
-    if (activeFilter !== 'ALL') scopeParts.push(PITCH_LABELS[activeFilter] || activeFilter);
+    if (activeTypes.length) scopeParts.push(activeTypes.map(t => PITCH_LABELS[t] || t).join(' + '));
     if (activeOutcomes.length) scopeParts.push(outcomeLabels().join(' + '));
     if (selectedAtBat !== null) scopeParts.push(`${atBats[selectedAtBat].inningLabel} at-bat`);
     scopeLabel.innerHTML = scopeParts.length
@@ -989,8 +1007,8 @@
     s += `<text transform="translate(14 ${cy}) rotate(-90)" ${lbl}>SIDE SPIN</text><text transform="translate(${W - 14} ${cy}) rotate(90)" ${lbl}>SIDE SPIN</text>`;
     const pitches = getScopedPitches().filter(p => p.spinDirection !== null);
     const types = Array.from(new Set(pitches.map(p => p.type)));
-    // Individual pitches only appear once a single pitch type is selected; the default is averages only.
-    if (activeFilter !== 'ALL') {
+    // Individual pitches only appear once a pitch type is selected; the default is averages only.
+    if (activeTypes.length) {
       pitches.forEach(p => {
         s += dialArrow(cx, cy, p.spinDirection, R * 0.88, PITCH_COLORS[p.type] || '#888', 1.6, 0.3, `${PITCH_LABELS[p.type] || p.type} · ${p.spinDirection}° (${spinClock(p.spinDirection)}) · ${p.spin !== null ? p.spin + ' rpm' : 'N/A'}`);
       });
@@ -1007,7 +1025,7 @@
     document.getElementById('dialLegend').innerHTML = avgs.map(a =>
       `<div class="mv-legend-item"><span class="mv-legend-swatch" style="background:${PITCH_COLORS[a.t] || '#888'};"></span><span class="mv-legend-text"><div class="mv-legend-type">${PITCH_LABELS[a.t] || a.t}</div><div class="mv-legend-avg">avg ${Math.round(a.d)}&deg; &middot; ${spinClock(a.d)}</div></span></div>`).join('');
     const note = document.getElementById('dialNote');
-    if (note) note.textContent = activeFilter === 'ALL' ? "Average spin direction of each pitch type. Select a pitch type to see every pitch behind its average." : 'Dark arrow is the average; faded arrows are the individual pitches.';
+    if (note) note.textContent = activeTypes.length === 0 ? "Average spin direction of each pitch type. Select a pitch type to see every pitch behind its average." : 'Dark arrow is the average; faded arrows are the individual pitches.';
   }
 
   let CHART_SLIDES = ['Pitch Location', 'Pitch Movement', 'Release Point'];
