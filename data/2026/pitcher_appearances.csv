@@ -133,3 +133,15 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867723,2026-10-06,home,Mesa Solar Sox,701839,Jay Dill,4,False
 867723,2026-10-06,home,Mesa Solar Sox,702255,Brandon Barriera,5,False
 867723,2026-10-06,home,Mesa Solar Sox,695761,Kenya Huggins,6,False
+867722,2026-10-07,away,Peoria Javelinas,826466,Winyer Chourio,1,True
+867722,2026-10-07,away,Peoria Javelinas,681064,Calvin Schapira,2,False
+867722,2026-10-07,away,Peoria Javelinas,683165,Joseph King,3,False
+867722,2026-10-07,away,Peoria Javelinas,828594,Michael Watson,4,False
+867722,2026-10-07,away,Peoria Javelinas,800212,Francis Peña,5,False
+867722,2026-10-07,away,Peoria Javelinas,834596,Kailen Hamson,6,False
+867722,2026-10-07,home,Scottsdale Scorpions,825095,Drake George,1,True
+867722,2026-10-07,home,Scottsdale Scorpions,803094,Win Scott,2,False
+867722,2026-10-07,home,Scottsdale Scorpions,828603,Logan Berrier,3,False
+867722,2026-10-07,home,Scottsdale Scorpions,807823,Jank Pichardo,4,False
+867722,2026-10-07,home,Scottsdale Scorpions,813796,Preston Howey,5,False
+867722,2026-10-07,home,Scottsdale Scorpions,683988,Railin Perez,6,False

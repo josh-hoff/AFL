@@ -211,3 +211,25 @@ game_pk,date,team_side,team_name,player_id,player_name,jersey_number,batting_ord
 867723,2026-10-06,home,Mesa Solar Sox,829052,Breyson Guedez,18,700,7,00,True,7,LF,Outfielder
 867723,2026-10-06,home,Mesa Solar Sox,702995,Antonio Anderson,10,800,8,00,True,5,3B,Third Base
 867723,2026-10-06,home,Mesa Solar Sox,829040,Juan Cabada,16,900,9,00,True,4,2B,Second Base
+867722,2026-10-07,away,Peoria Javelinas,806191,Tai Peete,22,100,1,00,True,8,CF,Outfielder
+867722,2026-10-07,away,Peoria Javelinas,702610,Ike Irish,10,200,2,00,True,9,RF,Outfielder
+867722,2026-10-07,away,Peoria Javelinas,694806,Brandon Eike,4,201,2,01,False,7,LF,Outfielder
+867722,2026-10-07,away,Peoria Javelinas,803679,Sammy Hernandez,7,300,3,00,True,3,1B,First Base
+867722,2026-10-07,away,Peoria Javelinas,800176,Carlos Sanchez,12,400,4,00,True,6,SS,Shortstop
+867722,2026-10-07,away,Peoria Javelinas,695722,Boston Smith,37,500,5,00,True,10,DH,Designated Hitter
+867722,2026-10-07,away,Peoria Javelinas,801629,Cade McGee,8,600,6,00,True,5,3B,Third Base
+867722,2026-10-07,away,Peoria Javelinas,691398,Yerlin Confidan,55,700,7,00,True,9,RF,Outfielder
+867722,2026-10-07,away,Peoria Javelinas,829210,Ty Harvey,2,800,8,00,True,2,C,Catcher
+867722,2026-10-07,away,Peoria Javelinas,822578,Brandon Butterworth,6,801,8,01,False,12,PR,Pinch Runner
+867722,2026-10-07,away,Peoria Javelinas,813664,Justin DeCriscio,5,900,9,00,True,4,2B,Second Base
+867722,2026-10-07,home,Scottsdale Scorpions,800614,Bryce Rainer,9,100,1,00,True,6,SS,Shortstop
+867722,2026-10-07,home,Scottsdale Scorpions,813796,Preston Howey,19,101,1,01,False,1,P,Pitcher
+867722,2026-10-07,home,Scottsdale Scorpions,683988,Railin Perez,22,102,1,02,False,1,P,Pitcher
+867722,2026-10-07,home,Scottsdale Scorpions,807083,Nathan Flewelling,27,200,2,00,True,2,C,Catcher
+867722,2026-10-07,home,Scottsdale Scorpions,702518,Jett Williams,46,300,3,00,True,5,3B,Third Base
+867722,2026-10-07,home,Scottsdale Scorpions,814307,Zyhir Hope,7,400,4,00,True,7,LF,Outfielder
+867722,2026-10-07,home,Scottsdale Scorpions,702607,Dakota Jordan,12,500,5,00,True,8,CF,Outfielder
+867722,2026-10-07,home,Scottsdale Scorpions,815520,Braylon Payne,40,600,6,00,True,9,RF,Outfielder
+867722,2026-10-07,home,Scottsdale Scorpions,800724,Eric Bitonti,25,700,7,00,True,3,1B,First Base
+867722,2026-10-07,home,Scottsdale Scorpions,809763,Kaeden Kent,5,800,8,00,True,6,SS,Shortstop
+867722,2026-10-07,home,Scottsdale Scorpions,807275,Dalton Wentz,10,900,9,00,True,4,2B,Second Base
