@@ -79,8 +79,8 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,826466,Winyer Chourio,Peoria Javelinas,2026-10-07,Scottsdale Scorpions,False,False,867722,R,P,3.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,691398,Yerlin Confidan,Peoria Javelinas,2026-10-04,Mesa Solar Sox,False,False,867716,R,RF,8.0,2,0,0,0,2,1.000,0,0,2.00,2.25
 2026,691398,Yerlin Confidan,Peoria Javelinas,2026-10-05,Salt River Rafters,False,False,867727,R,RF,8.0,1,0,0,0,1,1.000,0,0,1.00,1.13
-2026,691398,Yerlin Confidan,Peoria Javelinas,2026-10-07,Scottsdale Scorpions,False,False,867722,R,RF,1.0,0,0,0,0,0,1.000,0,0,0.00,0.00
 2026,691398,Yerlin Confidan,Peoria Javelinas,2026-10-07,Scottsdale Scorpions,False,False,867722,R,LF,7.0,0,0,0,0,0,1.000,0,0,0.00,0.00
+2026,691398,Yerlin Confidan,Peoria Javelinas,2026-10-07,Scottsdale Scorpions,False,False,867722,R,RF,1.0,0,0,0,0,0,1.000,0,0,0.00,0.00
 2026,677354,Alex Williams,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,P,3.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,695484,Anson Aroz,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,C,9.0,10,1,0,0,11,1.000,0,0,11.00,11.00
 2026,695484,Anson Aroz,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,1B,10.0,6,0,0,0,6,1.000,1,0,6.00,5.40

@@ -1518,7 +1518,7 @@
                 "pct": ".400"
               },
               "splitSquad": false,
-              "seriesNumber": 7
+              "seriesNumber": 6
             },
             "home": {
               "team": {
@@ -1533,7 +1533,7 @@
                 "pct": ".250"
               },
               "splitSquad": false,
-              "seriesNumber": 7
+              "seriesNumber": 6
             }
           },
           "venue": {
@@ -6474,7 +6474,7 @@
                 "pct": ".800"
               },
               "splitSquad": false,
-              "seriesNumber": 26
+              "seriesNumber": 28
             },
             "home": {
               "team": {
@@ -6489,7 +6489,7 @@
                 "pct": ".600"
               },
               "splitSquad": false,
-              "seriesNumber": 27
+              "seriesNumber": 28
             }
           },
           "venue": {
