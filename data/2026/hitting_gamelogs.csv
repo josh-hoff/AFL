@@ -3,7 +3,7 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,801932,Alex McCoy,Peoria Javelinas,2026-10-04,Mesa Solar Sox,False,False,867716,R,1,2,0,0,0,0,0,1,0,0,0,1,1,0,0,.250,.500,1.000,1.500,.---,0,0,0,0,0,1,0,10
 2026,801932,Alex McCoy,Peoria Javelinas,2026-10-05,Salt River Rafters,False,False,867727,R,4,5,1,0,0,0,1,3,1,1,0,0,0,2,0,.250,.455,.625,1.080,.250,1,2,0,0,0,2,0,12
 2026,801932,Alex McCoy,Peoria Javelinas,2026-10-08,Glendale Desert Dogs,False,True,867721,R,4,5,0,0,0,0,0,1,0,1,0,2,0,0,0,.167,.375,.417,.792,.000,0,2,0,0,0,3,0,15
-2026,801932,Alex McCoy,Peoria Javelinas,2026-10-09,Surprise Saguaros,False,True,867704,R,5,5,2,1,0,0,3,0,2,0,0,1,0,2,0,.235,.381,.471,.852,.500,0,2,0,0,0,4,0,16
+2026,801932,Alex McCoy,Peoria Javelinas,2026-10-09,Surprise Saguaros,False,True,867704,R,4,5,2,1,0,0,3,0,2,0,0,1,0,2,0,.250,.381,.500,.881,.500,0,2,0,0,1,3,0,16
 2026,695722,Boston Smith,Peoria Javelinas,2026-10-04,Mesa Solar Sox,False,False,867716,R,4,4,1,0,0,0,1,0,0,0,0,2,0,0,0,.250,.250,.250,.500,.500,1,0,0,0,0,2,0,19
 2026,695722,Boston Smith,Peoria Javelinas,2026-10-05,Salt River Rafters,False,False,867727,R,5,5,1,0,0,0,1,0,1,0,0,2,0,0,0,.222,.222,.222,.444,.333,1,1,0,0,0,5,0,20
 2026,695722,Boston Smith,Peoria Javelinas,2026-10-07,Scottsdale Scorpions,False,False,867722,R,4,4,0,0,0,0,0,0,0,0,0,2,0,0,0,.154,.154,.154,.308,.000,2,0,0,0,0,1,0,15

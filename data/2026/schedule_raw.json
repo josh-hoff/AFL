@@ -2155,7 +2155,7 @@
                 "pct": ".200"
               },
               "splitSquad": false,
-              "seriesNumber": 8
+              "seriesNumber": 9
             },
             "home": {
               "team": {
@@ -2545,7 +2545,7 @@
                 "pct": ".200"
               },
               "splitSquad": false,
-              "seriesNumber": 11
+              "seriesNumber": 10
             },
             "home": {
               "team": {
@@ -2634,7 +2634,7 @@
                 "pct": ".800"
               },
               "splitSquad": false,
-              "seriesNumber": 10
+              "seriesNumber": 11
             }
           },
           "venue": {
@@ -2718,7 +2718,7 @@
                 "pct": ".200"
               },
               "splitSquad": false,
-              "seriesNumber": 12
+              "seriesNumber": 11
             }
           },
           "venue": {
@@ -3083,7 +3083,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 13
+              "seriesNumber": 10
             },
             "home": {
               "team": {
@@ -3098,7 +3098,7 @@
                 "pct": ".800"
               },
               "splitSquad": false,
-              "seriesNumber": 13
+              "seriesNumber": 11
             }
           },
           "venue": {
@@ -3120,8 +3120,8 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
-          "seriesGameNumber": 1,
+          "gamesInSeries": 2,
+          "seriesGameNumber": 2,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
           "ifNecessary": "N",
@@ -3488,7 +3488,7 @@
                 "pct": ".800"
               },
               "splitSquad": false,
-              "seriesNumber": 15
+              "seriesNumber": 13
             }
           },
           "venue": {
@@ -3510,7 +3510,7 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
+          "gamesInSeries": 2,
           "seriesGameNumber": 1,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
@@ -4095,7 +4095,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 18
+              "seriesNumber": 17
             },
             "home": {
               "team": {
@@ -4110,7 +4110,7 @@
                 "pct": ".833"
               },
               "splitSquad": false,
-              "seriesNumber": 18
+              "seriesNumber": 16
             }
           },
           "venue": {
@@ -4132,8 +4132,8 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
-          "seriesGameNumber": 1,
+          "gamesInSeries": 2,
+          "seriesGameNumber": 2,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
           "ifNecessary": "N",
@@ -4401,7 +4401,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 18
+              "seriesNumber": 19
             },
             "home": {
               "team": {
@@ -4416,7 +4416,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 16
+              "seriesNumber": 19
             }
           },
           "venue": {
@@ -4574,7 +4574,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 20
+              "seriesNumber": 17
             }
           },
           "venue": {
@@ -4596,7 +4596,7 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
+          "gamesInSeries": 2,
           "seriesGameNumber": 1,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
@@ -4707,7 +4707,7 @@
                 "pct": ".833"
               },
               "splitSquad": false,
-              "seriesNumber": 20
+              "seriesNumber": 18
             },
             "home": {
               "team": {
@@ -4722,7 +4722,7 @@
                 "pct": ".800"
               },
               "splitSquad": false,
-              "seriesNumber": 20
+              "seriesNumber": 17
             }
           },
           "venue": {
@@ -4791,7 +4791,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 21
+              "seriesNumber": 17
             },
             "home": {
               "team": {
@@ -4828,8 +4828,8 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
-          "seriesGameNumber": 1,
+          "gamesInSeries": 2,
+          "seriesGameNumber": 2,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
           "ifNecessary": "N",
@@ -4939,7 +4939,7 @@
                 "pct": ".200"
               },
               "splitSquad": false,
-              "seriesNumber": 21
+              "seriesNumber": 20
             },
             "home": {
               "team": {
@@ -4954,7 +4954,7 @@
                 "pct": ".833"
               },
               "splitSquad": false,
-              "seriesNumber": 21
+              "seriesNumber": 19
             }
           },
           "venue": {
@@ -5255,7 +5255,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 23
+              "seriesNumber": 19
             },
             "home": {
               "team": {
@@ -5292,7 +5292,7 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
+          "gamesInSeries": 2,
           "seriesGameNumber": 1,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
@@ -5329,7 +5329,7 @@
                 "pct": ".833"
               },
               "splitSquad": false,
-              "seriesNumber": 23
+              "seriesNumber": 21
             },
             "home": {
               "team": {
@@ -5344,7 +5344,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 23
+              "seriesNumber": 22
             }
           },
           "venue": {
@@ -5403,7 +5403,7 @@
                 "pct": ".200"
               },
               "splitSquad": false,
-              "seriesNumber": 21
+              "seriesNumber": 23
             },
             "home": {
               "team": {
@@ -5418,7 +5418,7 @@
                 "pct": ".800"
               },
               "splitSquad": false,
-              "seriesNumber": 19
+              "seriesNumber": 23
             }
           },
           "venue": {
@@ -5440,8 +5440,8 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 2,
-          "seriesGameNumber": 2,
+          "gamesInSeries": 1,
+          "seriesGameNumber": 1,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
           "ifNecessary": "N",
@@ -5635,7 +5635,7 @@
                 "pct": ".800"
               },
               "splitSquad": false,
-              "seriesNumber": 24
+              "seriesNumber": 20
             },
             "home": {
               "team": {
@@ -5650,7 +5650,7 @@
                 "pct": ".833"
               },
               "splitSquad": false,
-              "seriesNumber": 24
+              "seriesNumber": 22
             }
           },
           "venue": {
@@ -5951,7 +5951,7 @@
                 "pct": ".200"
               },
               "splitSquad": false,
-              "seriesNumber": 26
+              "seriesNumber": 24
             },
             "home": {
               "team": {
@@ -5966,7 +5966,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 26
+              "seriesNumber": 21
             }
           },
           "venue": {
@@ -6025,7 +6025,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 25
+              "seriesNumber": 26
             },
             "home": {
               "team": {
@@ -6099,7 +6099,7 @@
                 "pct": ".833"
               },
               "splitSquad": false,
-              "seriesNumber": 26
+              "seriesNumber": 24
             },
             "home": {
               "team": {
@@ -6114,7 +6114,7 @@
                 "pct": ".800"
               },
               "splitSquad": false,
-              "seriesNumber": 26
+              "seriesNumber": 22
             }
           },
           "venue": {
@@ -6183,7 +6183,7 @@
                 "pct": ".200"
               },
               "splitSquad": false,
-              "seriesNumber": 27
+              "seriesNumber": 25
             },
             "home": {
               "team": {
@@ -6257,7 +6257,7 @@
                 "pct": ".833"
               },
               "splitSquad": false,
-              "seriesNumber": 27
+              "seriesNumber": 25
             },
             "home": {
               "team": {
@@ -6272,7 +6272,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 27
+              "seriesNumber": 22
             }
           },
           "venue": {
@@ -6728,7 +6728,7 @@
                 "pct": ".800"
               },
               "splitSquad": false,
-              "seriesNumber": 29
+              "seriesNumber": 25
             },
             "home": {
               "team": {
@@ -6743,7 +6743,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 29
+              "seriesNumber": 28
             }
           },
           "venue": {
