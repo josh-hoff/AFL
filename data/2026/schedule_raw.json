@@ -2165,7 +2165,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 9
+              "seriesNumber": 8
             },
             "home": {
               "team": {
@@ -2481,7 +2481,7 @@
                 "pct": ".429"
               },
               "splitSquad": false,
-              "seriesNumber": 11
+              "seriesNumber": 9
             },
             "home": {
               "team": {
@@ -2555,7 +2555,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 10
+              "seriesNumber": 11
             },
             "home": {
               "team": {
@@ -2787,7 +2787,7 @@
                 "pct": ".833"
               },
               "splitSquad": false,
-              "seriesNumber": 12
+              "seriesNumber": 11
             },
             "home": {
               "team": {
@@ -2802,7 +2802,7 @@
                 "pct": ".429"
               },
               "splitSquad": false,
-              "seriesNumber": 12
+              "seriesNumber": 10
             }
           },
           "venue": {
@@ -2824,7 +2824,7 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
+          "gamesInSeries": 2,
           "seriesGameNumber": 1,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
@@ -3325,7 +3325,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 13
+              "seriesNumber": 14
             },
             "home": {
               "team": {
@@ -3340,7 +3340,7 @@
                 "pct": ".833"
               },
               "splitSquad": false,
-              "seriesNumber": 12
+              "seriesNumber": 14
             }
           },
           "venue": {
@@ -3656,7 +3656,7 @@
                 "pct": ".429"
               },
               "splitSquad": false,
-              "seriesNumber": 16
+              "seriesNumber": 13
             }
           },
           "venue": {
@@ -3962,7 +3962,7 @@
                 "pct": ".714"
               },
               "splitSquad": false,
-              "seriesNumber": 17
+              "seriesNumber": 16
             }
           },
           "venue": {
@@ -3984,7 +3984,7 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
+          "gamesInSeries": 2,
           "seriesGameNumber": 1,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
@@ -6035,7 +6035,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 26
+              "seriesNumber": 25
             },
             "home": {
               "team": {
