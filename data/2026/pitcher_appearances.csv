@@ -221,3 +221,22 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867717,2026-10-09,home,Scottsdale Scorpions,800427,Jose Meneses,5,False
 867717,2026-10-09,home,Scottsdale Scorpions,804670,Ryan Birchard,6,False
 867717,2026-10-09,home,Scottsdale Scorpions,703142,Andy Rodriguez,7,False
+867705,2026-10-10,away,Peoria Javelinas,807748,Kannon Kemp,1,True
+867705,2026-10-10,away,Peoria Javelinas,800017,Jose Montero,2,False
+867705,2026-10-10,away,Peoria Javelinas,694832,Cody Adcock,3,False
+867705,2026-10-10,away,Peoria Javelinas,702751,Jose Geraldo,4,False
+867705,2026-10-10,away,Peoria Javelinas,695787,Trent Hodgdon,5,False
+867705,2026-10-10,home,Mesa Solar Sox,805255,Dominick Reid,1,True
+867705,2026-10-10,home,Mesa Solar Sox,701791,Caden Vire,2,False
+867705,2026-10-10,home,Mesa Solar Sox,701329,Luis Rujano,3,False
+867705,2026-10-10,home,Mesa Solar Sox,687991,Jared Johnson,4,False
+867706,2026-10-10,away,Scottsdale Scorpions,836172,Peyton Niksch,1,True
+867706,2026-10-10,away,Scottsdale Scorpions,843821,Maddox Long,2,False
+867706,2026-10-10,away,Scottsdale Scorpions,806711,Yereny Teus,3,False
+867706,2026-10-10,away,Scottsdale Scorpions,702904,Cesar De Jesus,4,False
+867706,2026-10-10,home,Salt River Rafters,703186,Jarlin Susana,1,True
+867706,2026-10-10,home,Salt River Rafters,813409,Joe Ariola,2,False
+867706,2026-10-10,home,Salt River Rafters,815065,Hunter Mann,3,False
+867706,2026-10-10,home,Salt River Rafters,682625,Antonio Gomez,4,False
+867706,2026-10-10,home,Salt River Rafters,801842,Fidel Ulloa,5,False
+867706,2026-10-10,home,Salt River Rafters,806070,Mack Estrada,6,False
