@@ -253,3 +253,5 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867707,2026-10-11,home,Surprise Saguaros,825100,Kevin Warunek,4,False
 867707,2026-10-11,home,Surprise Saguaros,681003,Andrew Walling,5,False
 867707,2026-10-11,home,Surprise Saguaros,807575,Cam Schuelke,6,False
+867708,2026-10-12,away,Glendale Desert Dogs,824624,Brooks Auger,1,True
+867708,2026-10-12,home,Scottsdale Scorpions,700280,Miguel Mendez,1,True
