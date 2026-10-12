@@ -141,6 +141,7 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,815792,Chase Harlan,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,1B,8.2,8,0,0,0,8,1.000,0,0,8.00,9.00
 2026,815792,Chase Harlan,Glendale Desert Dogs,2026-10-08,Peoria Javelinas,True,False,867721,R,1B,9.0,7,0,0,0,7,1.000,1,0,7.00,7.00
 2026,815792,Chase Harlan,Glendale Desert Dogs,2026-10-09,Salt River Rafters,False,False,867718,R,3B,8.0,1,2,0,0,3,1.000,0,0,3.00,3.38
+2026,815792,Chase Harlan,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,1B,8.2,11,2,1,0,14,.969,0,0,13.00,14.63
 2026,701808,Cody Morse,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,P,0.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,701808,Cody Morse,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,P,0.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,701808,Cody Morse,Glendale Desert Dogs,2026-10-09,Salt River Rafters,False,False,867718,R,P,0.2,0,0,0,0,0,.000,0,0,0.00,0.00
@@ -149,14 +150,17 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,701333,Colby Shelton,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,3B,1.2,0,0,0,0,0,1.000,0,0,0.00,0.00
 2026,701333,Colby Shelton,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,3B,10.0,1,1,0,0,2,1.000,0,0,2.00,1.80
 2026,701333,Colby Shelton,Glendale Desert Dogs,2026-10-09,Salt River Rafters,False,False,867718,R,1B,8.0,8,0,1,0,9,.958,2,0,8.00,9.00
+2026,701333,Colby Shelton,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,2B,3.2,1,0,0,0,1,.960,0,0,1.00,3.00
 2026,665993,Cristhian Tortosa,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,P,1.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,665993,Cristhian Tortosa,Glendale Desert Dogs,2026-10-09,Salt River Rafters,False,False,867718,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,827665,Dillon Lewis,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,LF,9.0,1,0,1,0,2,.500,0,0,1.00,1.00
 2026,827665,Dillon Lewis,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,CF,8.2,1,0,0,0,1,.667,0,0,1.00,1.13
 2026,827665,Dillon Lewis,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,LF,10.0,1,0,0,0,1,.750,0,0,1.00,0.90
 2026,827665,Dillon Lewis,Glendale Desert Dogs,2026-10-09,Salt River Rafters,False,False,867718,R,CF,8.0,0,0,0,0,0,.750,0,0,0.00,0.00
+2026,827665,Dillon Lewis,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,CF,8.2,3,0,0,0,3,.857,0,0,3.00,3.38
 2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,C,8.2,10,0,0,0,10,1.000,0,0,10.00,11.25
 2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-08,Peoria Javelinas,True,False,867721,R,C,9.0,10,0,0,0,10,1.000,0,0,10.00,10.00
+2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,C,8.2,5,1,0,0,6,1.000,0,0,6.00,6.75
 2026,808234,Eduardo Quintero,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,RF,9.0,2,0,0,0,2,1.000,0,0,2.00,2.00
 2026,808234,Eduardo Quintero,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,RF,8.2,5,0,0,0,5,1.000,0,0,5.00,5.63
 2026,808234,Eduardo Quintero,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,DH,0.0,0,0,0,0,0,1.000,0,0,0.00,-.--
@@ -172,34 +176,46 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,806061,Isaiah Drake,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,LF,8.2,1,0,0,0,1,1.000,0,0,1.00,1.13
 2026,806061,Isaiah Drake,Glendale Desert Dogs,2026-10-08,Peoria Javelinas,True,False,867721,R,DH,0.0,0,0,0,0,0,1.000,0,0,0.00,-.--
 2026,806061,Isaiah Drake,Glendale Desert Dogs,2026-10-09,Salt River Rafters,False,False,867718,R,DH,0.0,0,0,0,0,0,1.000,0,0,0.00,-.--
+2026,806061,Isaiah Drake,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,RF,8.2,1,0,0,0,1,1.000,0,0,1.00,1.13
 2026,703177,Jhonny Severino,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,3B,5.0,0,2,0,0,2,1.000,0,0,2.00,3.60
 2026,703177,Jhonny Severino,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,3B,7.0,0,1,0,0,1,1.000,0,0,1.00,1.29
 2026,703177,Jhonny Severino,Glendale Desert Dogs,2026-10-08,Peoria Javelinas,True,False,867721,R,3B,9.0,1,3,0,0,4,1.000,0,0,4.00,4.00
+2026,703177,Jhonny Severino,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,3B,8.2,2,1,0,0,3,1.000,0,0,3.00,3.38
 2026,702165,Jonathan Clark,Glendale Desert Dogs,2026-10-04,Scottsdale Scorpions,True,False,867730,R,P,2.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,702165,Jonathan Clark,Glendale Desert Dogs,2026-10-08,Peoria Javelinas,True,False,867721,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,808469,Logan Samuels,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,P,1.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,808469,Logan Samuels,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,P,1.2,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,808469,Logan Samuels,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,803183,Luke Fox,Glendale Desert Dogs,2026-10-04,Scottsdale Scorpions,True,False,867730,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,803183,Luke Fox,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,P,1.2,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,812363,Marlon Nieves,Glendale Desert Dogs,2026-10-04,Scottsdale Scorpions,True,False,867730,R,P,2.0,0,2,0,0,2,1.000,0,0,2.00,9.00
 2026,807187,Mathias LaCombe,Glendale Desert Dogs,2026-10-04,Scottsdale Scorpions,True,False,867730,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,807187,Mathias LaCombe,Glendale Desert Dogs,2026-10-08,Peoria Javelinas,True,False,867721,R,P,2.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,703637,Max Williams,Glendale Desert Dogs,2026-10-04,Scottsdale Scorpions,True,False,867730,R,LF,9.0,2,0,0,0,2,1.000,0,0,2.00,2.00
 2026,703637,Max Williams,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,DH,0.0,0,0,0,0,0,1.000,0,0,0.00,-.--
 2026,703637,Max Williams,Glendale Desert Dogs,2026-10-08,Peoria Javelinas,True,False,867721,R,LF,9.0,1,0,0,0,1,1.000,0,0,1.00,1.00
+2026,703637,Max Williams,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,LF,8.2,1,0,0,0,1,1.000,0,0,1.00,1.13
 2026,805315,Michael Walsh,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,P,2.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,805315,Michael Walsh,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,P,0.0,0,0,0,0,0,.000,0,0,0.00,-.--
 2026,805892,Nick Altermatt,Glendale Desert Dogs,2026-10-04,Scottsdale Scorpions,True,False,867730,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,805892,Nick Altermatt,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,P,0.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,805892,Nick Altermatt,Glendale Desert Dogs,2026-10-09,Salt River Rafters,False,False,867718,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,826928,Owen Carey,Glendale Desert Dogs,2026-10-04,Scottsdale Scorpions,True,False,867730,R,RF,9.0,2,0,0,0,2,1.000,0,0,2.00,2.00
 2026,826928,Owen Carey,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,RF,10.0,0,1,0,0,1,1.000,0,0,1.00,0.90
 2026,826928,Owen Carey,Glendale Desert Dogs,2026-10-09,Salt River Rafters,False,False,867718,R,RF,8.0,0,0,0,0,0,1.000,0,0,0.00,0.00
+2026,826928,Owen Carey,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,DH,0.0,0,0,0,0,0,1.000,0,0,0.00,-.--
 2026,813706,Owen Hackman,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,P,1.2,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,813706,Owen Hackman,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,P,1.0,0,0,1,1,1,.000,0,0,0.00,0.00
+2026,813706,Owen Hackman,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,P,2.0,1,1,0,0,2,.667,0,0,2.00,9.00
 2026,703670,Pierce George,Glendale Desert Dogs,2026-10-04,Scottsdale Scorpions,True,False,867730,R,P,0.2,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,802413,Sam Horn,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,802413,Sam Horn,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,802413,Sam Horn,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,P,1.0,0,2,0,0,2,1.000,0,0,2.00,18.00
+2026,815704,Samuel Carpio,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,P,1.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,703748,Tanner Bauman,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,P,0.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,703748,Tanner Bauman,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,P,2.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,703748,Tanner Bauman,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,P,1.2,1,0,0,0,1,1.000,0,0,1.00,9.00
+2026,816111,Tate Southisene,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,SS,5.0,0,0,1,0,1,.000,0,0,0.00,0.00
 2026,688306,Tristan Stevens,Glendale Desert Dogs,2026-10-09,Salt River Rafters,False,False,867718,R,P,0.2,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,679489,Tyler LaPorte,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,P,1.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,679489,Tyler LaPorte,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
@@ -208,6 +224,8 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,815608,Wyatt Sanford,Glendale Desert Dogs,2026-10-04,Scottsdale Scorpions,True,False,867730,R,SS,9.0,2,3,1,0,6,.900,0,0,5.00,5.00
 2026,815608,Wyatt Sanford,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,SS,10.0,2,3,0,0,5,.933,1,0,5.00,4.50
 2026,815608,Wyatt Sanford,Glendale Desert Dogs,2026-10-08,Peoria Javelinas,True,False,867721,R,SS,9.0,2,1,0,0,3,.944,1,0,3.00,3.00
+2026,815608,Wyatt Sanford,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,2B,5.0,0,3,0,0,3,.952,0,0,3.00,5.40
+2026,815608,Wyatt Sanford,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,SS,3.2,0,2,0,0,2,.957,0,0,2.00,6.00
 2026,805800,Zander Mueth,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,805800,Zander Mueth,Glendale Desert Dogs,2026-10-08,Peoria Javelinas,True,False,867721,R,P,0.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,802146,Aidan Major,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,P,3.0,1,0,0,0,1,1.000,0,0,1.00,3.00
@@ -216,10 +234,13 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,805795,Aidan Miller,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,3B,8.0,1,2,0,0,3,1.000,0,0,3.00,3.38
 2026,805795,Aidan Miller,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,DH,0.0,0,0,0,0,0,1.000,0,0,0.00,-.--
 2026,823330,Alejandro Chiquillo,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,P,3.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,823330,Alejandro Chiquillo,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,P,3.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,681003,Andrew Walling,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,681003,Andrew Walling,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,825412,Angeibel Gomez,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,RF,9.0,2,0,0,0,2,1.000,0,0,2.00,2.00
 2026,825412,Angeibel Gomez,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,RF,8.0,1,0,0,0,1,1.000,0,0,1.00,1.13
 2026,825412,Angeibel Gomez,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,RF,9.0,2,0,0,0,2,1.000,0,0,2.00,2.00
+2026,825412,Angeibel Gomez,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,LF,9.0,5,0,0,0,5,1.000,0,0,5.00,5.00
 2026,800169,Aroon Escobar,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,2B,9.0,1,4,0,0,5,1.000,1,0,5.00,5.00
 2026,800169,Aroon Escobar,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,3B,8.0,1,0,0,0,1,1.000,0,0,1.00,1.13
 2026,800169,Aroon Escobar,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,1B,9.0,5,0,0,0,5,1.000,0,0,5.00,5.00
@@ -227,9 +248,11 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,800051,Austin Charles,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,3B,4.0,0,2,1,1,3,.667,0,0,2.00,4.50
 2026,800051,Austin Charles,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,SS,8.0,4,2,0,0,6,.889,0,0,6.00,6.75
 2026,800051,Austin Charles,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,3B,9.0,1,0,0,0,1,.900,0,0,1.00,1.00
+2026,800051,Austin Charles,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,DH,0.0,0,0,0,0,0,.900,0,0,0.00,-.--
 2026,805951,Boston Baro,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,3B,5.0,0,1,0,0,1,1.000,0,0,1.00,1.80
 2026,805951,Boston Baro,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,2B,7.0,2,1,0,0,3,1.000,0,0,3.00,3.86
 2026,805951,Boston Baro,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,DH,0.0,0,0,0,0,0,1.000,0,0,0.00,-.--
+2026,805951,Boston Baro,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,3B,9.0,1,1,0,0,2,1.000,0,0,2.00,2.00
 2026,694858,Brendan Girton,Surprise Saguaros,2026-10-03,Scottsdale Scorpions,False,True,867732,R,P,0.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,694858,Brendan Girton,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,804871,Brooks Bryan,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,1B,9.0,12,0,0,0,12,1.000,1,0,12.00,12.00
@@ -238,18 +261,22 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,828202,Bruin Agbayani,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,2B,9.0,1,0,1,0,2,.700,0,0,1.00,1.00
 2026,828202,Bruin Agbayani,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,2B,1.0,0,0,0,0,0,.700,0,0,0.00,0.00
 2026,828202,Bruin Agbayani,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,2B,8.0,0,4,1,0,5,.733,0,0,4.00,4.50
+2026,828202,Bruin Agbayani,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,2B,9.0,1,4,0,0,5,.800,0,0,5.00,5.00
 2026,683349,Calvin Ziegler,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,683349,Calvin Ziegler,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,P,0.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,807575,Cam Schuelke,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,807575,Cam Schuelke,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,695517,Casey Cook,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,LF,9.0,0,0,1,1,1,.000,0,0,0.00,0.00
 2026,695517,Casey Cook,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,LF,8.0,4,0,0,0,4,.800,0,0,4.00,4.50
 2026,695517,Casey Cook,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,LF,9.0,0,0,0,0,0,.800,0,0,0.00,0.00
 2026,695573,Cole Mathis,Surprise Saguaros,2026-10-03,Scottsdale Scorpions,False,True,867732,R,1B,9.0,9,0,0,0,9,1.000,1,0,9.00,9.00
 2026,695573,Cole Mathis,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,1B,9.0,4,0,0,0,4,1.000,0,0,4.00,4.00
 2026,695573,Cole Mathis,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,1B,8.0,8,1,0,0,9,1.000,0,0,9.00,10.13
+2026,695573,Cole Mathis,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,1B,9.0,8,0,0,0,8,1.000,0,0,8.00,8.00
 2026,807276,Dante Nori,Surprise Saguaros,2026-10-03,Scottsdale Scorpions,False,True,867732,R,CF,9.0,2,0,0,0,2,1.000,0,0,2.00,2.00
 2026,807276,Dante Nori,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,RF,9.0,3,0,0,0,3,1.000,0,0,3.00,3.00
 2026,807276,Dante Nori,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,CF,8.0,2,0,0,0,2,1.000,0,0,2.00,2.25
+2026,807276,Dante Nori,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,RF,9.0,3,0,0,0,3,1.000,0,0,3.00,3.00
 2026,693732,Estibenzon Jimenez,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,693732,Estibenzon Jimenez,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,700924,Frank Mozzicato,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
@@ -260,12 +287,15 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,695037,J'Briell Easley,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,695037,J'Briell Easley,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,P,1.2,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,835375,Jacob Johnson,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,P,2.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,835375,Jacob Johnson,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,P,2.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,804966,Jesus Gamez,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,804966,Jesus Gamez,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,P,0.2,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,700985,Josh Hansell,Surprise Saguaros,2026-10-03,Scottsdale Scorpions,False,True,867732,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,700985,Josh Hansell,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,683149,Julian Brock,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,C,9.0,9,0,0,0,9,1.000,0,0,9.00,9.00
 2026,683149,Julian Brock,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,C,8.0,7,4,0,0,11,1.000,0,0,11.00,12.38
 2026,683149,Julian Brock,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,C,8.0,10,0,0,0,10,1.000,0,0,10.00,11.25
+2026,683149,Julian Brock,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,C,9.0,6,0,0,0,6,1.000,0,0,6.00,6.00
 2026,703610,Justin Lamkin,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,P,3.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,700176,Keegan Batka,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,700176,Keegan Batka,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,P,0.2,0,0,0,0,0,.000,0,0,0.00,0.00
@@ -273,6 +303,7 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,800607,Kehden Hettiger,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,C,9.0,12,0,0,0,12,.952,0,0,12.00,12.00
 2026,800607,Kehden Hettiger,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,C,9.0,15,0,1,1,16,.946,0,0,15.00,15.00
 2026,825100,Kevin Warunek,Surprise Saguaros,2026-10-06,Salt River Rafters,False,False,867724,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
+2026,825100,Kevin Warunek,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,815066,Kyle Scott,Surprise Saguaros,2026-10-03,Scottsdale Scorpions,False,True,867732,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,815066,Kyle Scott,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,702619,Luke Hill,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,DH,0.0,0,0,0,0,0,.000,0,0,0.00,-.--
@@ -284,6 +315,7 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,702265,Paxton Kling,Surprise Saguaros,2026-10-03,Scottsdale Scorpions,False,True,867732,R,RF,9.0,3,0,0,0,3,1.000,0,0,3.00,3.00
 2026,702265,Paxton Kling,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,CF,9.0,3,0,0,0,3,1.000,0,0,3.00,3.00
 2026,702265,Paxton Kling,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,RF,8.0,0,0,0,0,0,1.000,0,0,0.00,0.00
+2026,702265,Paxton Kling,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,CF,9.0,2,0,1,1,3,.889,0,0,2.00,2.00
 2026,807290,Peyton Prescott,Surprise Saguaros,2026-10-03,Scottsdale Scorpions,False,True,867732,R,P,1.2,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,807290,Peyton Prescott,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,P,1.1,0,1,0,0,1,1.000,0,0,1.00,9.00
 2026,823804,Ryan Dromboski,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,P,3.1,0,1,0,0,1,1.000,0,0,1.00,3.00
@@ -299,6 +331,7 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,806988,Welbyn Francisca,Surprise Saguaros,2026-10-03,Scottsdale Scorpions,False,True,867732,R,SS,9.0,2,2,0,0,4,1.000,1,0,4.00,4.00
 2026,806988,Welbyn Francisca,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,SS,9.0,0,2,0,0,2,1.000,0,0,2.00,2.00
 2026,806988,Welbyn Francisca,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,SS,8.0,0,1,0,0,1,1.000,0,0,1.00,1.13
+2026,806988,Welbyn Francisca,Surprise Saguaros,2026-10-11,Glendale Desert Dogs,True,True,867707,R,SS,9.0,1,0,0,0,1,1.000,0,0,1.00,1.00
 2026,805799,Zion Rose,Surprise Saguaros,2026-10-03,Scottsdale Scorpions,False,True,867732,R,LF,9.0,2,1,0,0,3,1.000,1,0,3.00,3.00
 2026,805799,Zion Rose,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,LF,9.0,4,0,0,0,4,1.000,0,0,4.00,4.00
 2026,805799,Zion Rose,Surprise Saguaros,2026-10-08,Scottsdale Scorpions,False,False,867719,R,LF,8.0,2,0,0,0,2,1.000,0,0,2.00,2.25
