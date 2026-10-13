@@ -254,4 +254,12 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867707,2026-10-11,home,Surprise Saguaros,681003,Andrew Walling,5,False
 867707,2026-10-11,home,Surprise Saguaros,807575,Cam Schuelke,6,False
 867708,2026-10-12,away,Glendale Desert Dogs,824624,Brooks Auger,1,True
+867708,2026-10-12,away,Glendale Desert Dogs,701808,Cody Morse,2,False
+867708,2026-10-12,away,Glendale Desert Dogs,805800,Zander Mueth,3,False
+867708,2026-10-12,away,Glendale Desert Dogs,827610,Brandon Cain,4,False
+867708,2026-10-12,away,Glendale Desert Dogs,665993,Cristhian Tortosa,5,False
 867708,2026-10-12,home,Scottsdale Scorpions,700280,Miguel Mendez,1,True
+867708,2026-10-12,home,Scottsdale Scorpions,837584,Jalen Evans,2,False
+867708,2026-10-12,home,Scottsdale Scorpions,825095,Drake George,3,False
+867708,2026-10-12,home,Scottsdale Scorpions,813796,Preston Howey,4,False
+867708,2026-10-12,home,Scottsdale Scorpions,807823,Jank Pichardo,5,False

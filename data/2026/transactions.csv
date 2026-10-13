@@ -178,13 +178,12 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Salt River Rafters,2026-10-01,695494,Kevin Bazzell,ASG,Assigned,,Salt River Rafters,C Kevin Bazzell assigned to Salt River Rafters.
 2026,Salt River Rafters,2026-10-12,806992,Enrique Jimenez,ASG,Assigned,,Salt River Rafters,C Enrique Jimenez assigned to Salt River Rafters.
 2026,Scottsdale Scorpions,2026-09-15,701592,Luke Davis,ASG,Assigned,,Scottsdale Scorpions,C Luke Davis assigned to Scottsdale Scorpions.
-2026,Scottsdale Scorpions,2026-09-15,804670,Ryan Birchard,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Ryan Birchard.
+2026,Scottsdale Scorpions,2026-09-15,828603,Logan Berrier,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Logan Berrier.
 2026,Scottsdale Scorpions,2026-09-15,702904,Cesar De Jesus,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Cesar De Jesus.
 2026,Scottsdale Scorpions,2026-09-15,837584,Jalen Evans,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Jalen Evans.
 2026,Scottsdale Scorpions,2026-09-15,814374,Francisco Frias,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Francisco Frias.
 2026,Scottsdale Scorpions,2026-09-15,815218,Alexander Fuentes,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Alexander Fuentes.
 2026,Scottsdale Scorpions,2026-09-15,825095,Drake George,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Drake George from the 60-day injured list.
-2026,Scottsdale Scorpions,2026-09-15,683988,Railin Perez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Railin Perez.
 2026,Scottsdale Scorpions,2026-09-15,806441,Nehomar Ochoa Jr.,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Nehomar Ochoa Jr. from the 60-day injured list.
 2026,Scottsdale Scorpions,2026-09-15,804911,Brendan Summerhill,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Brendan Summerhill.
 2026,Scottsdale Scorpions,2026-09-15,815520,Braylon Payne,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Braylon Payne.
@@ -204,9 +203,12 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Scottsdale Scorpions,2026-09-15,700800,Darien Smith,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Darien Smith.
 2026,Scottsdale Scorpions,2026-09-15,803094,Win Scott,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Win Scott.
 2026,Scottsdale Scorpions,2026-09-15,678495,Randy Rodríguez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Randy Rodríguez from the 60-day injured list.
+2026,Scottsdale Scorpions,2026-09-15,805694,Juan Bello,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Juan Bello from the 60-day injured list.
+2026,Scottsdale Scorpions,2026-09-15,804670,Ryan Birchard,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Ryan Birchard.
 2026,Scottsdale Scorpions,2026-09-15,703142,Andy Rodriguez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Andy Rodriguez.
 2026,Scottsdale Scorpions,2026-09-15,808350,Joshua Quezada,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Joshua Quezada.
 2026,Scottsdale Scorpions,2026-09-15,807823,Jank Pichardo,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Jank Pichardo.
+2026,Scottsdale Scorpions,2026-09-15,683988,Railin Perez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Railin Perez.
 2026,Scottsdale Scorpions,2026-09-15,843821,Maddox Long,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Maddox Long.
 2026,Scottsdale Scorpions,2026-09-15,823650,Miqueas Mercedes,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Miqueas Mercedes.
 2026,Scottsdale Scorpions,2026-09-15,813796,Preston Howey,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Preston Howey.
@@ -214,17 +216,13 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Scottsdale Scorpions,2026-09-15,700280,Miguel Mendez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Miguel Mendez.
 2026,Scottsdale Scorpions,2026-09-15,687189,Marcus Johnson,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Marcus Johnson.
 2026,Scottsdale Scorpions,2026-09-15,690972,Joey Dixon,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Joey Dixon from the 60-day injured list.
-2026,Scottsdale Scorpions,2026-09-15,805694,Juan Bello,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Juan Bello from the 60-day injured list.
-2026,Scottsdale Scorpions,2026-09-15,828603,Logan Berrier,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Logan Berrier.
-2026,Scottsdale Scorpions,2026-09-28,836172,Peyton Niksch,ASG,Assigned,,Scottsdale Scorpions,RHP Peyton Niksch assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-09-28,702518,Jett Williams,ASG,Assigned,,Scottsdale Scorpions,SS Jett Williams assigned to Scottsdale Scorpions.
+2026,Scottsdale Scorpions,2026-09-28,836172,Peyton Niksch,ASG,Assigned,,Scottsdale Scorpions,RHP Peyton Niksch assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-10-02,802105,Yeriel Santos,ASG,Assigned,,Scottsdale Scorpions,RHP Yeriel Santos assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-10-03,807726,John Peck,ASG,Assigned,,Scottsdale Scorpions,SS John Peck assigned to Scottsdale Scorpions.
 2026,Surprise Saguaros,2026-09-15,806522,Irving Cota,ASG,Assigned,,Surprise Saguaros,RHP Irving Cota assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-15,800607,Kehden Hettiger,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated C Kehden Hettiger from the 7-day injured list.
 2026,Surprise Saguaros,2026-09-15,805799,Zion Rose,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated CF Zion Rose.
 2026,Surprise Saguaros,2026-09-15,695517,Casey Cook,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Casey Cook.
-2026,Surprise Saguaros,2026-09-15,805951,Boston Baro,ASG,Assigned,,Surprise Saguaros,SS Boston Baro assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-15,800169,Aroon Escobar,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Aroon Escobar.
 2026,Surprise Saguaros,2026-09-15,807276,Dante Nori,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Dante Nori.
 2026,Surprise Saguaros,2026-09-15,702265,Paxton Kling,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Paxton Kling.
@@ -261,7 +259,9 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Surprise Saguaros,2026-09-15,702126,Aaron Davenport,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Aaron Davenport from the 60-day injured list.
 2026,Surprise Saguaros,2026-09-15,823330,Alejandro Chiquillo,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Alejandro Chiquillo.
 2026,Surprise Saguaros,2026-09-15,700176,Keegan Batka,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Keegan Batka.
-2026,Surprise Saguaros,2026-09-28,806964,Sebastian Walcott,ASG,Assigned,,Surprise Saguaros,DH Sebastian Walcott assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-28,805795,Aidan Miller,ASG,Assigned,,Surprise Saguaros,SS Aidan Miller assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-15,800607,Kehden Hettiger,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated C Kehden Hettiger from the 7-day injured list.
+2026,Surprise Saguaros,2026-09-15,805951,Boston Baro,ASG,Assigned,,Surprise Saguaros,SS Boston Baro assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-28,681003,Andrew Walling,ASG,Assigned,,Surprise Saguaros,LHP Andrew Walling assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-28,805795,Aidan Miller,ASG,Assigned,,Surprise Saguaros,SS Aidan Miller assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-28,825412,Angeibel Gomez,ASG,Assigned,,Surprise Saguaros,OF Angeibel Gomez assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-28,806964,Sebastian Walcott,ASG,Assigned,,Surprise Saguaros,DH Sebastian Walcott assigned to Surprise Saguaros.
