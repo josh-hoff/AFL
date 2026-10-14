@@ -2036,7 +2036,7 @@
               "score": 6,
               "isWinner": true,
               "splitSquad": false,
-              "seriesNumber": 9
+              "seriesNumber": 8
             },
             "home": {
               "team": {
@@ -2193,7 +2193,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 8
+              "seriesNumber": 7
             },
             "home": {
               "team": {
@@ -2530,7 +2530,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 8
+              "seriesNumber": 9
             }
           },
           "venue": {
@@ -2552,8 +2552,8 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 2,
-          "seriesGameNumber": 2,
+          "gamesInSeries": 1,
+          "seriesGameNumber": 1,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
           "ifNecessary": "N",
@@ -2589,7 +2589,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 9
+              "seriesNumber": 8
             },
             "home": {
               "team": {
@@ -2604,7 +2604,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 10
+              "seriesNumber": 9
             }
           },
           "venue": {
@@ -2626,8 +2626,8 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
-          "seriesGameNumber": 1,
+          "gamesInSeries": 2,
+          "seriesGameNumber": 2,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
           "ifNecessary": "N",
@@ -2673,7 +2673,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 9
+              "seriesNumber": 10
             },
             "home": {
               "team": {
@@ -2688,7 +2688,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 11
+              "seriesNumber": 10
             }
           },
           "venue": {
@@ -2747,7 +2747,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 10
+              "seriesNumber": 9
             },
             "home": {
               "team": {
@@ -2905,7 +2905,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 12
+              "seriesNumber": 11
             },
             "home": {
               "team": {
@@ -2920,7 +2920,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 11
+              "seriesNumber": 10
             }
           },
           "venue": {
@@ -2994,7 +2994,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 10
+              "seriesNumber": 11
             }
           },
           "venue": {
@@ -3152,7 +3152,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 13
+              "seriesNumber": 12
             }
           },
           "venue": {
@@ -3211,7 +3211,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 12
+              "seriesNumber": 11
             },
             "home": {
               "team": {
@@ -3285,7 +3285,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 10
+              "seriesNumber": 11
             },
             "home": {
               "team": {
@@ -3369,7 +3369,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 14
+              "seriesNumber": 13
             },
             "home": {
               "team": {
@@ -3384,7 +3384,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 11
+              "seriesNumber": 12
             }
           },
           "venue": {
@@ -3517,7 +3517,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 13
+              "seriesNumber": 12
             },
             "home": {
               "team": {
@@ -3616,7 +3616,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 15
+              "seriesNumber": 13
             }
           },
           "venue": {
@@ -3675,7 +3675,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 15
+              "seriesNumber": 14
             },
             "home": {
               "team": {
@@ -3764,7 +3764,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 14
+              "seriesNumber": 13
             }
           },
           "venue": {
@@ -3848,7 +3848,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 16
+              "seriesNumber": 14
             }
           },
           "venue": {
@@ -3922,7 +3922,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 15
+              "seriesNumber": 14
             }
           },
           "venue": {
@@ -3996,7 +3996,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 15
+              "seriesNumber": 14
             }
           },
           "venue": {
@@ -4065,7 +4065,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 14
+              "seriesNumber": 15
             },
             "home": {
               "team": {
@@ -4080,7 +4080,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 16
+              "seriesNumber": 15
             }
           },
           "venue": {
@@ -4154,7 +4154,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 16
+              "seriesNumber": 15
             }
           },
           "venue": {
@@ -4312,7 +4312,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 16
+              "seriesNumber": 15
             }
           },
           "venue": {
@@ -4386,7 +4386,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 15
+              "seriesNumber": 16
             }
           },
           "venue": {
@@ -4445,7 +4445,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 17
+              "seriesNumber": 16
             },
             "home": {
               "team": {
@@ -4529,7 +4529,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 17
+              "seriesNumber": 16
             },
             "home": {
               "team": {
@@ -4618,7 +4618,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 16
+              "seriesNumber": 17
             }
           },
           "venue": {
@@ -4692,7 +4692,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 18
+              "seriesNumber": 17
             }
           },
           "venue": {
@@ -4776,7 +4776,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 17
+              "seriesNumber": 18
             }
           },
           "venue": {
@@ -4850,7 +4850,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 19
+              "seriesNumber": 18
             }
           },
           "venue": {
@@ -4909,7 +4909,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 18
+              "seriesNumber": 17
             },
             "home": {
               "team": {
@@ -4993,7 +4993,7 @@
                 "pct": ".500"
               },
               "splitSquad": false,
-              "seriesNumber": 17
+              "seriesNumber": 18
             },
             "home": {
               "team": {
@@ -5141,7 +5141,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 20
+              "seriesNumber": 19
             },
             "home": {
               "team": {
@@ -5156,7 +5156,7 @@
                 "pct": ".750"
               },
               "splitSquad": false,
-              "seriesNumber": 19
+              "seriesNumber": 18
             }
           },
           "venue": {
@@ -6069,7 +6069,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 23
+              "seriesNumber": 22
             },
             "home": {
               "team": {
