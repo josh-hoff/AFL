@@ -419,3 +419,42 @@ game_pk,date,team_side,team_name,player_id,player_name,jersey_number,batting_ord
 867708,2026-10-12,home,Scottsdale Scorpions,800724,Eric Bitonti,25,700,7,00,True,3,1B,First Base
 867708,2026-10-12,home,Scottsdale Scorpions,809763,Kaeden Kent,5,800,8,00,True,4,2B,Second Base
 867708,2026-10-12,home,Scottsdale Scorpions,800440,Narciso Polanco,4,900,9,00,True,5,3B,Third Base
+867711,2026-10-13,away,Salt River Rafters,828076,Dax Kilby,11,100,1,00,True,6,SS,Shortstop
+867711,2026-10-13,away,Salt River Rafters,703606,Jared Thomas,2,200,2,00,True,3,1B,First Base
+867711,2026-10-13,away,Salt River Rafters,700321,Andy Perez,6,300,3,00,True,4,2B,Second Base
+867711,2026-10-13,away,Salt River Rafters,703160,Yasser Mercedes,23,400,4,00,True,8,CF,Outfielder
+867711,2026-10-13,away,Salt River Rafters,691942,Jack O'Dowd,18,500,5,00,True,2,C,Catcher
+867711,2026-10-13,away,Salt River Rafters,692110,Core Jackson,12,600,6,00,True,5,3B,Third Base
+867711,2026-10-13,away,Salt River Rafters,703449,Nathan Hall,29,700,7,00,True,7,LF,Outfielder
+867711,2026-10-13,away,Salt River Rafters,695493,Teo Banks,20,800,8,00,True,9,RF,Outfielder
+867711,2026-10-13,away,Salt River Rafters,808277,Miguel Rodríguez,98,900,9,00,True,10,DH,Designated Hitter
+867711,2026-10-13,home,Glendale Desert Dogs,816111,Tate Southisene,19,100,1,00,True,6,SS,Shortstop
+867711,2026-10-13,home,Glendale Desert Dogs,695484,Anson Aroz,77,101,1,01,False,3,1B,First Base
+867711,2026-10-13,home,Glendale Desert Dogs,804560,Charles Davalan,6,200,2,00,True,4,2B,Second Base
+867711,2026-10-13,home,Glendale Desert Dogs,827665,Dillon Lewis,22,300,3,00,True,10,DH,Designated Hitter
+867711,2026-10-13,home,Glendale Desert Dogs,815352,Caleb Bonemer,27,400,4,00,True,7,LF,Outfielder
+867711,2026-10-13,home,Glendale Desert Dogs,808234,Eduardo Quintero,16,500,5,00,True,8,CF,Outfielder
+867711,2026-10-13,home,Glendale Desert Dogs,701333,Colby Shelton,12,600,6,00,True,6,SS,Shortstop
+867711,2026-10-13,home,Glendale Desert Dogs,826928,Owen Carey,9,700,7,00,True,9,RF,Outfielder
+867711,2026-10-13,home,Glendale Desert Dogs,806061,Isaiah Drake,4,701,7,01,False,9,RF,Outfielder
+867711,2026-10-13,home,Glendale Desert Dogs,815793,Carter Johnson,2,800,8,00,True,5,3B,Third Base
+867711,2026-10-13,home,Glendale Desert Dogs,686944,Grant Magill,20,900,9,00,True,2,C,Catcher
+867712,2026-10-13,away,Peoria Javelinas,806191,Tai Peete,22,100,1,00,True,8,CF,Outfielder
+867712,2026-10-13,away,Peoria Javelinas,702610,Ike Irish,10,200,2,00,True,3,1B,First Base
+867712,2026-10-13,away,Peoria Javelinas,822578,Brandon Butterworth,6,300,3,00,True,4,2B,Second Base
+867712,2026-10-13,away,Peoria Javelinas,695722,Boston Smith,37,400,4,00,True,2,C,Catcher
+867712,2026-10-13,away,Peoria Javelinas,801932,Alex McCoy,11,500,5,00,True,9,RF,Outfielder
+867712,2026-10-13,away,Peoria Javelinas,800176,Carlos Sanchez,12,600,6,00,True,6,SS,Shortstop
+867712,2026-10-13,away,Peoria Javelinas,691398,Yerlin Confidan,55,700,7,00,True,7,LF,Outfielder
+867712,2026-10-13,away,Peoria Javelinas,700815,Matthew Ellis,32,800,8,00,True,10,DH,Designated Hitter
+867712,2026-10-13,away,Peoria Javelinas,813664,Justin DeCriscio,5,900,9,00,True,5,3B,Third Base
+867712,2026-10-13,home,Scottsdale Scorpions,800614,Bryce Rainer,9,100,1,00,True,6,SS,Shortstop
+867712,2026-10-13,home,Scottsdale Scorpions,823809,Nick Monistere,3,101,1,01,False,5,3B,Third Base
+867712,2026-10-13,home,Scottsdale Scorpions,702518,Jett Williams,46,200,2,00,True,6,SS,Shortstop
+867712,2026-10-13,home,Scottsdale Scorpions,702607,Dakota Jordan,12,300,3,00,True,8,CF,Outfielder
+867712,2026-10-13,home,Scottsdale Scorpions,806441,Nehomar Ochoa Jr.,53,400,4,00,True,9,RF,Outfielder
+867712,2026-10-13,home,Scottsdale Scorpions,804911,Brendan Summerhill,21,500,5,00,True,7,LF,Outfielder
+867712,2026-10-13,home,Scottsdale Scorpions,800294,Waner Luciano,2,600,6,00,True,4,2B,Second Base
+867712,2026-10-13,home,Scottsdale Scorpions,800724,Eric Bitonti,25,700,7,00,True,3,1B,First Base
+867712,2026-10-13,home,Scottsdale Scorpions,687783,Matthew Wood,15,800,8,00,True,2,C,Catcher
+867712,2026-10-13,home,Scottsdale Scorpions,807275,Dalton Wentz,10,900,9,00,True,10,DH,Designated Hitter
