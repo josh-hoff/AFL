@@ -1358,12 +1358,62 @@
     wrap.innerHTML = s + '</svg>';
     document.getElementById('mixLegend').innerHTML = typeLegendHtml(a);
   }
+  // With a pitch type selected: one bar per pitch, in the order thrown, grouped (and divided) by inning.
+  // Bar width is the same everywhere; an inning's section just gets wider with more pitches.
+  function renderPerPitchVelo(a, wrap, legend, note) {
+    const seq = new Map(allPitches.map((p, i) => [p, i]));
+    const ps = a.slice().sort((x, y) => seq.get(x) - seq.get(y));
+    const typeN = {}, typeTot = {};
+    ps.forEach(p => { typeTot[p.type] = (typeTot[p.type] || 0) + 1; });
+    const groups = [];
+    ps.forEach(p => {
+      p._ord = typeN[p.type] = (typeN[p.type] || 0) + 1;
+      let g = groups[groups.length - 1];
+      if (!g || g.inn !== Number(p.inning)) { g = { inn: Number(p.inning), ps: [] }; groups.push(g); }
+      g.ps.push(p);
+    });
+    const W = 380, H = 320, L = 40, R = 8, T = 22, B = 44, pw = W - L - R, ph = H - T - B, PAD = 5;
+    const BW = Math.min(22, (pw - groups.length * PAD * 2) / ps.length);
+    const total = ps.length * BW + groups.length * PAD * 2;
+    let x = L + (pw - total) / 2;
+    const vs = ps.map(p => p.velo);
+    const mn = Math.floor((Math.min(...vs) - 6) / 5) * 5, mx = Math.ceil((Math.max(...vs) + 1) / 5) * 5;
+    const Y = v => T + ph - (v - mn) / (mx - mn) * ph;
+    let s = `<svg class="sv" viewBox="0 0 ${W} ${H}" role="img" aria-label="Velocity of each pitch, grouped by inning">`;
+    for (let v = mn; v <= mx; v += 5) s += `<line x1="${L}" x2="${L + pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--border)"/><text x="${L - 7}" y="${Y(v) + 4}" text-anchor="end" font-size="10.5" class="m">${v}</text>`;
+    const single = activeTypes.length === 1;
+    const avgs = [];
+    groups.forEach((g, gi) => {
+      const gw = g.ps.length * BW + PAD * 2, gx = x;
+      s += `<g class="clk" data-inn="${g.inn}"><rect x="${gx + 1}" y="${T}" width="${Math.max(0, gw - 2)}" height="${ph + 26}" rx="6" fill="${activeInnings.includes(String(g.inn)) ? '#fdeadb' : 'transparent'}"/></g>`;
+      if (gi > 0) s += `<line x1="${gx}" x2="${gx}" y1="${T}" y2="${T + ph}" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4" pointer-events="none"/>`;
+      g.ps.forEach((p, k) => {
+        const bx = gx + PAD + k * BW + 1, ww = Math.max(2, BW - 2), y = Y(p.velo), r = Math.min(3, ww / 2);
+        s += `<path data-inn="${g.inn}" class="clk" data-tip="<b>${PITCH_LABELS[p.type] || p.type}</b> &middot; inning ${g.inn}<br>${p.velo.toFixed(1)} mph<br>Pitch ${p._ord} of ${typeTot[p.type]}${activeTypes.length > 1 ? ' ' + (PITCH_LABELS[p.type] || p.type) : ''}<br>vs ${p.batter_name} &middot; ${p.call}" d="M${bx},${T + ph}V${y + r}Q${bx},${y} ${bx + r},${y}H${bx + ww - r}Q${bx + ww},${y} ${bx + ww},${y + r}V${T + ph}Z" fill="${PITCH_COLORS[p.type] || '#888'}"/>`;
+        if (ww >= 20) s += `<text x="${bx + ww / 2}" y="${y - 4}" text-anchor="middle" font-size="9.5" font-weight="700" pointer-events="none">${p.velo.toFixed(1)}</text>`;
+      });
+      if (single) {
+        const av = mean(g.ps.map(p => p.velo));
+        avgs.push(`Inning ${g.inn}: ${av.toFixed(1)}`);
+        s += `<line x1="${gx + PAD - 1}" x2="${gx + gw - PAD + 1}" y1="${Y(av)}" y2="${Y(av)}" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="3 3" opacity=".75" pointer-events="none"/>`;
+      }
+      s += `<text x="${gx + gw / 2}" y="${T + ph + 17}" text-anchor="middle" font-size="10.5" class="m" pointer-events="none">${g.inn}</text>`;
+      x += gw;
+    });
+    s += `<text x="${L + pw / 2}" y="${T + ph + 34}" text-anchor="middle" font-size="10.5" font-weight="700">INNING</text><text transform="translate(11 ${T + ph / 2}) rotate(-90)" text-anchor="middle" font-size="10.5" font-weight="700">VELOCITY (MPH)</text><text x="${L + pw}" y="11" text-anchor="end" font-size="9.5" class="m">axis starts at ${mn} mph</text>`;
+    wrap.innerHTML = s + '</svg>';
+    legend.innerHTML = typeLegendHtml(ps);
+    if (note) note.textContent = 'Every pitch in the order thrown, grouped by inning. Click an inning to filter by it.' + (single ? ' Dashed line = inning average (' + avgs.join(', ') + ').' : '');
+  }
   function renderInnVeloChart() {
     const wrap = document.getElementById('innVeloWrap');
     if (!wrap) return;
     const a = getScopedPitches().filter(p => p.velo !== null);
     const legend = document.getElementById('innVeloLegend');
+    const note = document.getElementById('innVeloNote');
+    if (note) note.textContent = 'Click an inning to filter by it';
     if (!a.length) { wrap.innerHTML = '<div class="sv-empty">No pitches in this selection.</div>'; legend.innerHTML = ''; return; }
+    if (activeTypes.length) { renderPerPitchVelo(a, wrap, legend, note); return; }
     const W = 380, H = 320, L = 40, R = 8, T = 22, B = 44, pw = W - L - R, ph = H - T - B, bw = pw / INNINGS.length;
     const vs = a.map(p => p.velo);
     const mn = Math.floor((Math.min(...vs) - 6) / 5) * 5, mx = Math.ceil((Math.max(...vs) + 1) / 5) * 5;
@@ -1548,7 +1598,7 @@
                 <div class="heatmap-title">Velocity by Inning</div>
                 <div class="sv-wrap" id="innVeloWrap"></div>
                 <div class="movement-legend" id="innVeloLegend"></div>
-                <div class="sv-note">Click an inning to filter by it</div>
+                <div class="sv-note" id="innVeloNote">Click an inning to filter by it</div>
               </div>
               <div class="heatmap-card" data-slide="${SLIDE_EV}">
                 <div class="heatmap-title">Exit Velocity vs. Launch Angle</div>
