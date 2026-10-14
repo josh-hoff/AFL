@@ -1448,11 +1448,15 @@
     const legend = document.getElementById('evLegend');
     const b = getScopedPitches().filter(p => p.launch_speed !== null && p.launch_angle !== null);
     if (!b.length) { wrap.innerHTML = '<div class="sv-empty">No balls in play in this selection.</div>'; legend.innerHTML = ''; return; }
-    const W = 380, H = 340, L = 44, R = 12, T = 14, B = 44, pw = W - L - R, ph = H - T - B, xm = [60, 115], ym = [-40, 70];
+    const evs = b.map(p => p.launch_speed), las = b.map(p => p.launch_angle);
+    // Axes widen to fit steep popups / weak contact instead of letting those balls fall off the chart.
+    const xm = [Math.min(60, Math.floor((Math.min(...evs) - 2) / 10) * 10), 115];
+    const ym = [Math.min(-40, Math.floor((Math.min(...las) - 5) / 20) * 20), Math.max(70, Math.ceil((Math.max(...las) + 5) / 20) * 20)];
+    const W = 380, H = 340, L = 44, R = 12, T = 14, B = 44, pw = W - L - R, ph = H - T - B;
     const X = v => L + (v - xm[0]) / (xm[1] - xm[0]) * pw, Y = v => T + ph - (v - ym[0]) / (ym[1] - ym[0]) * ph;
     let s = `<svg class="sv" viewBox="0 0 ${W} ${H}" role="img" aria-label="Exit velocity versus launch angle">`;
-    for (let v = 60; v <= 115; v += 10) s += `<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${T + ph}" stroke="var(--border)"/><text x="${X(v)}" y="${T + ph + 15}" text-anchor="middle" font-size="10.5" class="m">${v}</text>`;
-    for (let v = -40; v <= 70; v += 20) s += `<line x1="${L}" x2="${L + pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--border)"/><text x="${L - 7}" y="${Y(v) + 4}" text-anchor="end" font-size="10.5" class="m">${v}</text>`;
+    for (let v = xm[0]; v <= 115; v += 10) s += `<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${T + ph}" stroke="var(--border)"/><text x="${X(v)}" y="${T + ph + 15}" text-anchor="middle" font-size="10.5" class="m">${v}</text>`;
+    for (let v = ym[0]; v <= ym[1]; v += 20) s += `<line x1="${L}" x2="${L + pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--border)"/><text x="${L - 7}" y="${Y(v) + 4}" text-anchor="end" font-size="10.5" class="m">${v}</text>`;
     const pts = [];
     for (let e = 98; e <= 115; e++) pts.push([X(e), Y(barrelZone(e)[1])]);
     for (let e = 115; e >= 98; e--) pts.push([X(e), Y(barrelZone(e)[0])]);
