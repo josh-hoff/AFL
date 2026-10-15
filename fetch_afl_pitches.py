@@ -20,6 +20,7 @@ PITCH_FIELDS = [
     "plate_x", "plate_z",
     "launch_speed", "launch_angle", "total_distance",
     "trajectory", "hardness", "hit_location",
+    "hit_coord_x", "hit_coord_y",
 ]
 
 
@@ -147,6 +148,11 @@ def extract_pitches(feed, game_info):
                 "trajectory": hit_data.get("trajectory"),
                 "hardness": hit_data.get("hardness"),
                 "hit_location": hit_data.get("location"),
+                # Where the ball was hit, in MLB Gameday field coordinates
+                # (home plate is roughly x=125, y=199; y grows toward home).
+                # Powers the true spray chart on the hitter page.
+                "hit_coord_x": (hit_data.get("coordinates") or {}).get("coordX"),
+                "hit_coord_y": (hit_data.get("coordinates") or {}).get("coordY"),
             })
 
     return rows
@@ -338,6 +344,17 @@ def main():
     args = parser.parse_args()
 
     schedule = load_schedule(args.season, args.output_dir)
+
+    # A postponed game that gets made up keeps its gamePk, so the schedule can
+    # list it twice (the original postponed date and the makeup date). Process
+    # each game once, using the makeup row, or every pitch, lineup and decision
+    # in that game would be written twice.
+    by_pk = {}
+    for game in schedule:
+        pk = game["game_pk"]
+        if pk not in by_pk or game.get("rescheduled") == "Y":
+            by_pk[pk] = game
+    schedule = list(by_pk.values())
 
     if args.game_pk:
         schedule = [g for g in schedule if str(g["game_pk"]) == str(args.game_pk)]
