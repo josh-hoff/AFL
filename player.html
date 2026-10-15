@@ -965,21 +965,26 @@ function chartMix(a){
 }
 function chartVelo(a){
  if(sel.length){
-  const allI=[...new Set(P.map(p=>p.inn))].sort((x,y)=>x-y),cols=inn.length?allI.filter(n=>inn.includes(String(n))):allI,W=520,H=340,L=50,R=20,T=22,B=48,pw=W-L-R,ph=H-T-B;
+  const allI=[...new Set(P.map(p=>p.inn))].sort((x,y)=>x-y),cols=inn.length?allI.filter(n=>inn.includes(String(n))):allI,W=520,H=372,L=50,R=20,T=22,B=66,pw=W-L-R,ph=H-T-B;
   const pv=a.filter(p=>p.v!=null).sort((x,y)=>x.g-y.g||x.pn-y.pn);if(!pv.length)return null;
   const vs=pv.map(p=>p.v),mn=Math.floor((Math.min(...vs)-3)/5)*5,mx=Math.ceil((Math.max(...vs)+1)/5)*5,Y=v=>T+ph-(v-mn)/(mx-mn)*ph;
-  const w=pw/cols.length;let s=`<svg viewBox="0 0 ${W} ${H}">`;
+  const w=pw/cols.length,PAD=6,GAP=5;let s=`<svg viewBox="0 0 ${W} ${H}">`;
   for(let v=mn;v<=mx;v+=5)s+=`<line x1="${L}" x2="${L+pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="11" class="m">${v}</text>`;
-  cols.forEach((n,i)=>{const gp=pv.filter(p=>p.inn===n),x0=L+i*w,pad=10;
-   s+=`<g class="clk" data-inn="${n}"><rect x="${x0+2}" y="${T}" width="${w-4}" height="${ph+26}" rx="6" fill="${inn.includes(String(n))?'var(--sel)':'transparent'}"/></g>`;
-   if(i>0)s+=`<line x1="${x0}" x2="${x0}" y1="${T}" y2="${T+ph}" stroke="var(--grid)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
-   const step=gp.length>1?(w-2*pad)/(gp.length-1):0,r=Math.max(1.6,Math.min(4,step*.45||4));
-   gp.forEach((p,k)=>{const cx=gp.length>1?x0+pad+k*step:x0+w/2;
-    s+=`<circle data-inn="${n}" class="clk" data-tip="<b>${LAB[p.t]}</b> &middot; ${ORD(n)} inning pitched<br>${p.v.toFixed(1)} mph<br>${DATA.games[p.g].date} vs ${DATA.games[p.g].opp}" cx="${cx}" cy="${Y(p.v)}" r="${r}" fill="${COL[p.t]}" opacity=".75"/>`});
-   sel.forEach(t=>{const g=gp.filter(p=>p.t===t);if(!g.length)return;const av=mean(g.map(p=>p.v));
-    s+=`<line x1="${x0+4}" x2="${x0+w-4}" y1="${Y(av)}" y2="${Y(av)}" stroke="${COL[t]}" stroke-width="2.2" stroke-dasharray="5 3" style="pointer-events:none"/><text x="${x0+w-5}" y="${Y(av)-5}" text-anchor="end" font-size="9.5" font-weight="700" style="pointer-events:none">${av.toFixed(1)}</text>`});
-   s+=`<text x="${x0+w/2}" y="${T+ph+18}" text-anchor="middle" font-size="11" class="m">${ORD(n)}</text>`});
-  return s+`<text x="${L+pw/2}" y="${T+ph+34}" text-anchor="middle" font-size="11" font-weight="700">INNING PITCHED</text><text transform="translate(13 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">VELOCITY (MPH)</text></svg>`;
+  const shortD=d=>{const m=String(d).match(/(\d{4})-(\d{2})-(\d{2})/);return m?(+m[2])+'/'+(+m[3]):d};
+  cols.forEach((n,i)=>{const gp=pv.filter(p=>p.inn===n),x0=L+i*w;
+   s+=`<g class="clk" data-inn="${n}"><rect x="${x0+2}" y="${T}" width="${w-4}" height="${ph+44}" rx="6" fill="${inn.includes(String(n))?'var(--sel)':'transparent'}"/></g>`;
+   if(i>0)s+=`<line x1="${x0}" x2="${x0}" y1="${T}" y2="${T+ph+2}" stroke="var(--grid)" stroke-width="1.5"/>`;
+   const gids=[...new Set(gp.map(p=>p.g))],unit=(w-2*PAD-GAP*Math.max(0,gids.length-1))/Math.max(1,gp.length);let x=x0+PAD;
+   gids.forEach((gid,gi)=>{const gg=gp.filter(p=>p.g===gid),gw=gg.length*unit;
+    if(gi>0)s+=`<line x1="${x-GAP/2}" x2="${x-GAP/2}" y1="${T}" y2="${T+ph+2}" stroke="var(--mut)" stroke-width="1" stroke-dasharray="3 3" opacity=".6" style="pointer-events:none"/>`;
+    gg.forEach((q,k)=>{const bx=x+k*unit+.5,ww=Math.max(1.2,unit-1),y=Y(q.v);
+     s+=`<rect data-inn="${n}" class="clk" data-tip="<b>${LAB[q.t]}</b> &middot; ${ORD(n)} inning pitched<br>${q.v.toFixed(1)} mph<br>${DATA.games[gid].date} vs ${DATA.games[gid].opp}" x="${bx}" y="${y}" width="${ww}" height="${Math.max(0,T+ph-y)}" fill="${COL[q.t]}"/>`});
+    sel.forEach(t=>{const g=gg.filter(q=>q.t===t);if(!g.length||gg.length<3)return;const av=mean(g.map(q=>q.v));
+     s+=`<line x1="${x}" x2="${x+gw}" y1="${Y(av)}" y2="${Y(av)}" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="3 2" opacity=".8" style="pointer-events:none"/>`});
+    if(gw>=24)s+=`<text x="${x+gw/2}" y="${T+ph+13}" text-anchor="middle" font-size="9" class="m" style="pointer-events:none">${shortD(DATA.games[gid].date)}</text>`;
+    x+=gw+GAP});
+   s+=`<text x="${x0+w/2}" y="${T+ph+30}" text-anchor="middle" font-size="11" font-weight="700" style="pointer-events:none">${ORD(n)} inning pitched</text>`});
+  return s+`<text x="${L+pw/2}" y="${H-6}" text-anchor="middle" font-size="10" class="m">One bar per pitch, oldest game to newest. Dashed lines separate games.</text><text transform="translate(13 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">VELOCITY (MPH)</text><text x="${L+pw}" y="10" text-anchor="end" font-size="10" class="m">axis starts at ${mn} mph</text></svg>`;
  }
  const inns=[...new Set(P.map(p=>p.inn))].sort((x,y)=>x-y),W=520,H=340,L=50,R=20,T=22,B=48,pw=W-L-R,ph=H-T-B,bw=pw/inns.length;
  const vs=a.map(p=>p.v).filter(v=>v!=null);let mn=Math.floor((Math.min(...vs)-6)/5)*5,mx=Math.ceil((Math.max(...vs)+1)/5)*5;
@@ -1103,7 +1108,7 @@ function renderChart(){
  let leg=used.map(t=>`<span><span class="dot" style="background:${COL[t]}"></span> ${LAB[t]}</span>`).join('');
  if(SN==='Pitch Location'){const ks=['CALLED','SWING','FOUL','BALL','INPLAY'].filter(k=>a.some(p=>kind(p)===k));const nm={CALLED:'Called Strike',SWING:'Swinging Strike',FOUL:'Foul',BALL:'Ball',INPLAY:'Ball In Play'};
   leg=ks.map(k=>k==='SWING'?`<span><span class="lg-x" style="color:${OC2[k]}">&#10005;</span>${nm[k]}</span>`:k==='FOUL'?`<span><span class="lg-sq" style="background:${OC2[k]}"></span>${nm[k]}</span>`:`<span><span class="dot" style="background:${OC2[k]}"></span> ${nm[k]}</span>`).join('')}
- $('cnote').textContent=SN==='Pitch Mix by Count'?'Click a count row to filter by it.':SN==='Velocity by Inning'?(sel.length?'Every pitch of the selected type(s) in the order thrown, grouped by inning pitched. Dashed line = inning average. Click an inning to filter by it.':'Average velocity in each inning of the outing (1st inning pitched, 2nd, ...) across every appearance. Click an inning to filter by it.'):SN==='Spin Direction'?(sel.length?'Faded arrows are individual pitches; the bold arrow is the season average.':'Average spin direction of each pitch type. Select a pitch type to see every pitch behind its average.'):SN==='Pitch Location'||SN==='Exit Velocity vs. Launch Angle'?'':SN==='Pitch Movement'||SN==='Release Point'?'Dots are individual pitches; larger rings are each pitch type\'s season average.':''
+ $('cnote').textContent=SN==='Pitch Mix by Count'?'Click a count row to filter by it.':SN==='Velocity by Inning'?(sel.length?'Every pitch of the selected type(s) in the order thrown, grouped by inning pitched and game. Click an inning to filter by it.':'Average velocity in each inning of the outing (1st inning pitched, 2nd, ...) across every appearance. Click an inning to filter by it.'):SN==='Spin Direction'?(sel.length?'Faded arrows are individual pitches; the bold arrow is the season average.':'Average spin direction of each pitch type. Select a pitch type to see every pitch behind its average.'):SN==='Pitch Location'||SN==='Exit Velocity vs. Launch Angle'?'':SN==='Pitch Movement'||SN==='Release Point'?'Dots are individual pitches; larger rings are each pitch type\'s season average.':''
  $('plot').innerHTML=(!a.length||!h)?`<div class="empty">${!a.length?'No pitches match this selection.':'No balls in play in this selection.'}</div>`:h+`<div class="leg">${leg}</div>`;
  hook();
  bindClicks();
