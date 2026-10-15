@@ -972,7 +972,7 @@ function chartVelo(a){
   for(let v=mn;v<=mx;v+=5)s+=`<line x1="${L}" x2="${L+pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="11" class="m">${v}</text>`;
   const shortD=d=>{const m=String(d).match(/(\d{4})-(\d{2})-(\d{2})/);return m?(+m[2])+'/'+(+m[3]):d};
   cols.forEach((n,i)=>{const gp=pv.filter(p=>p.inn===n),x0=L+i*w;
-   s+=`<g class="clk" data-inn="${n}"><rect x="${x0+2}" y="${T}" width="${w-4}" height="${ph+44}" rx="6" fill="${inn.includes(String(n))?'var(--sel)':'transparent'}"/></g>`;
+   s+=`<g class="clk" data-inn="${n}"><rect x="${x0+2}" y="${T}" width="${w-4}" height="${ph+44}" rx="6" fill="transparent"/></g>`;
    if(i>0)s+=`<line x1="${x0}" x2="${x0}" y1="${T}" y2="${T+ph+2}" stroke="var(--grid)" stroke-width="1.5"/>`;
    const gids=[...new Set(gp.map(p=>p.g))],unit=(w-2*PAD-GAP*Math.max(0,gids.length-1))/Math.max(1,gp.length);let x=x0+PAD;
    gids.forEach((gid,gi)=>{const gg=gp.filter(p=>p.g===gid),gw=gg.length*unit;
@@ -986,12 +986,12 @@ function chartVelo(a){
    s+=`<text x="${x0+w/2}" y="${T+ph+30}" text-anchor="middle" font-size="11" font-weight="700" style="pointer-events:none">${ORD(n)} inning pitched</text>`});
   return s+`<text x="${L+pw/2}" y="${H-6}" text-anchor="middle" font-size="10" class="m">One bar per pitch, oldest game to newest. Dashed lines separate games.</text><text transform="translate(13 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">VELOCITY (MPH)</text><text x="${L+pw}" y="10" text-anchor="end" font-size="10" class="m">axis starts at ${mn} mph</text></svg>`;
  }
- const inns=[...new Set(P.map(p=>p.inn))].sort((x,y)=>x-y),W=520,H=340,L=50,R=20,T=22,B=48,pw=W-L-R,ph=H-T-B,bw=pw/inns.length;
+ const inns=[...new Set(P.map(p=>p.inn))].sort((x,y)=>x-y).filter(n=>!inn.length||inn.includes(String(n))),W=520,H=340,L=50,R=20,T=22,B=48,pw=W-L-R,ph=H-T-B,bw=pw/inns.length;
  const vs=a.map(p=>p.v).filter(v=>v!=null);let mn=Math.floor((Math.min(...vs)-6)/5)*5,mx=Math.ceil((Math.max(...vs)+1)/5)*5;
  const X0=i=>L+(i+.5)*bw,Y=v=>T+ph-(v-mn)/(mx-mn)*ph;
  let s=`<svg viewBox="0 0 ${W} ${H}">`;
  for(let v=mn;v<=mx;v+=5)s+=`<line x1="${L}" x2="${L+pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="11" class="m">${v}</text>`;
- inns.forEach((n,i)=>{s+=`<g class="clk" data-inn="${n}"><rect x="${L+i*bw+2}" y="${T}" width="${bw-4}" height="${ph+26}" rx="6" fill="${inn.includes(String(n))?'var(--sel)':'transparent'}"/></g>`});
+ inns.forEach((n,i)=>{s+=`<g class="clk" data-inn="${n}"><rect x="${L+i*bw+2}" y="${T}" width="${bw-4}" height="${ph+26}" rx="6" fill="transparent"/></g>`});
  inns.forEach((n,i)=>{if(i>0)s+=`<line x1="${L+i*bw}" x2="${L+i*bw}" y1="${T}" y2="${T+ph}" stroke="var(--grid)" stroke-width="1.5" stroke-dasharray="4 4"/>`;s+=`<text x="${X0(i)}" y="${T+ph+18}" text-anchor="middle" font-size="11" class="m">${ORD(n)}</text>`});
  s+=`<text x="${L+pw/2}" y="${T+ph+34}" text-anchor="middle" font-size="11" font-weight="700">INNING PITCHED</text><text transform="translate(13 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">AVG VELOCITY (MPH)</text><text x="${L+pw}" y="10" text-anchor="end" font-size="10" class="m">axis starts at ${mn} mph</text>`;
  const maxBars=Math.max(...inns.map(n=>types.filter(tp=>a.some(p=>p.inn===n&&p.t===tp&&p.v!=null)).length),1),BW=Math.min(34,bw*.82/maxBars);
