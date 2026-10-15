@@ -263,31 +263,31 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867708,2026-10-12,home,Scottsdale Scorpions,825095,Drake George,3,False
 867708,2026-10-12,home,Scottsdale Scorpions,813796,Preston Howey,4,False
 867708,2026-10-12,home,Scottsdale Scorpions,807823,Jank Pichardo,5,False
-867710,2026-10-12,away,Peoria Javelinas,826466,Winyer Chourio,1,True
-867710,2026-10-12,away,Peoria Javelinas,694832,Cody Adcock,2,False
-867710,2026-10-12,away,Peoria Javelinas,702296,Nate Dohm,3,False
-867710,2026-10-12,away,Peoria Javelinas,702751,Jose Geraldo,4,False
-867710,2026-10-12,away,Peoria Javelinas,828594,Michael Watson,5,False
-867710,2026-10-12,away,Peoria Javelinas,822498,Reid Easterly,6,False
-867710,2026-10-12,away,Peoria Javelinas,822463,Nolan Sparks,7,False
-867710,2026-10-12,home,Surprise Saguaros,686632,Steven Zobac,1,True
-867710,2026-10-12,home,Surprise Saguaros,700176,Keegan Batka,2,False
-867710,2026-10-12,home,Surprise Saguaros,823804,Ryan Dromboski,3,False
-867710,2026-10-12,home,Surprise Saguaros,815066,Kyle Scott,4,False
-867710,2026-10-12,home,Surprise Saguaros,700985,Josh Hansell,5,False
-867710,2026-10-12,home,Surprise Saguaros,701884,Magnus Ellerts,6,False
-867709,2026-10-12,away,Salt River Rafters,694933,Ross Dunn,1,True
-867709,2026-10-12,away,Salt River Rafters,823227,Brian Zeldin,2,False
-867709,2026-10-12,away,Salt River Rafters,687317,Stu Flesland III,3,False
-867709,2026-10-12,away,Salt River Rafters,823996,Luke Craig,4,False
-867709,2026-10-12,away,Salt River Rafters,827768,Anthony Mena,5,False
-867709,2026-10-12,away,Salt River Rafters,688629,Noah Dean,6,False
-867709,2026-10-12,away,Salt River Rafters,815065,Hunter Mann,7,False
-867709,2026-10-12,home,Mesa Solar Sox,814005,Jake Bloss,1,True
-867709,2026-10-12,home,Mesa Solar Sox,808911,Grant Richardson,2,False
-867709,2026-10-12,home,Mesa Solar Sox,702255,Brandon Barriera,3,False
-867709,2026-10-12,home,Mesa Solar Sox,695761,Kenya Huggins,4,False
-867709,2026-10-12,home,Mesa Solar Sox,805093,Jhon Cabral,5,False
+867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,826466,Winyer Chourio,1,True
+867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,694832,Cody Adcock,2,False
+867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,702296,Nate Dohm,3,False
+867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,702751,Jose Geraldo,4,False
+867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,828594,Michael Watson,5,False
+867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,822498,Reid Easterly,6,False
+867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,822463,Nolan Sparks,7,False
+867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,686632,Steven Zobac,1,True
+867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,700176,Keegan Batka,2,False
+867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,823804,Ryan Dromboski,3,False
+867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,815066,Kyle Scott,4,False
+867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,700985,Josh Hansell,5,False
+867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,701884,Magnus Ellerts,6,False
+867709,2026-10-14 (originally 10/12),away,Salt River Rafters,694933,Ross Dunn,1,True
+867709,2026-10-14 (originally 10/12),away,Salt River Rafters,823227,Brian Zeldin,2,False
+867709,2026-10-14 (originally 10/12),away,Salt River Rafters,687317,Stu Flesland III,3,False
+867709,2026-10-14 (originally 10/12),away,Salt River Rafters,823996,Luke Craig,4,False
+867709,2026-10-14 (originally 10/12),away,Salt River Rafters,827768,Anthony Mena,5,False
+867709,2026-10-14 (originally 10/12),away,Salt River Rafters,688629,Noah Dean,6,False
+867709,2026-10-14 (originally 10/12),away,Salt River Rafters,815065,Hunter Mann,7,False
+867709,2026-10-14 (originally 10/12),home,Mesa Solar Sox,814005,Jake Bloss,1,True
+867709,2026-10-14 (originally 10/12),home,Mesa Solar Sox,808911,Grant Richardson,2,False
+867709,2026-10-14 (originally 10/12),home,Mesa Solar Sox,702255,Brandon Barriera,3,False
+867709,2026-10-14 (originally 10/12),home,Mesa Solar Sox,695761,Kenya Huggins,4,False
+867709,2026-10-14 (originally 10/12),home,Mesa Solar Sox,805093,Jhon Cabral,5,False
 867711,2026-10-13,away,Salt River Rafters,807743,Sean Sullivan,1,True
 867711,2026-10-13,away,Salt River Rafters,810102,Chris Veach,2,False
 867711,2026-10-13,away,Salt River Rafters,813409,Joe Ariola,3,False
@@ -319,28 +319,7 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867712,2026-10-13,home,Scottsdale Scorpions,828603,Logan Berrier,6,False
 867712,2026-10-13,home,Scottsdale Scorpions,815218,Alexander Fuentes,7,False
 867712,2026-10-13,home,Scottsdale Scorpions,800427,Jose Meneses,8,False
-867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,826466,Winyer Chourio,1,True
-867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,694832,Cody Adcock,2,False
-867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,702296,Nate Dohm,3,False
-867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,702751,Jose Geraldo,4,False
-867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,828594,Michael Watson,5,False
-867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,822498,Reid Easterly,6,False
-867710,2026-10-14 (originally 10/12),away,Peoria Javelinas,822463,Nolan Sparks,7,False
-867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,686632,Steven Zobac,1,True
-867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,700176,Keegan Batka,2,False
-867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,823804,Ryan Dromboski,3,False
-867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,815066,Kyle Scott,4,False
-867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,700985,Josh Hansell,5,False
-867710,2026-10-14 (originally 10/12),home,Surprise Saguaros,701884,Magnus Ellerts,6,False
-867709,2026-10-14 (originally 10/12),away,Salt River Rafters,694933,Ross Dunn,1,True
-867709,2026-10-14 (originally 10/12),away,Salt River Rafters,823227,Brian Zeldin,2,False
-867709,2026-10-14 (originally 10/12),away,Salt River Rafters,687317,Stu Flesland III,3,False
-867709,2026-10-14 (originally 10/12),away,Salt River Rafters,823996,Luke Craig,4,False
-867709,2026-10-14 (originally 10/12),away,Salt River Rafters,827768,Anthony Mena,5,False
-867709,2026-10-14 (originally 10/12),away,Salt River Rafters,688629,Noah Dean,6,False
-867709,2026-10-14 (originally 10/12),away,Salt River Rafters,815065,Hunter Mann,7,False
-867709,2026-10-14 (originally 10/12),home,Mesa Solar Sox,814005,Jake Bloss,1,True
-867709,2026-10-14 (originally 10/12),home,Mesa Solar Sox,808911,Grant Richardson,2,False
-867709,2026-10-14 (originally 10/12),home,Mesa Solar Sox,702255,Brandon Barriera,3,False
-867709,2026-10-14 (originally 10/12),home,Mesa Solar Sox,695761,Kenya Huggins,4,False
-867709,2026-10-14 (originally 10/12),home,Mesa Solar Sox,805093,Jhon Cabral,5,False
+867714,2026-10-15,away,Surprise Saguaros,703610,Justin Lamkin,1,True
+867714,2026-10-15,home,Glendale Desert Dogs,677354,Alex Williams,1,True
+867703,2026-10-15,away,Scottsdale Scorpions,690972,Joey Dixon,1,True
+867703,2026-10-15,home,Peoria Javelinas,694358,Tekoah Roby,1,True

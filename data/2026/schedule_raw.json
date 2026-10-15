@@ -3,7 +3,7 @@
   "totalItems": 98,
   "totalEvents": 0,
   "totalGames": 98,
-  "totalGamesInProgress": 0,
+  "totalGamesInProgress": 1,
   "dates": [
     {
       "date": "2026-10-03",
@@ -2419,7 +2419,7 @@
       "totalItems": 3,
       "totalEvents": 0,
       "totalGames": 3,
-      "totalGamesInProgress": 0,
+      "totalGamesInProgress": 1,
       "games": [
         {
           "gamePk": 867714,
@@ -2430,12 +2430,12 @@
           "gameDate": "2026-10-15T20:30:00Z",
           "officialDate": "2026-10-15",
           "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "S",
-            "detailedState": "Scheduled",
-            "statusCode": "S",
+            "abstractGameState": "Live",
+            "codedGameState": "I",
+            "detailedState": "In Progress",
+            "statusCode": "I",
             "startTimeTBD": false,
-            "abstractGameCode": "P"
+            "abstractGameCode": "L"
           },
           "teams": {
             "away": {
@@ -2505,9 +2505,9 @@
           "officialDate": "2026-10-15",
           "status": {
             "abstractGameState": "Preview",
-            "codedGameState": "S",
-            "detailedState": "Scheduled",
-            "statusCode": "S",
+            "codedGameState": "P",
+            "detailedState": "Pre-Game",
+            "statusCode": "P",
             "startTimeTBD": false,
             "abstractGameCode": "P"
           },
@@ -2540,7 +2540,7 @@
                 "pct": ".444"
               },
               "splitSquad": false,
-              "seriesNumber": 8
+              "seriesNumber": 9
             }
           },
           "venue": {
@@ -2562,8 +2562,8 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 2,
-          "seriesGameNumber": 2,
+          "gamesInSeries": 1,
+          "seriesGameNumber": 1,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
           "ifNecessary": "N",

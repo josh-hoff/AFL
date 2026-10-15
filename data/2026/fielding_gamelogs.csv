@@ -652,6 +652,8 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,702517,Mason White,Mesa Solar Sox,2026-10-08,Salt River Rafters,False,False,867720,R,2B,8.2,0,2,0,0,2,1.000,0,0,2.00,2.25
 2026,702517,Mason White,Mesa Solar Sox,2026-10-10,Peoria Javelinas,True,True,867705,R,SS,7.0,1,3,0,0,4,1.000,2,0,4.00,5.14
 2026,702517,Mason White,Mesa Solar Sox,2026-10-14,Salt River Rafters,True,True,867709,R,2B,9.0,2,2,0,0,4,1.000,0,0,4.00,4.00
+2026,687766,Miguel Useche,Mesa Solar Sox,2026-10-05,Peoria Javelinas,True,True,867727,R,1B,9.0,6,0,0,0,6,1.000,0,0,6.00,6.00
+2026,687766,Miguel Useche,Mesa Solar Sox,2026-10-10,Scottsdale Scorpions,True,False,867706,R,LF,7.0,0,0,1,0,1,.857,0,0,0.00,0.00
 2026,695402,Najer Victor,Mesa Solar Sox,2026-10-03,Peoria Javelinas,False,False,867731,R,P,0.1,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,695402,Najer Victor,Mesa Solar Sox,2026-10-08,Salt River Rafters,False,False,867720,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00
 2026,805801,Nazzan Zanetello,Mesa Solar Sox,2026-10-04,Peoria Javelinas,True,True,867716,R,2B,9.0,1,4,0,0,5,1.000,0,0,5.00,5.00
@@ -772,8 +774,6 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,808277,Miguel Rodríguez,Salt River Rafters,2026-10-04,Surprise Saguaros,False,False,867728,R,DH,0.0,0,0,0,0,0,.000,0,0,0.00,-.--
 2026,808277,Miguel Rodríguez,Salt River Rafters,2026-10-09,Glendale Desert Dogs,True,True,867718,R,C,9.0,7,0,0,0,7,1.000,0,0,7.00,7.00
 2026,808277,Miguel Rodríguez,Salt River Rafters,2026-10-13,Glendale Desert Dogs,False,True,867711,R,DH,0.0,0,0,0,0,0,1.000,0,0,0.00,-.--
-2026,687766,Miguel Useche,Salt River Rafters,2026-10-05,Peoria Javelinas,True,True,867727,R,1B,9.0,6,0,0,0,6,1.000,0,0,6.00,6.00
-2026,687766,Miguel Useche,Salt River Rafters,2026-10-10,Scottsdale Scorpions,True,False,867706,R,LF,7.0,0,0,1,0,1,.857,0,0,0.00,0.00
 2026,703449,Nathan Hall,Salt River Rafters,2026-10-03,Glendale Desert Dogs,False,True,867729,R,CF,9.0,2,0,0,0,2,1.000,0,0,2.00,2.00
 2026,703449,Nathan Hall,Salt River Rafters,2026-10-04,Surprise Saguaros,False,False,867728,R,RF,8.0,1,0,0,0,1,1.000,0,0,1.00,1.13
 2026,703449,Nathan Hall,Salt River Rafters,2026-10-05,Peoria Javelinas,True,True,867727,R,LF,9.0,2,0,0,0,2,1.000,0,0,2.00,2.00
