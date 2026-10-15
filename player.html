@@ -77,6 +77,7 @@
   .bio-card.top100 { background: #fff0e2; border-color: var(--tab-active); box-shadow: inset 6px 0 0 0 var(--tab-active); }
   .bio-card.mlb { background: #eaf1fa; border-color: #2f6fb0; box-shadow: inset 6px 0 0 0 #2f6fb0; }
   .bio-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
+  .bio-note { font-size: 0.72rem; color: #5d6a7c; margin-top: 0.5rem; max-width: 52ch; line-height: 1.35; }
   .bio-tag { display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.02em; padding: 2px 10px; border-radius: 12px; color: #fff; white-space: nowrap; }
   .bio-tag.top100 { background: var(--tab-active); }
   .bio-name { font-size: 1.6rem; font-weight: 700; color: var(--text); }
@@ -213,6 +214,98 @@
 
   .error { color: var(--cancelled); }
   .loading { color: var(--text-muted); }
+
+  /* ---- Season Statcast (pitchers) ---- */
+#seasonSc .cols{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:22px;align-items:start}
+@media(max-width:860px){#seasonSc .cols{grid-template-columns:1fr}}
+#seasonSc h3{font-size:1.05rem;margin:0 0 10px}
+#seasonSc .chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+#seasonSc .chip{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);color:var(--ink);padding:6px 13px;border-radius:999px;cursor:pointer;font:700 .8rem inherit;font-family:inherit}
+#seasonSc .chip .n{color:var(--mut);font-weight:600}
+#seasonSc .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+#seasonSc .chip.on .n{color:#ffffffd9}
+#seasonSc .chip.off{opacity:.35;cursor:default}
+#seasonSc .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+#seasonSc .cb{width:15px;height:15px;border:1.5px solid #b9b4a8;border-radius:4px;background:#fff;color:var(--acc);display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800}
+#seasonSc .cb.on{background:var(--acc);border-color:var(--acc);color:#fff}
+#seasonSc .chip.on .cb{background:#fff;border-color:#fff;color:var(--acc)}
+#seasonSc .multi{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;color:var(--mut);cursor:pointer;padding:4px 6px}
+#seasonSc .reset{background:var(--navy);color:#fff;border:0;border-radius:999px;padding:6px 14px;font:700 .8rem inherit;font-family:inherit;cursor:pointer}
+#seasonSc .reset:disabled{opacity:.35;cursor:default}
+#seasonSc .orow{margin-bottom:12px;display:flex;gap:6px;position:relative}
+#seasonSc .ddw{display:flex;align-items:center;flex:1 1 0;min-width:0}
+#seasonSc .odd{position:static;display:block;width:100%}
+#seasonSc .obtn{width:100%;min-width:0!important;padding:6px 8px!important;font-size:.78rem!important;gap:5px!important}
+#seasonSc .otxt{max-width:none!important;min-width:0}
+#seasonSc .omenu{left:0;right:auto;top:calc(100% + 4px)}
+#seasonSc .olab{display:none;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}
+#seasonSc .odd{position:relative;display:inline-block}
+#seasonSc .obtn{display:inline-flex;align-items:center;gap:8px;min-width:12.2rem;font:600 .85rem inherit;font-family:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 11px;cursor:pointer;text-align:left}
+#seasonSc .obtn.act{border-color:var(--acc);box-shadow:0 0 0 2px rgba(242,101,34,.15)}
+#seasonSc .otxt{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:9.5rem}
+#seasonSc .omenu{position:absolute;left:0;top:calc(100% + 4px);min-width:21rem;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:5px;z-index:20}
+#seasonSc .omenu[hidden]{display:none}
+#seasonSc .otop{display:flex;align-items:center;gap:6px;padding-bottom:4px;margin-bottom:4px;border-bottom:1px solid var(--line)}
+#seasonSc .otop .oopt{flex:1}
+#seasonSc .omulti{display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:6px;font-size:.78rem;font-weight:600;color:var(--mut);cursor:pointer;white-space:nowrap}
+#seasonSc .omulti:hover{background:var(--head)}
+#seasonSc .oopt{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:6px;font-size:.85rem;cursor:pointer}
+#seasonSc .oopt:hover{background:var(--head)}
+#seasonSc .oopt.sel{background:var(--sel);color:#b8460f;font-weight:700}
+#seasonSc .ocnt{margin-left:auto;color:var(--mut);font-weight:500}
+#seasonSc .oc-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+#seasonSc select{font:600 .82rem inherit;font-family:inherit;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);margin-bottom:12px}
+#seasonSc .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+#seasonSc .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 8px;text-align:center}
+#seasonSc .tl{font-size:.66rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+#seasonSc .tv{font-size:1.5rem;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums}
+#seasonSc .tn{font-size:.62rem;color:var(--mut)}
+#seasonSc .more{display:block;margin:14px auto 0;background:none;border:0;color:var(--mut);font:700 .8rem inherit;font-family:inherit;cursor:pointer;border-bottom:1px dashed var(--mut)}
+#seasonSc .tiles2{display:none;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+#seasonSc .tiles2.on{display:grid}
+#seasonSc .tiles2 .tv{font-size:1.25rem}
+#seasonSc .sub{grid-column:1/-1;text-align:left;font-size:.66rem;font-weight:800;letter-spacing:.08em;color:var(--mut);text-transform:uppercase;margin-top:2px}
+#seasonSc .car{display:flex;align-items:center;gap:8px}
+#seasonSc .nav{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-size:1.1rem;flex:none}
+#seasonSc .ch{flex:1;min-width:0;text-align:center}
+#seasonSc .cht{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+#seasonSc .dots{display:flex;gap:6px}
+#seasonSc .dotb{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer}
+#seasonSc .dotb.on{background:var(--acc)}
+#seasonSc svg{width:100%;height:auto;display:block;font-family:inherit}
+#seasonSc svg text{fill:var(--ink)}
+#seasonSc svg .m{fill:var(--mut)}
+#seasonSc .leg{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-size:.74rem;margin-top:6px}
+#seasonSc .empty{padding:60px 10px;color:var(--mut);font-size:.85rem}
+#seasonSc table{width:100%;border-collapse:collapse;font-size:.84rem;font-variant-numeric:tabular-nums}
+#seasonSc .tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+#seasonSc th{background:var(--head);color:var(--mut);font-size:.66rem;text-transform:uppercase;padding:8px 10px;white-space:nowrap;cursor:pointer;user-select:none;text-align:right}
+#seasonSc th:first-child,#seasonSc td:first-child{text-align:left}
+#seasonSc td{padding:8px 10px;border-top:1px solid var(--line);text-align:right;white-space:nowrap}
+#seasonSc tbody tr td{transition:opacity .15s}
+#seasonSc tr.dim td{opacity:.35}
+#seasonSc tr.dim:hover td{opacity:.7}
+#seasonSc tr.sel td{background:var(--sel)}
+#seasonSc tbody tr{cursor:pointer}
+#seasonSc tr.tot td{font-weight:800;background:var(--head);cursor:default}
+#seasonSc th.s::after{content:' ▾';color:var(--acc)}
+#seasonSc th.s.a::after{content:' ▴'}
+#seasonSc .note{color:var(--mut);font-size:.76rem;margin:8px 2px}
+#seasonSc .clk{cursor:pointer}
+#seasonSc .secb{margin-top:10px}
+#seasonSc .odd{position:static!important;display:block!important;width:100%}
+#seasonSc .omenu{left:0!important;right:auto!important}
+#seasonSc{--card:var(--bg-card);--ink:var(--text);--mut:var(--text-muted);--line:var(--border);--head:#f2f1ee;--acc:var(--tab-active);--navy:#0b1b3c;--grid:#e6e3dc;--sel:#fff3ea;color:var(--text)}
+#seasonSc .sc-sub{margin-top:26px;padding:6px 2px;border-bottom:1px solid var(--line);margin-bottom:10px}
+#seasonSc .sc-sub h3{margin:0}
+.sc-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:0.6rem}
+.sc-head .section-title{margin:0}
+.sc-head .sc-team{display:flex;align-items:center;gap:0.5rem;color:var(--text-muted);font-weight:600;font-size:0.9rem}
+.sc-head .sc-team img{width:26px;height:26px;object-fit:contain}
+#scTip{position:fixed;pointer-events:none;background:#111c;color:#fff;font-size:.74rem;padding:5px 9px;border-radius:6px;z-index:99;display:none;max-width:240px;line-height:1.35}
+.glossary-subtitle{font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin:.7rem 0 .2rem;border-bottom:1px dashed var(--border);padding-bottom:.2rem}
+.glossary-row.wide{grid-template-columns:112px 1fr}
+
 </style>
 </head>
 <body>
@@ -384,7 +477,7 @@
     const tags = [];
     const ranks = top100ById[player.player_id] || {};
     Object.keys(ranks).sort().forEach(y => tags.push(`<span class="bio-tag top100">${top100Label(y, ranks[y])}</span>`));
-    return tags.length ? `<div class="bio-tags">${tags.join('')}</div>` : '';
+    return tags.length ? `<div class="bio-tags">${tags.join('')}</div><div class="bio-note">Top 100 badges reflect the most recent MLB Pipeline list available for each year. Players who graduated before we began saving lists may not show a badge, and peak ranks are only tracked from that point on.</div>` : '';
   }
 
   function renderBio(player) {
@@ -668,7 +761,384 @@
     return `<div class="gl-table">${headerHtml}${rowsHtml}</div>`;
   }
 
+
+  // ================= Season Statcast (pitchers) =================
+  // Same controls and charts as the game-by-game Statcast page, but built from every pitch
+  // of the season. Innings are counted by innings pitched in each outing (1st, 2nd, ...).
+  const MASTER_ORDER = [
+    { code: 'FF', label: 'Four-Seam',     category: 'Fastball' },
+    { code: 'FT', label: 'Two-Seam',      category: 'Fastball' },
+    { code: 'SI', label: 'Sinker',        category: 'Fastball' },
+    { code: 'FC', label: 'Cutter',        category: 'Fastball' },
+    { code: 'CH', label: 'Changeup',      category: 'Changeup/Splitter' },
+    { code: 'FS', label: 'Splitter',      category: 'Changeup/Splitter' },
+    { code: 'FO', label: 'Forkball',      category: 'Changeup/Splitter' },
+    { code: 'CU', label: 'Curveball',     category: 'Off-Speed' },
+    { code: 'KC', label: 'Knuckle-Curve', category: 'Off-Speed' },
+    { code: 'SL', label: 'Slider',        category: 'Off-Speed' },
+    { code: 'ST', label: 'Sweeper',       category: 'Off-Speed' },
+    { code: 'SV', label: 'Slurve',        category: 'Off-Speed' },
+    { code: 'KN', label: 'Knuckle Ball',  category: 'Off-Speed' },
+  ];
+  const DARK_HUES  = ['#26598d', '#c2511b', '#1a7a52', '#553f91', '#8c3535'];
+  const LIGHT_HUES = ['#4e85bc', '#f47c43', '#32a087', '#8069c0', '#c3685f'];
+  function circMean(dirs) {
+    const r = d => d * Math.PI / 180;
+    const s = dirs.reduce((a, d) => a + Math.sin(r(d)), 0) / dirs.length;
+    const c = dirs.reduce((a, d) => a + Math.cos(r(d)), 0) / dirs.length;
+    return ((Math.atan2(s, c) * 180 / Math.PI) + 360) % 360;
+  }
+  function spinClock(d) {
+    let h = (((d - 180) / 30) % 12 + 12) % 12;
+    if (h < 0.0083) h = 12;
+    let hh = Math.floor(h + 1e-9), mm = Math.round((h - hh) * 60);
+    if (mm === 60) { hh += 1; mm = 0; }
+    if (hh === 0) hh = 12; if (hh === 13) hh = 1;
+    return hh + ':' + String(mm).padStart(2, '0');
+  }
+  function assignPitchColors(typesPresent) {
+    const present = MASTER_ORDER.filter(t => typesPresent.has(t.code));
+    const colors = {};
+    present.forEach((t, i) => { colors[t.code] = i < 5 ? DARK_HUES[i] : LIGHT_HUES[i - 5]; });
+    return colors;
+  }
+
+  function initSeasonStatcast(rows, ctx) {
+  const ROOT = document.getElementById('seasonSc');
+  if (!ROOT || !rows.length) return;
+  const $ = id => document.getElementById('sc-' + id);
+  const HAND = ctx.hand === 'L' ? 'L' : 'R';
+  const LS = HAND === 'R' ? 'glove-side' : 'arm-side', RS = HAND === 'R' ? 'arm-side' : 'glove-side';
+  const nn = x => (x === '' || x === undefined || x === null || isNaN(Number(x))) ? null : Number(x);
+  const classify = c => /^in play/i.test(c) ? 'IN_PLAY' : (c === 'Ball' || c === 'Ball In Dirt' || c === 'Hit By Pitch') ? 'BALL' : /^swinging strike/i.test(c) ? 'SWINGING' : 'CALLED';
+  const gameDate = new Map();
+  rows.forEach(r => { if (!gameDate.has(r.game_pk)) gameDate.set(r.game_pk, r.date); });
+  const gameOrder = Array.from(gameDate.keys()).sort((a, b) => (gameDate.get(a) < gameDate.get(b) ? -1 : gameDate.get(a) > gameDate.get(b) ? 1 : 0));
+  const DATA = { games: gameOrder.map(pk => ({ pk, date: gameDate.get(pk), opp: ctx.opponentMap.get(pk) || '' })) };
+  const P = [];
+  gameOrder.forEach((pk, gi) => {
+    const pr = rows.filter(r => r.game_pk === pk);
+    const ords = {};
+    Array.from(new Set(pr.map(r => Number(r.inning)))).sort((a, b) => a - b).forEach((n, i) => { ords[n] = i + 1; });
+    const abs = []; let cur = null;
+    pr.forEach(r => { if (!cur || cur.b !== r.batter_id) { cur = { b: r.batter_id, ps: [] }; abs.push(cur); } cur.ps.push(r); });
+    abs.forEach(ab => {
+      let balls = 0, strikes = 0;
+      ab.ps.forEach((r, i) => {
+        const sp = nn(r.spin_rate);
+        P.push({ g: gi, t: r.pitch_type_code, call: r.call, inn: ords[Number(r.inning)], bat: r.batter_name, pn: i + 1, b: balls, s: strikes,
+          z: nn(r.zone), v: nn(r.start_speed), ev_: nn(r.end_speed), spin: sp !== null && sp > 0 ? sp : null, ev: nn(r.launch_speed), la: nn(r.launch_angle), tr: r.trajectory || '',
+          px: nn(r.plate_x), pz: nn(r.plate_z), rx: nn(r.release_x), rz: nn(r.release_z), hb: nn(r.break_horizontal), vb: nn(r.break_vertical_induced), sd: nn(r.spin_direction) });
+        const ct = classify(r.call);
+        if (ct === 'BALL') { if (r.call !== 'Hit By Pitch') balls++; }
+        else if (ct === 'CALLED') { if (r.call !== 'Called Strike') { if (strikes < 2) strikes++; } else strikes++; }
+        else if (ct === 'SWINGING') strikes++;
+      });
+    });
+  });
+  const typeCounts = {}; P.forEach(p => { typeCounts[p.t] = (typeCounts[p.t] || 0) + 1; });
+  const COL = assignPitchColors(new Set(Object.keys(typeCounts)));
+  const LAB = Object.fromEntries(MASTER_ORDER.map(t => [t.code, t.label]));
+  Object.keys(typeCounts).forEach(t => { if (!LAB[t]) LAB[t] = t; if (!COL[t]) COL[t] = '#888'; });
+  const spinNote = (n, total) => { const pct = total ? Math.round(n / total * 100) : 0; let label = ''; if (n > 0) label = `${pct < 50 ? 'Small' : (pct <= 70 ? 'Decent' : 'Sufficient')} Sample Size: ${pct}%`; else if (total > 0) label = 'No Spin Data Available'; return `${n} of ${total} pitches` + (label ? '<br>' + label : ''); };
+
+const kind=p=>/^in play/i.test(p.call)?'INPLAY':(p.call==='Ball'||p.call==='Ball In Dirt'||p.call==='Hit By Pitch')?'BALL':/^swinging strike/i.test(p.call)?'SWING':/^foul/i.test(p.call)?'FOUL':'CALLED';
+const isSwing=p=>['SWING','FOUL','INPLAY'].includes(kind(p));
+const inZone=p=>p.z>=1&&p.z<=9;
+const types=[...new Set(P.map(p=>p.t))].sort((a,b)=>P.filter(p=>p.t===b).length-P.filter(p=>p.t===a).length);
+let sel=[],multi=false,res=[],resMulti=false,cnt=[],cntMulti=false,inn=[],innMulti=false,openDD=null,slide=0,sortK='n',sortAsc=false;
+const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+const pct=(n,d)=>d?Math.round(100*n/d)+'%':'—';
+const f1=v=>v==null?'—':v.toFixed(1);
+const innOk=p=>!inn.length||inn.includes(String(p.inn));
+const scoped=(ignoreType,ignoreCount)=>P.filter(p=>(ignoreType||!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&(ignoreCount||cntOk(p))&&innOk(p));
+function stats(a){
+ const n=a.length,sw=a.filter(isSwing),oz=a.filter(p=>!inZone(p)&&p.z),ozSw=oz.filter(isSwing);
+ const whiff=a.filter(p=>kind(p)==='SWING').length,called=a.filter(p=>kind(p)==='CALLED').length;
+ const strikes=a.filter(p=>kind(p)!=='BALL').length,fp=a.filter(p=>p.pn===1);
+ const bip=a.filter(p=>p.ev!=null);
+ const gb=bip.filter(p=>/ground/.test(p.tr)).length,ld=bip.filter(p=>/line/.test(p.tr)).length,fb=bip.filter(p=>/fly|popup/.test(p.tr)).length;
+  const barrel=bip.filter(p=>{if(p.la==null)return false;const z=bz(p.ev);return !!z&&p.la>=z[0]&&p.la<=z[1]}).length;
+ const sp=a.map(p=>p.spin).filter(v=>v!=null),vl=a.filter(p=>p.v!=null&&p.ev_!=null).map(p=>p.v-p.ev_);
+ return {n,velo:mean(a.map(p=>p.v).filter(v=>v!=null)),max:Math.max(...a.map(p=>p.v).filter(v=>v!=null)),spin:mean(sp),spinN:sp.length,whiff,hard:bip.filter(p=>p.ev>=95).length,
+  strikePct:pct(strikes,n),zone:pct(a.filter(inZone).length,a.filter(p=>p.z).length),chase:pct(ozSw.length,oz.length),csw:pct(called+whiff,n),whiffPct:pct(whiff,sw.length),
+  fps:pct(fp.filter(p=>kind(p)!=='BALL').length,fp.length),bipN:bip.length,avgEV:mean(bip.map(p=>p.ev)),maxEV:bip.length?Math.max(...bip.map(p=>p.ev)):null,
+  gb:pct(gb,bip.length),ld:pct(ld,bip.length),fb:pct(fb,bip.length),barrel:pct(barrel,bip.length),loss:mean(vl)};
+}
+const tile=(l,v,n)=>`<div><div class="tl">${l}</div><div class="tv">${v}</div>${n?`<div class="tn">${n}</div>`:''}</div>`;
+function renderTiles(){
+ const a=scoped(),s=stats(a);
+ if(!a.length){$('tiles').innerHTML='<div class="tn" style="grid-column:1/-1">No pitches in this selection.</div>';$('tiles2').innerHTML='';return}
+ $('tiles').innerHTML=tile('Pitches',s.n)+tile('Avg Velo',f1(s.velo))+tile('Max Velo',f1(s.max))+tile('Avg Spin',(s.spin?Math.round(s.spin):'N/A')+(s.spinN<s.n?'*':''),spinNote(s.spinN,s.n))+tile('Whiffs',s.whiff)+tile('Hard-Hit',s.hard);
+ $('tiles2').innerHTML=
+ '<div class="sub">Strikes &amp; discipline</div>'+tile('Strike %',s.strikePct)+tile('Zone %',s.zone)+tile('Chase %',s.chase)+tile('CSW %',s.csw,'called + whiffs')+tile('Whiff %',s.whiffPct,'per swing')+tile('1st-Pitch Strike',s.fps)+
+ '<div class="sub">Contact allowed ('+s.bipN+' in play)</div>'+tile('Avg Exit Velo',f1(s.avgEV))+tile('Max Exit Velo',f1(s.maxEV))+tile('Barrel %',s.barrel,'approx., per MLB def.')+tile('Ground Ball',s.gb)+tile('Line Drive',s.ld)+tile('Fly Ball / Popup',s.fb)+
+ '<div class="sub">Velocity</div>'+tile('Velo Loss',s.loss==null?'—':s.loss.toFixed(1)+' mph','release to plate');
+}
+function renderChips(){
+ const base=P.filter(p=>(!res.length||res.includes(kind(p)))&&cntOk(p)&&innOk(p));
+ let h=`<button class="chip${!sel.length?' on':''}" data-t="ALL">All Pitches <span class="n">(${base.length})</span></button>`;
+ types.forEach(t=>{const c=base.filter(p=>p.t===t).length,on=sel.includes(t);
+  h+=`<button class="chip${on?' on':''}${c===0&&!on?' off':''}" data-t="${t}">${multi?`<span class="cb${on?' on':''}">${on?'&#10003;':''}</span>`:''}<span class="dot" style="background:${COL[t]}"></span>${LAB[t]} <span class="n">(${c})</span></button>`});
+ h+=`<span class="multi" id="sc-multi"><span class="cb${multi?' on':''}">${multi?'&#10003;':''}</span>Multiple Selections</span><button class="reset" id="sc-reset"${(sel.length||res.length||cnt.length||inn.length||multi||resMulti||cntMulti||innMulti)?'':' disabled'}>Reset Filters</button>`;
+ $('chips').innerHTML=h;
+ ROOT.querySelectorAll('.chip').forEach(b=>b.onclick=()=>pick(b.dataset.t));
+ $('multi').onclick=()=>{multi=!multi;if(!multi&&sel.length>1)sel=[sel[0]];all()};
+ $('reset').onclick=()=>{sel=[];res=[];cnt=[];inn=[];multi=false;resMulti=false;cntMulti=false;innMulti=false;all()};
+}
+function pick(t){
+ if(t==='ALL')sel=[];else if(multi)sel=sel.includes(t)?sel.filter(x=>x!==t):[...sel,t];else sel=(sel.length===1&&sel[0]===t)?[]:[t];all();
+}
+const RES_OPTS=[['ALL','All Results'],['CALLED','Called Strike'],['SWING','Swinging Strike'],['FOUL','Foul'],['BALL','Ball'],['INPLAY','Ball In Play']];
+const OCOL={CALLED:'#c0392b',SWING:'#e8590c',FOUL:'#b8860b',BALL:'#6b7280',INPLAY:'#2563a8'};
+const CNT_OPTS=[['ALL','All Counts'],['FIRST','First Pitch (0-0)'],['AHEAD','Ahead (Strikes > Balls)'],['EVEN','Even (1-1, 2-2)'],['BEHIND','Behind (Balls > Strikes)'],['FULL','Full Count (3-2)'],['TWO','Two Strikes']];
+const ORD=n=>n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:(n%10<4?n%10:0)]);
+const INNS=[...new Set(P.map(p=>p.inn))].sort((x,y)=>x-y);
+const INN_OPTS=[['ALL','All Innings'],...INNS.map(n=>[String(n),ORD(n)+' Inning Pitched'])];
+const CNT_TEST={FIRST:p=>p.b===0&&p.s===0,AHEAD:p=>p.s>p.b,EVEN:p=>p.s===p.b&&p.b>0,BEHIND:p=>p.b>p.s&&!(p.b===3&&p.s===2),FULL:p=>p.b===3&&p.s===2,TWO:p=>p.s===2};
+const cntOk=p=>!cnt.length||cnt.some(k=>CNT_TEST[k](p));
+const DD={
+ res:{label:'Result',all:'All Results',opts:RES_OPTS,test:(p,k)=>kind(p)===k,mark:k=>k==='ALL'?'':`<span class="oc-dot" style="background:${OCOL[k]}"></span>`,
+      get v(){return res},set v(x){res=x},get m(){return resMulti},set m(x){resMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&cntOk(p)&&innOk(p))},
+ cnt:{label:'Count',all:'All Counts',opts:CNT_OPTS,test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
+      get v(){return cnt},set v(x){cnt=x},get m(){return cntMulti},set m(x){cntMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&innOk(p))},
+ inn:{label:'Inning',all:'All Innings',opts:INN_OPTS,test:(p,k)=>String(p.inn)===k,mark:()=>'',
+      get v(){return inn},set v(x){inn=x},get m(){return innMulti},set m(x){innMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&cntOk(p))}
+};
+function renderDD(id){
+ const d=DD[id],base=d.base(),n=k=>k==='ALL'?base.length:base.filter(p=>d.test(p,k)).length;
+ const ck=on=>`<span class="cb${on?' on':''}">${on?'&#10003;':''}</span>`;
+ const lab=k=>d.opts.find(o=>o[0]===k)[1];
+ const txt=!d.v.length?`${d.all} (${base.length})`:d.v.map(lab).join(', ')+` (${base.filter(p=>d.v.some(k=>d.test(p,k))).length})`;
+ const opts=d.opts.map(([k,l])=>{const on=k==='ALL'?!d.v.length:d.v.includes(k);
+  const row=`<div class="oopt${on?' sel':''}" data-k="${k}">${d.m&&k!=='ALL'?ck(on):''}${d.mark(k)}<span>${l}</span><span class="ocnt">${n(k)}</span></div>`;
+  return k==='ALL'?`<div class="otop">${row}<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div></div>`:row}).join('');
+ const host=$('dd-'+id);
+ host.innerHTML=`<span class="olab">${d.label}</span><div class="odd"><button type="button" class="obtn${d.v.length?' act':''}">${d.v.length?d.v.map(d.mark).join(''):''}<span class="otxt">${txt}</span><span style="color:var(--mut)">&#9662;</span></button><div class="omenu"${openDD===id?'':' hidden'}>${opts}</div></div>`;
+ const btn=host.querySelector('.obtn'),menu=host.querySelector('.omenu');
+ btn.onclick=e=>{e.stopPropagation();openDD=openDD===id?null:id;syncOpen()};
+ menu.onclick=e=>e.stopPropagation();
+ menu.querySelectorAll('.oopt').forEach(el=>el.onclick=()=>{const k=el.dataset.k;
+  if(k==='ALL')d.v=[];else if(d.m)d.v=d.v.includes(k)?d.v.filter(x=>x!==k):[...d.v,k];else d.v=[k];
+  if(!d.m)openDD=null;all()});
+ menu.querySelector('.omulti').onclick=()=>{d.m=!d.m;if(!d.m&&d.v.length>1)d.v=[d.v[0]];all()};
+}
+function syncOpen(){['res','cnt','inn'].forEach(id=>{const m=ROOT.querySelector('#sc-dd-'+id+' .omenu');if(m)m.hidden=openDD!==id})}
+function renderRes(){renderDD('res');renderDD('cnt');renderDD('inn')}
+if(window._scOut)document.removeEventListener('click',window._scOut);window._scOut=()=>{if(openDD){openDD=null;syncOpen()}};document.addEventListener('click',window._scOut);
+$('more').onclick=e=>{const o=$('tiles2').classList.toggle('on');e.target.innerHTML='More Stats '+(o?'&#9652;':'&#9662;')};
+// ---- table
+const COLS=[['n','#',s=>s.n],['use','Usage',s=>s.n/Math.max(1,scoped(true).length)],['velo','Avg Velo',s=>s.velo],['max','Max',s=>s.max],['spin','Spin',s=>s.spin],['whiff','Whiff %',s=>parseInt(s.whiffPct)||0],['csw','CSW %',s=>parseInt(s.csw)||0],['chase','Chase %',s=>parseInt(s.chase)||0],['zone','Zone %',s=>parseInt(s.zone)||0],['ev','Avg EV',s=>s.avgEV||0]];
+function renderTable(){
+ const base=scoped(true);
+ const rows=types.map(t=>({t,s:stats(base.filter(p=>p.t===t))})).filter(r=>r.s.n>0);
+ const key=COLS.find(c=>c[0]===sortK)||COLS[0];
+ rows.sort((a,b)=>(key[2](a.s)-key[2](b.s))*(sortAsc?1:-1));
+ const cell=(s,tot)=>`<td>${s.n}</td><td>${base.length?Math.round(100*s.n/base.length)+'%':'—'}</td><td>${f1(s.velo)}</td><td>${f1(s.max)}</td><td>${s.spin?Math.round(s.spin):'N/A'}</td><td>${s.whiffPct}</td><td>${s.csw}</td><td>${s.chase}</td><td>${s.zone}</td><td>${f1(s.avgEV)}</td>`;
+ let h='<thead><tr><th>Pitch</th>'+COLS.map(c=>`<th data-k="${c[0]}" class="${sortK===c[0]?'s'+(sortAsc?' a':''):''}">${c[1]}</th>`).join('')+'</tr></thead><tbody>';
+ rows.forEach(r=>h+=`<tr data-t="${r.t}" class="${sel.includes(r.t)?'sel':(sel.length?'dim':'')}"><td><span class="dot" style="background:${COL[r.t]};margin-right:8px"></span><b>${LAB[r.t]}</b></td>${cell(r.s)}</tr>`);
+ h+=`<tr class="tot"><td>All</td>${cell(stats(base))}</tr></tbody>`;
+ $('tbl').innerHTML=h;
+ ROOT.querySelectorAll('#sc-tbl tbody tr[data-t]').forEach(r=>r.onclick=()=>pick(r.dataset.t));
+ ROOT.querySelectorAll('#sc-tbl th[data-k]').forEach(th=>th.onclick=()=>{if(sortK===th.dataset.k)sortAsc=!sortAsc;else{sortK=th.dataset.k;sortAsc=false}renderTable()});
+}
+// ---- charts
+let tip=document.getElementById('scTip');if(!tip){tip=document.createElement('div');tip.id='scTip';document.body.appendChild(tip)}
+function hook(){ROOT.querySelectorAll('[data-tip]').forEach(e=>{e.onmousemove=ev=>{tip.style.display='block';tip.innerHTML=e.dataset.tip;tip.style.left=Math.min(ev.clientX+14,innerWidth-250)+'px';tip.style.top=(ev.clientY+14)+'px'};e.onmouseleave=()=>tip.style.display='none'})}
+
+const bz=e=>e<98?null:e<=98?[26,30]:e<=99?[25,31]:e<=100?[24,33]:e>=116?[8,50]:[24-(e-100),33+(e-100)*17/16];
+const GROUPS=[['First Pitch (0-0)',p=>CNT_TEST.FIRST(p),'FIRST'],['Ahead (Strikes > Balls)',p=>CNT_TEST.AHEAD(p),'AHEAD'],['Even (1-1, 2-2)',p=>CNT_TEST.EVEN(p),'EVEN'],['Behind (Balls > Strikes)',p=>CNT_TEST.BEHIND(p),'BEHIND'],['Full Count (3-2)',p=>CNT_TEST.FULL(p),'FULL']];
+function chartMix(a){
+ const W=540,L=190,R=16,rowH=62,H=GROUPS.length*rowH+26;let s=`<svg viewBox="0 0 ${W} ${H}">`;
+ GROUPS.forEach((g,i)=>{const ps=a.filter(g[1]),y=10+i*rowH;
+  s+=`<g class="clk" data-cnt="${g[2]}"><rect x="0" y="${y-2}" width="${W}" height="${rowH-4}" rx="6" fill="${cnt.includes(g[2])?'var(--sel)':'transparent'}"/><text x="${L-10}" y="${y+22}" text-anchor="end" font-size="12" font-weight="700">${g[0]}</text><text x="${L-10}" y="${y+38}" text-anchor="end" font-size="10.5" class="m">${ps.length} ${ps.length===1?"pitch":"pitches"}</text>`;
+  if(!ps.length){s+=`<text x="${L}" y="${y+32}" font-size="11" class="m">No pitches in this selection</text></g>`;return}
+  let x=L;const bw=W-L-R;
+  types.forEach(t=>{const c=ps.filter(p=>p.t===t).length;if(!c)return;const w=bw*c/ps.length;
+   s+=`<rect data-tip="<b>${LAB[t]}</b><br>${g[0]}<br>${c} of ${ps.length} (${(100*c/ps.length).toFixed(2)}%)" x="${x}" y="${y+10}" width="${Math.max(0,w-2)}" height="34" rx="3" fill="${COL[t]}"/>`;
+   s+=`<text x="${x+w/2-1}" y="${y+31}" text-anchor="middle" font-size="${w<30?9:11}" font-weight="700" style="fill:#fff;pointer-events:none">${Math.round(100*c/ps.length)}%</text>`;x+=w});
+  s+='</g>';
+ });
+ return s+'</svg>';
+}
+function chartVelo(a){
+ const inns=[...new Set(P.map(p=>p.inn))].sort((x,y)=>x-y),W=520,H=340,L=50,R=20,T=22,B=48,pw=W-L-R,ph=H-T-B,bw=pw/inns.length;
+ const vs=a.map(p=>p.v).filter(v=>v!=null);let mn=Math.floor((Math.min(...vs)-6)/5)*5,mx=Math.ceil((Math.max(...vs)+1)/5)*5;
+ const X0=i=>L+(i+.5)*bw,Y=v=>T+ph-(v-mn)/(mx-mn)*ph;
+ let s=`<svg viewBox="0 0 ${W} ${H}">`;
+ for(let v=mn;v<=mx;v+=5)s+=`<line x1="${L}" x2="${L+pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="11" class="m">${v}</text>`;
+ inns.forEach((n,i)=>{s+=`<g class="clk" data-inn="${n}"><rect x="${L+i*bw+2}" y="${T}" width="${bw-4}" height="${ph+26}" rx="6" fill="${inn.includes(String(n))?'var(--sel)':'transparent'}"/></g>`});
+ inns.forEach((n,i)=>{if(i>0)s+=`<line x1="${L+i*bw}" x2="${L+i*bw}" y1="${T}" y2="${T+ph}" stroke="var(--grid)" stroke-width="1.5" stroke-dasharray="4 4"/>`;s+=`<text x="${X0(i)}" y="${T+ph+18}" text-anchor="middle" font-size="11" class="m">${ORD(n)}</text>`});
+ s+=`<text x="${L+pw/2}" y="${T+ph+34}" text-anchor="middle" font-size="11" font-weight="700">INNING PITCHED</text><text transform="translate(13 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">AVG VELOCITY (MPH)</text><text x="${L+pw}" y="10" text-anchor="end" font-size="10" class="m">axis starts at ${mn} mph</text>`;
+ const maxBars=Math.max(...inns.map(n=>types.filter(tp=>a.some(p=>p.inn===n&&p.t===tp&&p.v!=null)).length),1),BW=Math.min(34,bw*.82/maxBars);
+ inns.forEach((n,i)=>{
+  const bars=types.map(tp=>{const g=a.filter(p=>p.inn===n&&p.t===tp&&p.v!=null);return g.length?{tp,av:mean(g.map(p=>p.v)),c:g.length}:null}).filter(Boolean);
+  if(!bars.length)return;const gw=bw*.82,w=BW,x0=X0(i)-w*bars.length/2;
+  bars.forEach((b,k)=>{const x=x0+k*w,y=Y(b.av),h=T+ph-y,bx=x+1,ww=Math.max(2,w-2),r=Math.min(3,ww/2);
+   s+=`<path data-inn="${n}" class="clk" data-tip="<b>${LAB[b.tp]}</b> &middot; ${ORD(n)} inning pitched<br>${b.av.toFixed(1)} mph avg<br>${b.c} pitch${b.c>1?'es':''}" d="M${bx},${T+ph}V${y+r}Q${bx},${y} ${bx+r},${y}H${bx+ww-r}Q${bx+ww},${y} ${bx+ww},${y+r}V${T+ph}Z" fill="${COL[b.tp]}"/>`;
+   if(ww>=22)s+=`<text x="${bx+ww/2}" y="${y-4}" text-anchor="middle" font-size="9.5" font-weight="700" style="pointer-events:none">${b.av.toFixed(1)}</text>`});
+ });
+ return s+'</svg>';
+}
+function chartEV(a){
+ const b=a.filter(p=>p.ev!=null&&p.la!=null);if(!b.length)return null;
+ const evs=b.map(p=>p.ev),las=b.map(p=>p.la),xm=[Math.min(60,Math.floor((Math.min(...evs)-2)/10)*10),115],ym=[Math.min(-40,Math.floor((Math.min(...las)-5)/20)*20),Math.max(70,Math.ceil((Math.max(...las)+5)/20)*20)];const W=520,H=360,L=50,R=16,T=14,B=44,pw=W-L-R,ph=H-T-B;
+ const X=v=>L+(v-xm[0])/(xm[1]-xm[0])*pw,Y=v=>T+ph-(v-ym[0])/(ym[1]-ym[0])*ph;
+ let s=`<svg viewBox="0 0 ${W} ${H}">`;
+ for(let v=xm[0];v<=115;v+=10)s+=`<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${T+ph}" stroke="var(--grid)"/><text x="${X(v)}" y="${T+ph+16}" text-anchor="middle" font-size="11" class="m">${v}</text>`;
+ for(let v=ym[0];v<=ym[1];v+=20)s+=`<line x1="${L}" x2="${L+pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="11" class="m">${v}</text>`;
+ // approximate barrel zone
+ let pts=[];for(let e=98;e<=115;e+=1)pts.push([X(e),Y(bz(e)[1])]);for(let e=115;e>=98;e-=1)pts.push([X(e),Y(bz(e)[0])]);
+ s+=`<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="var(--acc)" opacity=".16"/><text x="${X(106)}" y="${Y(30)}" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--acc)">BARREL (approx.)</text>`;
+ s+=`<line x1="${X(95)}" x2="${X(95)}" y1="${T}" y2="${T+ph}" stroke="var(--mut)" stroke-dasharray="4 4"/><text x="${X(95)+4}" y="${T+11}" font-size="10" class="m">95 mph hard-hit</text>`;
+ s+=`<text x="${L+pw/2}" y="${H-6}" text-anchor="middle" font-size="11" font-weight="700">EXIT VELOCITY (MPH)</text><text transform="translate(13 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">LAUNCH ANGLE (&deg;)</text>`;
+ b.forEach(p=>s+=`<circle data-tip="<b>${LAB[p.t]}</b> to ${p.bat}<br>${p.ev.toFixed(1)} mph &middot; ${p.la}&deg;<br>${p.tr.replace('_',' ')} &middot; ${p.call}" cx="${X(p.ev)}" cy="${Y(p.la)}" r="7" fill="${COL[p.t]}" stroke="var(--card)" stroke-width="2"/>`);
+ return s+'</svg>';
+}
+
+const OC2={CALLED:'#c0392b',SWING:'#c0392b',FOUL:'#c0392b',BALL:'#1a8a4a',INPLAY:'#2f6fb0'};
+function chartLoc(a){
+ const inSet=new Set(a);const base=P.filter(p=>!sel.length||sel.includes(p.t));
+ const W=500,H=470,sx=80,sy=88,cx=W/2,X=v=>cx+v*sx,Y=v=>H-14-v*sy*0.9;
+ let s=`<svg viewBox="0 0 ${W} ${H}"><rect x="${X(-2.6)}" y="${Y(4.6)}" width="${5.2*sx}" height="${(4.6-0.1)*sy*.9}" fill="none" stroke="var(--grid)" stroke-dasharray="3 3"/>`;
+ const zx0=X(-.708),zx1=X(.708),zy0=Y(3.5),zy1=Y(1.5);
+ for(let i=1;i<3;i++){s+=`<line x1="${zx0+(zx1-zx0)*i/3}" x2="${zx0+(zx1-zx0)*i/3}" y1="${zy0}" y2="${zy1}" stroke="var(--grid)"/><line x1="${zx0}" x2="${zx1}" y1="${zy0+(zy1-zy0)*i/3}" y2="${zy0+(zy1-zy0)*i/3}" stroke="var(--grid)"/>`}
+ s+=`<rect x="${zx0}" y="${zy0}" width="${zx1-zx0}" height="${zy1-zy0}" fill="none" stroke="var(--ink)" stroke-width="2.5"/>`;
+ base.filter(p=>p.px!=null&&p.pz!=null).forEach(p=>{const k=kind(p),c=OC2[k],x=X(p.px),y=Y(p.pz),op=inSet.has(p)?.8:.1;
+  const tp=`data-tip="<b>${LAB[p.t]}</b> &middot; ${p.v!=null?p.v.toFixed(1)+' mph':''}<br>${p.call}<br>${DATA.games[p.g].date} vs ${DATA.games[p.g].opp}"`;
+  if(k==='SWING')s+=`<text ${tp} x="${x}" y="${y+4.5}" text-anchor="middle" font-size="13" font-weight="800" style="fill:${c};opacity:${op}">&#10005;</text>`;
+  else if(k==='FOUL')s+=`<rect ${tp} x="${x-3.5}" y="${y-3.5}" width="7" height="7" fill="${c}" opacity="${op}"/>`;
+  else s+=`<circle ${tp} cx="${x}" cy="${y}" r="4" fill="${c}" opacity="${op}"/>`});
+ return s+'</svg>';
+}
+function chartMove(a){
+ const W=500,H=460,L=44,R=16,T=18,B=40,pw=W-L-R,ph=H-T-B,M=25,X=v=>L+(v+M)/(2*M)*pw,Y=v=>T+ph-(v+M)/(2*M)*ph;
+ let s=`<svg viewBox="0 0 ${W} ${H}">`;
+ for(let v=-20;v<=20;v+=10)s+=`<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${T+ph}" stroke="var(--grid)"/><line x1="${L}" x2="${L+pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${X(v)}" y="${T+ph+15}" text-anchor="middle" font-size="11" class="m">${v}</text><text x="${L-7}" y="${Y(v)+4}" text-anchor="end" font-size="11" class="m">${v}</text>`;
+ s+=`<line x1="${X(0)}" x2="${X(0)}" y1="${T}" y2="${T+ph}" stroke="var(--mut)"/><line x1="${L}" x2="${L+pw}" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--mut)"/>`;
+ s+=`<text x="${L+8}" y="${T+14}" font-size="10" class="m">rise &amp; ${LS}</text><text x="${L+pw-8}" y="${T+14}" text-anchor="end" font-size="10" class="m">rise &amp; ${RS}</text><text x="${L+8}" y="${T+ph-8}" font-size="10" class="m">drop &amp; ${LS}</text><text x="${L+pw-8}" y="${T+ph-8}" text-anchor="end" font-size="10" class="m">drop &amp; ${RS}</text>`;
+ s+=`<text x="${L+pw/2}" y="${H-5}" text-anchor="middle" font-size="11" font-weight="700">HORIZONTAL BREAK (IN.)  &#8592; ${LS} &nbsp; ${RS} &#8594;</text><text transform="translate(12 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">INDUCED VERTICAL BREAK (IN.)</text>`;
+ const pts=a.filter(p=>p.hb!=null&&p.vb!=null);
+ pts.forEach(p=>s+=`<circle data-tip="<b>${LAB[p.t]}</b><br>${p.hb.toFixed(1)}&quot; H &middot; ${p.vb.toFixed(1)}&quot; V" cx="${X(p.hb)}" cy="${Y(p.vb)}" r="3.6" fill="${COL[p.t]}" opacity=".5"/>`);
+ types.forEach(t=>{const g=pts.filter(p=>p.t===t);if(!g.length)return;const hx=mean(g.map(p=>p.hb)),vy=mean(g.map(p=>p.vb));
+  s+=`<circle data-tip="<b>${LAB[t]} average</b><br>${hx.toFixed(1)}&quot; H &middot; ${vy.toFixed(1)}&quot; V<br>${g.length} pitches" cx="${X(hx)}" cy="${Y(vy)}" r="9" fill="${COL[t]}" stroke="var(--card)" stroke-width="3"/>`});
+ return s+'</svg>';
+}
+function chartRel(a){
+ const pts=a.filter(p=>p.rx!=null&&p.rz!=null);if(!pts.length)return null;
+ const W=500,H=420,L=44,R=16,T=14,B=44,pw=W-L-R,ph=H-T-B,rxs=P.filter(p=>p.rx!=null).map(p=>p.rx),rzs=P.filter(p=>p.rz!=null).map(p=>p.rz),sp1=Math.max(2.4,Math.ceil((Math.max(...rxs)-Math.min(...rxs)+.5)/.6)*.6),c1=Math.round((Math.max(...rxs)+Math.min(...rxs))/2*20)/20,sp2=Math.max(1.2,Math.ceil((Math.max(...rzs)-Math.min(...rzs)+.4)/.4)*.4),c2=Math.round((Math.max(...rzs)+Math.min(...rzs))/2*20)/20,xm=[c1-sp1/2,c1+sp1/2],zm=[c2-sp2/2,c2+sp2/2];
+ const X=v=>L+(1-(v-xm[0])/(xm[1]-xm[0]))*pw,Y=v=>T+ph-(v-zm[0])/(zm[1]-zm[0])*ph;
+ let s=`<svg viewBox="0 0 ${W} ${H}">`;
+ for(let i=0;i<=6;i++){const v=xm[0]+i*(xm[1]-xm[0])/6;s+=`<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${T+ph}" stroke="var(--grid)"/><text x="${X(v)}" y="${T+ph+15}" text-anchor="middle" font-size="10.5" class="m">${v.toFixed(2)}</text>`}
+ for(let i=0;i<=4;i++){const v=zm[0]+i*(zm[1]-zm[0])/4;s+=`<line x1="${L}" x2="${L+pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${L-7}" y="${Y(v)+4}" text-anchor="end" font-size="10.5" class="m">${v.toFixed(1)}</text>`}
+ s+=`<text x="${L+pw/2}" y="${H-6}" text-anchor="middle" font-size="11" font-weight="700">HORIZONTAL RELEASE (FT)  &#8592; ${LS} &nbsp; ${RS} &#8594;</text><text transform="translate(12 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">RELEASE HEIGHT (FT)</text>`;
+ pts.forEach(p=>s+=`<circle data-tip="<b>${LAB[p.t]}</b><br>${p.rx.toFixed(2)} ft &middot; ${p.rz.toFixed(2)} ft" cx="${X(p.rx)}" cy="${Y(p.rz)}" r="3.6" fill="${COL[p.t]}" opacity=".5"/>`);
+ types.forEach(t=>{const g=pts.filter(p=>p.t===t);if(!g.length)return;const hx=mean(g.map(p=>p.rx)),vy=mean(g.map(p=>p.rz));
+  s+=`<circle data-tip="<b>${LAB[t]} average</b><br>${g.length} pitches" cx="${X(hx)}" cy="${Y(vy)}" r="9" fill="${COL[t]}" stroke="var(--card)" stroke-width="3"/>`});
+ return s+'</svg>';
+}
+function chartSpin(a){
+ const pts=a.filter(p=>p.spin!=null&&p.v!=null);if(!pts.length)return null;
+ const all=P.filter(p=>p.spin!=null&&p.v!=null);
+ const fit=(vals,steps,minSpan)=>{const mn=Math.min(...vals),mx=Math.max(...vals),span=Math.max(minSpan,mx-mn),pad=span*.2,raw=(span+2*pad)/6;const step=steps.find(x=>x>=raw)||steps[steps.length-1];return{min:Math.floor((mn-pad)/step)*step,max:Math.ceil((mx+pad)/step)*step,step}};
+ const ax=fit(all.map(p=>p.v),[1,2,5,10],6),ay=fit(all.map(p=>p.spin),[50,100,200,250,500],300);
+ const W=500,H=440,L=54,R=16,T=14,B=44,pw=W-L-R,ph=H-T-B,X=v=>L+(v-ax.min)/(ax.max-ax.min)*pw,Y=v=>T+ph-(v-ay.min)/(ay.max-ay.min)*ph;
+ let s=`<svg viewBox="0 0 ${W} ${H}">`;
+ for(let t=ax.min;t<=ax.max+1e-9;t+=ax.step)s+=`<line x1="${X(t)}" x2="${X(t)}" y1="${T}" y2="${T+ph}" stroke="var(--grid)"/><text x="${X(t)}" y="${T+ph+15}" text-anchor="middle" font-size="11" class="m">${t}</text>`;
+ for(let t=ay.min;t<=ay.max+1e-9;t+=ay.step)s+=`<line x1="${L}" x2="${L+pw}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--grid)"/><text x="${L-7}" y="${Y(t)+4}" text-anchor="end" font-size="11" class="m">${t}</text>`;
+ s+=`<text x="${L+pw/2}" y="${H-6}" text-anchor="middle" font-size="11" font-weight="700">VELOCITY (MPH)</text><text transform="translate(12 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">SPIN RATE (RPM)</text>`;
+ pts.forEach(p=>s+=`<circle data-tip="<b>${LAB[p.t]}</b><br>${p.v.toFixed(1)} mph &middot; ${p.spin} rpm" cx="${X(p.v)}" cy="${Y(p.spin)}" r="3.6" fill="${COL[p.t]}" opacity=".5"/>`);
+ types.forEach(t=>{const g=pts.filter(p=>p.t===t);if(!g.length)return;const vx=mean(g.map(p=>p.v)),sy=mean(g.map(p=>p.spin));
+  s+=`<circle data-tip="<b>${LAB[t]} average</b><br>${vx.toFixed(1)} mph &middot; ${Math.round(sy)} rpm<br>${g.length} pitches" cx="${X(vx)}" cy="${Y(sy)}" r="9" fill="${COL[t]}" stroke="var(--card)" stroke-width="3"/>`});
+ return s+'</svg>';
+}
+function dialArrow(cx,cy,deg,len,col,w,op,tt){const a=(deg-180)*Math.PI/180,sx=Math.sin(a),sy=-Math.cos(a),ex=cx+len*sx,ey=cy+len*sy,hl=w*3.4,hw=w*1.9,bx=ex-hl*sx,by=ey-hl*sy,qx=-sy,qy=sx;
+ return `<g opacity="${op}" data-tip="${tt}"><line x1="${cx}" y1="${cy}" x2="${bx}" y2="${by}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/><polygon points="${ex},${ey} ${bx+hw*qx},${by+hw*qy} ${bx-hw*qx},${by-hw*qy}" fill="${col}"/></g>`}
+function chartDial(a){
+ const pts=a.filter(p=>p.sd!=null);if(!pts.length)return null;
+ const W=520,cx=260,cy=260,R=170,pos=(d,r)=>{const t=(d-180)*Math.PI/180;return[cx+r*Math.sin(t),cy-r*Math.cos(t)]};
+ let s=`<svg viewBox="0 0 ${W} ${W}">`;
+ for(let k=1;k<=5;k++)s+=`<circle cx="${cx}" cy="${cy}" r="${R*k/5}" fill="none" stroke="var(--grid)"/>`;
+ for(let d=0;d<360;d+=15){const[x2,y2]=pos(d,R);s+=`<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="var(--grid)"/>`}
+ s+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--mut)" stroke-opacity=".5" stroke-width="1.5"/>`;
+ for(let d=0;d<360;d+=15){const[x,y]=pos(d,R+15);s+=`<text x="${x}" y="${y+3.5}" font-size="10.5" text-anchor="middle" font-weight="600" class="m">${d}&deg;</text>`}
+ for(let h=1;h<=12;h++){const[x,y]=pos((180+h*30)%360,R+42);s+=`<text x="${x}" y="${y+6}" font-size="17" text-anchor="middle" font-weight="800" style="fill:#c0392b">${h}</text>`}
+ const lb='font-size="12" font-weight="800" text-anchor="middle" letter-spacing="1"';
+ s+=`<text x="${cx}" y="20" ${lb}>TOP SPIN</text><text x="${cx}" y="${W-8}" ${lb}>BACK SPIN</text><text transform="translate(14 ${cy}) rotate(-90)" ${lb}>SIDE SPIN</text><text transform="translate(${W-14} ${cy}) rotate(90)" ${lb}>SIDE SPIN</text>`;
+ if(sel.length)pts.forEach(p=>s+=dialArrow(cx,cy,p.sd,R*.88,COL[p.t],1.6,.3,`<b>${LAB[p.t]}</b> &middot; ${Math.round(p.sd)}&deg; (${spinClock(p.sd)}) &middot; ${p.spin!=null?p.spin+' rpm':'N/A'}`));
+ types.forEach(t=>{const g=pts.filter(p=>p.t===t);if(!g.length)return;const d=circMean(g.map(p=>p.sd));
+  s+=dialArrow(cx,cy,d,R*.9,COL[t],4.5,1,`<b>${LAB[t]} average</b>: ${Math.round(d)}&deg; (${spinClock(d)}) &middot; ${g.length} pitches`)});
+ return s+`<circle cx="${cx}" cy="${cy}" r="5" fill="var(--ink)"/></svg>`;
+}
+function togg(arr,k,multiOn){return arr.includes(k)?(multiOn?arr.filter(x=>x!==k):[]):(multiOn?[...arr,k]:[k])}
+function bindClicks(){
+ ROOT.querySelectorAll('#sc-plot [data-cnt]').forEach(g=>g.onclick=()=>{cnt=togg(cnt,g.dataset.cnt,cntMulti);all()});
+ ROOT.querySelectorAll('#sc-plot [data-inn]').forEach(g=>g.onclick=()=>{inn=togg(inn,g.dataset.inn,innMulti);all()});
+}
+function renderChart(){
+ $('ctitle').textContent='Statcast Charts — '+SLIDES[slide].n;
+ $('dots').innerHTML=SLIDES.map((s,i)=>`<button class="dotb${i===slide?' on':''}" data-i="${i}" aria-label="${s.n}"></button>`).join('');
+ ROOT.querySelectorAll('.dotb').forEach(b=>b.onclick=()=>{slide=+b.dataset.i;renderChart()});
+ const a=scoped();const SN=SLIDES[slide].n;let h=SLIDES[slide].f(a);
+ const used=[...new Set(a.map(p=>p.t))];
+ let leg=used.map(t=>`<span><span class="dot" style="background:${COL[t]}"></span> ${LAB[t]}</span>`).join('');
+ if(SN==='Pitch Location'){const ks=['CALLED','SWING','FOUL','BALL','INPLAY'].filter(k=>a.some(p=>kind(p)===k));const nm={CALLED:'Called Strike',SWING:'Swinging Strike',FOUL:'Foul',BALL:'Ball',INPLAY:'Ball In Play'};
+  leg=ks.map(k=>k==='SWING'?`<span><span class="lg-x" style="color:${OC2[k]}">&#10005;</span>${nm[k]}</span>`:k==='FOUL'?`<span><span class="lg-sq" style="background:${OC2[k]}"></span>${nm[k]}</span>`:`<span><span class="dot" style="background:${OC2[k]}"></span> ${nm[k]}</span>`).join('')}
+ $('cnote').textContent=SN==='Pitch Mix by Count'?'Click a count row to filter by it.':SN==='Velocity by Inning'?'Average velocity in each inning of the outing (1st inning pitched, 2nd, ...) across every appearance. Click an inning to filter by it.':SN==='Spin Direction'?(sel.length?'Faded arrows are individual pitches; the bold arrow is the season average.':'Average spin direction of each pitch type. Select a pitch type to see every pitch behind its average.'):SN==='Pitch Location'?'Pitches that fall outside your filters are faded. Squares = fouls, x = swinging strikes.':'Dots are individual pitches; larger rings are each pitch type\'s season average.'
+ $('plot').innerHTML=(!a.length||!h)?`<div class="empty">${!a.length?'No pitches match this selection.':'No balls in play in this selection.'}</div>`:h+`<div class="leg">${leg}</div>`;
+ hook();
+ bindClicks();
+}
+$('prev').onclick=()=>{slide=(slide+SLIDES.length-1)%SLIDES.length;renderChart()};$('next').onclick=()=>{slide=(slide+1)%SLIDES.length;renderChart()};
+
+
+  const SLIDES = [{ n: 'Pitch Location', f: chartLoc }, { n: 'Pitch Movement', f: chartMove }, { n: 'Release Point', f: chartRel }];
+  if (P.some(p => p.spin !== null && p.v !== null)) SLIDES.push({ n: 'Spin Rate vs. Velocity', f: chartSpin });
+  if (P.some(p => p.sd !== null)) SLIDES.push({ n: 'Spin Direction', f: chartDial });
+  SLIDES.push({ n: 'Pitch Mix by Count', f: chartMix }, { n: 'Velocity by Inning', f: chartVelo }, { n: 'Exit Velocity vs. Launch Angle', f: chartEV });
+function all(){renderChips();renderRes();renderTiles();renderTable();renderChart()}
+all();
+
+  }
+
+  function seasonStatcastShell(team, toggleId, perGameRows, playerId) {
+    return `
+      <div class="sc-head">
+        <div class="section-title">${currentSeason} Statcast</div>
+        <div class="sc-team">${TEAM_LOGOS[team] ? `<img src="${TEAM_LOGOS[team]}" alt="" onerror="this.style.display='none'">` : ''}${team || ''}</div>
+      </div>
+      <div id="seasonSc">
+        <div class="cols">
+          <div>
+            <div class="chips" id="sc-chips"></div>
+            <div class="orow"><div class="ddw" id="sc-dd-res"></div><div class="ddw" id="sc-dd-cnt"></div><div class="ddw" id="sc-dd-inn"></div></div>
+            <div class="card">
+              <div class="tiles" id="sc-tiles"></div>
+              <button class="more" id="sc-more">More Stats &#9662;</button>
+              <div class="tiles tiles2" id="sc-tiles2"></div>
+            </div>
+          </div>
+          <div>
+            <div class="cht"><h3 style="margin:0" id="sc-ctitle"></h3><div class="dots" id="sc-dots"></div></div>
+            <div class="car"><button class="nav" id="sc-prev" aria-label="Previous chart">&#8249;</button><div class="ch card" id="sc-plot"></div><button class="nav" id="sc-next" aria-label="Next chart">&#8250;</button></div>
+            <div class="note" id="sc-cnote"></div>
+          </div>
+        </div>
+        <div class="sc-sub"><h3>Pitch Type Summary</h3></div>
+        <div class="tw"><table id="sc-tbl"></table></div>
+        <div class="note">Click a row to select that pitch type (same as its chip). Click a column header to sort. The table follows the Result, Count and Inning filters.</div>
+      </div>
+      <div class="transaction-expand-wrap" style="margin: 0.75rem 0 1.5rem;">
+        <a href="#" onclick="toggleStatcastGameLog('${toggleId}', this); return false;" class="statcast-toggle-link" aria-expanded="false">View Game-by-Game Statcast <span class="stc-arrow">&#9662;</span></a>
+      </div>
+      <div id="${toggleId}" class="career-gamelog-wrap" style="display:none; margin: -0.75rem 0 1.5rem; border-top:none;">
+        ${buildStatcastGameLogHtml(perGameRows, 'pitching', playerId)}
+      </div>
+    `;
+  }
+
   function renderStatcastSection(team, totals, perGameRows, statType, toggleId, playerId) {
+    if (statType === 'pitching') return seasonStatcastShell(team, toggleId, perGameRows, playerId);
     const statsGrid = statType === 'pitching'
       ? `
         <div class="afl-stats-grid" style="grid-template-columns: repeat(3, 1fr);">
@@ -1227,6 +1697,46 @@
       .join('');
   }
 
+  const STATCAST_PITCHING_GLOSSARY = [
+    ['Game Statcast tiles', [
+      ['Avg / Max Velo', 'Average and fastest release speed.'],
+      ['Avg Spin', 'Average spin rate in rpm.'],
+      ['Whiffs', 'Swings that missed.'],
+      ['Hard-Hit', 'Balls in play hit 95+ mph.']]],
+    ['Strikes & discipline', [
+      ['Strike %', 'Share of pitches that were strikes.'],
+      ['Zone %', 'Share of pitches thrown in the strike zone.'],
+      ['Chase %', 'Share of out-of-zone pitches the batter swung at.'],
+      ['CSW %', 'Called strikes plus whiffs, as a share of all pitches.'],
+      ['Whiff %', 'Share of swings that missed.'],
+      ['1st-Pitch Strike', 'Share of first pitches that were strikes.']]],
+    ['Contact allowed', [
+      ['Avg / Max Exit Velo', 'How hard balls were hit off the bat.'],
+      ['Barrel %', "Share of balls in play with an ideal exit velocity and launch angle, per MLB's barrel definition."],
+      ['Ground Ball / Line Drive / Fly Ball / Popup', 'Share of balls in play by trajectory.']]],
+    ['Velocity', [
+      ['Velo Loss', 'Average speed lost from release to the plate.']]],
+    ['Innings', [
+      ['Inning Pitched', "On this page innings are counted by how far into the outing the pitcher is (1st, 2nd, ...), not by the game's inning number. The 1st inning pitched is the first inning he threw in."]]],
+    ['Counts', [
+      ['Ahead', 'More strikes than balls.'],
+      ['Even', 'Balls equal strikes (1-1, 2-2).'],
+      ['Behind', 'More balls than strikes, except 3-2.'],
+      ['Full Count', '3 balls and 2 strikes.'],
+      ['Two Strikes', 'Any count with two strikes, including 3-2.']]],
+    ['Pitch characteristics', [
+      ['Induced Vertical Break', 'Vertical movement beyond what gravity alone would cause.'],
+      ['Horizontal Break', 'Sideways movement of the pitch.'],
+      ['Release Point', "Where the ball leaves the pitcher's hand."],
+      ['Extension', 'How far toward the plate the pitcher releases the ball.'],
+      ['Spin Direction', 'The axis the ball spins on, shown like a clock face.'],
+      ['Exit Velocity / Launch Angle', 'Speed and vertical angle of a batted ball off the bat.']]],
+  ];
+  function statcastGlossaryHtml() {
+    return STATCAST_PITCHING_GLOSSARY.map(([group, items]) =>
+      `<div class="glossary-subtitle">${group}</div>` + items.map(([n, d]) => `<div class="glossary-row wide"><div class="glossary-abbr">${n}</div><div class="glossary-desc">${d}</div></div>`).join('')
+    ).join('');
+  }
   function renderStatGlossary() {
     const hittingHtml = glossaryEntriesHtml(HITTING_STAT_ORDER, HITTING_LABELS, HITTING_GLOSSARY, HITTING_HIDDEN_KEYS);
     const pitchingHtml = glossaryEntriesHtml(PITCHING_STAT_ORDER, PITCHING_LABELS, PITCHING_GLOSSARY, PITCHING_HIDDEN_KEYS);
@@ -1243,6 +1753,8 @@
             <div class="glossary-col-title">Pitching</div>
             ${pitchingHtml}
             ${SPIN_GLOSSARY_ROW}
+            <div class="glossary-col-title" style="margin-top:1rem;">Pitching Statcast</div>
+            ${statcastGlossaryHtml()}
           </div>
           <div class="glossary-col">
             <div class="glossary-col-title">Fielding</div>
@@ -1862,6 +2374,7 @@
 
       content.innerHTML = html;
       wireTransactionExpand();
+      if (isPitcher && statcastTotals) initSeasonStatcast(playerPitches, { hand: ((player.throws || '')[0] || 'R').toUpperCase(), opponentMap });
 
       loadCareerPath(aflRow, statType, aflGameLogRows);
       loadLiveTransactions(playerTransactions);
