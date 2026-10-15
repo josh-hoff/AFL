@@ -44,26 +44,6 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Glendale Desert Dogs,2026-09-15,827610,Brandon Cain,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brandon Cain.
 2026,Glendale Desert Dogs,2026-10-01,700167,Bryan Mena,ASG,Assigned,,Glendale Desert Dogs,RHP Bryan Mena assigned to Glendale Desert Dogs.
 2026,Glendale Desert Dogs,2026-10-12,694761,Tommy Vail,ASG,Assigned,,Glendale Desert Dogs,LHP Tommy Vail assigned to Glendale Desert Dogs.
-2026,Mesa Solar Sox,2026-09-15,805255,Dominick Reid,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Dominick Reid.
-2026,Mesa Solar Sox,2026-09-15,700113,Nicholas Judice,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Nicholas Judice.
-2026,Mesa Solar Sox,2026-09-15,805093,Jhon Cabral,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jhon Cabral.
-2026,Mesa Solar Sox,2026-09-15,701839,Jay Dill,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jay Dill.
-2026,Mesa Solar Sox,2026-09-15,807625,Gilberto Batista,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Gilberto Batista.
-2026,Mesa Solar Sox,2026-09-15,814005,Jake Bloss,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jake Bloss from the 60-day injured list.
-2026,Mesa Solar Sox,2026-09-15,838799,Harry Blum,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Harry Blum.
-2026,Mesa Solar Sox,2026-09-15,702255,Brandon Barriera,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Brandon Barriera.
-2026,Mesa Solar Sox,2026-09-15,696286,Davis Diaz,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated C Davis Diaz.
-2026,Mesa Solar Sox,2026-09-15,701836,Kyle Robinson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Kyle Robinson.
-2026,Mesa Solar Sox,2026-09-15,803021,Peyton Olejnik,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Peyton Olejnik.
-2026,Mesa Solar Sox,2026-09-15,701512,Tucker Novotny,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Tucker Novotny.
-2026,Mesa Solar Sox,2026-09-15,803248,Yoendris Gonzalez,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Yoendris Gonzalez.
-2026,Mesa Solar Sox,2026-09-15,806879,Anhuar Garcia,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Anhuar Garcia.
-2026,Mesa Solar Sox,2026-09-15,687991,Jared Johnson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jared Johnson.
-2026,Mesa Solar Sox,2026-09-15,800125,Fernando Perez,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Fernando Perez.
-2026,Mesa Solar Sox,2026-09-15,695761,Kenya Huggins,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Kenya Huggins.
-2026,Mesa Solar Sox,2026-09-15,810830,Jake Knapp,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jake Knapp from the 7-day injured list.
-2026,Mesa Solar Sox,2026-09-15,821052,Madinson Frias,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Madinson Frias from the 60-day injured list.
-2026,Mesa Solar Sox,2026-09-15,815064,Trennor O'Donnell,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Trennor O'Donnell.
 2026,Mesa Solar Sox,2026-09-15,820835,Kade Snell,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated OF Kade Snell.
 2026,Mesa Solar Sox,2026-09-15,834404,Jake Cook,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated OF Jake Cook.
 2026,Mesa Solar Sox,2026-09-15,829052,Breyson Guedez,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated OF Breyson Guedez.
@@ -76,14 +56,34 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Mesa Solar Sox,2026-09-15,805801,Nazzan Zanetello,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated 2B Nazzan Zanetello.
 2026,Mesa Solar Sox,2026-09-15,815343,Myles Bailey,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated 1B Myles Bailey from the 60-day injured list.
 2026,Mesa Solar Sox,2026-09-15,813833,Cole Conn,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated C Cole Conn.
+2026,Mesa Solar Sox,2026-09-15,696286,Davis Diaz,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated C Davis Diaz.
 2026,Mesa Solar Sox,2026-09-15,695402,Najer Victor,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Najer Victor.
 2026,Mesa Solar Sox,2026-09-15,700292,Yondrei Rojas,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Yondrei Rojas.
-2026,Mesa Solar Sox,2026-09-15,702494,Sam Tookoian,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Sam Tookoian.
 2026,Mesa Solar Sox,2026-09-15,701791,Caden Vire,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Caden Vire.
 2026,Mesa Solar Sox,2026-09-15,814279,Yeferson Vargas,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Yeferson Vargas.
 2026,Mesa Solar Sox,2026-09-15,801590,Aaron Parker,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated C Aaron Parker.
 2026,Mesa Solar Sox,2026-09-15,808911,Grant Richardson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Grant Richardson from the 7-day injured list.
 2026,Mesa Solar Sox,2026-09-15,702995,Antonio Anderson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated 3B Antonio Anderson.
+2026,Mesa Solar Sox,2026-09-15,805255,Dominick Reid,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Dominick Reid.
+2026,Mesa Solar Sox,2026-09-15,700113,Nicholas Judice,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Nicholas Judice.
+2026,Mesa Solar Sox,2026-09-15,805093,Jhon Cabral,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jhon Cabral.
+2026,Mesa Solar Sox,2026-09-15,701839,Jay Dill,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jay Dill.
+2026,Mesa Solar Sox,2026-09-15,807625,Gilberto Batista,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Gilberto Batista.
+2026,Mesa Solar Sox,2026-09-15,814005,Jake Bloss,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jake Bloss from the 60-day injured list.
+2026,Mesa Solar Sox,2026-09-15,838799,Harry Blum,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Harry Blum.
+2026,Mesa Solar Sox,2026-09-15,702255,Brandon Barriera,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Brandon Barriera.
+2026,Mesa Solar Sox,2026-09-15,702494,Sam Tookoian,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Sam Tookoian.
+2026,Mesa Solar Sox,2026-09-15,815064,Trennor O'Donnell,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Trennor O'Donnell.
+2026,Mesa Solar Sox,2026-09-15,701512,Tucker Novotny,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated LHP Tucker Novotny.
+2026,Mesa Solar Sox,2026-09-15,701836,Kyle Robinson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Kyle Robinson.
+2026,Mesa Solar Sox,2026-09-15,803021,Peyton Olejnik,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Peyton Olejnik.
+2026,Mesa Solar Sox,2026-09-15,803248,Yoendris Gonzalez,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Yoendris Gonzalez.
+2026,Mesa Solar Sox,2026-09-15,806879,Anhuar Garcia,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Anhuar Garcia.
+2026,Mesa Solar Sox,2026-09-15,687991,Jared Johnson,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jared Johnson.
+2026,Mesa Solar Sox,2026-09-15,800125,Fernando Perez,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Fernando Perez.
+2026,Mesa Solar Sox,2026-09-15,695761,Kenya Huggins,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Kenya Huggins.
+2026,Mesa Solar Sox,2026-09-15,810830,Jake Knapp,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jake Knapp from the 7-day injured list.
+2026,Mesa Solar Sox,2026-09-15,821052,Madinson Frias,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Madinson Frias from the 60-day injured list.
 2026,Mesa Solar Sox,2026-09-15,810830,Jake Knapp,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Jake Knapp from the 7-day injured list.
 2026,Mesa Solar Sox,2026-09-28,695664,Harrison Feinberg,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated OF Harrison Feinberg.
 2026,Mesa Solar Sox,2026-09-28,695664,Harrison Feinberg,ASG,Assigned,,Mesa Solar Sox,OF Harrison Feinberg assigned to Mesa Solar Sox.
