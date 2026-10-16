@@ -380,6 +380,40 @@
   .loading {
     color: var(--text-muted);
   }
+
+  /* ---- Team Stats view ---- */
+  .view-buttons, .stat-subtabs { display: flex; justify-content: center; gap: 0.5rem; margin: 0 0 1.1rem; flex-wrap: wrap; }
+  .stat-subtabs { justify-content: flex-start; margin: 0.2rem 0 0.7rem; }
+  .view-btn { border: 1px solid var(--border); background: var(--bg-card); color: var(--text); border-radius: 999px; padding: 0.45rem 1.1rem; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .view-btn.active { background: var(--tab-active); border-color: var(--tab-active); color: #fff; }
+  .ts-hint { font-size: 0.78rem; color: var(--text-muted); align-self: center; margin-left: 0.4rem; }
+  .ts-wrap { overflow: auto; max-height: 72vh; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
+  .ts-table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 0.84rem; font-variant-numeric: tabular-nums; }
+  .ts-table th, .ts-table td { padding: 0.5rem 0.65rem; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--border); }
+  .ts-table thead th { position: sticky; top: 0; z-index: 2; background: #f1efeb; color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; user-select: none; }
+  .ts-table thead th:hover { color: var(--text); }
+  .ts-table thead th.sorted { color: var(--tab-active); }
+  .ts-table th:first-child, .ts-table td:first-child { text-align: left; position: sticky; left: 0; z-index: 1; background: var(--bg-card); }
+  .ts-table thead th:first-child { z-index: 3; background: #f1efeb; }
+  .ts-table td.l, .ts-table th.l { text-align: left; }
+  .ts-table tbody tr:hover td { background: #faf7f3; }
+  .ts-table td.sorted { background: #fffaf5; }
+  .ts-table tr.top td { background: #fff0e2; }
+  .ts-table tr.top td:first-child { box-shadow: inset 4px 0 0 var(--tab-active); }
+  .ts-table tr.mlb td { background: #eaf1fa; }
+  .ts-table tr.mlb td:first-child { box-shadow: inset 4px 0 0 #2f6fb0; }
+  .ts-table tr.divider td { background: #f1efeb; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); text-align: left; border-top: 2px solid var(--border); }
+  .ts-arrow { font-size: 0.6rem; margin-left: 3px; }
+  .ts-player { display: flex; align-items: center; gap: 0.6rem; }
+  .ts-av { width: 34px; height: 34px; border-radius: 50%; background: #2b2b2b; position: relative; flex-shrink: 0; }
+  .ts-av img.ts-photo { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: center 30%; display: block; }
+  .ts-av img.ts-org { position: absolute; right: -3px; bottom: -3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 1.5px solid #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.25); object-fit: contain; padding: 1px; }
+  .ts-pname { line-height: 1.2; }
+  .ts-pname a { color: var(--text); font-weight: 500; text-decoration: none; }
+  .ts-pname a:hover { text-decoration: underline; }
+  .ts-pname small { display: block; font-size: 0.66rem; color: var(--text-muted); }
+  .ts-tag { display: inline-block; font-size: 0.58rem; font-weight: 800; padding: 0 6px; border-radius: 9px; background: var(--tab-active); color: #fff; margin-left: 4px; vertical-align: 1px; }
+  .ts-note { font-size: 0.76rem; color: var(--text-muted); margin-top: 0.7rem; }
 </style>
 </head>
 <body>
@@ -440,6 +474,10 @@
   let pitcherStatsById = {};
   let hitterStatsById = {};
   let top100ById = {};
+  let hitterRows = [], pitcherRows = [], fieldingRows = [];
+  let currentView = 'roster';   // 'roster' | 'stats'
+  let currentStatTab = 'hitting';   // 'hitting' | 'pitching' | 'fielding'
+  const tsSort = { hitting: { k: 'plate_appearances', dir: -1 }, pitching: { k: 'outs', dir: -1 }, fielding: { k: 'games', dir: -1 } };
 
   function parseCSV(text) {
     const lines = text.trim().split(/\r?\n/);
@@ -648,10 +686,24 @@
           <select id="team-select"></select>
         </div>
       </div>
+      <div class="view-buttons">
+        <button class="view-btn${currentView === 'roster' ? ' active' : ''}" data-view="roster">Roster</button>
+        <button class="view-btn${currentView === 'stats' ? ' active' : ''}" data-view="stats">Team Stats</button>
+      </div>
       <div class="roster-heading">
         ${teamLogoImg(currentTeam, 'roster-heading-logo')}
-        <div class="roster-heading-name">${currentTeam} Roster</div>
+        <div class="roster-heading-name">${currentTeam} ${currentView === 'stats' ? 'Team Stats' : 'Roster'}</div>
       </div>
+    `;
+    if (currentView === 'stats') {
+      html += renderTeamStats(teamPlayers);
+      content.innerHTML = html;
+      wireTeamSelect();
+      wireViewButtons();
+      wireTeamStats(teamPlayers);
+      return;
+    }
+    html += `
       <div class="roster-key"><span class="roster-key-item"><span class="roster-key-swatch"></span>Blue card = player has appeared in an MLB game (based on MLB debut date)</span><span class="roster-key-item"><span class="roster-key-swatch top100"></span>Orange card / label = MLB Pipeline Top 100 prospect (most recent rank that year, with the year's peak rank if it was higher)</span></div>
     `;
 
@@ -706,7 +758,17 @@
     content.innerHTML = html;
     wireCollapsibleGroups();
     wireTransactionExpand();
+    wireTeamSelect();
+    wireViewButtons();
+  }
 
+  function wireViewButtons() {
+    document.querySelectorAll('.view-buttons .view-btn').forEach(b => {
+      b.onclick = () => { currentView = b.dataset.view; renderRoster(); };
+    });
+  }
+
+  function wireTeamSelect() {
     const teamSelect = document.getElementById('team-select');
     AFL_TEAM_NAMES.forEach(name => {
       const opt = document.createElement('option');
@@ -722,6 +784,174 @@
     };
   }
 
+
+  // ---------- Team Stats view ----------
+  const toN = v => (v === null || v === undefined || v === '') ? NaN : parseFloat(v);
+  const fI = v => { const n = toN(v); return isNaN(n) ? '—' : String(Math.round(n)); };
+  const fR3 = v => { const n = toN(v); return isNaN(n) ? '—' : fmtRate(n); };
+  const fD2 = v => { const n = toN(v); return (isNaN(n) || !isFinite(n)) ? '—' : n.toFixed(2); };
+  const fD1 = v => { const n = toN(v); return (isNaN(n) || !isFinite(n)) ? '—' : n.toFixed(1); };
+  const fPct = v => { const n = toN(v); return isNaN(n) ? '—' : (n * 100).toFixed(1) + '%'; };
+  const fOuts = v => { const o = toN(v); return isNaN(o) ? '—' : Math.floor(o / 3) + '.' + (o % 3); };
+  const fStr = v => (v === null || v === undefined || v === '') ? '—' : v;
+  const fRate = v => (v === '' || v === null || v === undefined || v === '.---' || isNaN(parseFloat(v))) ? '—' : fmtRate(parseFloat(v));
+
+  // Column definitions: [key, label, formatter, leftAligned, sortsAscendingFirst]
+  const HITTING_COLS = [
+    ['pos', 'Pos', fStr, true, true], ['age', 'Age', fI], ['games', 'G', fI], ['plate_appearances', 'PA', fI], ['at_bats', 'AB', fI], ['runs', 'R', fI], ['hits', 'H', fI],
+    ['doubles', '2B', fI], ['triples', '3B', fI], ['home_runs', 'HR', fI], ['rbi', 'RBI', fI], ['walks', 'BB', fI], ['intentional_walks', 'IBB', fI], ['strikeouts', 'K', fI],
+    ['stolen_bases', 'SB', fI], ['caught_stealing', 'CS', fI], ['sbp', 'SB%', fPct], ['avg', 'AVG', fR3], ['obp', 'OBP', fR3], ['slg', 'SLG', fR3], ['ops', 'OPS', fR3], ['babip', 'BABIP', fR3],
+    ['total_bases', 'TB', fI], ['hit_by_pitch', 'HBP', fI], ['left_on_base', 'LOB', fI], ['ground_outs', 'GO', fI], ['air_outs', 'AO', fI], ['goao', 'GO/AO', fD2],
+    ['ground_into_double_play', 'GIDP', fI], ['sac_bunts', 'SH', fI], ['sac_flies', 'SF', fI], ['abhr', 'AB/HR', fD1], ['number_of_pitches', 'Pit', fI], ['catchers_interference', 'CI', fI],
+  ];
+  const PITCHING_COLS = [
+    ['age', 'Age', fI], ['wins', 'W', fI], ['losses', 'L', fI], ['winPercentage', 'W-L%', fRate], ['era', 'ERA', fD2, false, true], ['whip', 'WHIP', fD2, false, true],
+    ['gamesPitched', 'G', fI], ['gamesStarted', 'GS', fI], ['completeGames', 'CG', fI], ['shutouts', 'SHO', fI], ['saves', 'SV', fI], ['blownSaves', 'BS', fI], ['holds', 'HLD', fI],
+    ['outs', 'IP', fOuts], ['battersFaced', 'BF', fI], ['hits', 'H', fI], ['runs', 'R', fI], ['earnedRuns', 'ER', fI], ['homeRuns', 'HR', fI], ['doubles', '2B', fI], ['triples', '3B', fI],
+    ['baseOnBalls', 'BB', fI], ['intentionalWalks', 'IBB', fI], ['strikeOuts', 'K', fI], ['hitByPitch', 'HBP', fI], ['wildPitches', 'WP', fI], ['balks', 'BK', fI], ['pickoffs', 'PK', fI],
+    ['atBats', 'AB', fI], ['avg', 'BA', fRate], ['obp', 'OBP', fRate], ['slg', 'SLG', fRate], ['ops', 'OPS', fRate], ['totalBases', 'TB', fI], ['stolenBases', 'SB', fI],
+    ['groundOuts', 'GO', fI], ['airOuts', 'AO', fI], ['groundOutsToAirouts', 'GO/AO', fD2], ['hitsPer9Inn', 'H/9', fD2, false, true], ['homeRunsPer9', 'HR/9', fD2, false, true],
+    ['walksPer9Inn', 'BB/9', fD2, false, true], ['strikeoutsPer9Inn', 'K/9', fD2], ['runsScoredPer9', 'R/9', fD2, false, true], ['strikeoutWalkRatio', 'K/BB', fD2],
+    ['strikes', 'Strk', fI], ['strikePercentage', 'Strike%', fRate], ['numberOfPitches', 'Pit', fI], ['pitchesPerInning', 'P/IP', fD2],
+    ['inheritedRunners', 'IR', fI], ['inheritedRunnersScored', 'IRS', fI], ['groundIntoDoublePlay', 'GIDP', fI], ['sacBunts', 'SH', fI], ['sacFlies', 'SF', fI], ['catchersInterference', 'CI', fI],
+  ];
+  const FIELDING_COLS = [
+    ['pos', 'Pos', fStr, true, true], ['games', 'G', fI], ['outs', 'Inn', fOuts], ['po', 'PO', fI], ['a', 'A', fI], ['e', 'E', fI], ['te', 'TE', fI], ['tc', 'TC', fI],
+    ['fpct', 'FPct', fR3], ['dp', 'DP', fI], ['tp', 'TP', fI], ['rfg', 'RF/G', fD2], ['rf9', 'RF/9', fD2],
+  ];
+  const TS_SAMPLE = { hitting: 'plate_appearances', pitching: 'outs', fielding: 'outs' };
+
+  function inningsToOuts(v) { const x = num(v), w = Math.floor(x + 1e-9); return w * 3 + Math.round((x - w) * 10); }
+
+  // One hitting row per player, totals summed from the game log; rates recalculated from the totals.
+  function buildHitterRows(logs) {
+    const by = {};
+    logs.filter(r => !r.game_type || r.game_type === 'R').forEach(r => { (by[r.player_id] = by[r.player_id] || []).push(r); });
+    return Object.keys(by).map(id => {
+      const g = by[id], s = k => g.reduce((a, r) => a + num(r[k]), 0);
+      const o = { player_id: id, team: g[0].team, games: new Set(g.map(r => r.game_pk)).size };
+      ['plate_appearances','at_bats','runs','hits','doubles','triples','home_runs','rbi','walks','intentional_walks','strikeouts','stolen_bases','caught_stealing','total_bases','hit_by_pitch','left_on_base','ground_outs','air_outs','ground_into_double_play','sac_bunts','sac_flies','number_of_pitches','catchers_interference'].forEach(k => { o[k] = s(k); });
+      const ab = o.at_bats, h = o.hits, bb = o.walks, hbp = o.hit_by_pitch, sf = o.sac_flies, k = o.strikeouts, hr = o.home_runs;
+      o.avg = ab ? h / ab : null;
+      o.obp = (ab + bb + hbp + sf) ? (h + bb + hbp) / (ab + bb + hbp + sf) : null;
+      o.slg = ab ? o.total_bases / ab : null;
+      o.ops = (o.obp !== null && o.slg !== null) ? o.obp + o.slg : null;
+      o.babip = (ab - k - hr + sf) > 0 ? (h - hr) / (ab - k - hr + sf) : null;
+      o.goao = o.air_outs ? o.ground_outs / o.air_outs : null;
+      o.sbp = (o.stolen_bases + o.caught_stealing) ? o.stolen_bases / (o.stolen_bases + o.caught_stealing) : null;
+      o.abhr = hr ? ab / hr : null;
+      return o;
+    });
+  }
+
+  // Fielding: one row per player per position (DH excluded).
+  function buildFieldingRows(logs) {
+    const by = {};
+    logs.filter(r => (!r.game_type || r.game_type === 'R') && r.position !== 'DH').forEach(r => { (by[r.player_id + '|' + r.position] = by[r.player_id + '|' + r.position] || []).push(r); });
+    return Object.keys(by).map(key => {
+      const g = by[key], s = k => g.reduce((a, r) => a + num(r[k]), 0);
+      const outs = g.reduce((a, r) => a + inningsToOuts(r.innings), 0);
+      const po = s('putouts'), a = s('assists'), tc = s('chances'), games = new Set(g.map(r => r.game_pk)).size;
+      return { player_id: g[0].player_id, team: g[0].team, pos: g[0].position, games, outs, po, a, e: s('errors'), te: s('throwing_errors'), tc, dp: s('double_plays'), tp: s('triple_plays'),
+        fpct: tc ? (po + a) / tc : null, rfg: games ? (po + a) / games : null, rf9: outs ? (po + a) * 27 / outs : null };
+    });
+  }
+
+  function tsPlayerCell(p) {
+    const link = `player.html?id=${p.player_id}&season=${currentSeason}`;
+    const photo = `https://img.mlbstatic.com/mlb-photos/image/upload/c_fill,g_auto/w_120/v1/people/${p.player_id}/headshot/milb/current`;
+    const org = p.org_id ? `<img class="ts-org" src="https://www.mlbstatic.com/team-logos/${p.org_id}.svg" alt="" onerror="this.style.display='none'">` : '';
+    const t100 = top100ById[p.player_id] ? Object.keys(top100ById[p.player_id]).sort().map(y => `<span class="ts-tag" title="${top100Label(y, top100ById[p.player_id][y])}">${y} #${top100ById[p.player_id][y].rank}</span>`).join('') : '';
+    return `<div class="ts-player"><a href="${link}"><div class="ts-av"><img class="ts-photo" src="${photo}" alt="" onerror="this.style.display='none'">${org}</div></a><div class="ts-pname"><a href="${link}">${p.full_name}</a>${t100}<small>${p.org_name || ''}</small></div></div>`;
+  }
+
+  function tsMissing(x) { return x === null || x === undefined || x === '' || x === '.---' || x === '-.--' || x === '*.**' || (typeof x === 'number' && isNaN(x)) || (typeof x === 'string' && isNaN(parseFloat(x)) && /^[-.*]+$/.test(x)); }
+  function tsSortRows(rows, k, dir, sampleKey) {
+    const val = r => (k === 'full_name' ? r.full_name : r[k]);
+    return [...rows].sort((a, b) => {
+      const x = val(a), y = val(b);
+      let c = 0;
+      if (tsMissing(x) && tsMissing(y)) c = 0;
+      else if (tsMissing(x)) return 1;
+      else if (tsMissing(y)) return -1;
+      else c = (typeof x === 'string' && isNaN(parseFloat(x))) ? dir * x.localeCompare(y) : dir * (parseFloat(x) - parseFloat(y));
+      if (c) return c;
+      // Ties: bigger sample first, whichever way the column is sorted.
+      const sa = num(a[sampleKey]), sb = num(b[sampleKey]);
+      if (sa !== sb) return sb - sa;
+      return a.full_name.localeCompare(b.full_name);
+    });
+  }
+
+  function tsRowClass(p) { return top100ById[p.player_id] ? 'top' : (p.mlb_debut_date ? 'mlb' : ''); }
+
+  function tsTable(rowsByKind, cols, kind) {
+    const st = tsSort[kind];
+    const arrow = k => st.k === k ? `<span class="ts-arrow">${st.dir > 0 ? '▲' : '▼'}</span>` : '';
+    const head = `<th class="l${st.k === 'full_name' ? ' sorted' : ''}" data-k="full_name">Player${arrow('full_name')}</th>` +
+      cols.map(c => `<th class="${c[3] ? 'l' : ''}${st.k === c[0] ? ' sorted' : ''}" data-k="${c[0]}">${c[1]}${arrow(c[0])}</th>`).join('');
+    const rowHtml = r => `<tr class="${tsRowClass(r)}"><td>${tsPlayerCell(r)}</td>` + cols.map(c => `<td class="${c[3] ? 'l' : ''}${st.k === c[0] ? ' sorted' : ''}">${c[2](r[c[0]])}</td>`).join('') + `</tr>`;
+    let body = '';
+    rowsByKind.forEach(sec => {
+      if (sec.label) body += `<tr class="divider"><td colspan="${cols.length + 1}">${sec.label}</td></tr>`;
+      body += tsSortRows(sec.rows, st.k, st.dir, TS_SAMPLE[kind]).map(rowHtml).join('');
+    });
+    if (!body) body = `<tr><td colspan="${cols.length + 1}" class="l">No stats yet.</td></tr>`;
+    return `<div class="ts-wrap"><table class="ts-table"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+  }
+
+  function tsDataFor(teamPlayers, kind) {
+    const byId = {};
+    teamPlayers.forEach(p => { byId[p.player_id] = p; });
+    const join = r => { const p = byId[r.player_id]; return p ? { ...r, ...p, ...Object.fromEntries(Object.entries(r).filter(([k]) => k !== 'team')), pos: r.pos || p.position_abbreviation, age: p.age } : null; };
+    if (kind === 'hitting') {
+      return [{ rows: hitterRows.map(r => { const p = byId[r.player_id]; return p && p.position_code !== '1' ? { ...p, ...r, pos: p.position_abbreviation, age: p.age } : null; }).filter(Boolean) }];
+    }
+    if (kind === 'pitching') {
+      return [{ rows: pitcherRows.map(r => { const p = byId[r.pitcher_id]; return p ? { ...p, ...r, outs: num(r.outs), age: p.age || r.age } : null; }).filter(Boolean) }];
+    }
+    const rows = fieldingRows.map(join).filter(Boolean);
+    return [{ label: 'Position Players', rows: rows.filter(r => r.pos !== 'P') }, { label: 'Pitchers', rows: rows.filter(r => r.pos === 'P') }];
+  }
+
+  function renderTeamStats(teamPlayers) {
+    const kind = currentStatTab;
+    const cols = kind === 'hitting' ? HITTING_COLS : kind === 'pitching' ? PITCHING_COLS : FIELDING_COLS;
+    const tab = (id, label) => `<button class="view-btn${kind === id ? ' active' : ''}" data-stat="${id}">${label}</button>`;
+    const note = kind === 'hitting' ? 'Hitting totals are summed from each player&#39;s AFL game logs; AVG, OBP, SLG, OPS, BABIP and the other rates are recalculated from those totals.'
+      : kind === 'pitching' ? 'Pitching stats are each pitcher&#39;s AFL season totals. Sorting by IP uses total outs.'
+      : 'Fielding is shown per player and position, so a player who played several positions appears on several rows. DH is excluded.';
+    return `
+      <div class="roster-key"><span class="roster-key-item"><span class="roster-key-swatch"></span>MLB debut</span><span class="roster-key-item"><span class="roster-key-swatch top100"></span>MLB Pipeline Top 100 (tag = rank)</span></div>
+      <div class="stat-subtabs">${tab('hitting', 'Hitting')}${tab('pitching', 'Pitching')}${tab('fielding', 'Fielding')}<span class="ts-hint">Click any column header to sort. Ties go to the larger sample (PA, IP or innings) first.</span></div>
+      <div id="ts-holder">${tsTable(tsDataFor(teamPlayers, kind), cols, kind)}</div>
+      <div class="ts-note">${note}</div>
+    `;
+  }
+
+  function wireTeamStats(teamPlayers) {
+    document.querySelectorAll('.stat-subtabs .view-btn').forEach(b => {
+      b.onclick = () => { currentStatTab = b.dataset.stat; renderRoster(); };
+    });
+    const kind = currentStatTab;
+    const cols = kind === 'hitting' ? HITTING_COLS : kind === 'pitching' ? PITCHING_COLS : FIELDING_COLS;
+    const holder = document.getElementById('ts-holder');
+    const bind = () => {
+      holder.querySelectorAll('th[data-k]').forEach(h => {
+        h.onclick = () => {
+          const w = holder.querySelector('.ts-wrap'), sl = w.scrollLeft, stp = w.scrollTop;
+          const k = h.dataset.k, st = tsSort[kind];
+          if (st.k === k) st.dir *= -1;
+          else { st.k = k; const col = cols.find(c => c[0] === k); st.dir = (k === 'full_name' || (col && col[4])) ? 1 : -1; }
+          holder.innerHTML = tsTable(tsDataFor(teamPlayers, kind), cols, kind);
+          const n = holder.querySelector('.ts-wrap'); n.scrollLeft = sl; n.scrollTop = stp;
+          bind();
+        };
+      });
+    };
+    bind();
+  }
+
   async function loadRosterPage() {
     const content = document.getElementById('content');
     content.innerHTML = '<p class="loading">Loading roster...</p>';
@@ -734,17 +964,20 @@
       const top100Years = [];
       for (let y = 2023; y <= Math.max(...SEASONS); y++) top100Years.push(y);
       const top100Fetches = top100Years.map(y => fetch(`data/${y}/top100.csv`).then(r => (r.ok ? r.text() : null)).catch(() => null));
-      const [rosterRes, txnRes, pStatRes, hLogRes] = await Promise.all([
+      const [rosterRes, txnRes, pStatRes, hLogRes, fLogRes] = await Promise.all([
         fetch(`data/${currentSeason}/roster.csv`),
         fetch(`data/${currentSeason}/transactions.csv`),
         fetch(`data/${currentSeason}/pitcher_stats.csv`),
         fetch(`data/${currentSeason}/hitting_gamelogs.csv`),
+        fetch(`data/${currentSeason}/fielding_gamelogs.csv`),
       ]);
 
       allRoster = rosterRes.ok ? parseCSV(await rosterRes.text()) : [];
       allTransactions = txnRes.ok ? parseCSV(await txnRes.text()) : [];
       pitcherStatsById = {};
+      pitcherRows = [];
       if (pStatRes.ok) parseCSV(await pStatRes.text()).forEach(r => {
+        pitcherRows.push({ ...r, player_id: r.pitcher_id, pitcher_id: r.pitcher_id, outs: r.outs });
         pitcherStatsById[r.pitcher_id] = [r.gamesPitched, r.gamesStarted, r.inningsPitched, r.era, r.whip, r.strikeOuts, r.baseOnBalls];
       });
       top100ById = {};
@@ -753,7 +986,10 @@
         if (!top100Texts[i]) return;
         parseCSV(top100Texts[i]).forEach(r => { const e = top100Entry(r); if (e) (top100ById[r.player_id] = top100ById[r.player_id] || {})[y] = e; });
       });
-      hitterStatsById = hLogRes.ok ? buildHitterStats(parseCSV(await hLogRes.text())) : {};
+      const hLogRows = hLogRes.ok ? parseCSV(await hLogRes.text()) : [];
+      hitterStatsById = buildHitterStats(hLogRows);
+      hitterRows = buildHitterRows(hLogRows);
+      fieldingRows = fLogRes.ok ? buildFieldingRows(parseCSV(await fLogRes.text())) : [];
 
       if (allRoster.length === 0) {
         content.innerHTML = '<p class="error">No roster available for this season yet.</p>';
