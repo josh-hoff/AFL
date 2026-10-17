@@ -355,3 +355,37 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867715,2026-10-15,home,Salt River Rafters,699283,Cleiber Maldonado,5,False
 867715,2026-10-15,home,Salt River Rafters,682625,Antonio Gomez,6,False
 867715,2026-10-15,home,Salt River Rafters,814487,Nolan Hughes,7,False
+867696,2026-10-16,away,Peoria Javelinas,694345,Patrick Reilly,1,True
+867696,2026-10-16,away,Peoria Javelinas,688867,Braxton Bragg,2,False
+867696,2026-10-16,away,Peoria Javelinas,695787,Trent Hodgdon,3,False
+867696,2026-10-16,away,Peoria Javelinas,807744,Ty Cummings,4,False
+867696,2026-10-16,home,Salt River Rafters,822950,J.T. Etheridge,1,True
+867696,2026-10-16,home,Salt River Rafters,823996,Luke Craig,2,False
+867696,2026-10-16,home,Salt River Rafters,800544,Cesar Lares,3,False
+867696,2026-10-16,home,Salt River Rafters,810102,Chris Veach,4,False
+867696,2026-10-16,home,Salt River Rafters,820825,Konner Eaton,5,False
+867697,2026-10-16,away,Mesa Solar Sox,701836,Kyle Robinson,1,True
+867697,2026-10-16,away,Mesa Solar Sox,700113,Nicholas Judice,2,False
+867697,2026-10-16,away,Mesa Solar Sox,806879,Anhuar Garcia,3,False
+867697,2026-10-16,away,Mesa Solar Sox,807625,Gilberto Batista,4,False
+867697,2026-10-16,away,Mesa Solar Sox,702494,Sam Tookoian,5,False
+867697,2026-10-16,away,Mesa Solar Sox,838799,Harry Blum,6,False
+867697,2026-10-16,away,Mesa Solar Sox,700292,Yondrei Rojas,7,False
+867697,2026-10-16,home,Surprise Saguaros,802146,Aidan Major,1,True
+867697,2026-10-16,home,Surprise Saguaros,807575,Cam Schuelke,2,False
+867697,2026-10-16,home,Surprise Saguaros,822415,Mason McConnaughey,3,False
+867697,2026-10-16,home,Surprise Saguaros,695037,J'Briell Easley,4,False
+867697,2026-10-16,home,Surprise Saguaros,681003,Andrew Walling,5,False
+867697,2026-10-16,home,Surprise Saguaros,804966,Jesus Gamez,6,False
+867697,2026-10-16,home,Surprise Saguaros,822038,Ryan Lambert,7,False
+867695,2026-10-16,away,Glendale Desert Dogs,828987,Briggs McKenzie,1,True
+867695,2026-10-16,away,Glendale Desert Dogs,703748,Tanner Bauman,2,False
+867695,2026-10-16,away,Glendale Desert Dogs,813706,Owen Hackman,3,False
+867695,2026-10-16,away,Glendale Desert Dogs,802413,Sam Horn,4,False
+867695,2026-10-16,away,Glendale Desert Dogs,694207,Brayan Mendoza,5,False
+867695,2026-10-16,home,Scottsdale Scorpions,823650,Miqueas Mercedes,1,True
+867695,2026-10-16,home,Scottsdale Scorpions,836172,Peyton Niksch,2,False
+867695,2026-10-16,home,Scottsdale Scorpions,805783,Mason Nichols,3,False
+867695,2026-10-16,home,Scottsdale Scorpions,813796,Preston Howey,4,False
+867695,2026-10-16,home,Scottsdale Scorpions,702904,Cesar De Jesus,5,False
+867695,2026-10-16,home,Scottsdale Scorpions,703142,Andy Rodriguez,6,False
