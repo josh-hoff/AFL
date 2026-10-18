@@ -389,3 +389,30 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867695,2026-10-16,home,Scottsdale Scorpions,813796,Preston Howey,4,False
 867695,2026-10-16,home,Scottsdale Scorpions,702904,Cesar De Jesus,5,False
 867695,2026-10-16,home,Scottsdale Scorpions,703142,Andy Rodriguez,6,False
+867694,2026-10-17,away,Salt River Rafters,804467,Patrick Forbes,1,True
+867694,2026-10-17,away,Salt River Rafters,823227,Brian Zeldin,2,False
+867694,2026-10-17,away,Salt River Rafters,813409,Joe Ariola,3,False
+867694,2026-10-17,away,Salt River Rafters,802482,John West,4,False
+867694,2026-10-17,away,Salt River Rafters,695403,Brock Gillis,5,False
+867694,2026-10-17,home,Mesa Solar Sox,821052,Madinson Frias,1,True
+867694,2026-10-17,home,Mesa Solar Sox,800125,Fernando Perez,2,False
+867694,2026-10-17,home,Mesa Solar Sox,701329,Luis Rujano,3,False
+867694,2026-10-17,home,Mesa Solar Sox,687991,Jared Johnson,4,False
+867693,2026-10-17,away,Scottsdale Scorpions,700280,Miguel Mendez,1,True
+867693,2026-10-17,away,Scottsdale Scorpions,825095,Drake George,2,False
+867693,2026-10-17,away,Scottsdale Scorpions,843821,Maddox Long,3,False
+867693,2026-10-17,away,Scottsdale Scorpions,806711,Yereny Teus,4,False
+867693,2026-10-17,home,Peoria Javelinas,807748,Kannon Kemp,1,True
+867693,2026-10-17,home,Peoria Javelinas,800017,Jose Montero,2,False
+867693,2026-10-17,home,Peoria Javelinas,702111,Adam Smith,3,False
+867693,2026-10-17,home,Peoria Javelinas,800212,Francis Peña,4,False
+867702,2026-10-17,away,Surprise Saguaros,807290,Peyton Prescott,1,True
+867702,2026-10-17,away,Surprise Saguaros,806522,Irving Cota,2,False
+867702,2026-10-17,away,Surprise Saguaros,825100,Kevin Warunek,3,False
+867702,2026-10-17,away,Surprise Saguaros,701884,Magnus Ellerts,4,False
+867702,2026-10-17,home,Glendale Desert Dogs,803183,Luke Fox,1,True
+867702,2026-10-17,home,Glendale Desert Dogs,827610,Brandon Cain,2,False
+867702,2026-10-17,home,Glendale Desert Dogs,807187,Mathias LaCombe,3,False
+867702,2026-10-17,home,Glendale Desert Dogs,665993,Cristhian Tortosa,4,False
+867702,2026-10-17,home,Glendale Desert Dogs,695057,Garrett Wright,5,False
+867702,2026-10-17,home,Glendale Desert Dogs,805892,Nick Altermatt,6,False
