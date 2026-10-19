@@ -2036,7 +2036,7 @@
               "score": 6,
               "isWinner": true,
               "splitSquad": false,
-              "seriesNumber": 8
+              "seriesNumber": 9
             },
             "home": {
               "team": {
@@ -2193,7 +2193,7 @@
                 "pct": ".333"
               },
               "splitSquad": false,
-              "seriesNumber": 7
+              "seriesNumber": 8
             },
             "home": {
               "team": {
@@ -4051,7 +4051,7 @@
                 "pct": ".400"
               },
               "splitSquad": false,
-              "seriesNumber": 14
+              "seriesNumber": 15
             }
           },
           "venue": {
@@ -5443,7 +5443,7 @@
                 "pct": ".400"
               },
               "splitSquad": false,
-              "seriesNumber": 21
+              "seriesNumber": 20
             }
           },
           "venue": {
@@ -5527,7 +5527,7 @@
                 "pct": ".167"
               },
               "splitSquad": false,
-              "seriesNumber": 22
+              "seriesNumber": 23
             }
           },
           "venue": {
@@ -6297,7 +6297,7 @@
                 "pct": ".167"
               },
               "splitSquad": false,
-              "seriesNumber": 26
+              "seriesNumber": 24
             }
           },
           "venue": {
@@ -6455,7 +6455,7 @@
                 "pct": ".167"
               },
               "splitSquad": false,
-              "seriesNumber": 25
+              "seriesNumber": 27
             }
           },
           "venue": {
@@ -6820,7 +6820,7 @@
                 "pct": ".167"
               },
               "splitSquad": false,
-              "seriesNumber": 26
+              "seriesNumber": 28
             },
             "home": {
               "team": {
