@@ -416,3 +416,36 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867702,2026-10-17,home,Glendale Desert Dogs,665993,Cristhian Tortosa,4,False
 867702,2026-10-17,home,Glendale Desert Dogs,695057,Garrett Wright,5,False
 867702,2026-10-17,home,Glendale Desert Dogs,805892,Nick Altermatt,6,False
+867701,2026-10-19,away,Glendale Desert Dogs,824624,Brooks Auger,1,True
+867701,2026-10-19,away,Glendale Desert Dogs,805315,Michael Walsh,2,False
+867701,2026-10-19,away,Glendale Desert Dogs,679489,Tyler LaPorte,3,False
+867701,2026-10-19,away,Glendale Desert Dogs,815704,Samuel Carpio,4,False
+867701,2026-10-19,away,Glendale Desert Dogs,702165,Jonathan Clark,5,False
+867701,2026-10-19,home,Salt River Rafters,807743,Sean Sullivan,1,True
+867701,2026-10-19,home,Salt River Rafters,687317,Stu Flesland III,2,False
+867701,2026-10-19,home,Salt River Rafters,688629,Noah Dean,3,False
+867701,2026-10-19,home,Salt River Rafters,805879,Connor Foley,4,False
+867701,2026-10-19,home,Salt River Rafters,801842,Fidel Ulloa,5,False
+867700,2026-10-19,away,Mesa Solar Sox,805255,Dominick Reid,1,True
+867700,2026-10-19,away,Mesa Solar Sox,695761,Kenya Huggins,2,False
+867700,2026-10-19,away,Mesa Solar Sox,701839,Jay Dill,3,False
+867700,2026-10-19,away,Mesa Solar Sox,814279,Yeferson Vargas,4,False
+867700,2026-10-19,away,Mesa Solar Sox,695402,Najer Victor,5,False
+867700,2026-10-19,away,Mesa Solar Sox,805093,Jhon Cabral,6,False
+867700,2026-10-19,home,Surprise Saguaros,835375,Jacob Johnson,1,True
+867700,2026-10-19,home,Surprise Saguaros,700176,Keegan Batka,2,False
+867700,2026-10-19,home,Surprise Saguaros,823330,Alejandro Chiquillo,3,False
+867700,2026-10-19,home,Surprise Saguaros,700985,Josh Hansell,4,False
+867700,2026-10-19,home,Surprise Saguaros,815066,Kyle Scott,5,False
+867699,2026-10-19,away,Peoria Javelinas,695705,Luke Holman,1,True
+867699,2026-10-19,away,Peoria Javelinas,694832,Cody Adcock,2,False
+867699,2026-10-19,away,Peoria Javelinas,683165,Joseph King,3,False
+867699,2026-10-19,away,Peoria Javelinas,814227,Jordan Valenzuela,4,False
+867699,2026-10-19,away,Peoria Javelinas,828718,Victor Diaz,5,False
+867699,2026-10-19,away,Peoria Javelinas,822463,Nolan Sparks,6,False
+867699,2026-10-19,home,Scottsdale Scorpions,678495,Randy Rodríguez,1,True
+867699,2026-10-19,home,Scottsdale Scorpions,807823,Jank Pichardo,2,False
+867699,2026-10-19,home,Scottsdale Scorpions,837584,Jalen Evans,3,False
+867699,2026-10-19,home,Scottsdale Scorpions,803094,Win Scott,4,False
+867699,2026-10-19,home,Scottsdale Scorpions,828603,Logan Berrier,5,False
+867699,2026-10-19,home,Scottsdale Scorpions,800427,Jose Meneses,6,False
