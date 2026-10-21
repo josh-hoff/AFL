@@ -724,3 +724,60 @@ game_pk,date,team_side,team_name,player_id,player_name,jersey_number,batting_ord
 867699,2026-10-19,home,Scottsdale Scorpions,807726,John Peck,14,700,7,00,True,5,3B,Third Base
 867699,2026-10-19,home,Scottsdale Scorpions,800724,Eric Bitonti,25,800,8,00,True,3,1B,First Base
 867699,2026-10-19,home,Scottsdale Scorpions,809763,Kaeden Kent,5,900,9,00,True,6,SS,Shortstop
+867698,2026-10-20,away,Salt River Rafters,828076,Dax Kilby,11,100,1,00,True,6,SS,Shortstop
+867698,2026-10-20,away,Salt River Rafters,702679,Demetrio Crisantes,1,200,2,00,True,10,DH,Designated Hitter
+867698,2026-10-20,away,Salt River Rafters,814414,Kyle DeBarge,8,300,3,00,True,8,CF,Outfielder
+867698,2026-10-20,away,Salt River Rafters,703160,Yasser Mercedes,23,400,4,00,True,9,RF,Outfielder
+867698,2026-10-20,away,Salt River Rafters,691942,Jack O'Dowd,18,500,5,00,True,2,C,Catcher
+867698,2026-10-20,away,Salt River Rafters,692110,Core Jackson,12,600,6,00,True,4,2B,Second Base
+867698,2026-10-20,away,Salt River Rafters,823918,Kyle West,24,700,7,00,True,3,1B,First Base
+867698,2026-10-20,away,Salt River Rafters,807957,Yassel Soler,5,800,8,00,True,5,3B,Third Base
+867698,2026-10-20,away,Salt River Rafters,695493,Teo Banks,20,900,9,00,True,7,LF,Outfielder
+867698,2026-10-20,home,Peoria Javelinas,806191,Tai Peete,22,100,1,00,True,7,LF,Outfielder
+867698,2026-10-20,home,Peoria Javelinas,807728,Carter Graham,15,200,2,00,True,10,DH,Designated Hitter
+867698,2026-10-20,home,Peoria Javelinas,695722,Boston Smith,37,300,3,00,True,2,C,Catcher
+867698,2026-10-20,home,Peoria Javelinas,700815,Matthew Ellis,32,301,3,01,False,2,C,Catcher
+867698,2026-10-20,home,Peoria Javelinas,822578,Brandon Butterworth,6,302,3,02,False,12,PR,Pinch Runner
+867698,2026-10-20,home,Peoria Javelinas,801932,Alex McCoy,11,400,4,00,True,9,RF,Outfielder
+867698,2026-10-20,home,Peoria Javelinas,803679,Sammy Hernandez,7,500,5,00,True,3,1B,First Base
+867698,2026-10-20,home,Peoria Javelinas,800176,Carlos Sanchez,12,600,6,00,True,5,3B,Third Base
+867698,2026-10-20,home,Peoria Javelinas,701689,Vance Honeycutt,25,700,7,00,True,8,CF,Outfielder
+867698,2026-10-20,home,Peoria Javelinas,801629,Cade McGee,8,800,8,00,True,4,2B,Second Base
+867698,2026-10-20,home,Peoria Javelinas,813664,Justin DeCriscio,5,900,9,00,True,6,SS,Shortstop
+867690,2026-10-20,away,Glendale Desert Dogs,808234,Eduardo Quintero,16,100,1,00,True,8,CF,Outfielder
+867690,2026-10-20,away,Glendale Desert Dogs,815608,Wyatt Sanford,3,200,2,00,True,4,2B,Second Base
+867690,2026-10-20,away,Glendale Desert Dogs,816111,Tate Southisene,19,300,3,00,True,6,SS,Shortstop
+867690,2026-10-20,away,Glendale Desert Dogs,815792,Chase Harlan,11,400,4,00,True,5,3B,Third Base
+867690,2026-10-20,away,Glendale Desert Dogs,827665,Dillon Lewis,22,500,5,00,True,7,LF,Outfielder
+867690,2026-10-20,away,Glendale Desert Dogs,703177,Jhonny Severino,25,600,6,00,True,10,DH,Designated Hitter
+867690,2026-10-20,away,Glendale Desert Dogs,826928,Owen Carey,9,700,7,00,True,9,RF,Outfielder
+867690,2026-10-20,away,Glendale Desert Dogs,702695,Easton Carmichael,23,800,8,00,True,2,C,Catcher
+867690,2026-10-20,away,Glendale Desert Dogs,695484,Anson Aroz,77,900,9,00,True,3,1B,First Base
+867690,2026-10-20,home,Surprise Saguaros,695517,Casey Cook,2,100,1,00,True,7,LF,Outfielder
+867690,2026-10-20,home,Surprise Saguaros,828202,Bruin Agbayani,25,200,2,00,True,4,2B,Second Base
+867690,2026-10-20,home,Surprise Saguaros,800169,Aroon Escobar,13,300,3,00,True,10,DH,Designated Hitter
+867690,2026-10-20,home,Surprise Saguaros,804871,Brooks Bryan,26,400,4,00,True,3,1B,First Base
+867690,2026-10-20,home,Surprise Saguaros,702619,Luke Hill,7,500,5,00,True,5,3B,Third Base
+867690,2026-10-20,home,Surprise Saguaros,800607,Kehden Hettiger,17,600,6,00,True,2,C,Catcher
+867690,2026-10-20,home,Surprise Saguaros,825412,Angeibel Gomez,18,700,7,00,True,9,RF,Outfielder
+867690,2026-10-20,home,Surprise Saguaros,805951,Boston Baro,3,800,8,00,True,6,SS,Shortstop
+867690,2026-10-20,home,Surprise Saguaros,687930,Tyresse Turner,6,900,9,00,True,8,CF,Outfielder
+867689,2026-10-20,away,Mesa Solar Sox,834404,Jake Cook,9,100,1,00,True,9,RF,Outfielder
+867689,2026-10-20,away,Mesa Solar Sox,805796,Arjun Nimmala,78,200,2,00,True,6,SS,Shortstop
+867689,2026-10-20,away,Mesa Solar Sox,687766,Miguel Useche,15,300,3,00,True,3,1B,First Base
+867689,2026-10-20,away,Mesa Solar Sox,801590,Aaron Parker,20,400,4,00,True,10,DH,Designated Hitter
+867689,2026-10-20,away,Mesa Solar Sox,696286,Davis Diaz,8,500,5,00,True,2,C,Catcher
+867689,2026-10-20,away,Mesa Solar Sox,829052,Breyson Guedez,18,600,6,00,True,7,LF,Outfielder
+867689,2026-10-20,away,Mesa Solar Sox,814457,Jake Casey,4,700,7,00,True,8,CF,Outfielder
+867689,2026-10-20,away,Mesa Solar Sox,805801,Nazzan Zanetello,24,800,8,00,True,4,2B,Second Base
+867689,2026-10-20,away,Mesa Solar Sox,829040,Juan Cabada,16,900,9,00,True,5,3B,Third Base
+867689,2026-10-20,home,Scottsdale Scorpions,702518,Jett Williams,46,100,1,00,True,6,SS,Shortstop
+867689,2026-10-20,home,Scottsdale Scorpions,800614,Bryce Rainer,9,200,2,00,True,10,DH,Designated Hitter
+867689,2026-10-20,home,Scottsdale Scorpions,800294,Waner Luciano,2,201,2,01,False,10,DH,Designated Hitter
+867689,2026-10-20,home,Scottsdale Scorpions,814307,Zyhir Hope,7,300,3,00,True,7,LF,Outfielder
+867689,2026-10-20,home,Scottsdale Scorpions,800724,Eric Bitonti,25,400,4,00,True,3,1B,First Base
+867689,2026-10-20,home,Scottsdale Scorpions,702607,Dakota Jordan,12,500,5,00,True,8,CF,Outfielder
+867689,2026-10-20,home,Scottsdale Scorpions,806441,Nehomar Ochoa Jr.,53,600,6,00,True,9,RF,Outfielder
+867689,2026-10-20,home,Scottsdale Scorpions,687783,Matthew Wood,15,700,7,00,True,2,C,Catcher
+867689,2026-10-20,home,Scottsdale Scorpions,823809,Nick Monistere,3,800,8,00,True,4,2B,Second Base
+867689,2026-10-20,home,Scottsdale Scorpions,807275,Dalton Wentz,10,900,9,00,True,5,3B,Third Base
