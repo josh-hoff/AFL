@@ -1665,7 +1665,10 @@
       const pitcherNameWithThrows = rosterRow ? `${pitcherName} (${PITCHER_THROWS}HP)` : pitcherName;
       const team = rosterRow ? rosterRow.team : '';
 
-      const scheduleRow = scheduleRows.find(r => r.game_pk === gamePk);
+      // Postponed games appear twice (original date and makeup date) with the same game_pk; the makeup row
+      // holds the real teams, home/away and score.
+      const sameGameRows = scheduleRows.filter(r => r.game_pk === gamePk);
+      const scheduleRow = sameGameRows.find(r => r.rescheduled === 'Y') || sameGameRows[0];
       const gameLogRow = pLogRows.find(r => r.pitcher_id === pitcherId && r.game_pk === gamePk);
 
       const rawPitches = pitchRows.filter(r => r.game_pk === gamePk && r.pitcher_id === pitcherId);

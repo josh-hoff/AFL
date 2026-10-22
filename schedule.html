@@ -1210,7 +1210,10 @@
     }
 
     if (!container.dataset.built) {
-      const g = allGames.find(x => String(x.game_pk) === String(gamePk));
+      // A postponed game appears twice in the schedule (the original date and the makeup date) with the
+      // same game_pk, and the makeup can flip home/away. Use the makeup row, which holds the real result.
+      const sameGame = allGames.filter(x => String(x.game_pk) === String(gamePk));
+      const g = sameGame.find(x => x.rescheduled === 'Y') || sameGame[0];
       container.innerHTML = g ? buildBoxScoreHtml(g) : '';
       container.dataset.built = '1';
     }
