@@ -132,6 +132,9 @@
   /* Used for the totals-row label in the AFL Game Log section's tables --
      that row's Date+Opp cell is a single div spanning both columns. */
   .career-row .col-span-2 { grid-column: span 2; }
+  /* Game log dates link to that game's scoring summary and play-by-play page */
+  a.date-link { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--tab-active); }
+  a.date-link:hover { color: var(--tab-active); }
   .gl-table { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; overflow-x: auto; }
   .gl-row { display: grid; gap: 10px; padding: 0.4rem 0.9rem; font-size: 0.76rem; align-items: center; white-space: nowrap; }
   .gl-row > div { text-align: right; }
@@ -738,7 +741,7 @@
     // rows with a real game_pk (Statcast data exists for that game) link.
     const rowsHtml = perGameRows.map(r => {
       const cells = cols.map(c => {
-        if (c === 'date') return `<div>${r.date || ''}</div>`;
+        if (c === 'date') return `<div>${gameDateCell(r.date, r.gamePk)}</div>`;
         if (c === 'opponent') return `<div>${cityFromOpponent(r.opponent)}</div>`;
         if (c === 'avgVelo' || c === 'maxVelo' || c === 'avgEV' || c === 'maxEV' || c === 'avgLA') return `<div>${fmtStatcastNum(r[c], 1)}</div>`;
         if (c === 'avgSpin') return `<div class="spin-cell">${fmtSpinCell(r.avgSpin, r.spinCount, r.totalPitches)}</div>`;
@@ -1977,6 +1980,14 @@ all();
   // running cumulative (postseason totals reset per round in MLB's API)
   // and get their own "<season> Postseason Total" row. Returns just the
   // table markup (no title/tabs -- renderAflGameLogSection wraps it).
+  // A game log date that links to that game's scoring summary / play-by-play page.
+  // Falls back to plain text when the row has no game id.
+  function gameDateCell(date, gamePk) {
+    if (!date) return '';
+    if (!gamePk) return date;
+    return `<a class="date-link" href="game-summary.html?game_pk=${encodeURIComponent(gamePk)}&season=${encodeURIComponent(currentSeason)}" title="View scoring summary and play-by-play">${date}</a>`;
+  }
+
   function buildAflGameLogTable(aflGameLogRows, statType, regTotalsRow) {
     if (!Array.isArray(aflGameLogRows) || aflGameLogRows.length === 0) return '';
 
@@ -2023,7 +2034,7 @@ all();
         const v = r[c];
         return `<div>${v !== undefined && v !== null && v !== '' ? v : '-'}</div>`;
       }).join('');
-      return `<div class="${rowClass}" ${rowStyle}><div>${r.date || ''}</div><div>${cityFromOpponent(r.opponent)}</div>${cells}</div>`;
+      return `<div class="${rowClass}" ${rowStyle}><div>${gameDateCell(r.date, r.game_pk)}</div><div>${cityFromOpponent(r.opponent)}</div>${cells}</div>`;
     };
 
     let html = `
@@ -2112,7 +2123,7 @@ all();
     const dataRow = (g, rowClass, L) => {
       const totals = sumFieldingGames([g]);
       const cells = L.statKeys.map(k => `<div>${fmtFieldingCell(k, totals[k])}</div>`).join('');
-      return `<div class="${rowClass}" ${L.rowStyle}><div>${g.date || ''}</div><div>${cityFromOpponent(g.opponent)}</div>${cells}</div>`;
+      return `<div class="${rowClass}" ${L.rowStyle}><div>${gameDateCell(g.date, g.game_pk)}</div><div>${cityFromOpponent(g.opponent)}</div>${cells}</div>`;
     };
 
     // Union of every position played, regular season or postseason, in the
