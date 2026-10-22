@@ -13,6 +13,8 @@ FIELDING_GAMELOG_FIELDS = [
     "innings", "putouts", "assists", "errors", "throwing_errors",
     "chances", "fielding_pct", "double_plays", "triple_plays",
     "range_factor_per_game", "range_factor_per_9",
+    # Catcher stats (blank/0 for other positions)
+    "stolen_bases", "caught_stealing", "caught_stealing_pct", "passed_balls", "pickoffs",
 ]
 
 
@@ -76,6 +78,11 @@ def extract_fielding_rows(data, player_id, player_name, team):
             "triple_plays": stat.get("triplePlays", ""),
             "range_factor_per_game": stat.get("rangeFactorPerGame", ""),
             "range_factor_per_9": stat.get("rangeFactorPer9Inn", ""),
+            "stolen_bases": stat.get("stolenBases", ""),
+            "caught_stealing": stat.get("caughtStealing", ""),
+            "caught_stealing_pct": stat.get("caughtStealingPercentage", ""),
+            "passed_balls": stat.get("passedBall", ""),
+            "pickoffs": stat.get("pickoffs", ""),
         })
     return rows
 

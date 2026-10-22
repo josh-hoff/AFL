@@ -1525,12 +1525,16 @@ all();
   // that currently just get appended after it (same alphabetical order
   // orderKeys() produces), so the glossary covers everything the table can
   // show, not just the first 9 curated columns.
-  const FIELDING_GLOSSARY_ORDER = [...FIELDING_STAT_ORDER, 'chances', 'rangeFactorPerGame', 'throwingErrors', 'triplePlays'];
+  const FIELDING_BASE_ORDER = [...FIELDING_STAT_ORDER, 'chances', 'rangeFactorPerGame', 'throwingErrors', 'triplePlays'];
+  // Catcher-only stats: only AFL tables for a catcher get these columns.
+  const CATCHER_KEYS = ['stolenBases', 'caughtStealing', 'caughtStealingPercentage', 'passedBall', 'pickoffs'];
+  const FIELDING_GLOSSARY_ORDER = [...FIELDING_BASE_ORDER, ...CATCHER_KEYS];
   const FIELDING_HIDDEN_KEYS = new Set();
   const FIELDING_LABELS = {
     age: 'Age', games: 'G', innings: 'Inn', putOuts: 'PO', assists: 'A', errors: 'E',
     fielding: 'FPCT', doublePlays: 'DP', triplePlays: 'TP', chances: 'TC',
     throwingErrors: 'TE', rangeFactorPerGame: 'RF/G', rangeFactorPer9Inn: 'RF/9',
+    stolenBases: 'SB', caughtStealing: 'CS', caughtStealingPercentage: 'CS%', passedBall: 'PB', pickoffs: 'PK',
   };
 
   // Sums a set of per-position MLB-API season stat blocks (camelCase keys,
@@ -1580,6 +1584,17 @@ all();
     totals.fielding = totals.chances > 0 ? ((po + a) / totals.chances) : null;
     totals.rangeFactorPer9Inn = outs > 0 ? ((po + a) * 27 / outs) : null;
     totals.rangeFactorPerGame = totals.games > 0 ? ((po + a) / totals.games) : null;
+    // Catcher stats, only for catchers and only once the CSV carries those columns.
+    const catcherGames = games.filter(g => g.position === 'C' && g.stolen_bases !== undefined);
+    if (catcherGames.length) {
+      const cs = catcherGames.reduce((x, g) => x + (Number(g.caught_stealing) || 0), 0);
+      const sb = catcherGames.reduce((x, g) => x + (Number(g.stolen_bases) || 0), 0);
+      totals.stolenBases = sb;
+      totals.caughtStealing = cs;
+      totals.caughtStealingPercentage = (sb + cs) > 0 ? cs / (sb + cs) : null;
+      totals.passedBall = catcherGames.reduce((x, g) => x + (Number(g.passed_balls) || 0), 0);
+      totals.pickoffs = catcherGames.reduce((x, g) => x + (Number(g.pickoffs) || 0), 0);
+    }
     return totals;
   }
 
@@ -1600,7 +1615,7 @@ all();
 
   function fmtFieldingCell(k, val) {
     if (k === 'innings') return formatIP(val);
-    if (k === 'fielding') return fmtRatePct(val);
+    if (k === 'fielding' || k === 'caughtStealingPercentage') return fmtRatePct(val);
     if (k === 'rangeFactorPer9Inn' || k === 'rangeFactorPerGame') return fmtRatio(val);
     return (val !== undefined && val !== null && val !== '') ? val : '-';
   }
@@ -1716,6 +1731,9 @@ all();
     chances: 'Total chances (putouts + assists + errors)', throwingErrors: 'Throwing errors',
     rangeFactorPerGame: 'Range factor per game ((putouts + assists) ÷ games)',
     rangeFactorPer9Inn: 'Range factor per 9 innings ((putouts + assists) × 9 ÷ innings)',
+    stolenBases: 'Stolen bases allowed (catchers)', caughtStealing: 'Runners caught stealing (catchers)',
+    caughtStealingPercentage: 'Caught stealing percentage (caught stealing ÷ stolen base attempts)',
+    passedBall: 'Passed balls (catchers)', pickoffs: 'Pickoffs',
   };
 
   const SPIN_GLOSSARY_ROW = `<div class="glossary-row"><div class="glossary-abbr">Avg Spin *</div><div class="glossary-desc">Average spin rate (rpm), using only pitches that have spin data. MLB doesn't/can't track every spin at every park, so some games have little or no spin data, and some will be completely tracked. The count under the number shows how many pitches the average is based on; for example, "2 of 35 pitches" means 2 of the 35 pitches had spin data. An asterisk (*) means some pitches in the sample have no spin data. Sample labels: Small Sample Size (under 50% of pitches have spin), Decent Sample Size (50% to 70%), Sufficient Sample Size (over 70%).</div></div>`;
@@ -2078,19 +2096,23 @@ all();
     const hasPost = postFieldingByPos && postFieldingByPos.size > 0;
     if (!hasReg && !hasPost) return '';
 
-    const statKeys = FIELDING_GLOSSARY_ORDER.filter(k => k !== 'age');
-    const labels = statKeys.map(k => FIELDING_LABELS[k] || k);
-    // Date gets an explicit floor (see buildAflGameLogTable) so it never
-    // truncates to "2025-1…".
-    const gridTemplate = `minmax(98px, 0.9fr) minmax(110px, 1.4fr) ${statKeys.map(() => 'minmax(65px, 1fr)').join(' ')}`;
-    const minWidth = `${(98 + 110) + statKeys.length * 75}px`;
-    const rowStyle = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
-    const headerCells = `<div>Date</div><div>Opp</div>${labels.map(l => `<div>${l}</div>`).join('')}`;
+    // Catchers get the extra catcher columns (SB, CS, CS%, PB, PK); other positions don't.
+    const layoutFor = pos => {
+      const statKeys = FIELDING_BASE_ORDER.filter(k => k !== 'age').concat(pos === 'C' ? CATCHER_KEYS : []);
+      const labels = statKeys.map(k => FIELDING_LABELS[k] || k);
+      // Date gets an explicit floor (see buildAflGameLogTable) so it never
+      // truncates to "2025-1…".
+      const gridTemplate = `minmax(98px, 0.9fr) minmax(110px, 1.4fr) ${statKeys.map(() => 'minmax(65px, 1fr)').join(' ')}`;
+      const minWidth = `${(98 + 110) + statKeys.length * 75}px`;
+      const rowStyle = `style="grid-template-columns:${gridTemplate}; min-width:${minWidth};"`;
+      const headerCells = `<div>Date</div><div>Opp</div>${labels.map(l => `<div>${l}</div>`).join('')}`;
+      return { statKeys, rowStyle, headerCells };
+    };
 
-    const dataRow = (g, rowClass) => {
+    const dataRow = (g, rowClass, L) => {
       const totals = sumFieldingGames([g]);
-      const cells = statKeys.map(k => `<div>${fmtFieldingCell(k, totals[k])}</div>`).join('');
-      return `<div class="${rowClass}" ${rowStyle}><div>${g.date || ''}</div><div>${cityFromOpponent(g.opponent)}</div>${cells}</div>`;
+      const cells = L.statKeys.map(k => `<div>${fmtFieldingCell(k, totals[k])}</div>`).join('');
+      return `<div class="${rowClass}" ${L.rowStyle}><div>${g.date || ''}</div><div>${cityFromOpponent(g.opponent)}</div>${cells}</div>`;
     };
 
     // Union of every position played, regular season or postseason, in the
@@ -2108,6 +2130,7 @@ all();
 
     let html = '';
     positions.forEach(pos => {
+      const L = layoutFor(pos), statKeys = L.statKeys, rowStyle = L.rowStyle;
       const sortedReg = ((hasReg && regFieldingByPos.get(pos)) || []).slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
       const sortedPost = ((hasPost && postFieldingByPos.get(pos)) || []).slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
 
@@ -2115,14 +2138,14 @@ all();
         html += `<div class="section-note" style="font-weight:700; color:var(--text); margin:0.8rem 0 0.4rem; font-size:0.85rem;">${pos}</div>`;
       }
 
-      html += `<div class="career-table"><div class="career-row head" ${rowStyle}>${headerCells}</div>`;
-      html += sortedReg.map(g => dataRow(g, 'career-row body')).join('');
+      html += `<div class="career-table"><div class="career-row head" ${rowStyle}>${L.headerCells}</div>`;
+      html += sortedReg.map(g => dataRow(g, 'career-row body', L)).join('');
       if (sortedReg.length) {
         const totals = sumFieldingGames(sortedReg);
         const statCells = statKeys.map(k => `<div>${fmtFieldingCell(k, totals[k])}</div>`).join('');
         html += `<div class="career-row body afl" ${rowStyle}><div class="col-span-2">${season} Season Total</div>${statCells}</div>`;
       }
-      html += sortedPost.map(g => dataRow(g, 'career-row body post-season')).join('');
+      html += sortedPost.map(g => dataRow(g, 'career-row body post-season', L)).join('');
       if (sortedPost.length) {
         const totals = sumFieldingGames(sortedPost);
         const statCells = statKeys.map(k => `<div>${fmtFieldingCell(k, totals[k])}</div>`).join('');

@@ -818,6 +818,7 @@
   const FIELDING_COLS = [
     ['pos', 'Pos', fStr, true, true], ['games', 'G', fI], ['outs', 'Inn', fOuts], ['po', 'PO', fI], ['a', 'A', fI], ['e', 'E', fI], ['te', 'TE', fI], ['tc', 'TC', fI],
     ['fpct', 'FPct', fR3], ['dp', 'DP', fI], ['tp', 'TP', fI], ['rfg', 'RF/G', fD2], ['rf9', 'RF/9', fD2],
+    ['sb', 'SB', fI], ['cs', 'CS', fI], ['cspct', 'CS%', fPct], ['pb', 'PB', fI], ['pk', 'PK', fI],
   ];
   const TS_SAMPLE = { hitting: 'plate_appearances', pitching: 'outs', fielding: 'outs' };
 
@@ -852,7 +853,12 @@
       const g = by[key], s = k => g.reduce((a, r) => a + num(r[k]), 0);
       const outs = g.reduce((a, r) => a + inningsToOuts(r.innings), 0);
       const po = s('putouts'), a = s('assists'), tc = s('chances'), games = new Set(g.map(r => r.game_pk)).size;
+      // Catcher-only stats (stolen bases allowed, caught stealing, passed balls); blank for other positions
+      // and for older CSVs that predate those columns.
+      const hasC = g[0].position === 'C' && g[0].stolen_bases !== undefined;
+      const sb = hasC ? s('stolen_bases') : null, cs = hasC ? s('caught_stealing') : null;
       return { player_id: g[0].player_id, team: g[0].team, pos: g[0].position, games, outs, po, a, e: s('errors'), te: s('throwing_errors'), tc, dp: s('double_plays'), tp: s('triple_plays'),
+        sb, cs, cspct: hasC && (sb + cs) ? cs / (sb + cs) : null, pb: hasC ? s('passed_balls') : null, pk: hasC ? s('pickoffs') : null,
         fpct: tc ? (po + a) / tc : null, rfg: games ? (po + a) / games : null, rf9: outs ? (po + a) * 27 / outs : null };
     });
   }
@@ -920,7 +926,7 @@
     const tab = (id, label) => `<button class="view-btn${kind === id ? ' active' : ''}" data-stat="${id}">${label}</button>`;
     const note = kind === 'hitting' ? 'Hitting totals are summed from each player&#39;s AFL game logs; AVG, OBP, SLG, OPS, BABIP and the other rates are recalculated from those totals.'
       : kind === 'pitching' ? 'Pitching stats are each pitcher&#39;s AFL season totals. Sorting by IP uses total outs.'
-      : 'Fielding is shown per player and position, so a player who played several positions appears on several rows. DH is excluded.';
+      : 'Fielding is shown per player and position, so a player who played several positions appears on several rows. DH is excluded. SB, CS, CS% (caught stealing percentage) and PB are catcher stats: stolen bases allowed, runners thrown out, share of attempts thrown out, and passed balls. PK is pickoffs.';
     return `
       <div class="roster-key"><span class="roster-key-item"><span class="roster-key-swatch"></span>MLB debut</span><span class="roster-key-item"><span class="roster-key-swatch top100"></span>MLB Pipeline Top 100 (tag = rank)</span></div>
       <div class="stat-subtabs">${tab('hitting', 'Hitting')}${tab('pitching', 'Pitching')}${tab('fielding', 'Fielding')}<span class="ts-hint">Click any column header to sort. Ties go to the larger sample (PA, IP or innings) first.</span></div>
