@@ -484,3 +484,32 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867689,2026-10-20,home,Scottsdale Scorpions,808350,Joshua Quezada,2,False
 867689,2026-10-20,home,Scottsdale Scorpions,815218,Alexander Fuentes,3,False
 867689,2026-10-20,home,Scottsdale Scorpions,802105,Yeriel Santos,4,False
+867688,2026-10-21,away,Glendale Desert Dogs,801207,Emmett Olson,1,True
+867688,2026-10-21,away,Glendale Desert Dogs,813706,Owen Hackman,2,False
+867688,2026-10-21,away,Glendale Desert Dogs,677354,Alex Williams,3,False
+867688,2026-10-21,home,Peoria Javelinas,694358,Tekoah Roby,1,True
+867688,2026-10-21,home,Peoria Javelinas,692284,Frank Elissalt,2,False
+867692,2026-10-21,away,Salt River Rafters,703186,Jarlin Susana,1,True
+867692,2026-10-21,away,Salt River Rafters,823996,Luke Craig,2,False
+867692,2026-10-21,away,Salt River Rafters,806070,Mack Estrada,3,False
+867692,2026-10-21,away,Salt River Rafters,695403,Brock Gillis,4,False
+867692,2026-10-21,away,Salt River Rafters,823227,Brian Zeldin,5,False
+867692,2026-10-21,away,Salt River Rafters,699283,Cleiber Maldonado,6,False
+867692,2026-10-21,home,Scottsdale Scorpions,690972,Joey Dixon,1,True
+867692,2026-10-21,home,Scottsdale Scorpions,813796,Preston Howey,2,False
+867692,2026-10-21,home,Scottsdale Scorpions,805783,Mason Nichols,3,False
+867692,2026-10-21,home,Scottsdale Scorpions,683988,Railin Perez,4,False
+867692,2026-10-21,home,Scottsdale Scorpions,804670,Ryan Birchard,5,False
+867692,2026-10-21,home,Scottsdale Scorpions,703142,Andy Rodriguez,6,False
+867691,2026-10-21,away,Surprise Saguaros,703610,Justin Lamkin,1,True
+867691,2026-10-21,away,Surprise Saguaros,681003,Andrew Walling,2,False
+867691,2026-10-21,away,Surprise Saguaros,702965,Hiro Wyatt,3,False
+867691,2026-10-21,away,Surprise Saguaros,683349,Calvin Ziegler,4,False
+867691,2026-10-21,away,Surprise Saguaros,695037,J'Briell Easley,5,False
+867691,2026-10-21,home,Mesa Solar Sox,803021,Peyton Olejnik,1,True
+867691,2026-10-21,home,Mesa Solar Sox,805093,Jhon Cabral,2,False
+867691,2026-10-21,home,Mesa Solar Sox,701512,Tucker Novotny,3,False
+867691,2026-10-21,home,Mesa Solar Sox,838799,Harry Blum,4,False
+867691,2026-10-21,home,Mesa Solar Sox,700292,Yondrei Rojas,5,False
+867691,2026-10-21,home,Mesa Solar Sox,702255,Brandon Barriera,6,False
+867691,2026-10-21,home,Mesa Solar Sox,701329,Luis Rujano,7,False
