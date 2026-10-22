@@ -21,6 +21,7 @@ PITCH_FIELDS = [
     "launch_speed", "launch_angle", "total_distance",
     "trajectory", "hardness", "hit_location",
     "hit_coord_x", "hit_coord_y",
+    "play_result", "play_result_type",
 ]
 
 
@@ -153,6 +154,11 @@ def extract_pitches(feed, game_info):
                 # Powers the true spray chart on the hitter page.
                 "hit_coord_x": (hit_data.get("coordinates") or {}).get("coordX"),
                 "hit_coord_y": (hit_data.get("coordinates") or {}).get("coordY"),
+                # How the plate appearance ended (e.g. "Single", "Home Run",
+                # "Field Error", "Groundout"), kept only on the pitch that was
+                # put in play so each batted ball carries its outcome.
+                "play_result": (play.get("result") or {}).get("event") if details.get("isInPlay") else None,
+                "play_result_type": (play.get("result") or {}).get("eventType") if details.get("isInPlay") else None,
             })
 
     return rows
