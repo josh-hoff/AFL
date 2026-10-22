@@ -146,6 +146,13 @@
 
     const halves = [];
     const byKey = {};
+    let curBases = { b1: false, b2: false, b3: false }, curKey = null;
+    let curAway = 0, curHome = 0;
+    const baseKey = { '1B': 'b1', '2B': 'b2', '3B': 'b3' };
+    const scoredRun = r => !!(r.movement && r.movement.end === 'score' && !r.movement.isOut);
+    const gotOut = r => !!(r.movement && r.movement.isOut);
+    // A runner-only play (steal, pickoff, wild pitch...) is already a play of its own in MLB's feed.
+    const runnerOnlyResult = /^(stolen_base|caught_stealing|pickoff|wild_pitch|passed_ball|balk|other_advance|defensive_indiff|error)/;
     allPlays.forEach(p => {
       const about = p.about || {};
       const side = about.isTopInning === false || about.halfInning === 'bottom' ? 'home' : 'away';
@@ -155,15 +162,76 @@
         byKey[key] = { key, inning: about.inning, half, side, plays: [] };
         halves.push(byKey[key]);
       }
+      if (key !== curKey) { curKey = key; curBases = { b1: false, b2: false, b3: false }; }
       const res = p.result || {};
+      const runners = p.runners || [];
+      const batterId = p.matchup && p.matchup.batter && p.matchup.batter.id;
+      const evs = p.playEvents || [];
+      const resultIsRunnerOnly = runnerOnlyResult.test(res.eventType || '');
+
+      // Runner moves that happen in the middle of an at-bat (stolen base, wild pitch,
+      // passed ball, pickoff, balk...) are separate non-pitch events inside the play.
+      const moveByIdx = {};
+      runners.forEach(r => {
+        const idx = r.details && r.details.playIndex;
+        if (idx === undefined || idx === null) return;
+        const rid = r.details.runner && r.details.runner.id;
+        if (rid !== undefined && rid === batterId) return;
+        (moveByIdx[idx] = moveByIdx[idx] || []).push(r);
+      });
+      const eventRows = [];
+      if (!resultIsRunnerOnly) {
+        evs.forEach((ev, i) => {
+          if (ev.isPitch) return;
+          const idx = ev.index !== undefined ? ev.index : i;
+          const moves = moveByIdx[idx];
+          const d = ev.details || {};
+          if (!moves || !moves.length || !d.description) return;
+          if (d.description === res.description) return;
+          eventRows.push({ idx, ev, moves });
+        });
+      }
+      const outsInPlay = runners.filter(gotOut).length;
+      let outsNow = p.count && p.count.outs !== undefined && p.count.outs !== null ? p.count.outs - outsInPlay : null;
+      let runsFromEvents = 0;
+      eventRows.sort((x, y) => x.idx - y.idx).forEach(({ ev, moves }) => {
+        const d = ev.details || {};
+        moves.forEach(r => {
+          const mv = r.movement || {};
+          if (baseKey[mv.start]) curBases[baseKey[mv.start]] = false;
+          if (!mv.isOut && baseKey[mv.end]) curBases[baseKey[mv.end]] = true;
+        });
+        const runs = moves.filter(scoredRun).length;
+        runsFromEvents += runs;
+        if (side === 'away') curAway += runs; else curHome += runs;
+        if (outsNow !== null) outsNow += moves.filter(gotOut).length;
+        const hasScore = d.awayScore !== undefined && d.homeScore !== undefined;
+        byKey[key].plays.push({
+          event: d.event || '',
+          description: d.description || '',
+          scoring: runs > 0,
+          outs: outsNow,
+          awayScore: hasScore ? d.awayScore : curAway,
+          homeScore: hasScore ? d.homeScore : curHome,
+          bases: { ...curBases },
+        });
+        if (hasScore) { curAway = d.awayScore; curHome = d.homeScore; }
+      });
+
+      const attachedToEvents = new Set(eventRows.map(x => x.idx));
+      const resultRuns = runners.filter(r => scoredRun(r) && !attachedToEvents.has(r.details && r.details.playIndex)).length;
+      const bases = basesAfter(p, key);
+      curBases = { ...bases };
+      if (res.awayScore !== undefined) curAway = res.awayScore;
+      if (res.homeScore !== undefined) curHome = res.homeScore;
       byKey[key].plays.push({
         event: res.event || '',
         description: res.description || '',
-        scoring: !!about.isScoringPlay,
+        scoring: !!about.isScoringPlay && (runsFromEvents === 0 || resultRuns > 0),
         outs: p.count ? p.count.outs : null,
         awayScore: res.awayScore,
         homeScore: res.homeScore,
-        bases: basesAfter(p, key),
+        bases,
       });
     });
 
