@@ -10,9 +10,9 @@ game_pk,date,winning_pitcher_id,winning_pitcher_name,winning_pitcher_wins,winnin
 825637,2025-10-09,801270,Darwin Rodriguez,1,0,9.00,694518,Austin Smith,0,1,45.00,686672,Mark Adamiak,1
 825651,2025-10-10,695076,Rhett Lowder,1,0,0.00,695065,Ryan Costeiu,0,1,13.50,,,
 825620,2025-10-10,801802,James Hicks,1,0,0.00,702516,JP Wheat,0,1,36.00,,,
-825664,2025-10-12,692437,Winston Santos,1,0,4.50,806293,Payton Martin,0,1,9.00,683720,Edwin Jimenez,1
-825605,2025-10-12,695366,Holt Jones,1,0,4.50,702586,Fulton Lockhart,0,1,36.00,,,
-825616,2025-10-12,807748,Kannon Kemp,1,0,0.00,690162,Kenny Serwa,0,1,13.50,,,
+825664,2025-10-21 (originally 10/12),692437,Winston Santos,1,0,4.50,806293,Payton Martin,0,1,9.00,683720,Edwin Jimenez,1
+825605,2025-10-21 (originally 10/12),695366,Holt Jones,1,0,4.50,702586,Fulton Lockhart,0,1,36.00,,,
+825616,2025-10-21 (originally 10/12),807748,Kannon Kemp,1,0,0.00,690162,Kenny Serwa,0,1,13.50,,,
 825636,2025-10-14,806270,Dominic Perachi,1,0,3.00,809915,Jakob Wright,0,1,40.50,695402,Najer Victor,1
 825649,2025-10-14,690162,Kenny Serwa,1,1,12.79,681041,Marcelo Perez,0,1,108.00,,,
 825604,2025-10-14,701604,Andrew Lindsey,1,0,6.75,692030,Jose Corniell,0,1,6.75,815292,Luis Martinez-Gomez,1
@@ -32,11 +32,8 @@ game_pk,date,winning_pitcher_id,winning_pitcher_name,winning_pitcher_wins,winnin
 825645,2025-10-19,701604,Andrew Lindsey,2,0,8.10,681041,Marcelo Perez,0,2,60.75,,,
 825615,2025-10-19,687562,Jake Bennett,1,1,9.00,806641,Kolton Curtis,0,1,54.00,,,
 825646,2025-10-21,678738,Juan Sanchez,1,0,0.00,804592,Hunter Hoopes,0,1,27.00,,,
-825616,2025-10-21 (originally 10/12),807748,Kannon Kemp,2,0,0.00,690162,Kenny Serwa,1,2,13.03,,,
 825581,2025-10-21,692030,Jose Corniell,1,1,5.62,696505,Cory Wall,0,1,6.75,801367,Matt Jachec,1
 825601,2025-10-21,806270,Dominic Perachi,2,0,1.50,691765,Jackson Baumeister,0,1,2.25,692243,Jaden Woods,2
-825664,2025-10-21 (originally 10/12),692437,Winston Santos,2,0,4.50,806293,Payton Martin,1,2,4.50,683720,Edwin Jimenez,2
-825605,2025-10-21 (originally 10/12),695366,Holt Jones,2,0,4.50,702586,Fulton Lockhart,0,2,36.00,,,
 825586,2025-10-22,685396,Nate Peterson,1,0,0.00,694885,Ryan Murphy,1,2,8.53,,,
 825631,2025-10-22,694788,Carlson Reed,1,0,0.00,701480,Bryce Cunningham,0,3,10.12,,,
 825643,2025-10-22,674265,Kevin Abel,1,0,0.00,681410,Connor McCullough,0,2,19.64,805955,Carson Dorsey,1
@@ -50,7 +47,7 @@ game_pk,date,winning_pitcher_id,winning_pitcher_name,winning_pitcher_wins,winnin
 825660,2025-10-26,815794,Hyun-Seok Jang,1,0,0.00,691384,Luis Perales,0,1,6.75,,,
 825609,2025-10-26,698952,Jose T. Perez,1,0,0.00,806281,Blaze Pontes,0,1,27.00,689223,Derek True,1
 825639,2025-10-28,700675,Jimmy Kingsbury,1,0,0.00,806270,Dominic Perachi,2,1,4.66,,,
-825613,2025-10-28,678738,Juan Sanchez,2,0,0.00,692437,Winston Santos,2,1,5.56,688692,Jared Simpson,1
+825613,2025-10-28,678738,Juan Sanchez,2,0,0.00,692437,Winston Santos,1,1,6.14,688692,Jared Simpson,1
 825599,2025-10-28,694696,Cade Smith,1,0,0.00,806334,Alex Amalfi,0,1,21.60,,,
 825628,2025-10-29,801725,Luis De León,2,0,2.45,815456,Ben Shields,0,1,135.00,805955,Carson Dorsey,2
 825583,2025-10-29,692137,L.P. Langevin,1,0,0.00,801221,Pedro Garcia,0,1,27.00,689557,Zane Morehouse,1
@@ -66,17 +63,17 @@ game_pk,date,winning_pitcher_id,winning_pitcher_name,winning_pitcher_wins,winnin
 825658,2025-11-02,682769,Eiberson Castellano,2,1,4.50,815794,Hyun-Seok Jang,1,1,5.06,,,
 825597,2025-11-02,815292,Luis Martinez-Gomez,2,0,6.00,802967,Benny Thompson,0,1,27.00,802374,Brady Kirtner,1
 825610,2025-11-02,694885,Ryan Murphy,2,2,5.23,681041,Marcelo Perez,0,3,35.10,688781,Brett Banks,1
-825579,2025-11-04,692437,Winston Santos,3,1,6.46,692243,Jaden Woods,0,2,27.00,,,
+825579,2025-11-04,692437,Winston Santos,2,1,7.15,692243,Jaden Woods,0,2,27.00,,,
 825596,2025-11-04,801270,Darwin Rodriguez,2,0,10.12,829338,Dariel Fregio,0,1,81.00,,,
 825657,2025-11-04,695316,Jarold Rosado,1,0,0.00,828471,Jakob Hall,0,1,18.00,,,
-825577,2025-11-05,690162,Kenny Serwa,2,2,9.22,695871,Jesús Broca,1,1,0.00,,,
+825577,2025-11-05,690162,Kenny Serwa,2,1,7.84,695871,Jesús Broca,1,1,0.00,,,
 825594,2025-11-05,806334,Alex Amalfi,1,1,11.57,813895,Corey Avant,0,2,38.57,,,
 825625,2025-11-05,814106,Cade Denton,1,1,13.50,823801,Tanner Smith,0,2,13.50,699230,Lorenzo Encarnacion,1
 825641,2025-11-06,813820,Chen-Wei Lin,3,1,3.48,808063,Maikel Miralles,0,2,50.14,,,
 825624,2025-11-06,671143,Trenton Denholm,1,0,0.00,694968,Jack Mahoney,0,1,13.50,,,
 825593,2025-11-06,693686,Spencer Miles,2,0,2.25,701480,Bryce Cunningham,0,4,11.70,,,
 825655,2025-11-07,800811,Jacob Kroeger,1,0,0.00,701557,Carlos Lequerica,1,1,4.50,,,
-825640,2025-11-07,807748,Kannon Kemp,3,0,0.00,815292,Luis Martinez-Gomez,2,1,5.40,804663,Tyler Cleveland,1
+825640,2025-11-07,807748,Kannon Kemp,2,0,0.00,815292,Luis Martinez-Gomez,2,1,5.40,804663,Tyler Cleveland,1
 825576,2025-11-07,814803,Logan Martin,1,2,8.53,691384,Luis Perales,0,2,9.82,,,
 825588,2025-11-09,829338,Dariel Fregio,,,,692404,Darlin Saladin,,,,,,
 825575,2025-11-10,827317,Brandon Downer,1,0,4.50,822067,A.J. Causey,1,1,3.38,687040,Sayer Diederich,1
@@ -87,6 +84,6 @@ game_pk,date,winning_pitcher_id,winning_pitcher_name,winning_pitcher_wins,winnin
 825608,2025-11-11,695003,Randel Clemente,1,1,7.71,691028,Nate Wohlgemuth,0,1,108.00,,,
 825574,2025-11-12,815292,Luis Martinez-Gomez,3,1,3.38,695632,Brandon Neely,0,1,27.00,680893,Hueston Morrill,3
 825573,2025-11-12,806288,Stefan Raeth,1,0,0.00,807724,Justin Chambers,0,3,11.25,,,
-825580,2025-11-13,822067,A.J. Causey,2,1,2.45,695366,Holt Jones,2,1,5.79,,,
+825580,2025-11-13,822067,A.J. Causey,2,1,2.45,695366,Holt Jones,1,1,6.75,,,
 825571,2025-11-13,691000,Carson Montgomery,2,0,1.80,693686,Spencer Miles,2,1,8.44,,,
 825572,2025-11-14,683720,Edwin Jimenez,1,0,0.00,805321,Trevor Kuncl,0,1,135.00,,,

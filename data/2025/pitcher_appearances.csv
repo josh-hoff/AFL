@@ -135,31 +135,31 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825620,2025-10-10,home,Scottsdale Scorpions,801802,James Hicks,3,False
 825620,2025-10-10,home,Scottsdale Scorpions,689223,Derek True,4,False
 825620,2025-10-10,home,Scottsdale Scorpions,688692,Jared Simpson,5,False
-825664,2025-10-12,away,Glendale Desert Dogs,815794,Hyun-Seok Jang,1,True
-825664,2025-10-12,away,Glendale Desert Dogs,806293,Payton Martin,2,False
-825664,2025-10-12,away,Glendale Desert Dogs,801941,Carson Jacobs,3,False
-825664,2025-10-12,away,Glendale Desert Dogs,801317,Alex Makarewich,4,False
-825664,2025-10-12,away,Glendale Desert Dogs,815322,Kai Peterson,5,False
-825664,2025-10-12,home,Surprise Saguaros,692437,Winston Santos,1,True
-825664,2025-10-12,home,Surprise Saguaros,828506,Joey Danielson,2,False
-825664,2025-10-12,home,Surprise Saguaros,692838,Jaydenn Estanista,3,False
-825664,2025-10-12,home,Surprise Saguaros,683720,Edwin Jimenez,4,False
-825605,2025-10-12,away,Salt River Rafters,700380,Joshua Loeschorn,1,True
-825605,2025-10-12,away,Salt River Rafters,808054,Yordin Chalas,2,False
-825605,2025-10-12,away,Salt River Rafters,809138,Isaac Stebens,3,False
-825605,2025-10-12,away,Salt River Rafters,702586,Fulton Lockhart,4,False
-825605,2025-10-12,home,Mesa Solar Sox,694696,Cade Smith,1,True
-825605,2025-10-12,home,Mesa Solar Sox,806281,Blaze Pontes,2,False
-825605,2025-10-12,home,Mesa Solar Sox,695366,Holt Jones,3,False
-825616,2025-10-12,away,Scottsdale Scorpions,690162,Kenny Serwa,1,True
-825616,2025-10-12,away,Scottsdale Scorpions,701557,Carlos Lequerica,2,False
-825616,2025-10-12,away,Scottsdale Scorpions,808743,Bryce Jenkins,3,False
-825616,2025-10-12,home,Peoria Javelinas,807748,Kannon Kemp,1,True
-825616,2025-10-12,home,Peoria Javelinas,827317,Brandon Downer,2,False
-825616,2025-10-12,home,Peoria Javelinas,808052,Johan Moreno,3,False
-825616,2025-10-12,home,Peoria Javelinas,823801,Tanner Smith,4,False
-825616,2025-10-12,home,Peoria Javelinas,814491,Tucker Musgrove,5,False
-825616,2025-10-12,home,Peoria Javelinas,805321,Trevor Kuncl,6,False
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,815794,Hyun-Seok Jang,1,True
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,806293,Payton Martin,2,False
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,801941,Carson Jacobs,3,False
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,801317,Alex Makarewich,4,False
+825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,815322,Kai Peterson,5,False
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,692437,Winston Santos,1,True
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,828506,Joey Danielson,2,False
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,692838,Jaydenn Estanista,3,False
+825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,683720,Edwin Jimenez,4,False
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,700380,Joshua Loeschorn,1,True
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,808054,Yordin Chalas,2,False
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,809138,Isaac Stebens,3,False
+825605,2025-10-21 (originally 10/12),away,Salt River Rafters,702586,Fulton Lockhart,4,False
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,694696,Cade Smith,1,True
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,806281,Blaze Pontes,2,False
+825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,695366,Holt Jones,3,False
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,690162,Kenny Serwa,1,True
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,701557,Carlos Lequerica,2,False
+825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,808743,Bryce Jenkins,3,False
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,807748,Kannon Kemp,1,True
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,827317,Brandon Downer,2,False
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,808052,Johan Moreno,3,False
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,823801,Tanner Smith,4,False
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,814491,Tucker Musgrove,5,False
+825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,805321,Trevor Kuncl,6,False
 825636,2025-10-14,away,Glendale Desert Dogs,820827,Luke Sinnard,1,True
 825636,2025-10-14,away,Glendale Desert Dogs,800811,Jacob Kroeger,2,False
 825636,2025-10-14,away,Glendale Desert Dogs,815794,Hyun-Seok Jang,3,False
@@ -377,15 +377,6 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825646,2025-10-21,home,Peoria Javelinas,804592,Hunter Hoopes,2,False
 825646,2025-10-21,home,Peoria Javelinas,687040,Sayer Diederich,3,False
 825646,2025-10-21,home,Peoria Javelinas,804663,Tyler Cleveland,4,False
-825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,690162,Kenny Serwa,1,True
-825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,701557,Carlos Lequerica,2,False
-825616,2025-10-21 (originally 10/12),away,Scottsdale Scorpions,808743,Bryce Jenkins,3,False
-825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,807748,Kannon Kemp,1,True
-825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,827317,Brandon Downer,2,False
-825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,808052,Johan Moreno,3,False
-825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,823801,Tanner Smith,4,False
-825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,814491,Tucker Musgrove,5,False
-825616,2025-10-21 (originally 10/12),home,Peoria Javelinas,805321,Trevor Kuncl,6,False
 825581,2025-10-21,away,Glendale Desert Dogs,806334,Alex Amalfi,1,True
 825581,2025-10-21,away,Glendale Desert Dogs,696505,Cory Wall,2,False
 825581,2025-10-21,away,Glendale Desert Dogs,830485,Trent Buchanan,3,False
@@ -402,22 +393,6 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 825601,2025-10-21,home,Mesa Solar Sox,690658,Will Johnston,2,False
 825601,2025-10-21,home,Mesa Solar Sox,688636,Adam Stone,3,False
 825601,2025-10-21,home,Mesa Solar Sox,812163,Jonathan Russell,4,False
-825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,815794,Hyun-Seok Jang,1,True
-825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,806293,Payton Martin,2,False
-825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,801941,Carson Jacobs,3,False
-825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,801317,Alex Makarewich,4,False
-825664,2025-10-21 (originally 10/12),away,Glendale Desert Dogs,815322,Kai Peterson,5,False
-825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,692437,Winston Santos,1,True
-825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,828506,Joey Danielson,2,False
-825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,692838,Jaydenn Estanista,3,False
-825664,2025-10-21 (originally 10/12),home,Surprise Saguaros,683720,Edwin Jimenez,4,False
-825605,2025-10-21 (originally 10/12),away,Salt River Rafters,700380,Joshua Loeschorn,1,True
-825605,2025-10-21 (originally 10/12),away,Salt River Rafters,808054,Yordin Chalas,2,False
-825605,2025-10-21 (originally 10/12),away,Salt River Rafters,809138,Isaac Stebens,3,False
-825605,2025-10-21 (originally 10/12),away,Salt River Rafters,702586,Fulton Lockhart,4,False
-825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,694696,Cade Smith,1,True
-825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,806281,Blaze Pontes,2,False
-825605,2025-10-21 (originally 10/12),home,Mesa Solar Sox,695366,Holt Jones,3,False
 825586,2025-10-22,away,Scottsdale Scorpions,694885,Ryan Murphy,1,True
 825586,2025-10-22,away,Scottsdale Scorpions,813865,Hudson Leach,2,False
 825586,2025-10-22,away,Scottsdale Scorpions,691028,Nate Wohlgemuth,3,False
