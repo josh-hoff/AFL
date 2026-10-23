@@ -516,15 +516,33 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867682,2026-10-22,away,Surprise Saguaros,802146,Aidan Major,1,True
 867682,2026-10-22,away,Surprise Saguaros,822415,Mason McConnaughey,2,False
 867682,2026-10-22,away,Surprise Saguaros,825100,Kevin Warunek,3,False
+867682,2026-10-22,away,Surprise Saguaros,804966,Jesus Gamez,4,False
+867682,2026-10-22,away,Surprise Saguaros,701884,Magnus Ellerts,5,False
 867682,2026-10-22,home,Peoria Javelinas,694345,Patrick Reilly,1,True
 867682,2026-10-22,home,Peoria Javelinas,688867,Braxton Bragg,2,False
 867682,2026-10-22,home,Peoria Javelinas,822498,Reid Easterly,3,False
 867682,2026-10-22,home,Peoria Javelinas,695787,Trent Hodgdon,4,False
+867682,2026-10-22,home,Peoria Javelinas,800212,Francis Peña,5,False
+867682,2026-10-22,home,Peoria Javelinas,702111,Adam Smith,6,False
 867683,2026-10-22,away,Scottsdale Scorpions,700280,Miguel Mendez,1,True
 867683,2026-10-22,away,Scottsdale Scorpions,836172,Peyton Niksch,2,False
 867683,2026-10-22,away,Scottsdale Scorpions,806711,Yereny Teus,3,False
 867683,2026-10-22,away,Scottsdale Scorpions,825095,Drake George,4,False
+867683,2026-10-22,away,Scottsdale Scorpions,805694,Juan Bello,5,False
+867683,2026-10-22,away,Scottsdale Scorpions,702904,Cesar De Jesus,6,False
 867683,2026-10-22,home,Salt River Rafters,820825,Konner Eaton,1,True
 867683,2026-10-22,home,Salt River Rafters,701680,R.J. Sales,2,False
 867683,2026-10-22,home,Salt River Rafters,805879,Connor Foley,3,False
 867683,2026-10-22,home,Salt River Rafters,800544,Cesar Lares,4,False
+867683,2026-10-22,home,Salt River Rafters,813409,Joe Ariola,5,False
+867683,2026-10-22,home,Salt River Rafters,688629,Noah Dean,6,False
+867681,2026-10-22,away,Glendale Desert Dogs,828987,Briggs McKenzie,1,True
+867681,2026-10-22,away,Glendale Desert Dogs,802413,Sam Horn,2,False
+867681,2026-10-22,away,Glendale Desert Dogs,805892,Nick Altermatt,3,False
+867681,2026-10-22,away,Glendale Desert Dogs,702165,Jonathan Clark,4,False
+867681,2026-10-22,away,Glendale Desert Dogs,807187,Mathias LaCombe,5,False
+867681,2026-10-22,home,Mesa Solar Sox,701836,Kyle Robinson,1,True
+867681,2026-10-22,home,Mesa Solar Sox,695402,Najer Victor,2,False
+867681,2026-10-22,home,Mesa Solar Sox,806879,Anhuar Garcia,3,False
+867681,2026-10-22,home,Mesa Solar Sox,815064,Trennor O'Donnell,4,False
+867681,2026-10-22,home,Mesa Solar Sox,700113,Nicholas Judice,5,False

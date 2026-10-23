@@ -871,3 +871,21 @@ game_pk,date,team_side,team_name,player_id,player_name,jersey_number,batting_ord
 867683,2026-10-22,home,Salt River Rafters,695493,Teo Banks,20,700,7,00,True,7,LF,Outfielder
 867683,2026-10-22,home,Salt River Rafters,808277,Miguel Rodríguez,98,800,8,00,True,2,C,Catcher
 867683,2026-10-22,home,Salt River Rafters,806992,Enrique Jimenez,60,900,9,00,True,10,DH,Designated Hitter
+867681,2026-10-22,away,Glendale Desert Dogs,815608,Wyatt Sanford,3,100,1,00,True,6,SS,Shortstop
+867681,2026-10-22,away,Glendale Desert Dogs,815352,Caleb Bonemer,27,200,2,00,True,8,CF,Outfielder
+867681,2026-10-22,away,Glendale Desert Dogs,816111,Tate Southisene,19,300,3,00,True,4,2B,Second Base
+867681,2026-10-22,away,Glendale Desert Dogs,815792,Chase Harlan,11,400,4,00,True,5,3B,Third Base
+867681,2026-10-22,away,Glendale Desert Dogs,808234,Eduardo Quintero,16,500,5,00,True,9,RF,Outfielder
+867681,2026-10-22,away,Glendale Desert Dogs,701333,Colby Shelton,12,600,6,00,True,3,1B,First Base
+867681,2026-10-22,away,Glendale Desert Dogs,826928,Owen Carey,9,700,7,00,True,7,LF,Outfielder
+867681,2026-10-22,away,Glendale Desert Dogs,815793,Carter Johnson,2,800,8,00,True,10,DH,Designated Hitter
+867681,2026-10-22,away,Glendale Desert Dogs,686944,Grant Magill,20,900,9,00,True,2,C,Catcher
+867681,2026-10-22,home,Mesa Solar Sox,813833,Cole Conn,3,100,1,00,True,2,C,Catcher
+867681,2026-10-22,home,Mesa Solar Sox,805796,Arjun Nimmala,78,200,2,00,True,6,SS,Shortstop
+867681,2026-10-22,home,Mesa Solar Sox,702995,Antonio Anderson,10,300,3,00,True,3,1B,First Base
+867681,2026-10-22,home,Mesa Solar Sox,687766,Miguel Useche,15,400,4,00,True,10,DH,Designated Hitter
+867681,2026-10-22,home,Mesa Solar Sox,801590,Aaron Parker,20,500,5,00,True,7,LF,Outfielder
+867681,2026-10-22,home,Mesa Solar Sox,820835,Kade Snell,6,600,6,00,True,9,RF,Outfielder
+867681,2026-10-22,home,Mesa Solar Sox,696286,Davis Diaz,8,700,7,00,True,5,3B,Third Base
+867681,2026-10-22,home,Mesa Solar Sox,829040,Juan Cabada,16,800,8,00,True,4,2B,Second Base
+867681,2026-10-22,home,Mesa Solar Sox,834404,Jake Cook,9,900,9,00,True,8,CF,Outfielder
