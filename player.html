@@ -119,6 +119,11 @@
   .career-row.mlb { border-top: 1px solid #2f6fb0; font-weight: 700; background: #eaf1fa; }
   .career-row.post-season { background: #eaf1fa; }
   .career-row > div { overflow: hidden; text-overflow: ellipsis; }
+  /* AFL Game Log: scrolls up and down once there are more than 10 games. The stat-key header stays pinned
+     at the top and the Season Total row stays pinned at the bottom (height is set by sizeGameLogScroll()). */
+  .career-table.gl-vscroll { overflow: auto; }
+  .gl-vscroll .career-row.head { position: sticky; top: 0; z-index: 3; }
+  .gl-vscroll .career-row.afl { position: sticky; bottom: 0; z-index: 2; }
 
   .tab-row { display: flex; gap: 0.5rem; margin: 0 0 0.75rem; }
   .stat-tab {
@@ -2074,7 +2079,7 @@ all();
     };
 
     let html = `
-      <div class="career-table">
+      <div class="career-table gl-vscroll">
         <div class="career-row head" ${rowStyle}>${headerCells}</div>
     `;
 
@@ -2185,7 +2190,7 @@ all();
         html += `<div class="section-note" style="font-weight:700; color:var(--text); margin:0.8rem 0 0.4rem; font-size:0.85rem;">${pos}</div>`;
       }
 
-      html += `<div class="career-table"><div class="career-row head" ${rowStyle}>${L.headerCells}</div>`;
+      html += `<div class="career-table gl-vscroll"><div class="career-row head" ${rowStyle}>${L.headerCells}</div>`;
       html += sortedReg.map(g => dataRow(g, 'career-row body', L)).join('');
       if (sortedReg.length) {
         const totals = sumFieldingGames(sortedReg);
@@ -2235,7 +2240,24 @@ all();
     if (fieldingBtn) fieldingBtn.classList.toggle('active', view === 'fielding');
     if (primaryView) primaryView.style.display = view === 'primary' ? '' : 'none';
     if (fieldingView) fieldingView.style.display = view === 'fielding' ? '' : 'none';
+    sizeGameLogScroll();
   }
+
+  // Show the header + the first 10 games + the pinned Season Total, and scroll for the rest.
+  const GAMELOG_VISIBLE_ROWS = 10;
+  function sizeGameLogScroll() {
+    document.querySelectorAll('.career-table.gl-vscroll').forEach(t => {
+      if (!t.offsetParent) return; // hidden tab; sized when it is shown
+      const games = Array.from(t.querySelectorAll('.career-row.body')).filter(r => !r.classList.contains('afl') && !r.classList.contains('post-season') && !r.classList.contains('mlb'));
+      if (games.length <= GAMELOG_VISIBLE_ROWS) { t.style.maxHeight = ''; return; }
+      const head = t.querySelector('.career-row.head'), total = t.querySelector('.career-row.afl');
+      let h = (head ? head.offsetHeight : 0) + (total ? total.offsetHeight : 0);
+      for (let i = 0; i < GAMELOG_VISIBLE_ROWS; i++) h += games[i].offsetHeight;
+      t.style.maxHeight = h + 'px';
+      t.style.maxHeight = (h + (t.offsetHeight - t.clientHeight)) + 'px'; // plus border and horizontal scroll bar
+    });
+  }
+  window.addEventListener('resize', sizeGameLogScroll);
 
   async function loadCareerPath(aflRow, statType, aflGameLogRows) {
     const container = document.getElementById('career-path-container');
@@ -2473,6 +2495,7 @@ all();
       html += top100Footnote(player);
 
       content.innerHTML = html;
+      sizeGameLogScroll();
       wireTransactionExpand();
       if (isPitcher && statcastTotals) initSeasonStatcast(playerPitches, { hand: ((player.throws || '')[0] || 'R').toUpperCase(), opponentMap });
 
