@@ -975,6 +975,7 @@ function hook(){ROOT.querySelectorAll('[data-tip]').forEach(e=>{e.onmousemove=ev
 
 const bz=e=>e<98?null:e<=98?[26,30]:e<=99?[25,31]:e<=100?[24,33]:e>=116?[8,50]:[24-(e-100),33+(e-100)*17/16];
 const GROUPS=[['First Pitch (0-0)',p=>CNT_TEST.FIRST(p),'FIRST'],['Ahead (Strikes > Balls)',p=>CNT_TEST.AHEAD(p),'AHEAD'],['Even (1-1, 2-2)',p=>CNT_TEST.EVEN(p),'EVEN'],['Behind (Balls > Strikes)',p=>CNT_TEST.BEHIND(p),'BEHIND'],['Full Count (3-2)',p=>CNT_TEST.FULL(p),'FULL']];
+const one=g=>g.length===1?` data-px="${g[0].ix}"`:'';
 function chartMix(a){
  const W=540,L=190,R=16,rowH=62,H=GROUPS.length*rowH+26;let s=`<svg viewBox="0 0 ${W} ${H}">`;
  GROUPS.forEach((g,i)=>{const ps=a.filter(g[1]),y=10+i*rowH;
@@ -982,7 +983,7 @@ function chartMix(a){
   if(!ps.length){s+=`<text x="${L}" y="${y+32}" font-size="11" class="m">No pitches in this selection</text></g>`;return}
   let x=L;const bw=W-L-R;
   types.forEach(t=>{const c=ps.filter(p=>p.t===t).length;if(!c)return;const w=bw*c/ps.length;
-   s+=`<rect data-tip="<b>${LAB[t]}</b><br>${g[0]}<br>${c} of ${ps.length} (${(100*c/ps.length).toFixed(2)}%)" x="${x}" y="${y+10}" width="${Math.max(0,w-2)}" height="34" rx="3" fill="${COL[t]}"/>`;
+   s+=`<rect${one(ps.filter(p=>p.t===t))} data-tip="<b>${LAB[t]}</b><br>${g[0]}<br>${c} of ${ps.length} (${(100*c/ps.length).toFixed(2)}%)" x="${x}" y="${y+10}" width="${Math.max(0,w-2)}" height="34" rx="3" fill="${COL[t]}"/>`;
    s+=`<text x="${x+w/2-1}" y="${y+31}" text-anchor="middle" font-size="${w<30?9:11}" font-weight="700" style="fill:#fff;pointer-events:none">${Math.round(100*c/ps.length)}%</text>`;x+=w});
   s+='</g>';
  });
@@ -1003,7 +1004,7 @@ function chartVelo(a){
    gids.forEach((gid,gi)=>{const gg=gp.filter(p=>p.g===gid),gw=gg.length*unit;
     if(gi>0)s+=`<line x1="${x-GAP/2}" x2="${x-GAP/2}" y1="${T}" y2="${T+ph+2}" stroke="var(--mut)" stroke-width="1" stroke-dasharray="3 3" opacity=".6" style="pointer-events:none"/>`;
     gg.forEach((q,k)=>{const bx=x+k*unit+.5,ww=Math.max(1.2,unit-1),y=Y(q.v);
-     s+=`<rect data-inn="${n}" class="clk" data-tip="<b>${LAB[q.t]}</b> &middot; ${ORD(n)} inning pitched<br>${q.v.toFixed(1)} mph<br>${DATA.games[gid].date} vs ${DATA.games[gid].opp}" x="${bx}" y="${y}" width="${ww}" height="${Math.max(0,T+ph-y)}" fill="${COL[q.t]}"/>`});
+     s+=`<rect data-px="${q.ix}" data-tip="<b>${LAB[q.t]}</b> &middot; ${ORD(n)} inning pitched<br>${q.v.toFixed(1)} mph<br>${DATA.games[gid].date} vs ${DATA.games[gid].opp}" x="${bx}" y="${y}" width="${ww}" height="${Math.max(0,T+ph-y)}" fill="${COL[q.t]}"/>`});
     sel.forEach(t=>{const g=gg.filter(q=>q.t===t);if(!g.length||gg.length<3)return;const av=mean(g.map(q=>q.v));
      s+=`<line x1="${x}" x2="${x+gw}" y1="${Y(av)}" y2="${Y(av)}" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="3 2" opacity=".8" style="pointer-events:none"/>`});
     if(gw>=24)s+=`<text x="${x+gw/2}" y="${T+ph+13}" text-anchor="middle" font-size="9" class="m" style="pointer-events:none">${shortD(DATA.games[gid].date)}</text>`;
@@ -1021,10 +1022,10 @@ function chartVelo(a){
  s+=`<text x="${L+pw/2}" y="${T+ph+34}" text-anchor="middle" font-size="11" font-weight="700">INNING PITCHED</text><text transform="translate(13 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">AVG VELOCITY (MPH)</text><text x="${L+pw}" y="10" text-anchor="end" font-size="10" class="m">axis starts at ${mn} mph</text>`;
  const maxBars=Math.max(...inns.map(n=>types.filter(tp=>a.some(p=>p.inn===n&&p.t===tp&&p.v!=null)).length),1),BW=Math.min(34,bw*.82/maxBars);
  inns.forEach((n,i)=>{
-  const bars=types.map(tp=>{const g=a.filter(p=>p.inn===n&&p.t===tp&&p.v!=null);return g.length?{tp,av:mean(g.map(p=>p.v)),c:g.length}:null}).filter(Boolean);
+  const bars=types.map(tp=>{const g=a.filter(p=>p.inn===n&&p.t===tp&&p.v!=null);return g.length?{tp,av:mean(g.map(p=>p.v)),c:g.length,one:one(g)}:null}).filter(Boolean);
   if(!bars.length)return;const gw=bw*.82,w=BW,x0=X0(i)-w*bars.length/2;
   bars.forEach((b,k)=>{const x=x0+k*w,y=Y(b.av),h=T+ph-y,bx=x+1,ww=Math.max(2,w-2),r=Math.min(3,ww/2);
-   s+=`<path data-inn="${n}" class="clk" data-tip="<b>${LAB[b.tp]}</b> &middot; ${ORD(n)} inning pitched<br>${b.av.toFixed(1)} mph avg<br>${b.c} pitch${b.c>1?'es':''}" d="M${bx},${T+ph}V${y+r}Q${bx},${y} ${bx+r},${y}H${bx+ww-r}Q${bx+ww},${y} ${bx+ww},${y+r}V${T+ph}Z" fill="${COL[b.tp]}"/>`;
+   s+=`<path ${b.one||`data-inn="${n}" class="clk"`} data-tip="<b>${LAB[b.tp]}</b> &middot; ${ORD(n)} inning pitched<br>${b.av.toFixed(1)} mph avg<br>${b.c} pitch${b.c>1?'es':''}" d="M${bx},${T+ph}V${y+r}Q${bx},${y} ${bx+r},${y}H${bx+ww-r}Q${bx+ww},${y} ${bx+ww},${y+r}V${T+ph}Z" fill="${COL[b.tp]}"/>`;
    if(ww>=22)s+=`<text x="${bx+ww/2}" y="${y-4}" text-anchor="middle" font-size="9.5" font-weight="700" style="pointer-events:none">${b.av.toFixed(1)}</text>`});
  });
  return s+'</svg>';
@@ -1041,7 +1042,7 @@ function chartEV(a){
  s+=`<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="var(--acc)" opacity=".16"/><text x="${X(106)}" y="${Y(30)}" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--acc)">BARREL (approx.)</text>`;
  s+=`<line x1="${X(95)}" x2="${X(95)}" y1="${T}" y2="${T+ph}" stroke="var(--mut)" stroke-dasharray="4 4"/><text x="${X(95)+4}" y="${T+11}" font-size="10" class="m">95 mph hard-hit</text>`;
  s+=`<text x="${L+pw/2}" y="${H-6}" text-anchor="middle" font-size="11" font-weight="700">EXIT VELOCITY (MPH)</text><text transform="translate(13 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">LAUNCH ANGLE (&deg;)</text>`;
- b.forEach(p=>s+=`<circle data-tip="<b>${LAB[p.t]}</b> to ${p.bat}<br>${p.ev.toFixed(1)} mph &middot; ${p.la}&deg;<br>${p.tr.replace('_',' ')} &middot; ${p.call}" cx="${X(p.ev)}" cy="${Y(p.la)}" r="7" fill="${COL[p.t]}" stroke="var(--card)" stroke-width="2"/>`);
+ b.forEach(p=>s+=`<circle data-px="${p.ix}" data-tip="<b>${LAB[p.t]}</b> to ${p.bat}<br>${p.ev.toFixed(1)} mph &middot; ${p.la}&deg;<br>${p.tr.replace('_',' ')} &middot; ${p.call}" cx="${X(p.ev)}" cy="${Y(p.la)}" r="7" fill="${COL[p.t]}" stroke="var(--card)" stroke-width="2"/>`);
  return s+'</svg>';
 }
 
@@ -1072,9 +1073,9 @@ function chartMove(a){
  s+=`<text x="${L+8}" y="${T+14}" font-size="10" class="m">rise &amp; ${LS}</text><text x="${L+pw-8}" y="${T+14}" text-anchor="end" font-size="10" class="m">rise &amp; ${RS}</text><text x="${L+8}" y="${T+ph-8}" font-size="10" class="m">drop &amp; ${LS}</text><text x="${L+pw-8}" y="${T+ph-8}" text-anchor="end" font-size="10" class="m">drop &amp; ${RS}</text>`;
  s+=`<text x="${L+pw/2}" y="${H-5}" text-anchor="middle" font-size="11" font-weight="700">HORIZONTAL BREAK (IN.)  &#8592; ${LS} &nbsp; ${RS} &#8594;</text><text transform="translate(12 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">INDUCED VERTICAL BREAK (IN.)</text>`;
  const pts=a.filter(p=>p.hb!=null&&p.vb!=null);
- pts.forEach(p=>s+=`<circle data-tip="<b>${LAB[p.t]}</b><br>${p.hb.toFixed(1)}&quot; H &middot; ${p.vb.toFixed(1)}&quot; V" cx="${X(p.hb)}" cy="${Y(p.vb)}" r="3.6" fill="${COL[p.t]}" opacity=".5"/>`);
+ pts.forEach(p=>s+=`<circle data-px="${p.ix}" data-tip="<b>${LAB[p.t]}</b><br>${p.hb.toFixed(1)}&quot; H &middot; ${p.vb.toFixed(1)}&quot; V" cx="${X(p.hb)}" cy="${Y(p.vb)}" r="3.6" fill="${COL[p.t]}" opacity=".5"/>`);
  types.forEach(t=>{const g=pts.filter(p=>p.t===t);if(!g.length)return;const hx=mean(g.map(p=>p.hb)),vy=mean(g.map(p=>p.vb));
-  s+=`<circle data-tip="<b>${LAB[t]} average</b><br>${hx.toFixed(1)}&quot; H &middot; ${vy.toFixed(1)}&quot; V<br>${g.length} pitches" cx="${X(hx)}" cy="${Y(vy)}" r="9" fill="${COL[t]}" stroke="var(--card)" stroke-width="3"/>`});
+  s+=`<circle${one(g)} data-tip="<b>${LAB[t]} average</b><br>${hx.toFixed(1)}&quot; H &middot; ${vy.toFixed(1)}&quot; V<br>${g.length} pitch${g.length===1?'':'es'}" cx="${X(hx)}" cy="${Y(vy)}" r="9" fill="${COL[t]}" stroke="var(--card)" stroke-width="3"/>`});
  return s+'</svg>';
 }
 function chartRel(a){
@@ -1085,9 +1086,9 @@ function chartRel(a){
  for(let i=0;i<=6;i++){const v=xm[0]+i*(xm[1]-xm[0])/6;s+=`<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${T+ph}" stroke="var(--grid)"/><text x="${X(v)}" y="${T+ph+15}" text-anchor="middle" font-size="10.5" class="m">${v.toFixed(2)}</text>`}
  for(let i=0;i<=4;i++){const v=zm[0]+i*(zm[1]-zm[0])/4;s+=`<line x1="${L}" x2="${L+pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${L-7}" y="${Y(v)+4}" text-anchor="end" font-size="10.5" class="m">${v.toFixed(1)}</text>`}
  s+=`<text x="${L+pw/2}" y="${H-6}" text-anchor="middle" font-size="11" font-weight="700">HORIZONTAL RELEASE (FT)  &#8592; ${LS} &nbsp; ${RS} &#8594;</text><text transform="translate(12 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">RELEASE HEIGHT (FT)</text>`;
- pts.forEach(p=>s+=`<circle data-tip="<b>${LAB[p.t]}</b><br>${p.rx.toFixed(2)} ft &middot; ${p.rz.toFixed(2)} ft" cx="${X(p.rx)}" cy="${Y(p.rz)}" r="3.6" fill="${COL[p.t]}" opacity=".5"/>`);
+ pts.forEach(p=>s+=`<circle data-px="${p.ix}" data-tip="<b>${LAB[p.t]}</b><br>${p.rx.toFixed(2)} ft &middot; ${p.rz.toFixed(2)} ft" cx="${X(p.rx)}" cy="${Y(p.rz)}" r="3.6" fill="${COL[p.t]}" opacity=".5"/>`);
  types.forEach(t=>{const g=pts.filter(p=>p.t===t);if(!g.length)return;const hx=mean(g.map(p=>p.rx)),vy=mean(g.map(p=>p.rz));
-  s+=`<circle data-tip="<b>${LAB[t]} average</b><br>${g.length} pitches" cx="${X(hx)}" cy="${Y(vy)}" r="9" fill="${COL[t]}" stroke="var(--card)" stroke-width="3"/>`});
+  s+=`<circle${one(g)} data-tip="<b>${LAB[t]} average</b><br>${g.length} pitch${g.length===1?'':'es'}" cx="${X(hx)}" cy="${Y(vy)}" r="9" fill="${COL[t]}" stroke="var(--card)" stroke-width="3"/>`});
  return s+'</svg>';
 }
 function chartSpin(a){
@@ -1100,13 +1101,13 @@ function chartSpin(a){
  for(let t=ax.min;t<=ax.max+1e-9;t+=ax.step)s+=`<line x1="${X(t)}" x2="${X(t)}" y1="${T}" y2="${T+ph}" stroke="var(--grid)"/><text x="${X(t)}" y="${T+ph+15}" text-anchor="middle" font-size="11" class="m">${t}</text>`;
  for(let t=ay.min;t<=ay.max+1e-9;t+=ay.step)s+=`<line x1="${L}" x2="${L+pw}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--grid)"/><text x="${L-7}" y="${Y(t)+4}" text-anchor="end" font-size="11" class="m">${t}</text>`;
  s+=`<text x="${L+pw/2}" y="${H-6}" text-anchor="middle" font-size="11" font-weight="700">VELOCITY (MPH)</text><text transform="translate(12 ${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700">SPIN RATE (RPM)</text>`;
- pts.forEach(p=>s+=`<circle data-tip="<b>${LAB[p.t]}</b><br>${p.v.toFixed(1)} mph &middot; ${p.spin} rpm" cx="${X(p.v)}" cy="${Y(p.spin)}" r="3.6" fill="${COL[p.t]}" opacity=".5"/>`);
+ pts.forEach(p=>s+=`<circle data-px="${p.ix}" data-tip="<b>${LAB[p.t]}</b><br>${p.v.toFixed(1)} mph &middot; ${p.spin} rpm" cx="${X(p.v)}" cy="${Y(p.spin)}" r="3.6" fill="${COL[p.t]}" opacity=".5"/>`);
  types.forEach(t=>{const g=pts.filter(p=>p.t===t);if(!g.length)return;const vx=mean(g.map(p=>p.v)),sy=mean(g.map(p=>p.spin));
-  s+=`<circle data-tip="<b>${LAB[t]} average</b><br>${vx.toFixed(1)} mph &middot; ${Math.round(sy)} rpm<br>${g.length} pitches" cx="${X(vx)}" cy="${Y(sy)}" r="9" fill="${COL[t]}" stroke="var(--card)" stroke-width="3"/>`});
+  s+=`<circle${one(g)} data-tip="<b>${LAB[t]} average</b><br>${vx.toFixed(1)} mph &middot; ${Math.round(sy)} rpm<br>${g.length} pitch${g.length===1?'':'es'}" cx="${X(vx)}" cy="${Y(sy)}" r="9" fill="${COL[t]}" stroke="var(--card)" stroke-width="3"/>`});
  return s+'</svg>';
 }
-function dialArrow(cx,cy,deg,len,col,w,op,tt){const a=(deg-180)*Math.PI/180,sx=Math.sin(a),sy=-Math.cos(a),ex=cx+len*sx,ey=cy+len*sy,hl=w*3.4,hw=w*1.9,bx=ex-hl*sx,by=ey-hl*sy,qx=-sy,qy=sx;
- return `<g opacity="${op}" data-tip="${tt}"><line x1="${cx}" y1="${cy}" x2="${bx}" y2="${by}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/><polygon points="${ex},${ey} ${bx+hw*qx},${by+hw*qy} ${bx-hw*qx},${by-hw*qy}" fill="${col}"/></g>`}
+function dialArrow(cx,cy,deg,len,col,w,op,tt,xa=''){const a=(deg-180)*Math.PI/180,sx=Math.sin(a),sy=-Math.cos(a),ex=cx+len*sx,ey=cy+len*sy,hl=w*3.4,hw=w*1.9,bx=ex-hl*sx,by=ey-hl*sy,qx=-sy,qy=sx;
+ return `<g opacity="${op}"${xa} data-tip="${tt}">${xa&&op<1?`<line x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}" stroke="transparent" stroke-width="10" stroke-linecap="round"/>`:''}<line x1="${cx}" y1="${cy}" x2="${bx}" y2="${by}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/><polygon points="${ex},${ey} ${bx+hw*qx},${by+hw*qy} ${bx-hw*qx},${by-hw*qy}" fill="${col}"/></g>`}
 function chartDial(a){
  const pts=a.filter(p=>p.sd!=null);if(!pts.length)return null;
  const W=520,cx=260,cy=260,R=170,pos=(d,r)=>{const t=(d-180)*Math.PI/180;return[cx+r*Math.sin(t),cy-r*Math.cos(t)]};
@@ -1118,9 +1119,9 @@ function chartDial(a){
  for(let h=1;h<=12;h++){const[x,y]=pos((180+h*30)%360,R+42);s+=`<text x="${x}" y="${y+6}" font-size="17" text-anchor="middle" font-weight="800" style="fill:#c0392b">${h}</text>`}
  const lb='font-size="12" font-weight="800" text-anchor="middle" letter-spacing="1"';
  s+=`<text x="${cx}" y="20" ${lb}>TOP SPIN</text><text x="${cx}" y="${W-8}" ${lb}>BACK SPIN</text><text transform="translate(14 ${cy}) rotate(-90)" ${lb}>SIDE SPIN</text><text transform="translate(${W-14} ${cy}) rotate(90)" ${lb}>SIDE SPIN</text>`;
- if(sel.length)pts.forEach(p=>s+=dialArrow(cx,cy,p.sd,R*.88,COL[p.t],1.6,.3,`<b>${LAB[p.t]}</b> &middot; ${Math.round(p.sd)}&deg; (${spinClock(p.sd)}) &middot; ${p.spin!=null?p.spin+' rpm':'N/A'}`));
+ if(sel.length)pts.forEach(p=>s+=dialArrow(cx,cy,p.sd,R*.88,COL[p.t],1.6,.3,`<b>${LAB[p.t]}</b> &middot; ${Math.round(p.sd)}&deg; (${spinClock(p.sd)}) &middot; ${p.spin!=null?p.spin+' rpm':'N/A'}`,` data-px="${p.ix}"`));
  types.forEach(t=>{const g=pts.filter(p=>p.t===t);if(!g.length)return;const d=circMean(g.map(p=>p.sd));
-  s+=dialArrow(cx,cy,d,R*.9,COL[t],4.5,1,`<b>${LAB[t]} average</b>: ${Math.round(d)}&deg; (${spinClock(d)}) &middot; ${g.length} pitches`)});
+  s+=dialArrow(cx,cy,d,R*.9,COL[t],4.5,1,`<b>${LAB[t]} average</b>: ${Math.round(d)}&deg; (${spinClock(d)}) &middot; ${g.length} pitch${g.length===1?'':'es'}`,one(g))});
  return s+`<circle cx="${cx}" cy="${cy}" r="5" fill="var(--ink)"/></svg>`;
 }
 function togg(arr,k,multiOn){return arr.includes(k)?(multiOn?arr.filter(x=>x!==k):[]):(multiOn?[...arr,k]:[k])}
@@ -1138,7 +1139,7 @@ function askSeePitch(p){
  ov.querySelector('.spm-no').focus();
 }
 function bindClicks(){
- ROOT.querySelectorAll('#sc-plot [data-px]').forEach(e=>e.onclick=()=>askSeePitch(P[+e.dataset.px]));
+ ROOT.querySelectorAll('#sc-plot [data-px]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();askSeePitch(P[+e.dataset.px])});
  ROOT.querySelectorAll('#sc-plot [data-cnt]').forEach(g=>g.onclick=()=>{cnt=togg(cnt,g.dataset.cnt,cntMulti);all()});
  ROOT.querySelectorAll('#sc-plot [data-inn]').forEach(g=>g.onclick=()=>{inn=togg(inn,g.dataset.inn,innMulti);all()});
 }
