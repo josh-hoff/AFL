@@ -83,6 +83,7 @@
      plate time, type confidence, plate x/z) lives in the collapsible row
      below, same click-to-expand behavior as before. */
   .pitch-row { display: grid; grid-template-columns: 34px 1.25fr 0.75fr 0.85fr 1.3fr 0.85fr 0.85fr 0.85fr 0.85fr 1.25fr; gap: 0.9rem; padding: 0.55rem 1.4rem 0.55rem 1rem; align-items: center; font-size: 0.86rem; position: relative; }
+  .pitch-row.pitch-target { background: #fdeadb !important; box-shadow: inset 0 0 0 2px var(--tab-active); }
   .pitch-row.head { background: #fafaf8; font-size: 0.6rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); line-height: 1.15; }
   .pitch-row:not(.head) { border-top: 1px solid var(--border); cursor: pointer; }
   .pitch-row:not(.head):hover { background: #fafaf8; }
@@ -871,7 +872,7 @@
         const releasePt = p.releaseX !== null && p.releaseZ !== null ? `${p.releaseX.toFixed(2)}, ${p.releaseZ.toFixed(2)} ft` : '—';
         const detailId = `pd-${abIdx}-${i}`;
         return `
-          <div class="pitch-row" style="--row-accent:${accentColor}" onclick="togglePitchDetail('${detailId}')">
+          <div class="pitch-row" id="pr-${abIdx}-${i}" style="--row-accent:${accentColor}" onclick="togglePitchDetail('${detailId}')">
             <div class="pitch-num">${i + 1}</div>
             <div class="pitch-type-cell"><span class="pitch-dot" style="background:${PITCH_COLORS[p.type] || '#888'}"></span>${PITCH_LABELS[p.type] || p.type}</div>
             <div class="pitch-velo pitch-numcell">${p.velo !== null ? p.velo.toFixed(1) : '—'}</div>
@@ -1776,6 +1777,16 @@
 
       renderAll();
       renderGlossary();
+      // Deep link from the player page: ?ab=<at-bat index>&pitch=<pitch # in that at-bat>
+      const tAb = params.get('ab'), tPitch = params.get('pitch');
+      if (tAb !== null && tPitch !== null) {
+        const row = document.getElementById(`pr-${tAb}-${Number(tPitch) - 1}`);
+        if (row) {
+          row.classList.add('pitch-target');
+          togglePitchDetail(`pd-${tAb}-${Number(tPitch) - 1}`);
+          row.scrollIntoView({ block: 'center' });
+        }
+      }
     } catch (err) {
       content.innerHTML = `<p class="error">Couldn't load this game: ${err.message}</p>`;
     }

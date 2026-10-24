@@ -249,6 +249,14 @@
 #seasonSc .obtn{display:inline-flex;align-items:center;gap:8px;min-width:12.2rem;font:600 .85rem inherit;font-family:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 11px;cursor:pointer;text-align:left}
 #seasonSc .obtn.act{border-color:var(--acc);box-shadow:0 0 0 2px rgba(242,101,34,.15)}
 #seasonSc .otxt{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:9.5rem}
+#seePitchOv{position:fixed;inset:0;background:rgba(10,18,36,.45);display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px}
+#seePitchOv .spm{background:var(--bg-card,#fff);color:var(--text,#111418);border:1px solid var(--border,#e8e6e2);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.28);padding:1.3rem 1.4rem 1.1rem;max-width:340px;width:100%;text-align:center}
+#seePitchOv .spm-t{font-size:1.05rem;font-weight:800}
+#seePitchOv .spm-s{margin-top:.5rem;font-size:.82rem;color:var(--text-muted,#5a6472);line-height:1.5}
+#seePitchOv .spm-b{display:flex;gap:.6rem;margin-top:1.1rem}
+#seePitchOv .spm-b button{flex:1;font:700 .9rem inherit;font-family:inherit;border-radius:999px;padding:.55rem 1rem;cursor:pointer;border:1px solid var(--border,#e8e6e2);background:var(--bg-card,#fff);color:var(--text,#111418)}
+#seePitchOv .spm-b .spm-yes{background:#f26522;border-color:#f26522;color:#fff}
+#seasonSc #sc-plot [data-px]{cursor:pointer}
 #seasonSc .obtn{position:relative;justify-content:center;padding-left:4px!important;padding-right:4px!important}
 #seasonSc .otxt{text-align:center;padding:0 12px}
 #seasonSc .oarr{position:absolute;right:6px;font-size:.7rem;top:50%;transform:translateY(-50%);color:var(--mut)}
@@ -835,11 +843,11 @@
     Array.from(new Set(pr.map(r => Number(r.inning)))).sort((a, b) => a - b).forEach((n, i) => { ords[n] = i + 1; });
     const abs = []; let cur = null;
     pr.forEach(r => { if (!cur || cur.b !== r.batter_id) { cur = { b: r.batter_id, ps: [] }; abs.push(cur); } cur.ps.push(r); });
-    abs.forEach(ab => {
+    abs.forEach((ab, ai) => {
       let balls = 0, strikes = 0;
       ab.ps.forEach((r, i) => {
         const sp = nn(r.spin_rate);
-        P.push({ g: gi, t: r.pitch_type_code, call: r.call, inn: ords[Number(r.inning)], bat: r.batter_name, pn: i + 1, b: balls, s: strikes,
+        P.push({ g: gi, ai, t: r.pitch_type_code, call: r.call, inn: ords[Number(r.inning)], bat: r.batter_name, pn: i + 1, b: balls, s: strikes,
           z: nn(r.zone), v: nn(r.start_speed), ev_: nn(r.end_speed), spin: sp !== null && sp > 0 ? sp : null, ev: nn(r.launch_speed), la: nn(r.launch_angle), tr: r.trajectory || '',
           px: nn(r.plate_x), pz: nn(r.plate_z), rx: nn(r.release_x), rz: nn(r.release_z), hb: nn(r.break_horizontal), vb: nn(r.break_vertical_induced), sd: nn(r.spin_direction), h: (r.bat_side||'').toUpperCase().slice(0,1) });
         const ct = classify(r.call);
@@ -855,6 +863,7 @@
   Object.keys(typeCounts).forEach(t => { if (!LAB[t]) LAB[t] = t; if (!COL[t]) COL[t] = '#888'; });
   const spinNote = (n, total) => { const pct = total ? Math.round(n / total * 100) : 0; let label = ''; if (n > 0) label = `${pct < 50 ? 'Small' : (pct <= 70 ? 'Decent' : 'Sufficient')} Sample Size: ${pct}%`; else if (total > 0) label = 'No Spin Data Available'; return `${n} of ${total} pitches` + (label ? '<br>' + label : ''); };
 
+P.forEach((p,i)=>p.ix=i);
 const kind=p=>/^in play/i.test(p.call)?'INPLAY':(p.call==='Ball'||p.call==='Ball In Dirt'||p.call==='Hit By Pitch')?'BALL':/^swinging strike/i.test(p.call)?'SWING':/^foul/i.test(p.call)?'FOUL':'CALLED';
 const isSwing=p=>['SWING','FOUL','INPLAY'].includes(kind(p));
 const inZone=p=>p.z>=1&&p.z<=9;
@@ -1045,7 +1054,7 @@ function chartLoc(a){
  for(let i=1;i<3;i++){s+=`<line x1="${zx0+(zx1-zx0)*i/3}" x2="${zx0+(zx1-zx0)*i/3}" y1="${zy0}" y2="${zy1}" stroke="var(--grid)"/><line x1="${zx0}" x2="${zx1}" y1="${zy0+(zy1-zy0)*i/3}" y2="${zy0+(zy1-zy0)*i/3}" stroke="var(--grid)"/>`}
  s+=`<rect x="${zx0}" y="${zy0}" width="${zx1-zx0}" height="${zy1-zy0}" fill="none" stroke="var(--ink)" stroke-width="2.5"/>`;
  base.filter(p=>p.px!=null&&p.pz!=null).forEach(p=>{const k=kind(p),c=OC2[k],x=X(p.px),y=Y(p.pz),op=inSet.has(p)?.8:.1;
-  const tp=`data-tip="<b>${LAB[p.t]}</b> &middot; ${p.v!=null?p.v.toFixed(1)+' mph':''}<br>${p.call}<br>${DATA.games[p.g].date} vs ${DATA.games[p.g].opp}"`;
+  const tp=`data-px="${p.ix}" data-tip="<b>${LAB[p.t]}</b> &middot; ${p.v!=null?p.v.toFixed(1)+' mph':''}<br>${p.call}<br>${DATA.games[p.g].date} vs ${DATA.games[p.g].opp}"`;
   if(k==='SWING')s+=`<text ${tp} x="${x}" y="${y+4.5}" text-anchor="middle" font-size="13" font-weight="800" style="fill:${c};opacity:${op}">&#10005;</text>`;
   else if(k==='FOUL')s+=`<rect ${tp} x="${x-3.5}" y="${y-3.5}" width="7" height="7" fill="${c}" opacity="${op}"/>`;
   else s+=`<circle ${tp} cx="${x}" cy="${y}" r="4" fill="${c}" opacity="${op}"/>`});
@@ -1115,7 +1124,21 @@ function chartDial(a){
  return s+`<circle cx="${cx}" cy="${cy}" r="5" fill="var(--ink)"/></svg>`;
 }
 function togg(arr,k,multiOn){return arr.includes(k)?(multiOn?arr.filter(x=>x!==k):[]):(multiOn?[...arr,k]:[k])}
+function askSeePitch(p){
+ const g=DATA.games[p.g],url=`game.html?game_pk=${g.pk}&pitcher_id=${playerId}&season=${currentSeason}&ab=${p.ai}&pitch=${p.pn}`;
+ let ov=document.getElementById('seePitchOv');if(ov)ov.remove();
+ ov=document.createElement('div');ov.id='seePitchOv';
+ ov.innerHTML=`<div class="spm" role="dialog" aria-modal="true" aria-labelledby="spmT"><div class="spm-t" id="spmT">Do You Want to See This Pitch?</div><div class="spm-s">${LAB[p.t]}${p.v!=null?' &middot; '+p.v.toFixed(1)+' mph':''} &middot; ${p.call}<br>${g.date} vs ${g.opp}</div><div class="spm-b"><button type="button" class="spm-no">No</button><button type="button" class="spm-yes">Yes</button></div></div>`;
+ document.body.appendChild(ov);
+ const close=()=>{ov.remove();document.removeEventListener('keydown',key)};
+ const key=e=>{if(e.key==='Escape')close()};document.addEventListener('keydown',key);
+ ov.onclick=e=>{if(e.target===ov)close()};
+ ov.querySelector('.spm-no').onclick=close;
+ ov.querySelector('.spm-yes').onclick=()=>{location.href=url};
+ ov.querySelector('.spm-no').focus();
+}
 function bindClicks(){
+ ROOT.querySelectorAll('#sc-plot [data-px]').forEach(e=>e.onclick=()=>askSeePitch(P[+e.dataset.px]));
  ROOT.querySelectorAll('#sc-plot [data-cnt]').forEach(g=>g.onclick=()=>{cnt=togg(cnt,g.dataset.cnt,cntMulti);all()});
  ROOT.querySelectorAll('#sc-plot [data-inn]').forEach(g=>g.onclick=()=>{inn=togg(inn,g.dataset.inn,innMulti);all()});
 }
