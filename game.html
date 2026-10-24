@@ -221,6 +221,14 @@
      dots) is positioned in percentages relative to this, not the wrap
      itself, so the whole plot shrinks in by the same small margin together. */
   .heatmap-plot-area { position: absolute; inset: 1.8%; }
+  /* Hitter-side axis under the zone chart: RHH on the left (catcher's view), LHH on the right,
+     home plate drawn the same width as the strike zone (x% values mirror .sz-box). */
+  .hand-axis { position: relative; width: 100%; height: 54px; margin-bottom: 0.2rem; }
+  .hand-axis-inner { position: absolute; left: 1.8%; right: 1.8%; top: 0; bottom: 0; border-top: 1.5px solid var(--text-muted); }
+  .hand-axis-inner::before, .hand-axis-inner::after { content: ''; position: absolute; top: -5px; height: 9px; border-left: 1.5px solid var(--text-muted); }
+  .hand-axis-inner::before { left: 0; } .hand-axis-inner::after { right: 0; }
+  .hand-axis-plate { position: absolute; left: 35.8%; top: 0; width: 28.3%; height: 40px; display: block; overflow: visible; }
+  .hand-axis-lbl { position: absolute; top: 16px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; color: var(--text-muted); }
   .sz-box { position: absolute; left: 35.8%; top: 33.3%; width: 28.3%; height: 33.3%; border: 3px solid var(--text); border-radius: 2px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); }
   .sz-limit-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
   .sz-box .sz-cell { border: 1px solid rgba(17,20,24,0.3); }
@@ -1545,6 +1553,7 @@
               <div class="heatmap-card active" data-slide="0">
                 <div class="heatmap-title" style="text-align: center;">Pitch Location <span id="heatmapScope"></span></div>
                 <div class="heatmap-wrap" id="heatmapWrap"></div>
+                <div class="hand-axis" aria-label="Catcher's view: right-handed hitters on the left, left-handed hitters on the right"><div class="hand-axis-inner"><svg class="hand-axis-plate" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon points="0,0 100,0 100,20 50,40 0,20" fill="var(--border)" stroke="var(--text-muted)" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg><span class="hand-axis-lbl" style="left:0">RHH</span><span class="hand-axis-lbl" style="right:0">LHH</span></div></div>
                 <div class="heatmap-legend" id="heatmapLegend"></div>
               </div>
               <div class="heatmap-card" data-slide="1">

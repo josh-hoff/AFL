@@ -1031,8 +1031,8 @@ function chartEV(a){
 const OC2={CALLED:'#c0392b',SWING:'#c0392b',FOUL:'#c0392b',BALL:'#1a8a4a',INPLAY:'#2f6fb0'};
 function chartLoc(a){
  const inSet=new Set(a);const base=P.filter(p=>!sel.length||sel.includes(p.t));
- const W=500,H=470,sx=80,sy=88,cx=W/2,X=v=>cx+v*sx,Y=v=>H-14-v*sy*0.9;
- let s=`<svg viewBox="0 0 ${W} ${H}"><rect x="${X(-2.6)}" y="${Y(4.6)}" width="${5.2*sx}" height="${(4.6-0.1)*sy*.9}" fill="none" stroke="var(--grid)" stroke-dasharray="3 3"/>`;
+ const W=500,H=470,H2=H+58,sx=80,sy=88,cx=W/2,X=v=>cx+v*sx,Y=v=>H-14-v*sy*0.9;
+ let s=`<svg viewBox="0 0 ${W} ${H2}"><rect x="${X(-2.6)}" y="${Y(4.6)}" width="${5.2*sx}" height="${(4.6-0.1)*sy*.9}" fill="none" stroke="var(--grid)" stroke-dasharray="3 3"/>`;
  const zx0=X(-.708),zx1=X(.708),zy0=Y(3.5),zy1=Y(1.5);
  for(let i=1;i<3;i++){s+=`<line x1="${zx0+(zx1-zx0)*i/3}" x2="${zx0+(zx1-zx0)*i/3}" y1="${zy0}" y2="${zy1}" stroke="var(--grid)"/><line x1="${zx0}" x2="${zx1}" y1="${zy0+(zy1-zy0)*i/3}" y2="${zy0+(zy1-zy0)*i/3}" stroke="var(--grid)"/>`}
  s+=`<rect x="${zx0}" y="${zy0}" width="${zx1-zx0}" height="${zy1-zy0}" fill="none" stroke="var(--ink)" stroke-width="2.5"/>`;
@@ -1041,6 +1041,10 @@ function chartLoc(a){
   if(k==='SWING')s+=`<text ${tp} x="${x}" y="${y+4.5}" text-anchor="middle" font-size="13" font-weight="800" style="fill:${c};opacity:${op}">&#10005;</text>`;
   else if(k==='FOUL')s+=`<rect ${tp} x="${x-3.5}" y="${y-3.5}" width="7" height="7" fill="${c}" opacity="${op}"/>`;
   else s+=`<circle ${tp} cx="${x}" cy="${y}" r="4" fill="${c}" opacity="${op}"/>`});
+ const ay=Y(.1)+14,pl=X(-.708),pr=X(.708);
+ s+=`<line x1="${X(-2.6)}" x2="${X(2.6)}" y1="${ay}" y2="${ay}" stroke="var(--mut)" stroke-width="1.5"/><line x1="${X(-2.6)}" x2="${X(-2.6)}" y1="${ay-5}" y2="${ay+4}" stroke="var(--mut)" stroke-width="1.5"/><line x1="${X(2.6)}" x2="${X(2.6)}" y1="${ay-5}" y2="${ay+4}" stroke="var(--mut)" stroke-width="1.5"/>`;
+ s+=`<polygon points="${pl},${ay} ${pr},${ay} ${pr},${ay+26} ${X(0)},${ay+52} ${pl},${ay+26}" fill="var(--line)" stroke="var(--mut)" stroke-width="1.5" stroke-linejoin="round"/>`;
+ s+=`<text x="${X(-2.6)}" y="${ay+34}" font-size="19" font-weight="800" letter-spacing=".06em" class="m">RHH</text><text x="${X(2.6)}" y="${ay+34}" text-anchor="end" font-size="19" font-weight="800" letter-spacing=".06em" class="m">LHH</text>`;
  return s+'</svg>';
 }
 function chartMove(a){
