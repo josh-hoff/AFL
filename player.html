@@ -249,6 +249,9 @@
 #seasonSc .obtn{display:inline-flex;align-items:center;gap:8px;min-width:12.2rem;font:600 .85rem inherit;font-family:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 11px;cursor:pointer;text-align:left}
 #seasonSc .obtn.act{border-color:var(--acc);box-shadow:0 0 0 2px rgba(242,101,34,.15)}
 #seasonSc .otxt{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:9.5rem}
+#seasonSc .obtn{position:relative;justify-content:center;padding-left:4px!important;padding-right:4px!important}
+#seasonSc .otxt{text-align:center;padding:0 12px}
+#seasonSc .oarr{position:absolute;right:6px;font-size:.7rem;top:50%;transform:translateY(-50%);color:var(--mut)}
 #seasonSc .omenu{position:absolute;left:0;top:calc(100% + 4px);min-width:21rem;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:5px;z-index:20}
 #seasonSc .omenu[hidden]{display:none}
 #seasonSc .otop{display:flex;align-items:center;gap:6px;padding-bottom:4px;margin-bottom:4px;border-bottom:1px solid var(--line)}
@@ -838,7 +841,7 @@
         const sp = nn(r.spin_rate);
         P.push({ g: gi, t: r.pitch_type_code, call: r.call, inn: ords[Number(r.inning)], bat: r.batter_name, pn: i + 1, b: balls, s: strikes,
           z: nn(r.zone), v: nn(r.start_speed), ev_: nn(r.end_speed), spin: sp !== null && sp > 0 ? sp : null, ev: nn(r.launch_speed), la: nn(r.launch_angle), tr: r.trajectory || '',
-          px: nn(r.plate_x), pz: nn(r.plate_z), rx: nn(r.release_x), rz: nn(r.release_z), hb: nn(r.break_horizontal), vb: nn(r.break_vertical_induced), sd: nn(r.spin_direction) });
+          px: nn(r.plate_x), pz: nn(r.plate_z), rx: nn(r.release_x), rz: nn(r.release_z), hb: nn(r.break_horizontal), vb: nn(r.break_vertical_induced), sd: nn(r.spin_direction), h: (r.bat_side||'').toUpperCase().slice(0,1) });
         const ct = classify(r.call);
         if (ct === 'BALL') { if (r.call !== 'Hit By Pitch') balls++; }
         else if (ct === 'CALLED') { if (r.call !== 'Called Strike') { if (strikes < 2) strikes++; } else strikes++; }
@@ -856,12 +859,14 @@ const kind=p=>/^in play/i.test(p.call)?'INPLAY':(p.call==='Ball'||p.call==='Ball
 const isSwing=p=>['SWING','FOUL','INPLAY'].includes(kind(p));
 const inZone=p=>p.z>=1&&p.z<=9;
 const types=[...new Set(P.map(p=>p.t))].sort((a,b)=>P.filter(p=>p.t===b).length-P.filter(p=>p.t===a).length);
-let sel=[],multi=false,res=[],resMulti=false,cnt=[],cntMulti=false,inn=[],innMulti=false,openDD=null,slide=0,sortK='n',sortAsc=false;
+let sel=[],multi=false,res=[],resMulti=false,cnt=[],cntMulti=false,inn=[],innMulti=false,hit=[],openDD=null,slide=0,sortK='n',sortAsc=false;
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
 const pct=(n,d)=>d?Math.round(100*n/d)+'%':'—';
 const f1=v=>v==null?'—':v.toFixed(1);
 const innOk=p=>!inn.length||inn.includes(String(p.inn));
-const scoped=(ignoreType,ignoreCount)=>P.filter(p=>(ignoreType||!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&(ignoreCount||cntOk(p))&&innOk(p));
+const hitOk=p=>!hit.length||hit.includes(p.h);
+const HAS_HIT=P.some(p=>p.h);
+const scoped=(ignoreType,ignoreCount)=>P.filter(p=>(ignoreType||!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&(ignoreCount||cntOk(p))&&innOk(p)&&hitOk(p));
 function stats(a){
  const n=a.length,sw=a.filter(isSwing),oz=a.filter(p=>!inZone(p)&&p.z),ozSw=oz.filter(isSwing);
  const whiff=a.filter(p=>kind(p)==='SWING').length,called=a.filter(p=>kind(p)==='CALLED').length;
@@ -886,15 +891,15 @@ function renderTiles(){
  '<div class="sub">Velocity</div>'+tile('Velo Loss',s.loss==null?'—':s.loss.toFixed(1)+' mph','release to plate');
 }
 function renderChips(){
- const base=P.filter(p=>(!res.length||res.includes(kind(p)))&&cntOk(p)&&innOk(p));
+ const base=P.filter(p=>(!res.length||res.includes(kind(p)))&&cntOk(p)&&innOk(p)&&hitOk(p));
  let h=`<button class="chip${!sel.length?' on':''}" data-t="ALL">All Pitches <span class="n">(${base.length})</span></button>`;
  types.forEach(t=>{const c=base.filter(p=>p.t===t).length,on=sel.includes(t);
   h+=`<button class="chip${on?' on':''}${c===0&&!on?' off':''}" data-t="${t}">${multi?`<span class="cb${on?' on':''}">${on?'&#10003;':''}</span>`:''}<span class="dot" style="background:${COL[t]}"></span>${LAB[t]} <span class="n">(${c})</span></button>`});
- h+=`<span class="multi" id="sc-multi"><span class="cb${multi?' on':''}">${multi?'&#10003;':''}</span>Multiple Selections</span><button class="reset" id="sc-reset"${(sel.length||res.length||cnt.length||inn.length||multi||resMulti||cntMulti||innMulti)?'':' disabled'}>Reset Filters</button>`;
+ h+=`<span class="multi" id="sc-multi"><span class="cb${multi?' on':''}">${multi?'&#10003;':''}</span>Multiple Selections</span><button class="reset" id="sc-reset"${(sel.length||res.length||cnt.length||inn.length||hit.length||multi||resMulti||cntMulti||innMulti)?'':' disabled'}>Reset Filters</button>`;
  $('chips').innerHTML=h;
  ROOT.querySelectorAll('.chip').forEach(b=>b.onclick=()=>pick(b.dataset.t));
  $('multi').onclick=()=>{multi=!multi;if(!multi&&sel.length>1)sel=[sel[0]];all()};
- $('reset').onclick=()=>{sel=[];res=[];cnt=[];inn=[];multi=false;resMulti=false;cntMulti=false;innMulti=false;all()};
+ $('reset').onclick=()=>{sel=[];res=[];cnt=[];inn=[];hit=[];multi=false;resMulti=false;cntMulti=false;innMulti=false;all()};
 }
 function pick(t){
  if(t==='ALL')sel=[];else if(multi)sel=sel.includes(t)?sel.filter(x=>x!==t):[...sel,t];else sel=(sel.length===1&&sel[0]===t)?[]:[t];all();
@@ -905,36 +910,39 @@ const CNT_OPTS=[['ALL','All Counts'],['FIRST','First Pitch (0-0)'],['AHEAD','Ahe
 const ORD=n=>n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:(n%10<4?n%10:0)]);
 const INNS=[...new Set(P.map(p=>p.inn))].sort((x,y)=>x-y);
 const INN_OPTS=[['ALL','All Innings'],...INNS.map(n=>[String(n),ORD(n)+' Inning Pitched'])];
+const HIT_OPTS=[['ALL','All Hitters'],['R','vs RHH'],['L','vs LHH']];
 const CNT_TEST={FIRST:p=>p.b===0&&p.s===0,AHEAD:p=>p.s>p.b,EVEN:p=>p.s===p.b&&p.b>0,BEHIND:p=>p.b>p.s&&!(p.b===3&&p.s===2),FULL:p=>p.b===3&&p.s===2,TWO:p=>p.s===2};
 const cntOk=p=>!cnt.length||cnt.some(k=>CNT_TEST[k](p));
 const DD={
- res:{label:'Result',all:'All Results',opts:RES_OPTS,test:(p,k)=>kind(p)===k,mark:k=>k==='ALL'?'':`<span class="oc-dot" style="background:${OCOL[k]}"></span>`,
-      get v(){return res},set v(x){res=x},get m(){return resMulti},set m(x){resMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&cntOk(p)&&innOk(p))},
- cnt:{label:'Count',all:'All Counts',opts:CNT_OPTS,test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
-      get v(){return cnt},set v(x){cnt=x},get m(){return cntMulti},set m(x){cntMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&innOk(p))},
- inn:{label:'Inning',all:'All Innings',opts:INN_OPTS,test:(p,k)=>String(p.inn)===k,mark:()=>'',
-      get v(){return inn},set v(x){inn=x},get m(){return innMulti},set m(x){innMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&cntOk(p))}
+ res:{label:'Result',all:'All Results',short:'Results',opts:RES_OPTS,test:(p,k)=>kind(p)===k,mark:k=>k==='ALL'?'':`<span class="oc-dot" style="background:${OCOL[k]}"></span>`,
+      get v(){return res},set v(x){res=x},get m(){return resMulti},set m(x){resMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&cntOk(p)&&innOk(p)&&hitOk(p))},
+ cnt:{label:'Count',all:'All Counts',short:'Counts',opts:CNT_OPTS,test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
+      get v(){return cnt},set v(x){cnt=x},get m(){return cntMulti},set m(x){cntMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&innOk(p)&&hitOk(p))},
+ inn:{label:'Inning',all:'All Innings',short:'Innings',opts:INN_OPTS,test:(p,k)=>String(p.inn)===k,mark:()=>'',
+      get v(){return inn},set v(x){inn=x},get m(){return innMulti},set m(x){innMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&cntOk(p)&&hitOk(p))},
+ hit:{label:'Hitter',all:'All Hitters',short:'RHH/LHH',single:true,opts:HIT_OPTS,test:(p,k)=>p.h===k,mark:()=>'',
+      get v(){return hit},set v(x){hit=x},get m(){return false},set m(x){},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&cntOk(p)&&innOk(p))}
 };
 function renderDD(id){
  const d=DD[id],base=d.base(),n=k=>k==='ALL'?base.length:base.filter(p=>d.test(p,k)).length;
  const ck=on=>`<span class="cb${on?' on':''}">${on?'&#10003;':''}</span>`;
  const lab=k=>d.opts.find(o=>o[0]===k)[1];
- const txt=!d.v.length?`${d.all} (${base.length})`:d.v.map(lab).join(', ')+` (${base.filter(p=>d.v.some(k=>d.test(p,k))).length})`;
+ const txt=!d.v.length?d.short:d.v.map(lab).join(', ')+(d.single?'':` (${base.filter(p=>d.v.some(k=>d.test(p,k))).length})`);
  const opts=d.opts.map(([k,l])=>{const on=k==='ALL'?!d.v.length:d.v.includes(k);
   const row=`<div class="oopt${on?' sel':''}" data-k="${k}">${d.m&&k!=='ALL'?ck(on):''}${d.mark(k)}<span>${l}</span><span class="ocnt">${n(k)}</span></div>`;
-  return k==='ALL'?`<div class="otop">${row}<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div></div>`:row}).join('');
+  return k==='ALL'?`<div class="otop">${row}${d.single?'':`<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div>`}</div>`:row}).join('');
  const host=$('dd-'+id);
- host.innerHTML=`<span class="olab">${d.label}</span><div class="odd"><button type="button" class="obtn${d.v.length?' act':''}">${d.v.length?d.v.map(d.mark).join(''):''}<span class="otxt">${txt}</span><span style="color:var(--mut)">&#9662;</span></button><div class="omenu"${openDD===id?'':' hidden'}>${opts}</div></div>`;
+ host.innerHTML=`<span class="olab">${d.label}</span><div class="odd"><button type="button" class="obtn${d.v.length?' act':''}">${d.v.length?d.v.map(d.mark).join(''):''}<span class="otxt">${txt}</span><span class="oarr">&#9662;</span></button><div class="omenu"${openDD===id?'':' hidden'}>${opts}</div></div>`;
  const btn=host.querySelector('.obtn'),menu=host.querySelector('.omenu');
  btn.onclick=e=>{e.stopPropagation();openDD=openDD===id?null:id;syncOpen()};
  menu.onclick=e=>e.stopPropagation();
  menu.querySelectorAll('.oopt').forEach(el=>el.onclick=()=>{const k=el.dataset.k;
   if(k==='ALL')d.v=[];else if(d.m)d.v=d.v.includes(k)?d.v.filter(x=>x!==k):[...d.v,k];else d.v=[k];
   if(!d.m)openDD=null;all()});
- menu.querySelector('.omulti').onclick=()=>{d.m=!d.m;if(!d.m&&d.v.length>1)d.v=[d.v[0]];all()};
+ const om=menu.querySelector('.omulti');if(om)om.onclick=()=>{d.m=!d.m;if(!d.m&&d.v.length>1)d.v=[d.v[0]];all()};
 }
-function syncOpen(){['res','cnt','inn'].forEach(id=>{const m=ROOT.querySelector('#sc-dd-'+id+' .omenu');if(m)m.hidden=openDD!==id})}
-function renderRes(){renderDD('res');renderDD('cnt');renderDD('inn')}
+function syncOpen(){['res','cnt','inn','hit'].forEach(id=>{const m=ROOT.querySelector('#sc-dd-'+id+' .omenu');if(m)m.hidden=openDD!==id})}
+function renderRes(){renderDD('res');renderDD('cnt');renderDD('inn');if(HAS_HIT)renderDD('hit');else $('dd-hit').style.display='none'}
 if(window._scOut)document.removeEventListener('click',window._scOut);window._scOut=()=>{if(openDD){openDD=null;syncOpen()}};document.addEventListener('click',window._scOut);
 $('more').onclick=e=>{const o=$('tiles2').classList.toggle('on');e.target.innerHTML='More Stats '+(o?'&#9652;':'&#9662;')};
 // ---- table
@@ -1147,7 +1155,7 @@ all();
         <div class="cols">
           <div>
             <div class="chips" id="sc-chips"></div>
-            <div class="orow"><div class="ddw" id="sc-dd-res"></div><div class="ddw" id="sc-dd-cnt"></div><div class="ddw" id="sc-dd-inn"></div></div>
+            <div class="orow"><div class="ddw" id="sc-dd-res"></div><div class="ddw" id="sc-dd-cnt"></div><div class="ddw" id="sc-dd-inn"></div><div class="ddw" id="sc-dd-hit"></div></div>
             <div class="card">
               <div class="tiles" id="sc-tiles"></div>
               <button class="more" id="sc-more">More Stats &#9662;</button>

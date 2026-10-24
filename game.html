@@ -124,6 +124,9 @@
   .oc-multi { display: flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.55rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); cursor: pointer; white-space: nowrap; }
   .oc-multi:hover { color: var(--text); background: #f5f3ee; }
   .oc-caret { color: var(--text-muted); font-size: 0.8rem; }
+  .oc-btn { position: relative; justify-content: center; }
+  .oc-text { text-align: center; }
+  .oc-caret { position: absolute; right: 0.35rem; top: 50%; transform: translateY(-50%); font-size: 0.7rem; }
   .oc-menu { position: absolute; left: 0; top: calc(100% + 4px); min-width: 21rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 5px; z-index: 20; }
   .oc-menu[hidden] { display: none; }
   .oc-opt { display: flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.55rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; }
@@ -143,7 +146,8 @@
   .outcome-row { position: relative; display: flex; align-items: center; gap: 0.4rem; margin: 0 0 1rem; }
   .oc-dd { position: static; flex: 1 1 0; min-width: 0; }
   .oc-btn { width: 100%; min-width: 0; padding: 0.45rem 0.55rem; font-size: 0.78rem; gap: 0.35rem; }
-  .oc-text { max-width: none; min-width: 0; }
+  .oc-text { max-width: none; min-width: 0; padding: 0 0.5rem; }
+  .oc-btn { padding-left: 0.25rem; padding-right: 0.25rem; }
   .oc-menu { left: 0; right: auto; top: calc(100% + 4px); min-width: min(21rem, 100%); }
   /* ---- More Stats ---- */
   .more-wrap { grid-column: 1 / -1; text-align: center; }
@@ -564,6 +568,7 @@
   let countMulti = false;
   let activeInnings = [];    // innings selected (as strings); empty = all innings
   let innMulti = false;
+  let activeHit = [];        // hitter side selected ('R' / 'L'); empty = all hitters
   let openMenu = null;       // which filter dropdown is open: 'res' | 'cnt' | 'inn' | null
   let moreOpen = false;      // "More Stats" expanded
   let typeSortKey = 'n', typeSortAsc = false;
@@ -613,7 +618,10 @@
   };
   function matchesCount(p) { return activeCounts.length === 0 || activeCounts.some(k => COUNT_TEST[k](p)); }
   function matchesInning(p) { return activeInnings.length === 0 || activeInnings.includes(String(p.inning)); }
-  function matchesFilters(p) { return matchesOutcome(p) && matchesCount(p) && matchesInning(p); }
+  function matchesHit(p) { return activeHit.length === 0 || activeHit.includes(p.bat_side); }
+  const hasHitData = () => allPitches.some(p => p.bat_side);
+  const HIT_OPTIONS = [['ALL', 'All Hitters'], ['R', 'vs RHH'], ['L', 'vs LHH']];
+  function matchesFilters(p) { return matchesOutcome(p) && matchesCount(p) && matchesInning(p) && matchesHit(p); }
   function getScopedPitches() {
     return getTypeScopedPitches().filter(matchesFilters);
   }
@@ -648,25 +656,32 @@
     const check0 = () => '';
     return {
       res: {
-        all: 'All Results', opts: OUTCOME_OPTIONS, mark: outcomeMarkerHtml,
+        all: 'All Results', short: 'Results', opts: OUTCOME_OPTIONS, mark: outcomeMarkerHtml,
         get v() { return activeOutcomes; }, set v(x) { activeOutcomes = x; },
         get m() { return multiMode; }, set m(x) { multiMode = x; },
         test: (p, k) => markerKind(p.call) === k,
-        base: () => getTypeScopedPitches().filter(p => matchesCount(p) && matchesInning(p)),
+        base: () => getTypeScopedPitches().filter(p => matchesCount(p) && matchesInning(p) && matchesHit(p)),
       },
       cnt: {
-        all: 'All Counts', opts: COUNT_OPTIONS, mark: check0,
+        all: 'All Counts', short: 'Counts', opts: COUNT_OPTIONS, mark: check0,
         get v() { return activeCounts; }, set v(x) { activeCounts = x; },
         get m() { return countMulti; }, set m(x) { countMulti = x; },
         test: (p, k) => COUNT_TEST[k](p),
-        base: () => getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesInning(p)),
+        base: () => getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesInning(p) && matchesHit(p)),
       },
       inn: {
-        all: 'All Innings', opts: [['ALL', 'All Innings'], ...INNINGS.map(n => [String(n), `Inning ${n}`])], mark: check0,
+        all: 'All Innings', short: 'Innings', opts: [['ALL', 'All Innings'], ...INNINGS.map(n => [String(n), `Inning ${n}`])], mark: check0,
         get v() { return activeInnings; }, set v(x) { activeInnings = x; },
         get m() { return innMulti; }, set m(x) { innMulti = x; },
         test: (p, k) => String(p.inning) === k,
-        base: () => getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesCount(p)),
+        base: () => getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesCount(p) && matchesHit(p)),
+      },
+      hit: {
+        all: 'All Hitters', short: 'RHH/LHH', single: true, opts: HIT_OPTIONS, mark: check0,
+        get v() { return activeHit; }, set v(x) { activeHit = x; },
+        get m() { return false; }, set m(x) { },
+        test: (p, k) => p.bat_side === k,
+        base: () => getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesCount(p) && matchesInning(p)),
       },
     };
   }
@@ -675,18 +690,18 @@
     if (!wrap) return;
     const defs = filterDefs();
     const check = on => `<span class="oc-check${on ? ' on' : ''}">${on ? '&#10003;' : ''}</span>`;
-    wrap.innerHTML = Object.keys(defs).map(id => {
+    wrap.innerHTML = Object.keys(defs).filter(id => id !== 'hit' || hasHitData()).map(id => {
       const d = defs[id], base = d.base();
       const countFor = k => k === 'ALL' ? base.length : base.filter(p => d.test(p, k)).length;
       const label = k => (d.opts.find(o => o[0] === k) || [0, k])[1];
       const selCount = base.filter(p => d.v.some(k => d.test(p, k))).length;
-      const btnText = d.v.length === 0 ? d.all : `${d.v.map(label).join(', ')} (${selCount})`;
+      const btnText = d.v.length === 0 ? d.short : `${d.v.map(label).join(', ')}${d.single ? '' : ` (${selCount})`}`;
       const btnMarks = d.v.length === 0 ? '' : d.v.map(d.mark).join('');
       const multiBox = `<div class="oc-multi" data-multi="${id}" role="checkbox" aria-checked="${d.m}">${check(d.m)}<span>Multiple Selections</span></div>`;
       const opts = d.opts.map(([k, l]) => {
         const on = k === 'ALL' ? d.v.length === 0 : d.v.includes(k);
         const row = `<div class="oc-opt${on ? ' sel' : ''}" role="option" aria-selected="${on}" data-dd="${id}" data-k="${k}">${d.m && k !== 'ALL' ? check(on) : ''}${d.mark(k)}<span>${l}</span><span class="oc-count">${countFor(k)}</span></div>`;
-        return k === 'ALL' ? `<div class="oc-top">${row}${multiBox}</div>` : row;
+        return k === 'ALL' ? `<div class="oc-top">${row}${d.single ? '' : multiBox}</div>` : row;
       }).join('');
       return `<div class="oc-dd">
         <button type="button" class="oc-btn${d.v.length ? ' active' : ''}" data-btn="${id}" aria-haspopup="listbox" aria-expanded="${openMenu === id}" title="${btnText.replace(/"/g, '')}">${btnMarks}<span class="oc-text">${btnText}</span><span class="oc-caret">&#9662;</span></button>
@@ -734,10 +749,10 @@
     }).join('');
     const multiBox = `<div class="oc-multi" id="typeMulti" role="checkbox" aria-checked="${typeMulti}"><span class="oc-check${typeMulti ? ' on' : ''}">${typeMulti ? '&#10003;' : ''}</span><span>Multiple Selections</span></div>`;
     row.insertAdjacentHTML('beforeend', multiBox);
-    const dirty = activeTypes.length > 0 || activeOutcomes.length > 0 || activeCounts.length > 0 || activeInnings.length > 0 || multiMode || typeMulti || countMulti || innMulti || selectedAtBat !== null;
+    const dirty = activeTypes.length > 0 || activeOutcomes.length > 0 || activeCounts.length > 0 || activeInnings.length > 0 || activeHit.length > 0 || multiMode || typeMulti || countMulti || innMulti || selectedAtBat !== null;
     row.insertAdjacentHTML('beforeend', `<button type="button" class="reset-filters${dirty ? '' : ' idle'}" id="resetFilters"${dirty ? '' : ' disabled'}>Reset Filters</button>`);
     document.getElementById('resetFilters').addEventListener('click', () => {
-      activeTypes = []; activeOutcomes = []; activeCounts = []; activeInnings = []; multiMode = false; typeMulti = false; countMulti = false; innMulti = false; selectedAtBat = null; renderAll();
+      activeTypes = []; activeOutcomes = []; activeCounts = []; activeInnings = []; activeHit = []; multiMode = false; typeMulti = false; countMulti = false; innMulti = false; selectedAtBat = null; renderAll();
     });
     document.getElementById('typeMulti').addEventListener('click', () => {
       typeMulti = !typeMulti;
@@ -903,6 +918,7 @@
     if (activeTypes.length) scopeParts.push(activeTypes.map(t => PITCH_LABELS[t] || t).join(' + '));
     if (activeOutcomes.length) scopeParts.push(outcomeLabels().join(' + '));
     if (activeCounts.length) scopeParts.push(activeCounts.map(k => (COUNT_OPTIONS.find(o => o[0] === k) || [0, k])[1]).join(' + '));
+    if (activeHit.length) scopeParts.push(activeHit.map(k => k === 'R' ? 'vs RHH' : 'vs LHH').join(' + '));
     if (activeInnings.length) scopeParts.push(activeInnings.map(n => `Inning ${n}`).join(' + '));
     if (selectedAtBat !== null) scopeParts.push(`${atBats[selectedAtBat].inningLabel} at-bat`);
     scopeLabel.innerHTML = scopeParts.length
@@ -1308,7 +1324,7 @@
     document.getElementById('hintTypes').textContent = `${rows.length} pitch type${rows.length === 1 ? '' : 's'}`;
 
     // Inning Summary: every filter except inning itself.
-    const baseI = getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesCount(p));
+    const baseI = getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesCount(p) && matchesHit(p));
     const icells = s => !s ? '<td>0</td><td colspan="8" style="text-align:left;color:var(--text-muted)">No pitches in this selection</td>'
       : `<td>${s.n}</td><td>${f1(s.avgVelo)}</td><td>${f1(s.maxVelo)}</td><td>${s.strikePct}</td><td>${s.whiffs}</td><td>${s.whiffPct}</td><td>${s.cswPct}</td><td>${s.bipN}</td><td>${s.hardHit}</td>`;
     let ih = '<thead><tr><th>Inning</th>' + ['#', 'Avg Velo', 'Max', 'Strike %', 'Whiffs', 'Whiff %', 'CSW %', 'In Play', 'Hard-Hit'].map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>';
@@ -1697,7 +1713,7 @@
         const { px, pz } = hasRealPlate ? { px: realPlateX, pz: realPlateZ } : approxPlateCoords(zone, i);
         return {
           type: r.pitch_type_code, velo: num(r.start_speed), endVelo: num(r.end_speed), spin: num(r.spin_rate) !== null ? Math.round(num(r.spin_rate)) : null,
-          zone, call: r.call, batter_id: r.batter_id, batter_name: r.batter_name, inning: r.inning, half_inning: r.half_inning,
+          zone, call: r.call, bat_side: (r.bat_side || '').toUpperCase().slice(0, 1), batter_id: r.batter_id, batter_name: r.batter_name, inning: r.inning, half_inning: r.half_inning,
           hb: num(r.break_horizontal), ivb: num(r.break_vertical_induced), breakVertical: num(r.break_vertical),
           breakAngle: num(r.break_angle) !== null ? Math.round(num(r.break_angle)) : null, breakLength: num(r.break_length),
           releaseX: num(r.release_x), releaseY: num(r.release_y), releaseZ: num(r.release_z),

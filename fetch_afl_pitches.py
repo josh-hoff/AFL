@@ -9,7 +9,7 @@ LIVE_FEED_URL = "https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live"
 
 PITCH_FIELDS = [
     "game_pk", "date", "venue", "inning", "half_inning",
-    "pitcher_id", "pitcher_name", "batter_id", "batter_name",
+    "pitcher_id", "pitcher_name", "batter_id", "batter_name", "bat_side",
     "pitch_number", "pitch_type_code", "pitch_type_desc", "call",
     "start_speed", "end_speed", "extension",
     "release_x", "release_y", "release_z",
@@ -114,6 +114,8 @@ def extract_pitches(feed, game_info):
                 "pitcher_name": pitcher.get("fullName"),
                 "batter_id": batter.get("id"),
                 "batter_name": batter.get("fullName"),
+                # Side of the plate the hitter actually stood on for this PA (switch hitters resolved).
+                "bat_side": (matchup.get("batSide") or {}).get("code"),
                 "pitch_number": event.get("pitchNumber"),
                 "pitch_type_code": pitch_type.get("code"),
                 "pitch_type_desc": pitch_type.get("description"),
