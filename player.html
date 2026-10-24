@@ -120,10 +120,11 @@
   .career-row.post-season { background: #eaf1fa; }
   .career-row > div { overflow: hidden; text-overflow: ellipsis; }
   /* AFL Game Log: scrolls up and down once there are more than 10 games. The stat-key header stays pinned
-     at the top and the Season Total row stays pinned at the bottom (height is set by sizeGameLogScroll()). */
+     at the top and everything from the Season Total down (playoff games + Postseason Total) stays pinned at
+     the bottom so playoff stats are always visible (height and offsets are set by sizeGameLogScroll()). */
   .career-table.gl-vscroll { overflow: auto; }
   .gl-vscroll .career-row.head { position: sticky; top: 0; z-index: 3; }
-  .gl-vscroll .career-row.afl { position: sticky; bottom: 0; z-index: 2; }
+  .gl-vscroll .career-row.gl-tail { position: sticky; z-index: 2; }
 
   .tab-row { display: flex; gap: 0.5rem; margin: 0 0 0.75rem; }
   .stat-tab {
@@ -2243,15 +2244,27 @@ all();
     sizeGameLogScroll();
   }
 
-  // Show the header + the first 10 games + the pinned Season Total, and scroll for the rest.
+  // Show the header + the first 10 games + the pinned bottom block (Season Total, any playoff games and the
+  // Postseason Total), and scroll for the rest of the regular-season games.
   const GAMELOG_VISIBLE_ROWS = 10;
   function sizeGameLogScroll() {
     document.querySelectorAll('.career-table.gl-vscroll').forEach(t => {
       if (!t.offsetParent) return; // hidden tab; sized when it is shown
-      const games = Array.from(t.querySelectorAll('.career-row.body')).filter(r => !r.classList.contains('afl') && !r.classList.contains('post-season') && !r.classList.contains('mlb'));
+      const rows = Array.from(t.querySelectorAll('.career-row.body'));
+      const isTail = r => r.classList.contains('afl') || r.classList.contains('post-season') || r.classList.contains('mlb');
+      const firstTail = rows.findIndex(isTail);
+      const games = firstTail < 0 ? rows : rows.slice(0, firstTail);
+      const tail = firstTail < 0 ? [] : rows.slice(firstTail);
+      // each pinned row sticks just above the rows below it
+      let off = 0;
+      for (let i = tail.length - 1; i >= 0; i--) {
+        tail[i].classList.add('gl-tail');
+        tail[i].style.bottom = off + 'px';
+        off += tail[i].offsetHeight;
+      }
       if (games.length <= GAMELOG_VISIBLE_ROWS) { t.style.maxHeight = ''; return; }
-      const head = t.querySelector('.career-row.head'), total = t.querySelector('.career-row.afl');
-      let h = (head ? head.offsetHeight : 0) + (total ? total.offsetHeight : 0);
+      const head = t.querySelector('.career-row.head');
+      let h = (head ? head.offsetHeight : 0) + off;
       for (let i = 0; i < GAMELOG_VISIBLE_ROWS; i++) h += games[i].offsetHeight;
       t.style.maxHeight = h + 'px';
       t.style.maxHeight = (h + (t.offsetHeight - t.clientHeight)) + 'px'; // plus border and horizontal scroll bar
