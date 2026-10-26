@@ -60,6 +60,17 @@
   .play-event { display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted); margin-bottom: 0.1rem; }
   .play.scoring .play-event { color: var(--tab-active); }
   .play-desc { word-wrap: break-word; }
+  .play-top { display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap; margin-bottom: 0.1rem; }
+  .play-top .play-event { margin-bottom: 0; }
+  .pitch-chip { font-size: 0.7rem; font-weight: 600; background: #eef1f6; color: #2c4a7c; border-radius: 999px; padding: 0.05rem 0.5rem; white-space: nowrap; }
+  .pitch-chip a, .play-runs a, .pitch-chg a { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--tab-active); }
+  .pitch-chip a:hover, .play-runs a:hover, .pitch-chg a:hover { color: var(--tab-active); }
+  .play-runs { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.45rem; }
+  .play-run { display: flex; gap: 0.5rem; align-items: baseline; font-size: 0.8rem; color: var(--text-muted); }
+  .run-tag { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 4px; padding: 0.08rem 0.4rem; white-space: nowrap; flex: none; }
+  .run-tag.earned { background: #fde3d3; color: #a8400b; }
+  .run-tag.unearned { background: #eef1f6; color: #2c4a7c; }
+  .pitch-chg { padding: 0.45rem 0.9rem; border-top: 1px solid var(--border); background: #eef1f6; color: #2c4a7c; font-size: 0.8rem; font-weight: 600; }
   .player-link { color: inherit; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; }
   .player-link:hover { color: var(--tab-active); border-bottom-color: var(--tab-active); }
   .dia-wrap { width: 40px; display: flex; justify-content: center; align-self: center; flex: none; }
@@ -256,6 +267,28 @@
       return { b1: !!tracked['1B'], b2: !!tracked['2B'], b3: !!tracked['3B'] };
     };
 
+    // id -> name, for charging runs to pitchers and labelling pitching changes.
+    const idName = {};
+    Object.values(gd.players || {}).forEach(p => { if (p && p.id && p.fullName) idName[p.id] = p.fullName; });
+    const nameOf = (id, fb) => idName[id] || fb || '';
+    const erTally = {};            // pitcher id -> earned runs charged so far this game
+    const lastPit = {};            // fielding side -> pitcher on the mound at the last play
+    // Earned / unearned breakdown for the runs scored on one play (or one mid-at-bat event).
+    const runInfo = (moves, pitId, pitName) => {
+      const by = {}; let unearned = false;
+      moves.filter(r => !!(r.movement && r.movement.end === 'score' && !r.movement.isOut)).forEach(r => {
+        const d = r.details || {};
+        if (d.earned === true) {
+          const id = (d.responsiblePitcher && d.responsiblePitcher.id) || pitId;
+          if (id === undefined || id === null) return;
+          erTally[id] = (erTally[id] || 0) + 1;
+          by[id] = erTally[id];
+        } else if (d.earned === false) unearned = true;
+      });
+      const earnedBy = Object.keys(by).map(id => ({ id, name: nameOf(id, String(id) === String(pitId) ? pitName : ''), er: by[id] }));
+      return (earnedBy.length || unearned) ? { earnedBy, unearned } : null;
+    };
+
     const halves = [];
     const byKey = {};
     let curBases = { b1: false, b2: false, b3: false }, curKey = null;
@@ -280,6 +313,18 @@
       const batterId = p.matchup && p.matchup.batter && p.matchup.batter.id;
       const evs = p.playEvents || [];
       const resultIsRunnerOnly = runnerOnlyResult.test(res.eventType || '');
+
+      // Who was pitching, and a "Pitching change" row whenever the pitcher on the mound differs from the last play.
+      const mp = p.matchup && p.matchup.pitcher;
+      const pitId = mp && mp.id;
+      const pitName = mp ? nameOf(mp.id, mp.fullName) : '';
+      const pit = pitId ? { id: pitId, name: pitName } : null;
+      const fieldSide = side === 'away' ? 'home' : 'away';
+      if (pit && lastPit[fieldSide] && String(lastPit[fieldSide].id) !== String(pitId)) {
+        const on = [curBases.b1 && '1st', curBases.b2 && '2nd', curBases.b3 && '3rd'].filter(Boolean);
+        byKey[key].plays.push({ change: true, newP: pit, oldP: lastPit[fieldSide], team: fieldSide === 'away' ? teamAbbr('away') : teamAbbr('home'), on });
+      }
+      if (pit) lastPit[fieldSide] = pit;
 
       // Runner moves that happen in the middle of an at-bat (stolen base, wild pitch,
       // passed ball, pickoff, balk...) are separate non-pitch events inside the play.
@@ -322,6 +367,8 @@
           event: d.event || '',
           description: d.description || '',
           scoring: runs > 0,
+          pitcher: pit,
+          runInfo: runInfo(moves, pitId, pitName),
           outs: outsNow,
           awayScore: hasScore ? d.awayScore : curAway,
           homeScore: hasScore ? d.homeScore : curHome,
@@ -331,7 +378,8 @@
       });
 
       const attachedToEvents = new Set(eventRows.map(x => x.idx));
-      const resultRuns = runners.filter(r => scoredRun(r) && !attachedToEvents.has(r.details && r.details.playIndex)).length;
+      const resultRunners = runners.filter(r => scoredRun(r) && !attachedToEvents.has(r.details && r.details.playIndex));
+      const resultRuns = resultRunners.length;
       const bases = basesAfter(p, key);
       curBases = { ...bases };
       if (res.awayScore !== undefined) curAway = res.awayScore;
@@ -340,6 +388,8 @@
         event: res.event || '',
         description: res.description || '',
         scoring: !!about.isScoringPlay && (runsFromEvents === 0 || resultRuns > 0),
+        pitcher: pit,
+        runInfo: runInfo(resultRunners, pitId, pitName),
         outs: p.count ? p.count.outs : null,
         awayScore: res.awayScore,
         homeScore: res.homeScore,
@@ -430,14 +480,34 @@
       <path d="M20 38 L15 33 L15 30 L25 30 L25 33 Z" fill="#fff"/></g></svg>`;
   }
 
+  function pitcherLink(m, id, name) {
+    const q = m.season ? `&season=${encodeURIComponent(m.season)}` : '';
+    return id !== undefined && id !== null && id !== ''
+      ? `<a href="player.html?id=${encodeURIComponent(id)}${q}">${esc(name || 'Pitcher')}</a>` : esc(name);
+  }
+
+  function runsHtml(m, ri) {
+    if (!ri) return '';
+    const lines = ri.earnedBy.map(e => `<div class="play-run"><span class="run-tag earned">Earned</span><span>${pitcherLink(m, e.id, e.name)} (${esc(e.er)} ER this game)</span></div>`);
+    if (ri.unearned) lines.push('<div class="play-run"><span class="run-tag unearned">Unearned</span></div>');
+    return `<div class="play-runs">${lines.join('')}</div>`;
+  }
+
+  function changeHtml(m, p) {
+    const on = p.on && p.on.length ? ` &mdash; runner${p.on.length > 1 ? 's' : ''} on ${esc(p.on.length > 2 ? p.on.slice(0, -1).join(', ') + ' and ' + p.on[p.on.length - 1] : p.on.join(' and '))}` : '';
+    return `<div class="pitch-chg">Pitching change: ${pitcherLink(m, p.newP.id, p.newP.name)} replaces ${pitcherLink(m, p.oldP.id, p.oldP.name)} (${esc(p.team)})${on}</div>`;
+  }
+
   function playHtml(m, p, showOuts) {
+    if (p.change) return changeHtml(m, p);
     const meta = [];
     if (p.scoring) meta.push(`<div class="play-score">${scoreText(m, p)}</div>`);
     if (showOuts && p.outs !== null && p.outs !== undefined) meta.push(`<div>${esc(p.outs)} out${p.outs === 1 ? '' : 's'}</div>`);
     return `<div class="play${p.scoring ? ' scoring' : ''}">
       <div class="play-body">
-        ${p.event ? `<div class="play-event">${esc(p.event)}</div>` : ''}
+        ${(p.event || p.pitcher) ? `<div class="play-top">${p.event ? `<span class="play-event">${esc(p.event)}</span>` : ''}${p.pitcher ? `<span class="pitch-chip">P: ${pitcherLink(m, p.pitcher.id, p.pitcher.name)}</span>` : ''}</div>` : ''}
         <div class="play-desc">${linkify(p.description, m)}</div>
+        ${runsHtml(m, p.runInfo)}
       </div>
       ${meta.length ? `<div class="play-meta">${meta.join('')}</div>` : ''}
       ${showOuts && p.bases ? `<div class="dia-wrap">${diamondSvg(p.bases)}</div>` : ''}
