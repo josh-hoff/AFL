@@ -92,6 +92,22 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Mesa Solar Sox,2026-09-30,701329,Luis Rujano,SC,Status Change,,Mesa Solar Sox,Mesa Solar Sox activated RHP Luis Rujano.
 2026,Mesa Solar Sox,2026-10-15,687766,Miguel Useche,ASG,Assigned,,Mesa Solar Sox,C Miguel Useche assigned to Mesa Solar Sox.
 2026,Mesa Solar Sox,2026-10-24,829888,Anthony Santa Cruz de Oviedo,ASG,Assigned,,Mesa Solar Sox,OF Anthony Santa Cruz de Oviedo assigned to Mesa Solar Sox.
+2026,Peoria Javelinas,2026-09-15,695722,Boston Smith,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Boston Smith.
+2026,Peoria Javelinas,2026-09-15,822578,Brandon Butterworth,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Brandon Butterworth.
+2026,Peoria Javelinas,2026-09-15,702111,Adam Smith,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Adam Smith.
+2026,Peoria Javelinas,2026-09-15,834596,Kailen Hamson,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Kailen Hamson.
+2026,Peoria Javelinas,2026-09-15,702751,Jose Geraldo,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Geraldo.
+2026,Peoria Javelinas,2026-09-15,681064,Calvin Schapira,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Calvin Schapira.
+2026,Peoria Javelinas,2026-09-15,695787,Trent Hodgdon,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Trent Hodgdon.
+2026,Peoria Javelinas,2026-09-15,815951,Igor Gil,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Igor Gil.
+2026,Peoria Javelinas,2026-09-15,694345,Patrick Reilly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Patrick Reilly.
+2026,Peoria Javelinas,2026-09-15,694358,Tekoah Roby,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Tekoah Roby from the 60-day injured list.
+2026,Peoria Javelinas,2026-09-15,800017,Jose Montero,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Montero.
+2026,Peoria Javelinas,2026-09-15,822498,Reid Easterly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Reid Easterly.
+2026,Peoria Javelinas,2026-09-15,702296,Nate Dohm,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Nate Dohm from the Development List.
+2026,Peoria Javelinas,2026-09-15,828718,Victor Diaz,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Victor Diaz.
+2026,Peoria Javelinas,2026-09-15,807744,Ty Cummings,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Ty Cummings.
+2026,Peoria Javelinas,2026-09-15,692284,Frank Elissalt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Frank Elissalt from the 60-day injured list.
 2026,Peoria Javelinas,2026-09-15,700251,Brandon Clarke,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Brandon Clarke.
 2026,Peoria Javelinas,2026-09-15,826466,Winyer Chourio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Winyer Chourio.
 2026,Peoria Javelinas,2026-09-15,688867,Braxton Bragg,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Braxton Bragg from the 60-day injured list.
@@ -109,32 +125,16 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Peoria Javelinas,2026-09-15,814532,Teddy Sharkey,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Teddy Sharkey.
 2026,Peoria Javelinas,2026-09-15,814227,Jordan Valenzuela,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jordan Valenzuela.
 2026,Peoria Javelinas,2026-09-15,694806,Brandon Eike,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated 1B Brandon Eike.
-2026,Peoria Javelinas,2026-09-15,695722,Boston Smith,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Boston Smith.
-2026,Peoria Javelinas,2026-09-15,822578,Brandon Butterworth,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Brandon Butterworth.
-2026,Peoria Javelinas,2026-09-15,702111,Adam Smith,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Adam Smith.
+2026,Peoria Javelinas,2026-09-15,811296,Kiefer Lord,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kiefer Lord.
 2026,Peoria Javelinas,2026-09-15,700815,Matthew Ellis,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated DH Matthew Ellis.
 2026,Peoria Javelinas,2026-09-15,829210,Ty Harvey,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Ty Harvey.
+2026,Peoria Javelinas,2026-09-15,813664,Justin DeCriscio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Justin DeCriscio.
 2026,Peoria Javelinas,2026-09-15,800212,Francis Peña,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Francis Peña.
 2026,Peoria Javelinas,2026-09-15,807748,Kannon Kemp,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kannon Kemp.
-2026,Peoria Javelinas,2026-09-15,834596,Kailen Hamson,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Kailen Hamson.
-2026,Peoria Javelinas,2026-09-15,811296,Kiefer Lord,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kiefer Lord.
-2026,Peoria Javelinas,2026-09-15,702751,Jose Geraldo,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Geraldo.
-2026,Peoria Javelinas,2026-09-15,681064,Calvin Schapira,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Calvin Schapira.
-2026,Peoria Javelinas,2026-09-15,695787,Trent Hodgdon,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Trent Hodgdon.
-2026,Peoria Javelinas,2026-09-15,815951,Igor Gil,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Igor Gil.
-2026,Peoria Javelinas,2026-09-15,694345,Patrick Reilly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Patrick Reilly.
-2026,Peoria Javelinas,2026-09-15,694358,Tekoah Roby,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Tekoah Roby from the 60-day injured list.
-2026,Peoria Javelinas,2026-09-15,800017,Jose Montero,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Montero.
-2026,Peoria Javelinas,2026-09-15,813664,Justin DeCriscio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Justin DeCriscio.
 2026,Peoria Javelinas,2026-09-15,695705,Luke Holman,ASG,Assigned,,Peoria Javelinas,RHP Luke Holman assigned to Peoria Javelinas.
-2026,Peoria Javelinas,2026-09-15,822498,Reid Easterly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Reid Easterly.
-2026,Peoria Javelinas,2026-09-15,702296,Nate Dohm,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Nate Dohm from the Development List.
-2026,Peoria Javelinas,2026-09-15,828718,Victor Diaz,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Victor Diaz.
-2026,Peoria Javelinas,2026-09-15,807744,Ty Cummings,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Ty Cummings.
-2026,Peoria Javelinas,2026-09-15,692284,Frank Elissalt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Frank Elissalt from the 60-day injured list.
 2026,Peoria Javelinas,2026-09-28,691398,Yerlin Confidan,ASG,Assigned,,Peoria Javelinas,OF Yerlin Confidan assigned to Peoria Javelinas.
-2026,Peoria Javelinas,2026-10-01,683165,Joseph King,ASG,Assigned,,Peoria Javelinas,RHP Joseph King assigned to Peoria Javelinas.
 2026,Peoria Javelinas,2026-10-01,822463,Nolan Sparks,ASG,Assigned,,Peoria Javelinas,RHP Nolan Sparks assigned to Peoria Javelinas.
+2026,Peoria Javelinas,2026-10-01,683165,Joseph King,ASG,Assigned,,Peoria Javelinas,RHP Joseph King assigned to Peoria Javelinas.
 2026,Salt River Rafters,2026-09-15,700321,Andy Perez,SC,Status Change,,Salt River Rafters,Salt River Rafters activated SS Andy Perez.
 2026,Salt River Rafters,2026-09-15,829643,Jacob McCombs,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Jacob McCombs.
 2026,Salt River Rafters,2026-09-15,695493,Teo Banks,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Teo Banks.
