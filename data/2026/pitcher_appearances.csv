@@ -680,3 +680,39 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867674,2026-10-28,home,Scottsdale Scorpions,815218,Alexander Fuentes,3,False
 867674,2026-10-28,home,Scottsdale Scorpions,702904,Cesar De Jesus,4,False
 867674,2026-10-28,home,Scottsdale Scorpions,805783,Mason Nichols,5,False
+867668,2026-10-29,away,Peoria Javelinas,694345,Patrick Reilly,1,True
+867668,2026-10-29,away,Peoria Javelinas,822498,Reid Easterly,2,False
+867668,2026-10-29,away,Peoria Javelinas,814227,Jordan Valenzuela,3,False
+867668,2026-10-29,away,Peoria Javelinas,694832,Cody Adcock,4,False
+867668,2026-10-29,away,Peoria Javelinas,695787,Trent Hodgdon,5,False
+867668,2026-10-29,away,Peoria Javelinas,800212,Francis Peña,6,False
+867668,2026-10-29,home,Glendale Desert Dogs,801207,Emmett Olson,1,True
+867668,2026-10-29,home,Glendale Desert Dogs,805800,Zander Mueth,2,False
+867668,2026-10-29,home,Glendale Desert Dogs,665993,Cristhian Tortosa,3,False
+867668,2026-10-29,home,Glendale Desert Dogs,827610,Brandon Cain,4,False
+867668,2026-10-29,home,Glendale Desert Dogs,816266,Williams Salazar,5,False
+867668,2026-10-29,home,Glendale Desert Dogs,805315,Michael Walsh,6,False
+867668,2026-10-29,home,Glendale Desert Dogs,805892,Nick Altermatt,7,False
+867672,2026-10-29,away,Scottsdale Scorpions,805694,Juan Bello,1,True
+867672,2026-10-29,away,Scottsdale Scorpions,836172,Peyton Niksch,2,False
+867672,2026-10-29,away,Scottsdale Scorpions,804670,Ryan Birchard,3,False
+867672,2026-10-29,away,Scottsdale Scorpions,806711,Yereny Teus,4,False
+867672,2026-10-29,away,Scottsdale Scorpions,813796,Preston Howey,5,False
+867672,2026-10-29,away,Scottsdale Scorpions,828603,Logan Berrier,6,False
+867672,2026-10-29,home,Surprise Saguaros,802146,Aidan Major,1,True
+867672,2026-10-29,home,Surprise Saguaros,700176,Keegan Batka,2,False
+867672,2026-10-29,home,Surprise Saguaros,825100,Kevin Warunek,3,False
+867672,2026-10-29,home,Surprise Saguaros,822415,Mason McConnaughey,4,False
+867672,2026-10-29,home,Surprise Saguaros,700985,Josh Hansell,5,False
+867673,2026-10-29,away,Mesa Solar Sox,701836,Kyle Robinson,1,True
+867673,2026-10-29,away,Mesa Solar Sox,806879,Anhuar Garcia,2,False
+867673,2026-10-29,away,Mesa Solar Sox,695761,Kenya Huggins,3,False
+867673,2026-10-29,away,Mesa Solar Sox,803248,Yoendris Gonzalez,4,False
+867673,2026-10-29,home,Salt River Rafters,694933,Ross Dunn,1,True
+867673,2026-10-29,home,Salt River Rafters,823996,Luke Craig,2,False
+867673,2026-10-29,home,Salt River Rafters,699283,Cleiber Maldonado,3,False
+867673,2026-10-29,home,Salt River Rafters,806070,Mack Estrada,4,False
+867673,2026-10-29,home,Salt River Rafters,820825,Konner Eaton,5,False
+867673,2026-10-29,home,Salt River Rafters,814487,Nolan Hughes,6,False
+867673,2026-10-29,home,Salt River Rafters,805879,Connor Foley,7,False
+867673,2026-10-29,home,Salt River Rafters,823227,Brian Zeldin,8,False
