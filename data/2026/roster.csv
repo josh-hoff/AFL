@@ -137,7 +137,6 @@ season,team,player_id,full_name,jersey_number,position_code,position_name,positi
 2026,Scottsdale Scorpions,702904,Cesar De Jesus,38,1,Pitcher,P,139,Tampa Bay Rays,2003-09-28,23,Santo Domingo,,Dominican Republic,"6' 1""",140,Left,Left,,
 2026,Scottsdale Scorpions,702607,Dakota Jordan,12,O,Outfield,OF,137,San Francisco Giants,2003-05-09,23,Canton,MS,USA,"6' 0""",231,Right,Right,2024,
 2026,Scottsdale Scorpions,807275,Dalton Wentz,10,6,Shortstop,SS,137,San Francisco Giants,2005-07-28,21,Lynchburg,VA,USA,"6' 2""",215,Switch,Right,2026,
-2026,Scottsdale Scorpions,700800,Darien Smith,23,1,Pitcher,P,137,San Francisco Giants,1999-11-30,26,Jacksonville,FL,USA,"6' 2""",207,Right,Right,2024,
 2026,Scottsdale Scorpions,825095,Drake George,26,1,Pitcher,P,137,San Francisco Giants,2001-09-30,25,Roseburg,OR,USA,"6' 1""",199,Right,Right,2024,
 2026,Scottsdale Scorpions,800724,Eric Bitonti,25,3,First Base,1B,158,Milwaukee Brewers,2005-11-17,20,Hesperia,CA,USA,"6' 5""",218,Left,Right,2023,
 2026,Scottsdale Scorpions,814374,Francisco Frias,35,1,Pitcher,P,117,Houston Astros,2004-10-15,22,Santiago de los Caballeros,,Dominican Republic,"5' 11""",190,Right,Right,,
@@ -167,6 +166,7 @@ season,team,player_id,full_name,jersey_number,position_code,position_name,positi
 2026,Scottsdale Scorpions,683988,Railin Perez,22,1,Pitcher,P,117,Houston Astros,2001-09-02,25,Santiago,,Dominican Republic,"6' 3""",185,Right,Right,,
 2026,Scottsdale Scorpions,678495,Randy Rodríguez,73,1,Pitcher,P,137,San Francisco Giants,1999-09-05,27,Santo Domingo,,Dominican Republic,"6' 0""",195,Right,Right,,2024-05-04
 2026,Scottsdale Scorpions,804670,Ryan Birchard,33,1,Pitcher,P,158,Milwaukee Brewers,2003-07-12,23,Auburn,NY,USA,"6' 0""",207,Left,Right,2023,
+2026,Scottsdale Scorpions,691797,Ryan Spikes,13,O,Outfield,OF,139,Tampa Bay Rays,2003-03-13,23,Conyers,GA,USA,"5' 9""",185,Right,Right,2021,
 2026,Scottsdale Scorpions,800294,Waner Luciano,2,5,Third Base,3B,117,Houston Astros,2005-01-13,21,Santo Domingo,,Dominican Republic,"6' 1""",210,Right,Right,,
 2026,Scottsdale Scorpions,803094,Win Scott,30,1,Pitcher,P,116,Detroit Tigers,2002-11-27,23,Greensboro,NC,USA,"6' 2""",205,Left,Left,2025,
 2026,Scottsdale Scorpions,806711,Yereny Teus,49,1,Pitcher,P,139,Tampa Bay Rays,2003-08-01,23,San Pedro De Macoris,,Dominican Republic,"5' 10""",157,Left,Left,,
@@ -185,7 +185,6 @@ season,team,player_id,full_name,jersey_number,position_code,position_name,positi
 2026,Mesa Solar Sox,805255,Dominick Reid,11,1,Pitcher,P,112,Chicago Cubs,2003-11-28,22,Plano,TX,USA,"6' 3""",201,Right,Right,2025,
 2026,Mesa Solar Sox,800125,Fernando Perez,34,1,Pitcher,P,141,Toronto Blue Jays,2004-02-12,22,Rivas,,Nicaragua,"6' 3""",170,Right,Right,,
 2026,Mesa Solar Sox,807625,Gilberto Batista,30,1,Pitcher,P,141,Toronto Blue Jays,2005-01-08,21,San Cristobal,,Dominican Republic,"6' 0""",165,Right,Right,,
-2026,Mesa Solar Sox,808911,Grant Richardson,26,1,Pitcher,P,133,Athletics,2003-11-08,22,Cave Creek,AZ,USA,"6' 3""",220,Right,Left,2025,
 2026,Mesa Solar Sox,695664,Harrison Feinberg,47,7,Outfielder,LF,112,Chicago Cubs,2002-09-14,24,Henderson,NV,USA,"6' 1""",210,Right,Right,2026,
 2026,Mesa Solar Sox,838799,Harry Blum,29,1,Pitcher,P,111,Boston Red Sox,2001-09-23,25,Fridley,MN,USA,"6' 7""",232,Right,Right,,
 2026,Mesa Solar Sox,814005,Jake Bloss,50,1,Pitcher,P,141,Toronto Blue Jays,2001-06-23,25,Greensboro,NC,USA,"6' 3""",223,Right,Right,2023,2024-06-21
