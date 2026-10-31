@@ -5395,12 +5395,13 @@
           "gameDate": "2026-10-30T20:30:00Z",
           "officialDate": "2026-10-30",
           "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "S",
-            "detailedState": "Scheduled",
-            "statusCode": "S",
+            "abstractGameState": "Final",
+            "codedGameState": "C",
+            "detailedState": "Cancelled",
+            "statusCode": "CR",
             "startTimeTBD": false,
-            "abstractGameCode": "P"
+            "reason": "Rain",
+            "abstractGameCode": "F"
           },
           "teams": {
             "away": {
@@ -5469,12 +5470,13 @@
           "gameDate": "2026-10-30T20:30:00Z",
           "officialDate": "2026-10-30",
           "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "S",
-            "detailedState": "Scheduled",
-            "statusCode": "S",
+            "abstractGameState": "Final",
+            "codedGameState": "C",
+            "detailedState": "Cancelled",
+            "statusCode": "CR",
             "startTimeTBD": false,
-            "abstractGameCode": "P"
+            "reason": "Rain",
+            "abstractGameCode": "F"
           },
           "teams": {
             "away": {
@@ -5543,12 +5545,13 @@
           "gameDate": "2026-10-31T01:30:00Z",
           "officialDate": "2026-10-30",
           "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "S",
-            "detailedState": "Scheduled",
-            "statusCode": "S",
+            "abstractGameState": "Final",
+            "codedGameState": "C",
+            "detailedState": "Cancelled",
+            "statusCode": "CR",
             "startTimeTBD": false,
-            "abstractGameCode": "P"
+            "reason": "Rain",
+            "abstractGameCode": "F"
           },
           "teams": {
             "away": {
