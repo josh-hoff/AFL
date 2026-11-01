@@ -716,3 +716,36 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867673,2026-10-29,home,Salt River Rafters,814487,Nolan Hughes,6,False
 867673,2026-10-29,home,Salt River Rafters,805879,Connor Foley,7,False
 867673,2026-10-29,home,Salt River Rafters,823227,Brian Zeldin,8,False
+867658,2026-10-31,away,Peoria Javelinas,807748,Kannon Kemp,1,True
+867658,2026-10-31,away,Peoria Javelinas,814532,Teddy Sharkey,2,False
+867658,2026-10-31,away,Peoria Javelinas,834596,Kailen Hamson,3,False
+867658,2026-10-31,away,Peoria Javelinas,800017,Jose Montero,4,False
+867658,2026-10-31,away,Peoria Javelinas,811296,Kiefer Lord,5,False
+867658,2026-10-31,away,Peoria Javelinas,815951,Igor Gil,6,False
+867658,2026-10-31,away,Peoria Javelinas,807744,Ty Cummings,7,False
+867658,2026-10-31,home,Glendale Desert Dogs,803183,Luke Fox,1,True
+867658,2026-10-31,home,Glendale Desert Dogs,695057,Garrett Wright,2,False
+867658,2026-10-31,home,Glendale Desert Dogs,679489,Tyler LaPorte,3,False
+867658,2026-10-31,home,Glendale Desert Dogs,701808,Cody Morse,4,False
+867658,2026-10-31,home,Glendale Desert Dogs,815704,Samuel Carpio,5,False
+867658,2026-10-31,home,Glendale Desert Dogs,802413,Sam Horn,6,False
+867658,2026-10-31,home,Glendale Desert Dogs,808469,Logan Samuels,7,False
+867666,2026-10-31,away,Salt River Rafters,701680,R.J. Sales,1,True
+867666,2026-10-31,away,Salt River Rafters,801842,Fidel Ulloa,2,False
+867666,2026-10-31,away,Salt River Rafters,810920,Jake Murray,3,False
+867666,2026-10-31,away,Salt River Rafters,815065,Hunter Mann,4,False
+867666,2026-10-31,home,Surprise Saguaros,807290,Peyton Prescott,1,True
+867666,2026-10-31,home,Surprise Saguaros,700924,Frank Mozzicato,2,False
+867666,2026-10-31,home,Surprise Saguaros,807575,Cam Schuelke,3,False
+867666,2026-10-31,home,Surprise Saguaros,806522,Irving Cota,4,False
+867666,2026-10-31,home,Surprise Saguaros,823862,Angel Perez,5,False
+867667,2026-10-31,away,Mesa Solar Sox,814005,Jake Bloss,1,True
+867667,2026-10-31,away,Mesa Solar Sox,821052,Madinson Frias,2,False
+867667,2026-10-31,away,Mesa Solar Sox,701329,Luis Rujano,3,False
+867667,2026-10-31,away,Mesa Solar Sox,701791,Caden Vire,4,False
+867667,2026-10-31,away,Mesa Solar Sox,687991,Jared Johnson,5,False
+867667,2026-10-31,home,Scottsdale Scorpions,843821,Maddox Long,1,True
+867667,2026-10-31,home,Scottsdale Scorpions,823650,Miqueas Mercedes,2,False
+867667,2026-10-31,home,Scottsdale Scorpions,802105,Yeriel Santos,3,False
+867667,2026-10-31,home,Scottsdale Scorpions,808350,Joshua Quezada,4,False
+867667,2026-10-31,home,Scottsdale Scorpions,683988,Railin Perez,5,False
