@@ -284,16 +284,6 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,827665,Dillon Lewis,Glendale Desert Dogs,2026-10-27,Salt River Rafters,True,True,867680,R,2,3,0,0,0,0,0,1,0,1,0,2,0,0,0,.261,.314,.457,.771,.---,0,0,0,0,0,0,0,13
 2026,827665,Dillon Lewis,Glendale Desert Dogs,2026-10-28,Peoria Javelinas,False,False,867678,R,5,6,2,0,0,0,2,2,0,1,0,1,0,0,0,.275,.333,.451,.784,.500,1,1,0,0,0,4,0,27
 2026,827665,Dillon Lewis,Glendale Desert Dogs,2026-10-31,Peoria Javelinas,True,True,867658,R,5,5,1,0,0,0,1,1,1,0,0,1,0,0,0,.268,.323,.429,.752,.250,2,1,1,0,0,1,0,23
-2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,5,5,2,0,0,0,2,1,1,0,0,2,0,0,0,.400,.400,.400,.800,.667,1,0,0,0,0,2,0,21
-2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-08,Peoria Javelinas,True,False,867721,R,4,4,0,0,0,0,0,0,0,0,0,2,0,0,0,.222,.222,.222,.444,.000,1,1,0,0,0,3,0,22
-2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-11,Surprise Saguaros,False,False,867707,R,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,.154,.154,.154,.308,.000,0,4,0,0,0,6,0,16
-2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-15,Surprise Saguaros,True,False,867714,R,3,4,1,1,0,0,2,1,0,1,0,2,0,0,0,.188,.235,.250,.485,1.000,0,0,0,0,0,0,0,22
-2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-16,Scottsdale Scorpions,False,True,867695,R,3,4,0,0,0,0,0,0,0,0,0,1,1,0,0,.158,.238,.211,.449,.000,2,0,0,0,0,5,0,20
-2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-19,Salt River Rafters,False,False,867701,R,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,.136,.208,.182,.390,.000,1,2,0,0,0,3,0,16
-2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-20,Surprise Saguaros,False,True,867690,R,2,5,0,0,0,0,0,1,2,2,0,0,0,0,0,.125,.241,.167,.408,.000,0,3,0,0,1,1,0,23
-2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-24,Scottsdale Scorpions,True,True,867686,R,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,.111,.219,.148,.367,.000,2,1,0,0,0,3,0,8
-2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-27,Salt River Rafters,True,True,867680,R,3,3,0,0,0,0,0,0,0,0,0,1,0,0,0,.100,.200,.133,.333,.000,2,0,0,0,0,1,0,10
-2026,702695,Easton Carmichael,Glendale Desert Dogs,2026-10-29,Peoria Javelinas,True,False,867668,R,2,5,0,0,0,0,0,2,0,3,0,1,0,0,0,.094,.250,.125,.375,.000,0,1,0,0,0,0,0,27
 2026,808234,Eduardo Quintero,Glendale Desert Dogs,2026-10-03,Salt River Rafters,True,False,867729,R,3,5,1,0,0,0,1,0,0,2,0,1,0,0,0,.333,.600,.333,.933,.500,0,1,0,0,0,2,0,22
 2026,808234,Eduardo Quintero,Glendale Desert Dogs,2026-10-05,Surprise Saguaros,False,False,867725,R,5,5,2,0,0,0,2,1,1,0,0,1,0,0,0,.375,.500,.375,.875,.500,1,1,0,0,0,0,0,19
 2026,808234,Eduardo Quintero,Glendale Desert Dogs,2026-10-06,Mesa Solar Sox,False,True,867723,R,2,4,0,0,0,0,0,0,0,2,0,0,0,0,0,.300,.500,.300,.800,.000,1,1,0,0,0,0,0,21
@@ -598,11 +588,6 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,815520,Braylon Payne,Scottsdale Scorpions,2026-10-16,Glendale Desert Dogs,True,False,867695,R,3,4,0,0,0,0,0,0,1,0,0,2,0,0,0,.222,.290,.370,.660,.000,1,1,0,0,1,0,0,11
 2026,815520,Braylon Payne,Scottsdale Scorpions,2026-10-19,Peoria Javelinas,True,False,867699,R,3,4,1,0,0,0,1,0,0,1,0,2,0,0,0,.233,.314,.367,.681,1.000,0,0,0,0,0,1,0,18
 2026,815520,Braylon Payne,Scottsdale Scorpions,2026-10-26,Peoria Javelinas,False,False,867677,R,5,5,0,0,0,0,0,0,0,0,0,4,0,0,0,.200,.275,.314,.589,.000,1,0,0,0,0,5,0,22
-2026,804911,Brendan Summerhill,Scottsdale Scorpions,2026-10-04,Glendale Desert Dogs,False,True,867730,R,4,5,3,0,0,0,3,0,1,1,0,1,0,1,0,.750,.800,.750,1.550,1.000,0,0,0,0,0,0,0,20
-2026,804911,Brendan Summerhill,Scottsdale Scorpions,2026-10-05,Mesa Solar Sox,False,False,867726,R,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,.750,.800,.750,1.550,.---,0,0,0,0,0,0,0,0
-2026,804911,Brendan Summerhill,Scottsdale Scorpions,2026-10-08,Surprise Saguaros,True,True,867719,R,3,4,0,0,0,0,0,1,0,1,0,0,0,0,0,.429,.556,.429,.985,.000,2,1,0,0,0,1,0,12
-2026,804911,Brendan Summerhill,Scottsdale Scorpions,2026-10-10,Salt River Rafters,False,True,867706,R,2,4,2,1,0,0,3,4,0,1,0,0,1,2,0,.556,.692,.667,1.359,1.000,0,0,0,0,0,0,0,12
-2026,804911,Brendan Summerhill,Scottsdale Scorpions,2026-10-13,Peoria Javelinas,True,False,867712,R,4,5,0,0,0,0,0,1,1,1,0,2,0,0,0,.385,.556,.462,1.018,.000,2,0,0,0,0,1,0,25
 2026,800614,Bryce Rainer,Scottsdale Scorpions,2026-10-03,Surprise Saguaros,True,False,867732,R,3,4,1,0,0,0,1,0,1,0,0,0,0,0,0,.333,.250,.333,.583,.250,1,2,0,0,1,4,0,13
 2026,800614,Bryce Rainer,Scottsdale Scorpions,2026-10-05,Mesa Solar Sox,False,False,867726,R,3,4,0,0,0,0,0,0,0,1,0,0,0,0,0,.167,.250,.167,.417,.000,1,2,0,0,0,2,0,18
 2026,800614,Bryce Rainer,Scottsdale Scorpions,2026-10-07,Peoria Javelinas,True,True,867722,R,4,4,1,1,0,0,2,0,1,0,0,0,0,0,0,.200,.250,.300,.550,.250,2,1,0,0,0,2,0,21
@@ -788,22 +773,6 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,800294,Waner Luciano,Scottsdale Scorpions,2026-10-28,Salt River Rafters,True,False,867674,R,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,.235,.350,.294,.644,.000,1,2,0,0,0,2,0,14
 2026,800294,Waner Luciano,Scottsdale Scorpions,2026-10-29,Surprise Saguaros,False,False,867672,R,3,4,1,0,0,0,1,1,0,1,0,0,0,0,0,.243,.364,.297,.661,.333,1,1,0,0,0,1,0,17
 2026,800294,Waner Luciano,Scottsdale Scorpions,2026-10-31,Mesa Solar Sox,True,False,867667,R,2,4,1,0,0,0,1,1,2,0,0,0,0,1,0,.256,.354,.308,.662,.250,0,3,0,0,2,1,0,22
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-03,Surprise Saguaros,True,False,867732,R,4,5,0,0,0,0,0,0,0,1,0,2,0,0,0,.000,.200,.000,.200,.000,1,1,0,0,0,2,0,18
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-04,Glendale Desert Dogs,False,True,867730,R,2,5,0,0,0,0,0,0,0,2,0,1,1,0,0,.000,.400,.000,.400,.000,1,0,0,0,0,1,0,24
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-07,Peoria Javelinas,True,True,867722,R,3,4,2,0,0,0,2,1,0,1,0,1,0,0,0,.222,.500,.222,.722,1.000,0,0,0,0,0,0,0,21
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-09,Mesa Solar Sox,True,True,867717,R,4,5,2,0,0,0,2,2,1,1,0,0,0,0,0,.308,.526,.308,.834,.500,2,0,0,0,0,1,0,15
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-10,Salt River Rafters,False,True,867706,R,4,4,1,0,0,0,1,0,2,0,0,2,0,0,0,.294,.478,.294,.772,.500,1,0,0,0,0,2,0,16
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-12,Glendale Desert Dogs,True,True,867708,R,4,4,1,0,0,1,4,1,2,0,0,2,0,0,0,.286,.444,.429,.873,.000,0,1,0,0,0,4,0,17
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-15,Peoria Javelinas,False,True,867703,R,2,5,0,0,0,0,0,1,1,2,0,0,1,0,0,.261,.469,.391,.860,.000,2,0,0,0,0,2,0,26
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-17,Peoria Javelinas,False,True,867693,R,4,4,0,0,0,0,0,0,0,0,0,1,0,0,0,.222,.417,.333,.750,.000,1,2,0,0,0,3,0,14
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-19,Peoria Javelinas,True,False,867699,R,4,4,2,0,0,0,2,0,0,0,0,1,0,0,0,.258,.425,.355,.780,.667,0,1,0,0,0,0,0,17
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-20,Mesa Solar Sox,True,True,867689,R,4,5,0,0,0,0,0,0,0,1,0,1,0,0,0,.229,.400,.314,.714,.000,1,2,0,0,0,5,0,20
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-22,Salt River Rafters,False,True,867683,R,6,6,2,0,0,0,2,0,1,0,0,1,0,0,0,.244,.392,.317,.709,.400,2,1,0,0,0,6,0,19
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-24,Glendale Desert Dogs,False,False,867686,R,3,4,0,0,0,0,0,0,0,1,0,2,0,0,0,.227,.382,.295,.677,.000,0,1,0,0,0,0,0,14
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-26,Peoria Javelinas,False,False,867677,R,2,5,0,0,0,0,0,1,1,3,0,1,0,0,0,.217,.400,.283,.683,.000,1,0,0,0,0,2,0,23
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-27,Mesa Solar Sox,False,True,867679,R,5,6,2,0,0,0,2,2,2,1,0,1,0,0,0,.235,.409,.294,.703,.500,1,1,0,0,0,3,0,23
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-29,Surprise Saguaros,False,False,867672,R,3,4,1,0,0,0,1,0,0,1,0,1,0,0,0,.241,.414,.296,.710,.500,1,0,0,0,0,0,0,18
-2026,814307,Zyhir Hope,Scottsdale Scorpions,2026-10-31,Mesa Solar Sox,True,False,867667,R,4,4,1,0,0,0,1,0,1,0,0,1,0,0,0,.241,.405,.293,.698,.333,1,1,0,0,0,1,0,15
 2026,801590,Aaron Parker,Mesa Solar Sox,2026-10-03,Peoria Javelinas,False,False,867731,R,5,5,3,0,0,0,3,1,1,0,0,0,0,1,0,.600,.600,.600,1.200,.600,1,1,0,0,0,3,0,11
 2026,801590,Aaron Parker,Mesa Solar Sox,2026-10-15,Salt River Rafters,False,True,867715,R,4,6,2,0,0,0,2,2,2,2,0,0,0,0,0,.556,.636,.556,1.192,.500,2,0,0,0,0,2,0,34
 2026,801590,Aaron Parker,Mesa Solar Sox,2026-10-19,Surprise Saguaros,False,True,867700,R,3,5,2,0,0,1,5,2,2,2,0,0,0,0,0,.583,.688,.833,1.521,.500,1,0,0,0,0,0,0,25
@@ -990,14 +959,6 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,805801,Nazzan Zanetello,Mesa Solar Sox,2026-10-27,Scottsdale Scorpions,True,False,867679,R,2,4,0,0,0,0,0,1,0,2,0,1,0,0,0,.162,.367,.297,.664,.000,0,1,0,0,0,1,0,23
 2026,805801,Nazzan Zanetello,Mesa Solar Sox,2026-10-29,Salt River Rafters,False,True,867673,R,5,6,1,0,1,0,3,1,3,1,0,1,0,0,0,.167,.364,.333,.697,.250,0,3,0,0,0,6,0,23
 2026,805801,Nazzan Zanetello,Mesa Solar Sox,2026-10-31,Scottsdale Scorpions,False,True,867667,R,3,4,0,0,0,0,0,0,0,1,0,2,0,0,0,.156,.356,.311,.667,.000,0,1,0,0,0,3,0,19
-2026,695301,Ryland Zaborowski,Mesa Solar Sox,2026-10-03,Peoria Javelinas,False,False,867731,R,5,5,2,0,0,0,2,1,1,0,0,1,0,0,0,.400,.400,.400,.800,.500,0,2,0,0,0,1,0,17
-2026,695301,Ryland Zaborowski,Mesa Solar Sox,2026-10-04,Peoria Javelinas,True,True,867716,R,4,5,0,0,0,0,0,1,0,1,0,0,0,0,0,.222,.300,.222,.522,.000,1,3,0,0,0,4,0,18
-2026,695301,Ryland Zaborowski,Mesa Solar Sox,2026-10-06,Glendale Desert Dogs,True,False,867723,R,4,5,0,0,0,0,0,0,0,1,0,3,0,0,0,.154,.267,.154,.421,.000,1,0,0,0,0,5,0,22
-2026,695301,Ryland Zaborowski,Mesa Solar Sox,2026-10-08,Salt River Rafters,False,False,867720,R,3,4,0,0,0,0,0,0,0,0,0,0,1,0,0,.125,.263,.125,.388,.000,2,1,0,0,0,4,0,11
-2026,695301,Ryland Zaborowski,Mesa Solar Sox,2026-10-09,Scottsdale Scorpions,False,False,867717,R,4,5,2,0,0,1,5,1,2,1,0,1,0,0,0,.200,.333,.350,.683,.500,0,1,0,0,0,4,0,17
-2026,695301,Ryland Zaborowski,Mesa Solar Sox,2026-10-10,Peoria Javelinas,True,True,867705,R,2,3,2,0,0,0,2,2,1,1,0,0,0,0,0,.273,.407,.409,.816,1.000,0,0,0,0,0,0,0,12
-2026,695301,Ryland Zaborowski,Mesa Solar Sox,2026-10-16,Surprise Saguaros,False,False,867697,R,3,5,1,0,0,0,1,1,0,2,0,1,0,0,0,.280,.438,.400,.838,.500,0,1,0,0,0,4,0,13
-2026,695301,Ryland Zaborowski,Mesa Solar Sox,2026-10-19,Surprise Saguaros,False,True,867700,R,2,4,0,0,0,0,0,1,0,2,0,2,0,0,0,.259,.444,.370,.814,.---,0,0,0,0,0,3,0,21
 2026,700321,Andy Perez,Salt River Rafters,2026-10-04,Surprise Saguaros,False,False,867728,R,4,4,1,0,0,0,1,1,1,0,0,1,0,0,0,.250,.250,.250,.500,.333,0,2,0,0,0,0,0,13
 2026,700321,Andy Perez,Salt River Rafters,2026-10-05,Peoria Javelinas,True,True,867727,R,5,5,1,0,0,0,1,0,1,0,0,1,0,0,0,.222,.222,.222,.444,.250,3,0,0,0,0,4,0,14
 2026,700321,Andy Perez,Salt River Rafters,2026-10-06,Surprise Saguaros,True,True,867724,R,4,4,2,0,0,0,2,2,0,0,0,0,0,2,0,.308,.308,.308,.616,.500,0,2,0,0,0,2,0,15
@@ -1100,10 +1061,6 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,703606,Jared Thomas,Salt River Rafters,2026-10-28,Scottsdale Scorpions,False,True,867674,R,2,5,1,0,0,0,1,0,1,3,0,1,0,2,0,.298,.403,.544,.947,1.000,0,0,0,0,0,1,0,28
 2026,703606,Jared Thomas,Salt River Rafters,2026-10-29,Mesa Solar Sox,True,False,867673,R,5,5,2,1,0,0,3,0,1,0,0,3,0,0,0,.306,.403,.548,.951,1.000,0,0,0,0,0,3,0,18
 2026,703606,Jared Thomas,Salt River Rafters,2026-10-31,Surprise Saguaros,False,True,867666,R,2,4,1,0,1,0,3,2,1,0,0,0,2,0,0,.313,.421,.578,.999,.500,1,0,0,0,0,0,0,4
-2026,800195,Jorgelys Mota,Salt River Rafters,2026-10-06,Surprise Saguaros,True,True,867724,R,3,3,1,0,0,1,4,1,2,0,0,1,0,0,0,.333,.333,1.333,1.666,.000,1,0,0,0,0,0,0,12
-2026,800195,Jorgelys Mota,Salt River Rafters,2026-10-08,Mesa Solar Sox,True,True,867720,R,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,.200,.200,.800,1.000,.000,0,2,0,0,0,1,0,8
-2026,800195,Jorgelys Mota,Salt River Rafters,2026-10-10,Scottsdale Scorpions,True,False,867706,R,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,.143,.143,.571,.714,.000,2,0,0,0,0,0,0,5
-2026,800195,Jorgelys Mota,Salt River Rafters,2026-10-15,Mesa Solar Sox,True,False,867715,R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,.143,.143,.571,.714,.---,0,0,0,0,0,0,0,0
 2026,695494,Kevin Bazzell,Salt River Rafters,2026-10-03,Glendale Desert Dogs,False,True,867729,R,4,6,1,0,0,0,1,1,1,1,0,1,1,1,0,.250,.500,.250,.750,.333,1,1,0,0,0,3,0,20
 2026,695494,Kevin Bazzell,Salt River Rafters,2026-10-05,Peoria Javelinas,True,True,867727,R,4,4,1,0,0,0,1,1,1,0,0,0,0,0,0,.250,.400,.250,.650,.250,1,2,0,0,0,1,0,18
 2026,695494,Kevin Bazzell,Salt River Rafters,2026-10-08,Mesa Solar Sox,True,True,867720,R,2,4,1,1,0,0,2,0,0,2,0,0,0,0,0,.300,.500,.400,.900,.500,0,1,0,0,0,0,0,16

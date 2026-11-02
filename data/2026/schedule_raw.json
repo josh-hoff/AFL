@@ -5870,154 +5870,6 @@
       "totalGamesInProgress": 0,
       "games": [
         {
-          "gamePk": 867665,
-          "gameGuid": "0d7385cc-974a-4b57-9ae1-0cc6663ff5b9",
-          "link": "/api/v1.1/game/867665/feed/live",
-          "gameType": "R",
-          "season": "2026",
-          "gameDate": "2026-11-02T20:30:00Z",
-          "officialDate": "2026-11-02",
-          "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "S",
-            "detailedState": "Scheduled",
-            "statusCode": "S",
-            "startTimeTBD": false,
-            "abstractGameCode": "P"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "id": 454,
-                "name": "Glendale Desert Dogs",
-                "link": "/api/v1/teams/454"
-              },
-              "leagueRecord": {
-                "wins": 7,
-                "losses": 15,
-                "ties": 0,
-                "pct": ".318"
-              },
-              "splitSquad": false,
-              "seriesNumber": 22
-            },
-            "home": {
-              "team": {
-                "id": 490,
-                "name": "Peoria Javelinas",
-                "link": "/api/v1/teams/490"
-              },
-              "leagueRecord": {
-                "wins": 13,
-                "losses": 9,
-                "ties": 0,
-                "pct": ".591"
-              },
-              "splitSquad": false,
-              "seriesNumber": 20
-            }
-          },
-          "venue": {
-            "id": 2530,
-            "name": "Peoria Stadium",
-            "link": "/api/v1/venues/2530"
-          },
-          "content": {
-            "link": "/api/v1/game/867665/content"
-          },
-          "gameNumber": 1,
-          "publicFacing": true,
-          "doubleHeader": "N",
-          "gamedayType": "E",
-          "tiebreaker": "N",
-          "calendarEventID": "173-867665-2026-11-02",
-          "seasonDisplay": "2026",
-          "dayNight": "day",
-          "scheduledInnings": 9,
-          "reverseHomeAwayStatus": false,
-          "inningBreakLength": 120,
-          "gamesInSeries": 2,
-          "seriesGameNumber": 2,
-          "seriesDescription": "Regular Season",
-          "recordSource": "S",
-          "ifNecessary": "N",
-          "ifNecessaryDescription": "Normal Game"
-        },
-        {
-          "gamePk": 867664,
-          "gameGuid": "775e8957-da1b-41ab-98f7-322e306c463f",
-          "link": "/api/v1.1/game/867664/feed/live",
-          "gameType": "R",
-          "season": "2026",
-          "gameDate": "2026-11-02T20:30:00Z",
-          "officialDate": "2026-11-02",
-          "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "S",
-            "detailedState": "Scheduled",
-            "statusCode": "S",
-            "startTimeTBD": false,
-            "abstractGameCode": "P"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "id": 542,
-                "name": "Surprise Saguaros",
-                "link": "/api/v1/teams/542"
-              },
-              "leagueRecord": {
-                "wins": 12,
-                "losses": 9,
-                "ties": 0,
-                "pct": ".571"
-              },
-              "splitSquad": false,
-              "seriesNumber": 23
-            },
-            "home": {
-              "team": {
-                "id": 555,
-                "name": "Mesa Solar Sox",
-                "link": "/api/v1/teams/555"
-              },
-              "leagueRecord": {
-                "wins": 9,
-                "losses": 11,
-                "ties": 1,
-                "pct": ".450"
-              },
-              "splitSquad": false,
-              "seriesNumber": 21
-            }
-          },
-          "venue": {
-            "id": 4629,
-            "name": "Sloan Park",
-            "link": "/api/v1/venues/4629"
-          },
-          "content": {
-            "link": "/api/v1/game/867664/content"
-          },
-          "gameNumber": 1,
-          "publicFacing": true,
-          "doubleHeader": "N",
-          "gamedayType": "E",
-          "tiebreaker": "N",
-          "calendarEventID": "173-867664-2026-11-02",
-          "seasonDisplay": "2026",
-          "dayNight": "day",
-          "scheduledInnings": 9,
-          "reverseHomeAwayStatus": false,
-          "inningBreakLength": 120,
-          "gamesInSeries": 1,
-          "seriesGameNumber": 1,
-          "seriesDescription": "Regular Season",
-          "recordSource": "S",
-          "ifNecessary": "N",
-          "ifNecessaryDescription": "Normal Game"
-        },
-        {
           "gamePk": 867663,
           "gameGuid": "5c0f03af-6cc1-416d-88ec-ed3288236327",
           "link": "/api/v1.1/game/867663/feed/live",
@@ -6086,6 +5938,155 @@
           "inningBreakLength": 120,
           "gamesInSeries": 1,
           "seriesGameNumber": 1,
+          "seriesDescription": "Regular Season",
+          "recordSource": "S",
+          "ifNecessary": "N",
+          "ifNecessaryDescription": "Normal Game"
+        },
+        {
+          "gamePk": 867664,
+          "gameGuid": "775e8957-da1b-41ab-98f7-322e306c463f",
+          "link": "/api/v1.1/game/867664/feed/live",
+          "gameType": "R",
+          "season": "2026",
+          "gameDate": "2026-11-03T01:30:00Z",
+          "officialDate": "2026-11-02",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "S",
+            "detailedState": "Scheduled",
+            "statusCode": "S",
+            "startTimeTBD": false,
+            "abstractGameCode": "P"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "id": 542,
+                "name": "Surprise Saguaros",
+                "link": "/api/v1/teams/542"
+              },
+              "leagueRecord": {
+                "wins": 12,
+                "losses": 9,
+                "ties": 0,
+                "pct": ".571"
+              },
+              "splitSquad": false,
+              "seriesNumber": 23
+            },
+            "home": {
+              "team": {
+                "id": 555,
+                "name": "Mesa Solar Sox",
+                "link": "/api/v1/teams/555"
+              },
+              "leagueRecord": {
+                "wins": 9,
+                "losses": 11,
+                "ties": 1,
+                "pct": ".450"
+              },
+              "splitSquad": false,
+              "seriesNumber": 21
+            }
+          },
+          "venue": {
+            "id": 4629,
+            "name": "Sloan Park",
+            "link": "/api/v1/venues/4629"
+          },
+          "content": {
+            "link": "/api/v1/game/867664/content"
+          },
+          "gameNumber": 1,
+          "publicFacing": true,
+          "doubleHeader": "N",
+          "gamedayType": "E",
+          "tiebreaker": "N",
+          "calendarEventID": "173-867664-2026-11-02",
+          "seasonDisplay": "2026",
+          "dayNight": "night",
+          "scheduledInnings": 9,
+          "reverseHomeAwayStatus": false,
+          "inningBreakLength": 120,
+          "gamesInSeries": 1,
+          "seriesGameNumber": 1,
+          "seriesDescription": "Regular Season",
+          "recordSource": "S",
+          "ifNecessary": "N",
+          "ifNecessaryDescription": "Normal Game"
+        },
+        {
+          "gamePk": 867665,
+          "gameGuid": "0d7385cc-974a-4b57-9ae1-0cc6663ff5b9",
+          "link": "/api/v1.1/game/867665/feed/live",
+          "gameType": "R",
+          "season": "2026",
+          "gameDate": "2026-11-02T20:30:00Z",
+          "officialDate": "2026-11-02",
+          "status": {
+            "abstractGameState": "Final",
+            "codedGameState": "C",
+            "detailedState": "Cancelled",
+            "statusCode": "CG",
+            "startTimeTBD": false,
+            "reason": "Wet Grounds",
+            "abstractGameCode": "F"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "id": 454,
+                "name": "Glendale Desert Dogs",
+                "link": "/api/v1/teams/454"
+              },
+              "leagueRecord": {
+                "wins": 7,
+                "losses": 15,
+                "ties": 0,
+                "pct": ".318"
+              },
+              "splitSquad": false,
+              "seriesNumber": 22
+            },
+            "home": {
+              "team": {
+                "id": 490,
+                "name": "Peoria Javelinas",
+                "link": "/api/v1/teams/490"
+              },
+              "leagueRecord": {
+                "wins": 13,
+                "losses": 9,
+                "ties": 0,
+                "pct": ".591"
+              },
+              "splitSquad": false,
+              "seriesNumber": 20
+            }
+          },
+          "venue": {
+            "id": 2530,
+            "name": "Peoria Stadium",
+            "link": "/api/v1/venues/2530"
+          },
+          "content": {
+            "link": "/api/v1/game/867665/content"
+          },
+          "gameNumber": 1,
+          "publicFacing": true,
+          "doubleHeader": "N",
+          "gamedayType": "E",
+          "tiebreaker": "N",
+          "calendarEventID": "173-867665-2026-11-02",
+          "seasonDisplay": "2026",
+          "dayNight": "day",
+          "scheduledInnings": 9,
+          "reverseHomeAwayStatus": false,
+          "inningBreakLength": 120,
+          "gamesInSeries": 2,
+          "seriesGameNumber": 2,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
           "ifNecessary": "N",
