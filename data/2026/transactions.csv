@@ -1,6 +1,4 @@
 season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,description
-2026,Glendale Desert Dogs,2026-09-15,701333,Colby Shelton,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 2B Colby Shelton.
-2026,Glendale Desert Dogs,2026-09-15,815352,Caleb Bonemer,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 3B Caleb Bonemer.
 2026,Glendale Desert Dogs,2026-09-15,827665,Dillon Lewis,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated OF Dillon Lewis.
 2026,Glendale Desert Dogs,2026-09-15,703637,Max Williams,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated DH Max Williams.
 2026,Glendale Desert Dogs,2026-09-15,816111,Tate Southisene,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated SS Tate Southisene from the 7-day injured list.
@@ -31,15 +29,17 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Glendale Desert Dogs,2026-09-15,701808,Cody Morse,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Cody Morse.
 2026,Glendale Desert Dogs,2026-09-15,828987,Briggs McKenzie,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Briggs McKenzie from the 60-day injured list.
 2026,Glendale Desert Dogs,2026-09-15,813706,Owen Hackman,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Owen Hackman.
-2026,Glendale Desert Dogs,2026-09-15,679489,Tyler LaPorte,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Tyler LaPorte.
 2026,Glendale Desert Dogs,2026-09-15,807187,Mathias LaCombe,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Mathias LaCombe.
-2026,Glendale Desert Dogs,2026-09-15,703748,Tanner Bauman,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Tanner Bauman.
-2026,Glendale Desert Dogs,2026-09-15,824624,Brooks Auger,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brooks Auger.
-2026,Glendale Desert Dogs,2026-09-15,805892,Nick Altermatt,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Nick Altermatt.
-2026,Glendale Desert Dogs,2026-09-15,702165,Jonathan Clark,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Jonathan Clark.
-2026,Glendale Desert Dogs,2026-09-15,703670,Pierce George,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Pierce George.
-2026,Glendale Desert Dogs,2026-09-15,815704,Samuel Carpio,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Samuel Carpio.
 2026,Glendale Desert Dogs,2026-09-15,803183,Luke Fox,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Luke Fox.
+2026,Glendale Desert Dogs,2026-09-15,815704,Samuel Carpio,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Samuel Carpio.
+2026,Glendale Desert Dogs,2026-09-15,703670,Pierce George,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Pierce George.
+2026,Glendale Desert Dogs,2026-09-15,702165,Jonathan Clark,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Jonathan Clark.
+2026,Glendale Desert Dogs,2026-09-15,805892,Nick Altermatt,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Nick Altermatt.
+2026,Glendale Desert Dogs,2026-09-15,824624,Brooks Auger,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brooks Auger.
+2026,Glendale Desert Dogs,2026-09-15,703748,Tanner Bauman,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Tanner Bauman.
+2026,Glendale Desert Dogs,2026-09-15,679489,Tyler LaPorte,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Tyler LaPorte.
+2026,Glendale Desert Dogs,2026-09-15,701333,Colby Shelton,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 2B Colby Shelton.
+2026,Glendale Desert Dogs,2026-09-15,815352,Caleb Bonemer,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 3B Caleb Bonemer.
 2026,Glendale Desert Dogs,2026-09-15,827610,Brandon Cain,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brandon Cain.
 2026,Glendale Desert Dogs,2026-09-15,804999,Cameron Keshock,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Cameron Keshock from the 60-day injured list.
 2026,Glendale Desert Dogs,2026-10-01,700167,Bryan Mena,ASG,Assigned,,Glendale Desert Dogs,RHP Bryan Mena assigned to Glendale Desert Dogs.
