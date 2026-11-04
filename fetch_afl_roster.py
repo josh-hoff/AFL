@@ -1,5 +1,6 @@
 import argparse
 import csv
+import os
 import time
 from datetime import datetime
 
@@ -113,6 +114,72 @@ def build_roster_row(season, team_name, roster_entry):
     }
 
 
+def _read_csv(path):
+    if not os.path.exists(path):
+        return []
+    with open(path, newline="", encoding="utf-8", errors="replace") as f:
+        return list(csv.DictReader(f))
+
+
+def keep_every_player_ever_seen(season, season_dir, all_rows):
+    """A player must never disappear from the site once he has been on it.
+
+    MLB's roster endpoint only lists who is on a club *right now*, so a player who is
+    released, returned to his organization, or moved off the list vanishes from it. If
+    roster.csv were simply overwritten, he (and every game log built from the roster)
+    would vanish too. So the new roster is merged with the existing file:
+      1. anyone already in roster.csv who is not on MLB's list today is kept as-is;
+      2. anyone who appears in this season's lineups or pitching appearances but has
+         never been on the roster file is added, so nobody who played is left out.
+    Players still on MLB's list always use the fresh row (new team, jersey, age...)."""
+    have = {str(r["player_id"]) for r in all_rows}
+
+    kept = 0
+    for old in _read_csv(os.path.join(season_dir, "roster.csv")):
+        pid = str(old.get("player_id", ""))
+        if pid and pid not in have:
+            all_rows.append({k: old.get(k, "") for k in ROSTER_FIELDS})
+            have.add(pid)
+            kept += 1
+
+    played = {}
+    for row in _read_csv(os.path.join(season_dir, "batting_lineups.csv")):
+        played.setdefault(str(row.get("player_id", "")), {
+            "name": row.get("player_name", ""), "team": row.get("team_name", ""),
+            "jersey": row.get("jersey_number", ""), "pos": (row.get("position_code", ""), row.get("position_name", ""), row.get("position_abbreviation", "")),
+        })
+    for row in _read_csv(os.path.join(season_dir, "pitcher_appearances.csv")):
+        played.setdefault(str(row.get("pitcher_id", "")), {
+            "name": row.get("pitcher_name", ""), "team": row.get("team_name", ""),
+            "jersey": "", "pos": ("1", "Pitcher", "P"),
+        })
+
+    added = 0
+    for pid, info in played.items():
+        if not pid or pid in have:
+            continue
+        entry = {
+            "person": {"id": int(pid) if pid.isdigit() else pid, "fullName": info["name"]},
+            "jerseyNumber": info["jersey"],
+            "position": {"code": info["pos"][0], "name": info["pos"][1], "abbreviation": info["pos"][2]},
+        }
+        try:
+            row = build_roster_row(season, info["team"], entry)
+        except Exception as e:
+            print(f"  could not fetch bio for {info['name']} ({e}); saving basic row.")
+            row = {k: "" for k in ROSTER_FIELDS}
+            row.update({"season": season, "team": info["team"], "player_id": pid, "full_name": info["name"],
+                        "jersey_number": info["jersey"], "position_code": info["pos"][0],
+                        "position_name": info["pos"][1], "position_abbreviation": info["pos"][2]})
+        all_rows.append(row)
+        have.add(pid)
+        added += 1
+
+    if kept or added:
+        print(f"Kept {kept} player(s) MLB no longer lists and added {added} who played but were never on the roster file.")
+    return all_rows
+
+
 def main():
     parser = argparse.ArgumentParser(description="Fetch AFL team rosters with bio info and MLB organization.")
     parser.add_argument(
@@ -142,9 +209,9 @@ def main():
             except Exception as e:
                 print(f"failed ({e}), skipping player.")
 
-    import os
     season_dir = os.path.join(args.output_dir, str(args.season))
     os.makedirs(season_dir, exist_ok=True)
+    all_rows = keep_every_player_ever_seen(args.season, season_dir, all_rows)
     out_path = os.path.join(season_dir, "roster.csv")
 
     with open(out_path, "w", newline="", encoding="utf-8") as f:
