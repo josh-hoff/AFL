@@ -777,3 +777,24 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867664,2026-11-02,home,Mesa Solar Sox,702255,Brandon Barriera,6,False
 867664,2026-11-02,home,Mesa Solar Sox,838799,Harry Blum,7,False
 867664,2026-11-02,home,Mesa Solar Sox,695402,Najer Victor,8,False
+867662,2026-11-03,away,Salt River Rafters,822950,J.T. Etheridge,1,True
+867662,2026-11-03,away,Salt River Rafters,806070,Mack Estrada,2,False
+867662,2026-11-03,away,Salt River Rafters,688629,Noah Dean,3,False
+867662,2026-11-03,away,Salt River Rafters,815065,Hunter Mann,4,False
+867662,2026-11-03,away,Salt River Rafters,827768,Anthony Mena,5,False
+867662,2026-11-03,away,Salt River Rafters,699283,Cleiber Maldonado,6,False
+867662,2026-11-03,home,Peoria Javelinas,695705,Luke Holman,1,True
+867662,2026-11-03,home,Peoria Javelinas,694345,Patrick Reilly,2,False
+867662,2026-11-03,home,Peoria Javelinas,688867,Braxton Bragg,3,False
+867662,2026-11-03,home,Peoria Javelinas,828594,Michael Watson,4,False
+867662,2026-11-03,home,Peoria Javelinas,683165,Joseph King,5,False
+867662,2026-11-03,home,Peoria Javelinas,800212,Francis Peña,6,False
+867660,2026-11-03,away,Surprise Saguaros,702373,Felix Arronde,1,True
+867660,2026-11-03,away,Surprise Saguaros,683349,Calvin Ziegler,2,False
+867660,2026-11-03,away,Surprise Saguaros,823804,Ryan Dromboski,3,False
+867660,2026-11-03,home,Scottsdale Scorpions,690972,Joey Dixon,1,True
+867660,2026-11-03,home,Scottsdale Scorpions,687189,Marcus Johnson,2,False
+867661,2026-11-03,away,Mesa Solar Sox,803021,Peyton Olejnik,1,True
+867661,2026-11-03,away,Mesa Solar Sox,807625,Gilberto Batista,2,False
+867661,2026-11-03,home,Glendale Desert Dogs,828987,Briggs McKenzie,1,True
+867661,2026-11-03,home,Glendale Desert Dogs,824624,Brooks Auger,2,False
