@@ -2041,3 +2041,6 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,815352,Caleb Bonemer,Glendale Desert Dogs,2026-10-24,Scottsdale Scorpions,True,True,867686,R,LF,8.0,0,0,0,0,0,.947,0,0,0.00,0.00,,,,,
 2026,686632,Steven Zobac,Surprise Saguaros,2026-10-05,Glendale Desert Dogs,True,True,867725,R,P,2.2,0,0,0,0,0,.000,0,0,0.00,0.00,,,,,
 2026,686632,Steven Zobac,Surprise Saguaros,2026-10-14,Peoria Javelinas,True,True,867710,R,P,1.2,0,0,0,0,0,.000,0,0,0.00,0.00,,,,,
+2026,824667,Owen Puk,Salt River Rafters,2026-10-03,Glendale Desert Dogs,False,True,867729,R,P,0.1,0,0,0,0,0,.000,0,0,0.00,0.00,,,,,
+2026,824667,Owen Puk,Salt River Rafters,2026-10-06,Surprise Saguaros,True,True,867724,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00,,,,,
+2026,824667,Owen Puk,Salt River Rafters,2026-10-13,Glendale Desert Dogs,False,True,867711,R,P,1.1,0,0,0,0,0,.000,0,0,0.00,0.00,,,,,

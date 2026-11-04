@@ -77,6 +77,9 @@ jobs:
       - name: Fetch current season standings
         run: python fetch_afl_standings.py --only-missing
 
+      - name: Keep every row ever saved (never delete player data)
+        run: python preserve_data.py
+
       - name: Commit and push updated data
         run: |
           git config user.name "github-actions[bot]"
