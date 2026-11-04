@@ -976,7 +976,7 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,820835,Kade Snell,Mesa Solar Sox,2026-10-28,Surprise Saguaros,True,False,867669,R,4,4,2,0,0,1,5,1,1,0,0,0,0,0,0,.265,.429,.388,.817,.333,1,1,0,0,0,1,0,12
 2026,820835,Kade Snell,Mesa Solar Sox,2026-10-29,Salt River Rafters,False,True,867673,R,6,7,3,0,0,0,3,4,0,1,0,1,0,1,0,.291,.443,.400,.843,.600,2,0,0,0,0,3,0,30
 2026,820835,Kade Snell,Mesa Solar Sox,2026-11-02,Surprise Saguaros,True,False,867664,R,3,5,1,0,0,0,1,0,1,1,0,0,1,2,0,.293,.453,.397,.850,.333,0,2,0,0,0,2,0,25
-2026,820835,Kade Snell,Mesa Solar Sox,2026-11-03,Glendale Desert Dogs,False,False,867661,R,5,5,1,0,0,0,1,1,0,0,0,2,0,2,0,.286,.438,.381,.819,.333,2,0,0,0,0,1,0,17
+2026,820835,Kade Snell,Mesa Solar Sox,2026-11-03,Glendale Desert Dogs,False,False,867661,R,5,5,1,0,0,0,1,1,0,0,0,2,0,2,0,.286,.438,.381,.819,.333,2,0,0,0,0,1,0,18
 2026,702517,Mason White,Mesa Solar Sox,2026-10-03,Peoria Javelinas,False,False,867731,R,4,5,1,0,0,0,1,1,0,1,0,3,0,0,0,.250,.400,.250,.650,1.000,0,0,0,0,0,3,0,27
 2026,702517,Mason White,Mesa Solar Sox,2026-10-04,Peoria Javelinas,True,True,867716,R,4,5,0,0,0,0,0,0,0,1,0,2,0,0,0,.125,.300,.125,.425,.000,0,2,0,0,0,6,0,19
 2026,702517,Mason White,Mesa Solar Sox,2026-10-06,Glendale Desert Dogs,True,False,867723,R,4,5,1,0,0,0,1,0,0,1,0,2,0,1,0,.167,.333,.167,.500,.500,0,1,0,0,0,2,0,25
