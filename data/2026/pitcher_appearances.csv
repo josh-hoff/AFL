@@ -792,9 +792,19 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867660,2026-11-03,away,Surprise Saguaros,702373,Felix Arronde,1,True
 867660,2026-11-03,away,Surprise Saguaros,683349,Calvin Ziegler,2,False
 867660,2026-11-03,away,Surprise Saguaros,823804,Ryan Dromboski,3,False
+867660,2026-11-03,away,Surprise Saguaros,700985,Josh Hansell,4,False
+867660,2026-11-03,away,Surprise Saguaros,701884,Magnus Ellerts,5,False
 867660,2026-11-03,home,Scottsdale Scorpions,690972,Joey Dixon,1,True
 867660,2026-11-03,home,Scottsdale Scorpions,687189,Marcus Johnson,2,False
+867660,2026-11-03,home,Scottsdale Scorpions,805783,Mason Nichols,3,False
+867660,2026-11-03,home,Scottsdale Scorpions,815218,Alexander Fuentes,4,False
+867660,2026-11-03,home,Scottsdale Scorpions,800427,Jose Meneses,5,False
 867661,2026-11-03,away,Mesa Solar Sox,803021,Peyton Olejnik,1,True
 867661,2026-11-03,away,Mesa Solar Sox,807625,Gilberto Batista,2,False
+867661,2026-11-03,away,Mesa Solar Sox,803248,Yoendris Gonzalez,3,False
+867661,2026-11-03,away,Mesa Solar Sox,814279,Yeferson Vargas,4,False
 867661,2026-11-03,home,Glendale Desert Dogs,828987,Briggs McKenzie,1,True
 867661,2026-11-03,home,Glendale Desert Dogs,824624,Brooks Auger,2,False
+867661,2026-11-03,home,Glendale Desert Dogs,694761,Tommy Vail,3,False
+867661,2026-11-03,home,Glendale Desert Dogs,688306,Tristan Stevens,4,False
+867661,2026-11-03,home,Glendale Desert Dogs,694207,Brayan Mendoza,5,False

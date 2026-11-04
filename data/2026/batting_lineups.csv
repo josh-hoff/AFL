@@ -1300,15 +1300,17 @@ game_pk,date,team_side,team_name,player_id,player_name,jersey_number,batting_ord
 867660,2026-11-03,home,Scottsdale Scorpions,809763,Kaeden Kent,5,700,7,00,True,5,3B,Third Base
 867660,2026-11-03,home,Scottsdale Scorpions,701592,Luke Davis,31,800,8,00,True,3,1B,First Base
 867660,2026-11-03,home,Scottsdale Scorpions,691797,Ryan Spikes,13,900,9,00,True,7,LF,Outfielder
+867660,2026-11-03,home,Scottsdale Scorpions,800294,Waner Luciano,2,901,9,01,False,7,LF,Outfielder
 867661,2026-11-03,away,Mesa Solar Sox,820835,Kade Snell,6,100,1,00,True,9,RF,Outfielder
 867661,2026-11-03,away,Mesa Solar Sox,696286,Davis Diaz,8,200,2,00,True,2,C,Catcher
 867661,2026-11-03,away,Mesa Solar Sox,805796,Arjun Nimmala,78,300,3,00,True,10,DH,Designated Hitter
 867661,2026-11-03,away,Mesa Solar Sox,827719,Jake Munroe,2,400,4,00,True,5,3B,Third Base
 867661,2026-11-03,away,Mesa Solar Sox,829888,Anthony Santa Cruz de Oviedo,17,500,5,00,True,3,1B,First Base
 867661,2026-11-03,away,Mesa Solar Sox,814457,Jake Casey,4,600,6,00,True,8,CF,Outfielder
-867661,2026-11-03,away,Mesa Solar Sox,805801,Nazzan Zanetello,24,700,7,00,True,4,2B,Second Base
+867661,2026-11-03,away,Mesa Solar Sox,805801,Nazzan Zanetello,24,700,7,00,True,6,SS,Shortstop
 867661,2026-11-03,away,Mesa Solar Sox,829052,Breyson Guedez,18,800,8,00,True,7,LF,Outfielder
 867661,2026-11-03,away,Mesa Solar Sox,702517,Mason White,5,900,9,00,True,6,SS,Shortstop
+867661,2026-11-03,away,Mesa Solar Sox,829040,Juan Cabada,16,901,9,01,False,4,2B,Second Base
 867661,2026-11-03,home,Glendale Desert Dogs,815608,Wyatt Sanford,3,100,1,00,True,4,2B,Second Base
 867661,2026-11-03,home,Glendale Desert Dogs,808234,Eduardo Quintero,16,200,2,00,True,9,RF,Outfielder
 867661,2026-11-03,home,Glendale Desert Dogs,816111,Tate Southisene,19,300,3,00,True,6,SS,Shortstop
