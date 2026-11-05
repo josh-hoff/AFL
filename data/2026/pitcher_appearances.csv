@@ -841,3 +841,5 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867655,2026-11-04,home,Scottsdale Scorpions,837584,Jalen Evans,3,False
 867655,2026-11-04,home,Scottsdale Scorpions,813796,Preston Howey,4,False
 867655,2026-11-04,home,Scottsdale Scorpions,828603,Logan Berrier,5,False
+867654,2026-11-05,away,Mesa Solar Sox,701836,Kyle Robinson,1,True
+867654,2026-11-05,home,Glendale Desert Dogs,801207,Emmett Olson,1,True
