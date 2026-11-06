@@ -842,4 +842,35 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867655,2026-11-04,home,Scottsdale Scorpions,813796,Preston Howey,4,False
 867655,2026-11-04,home,Scottsdale Scorpions,828603,Logan Berrier,5,False
 867654,2026-11-05,away,Mesa Solar Sox,701836,Kyle Robinson,1,True
+867654,2026-11-05,away,Mesa Solar Sox,806879,Anhuar Garcia,2,False
+867654,2026-11-05,away,Mesa Solar Sox,687991,Jared Johnson,3,False
+867654,2026-11-05,away,Mesa Solar Sox,695402,Najer Victor,4,False
 867654,2026-11-05,home,Glendale Desert Dogs,801207,Emmett Olson,1,True
+867654,2026-11-05,home,Glendale Desert Dogs,703748,Tanner Bauman,2,False
+867654,2026-11-05,home,Glendale Desert Dogs,816266,Williams Salazar,3,False
+867654,2026-11-05,home,Glendale Desert Dogs,807187,Mathias LaCombe,4,False
+867654,2026-11-05,home,Glendale Desert Dogs,805892,Nick Altermatt,5,False
+867654,2026-11-05,home,Glendale Desert Dogs,805800,Zander Mueth,6,False
+867653,2026-11-05,away,Salt River Rafters,694933,Ross Dunn,1,True
+867653,2026-11-05,away,Salt River Rafters,695403,Brock Gillis,2,False
+867653,2026-11-05,away,Salt River Rafters,823227,Brian Zeldin,3,False
+867653,2026-11-05,away,Salt River Rafters,813409,Joe Ariola,4,False
+867653,2026-11-05,away,Salt River Rafters,800544,Cesar Lares,5,False
+867653,2026-11-05,home,Peoria Javelinas,826466,Winyer Chourio,1,True
+867653,2026-11-05,home,Peoria Javelinas,828594,Michael Watson,2,False
+867653,2026-11-05,home,Peoria Javelinas,828718,Victor Diaz,3,False
+867653,2026-11-05,home,Peoria Javelinas,822498,Reid Easterly,4,False
+867653,2026-11-05,home,Peoria Javelinas,814227,Jordan Valenzuela,5,False
+867653,2026-11-05,home,Peoria Javelinas,807744,Ty Cummings,6,False
+867653,2026-11-05,home,Peoria Javelinas,694832,Cody Adcock,7,False
+867647,2026-11-05,away,Scottsdale Scorpions,805694,Juan Bello,1,True
+867647,2026-11-05,away,Scottsdale Scorpions,806711,Yereny Teus,2,False
+867647,2026-11-05,away,Scottsdale Scorpions,824714,Spencer Bauer,3,False
+867647,2026-11-05,away,Scottsdale Scorpions,808350,Joshua Quezada,4,False
+867647,2026-11-05,away,Scottsdale Scorpions,800427,Jose Meneses,5,False
+867647,2026-11-05,away,Scottsdale Scorpions,683988,Railin Perez,6,False
+867647,2026-11-05,home,Surprise Saguaros,802146,Aidan Major,1,True
+867647,2026-11-05,home,Surprise Saguaros,815066,Kyle Scott,2,False
+867647,2026-11-05,home,Surprise Saguaros,822415,Mason McConnaughey,3,False
+867647,2026-11-05,home,Surprise Saguaros,804966,Jesus Gamez,4,False
+867647,2026-11-05,home,Surprise Saguaros,700924,Frank Mozzicato,5,False
