@@ -7245,7 +7245,7 @@
           "calendarEventID": "173-867644-2026-11-10",
           "seasonDisplay": "2026",
           "dayNight": "day",
-          "scheduledInnings": 9,
+          "scheduledInnings": 7,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
           "gamesInSeries": 1,
@@ -7319,7 +7319,7 @@
           "calendarEventID": "173-867648-2026-11-10",
           "seasonDisplay": "2026",
           "dayNight": "day",
-          "scheduledInnings": 9,
+          "scheduledInnings": 7,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
           "gamesInSeries": 1,
@@ -7393,7 +7393,7 @@
           "calendarEventID": "173-867637-2026-11-10",
           "seasonDisplay": "2026",
           "dayNight": "night",
-          "scheduledInnings": 9,
+          "scheduledInnings": 7,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
           "gamesInSeries": 1,
@@ -7477,7 +7477,7 @@
           "calendarEventID": "173-867646-2026-11-11",
           "seasonDisplay": "2026",
           "dayNight": "day",
-          "scheduledInnings": 9,
+          "scheduledInnings": 7,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
           "gamesInSeries": 1,
@@ -7551,7 +7551,7 @@
           "calendarEventID": "173-867645-2026-11-11",
           "seasonDisplay": "2026",
           "dayNight": "day",
-          "scheduledInnings": 9,
+          "scheduledInnings": 7,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
           "gamesInSeries": 1,
@@ -7625,7 +7625,7 @@
           "calendarEventID": "173-867643-2026-11-11",
           "seasonDisplay": "2026",
           "dayNight": "day",
-          "scheduledInnings": 9,
+          "scheduledInnings": 7,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
           "gamesInSeries": 1,
@@ -7664,9 +7664,9 @@
           "teams": {
             "away": {
               "team": {
-                "id": 55,
-                "name": "To Be Determined",
-                "link": "/api/v1/teams/55"
+                "id": 454,
+                "name": "Glendale Desert Dogs",
+                "link": "/api/v1/teams/454"
               },
               "leagueRecord": {
                 "wins": 0,
@@ -7679,9 +7679,9 @@
             },
             "home": {
               "team": {
-                "id": 55,
-                "name": "To Be Determined",
-                "link": "/api/v1/teams/55"
+                "id": 544,
+                "name": "Scottsdale Scorpions",
+                "link": "/api/v1/teams/544"
               },
               "leagueRecord": {
                 "wins": 0,
@@ -7739,9 +7739,9 @@
           "teams": {
             "away": {
               "team": {
-                "id": 55,
-                "name": "To Be Determined",
-                "link": "/api/v1/teams/55"
+                "id": 555,
+                "name": "Mesa Solar Sox",
+                "link": "/api/v1/teams/555"
               },
               "leagueRecord": {
                 "wins": 0,
@@ -7754,9 +7754,9 @@
             },
             "home": {
               "team": {
-                "id": 55,
-                "name": "To Be Determined",
-                "link": "/api/v1/teams/55"
+                "id": 527,
+                "name": "Salt River Rafters",
+                "link": "/api/v1/teams/527"
               },
               "leagueRecord": {
                 "wins": 0,
@@ -7839,9 +7839,9 @@
             },
             "home": {
               "team": {
-                "id": 55,
-                "name": "To Be Determined",
-                "link": "/api/v1/teams/55"
+                "id": 542,
+                "name": "Surprise Saguaros",
+                "link": "/api/v1/teams/542"
               },
               "leagueRecord": {
                 "wins": 0,
@@ -7914,9 +7914,9 @@
             },
             "home": {
               "team": {
-                "id": 55,
-                "name": "To Be Determined",
-                "link": "/api/v1/teams/55"
+                "id": 490,
+                "name": "Peoria Javelinas",
+                "link": "/api/v1/teams/490"
               },
               "leagueRecord": {
                 "wins": 0,
