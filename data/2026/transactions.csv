@@ -95,13 +95,26 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Mesa Solar Sox,2026-10-15,687766,Miguel Useche,ASG,Assigned,,Mesa Solar Sox,C Miguel Useche assigned to Mesa Solar Sox.
 2026,Mesa Solar Sox,2026-10-24,829888,Anthony Santa Cruz de Oviedo,ASG,Assigned,,Mesa Solar Sox,OF Anthony Santa Cruz de Oviedo assigned to Mesa Solar Sox.
 2026,Mesa Solar Sox,2026-11-06,691004,Aaron Nixon,ASG,Assigned,,Mesa Solar Sox,RHP Aaron Nixon assigned to Mesa Solar Sox.
+2026,Peoria Javelinas,2026-09-15,702296,Nate Dohm,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Nate Dohm from the Development List.
+2026,Peoria Javelinas,2026-09-15,828718,Victor Diaz,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Victor Diaz.
+2026,Peoria Javelinas,2026-09-15,807744,Ty Cummings,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Ty Cummings.
+2026,Peoria Javelinas,2026-09-15,692284,Frank Elissalt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Frank Elissalt from the 60-day injured list.
+2026,Peoria Javelinas,2026-09-15,700251,Brandon Clarke,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Brandon Clarke.
+2026,Peoria Javelinas,2026-09-15,826466,Winyer Chourio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Winyer Chourio.
+2026,Peoria Javelinas,2026-09-15,688867,Braxton Bragg,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Braxton Bragg from the 60-day injured list.
+2026,Peoria Javelinas,2026-09-15,694832,Cody Adcock,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Cody Adcock.
+2026,Peoria Javelinas,2026-09-15,801629,Cade McGee,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Cade McGee.
+2026,Peoria Javelinas,2026-09-15,800176,Carlos Sanchez,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Carlos Sanchez.
+2026,Peoria Javelinas,2026-09-15,801932,Alex McCoy,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Alex McCoy.
+2026,Peoria Javelinas,2026-09-15,701689,Vance Honeycutt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Vance Honeycutt.
+2026,Peoria Javelinas,2026-09-15,806191,Tai Peete,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Tai Peete.
 2026,Peoria Javelinas,2026-09-15,702610,Ike Irish,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Ike Irish from the 7-day injured list.
 2026,Peoria Javelinas,2026-09-15,695481,Jay Allen II,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Jay Allen II from the 7-day injured list.
+2026,Peoria Javelinas,2026-09-15,694358,Tekoah Roby,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Tekoah Roby from the 60-day injured list.
 2026,Peoria Javelinas,2026-09-15,803679,Sammy Hernandez,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Sammy Hernandez.
 2026,Peoria Javelinas,2026-09-15,807728,Carter Graham,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated 1B Carter Graham.
 2026,Peoria Javelinas,2026-09-15,828594,Michael Watson,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Michael Watson.
 2026,Peoria Javelinas,2026-09-15,814532,Teddy Sharkey,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Teddy Sharkey.
-2026,Peoria Javelinas,2026-09-15,694358,Tekoah Roby,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Tekoah Roby from the 60-day injured list.
 2026,Peoria Javelinas,2026-09-15,814227,Jordan Valenzuela,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jordan Valenzuela.
 2026,Peoria Javelinas,2026-09-15,694806,Brandon Eike,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated 1B Brandon Eike.
 2026,Peoria Javelinas,2026-09-15,695722,Boston Smith,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Boston Smith.
@@ -113,37 +126,28 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Peoria Javelinas,2026-09-15,800212,Francis Peña,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Francis Peña.
 2026,Peoria Javelinas,2026-09-15,807748,Kannon Kemp,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kannon Kemp.
 2026,Peoria Javelinas,2026-09-15,834596,Kailen Hamson,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Kailen Hamson.
-2026,Peoria Javelinas,2026-09-15,822498,Reid Easterly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Reid Easterly.
-2026,Peoria Javelinas,2026-09-15,702296,Nate Dohm,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Nate Dohm from the Development List.
-2026,Peoria Javelinas,2026-09-15,828718,Victor Diaz,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Victor Diaz.
-2026,Peoria Javelinas,2026-09-15,807744,Ty Cummings,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Ty Cummings.
-2026,Peoria Javelinas,2026-09-15,692284,Frank Elissalt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Frank Elissalt from the 60-day injured list.
-2026,Peoria Javelinas,2026-09-15,700251,Brandon Clarke,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Brandon Clarke.
-2026,Peoria Javelinas,2026-09-15,826466,Winyer Chourio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Winyer Chourio.
-2026,Peoria Javelinas,2026-09-15,688867,Braxton Bragg,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Braxton Bragg from the 60-day injured list.
-2026,Peoria Javelinas,2026-09-15,694832,Cody Adcock,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Cody Adcock.
-2026,Peoria Javelinas,2026-09-15,695705,Luke Holman,ASG,Assigned,,Peoria Javelinas,RHP Luke Holman assigned to Peoria Javelinas.
-2026,Peoria Javelinas,2026-09-15,800017,Jose Montero,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Montero.
 2026,Peoria Javelinas,2026-09-15,811296,Kiefer Lord,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kiefer Lord.
 2026,Peoria Javelinas,2026-09-15,702751,Jose Geraldo,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Geraldo.
 2026,Peoria Javelinas,2026-09-15,681064,Calvin Schapira,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Calvin Schapira.
 2026,Peoria Javelinas,2026-09-15,695787,Trent Hodgdon,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Trent Hodgdon.
 2026,Peoria Javelinas,2026-09-15,815951,Igor Gil,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Igor Gil.
+2026,Peoria Javelinas,2026-09-15,695705,Luke Holman,ASG,Assigned,,Peoria Javelinas,RHP Luke Holman assigned to Peoria Javelinas.
+2026,Peoria Javelinas,2026-09-15,822498,Reid Easterly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Reid Easterly.
 2026,Peoria Javelinas,2026-09-15,694345,Patrick Reilly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Patrick Reilly.
-2026,Peoria Javelinas,2026-09-15,801629,Cade McGee,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Cade McGee.
-2026,Peoria Javelinas,2026-09-15,800176,Carlos Sanchez,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Carlos Sanchez.
-2026,Peoria Javelinas,2026-09-15,801932,Alex McCoy,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Alex McCoy.
-2026,Peoria Javelinas,2026-09-15,701689,Vance Honeycutt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Vance Honeycutt.
-2026,Peoria Javelinas,2026-09-15,806191,Tai Peete,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Tai Peete.
+2026,Peoria Javelinas,2026-09-15,800017,Jose Montero,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Montero.
 2026,Peoria Javelinas,2026-09-28,691398,Yerlin Confidan,ASG,Assigned,,Peoria Javelinas,OF Yerlin Confidan assigned to Peoria Javelinas.
-2026,Peoria Javelinas,2026-10-01,683165,Joseph King,ASG,Assigned,,Peoria Javelinas,RHP Joseph King assigned to Peoria Javelinas.
 2026,Peoria Javelinas,2026-10-01,822463,Nolan Sparks,ASG,Assigned,,Peoria Javelinas,RHP Nolan Sparks assigned to Peoria Javelinas.
-2026,Salt River Rafters,2026-09-15,807743,Sean Sullivan,ASG,Assigned,,Salt River Rafters,LHP Sean Sullivan assigned to Salt River Rafters.
+2026,Peoria Javelinas,2026-10-01,683165,Joseph King,ASG,Assigned,,Peoria Javelinas,RHP Joseph King assigned to Peoria Javelinas.
+2026,Salt River Rafters,2026-09-15,829643,Jacob McCombs,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Jacob McCombs.
+2026,Salt River Rafters,2026-09-15,695493,Teo Banks,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Teo Banks.
+2026,Salt River Rafters,2026-09-15,703160,Yasser Mercedes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Yasser Mercedes.
+2026,Salt River Rafters,2026-09-15,807957,Yassel Soler,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 3B Yassel Soler.
+2026,Salt River Rafters,2026-09-15,703449,Nathan Hall,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Nathan Hall.
+2026,Salt River Rafters,2026-09-15,823918,Kyle West,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 1B Kyle West.
+2026,Salt River Rafters,2026-09-15,800195,Jorgelys Mota,SC,Status Change,,Salt River Rafters,Salt River Rafters activated CF Jorgelys Mota from the 7-day injured list.
+2026,Salt River Rafters,2026-09-15,703606,Jared Thomas,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Jared Thomas.
 2026,Salt River Rafters,2026-09-15,814414,Kyle DeBarge,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 2B Kyle DeBarge.
 2026,Salt River Rafters,2026-09-15,702679,Demetrio Crisantes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 2B Demetrio Crisantes.
-2026,Salt River Rafters,2026-09-15,823996,Luke Craig,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Luke Craig.
-2026,Salt River Rafters,2026-09-15,806070,Mack Estrada,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Mack Estrada.
-2026,Salt River Rafters,2026-09-15,813409,Joe Ariola,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Joe Ariola.
 2026,Salt River Rafters,2026-09-15,691942,Jack O'Dowd,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 1B Jack O'Dowd.
 2026,Salt River Rafters,2026-09-15,802482,John West,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP John West.
 2026,Salt River Rafters,2026-09-15,823227,Brian Zeldin,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Brian Zeldin from the 7-day injured list.
@@ -158,29 +162,25 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Salt River Rafters,2026-09-15,804467,Patrick Forbes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Patrick Forbes.
 2026,Salt River Rafters,2026-09-15,815065,Hunter Mann,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Hunter Mann.
 2026,Salt River Rafters,2026-09-15,814487,Nolan Hughes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Nolan Hughes from the 60-day injured list.
-2026,Salt River Rafters,2026-09-15,688629,Noah Dean,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Noah Dean from the 60-day injured list.
 2026,Salt River Rafters,2026-09-15,805879,Connor Foley,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Connor Foley.
-2026,Salt River Rafters,2026-09-15,694933,Ross Dunn,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Ross Dunn.
 2026,Salt River Rafters,2026-09-15,800544,Cesar Lares,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Cesar Lares.
 2026,Salt River Rafters,2026-09-15,699283,Cleiber Maldonado,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Cleiber Maldonado.
 2026,Salt River Rafters,2026-09-15,822950,J.T. Etheridge,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP J.T. Etheridge.
 2026,Salt River Rafters,2026-09-15,687317,Stu Flesland III,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Stu Flesland III.
+2026,Salt River Rafters,2026-09-15,813409,Joe Ariola,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Joe Ariola.
+2026,Salt River Rafters,2026-09-15,823996,Luke Craig,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Luke Craig.
+2026,Salt River Rafters,2026-09-15,806070,Mack Estrada,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Mack Estrada.
+2026,Salt River Rafters,2026-09-15,694933,Ross Dunn,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Ross Dunn.
+2026,Salt River Rafters,2026-09-15,688629,Noah Dean,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Noah Dean from the 60-day injured list.
 2026,Salt River Rafters,2026-09-15,820825,Konner Eaton,SC,Status Change,,Salt River Rafters,Salt River Rafters activated LHP Konner Eaton.
 2026,Salt River Rafters,2026-09-15,700321,Andy Perez,SC,Status Change,,Salt River Rafters,Salt River Rafters activated SS Andy Perez.
-2026,Salt River Rafters,2026-09-15,829643,Jacob McCombs,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Jacob McCombs.
-2026,Salt River Rafters,2026-09-15,695493,Teo Banks,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Teo Banks.
-2026,Salt River Rafters,2026-09-15,703160,Yasser Mercedes,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Yasser Mercedes.
-2026,Salt River Rafters,2026-09-15,807957,Yassel Soler,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 3B Yassel Soler.
-2026,Salt River Rafters,2026-09-15,703449,Nathan Hall,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Nathan Hall.
-2026,Salt River Rafters,2026-09-15,823918,Kyle West,SC,Status Change,,Salt River Rafters,Salt River Rafters activated 1B Kyle West.
-2026,Salt River Rafters,2026-09-15,800195,Jorgelys Mota,SC,Status Change,,Salt River Rafters,Salt River Rafters activated CF Jorgelys Mota from the 7-day injured list.
-2026,Salt River Rafters,2026-09-15,703606,Jared Thomas,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Jared Thomas.
+2026,Salt River Rafters,2026-09-15,807743,Sean Sullivan,ASG,Assigned,,Salt River Rafters,LHP Sean Sullivan assigned to Salt River Rafters.
+2026,Salt River Rafters,2026-09-28,827768,Anthony Mena,ASG,Assigned,,Salt River Rafters,RHP Anthony Mena assigned to Salt River Rafters.
+2026,Salt River Rafters,2026-09-28,682625,Antonio Gomez,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Antonio Gomez.
 2026,Salt River Rafters,2026-09-28,682625,Antonio Gomez,ASG,Assigned,,Salt River Rafters,RHP Antonio Gomez assigned to Salt River Rafters.
 2026,Salt River Rafters,2026-09-28,827768,Anthony Mena,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Anthony Mena.
-2026,Salt River Rafters,2026-09-28,682625,Antonio Gomez,SC,Status Change,,Salt River Rafters,Salt River Rafters activated RHP Antonio Gomez.
-2026,Salt River Rafters,2026-09-28,827768,Anthony Mena,ASG,Assigned,,Salt River Rafters,RHP Anthony Mena assigned to Salt River Rafters.
-2026,Salt River Rafters,2026-10-01,824667,Owen Puk,ASG,Assigned,,Salt River Rafters,RHP Owen Puk assigned to Salt River Rafters.
 2026,Salt River Rafters,2026-10-01,808277,Miguel Rodríguez,ASG,Assigned,,Salt River Rafters,C Miguel Rodríguez assigned to Salt River Rafters.
+2026,Salt River Rafters,2026-10-01,824667,Owen Puk,ASG,Assigned,,Salt River Rafters,RHP Owen Puk assigned to Salt River Rafters.
 2026,Salt River Rafters,2026-10-01,695494,Kevin Bazzell,ASG,Assigned,,Salt River Rafters,C Kevin Bazzell assigned to Salt River Rafters.
 2026,Salt River Rafters,2026-10-12,806992,Enrique Jimenez,ASG,Assigned,,Salt River Rafters,C Enrique Jimenez assigned to Salt River Rafters.
 2026,Salt River Rafters,2026-10-14,695403,Brock Gillis,ASG,Assigned,,Salt River Rafters,RHP Brock Gillis assigned to Salt River Rafters.
