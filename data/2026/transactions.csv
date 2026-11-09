@@ -1,4 +1,8 @@
 season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,description
+2026,Glendale Desert Dogs,2026-09-15,804999,Cameron Keshock,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Cameron Keshock from the 60-day injured list.
+2026,Glendale Desert Dogs,2026-09-15,677354,Alex Williams,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Alex Williams.
+2026,Glendale Desert Dogs,2026-09-15,701333,Colby Shelton,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 2B Colby Shelton.
+2026,Glendale Desert Dogs,2026-09-15,815352,Caleb Bonemer,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 3B Caleb Bonemer.
 2026,Glendale Desert Dogs,2026-09-15,827665,Dillon Lewis,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated OF Dillon Lewis.
 2026,Glendale Desert Dogs,2026-09-15,703637,Max Williams,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated DH Max Williams.
 2026,Glendale Desert Dogs,2026-09-15,816111,Tate Southisene,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated SS Tate Southisene from the 7-day injured list.
@@ -18,7 +22,6 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Glendale Desert Dogs,2026-09-15,812363,Marlon Nieves,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Marlon Nieves.
 2026,Glendale Desert Dogs,2026-09-15,805800,Zander Mueth,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Zander Mueth.
 2026,Glendale Desert Dogs,2026-09-15,695057,Garrett Wright,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Garrett Wright.
-2026,Glendale Desert Dogs,2026-09-15,677354,Alex Williams,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Alex Williams.
 2026,Glendale Desert Dogs,2026-09-15,805315,Michael Walsh,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Michael Walsh.
 2026,Glendale Desert Dogs,2026-09-15,665993,Cristhian Tortosa,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Cristhian Tortosa.
 2026,Glendale Desert Dogs,2026-09-15,688306,Tristan Stevens,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Tristan Stevens.
@@ -29,6 +32,7 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Glendale Desert Dogs,2026-09-15,701808,Cody Morse,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Cody Morse.
 2026,Glendale Desert Dogs,2026-09-15,828987,Briggs McKenzie,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Briggs McKenzie from the 60-day injured list.
 2026,Glendale Desert Dogs,2026-09-15,813706,Owen Hackman,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Owen Hackman.
+2026,Glendale Desert Dogs,2026-09-15,679489,Tyler LaPorte,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Tyler LaPorte.
 2026,Glendale Desert Dogs,2026-09-15,807187,Mathias LaCombe,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Mathias LaCombe.
 2026,Glendale Desert Dogs,2026-09-15,803183,Luke Fox,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Luke Fox.
 2026,Glendale Desert Dogs,2026-09-15,815704,Samuel Carpio,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Samuel Carpio.
@@ -37,11 +41,7 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Glendale Desert Dogs,2026-09-15,805892,Nick Altermatt,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Nick Altermatt.
 2026,Glendale Desert Dogs,2026-09-15,824624,Brooks Auger,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brooks Auger.
 2026,Glendale Desert Dogs,2026-09-15,703748,Tanner Bauman,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated LHP Tanner Bauman.
-2026,Glendale Desert Dogs,2026-09-15,679489,Tyler LaPorte,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Tyler LaPorte.
-2026,Glendale Desert Dogs,2026-09-15,701333,Colby Shelton,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 2B Colby Shelton.
-2026,Glendale Desert Dogs,2026-09-15,815352,Caleb Bonemer,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated 3B Caleb Bonemer.
 2026,Glendale Desert Dogs,2026-09-15,827610,Brandon Cain,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Brandon Cain.
-2026,Glendale Desert Dogs,2026-09-15,804999,Cameron Keshock,SC,Status Change,,Glendale Desert Dogs,Glendale Desert Dogs activated RHP Cameron Keshock from the 60-day injured list.
 2026,Glendale Desert Dogs,2026-10-01,700167,Bryan Mena,ASG,Assigned,,Glendale Desert Dogs,RHP Bryan Mena assigned to Glendale Desert Dogs.
 2026,Glendale Desert Dogs,2026-10-12,694761,Tommy Vail,ASG,Assigned,,Glendale Desert Dogs,LHP Tommy Vail assigned to Glendale Desert Dogs.
 2026,Glendale Desert Dogs,2026-10-22,816266,Williams Salazar,ASG,Assigned,,Glendale Desert Dogs,LHP Williams Salazar assigned to Glendale Desert Dogs.
@@ -231,11 +231,8 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Scottsdale Scorpions,2026-10-31,691797,Ryan Spikes,ASG,Assigned,,Scottsdale Scorpions,OF Ryan Spikes assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-11-04,824714,Spencer Bauer,ASG,Assigned,,Scottsdale Scorpions,RHP Spencer Bauer assigned to Scottsdale Scorpions.
 2026,Surprise Saguaros,2026-09-15,806522,Irving Cota,ASG,Assigned,,Surprise Saguaros,RHP Irving Cota assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-15,805951,Boston Baro,ASG,Assigned,,Surprise Saguaros,SS Boston Baro assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-15,800169,Aroon Escobar,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Aroon Escobar.
-2026,Surprise Saguaros,2026-09-15,807276,Dante Nori,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Dante Nori.
-2026,Surprise Saguaros,2026-09-15,702265,Paxton Kling,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Paxton Kling.
-2026,Surprise Saguaros,2026-09-15,687930,Tyresse Turner,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Tyresse Turner from the 7-day injured list.
+2026,Surprise Saguaros,2026-09-15,805799,Zion Rose,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated CF Zion Rose.
+2026,Surprise Saguaros,2026-09-15,695517,Casey Cook,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Casey Cook.
 2026,Surprise Saguaros,2026-09-15,695573,Cole Mathis,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 3B Cole Mathis.
 2026,Surprise Saguaros,2026-09-15,702619,Luke Hill,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 3B Luke Hill.
 2026,Surprise Saguaros,2026-09-15,806988,Welbyn Francisca,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated SS Welbyn Francisca.
@@ -258,7 +255,6 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Surprise Saguaros,2026-09-15,802146,Aidan Major,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Aidan Major.
 2026,Surprise Saguaros,2026-09-15,703610,Justin Lamkin,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated LHP Justin Lamkin from the 60-day injured list.
 2026,Surprise Saguaros,2026-09-15,822038,Ryan Lambert,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Ryan Lambert.
-2026,Surprise Saguaros,2026-09-15,835375,Jacob Johnson,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Jacob Johnson.
 2026,Surprise Saguaros,2026-09-15,693732,Estibenzon Jimenez,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Estibenzon Jimenez.
 2026,Surprise Saguaros,2026-09-15,695037,J'Briell Easley,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP J'Briell Easley.
 2026,Surprise Saguaros,2026-09-15,694858,Brendan Girton,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Brendan Girton.
@@ -268,12 +264,16 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Surprise Saguaros,2026-09-15,702126,Aaron Davenport,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Aaron Davenport from the 60-day injured list.
 2026,Surprise Saguaros,2026-09-15,823330,Alejandro Chiquillo,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Alejandro Chiquillo.
 2026,Surprise Saguaros,2026-09-15,700176,Keegan Batka,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Keegan Batka.
-2026,Surprise Saguaros,2026-09-15,805799,Zion Rose,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated CF Zion Rose.
-2026,Surprise Saguaros,2026-09-15,695517,Casey Cook,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Casey Cook.
+2026,Surprise Saguaros,2026-09-15,835375,Jacob Johnson,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Jacob Johnson.
+2026,Surprise Saguaros,2026-09-15,800169,Aroon Escobar,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Aroon Escobar.
+2026,Surprise Saguaros,2026-09-15,807276,Dante Nori,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Dante Nori.
+2026,Surprise Saguaros,2026-09-15,702265,Paxton Kling,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Paxton Kling.
+2026,Surprise Saguaros,2026-09-15,687930,Tyresse Turner,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Tyresse Turner from the 7-day injured list.
 2026,Surprise Saguaros,2026-09-15,800607,Kehden Hettiger,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated C Kehden Hettiger from the 7-day injured list.
+2026,Surprise Saguaros,2026-09-15,805951,Boston Baro,ASG,Assigned,,Surprise Saguaros,SS Boston Baro assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-28,806964,Sebastian Walcott,ASG,Assigned,,Surprise Saguaros,DH Sebastian Walcott assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-28,681003,Andrew Walling,ASG,Assigned,,Surprise Saguaros,LHP Andrew Walling assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-28,825412,Angeibel Gomez,ASG,Assigned,,Surprise Saguaros,OF Angeibel Gomez assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-28,805795,Aidan Miller,ASG,Assigned,,Surprise Saguaros,SS Aidan Miller assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-28,681003,Andrew Walling,ASG,Assigned,,Surprise Saguaros,LHP Andrew Walling assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-28,806964,Sebastian Walcott,ASG,Assigned,,Surprise Saguaros,DH Sebastian Walcott assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-10-20,702373,Felix Arronde,ASG,Assigned,,Surprise Saguaros,RHP Felix Arronde assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-10-24,823862,Angel Perez,ASG,Assigned,,Surprise Saguaros,RHP Angel Perez assigned to Surprise Saguaros.

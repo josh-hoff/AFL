@@ -2155,7 +2155,7 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
+          "gamesInSeries": 2,
           "seriesGameNumber": 1,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
@@ -2572,8 +2572,8 @@
           "scheduledInnings": 9,
           "reverseHomeAwayStatus": false,
           "inningBreakLength": 120,
-          "gamesInSeries": 1,
-          "seriesGameNumber": 1,
+          "gamesInSeries": 2,
+          "seriesGameNumber": 2,
           "seriesDescription": "Regular Season",
           "recordSource": "S",
           "ifNecessary": "N",
@@ -7109,12 +7109,12 @@
           "gameDate": "2026-11-09T01:00:00Z",
           "officialDate": "2026-11-08",
           "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "S",
-            "detailedState": "Scheduled",
-            "statusCode": "S",
+            "abstractGameState": "Final",
+            "codedGameState": "F",
+            "detailedState": "Final",
+            "statusCode": "F",
             "startTimeTBD": false,
-            "abstractGameCode": "P"
+            "abstractGameCode": "F"
           },
           "teams": {
             "away": {
@@ -7125,10 +7125,12 @@
               },
               "leagueRecord": {
                 "wins": 0,
-                "losses": 0,
+                "losses": 1,
                 "ties": 0,
                 "pct": ".000"
               },
+              "score": 4,
+              "isWinner": false,
               "splitSquad": false
             },
             "home": {
@@ -7138,11 +7140,13 @@
                 "link": "/api/v1/teams/1311"
               },
               "leagueRecord": {
-                "wins": 0,
+                "wins": 1,
                 "losses": 0,
                 "ties": 0,
-                "pct": ".000"
+                "pct": "1.000"
               },
+              "score": 7,
+              "isWinner": true,
               "splitSquad": false
             }
           },
@@ -7154,6 +7158,7 @@
           "content": {
             "link": "/api/v1/game/867649/content"
           },
+          "isTie": false,
           "gameNumber": 1,
           "publicFacing": true,
           "doubleHeader": "N",
