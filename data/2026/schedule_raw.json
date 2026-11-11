@@ -2172,9 +2172,9 @@
           "officialDate": "2026-10-13",
           "status": {
             "abstractGameState": "Final",
-            "codedGameState": "D",
-            "detailedState": "Postponed",
-            "statusCode": "DP",
+            "codedGameState": "C",
+            "detailedState": "Cancelled",
+            "statusCode": "CP",
             "startTimeTBD": false,
             "reason": "Power",
             "abstractGameCode": "F"
