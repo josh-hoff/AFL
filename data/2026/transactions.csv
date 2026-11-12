@@ -186,19 +186,10 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Salt River Rafters,2026-10-12,806992,Enrique Jimenez,ASG,Assigned,,Salt River Rafters,C Enrique Jimenez assigned to Salt River Rafters.
 2026,Salt River Rafters,2026-10-14,695403,Brock Gillis,ASG,Assigned,,Salt River Rafters,RHP Brock Gillis assigned to Salt River Rafters.
 2026,Salt River Rafters,2026-10-24,808279,Elian Soto,ASG,Assigned,,Salt River Rafters,OF Elian Soto assigned to Salt River Rafters.
-2026,Scottsdale Scorpions,2026-09-15,805783,Mason Nichols,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Mason Nichols.
-2026,Scottsdale Scorpions,2026-09-15,806711,Yereny Teus,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Yereny Teus.
-2026,Scottsdale Scorpions,2026-09-15,700800,Darien Smith,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Darien Smith.
-2026,Scottsdale Scorpions,2026-09-15,803094,Win Scott,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Win Scott.
-2026,Scottsdale Scorpions,2026-09-15,678495,Randy Rodríguez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Randy Rodríguez from the 60-day injured list.
 2026,Scottsdale Scorpions,2026-09-15,808350,Joshua Quezada,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Joshua Quezada.
-2026,Scottsdale Scorpions,2026-09-15,807823,Jank Pichardo,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Jank Pichardo.
-2026,Scottsdale Scorpions,2026-09-15,683988,Railin Perez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Railin Perez.
-2026,Scottsdale Scorpions,2026-09-15,843821,Maddox Long,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Maddox Long.
-2026,Scottsdale Scorpions,2026-09-15,823650,Miqueas Mercedes,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Miqueas Mercedes.
-2026,Scottsdale Scorpions,2026-09-15,813796,Preston Howey,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Preston Howey.
-2026,Scottsdale Scorpions,2026-09-15,800427,Jose Meneses,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Jose Meneses.
+2026,Scottsdale Scorpions,2026-09-15,678495,Randy Rodríguez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Randy Rodríguez from the 60-day injured list.
 2026,Scottsdale Scorpions,2026-09-15,703142,Andy Rodriguez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Andy Rodriguez.
+2026,Scottsdale Scorpions,2026-09-15,807823,Jank Pichardo,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Jank Pichardo.
 2026,Scottsdale Scorpions,2026-09-15,806441,Nehomar Ochoa Jr.,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Nehomar Ochoa Jr. from the 60-day injured list.
 2026,Scottsdale Scorpions,2026-09-15,804911,Brendan Summerhill,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Brendan Summerhill.
 2026,Scottsdale Scorpions,2026-09-15,815520,Braylon Payne,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Braylon Payne.
@@ -206,14 +197,23 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Scottsdale Scorpions,2026-09-15,702607,Dakota Jordan,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated OF Dakota Jordan.
 2026,Scottsdale Scorpions,2026-09-15,814307,Zyhir Hope,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated CF Zyhir Hope.
 2026,Scottsdale Scorpions,2026-09-15,807275,Dalton Wentz,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 3B Dalton Wentz.
+2026,Scottsdale Scorpions,2026-09-15,701592,Luke Davis,ASG,Assigned,,Scottsdale Scorpions,C Luke Davis assigned to Scottsdale Scorpions.
+2026,Scottsdale Scorpions,2026-09-15,800427,Jose Meneses,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Jose Meneses.
+2026,Scottsdale Scorpions,2026-09-15,813796,Preston Howey,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Preston Howey.
+2026,Scottsdale Scorpions,2026-09-15,823650,Miqueas Mercedes,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Miqueas Mercedes.
 2026,Scottsdale Scorpions,2026-09-15,800614,Bryce Rainer,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated SS Bryce Rainer.
 2026,Scottsdale Scorpions,2026-09-15,800440,Narciso Polanco,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated SS Narciso Polanco.
 2026,Scottsdale Scorpions,2026-09-15,823809,Nick Monistere,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 2B Nick Monistere.
+2026,Scottsdale Scorpions,2026-09-15,843821,Maddox Long,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Maddox Long.
 2026,Scottsdale Scorpions,2026-09-15,809763,Kaeden Kent,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated SS Kaeden Kent.
+2026,Scottsdale Scorpions,2026-09-15,683988,Railin Perez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Railin Perez.
 2026,Scottsdale Scorpions,2026-09-15,800724,Eric Bitonti,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated 1B Eric Bitonti.
 2026,Scottsdale Scorpions,2026-09-15,687783,Matthew Wood,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated C Matthew Wood.
 2026,Scottsdale Scorpions,2026-09-15,807083,Nathan Flewelling,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated C Nathan Flewelling.
-2026,Scottsdale Scorpions,2026-09-15,701592,Luke Davis,ASG,Assigned,,Scottsdale Scorpions,C Luke Davis assigned to Scottsdale Scorpions.
+2026,Scottsdale Scorpions,2026-09-15,805783,Mason Nichols,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Mason Nichols.
+2026,Scottsdale Scorpions,2026-09-15,806711,Yereny Teus,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Yereny Teus.
+2026,Scottsdale Scorpions,2026-09-15,700800,Darien Smith,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Darien Smith.
+2026,Scottsdale Scorpions,2026-09-15,803094,Win Scott,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated LHP Win Scott.
 2026,Scottsdale Scorpions,2026-09-15,700280,Miguel Mendez,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Miguel Mendez.
 2026,Scottsdale Scorpions,2026-09-15,687189,Marcus Johnson,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Marcus Johnson.
 2026,Scottsdale Scorpions,2026-09-15,690972,Joey Dixon,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Joey Dixon from the 60-day injured list.
@@ -225,8 +225,8 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Scottsdale Scorpions,2026-09-15,814374,Francisco Frias,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Francisco Frias.
 2026,Scottsdale Scorpions,2026-09-15,815218,Alexander Fuentes,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Alexander Fuentes.
 2026,Scottsdale Scorpions,2026-09-15,825095,Drake George,SC,Status Change,,Scottsdale Scorpions,Scottsdale Scorpions activated RHP Drake George from the 60-day injured list.
-2026,Scottsdale Scorpions,2026-09-28,702518,Jett Williams,ASG,Assigned,,Scottsdale Scorpions,SS Jett Williams assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-09-28,836172,Peyton Niksch,ASG,Assigned,,Scottsdale Scorpions,RHP Peyton Niksch assigned to Scottsdale Scorpions.
+2026,Scottsdale Scorpions,2026-09-28,702518,Jett Williams,ASG,Assigned,,Scottsdale Scorpions,SS Jett Williams assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-10-02,802105,Yeriel Santos,ASG,Assigned,,Scottsdale Scorpions,RHP Yeriel Santos assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-10-03,807726,John Peck,ASG,Assigned,,Scottsdale Scorpions,SS John Peck assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-10-31,691797,Ryan Spikes,ASG,Assigned,,Scottsdale Scorpions,OF Ryan Spikes assigned to Scottsdale Scorpions.

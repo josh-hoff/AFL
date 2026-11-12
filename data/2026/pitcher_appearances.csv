@@ -970,3 +970,39 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867637,2026-11-10,home,Salt River Rafters,688629,Noah Dean,4,False
 867637,2026-11-10,home,Salt River Rafters,806070,Mack Estrada,5,False
 867637,2026-11-10,home,Salt River Rafters,823227,Brian Zeldin,6,False
+867646,2026-11-11,away,Surprise Saguaros,700176,Keegan Batka,1,True
+867646,2026-11-11,away,Surprise Saguaros,823862,Angel Perez,2,False
+867646,2026-11-11,away,Surprise Saguaros,815066,Kyle Scott,3,False
+867646,2026-11-11,away,Surprise Saguaros,807575,Cam Schuelke,4,False
+867646,2026-11-11,away,Surprise Saguaros,681003,Andrew Walling,5,False
+867646,2026-11-11,away,Surprise Saguaros,695037,J'Briell Easley,6,False
+867646,2026-11-11,away,Surprise Saguaros,683349,Calvin Ziegler,7,False
+867646,2026-11-11,away,Surprise Saguaros,804966,Jesus Gamez,8,False
+867646,2026-11-11,home,Peoria Javelinas,826466,Winyer Chourio,1,True
+867646,2026-11-11,home,Peoria Javelinas,702296,Nate Dohm,2,False
+867646,2026-11-11,home,Peoria Javelinas,702751,Jose Geraldo,3,False
+867646,2026-11-11,home,Peoria Javelinas,800017,Jose Montero,4,False
+867646,2026-11-11,home,Peoria Javelinas,814532,Teddy Sharkey,5,False
+867646,2026-11-11,home,Peoria Javelinas,695787,Trent Hodgdon,6,False
+867645,2026-11-11,away,Salt River Rafters,694933,Ross Dunn,1,True
+867645,2026-11-11,away,Salt River Rafters,800544,Cesar Lares,2,False
+867645,2026-11-11,away,Salt River Rafters,810920,Jake Murray,3,False
+867645,2026-11-11,home,Mesa Solar Sox,803021,Peyton Olejnik,1,True
+867645,2026-11-11,home,Mesa Solar Sox,805093,Jhon Cabral,2,False
+867645,2026-11-11,home,Mesa Solar Sox,702255,Brandon Barriera,3,False
+867645,2026-11-11,home,Mesa Solar Sox,702494,Sam Tookoian,4,False
+867645,2026-11-11,home,Mesa Solar Sox,701791,Caden Vire,5,False
+867645,2026-11-11,home,Mesa Solar Sox,691004,Aaron Nixon,6,False
+867645,2026-11-11,home,Mesa Solar Sox,814279,Yeferson Vargas,7,False
+867645,2026-11-11,home,Mesa Solar Sox,838799,Harry Blum,8,False
+867643,2026-11-11,away,Scottsdale Scorpions,836172,Peyton Niksch,1,True
+867643,2026-11-11,away,Scottsdale Scorpions,815218,Alexander Fuentes,2,False
+867643,2026-11-11,away,Scottsdale Scorpions,806711,Yereny Teus,3,False
+867643,2026-11-11,away,Scottsdale Scorpions,802105,Yeriel Santos,4,False
+867643,2026-11-11,away,Scottsdale Scorpions,808350,Joshua Quezada,5,False
+867643,2026-11-11,home,Glendale Desert Dogs,677354,Alex Williams,1,True
+867643,2026-11-11,home,Glendale Desert Dogs,688306,Tristan Stevens,2,False
+867643,2026-11-11,home,Glendale Desert Dogs,703748,Tanner Bauman,3,False
+867643,2026-11-11,home,Glendale Desert Dogs,807187,Mathias LaCombe,4,False
+867643,2026-11-11,home,Glendale Desert Dogs,815704,Samuel Carpio,5,False
+867643,2026-11-11,home,Glendale Desert Dogs,695057,Garrett Wright,6,False
