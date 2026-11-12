@@ -1006,3 +1006,5 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867643,2026-11-11,home,Glendale Desert Dogs,807187,Mathias LaCombe,4,False
 867643,2026-11-11,home,Glendale Desert Dogs,815704,Samuel Carpio,5,False
 867643,2026-11-11,home,Glendale Desert Dogs,695057,Garrett Wright,6,False
+867642,2026-11-12,away,Glendale Desert Dogs,801207,Emmett Olson,1,True
+867642,2026-11-12,home,Scottsdale Scorpions,700280,Miguel Mendez,1,True
