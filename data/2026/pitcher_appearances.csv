@@ -1007,4 +1007,21 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867643,2026-11-11,home,Glendale Desert Dogs,815704,Samuel Carpio,5,False
 867643,2026-11-11,home,Glendale Desert Dogs,695057,Garrett Wright,6,False
 867642,2026-11-12,away,Glendale Desert Dogs,801207,Emmett Olson,1,True
+867642,2026-11-12,away,Glendale Desert Dogs,700167,Bryan Mena,2,False
+867642,2026-11-12,away,Glendale Desert Dogs,805892,Nick Altermatt,3,False
+867642,2026-11-12,away,Glendale Desert Dogs,701808,Cody Morse,4,False
+867642,2026-11-12,away,Glendale Desert Dogs,702165,Jonathan Clark,5,False
+867642,2026-11-12,away,Glendale Desert Dogs,805315,Michael Walsh,6,False
 867642,2026-11-12,home,Scottsdale Scorpions,700280,Miguel Mendez,1,True
+867642,2026-11-12,home,Scottsdale Scorpions,843821,Maddox Long,2,False
+867642,2026-11-12,home,Scottsdale Scorpions,683988,Railin Perez,3,False
+867642,2026-11-12,home,Scottsdale Scorpions,828603,Logan Berrier,4,False
+867642,2026-11-12,home,Scottsdale Scorpions,805783,Mason Nichols,5,False
+867642,2026-11-12,home,Scottsdale Scorpions,800427,Jose Meneses,6,False
+867642,2026-11-12,home,Scottsdale Scorpions,703142,Andy Rodriguez,7,False
+867641,2026-11-12,away,Mesa Solar Sox,701512,Tucker Novotny,1,True
+867641,2026-11-12,away,Mesa Solar Sox,821052,Madinson Frias,2,False
+867641,2026-11-12,away,Mesa Solar Sox,695761,Kenya Huggins,3,False
+867641,2026-11-12,home,Salt River Rafters,703186,Jarlin Susana,1,True
+867641,2026-11-12,home,Salt River Rafters,687317,Stu Flesland III,2,False
+867641,2026-11-12,home,Salt River Rafters,802482,John West,3,False

@@ -92,8 +92,8 @@ date,time_az,away_team,home_team,away_wins,away_losses,away_ties,home_wins,home_
 2026-11-11,1:30 PM,Surprise Saguaros,Peoria Javelinas,18,10,0,17,11,0,8,4,,,,,Peoria Stadium,2530,867646,Regular Season,Final,,N,,
 2026-11-11,1:30 PM,Salt River Rafters,Mesa Solar Sox,14,15,0,11,15,2,12,4,,,,,Sloan Park,4629,867645,Regular Season,Final,,N,,
 2026-11-11,3:30 PM,Scottsdale Scorpions,Glendale Desert Dogs,13,15,1,10,17,1,0,11,,,,,Camelback Ranch,3809,867643,Regular Season,Final,,N,,
-2026-11-12,1:30 PM,Glendale Desert Dogs,Scottsdale Scorpions,0,0,0,0,0,0,,,,,,,Sloan Park,4629,867642,First Round,Pre-Game,,N,,3 seed vs 6 seed
-2026-11-12,6:30 PM,Mesa Solar Sox,Salt River Rafters,0,0,0,0,0,0,,,,,,,Sloan Park,4629,867641,First Round,Scheduled,,N,,4 Seed vs 5 Seed
-2026-11-13,1:30 PM,To Be Determined,Surprise Saguaros,0,0,0,0,0,0,,,,,,,Peoria Stadium,2530,867640,Semifinal,Scheduled,,N,,2 Seed vs 3/6 Winner
-2026-11-13,6:30 PM,To Be Determined,Peoria Javelinas,0,0,0,0,0,0,,,,,,,Peoria Stadium,2530,867639,Semifinal,Scheduled,,N,,1 Seeds vs 4/5 Winner
+2026-11-12,1:30 PM,Glendale Desert Dogs,Scottsdale Scorpions,1,0,0,0,1,0,17,5,,,,,Sloan Park,4629,867642,First Round,Final,,N,,3 seed vs 6 seed
+2026-11-12,6:30 PM,Mesa Solar Sox,Salt River Rafters,0,1,0,1,0,0,2,5,,,,,Sloan Park,4629,867641,First Round,Final,,N,,4 Seed vs 5 Seed
+2026-11-13,1:30 PM,Glendale Desert Dogs,Surprise Saguaros,0,0,0,0,0,0,,,,,,,Peoria Stadium,2530,867640,Semifinal,Scheduled,,N,,2 Seed vs 3/6 Winner
+2026-11-13,6:30 PM,Salt River Rafters,Peoria Javelinas,0,0,0,0,0,0,,,,,,,Peoria Stadium,2530,867639,Semifinal,Scheduled,,N,,1 Seeds vs 4/5 Winner
 2026-11-14,6:00 PM,To Be Determined,To Be Determined,0,0,0,0,0,0,,,,,,,Peoria Stadium,2530,867638,Championship,Scheduled,,N,,AFL Championship

@@ -7688,12 +7688,12 @@
           "gameDate": "2026-11-12T20:30:00Z",
           "officialDate": "2026-11-12",
           "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "P",
-            "detailedState": "Pre-Game",
-            "statusCode": "P",
+            "abstractGameState": "Final",
+            "codedGameState": "F",
+            "detailedState": "Final",
+            "statusCode": "F",
             "startTimeTBD": false,
-            "abstractGameCode": "P"
+            "abstractGameCode": "F"
           },
           "teams": {
             "away": {
@@ -7703,11 +7703,13 @@
                 "link": "/api/v1/teams/454"
               },
               "leagueRecord": {
-                "wins": 0,
+                "wins": 1,
                 "losses": 0,
                 "ties": 0,
-                "pct": ".000"
+                "pct": "1.000"
               },
+              "score": 17,
+              "isWinner": true,
               "splitSquad": false,
               "seriesNumber": 1
             },
@@ -7719,10 +7721,12 @@
               },
               "leagueRecord": {
                 "wins": 0,
-                "losses": 0,
+                "losses": 1,
                 "ties": 0,
                 "pct": ".000"
               },
+              "score": 5,
+              "isWinner": false,
               "splitSquad": false,
               "seriesNumber": 1
             }
@@ -7735,6 +7739,7 @@
           "content": {
             "link": "/api/v1/game/867642/content"
           },
+          "isTie": false,
           "gameNumber": 1,
           "publicFacing": true,
           "doubleHeader": "N",
@@ -7763,12 +7768,12 @@
           "gameDate": "2026-11-13T01:30:00Z",
           "officialDate": "2026-11-12",
           "status": {
-            "abstractGameState": "Preview",
-            "codedGameState": "S",
-            "detailedState": "Scheduled",
-            "statusCode": "S",
+            "abstractGameState": "Final",
+            "codedGameState": "F",
+            "detailedState": "Final",
+            "statusCode": "F",
             "startTimeTBD": false,
-            "abstractGameCode": "P"
+            "abstractGameCode": "F"
           },
           "teams": {
             "away": {
@@ -7779,10 +7784,12 @@
               },
               "leagueRecord": {
                 "wins": 0,
-                "losses": 0,
+                "losses": 1,
                 "ties": 0,
                 "pct": ".000"
               },
+              "score": 2,
+              "isWinner": false,
               "splitSquad": false,
               "seriesNumber": 2
             },
@@ -7793,11 +7800,13 @@
                 "link": "/api/v1/teams/527"
               },
               "leagueRecord": {
-                "wins": 0,
+                "wins": 1,
                 "losses": 0,
                 "ties": 0,
-                "pct": ".000"
+                "pct": "1.000"
               },
+              "score": 5,
+              "isWinner": true,
               "splitSquad": false,
               "seriesNumber": 2
             }
@@ -7810,6 +7819,7 @@
           "content": {
             "link": "/api/v1/game/867641/content"
           },
+          "isTie": false,
           "gameNumber": 1,
           "publicFacing": true,
           "doubleHeader": "N",
@@ -7858,9 +7868,9 @@
           "teams": {
             "away": {
               "team": {
-                "id": 55,
-                "name": "To Be Determined",
-                "link": "/api/v1/teams/55"
+                "id": 454,
+                "name": "Glendale Desert Dogs",
+                "link": "/api/v1/teams/454"
               },
               "leagueRecord": {
                 "wins": 0,
@@ -7933,9 +7943,9 @@
           "teams": {
             "away": {
               "team": {
-                "id": 55,
-                "name": "To Be Determined",
-                "link": "/api/v1/teams/55"
+                "id": 527,
+                "name": "Salt River Rafters",
+                "link": "/api/v1/teams/527"
               },
               "leagueRecord": {
                 "wins": 0,
