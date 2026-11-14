@@ -8038,9 +8038,9 @@
           "teams": {
             "away": {
               "team": {
-                "id": 55,
-                "name": "To Be Determined",
-                "link": "/api/v1/teams/55"
+                "id": 542,
+                "name": "Surprise Saguaros",
+                "link": "/api/v1/teams/542"
               },
               "leagueRecord": {
                 "wins": 0,
@@ -8053,9 +8053,9 @@
             },
             "home": {
               "team": {
-                "id": 55,
-                "name": "To Be Determined",
-                "link": "/api/v1/teams/55"
+                "id": 490,
+                "name": "Peoria Javelinas",
+                "link": "/api/v1/teams/490"
               },
               "leagueRecord": {
                 "wins": 0,
