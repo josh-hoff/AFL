@@ -1045,3 +1045,13 @@ game_pk,date,team_side,team_name,pitcher_id,pitcher_name,appearance_order,is_sta
 867639,2026-11-13,home,Peoria Javelinas,692284,Frank Elissalt,3,False
 867639,2026-11-13,home,Peoria Javelinas,800212,Francis Peña,4,False
 867639,2026-11-13,home,Peoria Javelinas,702111,Adam Smith,5,False
+867638,2026-11-14,away,Surprise Saguaros,703610,Justin Lamkin,1,True
+867638,2026-11-14,away,Surprise Saguaros,806522,Irving Cota,2,False
+867638,2026-11-14,away,Surprise Saguaros,825100,Kevin Warunek,3,False
+867638,2026-11-14,away,Surprise Saguaros,700985,Josh Hansell,4,False
+867638,2026-11-14,away,Surprise Saguaros,822038,Ryan Lambert,5,False
+867638,2026-11-14,away,Surprise Saguaros,693732,Estibenzon Jimenez,6,False
+867638,2026-11-14,home,Peoria Javelinas,695705,Luke Holman,1,True
+867638,2026-11-14,home,Peoria Javelinas,807748,Kannon Kemp,2,False
+867638,2026-11-14,home,Peoria Javelinas,683165,Joseph King,3,False
+867638,2026-11-14,home,Peoria Javelinas,800212,Francis Peña,4,False
