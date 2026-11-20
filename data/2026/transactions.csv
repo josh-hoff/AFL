@@ -95,6 +95,21 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Mesa Solar Sox,2026-10-15,687766,Miguel Useche,ASG,Assigned,,Mesa Solar Sox,C Miguel Useche assigned to Mesa Solar Sox.
 2026,Mesa Solar Sox,2026-10-24,829888,Anthony Santa Cruz de Oviedo,ASG,Assigned,,Mesa Solar Sox,OF Anthony Santa Cruz de Oviedo assigned to Mesa Solar Sox.
 2026,Mesa Solar Sox,2026-11-06,691004,Aaron Nixon,ASG,Assigned,,Mesa Solar Sox,RHP Aaron Nixon assigned to Mesa Solar Sox.
+2026,Peoria Javelinas,2026-09-15,695705,Luke Holman,ASG,Assigned,,Peoria Javelinas,RHP Luke Holman assigned to Peoria Javelinas.
+2026,Peoria Javelinas,2026-09-15,694358,Tekoah Roby,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Tekoah Roby from the 60-day injured list.
+2026,Peoria Javelinas,2026-09-15,692284,Frank Elissalt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Frank Elissalt from the 60-day injured list.
+2026,Peoria Javelinas,2026-09-15,700251,Brandon Clarke,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Brandon Clarke.
+2026,Peoria Javelinas,2026-09-15,826466,Winyer Chourio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Winyer Chourio.
+2026,Peoria Javelinas,2026-09-15,688867,Braxton Bragg,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Braxton Bragg from the 60-day injured list.
+2026,Peoria Javelinas,2026-09-15,694832,Cody Adcock,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Cody Adcock.
+2026,Peoria Javelinas,2026-09-15,801629,Cade McGee,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Cade McGee.
+2026,Peoria Javelinas,2026-09-15,694345,Patrick Reilly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Patrick Reilly.
+2026,Peoria Javelinas,2026-09-15,815951,Igor Gil,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Igor Gil.
+2026,Peoria Javelinas,2026-09-15,695787,Trent Hodgdon,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Trent Hodgdon.
+2026,Peoria Javelinas,2026-09-15,681064,Calvin Schapira,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Calvin Schapira.
+2026,Peoria Javelinas,2026-09-15,702751,Jose Geraldo,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Geraldo.
+2026,Peoria Javelinas,2026-09-15,800176,Carlos Sanchez,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Carlos Sanchez.
+2026,Peoria Javelinas,2026-09-15,801932,Alex McCoy,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Alex McCoy.
 2026,Peoria Javelinas,2026-09-15,701689,Vance Honeycutt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Vance Honeycutt.
 2026,Peoria Javelinas,2026-09-15,806191,Tai Peete,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Tai Peete.
 2026,Peoria Javelinas,2026-09-15,702610,Ike Irish,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Ike Irish from the 7-day injured list.
@@ -105,39 +120,24 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Peoria Javelinas,2026-09-15,814532,Teddy Sharkey,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Teddy Sharkey.
 2026,Peoria Javelinas,2026-09-15,814227,Jordan Valenzuela,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jordan Valenzuela.
 2026,Peoria Javelinas,2026-09-15,694806,Brandon Eike,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated 1B Brandon Eike.
+2026,Peoria Javelinas,2026-09-15,695722,Boston Smith,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Boston Smith.
 2026,Peoria Javelinas,2026-09-15,822578,Brandon Butterworth,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Brandon Butterworth.
 2026,Peoria Javelinas,2026-09-15,702111,Adam Smith,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Adam Smith.
 2026,Peoria Javelinas,2026-09-15,700815,Matthew Ellis,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated DH Matthew Ellis.
 2026,Peoria Javelinas,2026-09-15,829210,Ty Harvey,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Ty Harvey.
 2026,Peoria Javelinas,2026-09-15,813664,Justin DeCriscio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Justin DeCriscio.
 2026,Peoria Javelinas,2026-09-15,800212,Francis Peña,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Francis Peña.
-2026,Peoria Javelinas,2026-09-15,807748,Kannon Kemp,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kannon Kemp.
 2026,Peoria Javelinas,2026-09-15,834596,Kailen Hamson,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Kailen Hamson.
+2026,Peoria Javelinas,2026-09-15,807748,Kannon Kemp,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kannon Kemp.
 2026,Peoria Javelinas,2026-09-15,811296,Kiefer Lord,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Kiefer Lord.
-2026,Peoria Javelinas,2026-09-15,702751,Jose Geraldo,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Geraldo.
-2026,Peoria Javelinas,2026-09-15,681064,Calvin Schapira,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Calvin Schapira.
-2026,Peoria Javelinas,2026-09-15,695787,Trent Hodgdon,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Trent Hodgdon.
-2026,Peoria Javelinas,2026-09-15,815951,Igor Gil,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Igor Gil.
-2026,Peoria Javelinas,2026-09-15,694345,Patrick Reilly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Patrick Reilly.
-2026,Peoria Javelinas,2026-09-15,694358,Tekoah Roby,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Tekoah Roby from the 60-day injured list.
-2026,Peoria Javelinas,2026-09-15,800017,Jose Montero,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Montero.
-2026,Peoria Javelinas,2026-09-15,695722,Boston Smith,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Boston Smith.
-2026,Peoria Javelinas,2026-09-15,695705,Luke Holman,ASG,Assigned,,Peoria Javelinas,RHP Luke Holman assigned to Peoria Javelinas.
-2026,Peoria Javelinas,2026-09-15,801629,Cade McGee,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated C Cade McGee.
-2026,Peoria Javelinas,2026-09-15,800176,Carlos Sanchez,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated SS Carlos Sanchez.
-2026,Peoria Javelinas,2026-09-15,801932,Alex McCoy,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated OF Alex McCoy.
-2026,Peoria Javelinas,2026-09-15,694832,Cody Adcock,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Cody Adcock.
-2026,Peoria Javelinas,2026-09-15,688867,Braxton Bragg,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Braxton Bragg from the 60-day injured list.
-2026,Peoria Javelinas,2026-09-15,826466,Winyer Chourio,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Winyer Chourio.
-2026,Peoria Javelinas,2026-09-15,700251,Brandon Clarke,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Brandon Clarke.
-2026,Peoria Javelinas,2026-09-15,692284,Frank Elissalt,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Frank Elissalt from the 60-day injured list.
-2026,Peoria Javelinas,2026-09-15,807744,Ty Cummings,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Ty Cummings.
 2026,Peoria Javelinas,2026-09-15,822498,Reid Easterly,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated LHP Reid Easterly.
 2026,Peoria Javelinas,2026-09-15,702296,Nate Dohm,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Nate Dohm from the Development List.
 2026,Peoria Javelinas,2026-09-15,828718,Victor Diaz,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Victor Diaz.
+2026,Peoria Javelinas,2026-09-15,807744,Ty Cummings,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Ty Cummings.
+2026,Peoria Javelinas,2026-09-15,800017,Jose Montero,SC,Status Change,,Peoria Javelinas,Peoria Javelinas activated RHP Jose Montero.
 2026,Peoria Javelinas,2026-09-28,691398,Yerlin Confidan,ASG,Assigned,,Peoria Javelinas,OF Yerlin Confidan assigned to Peoria Javelinas.
-2026,Peoria Javelinas,2026-10-01,683165,Joseph King,ASG,Assigned,,Peoria Javelinas,RHP Joseph King assigned to Peoria Javelinas.
 2026,Peoria Javelinas,2026-10-01,822463,Nolan Sparks,ASG,Assigned,,Peoria Javelinas,RHP Nolan Sparks assigned to Peoria Javelinas.
+2026,Peoria Javelinas,2026-10-01,683165,Joseph King,ASG,Assigned,,Peoria Javelinas,RHP Joseph King assigned to Peoria Javelinas.
 2026,Peoria Javelinas,2026-11-09,812540,Qrey Lott,ASG,Assigned,,Peoria Javelinas,OF Qrey Lott assigned to Peoria Javelinas.
 2026,Salt River Rafters,2026-09-15,700321,Andy Perez,SC,Status Change,,Salt River Rafters,Salt River Rafters activated SS Andy Perez.
 2026,Salt River Rafters,2026-09-15,829643,Jacob McCombs,SC,Status Change,,Salt River Rafters,Salt River Rafters activated OF Jacob McCombs.
@@ -231,7 +231,13 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Scottsdale Scorpions,2026-10-03,807726,John Peck,ASG,Assigned,,Scottsdale Scorpions,SS John Peck assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-10-31,691797,Ryan Spikes,ASG,Assigned,,Scottsdale Scorpions,OF Ryan Spikes assigned to Scottsdale Scorpions.
 2026,Scottsdale Scorpions,2026-11-04,824714,Spencer Bauer,ASG,Assigned,,Scottsdale Scorpions,RHP Spencer Bauer assigned to Scottsdale Scorpions.
-2026,Surprise Saguaros,2026-09-15,805951,Boston Baro,ASG,Assigned,,Surprise Saguaros,SS Boston Baro assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-15,804966,Jesus Gamez,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Jesus Gamez.
+2026,Surprise Saguaros,2026-09-15,806522,Irving Cota,ASG,Assigned,,Surprise Saguaros,RHP Irving Cota assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-15,800607,Kehden Hettiger,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated C Kehden Hettiger from the 7-day injured list.
+2026,Surprise Saguaros,2026-09-15,805799,Zion Rose,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated CF Zion Rose.
+2026,Surprise Saguaros,2026-09-15,695517,Casey Cook,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Casey Cook.
+2026,Surprise Saguaros,2026-09-15,800169,Aroon Escobar,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Aroon Escobar.
+2026,Surprise Saguaros,2026-09-15,807276,Dante Nori,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Dante Nori.
 2026,Surprise Saguaros,2026-09-15,702265,Paxton Kling,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Paxton Kling.
 2026,Surprise Saguaros,2026-09-15,687930,Tyresse Turner,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Tyresse Turner from the 7-day injured list.
 2026,Surprise Saguaros,2026-09-15,695573,Cole Mathis,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 3B Cole Mathis.
@@ -263,18 +269,13 @@ season,team,date,player_id,player_name,type_code,type_desc,from_team,to_team,des
 2026,Surprise Saguaros,2026-09-15,804966,Jesus Gamez,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Jesus Gamez.
 2026,Surprise Saguaros,2026-09-15,701884,Magnus Ellerts,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Magnus Ellerts.
 2026,Surprise Saguaros,2026-09-15,823804,Ryan Dromboski,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Ryan Dromboski.
+2026,Surprise Saguaros,2026-09-15,702126,Aaron Davenport,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Aaron Davenport from the 60-day injured list.
 2026,Surprise Saguaros,2026-09-15,823330,Alejandro Chiquillo,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Alejandro Chiquillo.
 2026,Surprise Saguaros,2026-09-15,700176,Keegan Batka,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Keegan Batka.
-2026,Surprise Saguaros,2026-09-15,702126,Aaron Davenport,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated RHP Aaron Davenport from the 60-day injured list.
-2026,Surprise Saguaros,2026-09-15,800607,Kehden Hettiger,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated C Kehden Hettiger from the 7-day injured list.
-2026,Surprise Saguaros,2026-09-15,806522,Irving Cota,ASG,Assigned,,Surprise Saguaros,RHP Irving Cota assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-15,805799,Zion Rose,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated CF Zion Rose.
-2026,Surprise Saguaros,2026-09-15,695517,Casey Cook,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Casey Cook.
-2026,Surprise Saguaros,2026-09-15,800169,Aroon Escobar,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated 2B Aroon Escobar.
-2026,Surprise Saguaros,2026-09-15,807276,Dante Nori,SC,Status Change,,Surprise Saguaros,Surprise Saguaros activated OF Dante Nori.
-2026,Surprise Saguaros,2026-09-28,681003,Andrew Walling,ASG,Assigned,,Surprise Saguaros,LHP Andrew Walling assigned to Surprise Saguaros.
-2026,Surprise Saguaros,2026-09-28,806964,Sebastian Walcott,ASG,Assigned,,Surprise Saguaros,DH Sebastian Walcott assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-15,805951,Boston Baro,ASG,Assigned,,Surprise Saguaros,SS Boston Baro assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-28,825412,Angeibel Gomez,ASG,Assigned,,Surprise Saguaros,OF Angeibel Gomez assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-28,806964,Sebastian Walcott,ASG,Assigned,,Surprise Saguaros,DH Sebastian Walcott assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-09-28,805795,Aidan Miller,ASG,Assigned,,Surprise Saguaros,SS Aidan Miller assigned to Surprise Saguaros.
+2026,Surprise Saguaros,2026-09-28,681003,Andrew Walling,ASG,Assigned,,Surprise Saguaros,LHP Andrew Walling assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-10-20,702373,Felix Arronde,ASG,Assigned,,Surprise Saguaros,RHP Felix Arronde assigned to Surprise Saguaros.
 2026,Surprise Saguaros,2026-10-24,823862,Angel Perez,ASG,Assigned,,Surprise Saguaros,RHP Angel Perez assigned to Surprise Saguaros.
