@@ -311,6 +311,27 @@
 #seasonSc tr.sel td{background:var(--sel)}
 #seasonSc tbody tr{cursor:pointer}
 #seasonSc tr.tot td{font-weight:800;background:var(--head);cursor:default}
+#seasonSc .pl-chev{display:inline-block;width:22px;padding:3px 0;margin-left:-6px;margin-right:2px;color:var(--mut);font-size:.8rem;text-align:center;border-radius:5px;cursor:pointer;user-select:none}
+#seasonSc .pl-chev:hover{background:#e8e6e2;color:var(--ink)}
+#seasonSc tr.pl-row>td{padding:0;text-align:left;white-space:normal;background:#fafaf8;cursor:default}
+#seasonSc .pl{border-left:4px solid var(--acc);overflow-x:auto}
+#seasonSc .pl-in{min-width:800px}
+#seasonSc .pl-h,#seasonSc .pl-r{display:grid;grid-template-columns:44px 68px 50px 112px 42px 50px 90px 46px 50px 54px 56px minmax(92px,1fr) 14px;gap:4px;align-items:center;padding:0 10px;text-align:left}
+#seasonSc .pl-h{font-size:.58rem;font-weight:700;color:var(--mut);letter-spacing:.03em;text-transform:uppercase;padding-top:9px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+#seasonSc .pl-h .hint{color:var(--acc)}
+#seasonSc .pl-r{border-top:1px solid #efede9;border-left:4px solid;font-size:.78rem;min-height:34px;background:var(--card);cursor:pointer;margin-left:-4px;padding-left:14px}
+#seasonSc .pl-r:hover{background:#fffaf5}
+#seasonSc .pl-r.k-strike{border-left-color:#c0392b}#seasonSc .pl-r.k-ball{border-left-color:#1a8a4a}#seasonSc .pl-r.k-inp{border-left-color:#2f6fb0}
+#seasonSc .pl-r.k-strike .pl-res{color:#c0392b}#seasonSc .pl-r.k-ball .pl-res{color:#1a8a4a}#seasonSc .pl-r.k-inp .pl-res{color:#2f6fb0}
+#seasonSc .pl-res{font-weight:600}#seasonSc .pl-b{font-weight:700}#seasonSc .pl-bat{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#seasonSc .pl-star{color:var(--acc);font-weight:800;margin-left:3px}
+#seasonSc .pl-car{color:#8a8a80}
+#seasonSc .pl-r.open{background:#fffaf5}
+#seasonSc .pl-d{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 20px;padding:14px 22px 16px 22px;background:#fafaf8;border-top:1px dashed #e0ddd6}
+#seasonSc .pl-d label{display:block;font-size:.64rem;font-weight:700;color:var(--mut);letter-spacing:.04em;text-transform:uppercase}
+#seasonSc .pl-d b{font-size:.86rem}
+#seasonSc .pl-d .wide{grid-column:span 4;border-top:1px solid #efede9;padding-top:10px}
+#seasonSc .pl-d .wide span{color:var(--mut);font-weight:500;font-size:.8rem}
 #seasonSc th.s::after{content:' ▾';color:var(--acc)}
 #seasonSc th.s.a::after{content:' ▴'}
 #seasonSc .note{color:var(--mut);font-size:.76rem;margin:8px 2px}
@@ -882,7 +903,7 @@
       let balls = 0, strikes = 0;
       ab.ps.forEach((r, i) => {
         const sp = nn(r.spin_rate);
-        P.push({ g: gi, ai, t: r.pitch_type_code, om: r._mlb_code, call: r.call, inn: ords[Number(r.inning)], bat: r.batter_name, pn: i + 1, b: balls, s: strikes,
+        P.push({ g: gi, ai, t: r.pitch_type_code, om: r._mlb_code, call: r.call, gin: r.inning, half: r.half_inning, ext: nn(r.extension), vbt: nn(r.break_vertical), ba: nn(r.break_angle), bl: nn(r.break_length), pt: nn(r.plate_time), tc: nn(r.type_confidence), ry: nn(r.release_y), inn: ords[Number(r.inning)], bat: r.batter_name, pn: i + 1, b: balls, s: strikes,
           z: nn(r.zone), v: nn(r.start_speed), ev_: nn(r.end_speed), spin: sp !== null && sp > 0 ? sp : null, ev: nn(r.launch_speed), la: nn(r.launch_angle), tr: r.trajectory || '',
           px: nn(r.plate_x), pz: nn(r.plate_z), rx: nn(r.release_x), rz: nn(r.release_z), hb: nn(r.break_horizontal), vb: nn(r.break_vertical_induced), sd: nn(r.spin_direction), h: (r.bat_side||'').toUpperCase().slice(0,1) });
         const ct = classify(r.call);
@@ -991,6 +1012,19 @@ if(window._scOut)document.removeEventListener('click',window._scOut);window._scO
 $('more').onclick=e=>{const o=$('tiles2').classList.toggle('on');e.target.innerHTML='More Stats '+(o?'&#9652;':'&#9662;')};
 // ---- table
 const COLS=[['n','#',s=>s.n],['use','Usage',s=>s.n/Math.max(1,scoped(true).length)],['velo','Avg Velo',s=>s.velo],['max','Max',s=>s.max],['spin','Spin',s=>s.spin],['whiff','Whiff %',s=>parseInt(s.whiffPct)||0],['csw','CSW %',s=>parseInt(s.csw)||0],['chase','Chase %',s=>parseInt(s.chase)||0],['zone','Zone %',s=>parseInt(s.zone)||0],['ev','Avg EV',s=>s.avgEV||0]];
+const openTypes=new Set(),openPitches=new Set();
+const sgn=v=>v==null?'—':(v>0?'+':'')+v.toFixed(1)+'"';
+const ft=(v,d)=>v==null?'—':v.toFixed(d)+' ft';
+function pitchLogHtml(t,base){
+ const ps=base.filter(p=>p.t===t);
+ let h='<tr class="pl-row"><td colspan="'+(COLS.length+1)+'"><div class="pl"><div class="pl-in"><div class="pl-h"><div>Date</div><div>Opp</div><div>Inn</div><div>Vs</div><div>Velo</div><div>Spin</div><div>Release Pt (ft)</div><div>Ext (ft)</div><div>VB (Ind)</div><div>Vert Brk</div><div>Horiz Brk</div><div>Result</div><div></div></div>';
+ ps.forEach(p=>{const g=DATA.games[p.g],k=kind(p),open=openPitches.has(p.ix),kc=k==='BALL'?'k-ball':(k==='INPLAY'?'k-inp':'k-strike'),re=p.om&&p.om!==p.t;
+  const d=String(g.date||'').slice(5).replace('-','/'),opp=typeof cityFromOpponent==='function'?cityFromOpponent(g.opp):g.opp;
+  h+=`<div class="pl-r ${kc}${open?' open':''}" data-pix="${p.ix}"><div>${d}</div><div>${opp||''}</div><div>${p.half==='top'?'Top':'Bot'} ${p.gin}</div><div class="pl-bat">${p.bat||''}</div><div class="pl-b">${f1(p.v)}</div><div>${p.spin!=null?Math.round(p.spin):'N/A'}</div><div>${p.rx!=null&&p.rz!=null?p.rx.toFixed(2)+', '+p.rz.toFixed(2):'—'}</div><div>${p.ext!=null?p.ext.toFixed(1):'—'}</div><div>${sgn(p.vb)}</div><div>${sgn(p.vbt)}</div><div>${sgn(p.hb)}</div><div class="pl-res">${p.call}${re?'<span class="pl-star" title="MLB tagged this pitch differently">*</span>':''}</div><div class="pl-car">${open?'&#9662;':'&#9656;'}</div></div>`;
+  if(open)h+=`<div class="pl-d"><div><label>Zone</label><b>${p.z!=null?p.z:'—'}</b></div><div><label>Spin Direction</label><b>${p.sd!=null?Math.round(p.sd)+'&deg;':'N/A'}</b></div><div><label>Break Angle</label><b>${p.ba!=null?Math.round(p.ba)+'&deg;':'—'}</b></div><div><label>Break Length</label><b>${p.bl!=null?p.bl.toFixed(1)+'"':'—'}</b></div><div><label>Release Pt (X,Y,Z)</label><b>${p.rx!=null&&p.ry!=null&&p.rz!=null?p.rx.toFixed(2)+', '+p.ry.toFixed(1)+', '+p.rz.toFixed(2)+' ft':'—'}</b></div><div><label>Plate Time</label><b>${p.pt!=null?p.pt.toFixed(3)+' s':'—'}</b></div><div><label>Type Confidence</label><b>${p.tc!=null?p.tc.toFixed(0):'—'}</b></div><div><label>Plate X, Z</label><b>${p.px!=null&&p.pz!=null?p.px.toFixed(2)+', '+p.pz.toFixed(2)+' ft':'—'}</b></div>${re?`<div class="wide"><label>MLB's tag</label><b>${LAB[p.om]||p.om} <span>(re-labeled to ${LAB[p.t]||p.t} by the site)</span></b></div>`:''}</div>`;
+ });
+ return h+'</div></div></td></tr>';
+}
 function renderTable(){
  const base=scoped(true);
  const rows=types.map(t=>({t,s:stats(base.filter(p=>p.t===t))})).filter(r=>r.s.n>0);
@@ -998,10 +1032,12 @@ function renderTable(){
  rows.sort((a,b)=>(key[2](a.s)-key[2](b.s))*(sortAsc?1:-1));
  const cell=(s,tot)=>`<td>${s.n}</td><td>${base.length?Math.round(100*s.n/base.length)+'%':'—'}</td><td>${f1(s.velo)}</td><td>${f1(s.max)}</td><td>${s.spin?Math.round(s.spin):'N/A'}</td><td>${s.whiffPct}</td><td>${s.csw}</td><td>${s.chase}</td><td>${s.zone}</td><td>${f1(s.avgEV)}</td>`;
  let h='<thead><tr><th>Pitch</th>'+COLS.map(c=>`<th data-k="${c[0]}" class="${sortK===c[0]?'s'+(sortAsc?' a':''):''}">${c[1]}</th>`).join('')+'</tr></thead><tbody>';
- rows.forEach(r=>h+=`<tr data-t="${r.t}" class="${sel.includes(r.t)?'sel':(sel.length?'dim':'')}"><td><span class="dot" style="background:${COL[r.t]};margin-right:8px"></span><b>${LAB[r.t]}</b></td>${cell(r.s)}</tr>`);
+ rows.forEach(r=>{const op=openTypes.has(r.t);h+=`<tr data-t="${r.t}" class="${sel.includes(r.t)?'sel':(sel.length?'dim':'')}"><td><span class="pl-chev" data-ar="${r.t}" role="button" aria-expanded="${op}" title="${op?'Hide':'Show'} every ${LAB[r.t]} pitch">${op?'&#9662;':'&#9656;'}</span><span class="dot" style="background:${COL[r.t]};margin-right:8px"></span><b>${LAB[r.t]}</b></td>${cell(r.s)}</tr>`+(op?pitchLogHtml(r.t,base):'')});
  h+=`<tr class="tot"><td>All</td>${cell(stats(base))}</tr></tbody>`;
  $('tbl').innerHTML=h;
- ROOT.querySelectorAll('#sc-tbl tbody tr[data-t]').forEach(r=>r.onclick=()=>pick(r.dataset.t));
+ ROOT.querySelectorAll('#sc-tbl tbody tr[data-t]').forEach(r=>r.onclick=()=>{const t=r.dataset.t;pick(t);if(sel.includes(t)){openTypes.add(t);renderTable()}});
+ ROOT.querySelectorAll('#sc-tbl .pl-chev').forEach(a=>a.onclick=e=>{e.stopPropagation();const t=a.dataset.ar;if(openTypes.has(t))openTypes.delete(t);else openTypes.add(t);renderTable()});
+ ROOT.querySelectorAll('#sc-tbl .pl-r').forEach(r=>r.onclick=e=>{e.stopPropagation();const i=+r.dataset.pix;if(openPitches.has(i))openPitches.delete(i);else openPitches.add(i);renderTable()});
  ROOT.querySelectorAll('#sc-tbl th[data-k]').forEach(th=>th.onclick=()=>{if(sortK===th.dataset.k)sortAsc=!sortAsc;else{sortK=th.dataset.k;sortAsc=false}renderTable()});
 }
 // ---- charts
