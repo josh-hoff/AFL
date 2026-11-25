@@ -625,7 +625,7 @@
     const base = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
     return activeTypes.length === 0 ? base : base.filter(p => activeTypes.includes(p.type));
   }
-  const outcomeTest = (p, k) => PitchOutcomes.isKey(k) ? p.oc === k : markerKind(p.call) === k;
+  const outcomeTest = (p, k) => k === 'O_K' ? PitchOutcomes.isK(p.call, p.strikes) : PitchOutcomes.isKey(k) ? p.oc === k : markerKind(p.call) === k;
   function matchesOutcome(p) { return activeOutcomes.length === 0 || activeOutcomes.some(k => outcomeTest(p, k)); }
   function outcomeLabels() { return activeOutcomes.map(k => (OUTCOME_OPTIONS.find(o => o[0] === k) || [0, k])[1]); }
 
