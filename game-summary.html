@@ -95,7 +95,7 @@
   }
   .bs-header, .bs-row {
     display: grid;
-    grid-template-columns: 26px 2fr repeat(13, 0.62fr);
+    grid-template-columns: 26px 2fr repeat(13, 0.62fr) 86px;
     gap: 4px;
     padding: 0.35rem 0.55rem;
     font-size: 0.76rem;
@@ -180,7 +180,7 @@
     vertical-align: middle;
   }
   @media (max-width: 560px) {
-    .bs-header, .bs-row { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(13, 1fr); }
+    .bs-header, .bs-row { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(13, 1fr) 40px; }
     .bs-header-p, .bs-row-p { font-size: 0.66rem; grid-template-columns: 20px 1.4fr repeat(10, 1fr) 40px; }
     .statcast-pill { padding: 1px 8px; }
     .statcast-pill .sp-text { display: none; }
@@ -700,7 +700,7 @@
       <div class="bs-team-title">Batting &mdash; ${teamName || ''}${tag}</div>
       <div class="bs-table">
         <div class="bs-header">
-          <div>#</div><div>Player</div><div>AVG</div><div>OPS</div><div>AB</div><div>R</div><div>H</div><div>RBI</div><div>2B</div><div>3B</div><div>HR</div><div>BB</div><div>IBB</div><div>K</div><div>SB</div>
+          <div>#</div><div>Player</div><div>AVG</div><div>OPS</div><div>AB</div><div>R</div><div>H</div><div>RBI</div><div>2B</div><div>3B</div><div>HR</div><div>BB</div><div>IBB</div><div>K</div><div>SB</div><div></div>
         </div>
         ${rows}
       </div>
@@ -739,6 +739,7 @@
         <div>${fmtDash(stat.intentional_walks)}</div>
         <div>${fmtDash(stat.strikeouts)}</div>
         <div>${fmtDash(stat.stolen_bases)}</div>
+        <div><a class="statcast-pill" href="player.html?id=${entry.player_id}&season=${season}&game=${gamePk}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a></div>
       </div>
     `;
   }
