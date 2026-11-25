@@ -330,6 +330,15 @@
 .glossary-row.wide{grid-template-columns:112px 1fr}
 
 </style>
+<script src="pitch-reclass.js"></script>
+<style>
+.reclass-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 .8rem;font-size:.82rem;color:var(--text-muted);line-height:1.4}
+.rc-seg{display:inline-flex;border:1.5px solid #0d1b3a;border-radius:999px;overflow:hidden}
+.rc-seg button,.rc-seg a{background:transparent;border:0;color:#0d1b3a;padding:3px 13px;font:700 .78rem inherit;font-family:inherit;cursor:pointer;text-decoration:none;white-space:nowrap;display:inline-block}
+.rc-seg .on{background:#0d1b3a;color:#fff;cursor:default}
+.rc-seg button:not(.on):hover,.rc-seg a:not(.on):hover{background:rgba(13,27,58,.1)}
+.retag{color:var(--tab-active);font-weight:800;cursor:help;margin-left:2px}
+</style>
 </head>
 <body>
 
@@ -830,8 +839,28 @@
     return colors;
   }
 
+  let SC_USE_MLB = false;
+  function renderReclassBar(rows, ctx) {
+    const bar = document.getElementById('sc-reclass');
+    if (!bar) return;
+    const n = rows.filter(r => r._changed).length;
+    if (!n) { bar.hidden = true; bar.innerHTML = ''; return; }
+    const pl = n === 1 ? '1 pitch' : n + ' pitches';
+    bar.hidden = false;
+    bar.innerHTML = `<span class="rc-seg" role="group" aria-label="Pitch tags"><button type="button" data-mlb="0" class="${SC_USE_MLB ? '' : 'on'}" aria-pressed="${!SC_USE_MLB}">Auto-Adjusted Tags</button><button type="button" data-mlb="1" class="${SC_USE_MLB ? 'on' : ''}" aria-pressed="${SC_USE_MLB}">MLB Tags</button></span>`
+      + `<span>${SC_USE_MLB ? "Showing MLB's original tags." : pl + ' re-labeled based on their measurements.'}</span>`;
+    bar.querySelectorAll('button[data-mlb]').forEach(b => b.onclick = () => {
+      const want = b.dataset.mlb === '1';
+      if (want === SC_USE_MLB) return;
+      SC_USE_MLB = want;
+      PitchReclass.setMode(rows, SC_USE_MLB);
+      initSeasonStatcast(rows, ctx);
+    });
+  }
+
   function initSeasonStatcast(rows, ctx) {
   const ROOT = document.getElementById('seasonSc');
+  renderReclassBar(rows, ctx);
   if (!ROOT || !rows.length) return;
   const $ = id => document.getElementById('sc-' + id);
   const HAND = ctx.hand === 'L' ? 'L' : 'R';
@@ -853,7 +882,7 @@
       let balls = 0, strikes = 0;
       ab.ps.forEach((r, i) => {
         const sp = nn(r.spin_rate);
-        P.push({ g: gi, ai, t: r.pitch_type_code, call: r.call, inn: ords[Number(r.inning)], bat: r.batter_name, pn: i + 1, b: balls, s: strikes,
+        P.push({ g: gi, ai, t: r.pitch_type_code, om: r._mlb_code, call: r.call, inn: ords[Number(r.inning)], bat: r.batter_name, pn: i + 1, b: balls, s: strikes,
           z: nn(r.zone), v: nn(r.start_speed), ev_: nn(r.end_speed), spin: sp !== null && sp > 0 ? sp : null, ev: nn(r.launch_speed), la: nn(r.launch_angle), tr: r.trajectory || '',
           px: nn(r.plate_x), pz: nn(r.plate_z), rx: nn(r.release_x), rz: nn(r.release_z), hb: nn(r.break_horizontal), vb: nn(r.break_vertical_induced), sd: nn(r.spin_direction), h: (r.bat_side||'').toUpperCase().slice(0,1) });
         const ct = classify(r.call);
@@ -1135,7 +1164,7 @@ function askSeePitch(p){
  const g=DATA.games[p.g],url=`game.html?game_pk=${g.pk}&pitcher_id=${playerId}&season=${currentSeason}&ab=${p.ai}&pitch=${p.pn}`;
  let ov=document.getElementById('seePitchOv');if(ov)ov.remove();
  ov=document.createElement('div');ov.id='seePitchOv';
- ov.innerHTML=`<div class="spm" role="dialog" aria-modal="true" aria-labelledby="spmT"><div class="spm-t" id="spmT">Do You Want to See This Pitch?</div><div class="spm-s">${LAB[p.t]}${p.v!=null?' &middot; '+p.v.toFixed(1)+' mph':''} &middot; ${p.call}<br>${g.date} vs ${g.opp}</div><div class="spm-b"><button type="button" class="spm-no">No</button><button type="button" class="spm-yes">Yes</button></div></div>`;
+ ov.innerHTML=`<div class="spm" role="dialog" aria-modal="true" aria-labelledby="spmT"><div class="spm-t" id="spmT">Do You Want to See This Pitch?</div><div class="spm-s">${LAB[p.t]}${p.om&&p.om!==p.t?' <span class="retag" title="MLB tagged this pitch differently">(MLB tag: '+(LAB[p.om]||p.om)+')</span>':''}${p.v!=null?' &middot; '+p.v.toFixed(1)+' mph':''} &middot; ${p.call}<br>${g.date} vs ${g.opp}</div><div class="spm-b"><button type="button" class="spm-no">No</button><button type="button" class="spm-yes">Yes</button></div></div>`;
  document.body.appendChild(ov);
  const close=()=>{ov.remove();document.removeEventListener('keydown',key)};
  const key=e=>{if(e.key==='Escape')close()};document.addEventListener('keydown',key);
@@ -1181,6 +1210,7 @@ all();
         <div class="section-title">${currentSeason} Statcast</div>
         <div class="sc-team">${TEAM_LOGOS[team] ? `<img src="${TEAM_LOGOS[team]}" alt="" onerror="this.style.display='none'">` : ''}${team || ''}</div>
       </div>
+      <div class="reclass-bar" id="sc-reclass" hidden></div>
       <div id="seasonSc">
         <div class="cols">
           <div>
@@ -2471,6 +2501,9 @@ all();
         ? pitches.filter(p => p.pitcher_id === playerId)
         : pitches.filter(p => p.batter_id === playerId);
       const opponentMap = buildGamePkOpponentMap(schedule, player.team);
+      // Obvious pitch-type mislabels in MLB's feed are corrected (the original tag is kept on every row);
+      // pitcher pages open on the adjusted types.
+      if (isPitcher) { PitchReclass.annotate(playerPitches); PitchReclass.setMode(playerPitches, false); }
       const statcastTotals = isPitcher ? pitcherStatcastTotals(playerPitches) : hitterStatcastTotals(playerPitches);
 
       // DH is batting-only -- there shouldn't be fielding rows for it, but

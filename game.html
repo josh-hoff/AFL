@@ -335,6 +335,15 @@
   .loading, .error { color: var(--text-muted); }
   .error { color: #c0392b; }
 </style>
+<script src="pitch-reclass.js"></script>
+<style>
+.reclass-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 .8rem;font-size:.82rem;color:var(--text-muted);line-height:1.4}
+.rc-seg{display:inline-flex;border:1.5px solid #0d1b3a;border-radius:999px;overflow:hidden}
+.rc-seg button,.rc-seg a{background:transparent;border:0;color:#0d1b3a;padding:3px 13px;font:700 .78rem inherit;font-family:inherit;cursor:pointer;text-decoration:none;white-space:nowrap;display:inline-block}
+.rc-seg .on{background:#0d1b3a;color:#fff;cursor:default}
+.rc-seg button:not(.on):hover,.rc-seg a:not(.on):hover{background:rgba(13,27,58,.1)}
+.retag{color:var(--tab-active);font-weight:800;cursor:help;margin-left:2px}
+</style>
 </head>
 <body>
 
@@ -874,7 +883,7 @@
         return `
           <div class="pitch-row" id="pr-${abIdx}-${i}" style="--row-accent:${accentColor}" onclick="togglePitchDetail('${detailId}')">
             <div class="pitch-num">${i + 1}</div>
-            <div class="pitch-type-cell"><span class="pitch-dot" style="background:${PITCH_COLORS[p.type] || '#888'}"></span>${PITCH_LABELS[p.type] || p.type}</div>
+            <div class="pitch-type-cell"><span class="pitch-dot" style="background:${PITCH_COLORS[p.type] || '#888'}"></span>${PITCH_LABELS[p.type] || p.type}${p.mlbType && p.mlbType !== p.type ? `<span class="retag" title="MLB tagged this pitch as ${PITCH_LABELS[p.mlbType] || p.mlbType}">*</span>` : ''}</div>
             <div class="pitch-velo pitch-numcell">${p.velo !== null ? p.velo.toFixed(1) : '—'}</div>
             <div class="pitch-numcell">${p.spin !== null ? p.spin : 'N/A'}</div>
             <div class="pitch-numcell">${releasePt}</div>
@@ -1697,6 +1706,12 @@
       const scheduleRow = sameGameRows.find(r => r.rescheduled === 'Y') || sameGameRows[0];
       const gameLogRow = pLogRows.find(r => r.pitcher_id === pitcherId && r.game_pk === gamePk);
 
+      // Correct obvious pitch-type mislabels using the pitcher's whole season (same result as on his player page).
+      // MLB's original tag stays on every row; ?tags=mlb shows the original tags.
+      const USE_MLB_TAGS = params.get('tags') === 'mlb';
+      const seasonPitcherRows = pitchRows.filter(r => r.pitcher_id === pitcherId);
+      PitchReclass.annotate(seasonPitcherRows);
+      PitchReclass.setMode(seasonPitcherRows, USE_MLB_TAGS);
       const rawPitches = pitchRows.filter(r => r.game_pk === gamePk && r.pitcher_id === pitcherId);
       if (rawPitches.length === 0) {
         content.innerHTML = '<p class="error">No Statcast pitches found for this pitcher in this game.</p>';
@@ -1713,7 +1728,7 @@
         const hasRealPlate = realPlateX !== null && realPlateZ !== null;
         const { px, pz } = hasRealPlate ? { px: realPlateX, pz: realPlateZ } : approxPlateCoords(zone, i);
         return {
-          type: r.pitch_type_code, velo: num(r.start_speed), endVelo: num(r.end_speed), spin: num(r.spin_rate) !== null ? Math.round(num(r.spin_rate)) : null,
+          type: r.pitch_type_code, mlbType: r._mlb_code, velo: num(r.start_speed), endVelo: num(r.end_speed), spin: num(r.spin_rate) !== null ? Math.round(num(r.spin_rate)) : null,
           zone, call: r.call, bat_side: (r.bat_side || '').toUpperCase().slice(0, 1), batter_id: r.batter_id, batter_name: r.batter_name, inning: r.inning, half_inning: r.half_inning,
           hb: num(r.break_horizontal), ivb: num(r.break_vertical_induced), breakVertical: num(r.break_vertical),
           breakAngle: num(r.break_angle) !== null ? Math.round(num(r.break_angle)) : null, breakLength: num(r.break_length),
@@ -1773,6 +1788,17 @@
             <div class="pitcher-line">${pitcherLine}</div>
           </div>
         </div>
+        ${(() => {
+          const nChanged = rawPitches.filter(r => r._changed).length;
+          if (!nChanged) return '';
+          const pl = nChanged === 1 ? '1 pitch' : nChanged + ' pitches';
+          const qa = new URLSearchParams(window.location.search); qa.delete('tags');
+          const qm = new URLSearchParams(window.location.search); qm.set('tags', 'mlb');
+          const seg = USE_MLB_TAGS
+            ? `<a href="?${qa.toString()}">Auto-Adjusted Tags</a><a class="on" href="?${qm.toString()}" aria-current="true">MLB Tags</a>`
+            : `<a class="on" href="?${qa.toString()}" aria-current="true">Auto-Adjusted Tags</a><a href="?${qm.toString()}">MLB Tags</a>`;
+          return `<div class="reclass-bar"><span class="rc-seg">${seg}</span><span>${USE_MLB_TAGS ? "Showing MLB's original tags." : pl + ' re-labeled based on their measurements.'}</span></div>`;
+        })()}
       `);
 
       renderAll();
