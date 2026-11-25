@@ -363,6 +363,9 @@
 #seasonSc{--card:var(--bg-card);--ink:var(--text);--mut:var(--text-muted);--line:var(--border);--head:#f2f1ee;--acc:var(--tab-active);--navy:#0b1b3c;--grid:#e6e3dc;--sel:#fff3ea;color:var(--text)}
 #seasonSc .sc-sub{margin-top:26px;padding:6px 2px;border-bottom:1px solid var(--line);margin-bottom:10px}
 #seasonSc .sc-sub h3{margin:0}
+#seasonSc.gm .cols{grid-template-columns:minmax(0,380px) minmax(0,1fr)}
+#seasonSc.gm .ch{flex:0 1 460px;max-width:460px;margin:0 auto}
+#seasonSc.gm .car{justify-content:space-between}
 #seasonSc .gx-head{display:flex;align-items:center;gap:.6rem;width:100%;background:none;border:0;border-top:1px solid var(--line,#e8e6e2);padding:1rem .2rem;margin-top:1rem;cursor:pointer;font-family:inherit;text-align:left;color:inherit}
 #seasonSc .gx-head h3{margin:0}
 #seasonSc .gx-head:hover h3{color:var(--tab-active,#e8590c)}
@@ -1373,7 +1376,7 @@ all();
         ${gameMode ? '' : `<div class="sc-team">${TEAM_LOGOS[team] ? `<img src="${TEAM_LOGOS[team]}" alt="" onerror="this.style.display='none'">` : ''}${team || ''}</div>`}
       </div>
       <div class="reclass-bar" id="sc-reclass" hidden></div>
-      <div id="seasonSc">
+      <div id="seasonSc"${gameMode ? ' class="gm"' : ''}>
         <div class="cols">
           <div>
             <div class="chips" id="sc-chips"></div>
