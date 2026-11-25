@@ -2834,7 +2834,10 @@ all();
       const pitcherStats = pitcherStatsRes.ok ? parseCSV(await pitcherStatsRes.text()) : [];
       const pitchingGameLogs = pitchingGameLogsRes.ok ? parseCSV(await pitchingGameLogsRes.text()) : [];
       const fieldingGameLogs = fieldingGameLogsRes.ok ? parseCSV(await fieldingGameLogsRes.text()) : [];
-      const pitches = pitchesRes.ok ? parseCSV(await pitchesRes.text()) : [];
+      // Games with no Statcast tracking at all (see no-statcast.js) are left out of every Statcast view; their regular stats stay.
+      const pitchesAll = pitchesRes.ok ? parseCSV(await pitchesRes.text()) : [];
+      const noTrack = untrackedGames(pitchesAll);
+      const pitches = pitchesAll.filter(r => !noTrack.has(r.game_pk));
       const schedule = scheduleRes.ok ? parseCSV(await scheduleRes.text()) : [];
       const transactions = txnRes.ok ? parseCSV(await txnRes.text()) : [];
 
@@ -3020,6 +3023,7 @@ all();
   init();
 </script>
 
+<script src="no-statcast.js"></script>
 <script src="player-search.js"></script>
 <script src="top-scrollbar.js"></script>
 </body>

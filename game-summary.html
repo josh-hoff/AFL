@@ -739,7 +739,7 @@
         <div>${fmtDash(stat.intentional_walks)}</div>
         <div>${fmtDash(stat.strikeouts)}</div>
         <div>${fmtDash(stat.stolen_bases)}</div>
-        <div><a class="statcast-pill" href="player.html?id=${entry.player_id}&season=${season}&game=${gamePk}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a></div>
+        <div>${!hasStatcast(gamePk) ? '' : `<a class="statcast-pill" href="player.html?id=${entry.player_id}&season=${season}&game=${gamePk}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a>`}</div>
       </div>
     `;
   }
@@ -794,7 +794,7 @@
         <div>${fmtDash(stat.strikeOuts)}</div>
         <div>${fmtDash(stat.numberOfPitches)}</div>
         <div>${whipDisplay}</div>
-        <div><a class="statcast-pill" href="game.html?game_pk=${gamePk}&pitcher_id=${app.pitcher_id}&season=${season}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a></div>
+        <div>${!hasStatcast(gamePk) ? '' : `<a class="statcast-pill" href="game.html?game_pk=${gamePk}&pitcher_id=${app.pitcher_id}&season=${season}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a>`}</div>
       </div>
     `;
   }
@@ -807,6 +807,7 @@
   function boxHtml(m) {
     if (!hasBoxScoreData()) return '<p class="empty">The box score isn\'t available for this game yet.</p>';
     const isPlayoff = !!scheduleRow && isPlayoffGame(scheduleRow);
+    window.BOX_VENUE = m.venue || (scheduleRow && scheduleRow.venue) || '';
     const panel = side => battingSectionHtml(gamePk, side, side === 'away' ? m.awayName : m.homeName, isPlayoff)
       + pitchingSectionHtml(gamePk, side, side === 'away' ? m.awayName : m.homeName, isPlayoff);
     return `
@@ -860,6 +861,7 @@
   }
   init();
 </script>
+<script src="no-statcast.js"></script>
 <script src="player-search.js"></script>
 <script src="top-scrollbar.js"></script>
 </body>

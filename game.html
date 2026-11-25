@@ -1736,13 +1736,15 @@
         fetch(`data/${season}/schedule.csv`),
         fetch(`data/${season}/pitching_gamelogs.csv`),
       ]);
-      const [rosterRows, pitchRows, scheduleRows, pLogRows] = await Promise.all([
+      const [rosterRows, pitchRowsAll, scheduleRows, pLogRows] = await Promise.all([
         rosterRes.text().then(parseCSV),
         pitchesRes.text().then(parseCSV),
         scheduleRes.text().then(parseCSV),
         pLogsRes.text().then(parseCSV),
       ]);
 
+      const noTrack = untrackedGames(pitchRowsAll);
+      const pitchRows = pitchRowsAll.filter(r => !noTrack.has(r.game_pk));
       const rosterRow = rosterRows.find(r => r.player_id === pitcherId);
       PITCHER_THROWS = rosterRow && rosterRow.throws === 'Left' ? 'L' : 'R';
       const pitcherName = rosterRow ? rosterRow.full_name : 'Pitcher';
@@ -1763,7 +1765,7 @@
       PitchReclass.setMode(seasonPitcherRows, USE_MLB_TAGS);
       const rawPitches = pitchRows.filter(r => r.game_pk === gamePk && r.pitcher_id === pitcherId);
       if (rawPitches.length === 0) {
-        content.innerHTML = '<p class="error">No Statcast pitches found for this pitcher in this game.</p>';
+        content.innerHTML = noTrack.has(gamePk) ? '<p class="error">Statcast tracking was not available for this game.</p>' : '<p class="error">No Statcast pitches found for this pitcher in this game.</p>';
         return;
       }
 
@@ -1871,6 +1873,7 @@
 
   init();
 </script>
+<script src="no-statcast.js"></script>
 <script src="player-search.js"></script>
 <script src="top-scrollbar.js"></script>
 </body>

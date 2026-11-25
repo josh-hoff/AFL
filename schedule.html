@@ -1224,6 +1224,7 @@
   function buildBoxScoreHtml(g) {
     const gamePk = g.game_pk;
     const isPlayoff = isPlayoffGame(g);
+    window.BOX_VENUE = g.venue || '';
     const awayHtml = battingSectionHtml(gamePk, 'away', g.away_team, isPlayoff) + pitchingSectionHtml(gamePk, 'away', g.away_team, isPlayoff);
     const homeHtml = battingSectionHtml(gamePk, 'home', g.home_team, isPlayoff) + pitchingSectionHtml(gamePk, 'home', g.home_team, isPlayoff);
     return `
@@ -1305,7 +1306,7 @@
         <div>${fmtDash(stat.intentional_walks)}</div>
         <div>${fmtDash(stat.strikeouts)}</div>
         <div>${fmtDash(stat.stolen_bases)}</div>
-        <div><a class="statcast-pill" href="player.html?id=${entry.player_id}&season=${currentSeason}&game=${gamePk}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a></div>
+        <div>${!hasStatcast(gamePk) ? '' : `<a class="statcast-pill" href="player.html?id=${entry.player_id}&season=${currentSeason}&game=${gamePk}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a>`}</div>
       </div>
     `;
   }
@@ -1360,7 +1361,7 @@
         <div>${fmtDash(stat.strikeOuts)}</div>
         <div>${fmtDash(stat.numberOfPitches)}</div>
         <div>${whipDisplay}</div>
-        <div><a class="statcast-pill" href="game.html?game_pk=${gamePk}&pitcher_id=${app.pitcher_id}&season=${currentSeason}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a></div>
+        <div>${!hasStatcast(gamePk) ? '' : `<a class="statcast-pill" href="game.html?game_pk=${gamePk}&pitcher_id=${app.pitcher_id}&season=${currentSeason}" title="View full Statcast for this game"><span class="sp-text">Statcast </span><span class="sp-chev">&rsaquo;</span></a>`}</div>
       </div>
     `;
   }
@@ -1632,6 +1633,7 @@
   init();
 </script>
 
+<script src="no-statcast.js"></script>
 <script src="player-search.js"></script>
 <script src="top-scrollbar.js"></script>
 </body>
