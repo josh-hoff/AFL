@@ -169,6 +169,7 @@
   .org-opt.sel { background: #fff0e2; }
   .org-opt img { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
   .org-opt .org-logo-gap { width: 22px; flex-shrink: 0; }
+  .team-opt-logo { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
   .org-opt .org-name { flex: 1; min-width: 0; }
   .org-opt .org-count { color: var(--text-muted); font-size: 0.78rem; font-weight: 600; font-variant-numeric: tabular-nums; }
   .org-opt .org-tick { width: 16px; text-align: center; color: var(--tab-active); font-weight: 800; visibility: hidden; }
@@ -508,6 +509,7 @@
   let selectedOrgs = new Set(); // parent organizations picked in the filter (empty = all players)
   let orgMulti = false;         // 'Multi-select' box in the organization dropdown
   let orgOpen = false;          // is the organization dropdown panel open
+  let teamOpen = false;         // is the team dropdown panel open
   let currentStatTab = 'hitting';   // 'hitting' | 'pitching' | 'fielding'
   const tsSort = { hitting: { k: 'plate_appearances', dir: -1 }, pitching: { k: 'outs', dir: -1 }, fielding: { k: 'games', dir: -1 } };
 
@@ -743,6 +745,7 @@
       orgOpen = panel.hidden;
       panel.hidden = !orgOpen;
       btn.setAttribute('aria-expanded', String(orgOpen));
+      if (orgOpen) closeTeamPanel();
     };
     panel.onclick = (e) => e.stopPropagation();
     document.getElementById('org-multi').onchange = (e) => { orgMulti = e.target.checked; };
@@ -757,16 +760,26 @@
       };
     });
   }
+  function closeOrgPanel() {
+    orgOpen = false;
+    const panel = document.getElementById('org-panel'), b = document.getElementById('org-btn');
+    if (panel) panel.hidden = true;
+    if (b) b.setAttribute('aria-expanded', 'false');
+  }
+  function closeTeamPanel() {
+    teamOpen = false;
+    const panel = document.getElementById('team-panel'), b = document.getElementById('team-btn');
+    if (panel) panel.hidden = true;
+    if (b) b.setAttribute('aria-expanded', 'false');
+  }
   if (!window.__orgFilterBound) {
     window.__orgFilterBound = true;
-    document.addEventListener('click', () => {
-      const panel = document.getElementById('org-panel');
-      if (panel && !panel.hidden) { orgOpen = false; panel.hidden = true; const b = document.getElementById('org-btn'); if (b) b.setAttribute('aria-expanded', 'false'); }
-    });
+    document.addEventListener('click', () => { closeOrgPanel(); closeTeamPanel(); });
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
-      const panel = document.getElementById('org-panel');
-      if (panel && !panel.hidden) { orgOpen = false; panel.hidden = true; const b = document.getElementById('org-btn'); if (b) { b.setAttribute('aria-expanded', 'false'); b.focus(); } }
+      const open = orgOpen ? 'org-btn' : teamOpen ? 'team-btn' : null;
+      closeOrgPanel(); closeTeamPanel();
+      if (open) { const b = document.getElementById(open); if (b) b.focus(); }
     });
   }
 
@@ -788,9 +801,14 @@
 
     let html = `
       <div class="team-filter-bar">
-        <div class="filter-group">
-          <label for="team-select">Team</label>
-          <select id="team-select"></select>
+        <div class="org-filter" id="team-filter">
+          <label for="team-btn">Team</label>
+          <button type="button" id="team-btn" class="org-btn" aria-haspopup="true" aria-expanded="${teamOpen}">
+            ${teamLogoImg(currentTeam, 'team-opt-logo')}<span>${currentTeam}</span><span class="org-caret">&#9662;</span>
+          </button>
+          <div class="org-panel" id="team-panel"${teamOpen ? '' : ' hidden'}>
+            ${AFL_TEAM_NAMES.map(n => `<button type="button" class="org-opt${n === currentTeam ? ' sel' : ''}" data-team="${n}">${teamLogoImg(n, 'team-opt-logo')}<span class="org-name">${n}</span><span class="org-tick">&#10003;</span></button>`).join('')}
+          </div>
         </div>
         ${orgFilterHtml(orgList, wholeTeam.length)}
       </div>
@@ -877,22 +895,27 @@
   }
 
   function wireTeamSelect() {
-    const teamSelect = document.getElementById('team-select');
-    AFL_TEAM_NAMES.forEach(name => {
-      const opt = document.createElement('option');
-      opt.value = name;
-      opt.textContent = name;
-      if (name === currentTeam) opt.selected = true;
-      teamSelect.appendChild(opt);
-    });
     wireOrgFilter();
-    teamSelect.onchange = () => {
-      currentTeam = teamSelect.value;
-      selectedOrgs.clear();
-      orgOpen = false;
-      updateUrl();
-      renderRoster();
+    const btn = document.getElementById('team-btn');
+    const panel = document.getElementById('team-panel');
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      teamOpen = panel.hidden;
+      panel.hidden = !teamOpen;
+      btn.setAttribute('aria-expanded', String(teamOpen));
+      if (teamOpen) closeOrgPanel();
     };
+    panel.onclick = (e) => e.stopPropagation();
+    panel.querySelectorAll('.org-opt').forEach(b => {
+      b.onclick = () => {
+        currentTeam = b.dataset.team;
+        selectedOrgs.clear();
+        orgOpen = false;
+        teamOpen = false;
+        updateUrl();
+        renderRoster();
+      };
+    });
   }
 
 
