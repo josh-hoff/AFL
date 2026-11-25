@@ -1875,6 +1875,12 @@
       renderGlossary();
       // Deep link from the player page: ?ab=<at-bat index>&pitch=<pitch # in that at-bat>
       const tAb = params.get('ab'), tPitch = params.get('pitch');
+      if (tAb !== null && tPitch === null && atBats[Number(tAb)]) {
+        // ?ab= alone: open that at-bat (charts and pitch log filter to it) and scroll to it
+        selectAtBat(Number(tAb));
+        const head = document.querySelector('.ab-head.selected');
+        if (head) head.scrollIntoView({ block: 'center' });
+      }
       if (tAb !== null && tPitch !== null) {
         const row = document.getElementById(`pr-${tAb}-${Number(tPitch) - 1}`);
         if (row) {

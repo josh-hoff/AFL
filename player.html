@@ -268,6 +268,18 @@
 #seasonSc .oarr{position:absolute;right:6px;font-size:.7rem;top:50%;transform:translateY(-50%);color:var(--mut)}
 #seasonSc .omenu{position:absolute;left:0;top:calc(100% + 4px);min-width:21rem;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:5px;z-index:20}
 #seasonSc .omenu[hidden]{display:none}
+/* Per-game hitter Statcast page header (same look as the pitcher game page) */
+.back-link{display:inline-flex;align-items:center;gap:.35rem;color:var(--text-muted);text-decoration:none;font-size:.85rem;font-weight:600;margin-bottom:1rem}
+.game-header{background:var(--header-bg);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.game-header-left{display:flex;flex-direction:column;gap:.3rem}
+.game-matchup{color:var(--header-text);font-size:1.25rem;font-weight:700}
+.game-matchup .team-hl{color:#ff7a33}
+.game-sub{color:#9fb3d1;font-size:.82rem}
+.game-result{text-align:right}
+.game-result .line{color:#9fb3d1;font-size:.72rem;text-transform:uppercase;font-weight:600}
+.game-result .pitcher-line{color:var(--header-text);font-size:1rem;font-weight:700;margin-top:.15rem}
+#seasonSc .pl-lk{color:inherit;text-decoration:none;border-bottom:1px dashed var(--acc);cursor:pointer}
+#seasonSc .pl-lk:hover{color:var(--acc)}
 #seasonSc .odiv{height:1px;background:var(--line);margin:6px 2px}
 #seasonSc .osec{display:flex;align-items:center;justify-content:space-between;margin:6px 0 2px;padding:7px 9px;border-top:1px solid var(--line);font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);cursor:pointer;user-select:none}
 #seasonSc .osec:hover{background:var(--head)}
@@ -351,6 +363,40 @@
 #seasonSc{--card:var(--bg-card);--ink:var(--text);--mut:var(--text-muted);--line:var(--border);--head:#f2f1ee;--acc:var(--tab-active);--navy:#0b1b3c;--grid:#e6e3dc;--sel:#fff3ea;color:var(--text)}
 #seasonSc .sc-sub{margin-top:26px;padding:6px 2px;border-bottom:1px solid var(--line);margin-bottom:10px}
 #seasonSc .sc-sub h3{margin:0}
+#seasonSc .gx-head{display:flex;align-items:center;gap:.6rem;width:100%;background:none;border:0;border-top:1px solid var(--line,#e8e6e2);padding:1rem .2rem;margin-top:1rem;cursor:pointer;font-family:inherit;text-align:left;color:inherit}
+#seasonSc .gx-head h3{margin:0}
+#seasonSc .gx-head:hover h3{color:var(--tab-active,#e8590c)}
+#seasonSc .gx-car{color:var(--text-muted,#5a6472);font-size:.9rem;transition:transform .15s}
+#seasonSc .gx-head[aria-expanded="true"] .gx-car{transform:rotate(90deg)}
+#seasonSc .gx-hint{margin-left:auto;font-size:.76rem;color:var(--text-muted,#5a6472)}
+#seasonSc .gx-body{margin-top:.2rem}
+#seasonSc .gx-ab{background:var(--card,#fff);border:1px solid var(--line,#e8e6e2);border-radius:10px;margin-bottom:.9rem;overflow:hidden}
+#seasonSc .gx-abh{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.6rem .9rem;background:#f5f3ee;cursor:pointer;flex-wrap:wrap}
+#seasonSc .gx-abh.selected{background:#fdeee3}
+#seasonSc .gx-inn{font-weight:700;font-size:.78rem;color:var(--text-muted,#5a6472);text-transform:uppercase}
+#seasonSc .gx-pit{font-weight:700;font-size:.92rem}
+#seasonSc .gx-hintsel{color:var(--text-muted,#5a6472);font-size:.72rem;margin-left:.5rem}
+#seasonSc .gx-out{font-size:.8rem;font-weight:700}
+#seasonSc .gx-out.k,#seasonSc .gx-out.out{color:#c0392b}
+#seasonSc .gx-out.hit,#seasonSc .gx-out.walk{color:#1a8a4a}
+#seasonSc .gx-row{display:grid;grid-template-columns:34px 1.5fr .8fr .8fr .7fr .9fr .9fr 2fr;gap:.5rem;padding:.5rem .9rem;font-size:.82rem;align-items:center;position:relative}
+#seasonSc .gx-row.hd{background:#fafaf8;font-size:.6rem;font-weight:700;text-transform:uppercase;color:var(--text-muted,#5a6472);letter-spacing:.04em}
+#seasonSc .gx-row:not(.hd){border-top:1px solid var(--line,#e8e6e2);cursor:pointer}
+#seasonSc .gx-row:not(.hd):hover{background:#fafaf8}
+#seasonSc .gx-row.c-ball{box-shadow:inset 3px 0 0 #1a8a4a}
+#seasonSc .gx-row.c-strike{box-shadow:inset 3px 0 0 #c0392b}
+#seasonSc .gx-row.c-inp{box-shadow:inset 3px 0 0 #2f6fb0}
+#seasonSc .gx-det{display:none;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem 1rem;padding:.7rem .9rem;background:#fafaf8;border-top:1px dashed var(--line,#e8e6e2);font-size:.8rem}
+#seasonSc .gx-det.open{display:grid}
+#seasonSc .gx-det label{display:block;color:var(--text-muted,#5a6472);font-size:.64rem;text-transform:uppercase;font-weight:700}
+#seasonSc .gx-det a{color:var(--tab-active,#e8590c);font-weight:700;cursor:pointer}
+#seasonSc .gx-gl h4{margin:1rem 0 .35rem;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted,#5a6472)}
+#seasonSc .gx-gl dl{display:grid;grid-template-columns:minmax(150px,220px) 1fr;margin:0}
+#seasonSc .gx-gl dt{font-weight:800;font-size:.84rem;padding:.4rem 0;border-top:1px solid var(--line,#e8e6e2)}
+#seasonSc .gx-gl dd{margin:0;font-size:.84rem;line-height:1.4;padding:.4rem 0;border-top:1px solid var(--line,#e8e6e2)}
+#seasonSc .gx-search{width:100%;max-width:360px;font:inherit;font-size:.85rem;padding:.5rem .75rem;border-radius:8px;border:1px solid var(--line,#e8e6e2);margin-bottom:.5rem}
+@media(max-width:700px){#seasonSc .gx-row{grid-template-columns:28px 1.4fr .8fr .8fr 1.6fr}#seasonSc .gx-row>:nth-child(5),#seasonSc .gx-row>:nth-child(6),#seasonSc .gx-row>:nth-child(7){display:none}}
+
 .sc-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:0.6rem}
 .sc-head .section-title{margin:0}
 .sc-head .sc-team{display:flex;align-items:center;gap:0.5rem;color:var(--text-muted);font-weight:600;font-size:0.9rem}
@@ -961,7 +1007,7 @@
       let balls = 0, strikes = 0;
       ab.ps.forEach((r, i) => {
         const sp = nn(r.spin_rate);
-        P.push({ g: gi, ai, t: r.pitch_type_code, om: r._mlb_code, call: r.call, gin: r.inning, half: r.half_inning, ext: nn(r.extension), vbt: nn(r.break_vertical), ba: nn(r.break_angle), bl: nn(r.break_length), pt: nn(r.plate_time), tc: nn(r.type_confidence), ry: nn(r.release_y), inn: ords[Number(r.inning)], bat: r.batter_name, pn: i + 1, b: balls, s: strikes,
+        P.push({ g: gi, ai, t: r.pitch_type_code, om: r._mlb_code, call: r.call, gin: r.inning, half: r.half_inning, ext: nn(r.extension), vbt: nn(r.break_vertical), ba: nn(r.break_angle), bl: nn(r.break_length), pt: nn(r.plate_time), tc: nn(r.type_confidence), ry: nn(r.release_y), inn: ords[Number(r.inning)], bat: r.batter_name, bid: r.batter_id, pn: i + 1, b: balls, s: strikes,
           z: nn(r.zone), v: nn(r.start_speed), ev_: nn(r.end_speed), spin: sp !== null && sp > 0 ? sp : null, ev: nn(r.launch_speed), la: nn(r.launch_angle), tr: r.trajectory || '', oc: /^in play/i.test(r.call) ? PitchOutcomes.of(r.play_result_type, r.play_result, r.trajectory) : '',
           px: nn(r.plate_x), pz: nn(r.plate_z), rx: nn(r.release_x), rz: nn(r.release_z), hb: nn(r.break_horizontal), vb: nn(r.break_vertical_induced), sd: nn(r.spin_direction), h: (r.bat_side||'').toUpperCase().slice(0,1) });
         const ct = classify(r.call);
@@ -1020,7 +1066,7 @@ function renderChips(){
  let h=`<button class="chip${!sel.length?' on':''}" data-t="ALL">All Pitches <span class="n">(${base.length})</span></button>`;
  types.forEach(t=>{const c=base.filter(p=>p.t===t).length,on=sel.includes(t);
   h+=`<button class="chip${on?' on':''}${c===0&&!on?' off':''}" data-t="${t}">${multi?`<span class="cb${on?' on':''}">${on?'&#10003;':''}</span>`:''}<span class="dot" style="background:${COL[t]}"></span>${LAB[t]} <span class="n">(${c})</span></button>`});
- h+=`<span class="multi" id="sc-multi"><span class="cb${multi?' on':''}">${multi?'&#10003;':''}</span>Multiple Selections</span><button class="reset" id="sc-reset"${(sel.length||res.length||cnt.length||inn.length||hit.length||multi||resMulti||cntMulti||innMulti)?'':' disabled'}>Reset Filters</button>`;
+ h+=`<span class="multi" id="sc-multi"><span class="cb${multi?' on':''}">${multi?'&#10003;':''}</span>Multiple Selections</span><button class="reset" id="sc-reset"${(abSel!==null||sel.length||res.length||cnt.length||inn.length||hit.length||multi||resMulti||cntMulti||innMulti)?'':' disabled'}>Reset Filters</button>`;
  $('chips').innerHTML=h;
  ROOT.querySelectorAll('.chip').forEach(b=>b.onclick=()=>pick(b.dataset.t));
  $('multi').onclick=()=>{multi=!multi;if(!multi&&sel.length>1)sel=[sel[0]];all()};
@@ -1089,7 +1135,7 @@ function pitchLogHtml(t,base){
  let h='<tr class="pl-row"><td colspan="'+(COLS.length+1)+'"><div class="pl"><div class="pl-in"><div class="pl-h"><div>Date</div><div>Opp</div><div>Inn</div><div>Vs</div><div>Velo</div><div>Spin</div><div>Release Pt (ft)</div><div>Ext (ft)</div><div>VB (Ind)</div><div>Vert Brk</div><div>Horiz Brk</div><div>Result</div><div></div></div>';
  ps.forEach(p=>{const g=DATA.games[p.g],k=kind(p),open=openPitches.has(p.ix),kc=k==='BALL'?'k-ball':(k==='INPLAY'?'k-inp':'k-strike'),re=p.om&&p.om!==p.t;
   const d=String(g.date||'').slice(5).replace('-','/'),opp=typeof cityFromOpponent==='function'?cityFromOpponent(g.opp):g.opp;
-  h+=`<div class="pl-r ${kc}${open?' open':''}" data-pix="${p.ix}"><div>${d}</div><div>${opp||''}</div><div>${p.half==='top'?'Top':'Bot'} ${p.gin}</div><div class="pl-bat">${p.bat||''}</div><div class="pl-b">${f1(p.v)}</div><div>${p.spin!=null?Math.round(p.spin):'N/A'}</div><div>${p.rx!=null&&p.rz!=null?p.rx.toFixed(2)+', '+p.rz.toFixed(2):'—'}</div><div>${p.ext!=null?p.ext.toFixed(1):'—'}</div><div>${sgn(p.vb)}</div><div>${sgn(p.vbt)}</div><div>${sgn(p.hb)}</div><div class="pl-res">${p.call}${re?'<span class="pl-star" title="MLB tagged this pitch differently">*</span>':''}</div><div class="pl-car">${open?'&#9662;':'&#9656;'}</div></div>`;
+  h+=`<div class="pl-r ${kc}${open?' open':''}" data-pix="${p.ix}"><div><a class="pl-lk" href="game.html?game_pk=${g.pk}&pitcher_id=${playerId}&season=${currentSeason}&ab=${p.ai}" onclick="event.stopPropagation()" title="Go to this at-bat">${d}</a></div><div>${opp||''}</div><div>${p.half==='top'?'Top':'Bot'} ${p.gin}</div><div class="pl-bat">${p.bid?`<a class="pl-lk" href="player.html?id=${p.bid}&season=${currentSeason}" onclick="event.stopPropagation()" title="Go to player page">${p.bat||''}</a>`:(p.bat||'')}</div><div class="pl-b">${f1(p.v)}</div><div>${p.spin!=null?Math.round(p.spin):'N/A'}</div><div>${p.rx!=null&&p.rz!=null?p.rx.toFixed(2)+', '+p.rz.toFixed(2):'—'}</div><div>${p.ext!=null?p.ext.toFixed(1):'—'}</div><div>${sgn(p.vb)}</div><div>${sgn(p.vbt)}</div><div>${sgn(p.hb)}</div><div class="pl-res">${p.call}${re?'<span class="pl-star" title="MLB tagged this pitch differently">*</span>':''}</div><div class="pl-car">${open?'&#9662;':'&#9656;'}</div></div>`;
   if(open)h+=`<div class="pl-d"><div><label>Zone</label><b>${p.z!=null?p.z:'—'}</b></div><div><label>Spin Direction</label><b>${p.sd!=null?Math.round(p.sd)+'&deg;':'N/A'}</b></div><div><label>Break Angle</label><b>${p.ba!=null?Math.round(p.ba)+'&deg;':'—'}</b></div><div><label>Break Length</label><b>${p.bl!=null?p.bl.toFixed(1)+'"':'—'}</b></div><div><label>Release Pt (X,Y,Z)</label><b>${p.rx!=null&&p.ry!=null&&p.rz!=null?p.rx.toFixed(2)+', '+p.ry.toFixed(1)+', '+p.rz.toFixed(2)+' ft':'—'}</b></div><div><label>Plate Time</label><b>${p.pt!=null?p.pt.toFixed(3)+' s':'—'}</b></div><div><label>Type Confidence</label><b>${p.tc!=null?p.tc.toFixed(0):'—'}</b></div><div><label>Plate X, Z</label><b>${p.px!=null&&p.pz!=null?p.px.toFixed(2)+', '+p.pz.toFixed(2)+' ft':'—'}</b></div>${re?`<div class="wide"><label>MLB's tag</label><b>${LAB[p.om]||p.om} <span>(re-labeled to ${LAB[p.t]||p.t} by the site)</span></b></div>`:''}</div>`;
  });
  return h+'</div></div></td></tr>';
@@ -1309,6 +1355,7 @@ $('prev').onclick=()=>{slide=(slide+SLIDES.length-1)%SLIDES.length;renderChart()
   if (P.some(p => p.spin !== null && p.v !== null)) SLIDES.push({ n: 'Spin Rate vs. Velocity', f: chartSpin });
   if (P.some(p => p.sd !== null)) SLIDES.push({ n: 'Spin Direction', f: chartDial });
   SLIDES.push({ n: 'Pitch Mix by Count', f: chartMix }, { n: 'Velocity by Inning', f: chartVelo }, { n: 'Exit Velocity vs. Launch Angle', f: chartEV });
+
 function all(){renderChips();renderRes();renderTiles();renderTable();renderChart()}
 all();
 
@@ -1322,8 +1369,8 @@ all();
   function hitterSeasonShell(team, toggleId, perGameRows, playerId, gameMode) {
     return `
       <div class="sc-head">
-        <div class="section-title">${gameMode ? gameMode.title : currentSeason + ' Statcast'}</div>
-        <div class="sc-team">${TEAM_LOGOS[team] ? `<img src="${TEAM_LOGOS[team]}" alt="" onerror="this.style.display='none'">` : ''}${team || ''}</div>
+        <div class="section-title">${gameMode ? 'Game Statcast' : currentSeason + ' Statcast'}</div>
+        ${gameMode ? '' : `<div class="sc-team">${TEAM_LOGOS[team] ? `<img src="${TEAM_LOGOS[team]}" alt="" onerror="this.style.display='none'">` : ''}${team || ''}</div>`}
       </div>
       <div class="reclass-bar" id="sc-reclass" hidden></div>
       <div id="seasonSc">
@@ -1344,9 +1391,28 @@ all();
             <div class="note" id="sc-cnote"></div>
           </div>
         </div>
+        ${gameMode ? `
+        <button type="button" class="gx-head" data-g="types" aria-expanded="false"><span class="gx-car">&#9656;</span><h3>Pitch Types Faced</h3><span class="gx-hint" id="sc-hint-types"></span></button>
+        <div class="gx-body" id="gx-types" hidden>
+          <div class="tw"><table id="sc-tbl"></table></div>
+          <div class="note">Click a row to select that pitch type (same as its chip). Click a column header to sort. The table follows the Result, Count, Inning and Pitcher filters.</div>
+        </div>
+        <button type="button" class="gx-head" data-g="inn" aria-expanded="false"><span class="gx-car">&#9656;</span><h3>Inning Summary</h3><span class="gx-hint" id="sc-hint-inn"></span></button>
+        <div class="gx-body" id="gx-inn" hidden>
+          <div class="tw"><table id="sc-itbl"></table></div>
+          <div class="note">Click a row to filter to that inning (same as the Inning dropdown). The table follows the pitch type, Result and Count filters.</div>
+        </div>
+        <div class="sc-sub" style="margin-top:1.5rem"><h3>Pitch-by-Pitch <span style="font-size:.75rem;font-weight:500;color:var(--text-muted,#5a6472)">grouped by at-bat</span></h3></div>
+        <div id="sc-abs"></div>
+        <button type="button" class="gx-head" data-g="gloss" aria-expanded="false"><span class="gx-car">&#9656;</span><h3>Stat Glossary</h3><span class="gx-hint">what each stat means</span></button>
+        <div class="gx-body" id="gx-gloss" hidden>
+          <input class="gx-search" id="sc-glsearch" type="search" placeholder="Search stats (e.g. whiff, chase, barrel)" aria-label="Search glossary">
+          <div id="sc-glbody" class="gx-gl"></div>
+          <div class="note">Stats are calculated for whichever pitches your filters currently show.</div>
+        </div>` : `
         <div class="sc-sub"><h3>Pitch Types Faced</h3></div>
         <div class="tw"><table id="sc-tbl"></table></div>
-        <div class="note">Click a row to select that pitch type (same as its chip). Click a column header to sort. The table follows the Result, Count, Inning and Pitcher filters.</div>
+        <div class="note">Click a row to select that pitch type (same as its chip). Click a column header to sort. The table follows the Result, Count, Inning and Pitcher filters.</div>`}
       </div>
       ${gameMode ? '' : `
       <div class="transaction-expand-wrap" style="margin: 0.75rem 0 1.5rem;">
@@ -1401,14 +1467,14 @@ const RT=(p,k)=>PitchOutcomes.isKey(k)?p.oc===k:kind(p)===k;
 const resOk=p=>!res.length||res.some(k=>RT(p,k));
 const inZone=p=>p.z>=1&&p.z<=9;
 const types=[...new Set(P.map(p=>p.t))].sort((a,b)=>P.filter(p=>p.t===b).length-P.filter(p=>p.t===a).length);
-let sel=[],multi=false,res=[],resMulti=false,cnt=[],cntMulti=false,inn=[],innMulti=false,hit=[],openDD=null,slide=0,sortK='n',sortAsc=false;
+let abSel=null,sel=[],multi=false,res=[],resMulti=false,cnt=[],cntMulti=false,inn=[],innMulti=false,hit=[],openDD=null,slide=0,sortK='n',sortAsc=false;
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
 const pct=(n,d)=>d?Math.round(100*n/d)+'%':'—';
 const f1=v=>v==null?'—':v.toFixed(1);
 const innOk=p=>!inn.length||inn.includes(String(p.inn));
 const hitOk=p=>!hit.length||hit.includes(p.h);
 const HAS_HIT=P.some(p=>p.h);
-const scoped=(ignoreType,ignoreCount)=>P.filter(p=>(ignoreType||!sel.length||sel.includes(p.t))&&resOk(p)&&(ignoreCount||cntOk(p))&&innOk(p)&&hitOk(p));
+const scoped=(ignoreType,ignoreCount)=>P.filter(p=>(ignoreType||!sel.length||sel.includes(p.t))&&resOk(p)&&(ignoreCount||cntOk(p))&&innOk(p)&&hitOk(p)&&(abSel===null||p.ai===abSel));
 const bz=e=>e<98?null:e<=98?[26,30]:e<=99?[25,31]:e<=100?[24,33]:e>=116?[8,50]:[24-(e-100),33+(e-100)*17/16];
 function stats(a){
  const n=a.length,sw=a.filter(isSwing),zn=a.filter(p=>inZone(p)),znSw=zn.filter(isSwing),oz=a.filter(p=>!inZone(p)&&p.z),ozSw=oz.filter(isSwing);
@@ -1436,11 +1502,11 @@ function renderChips(){
  let h=`<button class="chip${!sel.length?' on':''}" data-t="ALL">All Pitches <span class="n">(${base.length})</span></button>`;
  types.forEach(t=>{const c=base.filter(p=>p.t===t).length,on=sel.includes(t);
   h+=`<button class="chip${on?' on':''}${c===0&&!on?' off':''}" data-t="${t}">${multi?`<span class="cb${on?' on':''}">${on?'&#10003;':''}</span>`:''}<span class="dot" style="background:${COL[t]}"></span>${LAB[t]} <span class="n">(${c})</span></button>`});
- h+=`<span class="multi" id="sc-multi"><span class="cb${multi?' on':''}">${multi?'&#10003;':''}</span>Multiple Selections</span><button class="reset" id="sc-reset"${(sel.length||res.length||cnt.length||inn.length||hit.length||multi||resMulti||cntMulti||innMulti)?'':' disabled'}>Reset Filters</button>`;
+ h+=`<span class="multi" id="sc-multi"><span class="cb${multi?' on':''}">${multi?'&#10003;':''}</span>Multiple Selections</span><button class="reset" id="sc-reset"${(abSel!==null||sel.length||res.length||cnt.length||inn.length||hit.length||multi||resMulti||cntMulti||innMulti)?'':' disabled'}>Reset Filters</button>`;
  $('chips').innerHTML=h;
  ROOT.querySelectorAll('.chip').forEach(b=>b.onclick=()=>pick(b.dataset.t));
  $('multi').onclick=()=>{multi=!multi;if(!multi&&sel.length>1)sel=[sel[0]];all()};
- $('reset').onclick=()=>{sel=[];res=[];cnt=[];inn=[];hit=[];multi=false;resMulti=false;cntMulti=false;innMulti=false;openTypes.clear();all()};
+ $('reset').onclick=()=>{abSel=null;sel=[];res=[];cnt=[];inn=[];hit=[];multi=false;resMulti=false;cntMulti=false;innMulti=false;openTypes.clear();all()};
 }
 function pick(t){
  if(t==='ALL')sel=[];else if(multi)sel=sel.includes(t)?sel.filter(x=>x!==t):[...sel,t];else sel=(sel.length===1&&sel[0]===t)?[]:[t];
@@ -1504,7 +1570,7 @@ function pitchLogHtml(t,base){
  ps.forEach(p=>{const g=DATA.games[p.g],k=kind(p),open=openPitches.has(p.ix),kc=k==='BALL'?'k-ball':(k==='INPLAY'?'k-inp':'k-strike'),re=p.om&&p.om!==p.t;
   const d=String(g.date||'').slice(5).replace('-','/'),opp=typeof cityFromOpponent==='function'?cityFromOpponent(g.opp):g.opp;
   const rtxt=k==='INPLAY'&&p.res?p.res:p.call;
-  h+=`<div class="pl-r ${kc}${open?' open':''}" data-pix="${p.ix}"><div>${d}</div><div>${opp||''}</div><div>${p.half==='top'?'Top':'Bot'} ${p.gin}</div><div class="pl-bat">${p.pit||''}${p.h?' ('+p.h+')':''}</div><div class="pl-b">${f1(p.v)}</div><div>${p.spin!=null?Math.round(p.spin):'N/A'}</div><div>${p.ev!=null?p.ev.toFixed(1):'—'}</div><div>${p.la!=null?Math.round(p.la)+'°':'—'}</div><div>${p.z!=null?p.z:'—'}</div><div class="pl-res">${rtxt}${re?'<span class="pl-star" title="MLB tagged this pitch differently">*</span>':''}</div><div class="pl-car">${open?'&#9662;':'&#9656;'}</div></div>`;
+  h+=`<div class="pl-r ${kc}${open?' open':''}" data-pix="${p.ix}"><div><a class="pl-lk" href="game.html?game_pk=${g.pk}&pitcher_id=${p.pid}&season=${currentSeason}&ab=${p.pai}" onclick="event.stopPropagation()" title="Go to this at-bat">${d}</a></div><div>${opp||''}</div><div>${p.half==='top'?'Top':'Bot'} ${p.gin}</div><div class="pl-bat"><a class="pl-lk" href="player.html?id=${p.pid}&season=${currentSeason}" onclick="event.stopPropagation()" title="Go to player page">${p.pit||''}</a>${p.h?' ('+p.h+')':''}</div><div class="pl-b">${f1(p.v)}</div><div>${p.spin!=null?Math.round(p.spin):'N/A'}</div><div>${p.ev!=null?p.ev.toFixed(1):'—'}</div><div>${p.la!=null?Math.round(p.la)+'°':'—'}</div><div>${p.z!=null?p.z:'—'}</div><div class="pl-res">${rtxt}${re?'<span class="pl-star" title="MLB tagged this pitch differently">*</span>':''}</div><div class="pl-car">${open?'&#9662;':'&#9656;'}</div></div>`;
   if(open)h+=`<div class="pl-d"><div><label>Count</label><b>${p.b}-${p.s}</b></div><div><label>Plate X, Z</label><b>${p.px!=null&&p.pz!=null?p.px.toFixed(2)+', '+p.pz.toFixed(2)+' ft':'—'}</b></div><div><label>Trajectory</label><b>${p.tr?p.tr.replace('_',' '):'—'}</b></div><div><label>Distance</label><b>${p.dist!=null&&p.dist>0&&!/ground|bunt/.test(p.tr)?Math.round(p.dist)+' ft':'—'}</b></div><div><label>Spin Direction</label><b>${p.sd!=null?Math.round(p.sd)+'&deg;':'N/A'}</b></div><div><label>Vert Brk</label><b>${sgn(p.vbt)}</b></div><div><label>Horiz Brk</label><b>${sgn(p.hb)}</b></div><div><label>Pitch Result</label><b>${p.call}</b></div>${re?`<div class="wide"><label>MLB's tag</label><b>${LAB[p.om]||p.om} <span>(re-labeled to ${LAB[p.t]||p.t} by the site)</span></b></div>`:''}</div>`;
  });
  return h+'</div></div></td></tr>';
@@ -1656,7 +1722,53 @@ function renderChart(){
  bindClicks();
 }
 $('prev').onclick=()=>{slide=(slide+SLIDES.length-1)%SLIDES.length;renderChart()};$('next').onclick=()=>{slide=(slide+1)%SLIDES.length;renderChart()};
-function all(){renderChips();renderRes();renderTiles();renderTable();renderChart()}
+const GAMEMODE=!!$('abs');
+function outcomeOf(ab){
+ const l=ab[ab.length-1],k=kind(l);
+ if(k==='INPLAY')return [l.res||'In play',/single|double|triple|home run/i.test(l.res||'')?'hit':(/error/i.test(l.res||'')?'':'out')];
+ if(l.call==='Hit By Pitch')return ['Hit By Pitch','walk'];
+ if(k==='BALL'&&l.b===3)return ['Walk','walk'];
+ if(l.s===2&&(k==='SWING'||l.call==='Foul Tip'))return ['Strikeout (swinging)','k'];
+ if(l.s===2&&k==='CALLED')return ['Strikeout (looking)','k'];
+ return ['—',''];
+}
+const gxOpen=new Set();
+function renderAbs(){
+ const box=$('abs');if(!box)return;
+ const by=new Map();P.forEach(p=>{if(!by.has(p.ai))by.set(p.ai,[]);by.get(p.ai).push(p)});
+ box.innerHTML=[...by.entries()].map(([ai,ab])=>{
+  const rows=ab.filter(p=>!sel.length||sel.includes(p.t));if(!rows.length)return '';
+  const f=ab[0],[ot,oc]=outcomeOf(ab),on=abSel===ai;
+  const body=rows.map(p=>{const k=kind(p),cc=k==='BALL'?'c-ball':(k==='INPLAY'?'c-inp':'c-strike'),open=gxOpen.has(p.ix);
+   const rtxt=k==='INPLAY'?(p.res||'In play')+(p.ev!=null?` — ${p.ev.toFixed(1)} mph`+(p.la!=null?` · ${Math.round(p.la)}° LA`:''):''):p.call;
+   return `<div class="gx-row ${cc}" data-gx="${p.ix}"><div style="color:var(--text-muted,#5a6472);font-weight:600">${p.pn}</div><div><span class="dot" style="background:${COL[p.t]};margin-right:6px"></span>${LAB[p.t]}</div><div style="font-weight:700">${f1(p.v)}</div><div>${p.spin!=null?p.spin:'N/A'}</div><div>${p.z!=null?p.z:'—'}</div><div>${p.ev!=null?p.ev.toFixed(1):'—'}</div><div>${p.la!=null?Math.round(p.la)+'°':'—'}</div><div>${rtxt}</div></div>`
+   +`<div class="gx-det${open?' open':''}" id="gxd-${p.ix}"><div><label>Count</label><b>${p.b}-${p.s}</b></div><div><label>Plate X, Z</label><b>${p.px!=null&&p.pz!=null?p.px.toFixed(2)+', '+p.pz.toFixed(2)+' ft':'—'}</b></div><div><label>Induced Vert. Break</label><b>${sgn(p.vb)}</b></div><div><label>Horiz. Break</label><b>${sgn(p.hb)}</b></div><div><label>Trajectory</label><b>${p.tr?p.tr.replace('_',' '):'—'}</b></div><div><label>Distance</label><b>${p.dist!=null&&p.dist>0&&!/ground|bunt/.test(p.tr)?Math.round(p.dist)+' ft':'—'}</b></div><div><label>Spin Direction</label><b>${p.sd!=null?Math.round(p.sd)+'&deg;':'N/A'}</b></div>${p.pai!=null?`<div><a data-see="${p.ix}">See this pitch &rarr;</a></div>`:''}</div>`}).join('');
+  return `<div class="gx-ab"><div class="gx-abh${on?' selected':''}" data-ab="${ai}"><div><span class="gx-inn">${f.half==='top'?'Top':'Bot'} ${f.gin}</span> &nbsp; <span class="gx-pit">vs. ${f.pit||''}${f.h?' ('+f.h+'HP)':''}</span><span class="gx-hintsel">${on?'(shown above — click to clear)':'(click to show only this at-bat)'}</span></div><div class="gx-out ${oc}">${ot}</div></div><div class="gx-row hd"><div>#</div><div>Type</div><div>Velo</div><div>Spin</div><div>Zone</div><div>Exit Velo</div><div>Launch</div><div>Result <span style="text-transform:none;font-weight:500">(click row for full Statcast)</span></div></div>${body}</div>`}).join('');
+ box.querySelectorAll('.gx-abh').forEach(h=>h.onclick=()=>{const a=+h.dataset.ab;abSel=abSel===a?null:a;all()});
+ box.querySelectorAll('.gx-row[data-gx]').forEach(r=>r.onclick=()=>{const i=+r.dataset.gx;if(gxOpen.has(i))gxOpen.delete(i);else gxOpen.add(i);const d=document.getElementById('gxd-'+i);if(d)d.classList.toggle('open')});
+ box.querySelectorAll('[data-see]').forEach(a=>a.onclick=e=>{e.stopPropagation();askSeePitch(P[+a.dataset.see])});
+}
+function renderInnTable(){
+ const t=$('itbl');if(!t)return;
+ const base=P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&cntOk(p)&&hitOk(p)&&(abSel===null||p.ai===abSel));
+ const ins=[...new Set(base.map(p=>p.inn))].sort((a,b)=>a-b);
+ const row=(lab,a,cls,attr)=>{const s=stats(a);return `<tr class="${cls||''}" ${attr||''}><td>${lab}</td><td>${s.n}</td><td>${s.swing}</td><td>${s.whiffPct}</td><td>${s.chase}</td><td>${s.bipN}</td><td>${f1(s.avgEV)}</td><td>${s.hard}</td></tr>`};
+ t.innerHTML='<thead><tr><th>Inning</th><th>Pitches</th><th>Swing %</th><th>Whiff %</th><th>Chase %</th><th>In Play</th><th>Avg EV</th><th>Hard-Hit</th></tr></thead><tbody>'+ins.map(n=>row(n,base.filter(p=>p.inn===n),inn.includes(String(n))?'sel':(inn.length?'dim':''),`data-i="${n}"`)).join('')+row('All',base,'tot')+'</tbody>';
+ t.querySelectorAll('tbody tr[data-i]').forEach(r=>r.onclick=()=>{const n=r.dataset.i;inn=inn.length===1&&inn[0]===n?[]:[n];all()});
+ const h=$('hint-inn');if(h)h.textContent=ins.length+' inning'+(ins.length===1?'':'s');
+ const h2=$('hint-types');if(h2)h2.textContent=types.length+' pitch type'+(types.length===1?'':'s');
+}
+const GLOSS=[['Plate discipline',[['Pitches Seen','Total pitches thrown to the hitter.'],['Swing %','Share of pitches swung at (swinging strikes, fouls and balls in play).'],['Whiff %','Swinging strikes per swing.'],['Chase %','Swings at pitches outside the strike zone, per pitch outside the zone.'],['Zone Swing %','Swings at pitches inside the strike zone, per pitch in the zone.'],['Zone Contact %','Contact made on swings at pitches in the zone.'],['Contact %','Contact made per swing, in or out of the zone.'],['Called Strike %','Share of pitches taken for a called strike.'],['1st-Pitch Swing','Swing rate on the first pitch of the plate appearance.'],['Avg Velo Seen','Average pitch velocity the hitter faced.']]],['Contact quality',[['Balls In Play','Pitches put in play with tracked batted-ball data.'],['Hard-Hit','Balls in play hit 95 mph or harder.'],['Avg / Max Exit Velo','Average and maximum speed of the ball off the bat.'],['Avg Launch Angle','Average vertical angle of the ball off the bat.'],['Barrel %','Approximation of MLB barrels: ideal exit velocity and launch angle pairing.'],['Sweet Spot %','Balls in play with a launch angle between 8 and 32 degrees.'],['Ground Ball / Line Drive / Fly Ball','Batted-ball type share of balls in play.']]]];
+function renderGloss(){
+ const b=$('glbody');if(!b)return;const q=(($('glsearch')||{}).value||'').trim().toLowerCase();
+ const h=GLOSS.map(([g,it])=>{const r=it.filter(([n,d])=>!q||(n+' '+d).toLowerCase().includes(q));return r.length?`<h4>${g}</h4><dl>${r.map(([n,d])=>`<dt>${n}</dt><dd>${d}</dd>`).join('')}</dl>`:''}).join('');
+ b.innerHTML=h||'<div class="note">No matching stats.</div>';
+}
+if(GAMEMODE){
+ ROOT.querySelectorAll('.gx-head').forEach(b=>b.onclick=()=>{const o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',String(o));ROOT.querySelector('#gx-'+b.dataset.g).hidden=!o;const h=b.querySelector('.gx-hint[id]');if(h)h.hidden=o});
+ $('glsearch').oninput=renderGloss;renderGloss();
+}
+function all(){renderChips();renderRes();renderTiles();renderTable();renderChart();if(GAMEMODE){renderInnTable();renderAbs()}}
 all();
   }
 
@@ -2983,10 +3095,21 @@ all();
         const opp = opponentMap.get(gameParam) || '';
         const gd = gRows.length ? gRows[0].date : '';
         const back = `player.html?id=${playerId}&season=${currentSeason}`;
-        window.HIT_GAME_MODE = { title: `Statcast &mdash; ${gd ? formatShortDate(gd) + ' ' : ''}${opp ? 'vs ' + cityFromOpponent(opp) : ''}` };
-        content.innerHTML = `<div style="margin:0 0 .8rem"><a href="${back}" class="statcast-toggle-link">&larr; Back to ${player.full_name}</a></div>`
+        window.HIT_GAME_MODE = { title: 'Game Statcast' };
+        const sRow = schedule.filter(r => r.game_pk === gameParam).find(r => r.rescheduled === 'Y') || schedule.find(r => r.game_pk === gameParam);
+        const hLog = hitting.find(r => r.player_id === playerId && r.game_pk === gameParam);
+        const nick = n => String(n || '').replace(/^(Salt River|Glendale|Mesa|Peoria|Scottsdale|Surprise)\s+/, '');
+        const teamHl = n => (n && n === player.team) ? `<span class="team-hl">${n}</span>` : n;
+        const sides = []; gRows.forEach(r => { const s = (r.bat_side || '').toUpperCase().slice(0, 1); if (s && !sides.includes(s)) sides.push(s); });
+        const hand = sides.length === 1 ? ` (${sides[0]}HH)` : (sides.length > 1 ? ` (Switch &mdash; batted ${sides.join(' &amp; ')})` : '');
+        const nPit = hLog && hLog.number_of_pitches !== '' && hLog.number_of_pitches != null ? Number(hLog.number_of_pitches) : gRows.length;
+        const hLine = hLog ? `${player.full_name}${hand} &mdash; ${hLog.plate_appearances} PA, ${hLog.hits}-for-${hLog.at_bats}, ${hLog.rbi} RBI, ${hLog.strikeouts} K &mdash; ${nPit} pitches seen` : `${player.full_name}${hand} &mdash; ${nPit} pitches seen`;
+        const finalLine = sRow ? (sRow.status === 'Final' ? `Final &middot; ${nick(sRow.away_team)} ${sRow.away_score}, ${nick(sRow.home_team)} ${sRow.home_score}` : sRow.status) : '';
+        const header = sRow ? `<div class="game-header"><div class="game-header-left"><div class="game-matchup">${teamHl(sRow.away_team)} @ ${teamHl(sRow.home_team)}</div><div class="game-sub">${sRow.date}${sRow.venue ? ' &middot; ' + sRow.venue : ''}</div></div><div class="game-result"><div class="line">${finalLine}</div><div class="pitcher-line">${hLine}</div></div></div>` : '';
+        content.innerHTML = `<a href="${back}" class="back-link">&larr; Back to ${player.full_name}</a>` + header
           + (gRows.length ? hitterSeasonShell(player.team, 'x', [], playerId, window.HIT_GAME_MODE) : '<p class="error">No Statcast data for this game.</p>');
         window.HIT_GAME_MODE = null;
+        { const mn = document.querySelector('main'); if (mn) mn.style.maxWidth = '1180px'; }
         if (gRows.length) initSeasonStatcastHitter(gRows, hitterCtx);
         return;
       }
