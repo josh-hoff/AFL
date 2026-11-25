@@ -151,7 +151,7 @@
   .org-filter > label { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-align: center; }
   .org-btn {
     display: flex; align-items: center; justify-content: center; gap: 0.5rem; position: relative;
-    min-width: 230px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+    width: 280px; max-width: 100%; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
     padding: 0.5rem 2rem; border-radius: 6px; font-size: 0.95rem; font-weight: 600; font-family: inherit; cursor: pointer;
   }
   .org-btn.active { border-color: var(--tab-active); }
@@ -170,6 +170,10 @@
   .org-opt img { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
   .org-opt .org-logo-gap { width: 22px; flex-shrink: 0; }
   .team-opt-logo { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
+  .org-btn .btn-txt { display: flex; align-items: center; justify-content: center; gap: 0.55rem; min-width: 0; white-space: nowrap; }
+  .org-btn .btn-chip { display: inline-flex; align-items: center; gap: 0.3rem; min-width: 0; }
+  .org-btn .btn-chip .btn-name { overflow: hidden; text-overflow: ellipsis; }
+  .org-btn .btn-logo { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
   .org-opt .org-name { flex: 1; min-width: 0; }
   .org-opt .org-count { color: var(--text-muted); font-size: 0.78rem; font-weight: 600; font-variant-numeric: tabular-nums; }
   .org-opt .org-tick { width: 16px; text-align: center; color: var(--tab-active); font-weight: 800; visibility: hidden; }
@@ -713,10 +717,30 @@
     });
     return [...m.values()].sort((a, b) => a.name.localeCompare(b.name));
   }
-  function orgFilterLabel(orgList) {
-    if (selectedOrgs.size === 0) return 'All Organizations';
-    if (selectedOrgs.size === 1) { const o = orgList.find(x => selectedOrgs.has(x.key)); return o ? o.name : 'All Organizations'; }
-    return selectedOrgs.size + ' organizations';
+  // Club abbreviations for the closed button when a few organizations are picked.
+  const ORG_ABBR = {
+    'Arizona Diamondbacks': 'ARI', 'Atlanta Braves': 'ATL', 'Baltimore Orioles': 'BAL', 'Boston Red Sox': 'BOS',
+    'Chicago Cubs': 'CHC', 'Chicago White Sox': 'CWS', 'Cincinnati Reds': 'CIN', 'Cleveland Guardians': 'CLE',
+    'Cleveland Indians': 'CLE', 'Colorado Rockies': 'COL', 'Detroit Tigers': 'DET', 'Houston Astros': 'HOU',
+    'Kansas City Royals': 'KC', 'Los Angeles Angels': 'LAA', 'Los Angeles Dodgers': 'LAD', 'Miami Marlins': 'MIA',
+    'Milwaukee Brewers': 'MIL', 'Minnesota Twins': 'MIN', 'New York Mets': 'NYM', 'New York Yankees': 'NYY',
+    'Oakland Athletics': 'ATH', 'Athletics': 'ATH', 'Philadelphia Phillies': 'PHI', 'Pittsburgh Pirates': 'PIT',
+    'San Diego Padres': 'SD', 'San Francisco Giants': 'SF', 'Seattle Mariners': 'SEA', 'St. Louis Cardinals': 'STL',
+    'Tampa Bay Rays': 'TB', 'Texas Rangers': 'TEX', 'Toronto Blue Jays': 'TOR', 'Washington Nationals': 'WSH',
+  };
+  const orgAbbr = o => ORG_ABBR[o.name] || ((o.name.split(' ').pop() || o.name).slice(0, 3).toUpperCase());
+  const orgLogo = o => o.id ? `<img class="btn-logo" src="https://www.mlbstatic.com/team-logos/${o.id}.svg" alt="${o.name}" title="${o.name}" onerror="this.style.display='none'">` : '';
+  // What the closed button shows: none = All Organizations; 1 = logo + name; 2-3 = logo + abbreviation;
+  // 4-6 = logos only; 7 or more = a count. The button is always the same fixed width.
+  function orgButtonHtml(orgList) {
+    const picked = orgList.filter(o => selectedOrgs.has(o.key));
+    let inner;
+    if (picked.length === 0) inner = 'All Organizations';
+    else if (picked.length === 1) inner = `<span class="btn-chip">${orgLogo(picked[0])}<span class="btn-name">${picked[0].name}</span></span>`;
+    else if (picked.length <= 3) inner = picked.map(o => `<span class="btn-chip">${orgLogo(o)}<span>${orgAbbr(o)}</span></span>`).join('');
+    else if (picked.length <= 6) inner = picked.map(orgLogo).join('');
+    else inner = picked.length + ' organizations';
+    return `<span class="btn-txt">${inner}</span><span class="org-caret">&#9662;</span>`;
   }
   function orgFilterHtml(orgList, total) {
     if (orgList.length === 0) return '';
@@ -727,7 +751,7 @@
       <div class="org-filter" id="org-filter">
         <label for="org-btn">Parent Organization</label>
         <button type="button" id="org-btn" class="org-btn${selectedOrgs.size ? ' active' : ''}" aria-haspopup="true" aria-expanded="${orgOpen}">
-          <span>${orgFilterLabel(orgList)}</span><span class="org-caret">&#9662;</span>
+          ${orgButtonHtml(orgList)}
         </button>
         <div class="org-panel" id="org-panel"${orgOpen ? '' : ' hidden'}>
           <label class="org-multi"><input type="checkbox" id="org-multi"${orgMulti ? ' checked' : ''}> Multi-select</label>
@@ -804,7 +828,7 @@
         <div class="org-filter" id="team-filter">
           <label for="team-btn">Team</label>
           <button type="button" id="team-btn" class="org-btn" aria-haspopup="true" aria-expanded="${teamOpen}">
-            ${teamLogoImg(currentTeam, 'team-opt-logo')}<span>${currentTeam}</span><span class="org-caret">&#9662;</span>
+            <span class="btn-txt"><span class="btn-chip">${teamLogoImg(currentTeam, 'btn-logo')}<span class="btn-name">${currentTeam}</span></span></span><span class="org-caret">&#9662;</span>
           </button>
           <div class="org-panel" id="team-panel"${teamOpen ? '' : ' hidden'}>
             ${AFL_TEAM_NAMES.map(n => `<button type="button" class="org-opt${n === currentTeam ? ' sel' : ''}" data-team="${n}">${teamLogoImg(n, 'team-opt-logo')}<span class="org-name">${n}</span><span class="org-tick">&#10003;</span></button>`).join('')}
