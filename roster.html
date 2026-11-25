@@ -141,9 +141,38 @@
   }
   .team-filter-bar {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
     margin-bottom: 1.75rem;
   }
+  /* Parent organization filter (sits below the team dropdown) */
+  .org-filter { position: relative; display: flex; flex-direction: column; gap: 0.3rem; align-items: center; }
+  .org-filter > label { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-align: center; }
+  .org-btn {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem; position: relative;
+    min-width: 230px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+    padding: 0.5rem 2rem; border-radius: 6px; font-size: 0.95rem; font-weight: 600; font-family: inherit; cursor: pointer;
+  }
+  .org-btn.active { border-color: var(--tab-active); }
+  .org-btn .org-caret { position: absolute; right: 0.7rem; top: 50%; transform: translateY(-50%); font-size: 0.7rem; color: var(--text-muted); }
+  .org-panel {
+    position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 4px; z-index: 30;
+    width: min(340px, 92vw); max-height: 60vh; overflow-y: auto; background: var(--bg-card);
+    border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.14); padding: 0.35rem;
+  }
+  .org-panel[hidden] { display: none; }
+  .org-multi { display: flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.6rem 0.55rem; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); border-bottom: 1px solid var(--border); margin-bottom: 0.3rem; cursor: pointer; user-select: none; }
+  .org-multi input { width: 16px; height: 16px; accent-color: var(--tab-active); cursor: pointer; }
+  .org-opt { display: flex; align-items: center; gap: 0.6rem; width: 100%; background: none; border: 0; border-radius: 6px; padding: 0.45rem 0.6rem; font-family: inherit; font-size: 0.9rem; font-weight: 600; color: var(--text); cursor: pointer; text-align: left; }
+  .org-opt:hover { background: #faf7f3; }
+  .org-opt.sel { background: #fff0e2; }
+  .org-opt img { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
+  .org-opt .org-logo-gap { width: 22px; flex-shrink: 0; }
+  .org-opt .org-name { flex: 1; min-width: 0; }
+  .org-opt .org-count { color: var(--text-muted); font-size: 0.78rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .org-opt .org-tick { width: 16px; text-align: center; color: var(--tab-active); font-weight: 800; visibility: hidden; }
+  .org-opt.sel .org-tick { visibility: visible; }
   .filter-group {
     display: flex;
     flex-direction: column;
@@ -476,6 +505,9 @@
   let top100ById = {};
   let hitterRows = [], pitcherRows = [], fieldingRows = [];
   let currentView = 'roster';   // 'roster' | 'stats'
+  let selectedOrgs = new Set(); // parent organizations picked in the filter (empty = all players)
+  let orgMulti = false;         // 'Multi-select' box in the organization dropdown
+  let orgOpen = false;          // is the organization dropdown panel open
   let currentStatTab = 'hitting';   // 'hitting' | 'pitching' | 'fielding'
   const tsSort = { hitting: { k: 'plate_appearances', dir: -1 }, pitching: { k: 'outs', dir: -1 }, fielding: { k: 'games', dir: -1 } };
 
@@ -667,6 +699,77 @@
   function hometown(p) { return [p.birth_city, p.birth_state || p.birth_country].filter(Boolean).join(', ') || '—'; }
   function batsThrows(p) { return (p.bats ? p.bats[0] : '—') + '/' + (p.throws ? p.throws[0] : '—'); }
 
+  // ---------- Parent organization filter ----------
+  const orgKey = p => String(p.org_id || p.org_name || '');
+  function orgsOf(players) {
+    const m = new Map();
+    players.forEach(p => {
+      const k = orgKey(p);
+      if (!k) return;
+      if (!m.has(k)) m.set(k, { key: k, id: p.org_id || '', name: p.org_name || 'Unknown organization', count: 0 });
+      m.get(k).count++;
+    });
+    return [...m.values()].sort((a, b) => a.name.localeCompare(b.name));
+  }
+  function orgFilterLabel(orgList) {
+    if (selectedOrgs.size === 0) return 'All Organizations';
+    if (selectedOrgs.size === 1) { const o = orgList.find(x => selectedOrgs.has(x.key)); return o ? o.name : 'All Organizations'; }
+    return selectedOrgs.size + ' organizations';
+  }
+  function orgFilterHtml(orgList, total) {
+    if (orgList.length === 0) return '';
+    const opt = (o) => `<button type="button" class="org-opt${selectedOrgs.has(o.key) ? ' sel' : ''}" data-org="${o.key.replace(/"/g, '&quot;')}">
+        ${o.id ? `<img src="https://www.mlbstatic.com/team-logos/${o.id}.svg" alt="" onerror="this.style.display='none'">` : '<span class="org-logo-gap"></span>'}
+        <span class="org-name">${o.name}</span><span class="org-count">${o.count}</span><span class="org-tick">&#10003;</span></button>`;
+    return `
+      <div class="org-filter" id="org-filter">
+        <label for="org-btn">Parent Organization</label>
+        <button type="button" id="org-btn" class="org-btn${selectedOrgs.size ? ' active' : ''}" aria-haspopup="true" aria-expanded="${orgOpen}">
+          <span>${orgFilterLabel(orgList)}</span><span class="org-caret">&#9662;</span>
+        </button>
+        <div class="org-panel" id="org-panel"${orgOpen ? '' : ' hidden'}>
+          <label class="org-multi"><input type="checkbox" id="org-multi"${orgMulti ? ' checked' : ''}> Multi-select</label>
+          <button type="button" class="org-opt${selectedOrgs.size === 0 ? ' sel' : ''}" data-org=""><span class="org-logo-gap"></span><span class="org-name">All Organizations</span><span class="org-count">${total}</span><span class="org-tick">&#10003;</span></button>
+          ${orgList.map(opt).join('')}
+        </div>
+      </div>`;
+  }
+  function wireOrgFilter() {
+    const btn = document.getElementById('org-btn');
+    if (!btn) return;
+    const panel = document.getElementById('org-panel');
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      orgOpen = panel.hidden;
+      panel.hidden = !orgOpen;
+      btn.setAttribute('aria-expanded', String(orgOpen));
+    };
+    panel.onclick = (e) => e.stopPropagation();
+    document.getElementById('org-multi').onchange = (e) => { orgMulti = e.target.checked; };
+    panel.querySelectorAll('.org-opt').forEach(b => {
+      b.onclick = () => {
+        const k = b.dataset.org;
+        if (k === '') selectedOrgs.clear();
+        else if (orgMulti) { if (selectedOrgs.has(k)) selectedOrgs.delete(k); else selectedOrgs.add(k); }
+        else { selectedOrgs = new Set([k]); orgOpen = false; }
+        if (k === '') orgOpen = orgMulti;   // 'All Organizations' closes the panel unless multi-select is on
+        renderRoster();
+      };
+    });
+  }
+  if (!window.__orgFilterBound) {
+    window.__orgFilterBound = true;
+    document.addEventListener('click', () => {
+      const panel = document.getElementById('org-panel');
+      if (panel && !panel.hidden) { orgOpen = false; panel.hidden = true; const b = document.getElementById('org-btn'); if (b) b.setAttribute('aria-expanded', 'false'); }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      const panel = document.getElementById('org-panel');
+      if (panel && !panel.hidden) { orgOpen = false; panel.hidden = true; const b = document.getElementById('org-btn'); if (b) { b.setAttribute('aria-expanded', 'false'); b.focus(); } }
+    });
+  }
+
   function renderRoster() {
     const content = document.getElementById('content');
 
@@ -674,7 +777,11 @@
       currentTeam = AFL_TEAM_NAMES[0];
     }
 
-    const teamPlayers = allRoster.filter(p => p.team === currentTeam);
+    const wholeTeam = allRoster.filter(p => p.team === currentTeam);
+    // Parent organizations differ by team and by season, so the list is built from this team's players.
+    const orgList = orgsOf(wholeTeam);
+    for (const k of [...selectedOrgs]) if (!orgList.some(o => o.key === k)) selectedOrgs.delete(k);
+    const teamPlayers = selectedOrgs.size ? wholeTeam.filter(p => selectedOrgs.has(orgKey(p))) : wholeTeam;
     const teamTransactions = allTransactions
       .filter(t => t.team === currentTeam)
       .sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -685,6 +792,7 @@
           <label for="team-select">Team</label>
           <select id="team-select"></select>
         </div>
+        ${orgFilterHtml(orgList, wholeTeam.length)}
       </div>
       <div class="view-buttons">
         <button class="view-btn${currentView === 'roster' ? ' active' : ''}" data-view="roster">Roster</button>
@@ -777,8 +885,11 @@
       if (name === currentTeam) opt.selected = true;
       teamSelect.appendChild(opt);
     });
+    wireOrgFilter();
     teamSelect.onchange = () => {
       currentTeam = teamSelect.value;
+      selectedOrgs.clear();
+      orgOpen = false;
       updateUrl();
       renderRoster();
     };
