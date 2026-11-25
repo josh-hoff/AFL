@@ -241,7 +241,7 @@
   .sz-box .sz-cell:nth-child(3n) { border-right: none; }
   .sz-box .sz-cell:nth-child(-n+3) { border-top: none; }
   .sz-box .sz-cell:nth-child(n+7) { border-bottom: none; }
-.loc-tg{display:flex;justify-content:center;align-items:center;gap:8px;margin:0 0 .5rem}
+.loc-tg{display:flex;justify-content:center;align-items:center;gap:8px;margin:.55rem 0 0}.loc-tg[hidden]{display:none}
 .loc-tg button{background:transparent;border:1.5px solid var(--text-muted,#5a6472);color:var(--text-muted,#5a6472);border-radius:999px;padding:3px 13px;font:700 .76rem inherit;font-family:inherit;cursor:pointer}
 .loc-tg button.on{background:#0d1b3a;border-color:#0d1b3a;color:#fff}
 .loc-tg button:not(.on):hover{background:rgba(13,27,58,.1)}
@@ -1560,6 +1560,7 @@
       card.classList.toggle('active', Number(card.dataset.slide) === currentSlide);
     });
     document.getElementById('carouselTitle').innerHTML = `Statcast Charts &mdash; ${CHART_SLIDES[currentSlide]}`;
+    document.getElementById('locTg').hidden = currentSlide !== 0; // layer toggles only belong to the Pitch Location card
     renderChartDots();
   }
   function shiftChart(delta) { currentSlide = (currentSlide + delta + CHART_SLIDES.length) % CHART_SLIDES.length; showSlide(); }
@@ -1625,7 +1626,6 @@
             <div class="chart-carousel-viewport" id="chartsRow">
               <div class="heatmap-card active" data-slide="0">
                 <div class="heatmap-title" style="text-align: center;">Pitch Location <span id="heatmapScope"></span></div>
-                <div class="loc-tg" id="locTg"></div>
                 <div class="heatmap-wrap" id="heatmapWrap"></div>
                 <div class="hand-axis" aria-label="Catcher's view: right-handed hitters on the left, left-handed hitters on the right"><div class="hand-axis-inner"><svg class="hand-axis-plate" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon points="0,0 100,0 100,20 50,40 0,20" fill="var(--border)" stroke="var(--text-muted)" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg><span class="hand-axis-lbl" style="left:0">RHH</span><span class="hand-axis-lbl" style="right:0">LHH</span></div></div>
                 <div class="heatmap-legend" id="heatmapLegend"></div>
@@ -1695,6 +1695,7 @@
             </div>
             <button class="chart-nav-btn" onclick="shiftChart(1)" aria-label="Next chart">&#8250;</button>
           </div>
+          <div class="loc-tg" id="locTg"></div>
         </div>
       </div>
       <button type="button" class="sum-head" data-s="types" aria-expanded="false" onclick="toggleSection('types')"><span class="sum-car">&#9656;</span><span class="section-title">Pitch Type Summary</span><span class="sum-hint" id="hintTypes"></span></button>

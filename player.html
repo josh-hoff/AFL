@@ -358,7 +358,7 @@
 .rc-seg button,.rc-seg a{background:transparent;border:0;color:#0d1b3a;padding:3px 13px;font:700 .78rem inherit;font-family:inherit;cursor:pointer;text-decoration:none;white-space:nowrap;display:inline-block}
 .rc-seg .on{background:#0d1b3a;color:#fff;cursor:default}
 .rc-seg button:not(.on):hover,.rc-seg a:not(.on):hover{background:rgba(13,27,58,.1)}
-.loc-tg{display:flex;justify-content:center;align-items:center;gap:8px;margin:0 0 .5rem}
+.loc-tg{display:flex;justify-content:center;align-items:center;gap:8px;margin:.55rem 0 0}.loc-tg[hidden]{display:none}
 .loc-tg button{background:transparent;border:1.5px solid var(--text-muted,#5a6472);color:var(--text-muted,#5a6472);border-radius:999px;padding:3px 13px;font:700 .76rem inherit;font-family:inherit;cursor:pointer}
 .loc-tg button.on{background:#0d1b3a;border-color:#0d1b3a;color:#fff}
 .loc-tg button:not(.on):hover{background:rgba(13,27,58,.1)}
@@ -1105,8 +1105,7 @@ function chartMix(a){
   types.forEach(t=>{const c=ps.filter(p=>p.t===t).length;if(!c)return;const w=bw*c/ps.length;
    s+=`<rect${one(ps.filter(p=>p.t===t))} data-tip="<b>${LAB[t]}</b><br>${g[0]}<br>${c} of ${ps.length} (${(100*c/ps.length).toFixed(2)}%)" x="${x}" y="${y+10}" width="${Math.max(0,w-2)}" height="34" rx="3" fill="${COL[t]}"/>`;
    s+=`<text x="${x+w/2-1}" y="${y+31}" text-anchor="middle" font-size="${w<30?9:11}" font-weight="700" style="fill:#fff;pointer-events:none">${Math.round(100*c/ps.length)}%</text>`;x+=w});
-  s+='</g>';
- });
+  });
  return s+'</svg>';
 }
 function chartVelo(a){
@@ -1169,18 +1168,19 @@ function chartEV(a){
 const OC2={CALLED:'#c0392b',SWING:'#c0392b',FOUL:'#c0392b',BALL:'#1a8a4a',INPLAY:'#2f6fb0'};
 function chartLoc(a){
  const inSet=new Set(a);const base=P.filter(p=>!sel.length||sel.includes(p.t));
- const W=500,H=470,H2=H+58,sx=80,sy=88,cx=W/2,X=v=>cx+v*sx,Y=v=>H-14-v*sy*0.9;
- let s=`<svg viewBox="0 0 ${W} ${H2}"><rect x="${X(-2.6)}" y="${Y(4.6)}" width="${5.2*sx}" height="${(4.6-0.1)*sy*.9}" fill="none" stroke="var(--grid)" stroke-dasharray="3 3"/>`;
- if(LOC_HEAT){const hu=locHeatUrl(a.filter(p=>p.px!=null&&p.pz!=null).map(p=>[p.px,p.pz]),-2.6,2.6,0.1,4.6,130,113);if(hu)s+=`<image href="${hu}" x="${X(-2.6)}" y="${Y(4.6)}" width="${5.2*sx}" height="${(4.6-0.1)*sy*.9}" preserveAspectRatio="none"/>`}
+ const ZMIN=-0.5,W=500,H=470,sx=80,sy=88,cx=W/2,X=v=>cx+v*sx,Y=v=>H-14-v*sy*0.9,H2=H+58+(0.1-ZMIN)*sy*0.9; // plot now reaches z=-0.5 (dirt) so low pitches never land on the axis/plate
+ let s=`<svg viewBox="0 0 ${W} ${H2}"><rect x="${X(-2.6)}" y="${Y(4.6)}" width="${5.2*sx}" height="${(4.6-ZMIN)*sy*.9}" fill="none" stroke="var(--grid)" stroke-dasharray="3 3"/>`;
+ if(LOC_HEAT){const hu=locHeatUrl(a.filter(p=>p.px!=null&&p.pz!=null).map(p=>[p.px,p.pz]),-2.6,2.6,ZMIN,4.6,130,128);if(hu)s+=`<image href="${hu}" x="${X(-2.6)}" y="${Y(4.6)}" width="${5.2*sx}" height="${(4.6-ZMIN)*sy*.9}" preserveAspectRatio="none"/>`}
  const zx0=X(-.708),zx1=X(.708),zy0=Y(3.5),zy1=Y(1.5);
  for(let i=1;i<3;i++){s+=`<line x1="${zx0+(zx1-zx0)*i/3}" x2="${zx0+(zx1-zx0)*i/3}" y1="${zy0}" y2="${zy1}" stroke="var(--grid)"/><line x1="${zx0}" x2="${zx1}" y1="${zy0+(zy1-zy0)*i/3}" y2="${zy0+(zy1-zy0)*i/3}" stroke="var(--grid)"/>`}
  s+=`<rect x="${zx0}" y="${zy0}" width="${zx1-zx0}" height="${zy1-zy0}" fill="none" stroke="var(--ink)" stroke-width="2.5"/>`;
- (LOC_DOTS?base:[]).filter(p=>p.px!=null&&p.pz!=null).forEach(p=>{const k=kind(p),c=OC2[k],x=X(p.px),y=Y(p.pz),op=inSet.has(p)?.8:.1;
-  const tp=`data-px="${p.ix}" data-tip="<b>${LAB[p.t]}</b> &middot; ${p.v!=null?p.v.toFixed(1)+' mph':''}<br>${p.call}<br>${DATA.games[p.g].date} vs ${DATA.games[p.g].opp}"`;
+ (LOC_DOTS?base:[]).filter(p=>p.px!=null&&p.pz!=null).forEach(p=>{const k=kind(p),c=OC2[k],rx0=X(p.px),ry0=Y(p.pz),x=Math.min(W-8,Math.max(8,rx0)),y=Math.min(H2-8,Math.max(8,ry0)),off=(x!==rx0||y!==ry0),op=inSet.has(p)?.8:.1; // every pitch is drawn; the rare wild one beyond the chart is pinned to its edge
+  const tp=`data-px="${p.ix}" data-tip="<b>${LAB[p.t]}</b> &middot; ${p.v!=null?p.v.toFixed(1)+' mph':''}<br>${p.call}${off?'<br><i>off the chart &mdash; shown at the edge</i>':''}<br>${DATA.games[p.g].date} vs ${DATA.games[p.g].opp}"`;
   if(k==='SWING')s+=`<text ${tp} x="${x}" y="${y+4.5}" text-anchor="middle" font-size="13" font-weight="800" style="fill:${c};opacity:${op}">&#10005;</text>`;
   else if(k==='FOUL')s+=`<rect ${tp} x="${x-3.5}" y="${y-3.5}" width="7" height="7" fill="${c}" opacity="${op}"/>`;
   else s+=`<circle ${tp} cx="${x}" cy="${y}" r="4" fill="${c}" opacity="${op}"/>`});
- const ay=Y(.1)+14,pl=X(-.708),pr=X(.708);
+ s+='</g>';
+ const ay=Y(ZMIN)+14,pl=X(-.708),pr=X(.708);
  s+=`<line x1="${X(-2.6)}" x2="${X(2.6)}" y1="${ay}" y2="${ay}" stroke="var(--mut)" stroke-width="1.5"/><line x1="${X(-2.6)}" x2="${X(-2.6)}" y1="${ay-5}" y2="${ay+4}" stroke="var(--mut)" stroke-width="1.5"/><line x1="${X(2.6)}" x2="${X(2.6)}" y1="${ay-5}" y2="${ay+4}" stroke="var(--mut)" stroke-width="1.5"/>`;
  s+=`<polygon points="${pl},${ay} ${pr},${ay} ${pr},${ay+26} ${X(0)},${ay+52} ${pl},${ay+26}" fill="var(--line)" stroke="var(--mut)" stroke-width="1.5" stroke-linejoin="round"/>`;
  s+=`<text x="${X(-2.6)}" y="${ay+34}" font-size="19" font-weight="800" letter-spacing=".06em" class="m">RHH</text><text x="${X(2.6)}" y="${ay+34}" text-anchor="end" font-size="19" font-weight="800" letter-spacing=".06em" class="m">LHH</text>`;
@@ -1276,7 +1276,8 @@ function renderChart(){
  $('cnote').textContent=SN==='Pitch Mix by Count'?'Click a count row to filter by it.':SN==='Velocity by Inning'?(sel.length?'Every pitch of the selected type(s) in the order thrown, grouped by inning pitched and game. Click an inning to filter by it.':'Average velocity in each inning of the outing (1st inning pitched, 2nd, ...) across every appearance. Click an inning to filter by it.'):SN==='Spin Direction'?(sel.length?'Faded arrows are individual pitches; the bold arrow is the season average.':'Average spin direction of each pitch type. Select a pitch type to see every pitch behind its average.'):SN==='Pitch Location'||SN==='Exit Velocity vs. Launch Angle'?'':SN==='Pitch Movement'||SN==='Release Point'?'Dots are individual pitches; larger rings are each pitch type\'s season average.':''
  if(SN==='Pitch Location'){const hk=LOC_HEAT?'<span class="heat-key">Fewer <i></i> More pitches</span>':'';leg=(LOC_DOTS?leg:'')+hk}
  const locTg=SN==='Pitch Location'?`<div class="loc-tg" role="group" aria-label="Pitch Location layers"><button type="button" data-loc="dots" class="${LOC_DOTS?'on':''}" aria-pressed="${LOC_DOTS}">Pitches</button><button type="button" data-loc="heat" class="${LOC_HEAT?'on':''}" aria-pressed="${LOC_HEAT}">Heat Map</button></div>`:'';
- $('plot').innerHTML=(!a.length||!h)?`<div class="empty">${!a.length?'No pitches match this selection.':'No balls in play in this selection.'}</div>`:locTg+h+`<div class="leg">${leg}</div>`;
+ $('plot').innerHTML=(!a.length||!h)?`<div class="empty">${!a.length?'No pitches match this selection.':'No balls in play in this selection.'}</div>`:h+`<div class="leg">${leg}</div>`;
+ $('loc-tg').innerHTML=locTg;$('loc-tg').hidden=SN!=='Pitch Location';
  ROOT.querySelectorAll('.loc-tg button').forEach(b=>b.onclick=()=>{const k=b.dataset.loc;if(k==='dots'){if(LOC_DOTS&&!LOC_HEAT)return;LOC_DOTS=!LOC_DOTS}else{if(LOC_HEAT&&!LOC_DOTS)return;LOC_HEAT=!LOC_HEAT}renderChart()});
  hook();
  bindClicks();
@@ -1314,6 +1315,7 @@ all();
           <div>
             <div class="cht"><h3 style="margin:0" id="sc-ctitle"></h3><div class="dots" id="sc-dots"></div></div>
             <div class="car"><button class="nav" id="sc-prev" aria-label="Previous chart">&#8249;</button><div class="ch card" id="sc-plot"></div><button class="nav" id="sc-next" aria-label="Next chart">&#8250;</button></div>
+            <div class="loc-tg" id="sc-loc-tg" hidden></div>
             <div class="note" id="sc-cnote"></div>
           </div>
         </div>
