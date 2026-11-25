@@ -425,6 +425,7 @@
     { code: 'FC', label: 'Cutter',        category: 'Fastball' },
     { code: 'CH', label: 'Changeup',      category: 'Changeup/Splitter' },
     { code: 'FS', label: 'Splitter',      category: 'Changeup/Splitter' },
+    { code: 'CS', label: 'Split/Change',  category: 'Changeup/Splitter' },
     { code: 'FO', label: 'Forkball',      category: 'Changeup/Splitter' },
     { code: 'CU', label: 'Curveball',     category: 'Off-Speed' },
     { code: 'KC', label: 'Knuckle-Curve', category: 'Off-Speed' },
@@ -1791,13 +1792,15 @@
         ${(() => {
           const nChanged = rawPitches.filter(r => r._changed).length;
           if (!nChanged) return '';
-          const pl = nChanged === 1 ? '1 pitch' : nChanged + ' pitches';
+          const nM = rawPitches.filter(r => r._changed && r._why === 'measure').length, nF = nChanged - nM;
+          const pc = k => k === 1 ? '1 pitch' : k + ' pitches';
+          const pl = [nM ? pc(nM) + ' re-labeled based on their measurements.' : '', nF ? pc(nF) + ' grouped as Split/Change (MLB tags changeups and splitters inconsistently).' : ''].filter(Boolean).join(' ');
           const qa = new URLSearchParams(window.location.search); qa.delete('tags');
           const qm = new URLSearchParams(window.location.search); qm.set('tags', 'mlb');
           const seg = USE_MLB_TAGS
             ? `<a href="?${qa.toString()}">Auto-Adjusted Tags</a><a class="on" href="?${qm.toString()}" aria-current="true">MLB Tags</a>`
             : `<a class="on" href="?${qa.toString()}" aria-current="true">Auto-Adjusted Tags</a><a href="?${qm.toString()}">MLB Tags</a>`;
-          return `<div class="reclass-bar"><span class="rc-seg">${seg}</span><span>${USE_MLB_TAGS ? "Showing MLB's original tags." : pl + ' re-labeled based on their measurements.'}</span></div>`;
+          return `<div class="reclass-bar"><span class="rc-seg">${seg}</span><span>${USE_MLB_TAGS ? "Showing MLB's original tags." : pl}</span></div>`;
         })()}
       `);
 
