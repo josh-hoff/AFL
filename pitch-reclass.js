@@ -22,6 +22,8 @@
   var MIN_ANCHOR = 10;          // fastballs (with spin) needed to know a pitcher's normal spin
   var LOW_R = 0.70, HIGH_R = 0.92; // spin vs. own fastball: breaking balls below LOW_R, changeups/splitters above HIGH_R are suspect
   var FIT_Z = 2.0;              // a metric "fits" a profile when it is within this many spreads
+  var DROP_R = 0.65, DROP_GAP = 800; // a breaking ball spinning under 65% of his fastball AND 800+ rpm below it is a changeup/splitter, full stop
+  var SPIN_EXTREME = 5.0, SPIN_WINS_RATIO = 1.25; // huge spin gap: new type only needs to be 1.25x closer overall
   var FAM = 'FAM';              // internal class for changeup + splitter
   var FAMILY = { CH: 1, FS: 1 };
   var FASTBALLS = { FF: 1, SI: 1, FT: 1 };
@@ -121,6 +123,8 @@
     rows.forEach(function (r, i) {
       var c = cls(r._mlb_code), v = vals[i], rr = ratio[i], target = null;
       if (!c) return;
+      // Big spin drop: his breaking balls never spin like that, his changeup/splitter does. Spin alone decides.
+      if (BREAKERS[c] && v.spin !== null && anchor && rr < DROP_R && anchor - v.spin >= DROP_GAP) { r._adj_code = FAM; r._why = 'measure'; return; }
       var own = prof[c], a = own ? zs(v, own) : null;
 
       if (v.spin !== null) {
@@ -134,12 +138,20 @@
             if (t === c) return;
             if (!(BREAKERS[t] || FASTBALLS[t] || t === FAM)) return;
             if (!plausibleVsFastball(t, rr)) return;
-            var b = zs(v, prof[t]); if (b.k < MIN_FEATURES || !(b.z.spin <= FIT_Z)) return;
+            var b = zs(v, prof[t]); if (b.k < MIN_FEATURES) return;
+            // Spin must fit the target. If the target's profile has too few spin readings to have a spin spread,
+            // his fastball spin decides instead (already checked by plausibleVsFastball above).
+            if (b.z.spin !== undefined && !(b.z.spin <= FIT_Z)) return;
             if (!best || b.D < best.b.D) best = { t: t, b: b };
           });
           if (best) {
+            // When the spin gap is huge (5+ spreads off his own type, or impossible against his fastball) spin carries the decision:
+            // the new type only has to be clearly closer overall, not twice as close.
+            var spinExtreme = (a && a.z.spin !== undefined && a.z.spin >= SPIN_EXTREME) || fbOff;
             var of = otherFit(best.b), lim = (best.t === FAM) ? NEAR + 0.5 : NEAR;
-            var closer = a ? a.D >= RATIO * best.b.D : (fbOff && c === FAM); // with no profile of its own, only the fastball baseline can speak
+            // With no spin readings in his own profile for this type, his fastball spin is the only spin judge: if it says
+            // the spin is impossible for the tag and the pitch fits the other type well, that is enough.
+            var closer = a ? (a.z.spin === undefined ? fbOff : a.D >= (spinExtreme ? SPIN_WINS_RATIO : RATIO) * best.b.D) : (fbOff && c === FAM); // with no profile of its own, only the fastball baseline can speak
             if (of.have >= 2 && of.fit >= 2 && best.b.D <= lim && closer) target = best.t;
           }
         }
