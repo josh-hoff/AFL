@@ -964,10 +964,13 @@ function renderChips(){
  $('chips').innerHTML=h;
  ROOT.querySelectorAll('.chip').forEach(b=>b.onclick=()=>pick(b.dataset.t));
  $('multi').onclick=()=>{multi=!multi;if(!multi&&sel.length>1)sel=[sel[0]];all()};
- $('reset').onclick=()=>{sel=[];res=[];cnt=[];inn=[];hit=[];multi=false;resMulti=false;cntMulti=false;innMulti=false;all()};
+ $('reset').onclick=()=>{sel=[];res=[];cnt=[];inn=[];hit=[];multi=false;resMulti=false;cntMulti=false;innMulti=false;openTypes.clear();all()};
 }
 function pick(t){
- if(t==='ALL')sel=[];else if(multi)sel=sel.includes(t)?sel.filter(x=>x!==t):[...sel,t];else sel=(sel.length===1&&sel[0]===t)?[]:[t];all();
+ if(t==='ALL')sel=[];else if(multi)sel=sel.includes(t)?sel.filter(x=>x!==t):[...sel,t];else sel=(sel.length===1&&sel[0]===t)?[]:[t];
+ // The Pitch Type Summary's open pitch lists follow the selection: only the selected type(s) stay open.
+ openTypes.clear();sel.forEach(x=>openTypes.add(x));
+ all();
 }
 const RES_OPTS=[['ALL','All Results'],['CALLED','Called Strike'],['SWING','Swinging Strike'],['FOUL','Foul'],['BALL','Ball'],['INPLAY','Ball In Play']];
 const OCOL={CALLED:'#c0392b',SWING:'#e8590c',FOUL:'#b8860b',BALL:'#6b7280',INPLAY:'#2563a8'};
@@ -1035,7 +1038,7 @@ function renderTable(){
  rows.forEach(r=>{const op=openTypes.has(r.t);h+=`<tr data-t="${r.t}" class="${sel.includes(r.t)?'sel':(sel.length?'dim':'')}"><td><span class="pl-chev" data-ar="${r.t}" role="button" aria-expanded="${op}" title="${op?'Hide':'Show'} every ${LAB[r.t]} pitch">${op?'&#9662;':'&#9656;'}</span><span class="dot" style="background:${COL[r.t]};margin-right:8px"></span><b>${LAB[r.t]}</b></td>${cell(r.s)}</tr>`+(op?pitchLogHtml(r.t,base):'')});
  h+=`<tr class="tot"><td>All</td>${cell(stats(base))}</tr></tbody>`;
  $('tbl').innerHTML=h;
- ROOT.querySelectorAll('#sc-tbl tbody tr[data-t]').forEach(r=>r.onclick=()=>{const t=r.dataset.t;pick(t);if(sel.includes(t)){openTypes.add(t);renderTable()}});
+ ROOT.querySelectorAll('#sc-tbl tbody tr[data-t]').forEach(r=>r.onclick=()=>{const t=r.dataset.t;pick(t)});
  ROOT.querySelectorAll('#sc-tbl .pl-chev').forEach(a=>a.onclick=e=>{e.stopPropagation();const t=a.dataset.ar;if(openTypes.has(t))openTypes.delete(t);else openTypes.add(t);renderTable()});
  ROOT.querySelectorAll('#sc-tbl .pl-r').forEach(r=>r.onclick=e=>{e.stopPropagation();const i=+r.dataset.pix;if(openPitches.has(i))openPitches.delete(i);else openPitches.add(i);renderTable()});
  ROOT.querySelectorAll('#sc-tbl th[data-k]').forEach(th=>th.onclick=()=>{if(sortK===th.dataset.k)sortAsc=!sortAsc;else{sortK=th.dataset.k;sortAsc=false}renderTable()});
