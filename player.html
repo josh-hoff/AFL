@@ -358,6 +358,12 @@
 .rc-seg button,.rc-seg a{background:transparent;border:0;color:#0d1b3a;padding:3px 13px;font:700 .78rem inherit;font-family:inherit;cursor:pointer;text-decoration:none;white-space:nowrap;display:inline-block}
 .rc-seg .on{background:#0d1b3a;color:#fff;cursor:default}
 .rc-seg button:not(.on):hover,.rc-seg a:not(.on):hover{background:rgba(13,27,58,.1)}
+.loc-tg{display:flex;justify-content:center;align-items:center;gap:8px;margin:0 0 .5rem}
+.loc-tg button{background:transparent;border:1.5px solid var(--text-muted,#5a6472);color:var(--text-muted,#5a6472);border-radius:999px;padding:3px 13px;font:700 .76rem inherit;font-family:inherit;cursor:pointer}
+.loc-tg button.on{background:#0d1b3a;border-color:#0d1b3a;color:#fff}
+.loc-tg button:not(.on):hover{background:rgba(13,27,58,.1)}
+.heat-key{display:inline-flex;align-items:center;gap:6px}
+.heat-key i{display:inline-block;width:70px;height:9px;border-radius:5px;background:linear-gradient(90deg,rgba(255,224,130,.5),rgba(245,130,50,.75),rgba(190,35,35,.9))}
 .retag{color:var(--tab-active);font-weight:800;cursor:help;margin-left:2px}
 </style>
 </head>
@@ -862,6 +868,37 @@
   }
 
   let SC_USE_MLB = false;
+  let LOC_DOTS = true, LOC_HEAT = true; // Pitch Location chart layers (independent on/off)
+
+  // ---- Pitch Location heat map: smoothed density of where pitches were thrown, drawn UNDER the pitch dots. ----
+  // pts = [[plate_x, plate_z], ...]; returns a PNG data URL covering x0..x1 (ft) by z0..z1 (ft), or null if nothing to draw.
+  function locHeatUrl(pts, x0, x1, z0, z1, W, H) {
+    if (!pts.length) return null;
+    const g = new Float32Array(W * H), sx = (x1 - x0) / W, sz = (z1 - z0) / H, sig = 0.3, sp = sig / sx, sq = sig / sz, rx = Math.ceil(sp * 3), rz = Math.ceil(sq * 3);
+    pts.forEach(([x, z]) => {
+      const cx = (x - x0) / sx, cy = (z1 - z) / sz;
+      for (let j = Math.max(0, Math.floor(cy - rz)); j <= Math.min(H - 1, Math.ceil(cy + rz)); j++)
+        for (let i = Math.max(0, Math.floor(cx - rx)); i <= Math.min(W - 1, Math.ceil(cx + rx)); i++) {
+          const dx = (i + 0.5 - cx) / sp, dz = (j + 0.5 - cy) / sq; g[j * W + i] += Math.exp(-(dx * dx + dz * dz) / 2);
+        }
+    });
+    let m = 0; for (let k = 0; k < g.length; k++) if (g[k] > m) m = g[k];
+    if (!m) return null;
+    const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    const c2 = cv.getContext('2d'), im = c2.createImageData(W, H);
+    const lerp = (a, b, t) => a + (b - a) * t;
+    for (let k = 0; k < g.length; k++) {
+      const t = g[k] / m; let r = 0, gg = 0, b = 0, a = 0;
+      if (t >= 0.07) {
+        if (t < 0.35) { const u = (t - 0.07) / 0.28; r = 255; gg = 224; b = 130; a = lerp(0, 0.55, u); }
+        else if (t < 0.7) { const u = (t - 0.35) / 0.35; r = lerp(255, 245, u); gg = lerp(224, 130, u); b = lerp(130, 50, u); a = lerp(0.55, 0.72, u); }
+        else { const u = (t - 0.7) / 0.3; r = lerp(245, 190, u); gg = lerp(130, 35, u); b = lerp(50, 35, u); a = lerp(0.72, 0.88, u); }
+      }
+      im.data[k * 4] = r; im.data[k * 4 + 1] = gg; im.data[k * 4 + 2] = b; im.data[k * 4 + 3] = Math.round(a * 255);
+    }
+    c2.putImageData(im, 0, 0);
+    return cv.toDataURL('image/png');
+  }
   // Wording for the Auto-Adjusted note: pitches corrected from their measurements, and/or changeups + splitters grouped as Split/Change.
   function reclassNote(nm, nf) {
     const p = k => k === 1 ? '1 pitch' : k + ' pitches';
@@ -1134,10 +1171,11 @@ function chartLoc(a){
  const inSet=new Set(a);const base=P.filter(p=>!sel.length||sel.includes(p.t));
  const W=500,H=470,H2=H+58,sx=80,sy=88,cx=W/2,X=v=>cx+v*sx,Y=v=>H-14-v*sy*0.9;
  let s=`<svg viewBox="0 0 ${W} ${H2}"><rect x="${X(-2.6)}" y="${Y(4.6)}" width="${5.2*sx}" height="${(4.6-0.1)*sy*.9}" fill="none" stroke="var(--grid)" stroke-dasharray="3 3"/>`;
+ if(LOC_HEAT){const hu=locHeatUrl(a.filter(p=>p.px!=null&&p.pz!=null).map(p=>[p.px,p.pz]),-2.6,2.6,0.1,4.6,130,113);if(hu)s+=`<image href="${hu}" x="${X(-2.6)}" y="${Y(4.6)}" width="${5.2*sx}" height="${(4.6-0.1)*sy*.9}" preserveAspectRatio="none"/>`}
  const zx0=X(-.708),zx1=X(.708),zy0=Y(3.5),zy1=Y(1.5);
  for(let i=1;i<3;i++){s+=`<line x1="${zx0+(zx1-zx0)*i/3}" x2="${zx0+(zx1-zx0)*i/3}" y1="${zy0}" y2="${zy1}" stroke="var(--grid)"/><line x1="${zx0}" x2="${zx1}" y1="${zy0+(zy1-zy0)*i/3}" y2="${zy0+(zy1-zy0)*i/3}" stroke="var(--grid)"/>`}
  s+=`<rect x="${zx0}" y="${zy0}" width="${zx1-zx0}" height="${zy1-zy0}" fill="none" stroke="var(--ink)" stroke-width="2.5"/>`;
- base.filter(p=>p.px!=null&&p.pz!=null).forEach(p=>{const k=kind(p),c=OC2[k],x=X(p.px),y=Y(p.pz),op=inSet.has(p)?.8:.1;
+ (LOC_DOTS?base:[]).filter(p=>p.px!=null&&p.pz!=null).forEach(p=>{const k=kind(p),c=OC2[k],x=X(p.px),y=Y(p.pz),op=inSet.has(p)?.8:.1;
   const tp=`data-px="${p.ix}" data-tip="<b>${LAB[p.t]}</b> &middot; ${p.v!=null?p.v.toFixed(1)+' mph':''}<br>${p.call}<br>${DATA.games[p.g].date} vs ${DATA.games[p.g].opp}"`;
   if(k==='SWING')s+=`<text ${tp} x="${x}" y="${y+4.5}" text-anchor="middle" font-size="13" font-weight="800" style="fill:${c};opacity:${op}">&#10005;</text>`;
   else if(k==='FOUL')s+=`<rect ${tp} x="${x-3.5}" y="${y-3.5}" width="7" height="7" fill="${c}" opacity="${op}"/>`;
@@ -1236,7 +1274,10 @@ function renderChart(){
  if(SN==='Pitch Location'){const ks=['CALLED','SWING','FOUL','BALL','INPLAY'].filter(k=>a.some(p=>kind(p)===k));const nm={CALLED:'Called Strike',SWING:'Swinging Strike',FOUL:'Foul',BALL:'Ball',INPLAY:'Ball In Play'};
   leg=ks.map(k=>k==='SWING'?`<span><span class="lg-x" style="color:${OC2[k]}">&#10005;</span>${nm[k]}</span>`:k==='FOUL'?`<span><span class="lg-sq" style="background:${OC2[k]}"></span>${nm[k]}</span>`:`<span><span class="dot" style="background:${OC2[k]}"></span> ${nm[k]}</span>`).join('')}
  $('cnote').textContent=SN==='Pitch Mix by Count'?'Click a count row to filter by it.':SN==='Velocity by Inning'?(sel.length?'Every pitch of the selected type(s) in the order thrown, grouped by inning pitched and game. Click an inning to filter by it.':'Average velocity in each inning of the outing (1st inning pitched, 2nd, ...) across every appearance. Click an inning to filter by it.'):SN==='Spin Direction'?(sel.length?'Faded arrows are individual pitches; the bold arrow is the season average.':'Average spin direction of each pitch type. Select a pitch type to see every pitch behind its average.'):SN==='Pitch Location'||SN==='Exit Velocity vs. Launch Angle'?'':SN==='Pitch Movement'||SN==='Release Point'?'Dots are individual pitches; larger rings are each pitch type\'s season average.':''
- $('plot').innerHTML=(!a.length||!h)?`<div class="empty">${!a.length?'No pitches match this selection.':'No balls in play in this selection.'}</div>`:h+`<div class="leg">${leg}</div>`;
+ if(SN==='Pitch Location'){const hk=LOC_HEAT?'<span class="heat-key">Fewer <i></i> More pitches</span>':'';leg=(LOC_DOTS?leg:'')+hk}
+ const locTg=SN==='Pitch Location'?`<div class="loc-tg" role="group" aria-label="Pitch Location layers"><button type="button" data-loc="dots" class="${LOC_DOTS?'on':''}" aria-pressed="${LOC_DOTS}">Pitches</button><button type="button" data-loc="heat" class="${LOC_HEAT?'on':''}" aria-pressed="${LOC_HEAT}">Heat Map</button></div>`:'';
+ $('plot').innerHTML=(!a.length||!h)?`<div class="empty">${!a.length?'No pitches match this selection.':'No balls in play in this selection.'}</div>`:locTg+h+`<div class="leg">${leg}</div>`;
+ ROOT.querySelectorAll('.loc-tg button').forEach(b=>b.onclick=()=>{const k=b.dataset.loc;if(k==='dots'){if(LOC_DOTS&&!LOC_HEAT)return;LOC_DOTS=!LOC_DOTS}else{if(LOC_HEAT&&!LOC_DOTS)return;LOC_HEAT=!LOC_HEAT}renderChart()});
  hook();
  bindClicks();
 }

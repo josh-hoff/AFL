@@ -241,6 +241,13 @@
   .sz-box .sz-cell:nth-child(3n) { border-right: none; }
   .sz-box .sz-cell:nth-child(-n+3) { border-top: none; }
   .sz-box .sz-cell:nth-child(n+7) { border-bottom: none; }
+.loc-tg{display:flex;justify-content:center;align-items:center;gap:8px;margin:0 0 .5rem}
+.loc-tg button{background:transparent;border:1.5px solid var(--text-muted,#5a6472);color:var(--text-muted,#5a6472);border-radius:999px;padding:3px 13px;font:700 .76rem inherit;font-family:inherit;cursor:pointer}
+.loc-tg button.on{background:#0d1b3a;border-color:#0d1b3a;color:#fff}
+.loc-tg button:not(.on):hover{background:rgba(13,27,58,.1)}
+.heat-key{display:inline-flex;align-items:center;gap:6px}
+.heat-key i{display:inline-block;width:70px;height:9px;border-radius:5px;background:linear-gradient(90deg,rgba(255,224,130,.5),rgba(245,130,50,.75),rgba(190,35,35,.9))}
+.hm-heat{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
   .pitch-dot-plot { position: absolute; width: 9px; height: 9px; border-radius: 50%; transform: translate(-50%, -50%); }
   .pitch-x-mark { position: absolute; font-size: 12px; font-weight: 900; line-height: 1; transform: translate(-50%, -50%); user-select: none; }
   .heatmap-legend { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.85rem; font-size: 0.72rem; color: var(--text-muted); flex-wrap: wrap; justify-content: center; }
@@ -922,6 +929,42 @@
   function toPlotPercent(px, pz) {
     return { left: ((px - PLOT_X_MIN) / (PLOT_X_MAX - PLOT_X_MIN)) * 100, top: 100 - ((pz - PLOT_Z_MIN) / (PLOT_Z_MAX - PLOT_Z_MIN)) * 100 };
   }
+  let LOC_DOTS = true, LOC_HEAT = true; // Pitch Location chart layers (independent on/off)
+
+  // ---- Pitch Location heat map: smoothed density of where pitches were thrown, drawn UNDER the pitch dots. ----
+  // pts = [[plate_x, plate_z], ...]; returns a PNG data URL covering x0..x1 (ft) by z0..z1 (ft), or null if nothing to draw.
+  function locHeatUrl(pts, x0, x1, z0, z1, W, H) {
+    if (!pts.length) return null;
+    const g = new Float32Array(W * H), sx = (x1 - x0) / W, sz = (z1 - z0) / H, sig = 0.3, sp = sig / sx, sq = sig / sz, rx = Math.ceil(sp * 3), rz = Math.ceil(sq * 3);
+    pts.forEach(([x, z]) => {
+      const cx = (x - x0) / sx, cy = (z1 - z) / sz;
+      for (let j = Math.max(0, Math.floor(cy - rz)); j <= Math.min(H - 1, Math.ceil(cy + rz)); j++)
+        for (let i = Math.max(0, Math.floor(cx - rx)); i <= Math.min(W - 1, Math.ceil(cx + rx)); i++) {
+          const dx = (i + 0.5 - cx) / sp, dz = (j + 0.5 - cy) / sq; g[j * W + i] += Math.exp(-(dx * dx + dz * dz) / 2);
+        }
+    });
+    let m = 0; for (let k = 0; k < g.length; k++) if (g[k] > m) m = g[k];
+    if (!m) return null;
+    const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    const c2 = cv.getContext('2d'), im = c2.createImageData(W, H);
+    const lerp = (a, b, t) => a + (b - a) * t;
+    for (let k = 0; k < g.length; k++) {
+      const t = g[k] / m; let r = 0, gg = 0, b = 0, a = 0;
+      if (t >= 0.07) {
+        if (t < 0.35) { const u = (t - 0.07) / 0.28; r = 255; gg = 224; b = 130; a = lerp(0, 0.55, u); }
+        else if (t < 0.7) { const u = (t - 0.35) / 0.35; r = lerp(255, 245, u); gg = lerp(224, 130, u); b = lerp(130, 50, u); a = lerp(0.55, 0.72, u); }
+        else { const u = (t - 0.7) / 0.3; r = lerp(245, 190, u); gg = lerp(130, 35, u); b = lerp(50, 35, u); a = lerp(0.72, 0.88, u); }
+      }
+      im.data[k * 4] = r; im.data[k * 4 + 1] = gg; im.data[k * 4 + 2] = b; im.data[k * 4 + 3] = Math.round(a * 255);
+    }
+    c2.putImageData(im, 0, 0);
+    return cv.toDataURL('image/png');
+  }
+  function toggleLoc(k) {
+    if (k === 'dots') { if (LOC_DOTS && !LOC_HEAT) return; LOC_DOTS = !LOC_DOTS; }
+    else { if (LOC_HEAT && !LOC_DOTS) return; LOC_HEAT = !LOC_HEAT; }
+    renderHeatmap();
+  }
   function renderHeatmap() {
     const pitches = getTypeScopedPitches();
     const scopeLabel = document.getElementById('heatmapScope');
@@ -936,7 +979,8 @@
       ? `— ${scopeParts.join(', ')}${selectedAtBat !== null ? ' <span class="scope-clear" onclick="selectAtBat(' + selectedAtBat + ')">(clear)</span>' : ''}`
       : '';
     const gridCells = Array.from({ length: 9 }, () => '<div class="sz-cell"></div>').join('');
-    const marks = pitches.map(p => {
+    const heatUrl = LOC_HEAT ? locHeatUrl(pitches.filter(matchesFilters).filter(p => p.px != null && p.pz != null).map(p => [p.px, p.pz]), PLOT_X_MIN, PLOT_X_MAX, PLOT_Z_MIN, PLOT_Z_MAX, 125, 150) : null;
+    const marks = (LOC_DOTS ? pitches : []).map(p => {
       const { left, top } = toPlotPercent(p.px, p.pz);
       const callType = classifyCall(p.call);
       const color = CALL_TYPES[callType].color;
@@ -948,15 +992,17 @@
     }).join('');
     const wrap = document.getElementById('heatmapWrap');
     const limitSvg = `<svg class="sz-limit-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(90,100,114,0.48)" stroke-width="0.65" stroke-dasharray="1.5 3.5" vector-effect="non-scaling-stroke" /></svg>`;
-    wrap.innerHTML = `<div class="heatmap-plot-area">${limitSvg}<div class="sz-box">${gridCells}</div>${marks}</div>`;
+    wrap.innerHTML = `<div class="heatmap-plot-area">${heatUrl ? `<img class="hm-heat" alt="" src="${heatUrl}">` : ''}${limitSvg}<div class="sz-box">${gridCells}</div>${marks}</div>`;
+    document.getElementById('locTg').innerHTML = `<button type="button" class="${LOC_DOTS ? 'on' : ''}" aria-pressed="${LOC_DOTS}" onclick="toggleLoc('dots')">Pitches</button><button type="button" class="${LOC_HEAT ? 'on' : ''}" aria-pressed="${LOC_HEAT}" onclick="toggleLoc('heat')">Heat Map</button>`;
     const presentSet = new Set(pitches.map(p => markerKind(p.call)));
     const presentTypes = KEY_ORDER.filter(t => presentSet.has(t));
     const legend = document.getElementById('heatmapLegend');
-    legend.innerHTML = presentTypes.map(t => {
+    const heatKey = LOC_HEAT ? '<span class="heat-key">Fewer <i></i> More pitches</span>' : '';
+    legend.innerHTML = (LOC_DOTS ? presentTypes : []).map(t => {
       const info = t === 'FOUL' ? { label: 'Foul', color: CALL_TYPES.CALLED.color } : t === 'IN_PLAY' ? { label: 'Ball In Play', color: CALL_TYPES[t].color } : CALL_TYPES[t];
       const marker = t === 'SWINGING' ? `<span class="legend-x" style="color:${info.color};">&#10005;</span>` : t === 'FOUL' ? `<span class="legend-sq" style="background:${info.color};"></span>` : `<span class="legend-dot" style="background:${info.color};"></span>`;
       return `<span>${marker}${info.label}</span>`;
-    }).join('');
+    }).join('') + heatKey;
   }
 
   // ---- Pitch Movement -- hb/ivb read straight from pitches.csv's
@@ -1579,6 +1625,7 @@
             <div class="chart-carousel-viewport" id="chartsRow">
               <div class="heatmap-card active" data-slide="0">
                 <div class="heatmap-title" style="text-align: center;">Pitch Location <span id="heatmapScope"></span></div>
+                <div class="loc-tg" id="locTg"></div>
                 <div class="heatmap-wrap" id="heatmapWrap"></div>
                 <div class="hand-axis" aria-label="Catcher's view: right-handed hitters on the left, left-handed hitters on the right"><div class="hand-axis-inner"><svg class="hand-axis-plate" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon points="0,0 100,0 100,20 50,40 0,20" fill="var(--border)" stroke="var(--text-muted)" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg><span class="hand-axis-lbl" style="left:0">RHH</span><span class="hand-axis-lbl" style="right:0">LHH</span></div></div>
                 <div class="heatmap-legend" id="heatmapLegend"></div>
