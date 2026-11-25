@@ -1029,7 +1029,7 @@
 P.forEach((p,i)=>p.ix=i);
 const kind=p=>/^in play/i.test(p.call)?'INPLAY':(p.call==='Ball'||p.call==='Ball In Dirt'||p.call==='Hit By Pitch')?'BALL':/^swinging strike/i.test(p.call)?'SWING':/^foul/i.test(p.call)?'FOUL':'CALLED';
 const isSwing=p=>['SWING','FOUL','INPLAY'].includes(kind(p));
-const RT=(p,k)=>k==='O_K'?PitchOutcomes.isK(p.call,p.s):PitchOutcomes.isKey(k)?p.oc===k:kind(p)===k;
+const RT=(p,k)=>/^O_K/.test(k)?PitchOutcomes.kTest(k,p.call,p.s):PitchOutcomes.isKey(k)?p.oc===k:kind(p)===k;
 const resOk=p=>!res.length||res.some(k=>RT(p,k));
 const inZone=p=>p.z>=1&&p.z<=9;
 const types=[...new Set(P.map(p=>p.t))].sort((a,b)=>P.filter(p=>p.t===b).length-P.filter(p=>p.t===a).length);
@@ -1466,7 +1466,7 @@ all();
 P.forEach((p,i)=>p.ix=i);
 const kind=p=>/^in play/i.test(p.call)?'INPLAY':(p.call==='Ball'||p.call==='Ball In Dirt'||p.call==='Hit By Pitch')?'BALL':/^(swinging strike|missed bunt)/i.test(p.call)?'SWING':/^foul/i.test(p.call)?'FOUL':'CALLED';
 const isSwing=p=>['SWING','FOUL','INPLAY'].includes(kind(p));
-const RT=(p,k)=>k==='O_K'?PitchOutcomes.isK(p.call,p.s):PitchOutcomes.isKey(k)?p.oc===k:kind(p)===k;
+const RT=(p,k)=>/^O_K/.test(k)?PitchOutcomes.kTest(k,p.call,p.s):PitchOutcomes.isKey(k)?p.oc===k:kind(p)===k;
 const resOk=p=>!res.length||res.some(k=>RT(p,k));
 const inZone=p=>p.z>=1&&p.z<=9;
 const types=[...new Set(P.map(p=>p.t))].sort((a,b)=>P.filter(p=>p.t===b).length-P.filter(p=>p.t===a).length);
