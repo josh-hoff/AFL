@@ -268,6 +268,7 @@
 #seasonSc .oarr{position:absolute;right:6px;font-size:.7rem;top:50%;transform:translateY(-50%);color:var(--mut)}
 #seasonSc .omenu{position:absolute;left:0;top:calc(100% + 4px);min-width:21rem;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:5px;z-index:20}
 #seasonSc .omenu[hidden]{display:none}
+#seasonSc .odiv{height:1px;background:var(--line);margin:6px 2px}
 #seasonSc .otop{display:flex;align-items:center;gap:6px;padding-bottom:4px;margin-bottom:4px;border-bottom:1px solid var(--line)}
 #seasonSc .otop .oopt{flex:1}
 #seasonSc .omulti{display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:6px;font-size:.78rem;font-weight:600;color:var(--mut);cursor:pointer;white-space:nowrap}
@@ -354,6 +355,8 @@
 
 </style>
 <script src="pitch-reclass.js"></script>
+<script src="no-statcast.js"></script>
+<script src="pitch-outcomes.js"></script>
 <style>
 .reclass-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 .8rem;font-size:.82rem;color:var(--text-muted);line-height:1.4}
 .rc-seg{display:inline-flex;border:1.5px solid #0d1b3a;border-radius:999px;overflow:hidden}
@@ -953,7 +956,7 @@
       ab.ps.forEach((r, i) => {
         const sp = nn(r.spin_rate);
         P.push({ g: gi, ai, t: r.pitch_type_code, om: r._mlb_code, call: r.call, gin: r.inning, half: r.half_inning, ext: nn(r.extension), vbt: nn(r.break_vertical), ba: nn(r.break_angle), bl: nn(r.break_length), pt: nn(r.plate_time), tc: nn(r.type_confidence), ry: nn(r.release_y), inn: ords[Number(r.inning)], bat: r.batter_name, pn: i + 1, b: balls, s: strikes,
-          z: nn(r.zone), v: nn(r.start_speed), ev_: nn(r.end_speed), spin: sp !== null && sp > 0 ? sp : null, ev: nn(r.launch_speed), la: nn(r.launch_angle), tr: r.trajectory || '',
+          z: nn(r.zone), v: nn(r.start_speed), ev_: nn(r.end_speed), spin: sp !== null && sp > 0 ? sp : null, ev: nn(r.launch_speed), la: nn(r.launch_angle), tr: r.trajectory || '', oc: /^in play/i.test(r.call) ? PitchOutcomes.of(r.play_result_type, r.play_result, r.trajectory) : '',
           px: nn(r.plate_x), pz: nn(r.plate_z), rx: nn(r.release_x), rz: nn(r.release_z), hb: nn(r.break_horizontal), vb: nn(r.break_vertical_induced), sd: nn(r.spin_direction), h: (r.bat_side||'').toUpperCase().slice(0,1) });
         const ct = classify(r.call);
         if (ct === 'BALL') { if (r.call !== 'Hit By Pitch') balls++; }
@@ -971,6 +974,8 @@
 P.forEach((p,i)=>p.ix=i);
 const kind=p=>/^in play/i.test(p.call)?'INPLAY':(p.call==='Ball'||p.call==='Ball In Dirt'||p.call==='Hit By Pitch')?'BALL':/^swinging strike/i.test(p.call)?'SWING':/^foul/i.test(p.call)?'FOUL':'CALLED';
 const isSwing=p=>['SWING','FOUL','INPLAY'].includes(kind(p));
+const RT=(p,k)=>PitchOutcomes.isKey(k)?p.oc===k:kind(p)===k;
+const resOk=p=>!res.length||res.some(k=>RT(p,k));
 const inZone=p=>p.z>=1&&p.z<=9;
 const types=[...new Set(P.map(p=>p.t))].sort((a,b)=>P.filter(p=>p.t===b).length-P.filter(p=>p.t===a).length);
 let sel=[],multi=false,res=[],resMulti=false,cnt=[],cntMulti=false,inn=[],innMulti=false,hit=[],openDD=null,slide=0,sortK='n',sortAsc=false;
@@ -980,7 +985,7 @@ const f1=v=>v==null?'—':v.toFixed(1);
 const innOk=p=>!inn.length||inn.includes(String(p.inn));
 const hitOk=p=>!hit.length||hit.includes(p.h);
 const HAS_HIT=P.some(p=>p.h);
-const scoped=(ignoreType,ignoreCount)=>P.filter(p=>(ignoreType||!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&(ignoreCount||cntOk(p))&&innOk(p)&&hitOk(p));
+const scoped=(ignoreType,ignoreCount)=>P.filter(p=>(ignoreType||!sel.length||sel.includes(p.t))&&resOk(p)&&(ignoreCount||cntOk(p))&&innOk(p)&&hitOk(p));
 function stats(a){
  const n=a.length,sw=a.filter(isSwing),oz=a.filter(p=>!inZone(p)&&p.z),ozSw=oz.filter(isSwing);
  const whiff=a.filter(p=>kind(p)==='SWING').length,called=a.filter(p=>kind(p)==='CALLED').length;
@@ -1005,7 +1010,7 @@ function renderTiles(){
  '<div class="sub">Velocity</div>'+tile('Velo Loss',s.loss==null?'—':s.loss.toFixed(1)+' mph','release to plate');
 }
 function renderChips(){
- const base=P.filter(p=>(!res.length||res.includes(kind(p)))&&cntOk(p)&&innOk(p)&&hitOk(p));
+ const base=P.filter(p=>resOk(p)&&cntOk(p)&&innOk(p)&&hitOk(p));
  let h=`<button class="chip${!sel.length?' on':''}" data-t="ALL">All Pitches <span class="n">(${base.length})</span></button>`;
  types.forEach(t=>{const c=base.filter(p=>p.t===t).length,on=sel.includes(t);
   h+=`<button class="chip${on?' on':''}${c===0&&!on?' off':''}" data-t="${t}">${multi?`<span class="cb${on?' on':''}">${on?'&#10003;':''}</span>`:''}<span class="dot" style="background:${COL[t]}"></span>${LAB[t]} <span class="n">(${c})</span></button>`});
@@ -1021,24 +1026,24 @@ function pick(t){
  openTypes.clear();sel.forEach(x=>openTypes.add(x));
  all();
 }
-const RES_OPTS=[['ALL','All Results'],['CALLED','Called Strike'],['SWING','Swinging Strike'],['FOUL','Foul'],['BALL','Ball'],['INPLAY','Ball In Play']];
+const RES_OPTS=[['ALL','All Results'],['CALLED','Called Strike'],['SWING','Swinging Strike'],['FOUL','Foul'],['BALL','Ball'],['INPLAY','Ball In Play'],...PitchOutcomes.OPTS];
 const OCOL={CALLED:'#c0392b',SWING:'#e8590c',FOUL:'#b8860b',BALL:'#6b7280',INPLAY:'#2563a8'};
-const CNT_OPTS=[['ALL','All Counts'],['FIRST','First Pitch (0-0)'],['AHEAD','Ahead (Strikes > Balls)'],['EVEN','Even (1-1, 2-2)'],['BEHIND','Behind (Balls > Strikes)'],['FULL','Full Count (3-2)'],['TWO','Two Strikes']];
+const CNT_OPTS=[['ALL','All Counts'],['FIRST','First Pitch (0-0)'],['AHEAD','Ahead (Strikes > Balls)'],['EVEN','Even (1-1, 2-2)'],['BEHIND','Behind (Balls > Strikes)'],['FULL','Full Count (3-2)'],['TWO','Two Strikes'],['C_0_1','0-1'],['C_0_2','0-2'],['C_1_0','1-0'],['C_1_1','1-1'],['C_1_2','1-2'],['C_2_0','2-0'],['C_2_1','2-1'],['C_2_2','2-2'],['C_3_0','3-0'],['C_3_1','3-1']];
 const ORD=n=>n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:(n%10<4?n%10:0)]);
 const INNS=[...new Set(P.map(p=>p.inn))].sort((x,y)=>x-y);
 const INN_OPTS=[['ALL','All Innings'],...INNS.map(n=>[String(n),ORD(n)+' Inning Pitched'])];
 const HIT_OPTS=[['ALL','All Hitters'],['R','vs RHH'],['L','vs LHH']];
-const CNT_TEST={FIRST:p=>p.b===0&&p.s===0,AHEAD:p=>p.s>p.b,EVEN:p=>p.s===p.b&&p.b>0,BEHIND:p=>p.b>p.s&&!(p.b===3&&p.s===2),FULL:p=>p.b===3&&p.s===2,TWO:p=>p.s===2};
+const CNT_TEST={FIRST:p=>p.b===0&&p.s===0,AHEAD:p=>p.s>p.b,EVEN:p=>p.s===p.b&&p.b>0,BEHIND:p=>p.b>p.s&&!(p.b===3&&p.s===2),FULL:p=>p.b===3&&p.s===2,TWO:p=>p.s===2,C_0_1:p=>p.b===0&&p.s===1,C_0_2:p=>p.b===0&&p.s===2,C_1_0:p=>p.b===1&&p.s===0,C_1_1:p=>p.b===1&&p.s===1,C_1_2:p=>p.b===1&&p.s===2,C_2_0:p=>p.b===2&&p.s===0,C_2_1:p=>p.b===2&&p.s===1,C_2_2:p=>p.b===2&&p.s===2,C_3_0:p=>p.b===3&&p.s===0,C_3_1:p=>p.b===3&&p.s===1};
 const cntOk=p=>!cnt.length||cnt.some(k=>CNT_TEST[k](p));
 const DD={
- res:{label:'Result',all:'All Results',short:'Results',opts:RES_OPTS,test:(p,k)=>kind(p)===k,mark:k=>k==='ALL'?'':`<span class="oc-dot" style="background:${OCOL[k]}"></span>`,
+ res:{label:'Result',all:'All Results',short:'Results',opts:RES_OPTS,divAt:'O_1B',test:RT,mark:k=>k==='ALL'?'':`<span class="oc-dot" style="background:${OCOL[k]||PitchOutcomes.COLOR[k]}"></span>`,
       get v(){return res},set v(x){res=x},get m(){return resMulti},set m(x){resMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&cntOk(p)&&innOk(p)&&hitOk(p))},
- cnt:{label:'Count',all:'All Counts',short:'Counts',opts:CNT_OPTS,test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
-      get v(){return cnt},set v(x){cnt=x},get m(){return cntMulti},set m(x){cntMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&innOk(p)&&hitOk(p))},
+ cnt:{label:'Count',all:'All Counts',short:'Counts',opts:CNT_OPTS,divAt:'C_0_1',test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
+      get v(){return cnt},set v(x){cnt=x},get m(){return cntMulti},set m(x){cntMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&innOk(p)&&hitOk(p))},
  inn:{label:'Inning',all:'All Innings',short:'Innings',opts:INN_OPTS,test:(p,k)=>String(p.inn)===k,mark:()=>'',
-      get v(){return inn},set v(x){inn=x},get m(){return innMulti},set m(x){innMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&cntOk(p)&&hitOk(p))},
+      get v(){return inn},set v(x){inn=x},get m(){return innMulti},set m(x){innMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&cntOk(p)&&hitOk(p))},
  hit:{label:'Hitter',all:'All Hitters',short:'RHH/LHH',single:true,opts:HIT_OPTS,test:(p,k)=>p.h===k,mark:()=>'',
-      get v(){return hit},set v(x){hit=x},get m(){return false},set m(x){},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&cntOk(p)&&innOk(p))}
+      get v(){return hit},set v(x){hit=x},get m(){return false},set m(x){},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&cntOk(p)&&innOk(p))}
 };
 function renderDD(id){
  const d=DD[id],base=d.base(),n=k=>k==='ALL'?base.length:base.filter(p=>d.test(p,k)).length;
@@ -1047,7 +1052,7 @@ function renderDD(id){
  const txt=!d.v.length?d.short:d.v.map(lab).join(', ')+(d.single?'':` (${base.filter(p=>d.v.some(k=>d.test(p,k))).length})`);
  const opts=d.opts.map(([k,l])=>{const on=k==='ALL'?!d.v.length:d.v.includes(k);
   const row=`<div class="oopt${on?' sel':''}" data-k="${k}">${d.m&&k!=='ALL'?ck(on):''}${d.mark(k)}<span>${l}</span><span class="ocnt">${n(k)}</span></div>`;
-  return k==='ALL'?`<div class="otop">${row}${d.single?'':`<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div>`}</div>`:row}).join('');
+  return k==='ALL'?`<div class="otop">${row}${d.single?'':`<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div>`}</div>`:(d.divAt===k?'<div class="odiv"></div>':'')+row}).join('');
  const host=$('dd-'+id);
  host.innerHTML=`<span class="olab">${d.label}</span><div class="odd"><button type="button" class="obtn${d.v.length?' act':''}">${d.v.length?d.v.map(d.mark).join(''):''}<span class="otxt">${txt}</span><span class="oarr">&#9662;</span></button><div class="omenu"${openDD===id?'':' hidden'}>${opts}</div></div>`;
  const btn=host.querySelector('.obtn'),menu=host.querySelector('.omenu');
@@ -1363,7 +1368,7 @@ all();
         const sp = nn(r.spin_rate);
         P.push({ g: gi, ai, t: r.pitch_type_code, om: r._mlb_code, call: r.call, gin: r.inning, half: r.half_inning, inn: Number(r.inning), pit: r.pitcher_name, pid: r.pitcher_id, h: ctx.throws.get(r.pitcher_id) || '', bh: (r.bat_side || '').toUpperCase().slice(0, 1),
           pai: r._pai, ppn: r._ppn, pn: i + 1, b: balls, s: strikes, ext: nn(r.extension), vbt: nn(r.break_vertical), ba: nn(r.break_angle), bl: nn(r.break_length), tc: nn(r.type_confidence),
-          z: nn(r.zone), v: nn(r.start_speed), ev_: nn(r.end_speed), spin: sp !== null && sp > 0 ? sp : null, ev: nn(r.launch_speed), la: nn(r.launch_angle), tr: r.trajectory || '', dist: nn(r.total_distance), hx: nn(r.hit_coord_x), hy: nn(r.hit_coord_y), res: r.play_result || '', rt: r.play_result_type || '',
+          z: nn(r.zone), v: nn(r.start_speed), ev_: nn(r.end_speed), spin: sp !== null && sp > 0 ? sp : null, ev: nn(r.launch_speed), la: nn(r.launch_angle), tr: r.trajectory || '', oc: /^in play/i.test(r.call) ? PitchOutcomes.of(r.play_result_type, r.play_result, r.trajectory) : '', dist: nn(r.total_distance), hx: nn(r.hit_coord_x), hy: nn(r.hit_coord_y), res: r.play_result || '', rt: r.play_result_type || '',
           px: nn(r.plate_x), pz: nn(r.plate_z), hb: nn(r.break_horizontal), vb: nn(r.break_vertical_induced), sd: nn(r.spin_direction) });
         const ct = classify(r.call);
         if (ct === 'BALL') { if (r.call !== 'Hit By Pitch') balls++; }
@@ -1380,6 +1385,8 @@ all();
 P.forEach((p,i)=>p.ix=i);
 const kind=p=>/^in play/i.test(p.call)?'INPLAY':(p.call==='Ball'||p.call==='Ball In Dirt'||p.call==='Hit By Pitch')?'BALL':/^(swinging strike|missed bunt)/i.test(p.call)?'SWING':/^foul/i.test(p.call)?'FOUL':'CALLED';
 const isSwing=p=>['SWING','FOUL','INPLAY'].includes(kind(p));
+const RT=(p,k)=>PitchOutcomes.isKey(k)?p.oc===k:kind(p)===k;
+const resOk=p=>!res.length||res.some(k=>RT(p,k));
 const inZone=p=>p.z>=1&&p.z<=9;
 const types=[...new Set(P.map(p=>p.t))].sort((a,b)=>P.filter(p=>p.t===b).length-P.filter(p=>p.t===a).length);
 let sel=[],multi=false,res=[],resMulti=false,cnt=[],cntMulti=false,inn=[],innMulti=false,hit=[],openDD=null,slide=0,sortK='n',sortAsc=false;
@@ -1389,7 +1396,7 @@ const f1=v=>v==null?'—':v.toFixed(1);
 const innOk=p=>!inn.length||inn.includes(String(p.inn));
 const hitOk=p=>!hit.length||hit.includes(p.h);
 const HAS_HIT=P.some(p=>p.h);
-const scoped=(ignoreType,ignoreCount)=>P.filter(p=>(ignoreType||!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&(ignoreCount||cntOk(p))&&innOk(p)&&hitOk(p));
+const scoped=(ignoreType,ignoreCount)=>P.filter(p=>(ignoreType||!sel.length||sel.includes(p.t))&&resOk(p)&&(ignoreCount||cntOk(p))&&innOk(p)&&hitOk(p));
 const bz=e=>e<98?null:e<=98?[26,30]:e<=99?[25,31]:e<=100?[24,33]:e>=116?[8,50]:[24-(e-100),33+(e-100)*17/16];
 function stats(a){
  const n=a.length,sw=a.filter(isSwing),zn=a.filter(p=>inZone(p)),znSw=zn.filter(isSwing),oz=a.filter(p=>!inZone(p)&&p.z),ozSw=oz.filter(isSwing);
@@ -1413,7 +1420,7 @@ function renderTiles(){
  '<div class="sub">Contact quality ('+s.bipN+' in play)</div>'+tile('Avg Exit Velo',f1(s.avgEV))+tile('Max Exit Velo',f1(s.maxEV))+tile('Avg Launch Angle',s.avgLA==null?'—':s.avgLA.toFixed(1)+'°')+tile('Barrel %',s.barrel,'approx., per MLB def.')+tile('Sweet Spot %',s.sweet,'8°–32° launch angle')+tile('Ground Ball',s.gb)+tile('Line Drive',s.ld)+tile('Fly Ball / Popup',s.fb);
 }
 function renderChips(){
- const base=P.filter(p=>(!res.length||res.includes(kind(p)))&&cntOk(p)&&innOk(p)&&hitOk(p));
+ const base=P.filter(p=>resOk(p)&&cntOk(p)&&innOk(p)&&hitOk(p));
  let h=`<button class="chip${!sel.length?' on':''}" data-t="ALL">All Pitches <span class="n">(${base.length})</span></button>`;
  types.forEach(t=>{const c=base.filter(p=>p.t===t).length,on=sel.includes(t);
   h+=`<button class="chip${on?' on':''}${c===0&&!on?' off':''}" data-t="${t}">${multi?`<span class="cb${on?' on':''}">${on?'&#10003;':''}</span>`:''}<span class="dot" style="background:${COL[t]}"></span>${LAB[t]} <span class="n">(${c})</span></button>`});
@@ -1428,24 +1435,24 @@ function pick(t){
  openTypes.clear();sel.forEach(x=>openTypes.add(x));
  all();
 }
-const RES_OPTS=[['ALL','All Results'],['CALLED','Called Strike'],['SWING','Swinging Strike'],['FOUL','Foul'],['BALL','Ball'],['INPLAY','Ball In Play']];
+const RES_OPTS=[['ALL','All Results'],['CALLED','Called Strike'],['SWING','Swinging Strike'],['FOUL','Foul'],['BALL','Ball'],['INPLAY','Ball In Play'],...PitchOutcomes.OPTS];
 const OCOL={CALLED:'#c0392b',SWING:'#e8590c',FOUL:'#b8860b',BALL:'#6b7280',INPLAY:'#2563a8'};
-const CNT_OPTS=[['ALL','All Counts'],['FIRST','First Pitch (0-0)'],['AHEAD','Hitter Ahead (Balls > Strikes)'],['EVEN','Even (1-1, 2-2)'],['BEHIND','Hitter Behind (Strikes > Balls)'],['FULL','Full Count (3-2)'],['TWO','Two Strikes']];
+const CNT_OPTS=[['ALL','All Counts'],['FIRST','First Pitch (0-0)'],['AHEAD','Hitter Ahead (Balls > Strikes)'],['EVEN','Even (1-1, 2-2)'],['BEHIND','Hitter Behind (Strikes > Balls)'],['FULL','Full Count (3-2)'],['TWO','Two Strikes'],['C_0_1','0-1'],['C_0_2','0-2'],['C_1_0','1-0'],['C_1_1','1-1'],['C_1_2','1-2'],['C_2_0','2-0'],['C_2_1','2-1'],['C_2_2','2-2'],['C_3_0','3-0'],['C_3_1','3-1']];
 const ORD=n=>n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:(n%10<4?n%10:0)]);
 const INNS=[...new Set(P.map(p=>p.inn))].sort((x,y)=>x-y);
 const INN_OPTS=[['ALL','All Innings'],...INNS.map(n=>[String(n),ORD(n)+' Inning'])];
 const HIT_OPTS=[['ALL','All Pitchers'],['R','vs RHP'],['L','vs LHP']];
-const CNT_TEST={FIRST:p=>p.b===0&&p.s===0,AHEAD:p=>p.b>p.s&&!(p.b===3&&p.s===2),EVEN:p=>p.s===p.b&&p.b>0,BEHIND:p=>p.s>p.b,FULL:p=>p.b===3&&p.s===2,TWO:p=>p.s===2};
+const CNT_TEST={FIRST:p=>p.b===0&&p.s===0,AHEAD:p=>p.b>p.s&&!(p.b===3&&p.s===2),EVEN:p=>p.s===p.b&&p.b>0,BEHIND:p=>p.s>p.b,FULL:p=>p.b===3&&p.s===2,TWO:p=>p.s===2,C_0_1:p=>p.b===0&&p.s===1,C_0_2:p=>p.b===0&&p.s===2,C_1_0:p=>p.b===1&&p.s===0,C_1_1:p=>p.b===1&&p.s===1,C_1_2:p=>p.b===1&&p.s===2,C_2_0:p=>p.b===2&&p.s===0,C_2_1:p=>p.b===2&&p.s===1,C_2_2:p=>p.b===2&&p.s===2,C_3_0:p=>p.b===3&&p.s===0,C_3_1:p=>p.b===3&&p.s===1};
 const cntOk=p=>!cnt.length||cnt.some(k=>CNT_TEST[k](p));
 const DD={
- res:{label:'Result',all:'All Results',short:'Results',opts:RES_OPTS,test:(p,k)=>kind(p)===k,mark:k=>k==='ALL'?'':`<span class="oc-dot" style="background:${OCOL[k]}"></span>`,
+ res:{label:'Result',all:'All Results',short:'Results',opts:RES_OPTS,divAt:'O_1B',test:RT,mark:k=>k==='ALL'?'':`<span class="oc-dot" style="background:${OCOL[k]||PitchOutcomes.COLOR[k]}"></span>`,
       get v(){return res},set v(x){res=x},get m(){return resMulti},set m(x){resMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&cntOk(p)&&innOk(p)&&hitOk(p))},
- cnt:{label:'Count',all:'All Counts',short:'Counts',opts:CNT_OPTS,test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
-      get v(){return cnt},set v(x){cnt=x},get m(){return cntMulti},set m(x){cntMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&innOk(p)&&hitOk(p))},
+ cnt:{label:'Count',all:'All Counts',short:'Counts',opts:CNT_OPTS,divAt:'C_0_1',test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
+      get v(){return cnt},set v(x){cnt=x},get m(){return cntMulti},set m(x){cntMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&innOk(p)&&hitOk(p))},
  inn:{label:'Inning',all:'All Innings',short:'Innings',opts:INN_OPTS,test:(p,k)=>String(p.inn)===k,mark:()=>'',
-      get v(){return inn},set v(x){inn=x},get m(){return innMulti},set m(x){innMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&cntOk(p)&&hitOk(p))},
+      get v(){return inn},set v(x){inn=x},get m(){return innMulti},set m(x){innMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&cntOk(p)&&hitOk(p))},
  hit:{label:'Pitcher',all:'All Pitchers',short:'RHP/LHP',single:true,opts:HIT_OPTS,test:(p,k)=>p.h===k,mark:()=>'',
-      get v(){return hit},set v(x){hit=x},get m(){return false},set m(x){},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&(!res.length||res.includes(kind(p)))&&cntOk(p)&&innOk(p))}
+      get v(){return hit},set v(x){hit=x},get m(){return false},set m(x){},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&cntOk(p)&&innOk(p))}
 };
 function renderDD(id){
  const d=DD[id],base=d.base(),n=k=>k==='ALL'?base.length:base.filter(p=>d.test(p,k)).length;
@@ -1454,7 +1461,7 @@ function renderDD(id){
  const txt=!d.v.length?d.short:d.v.map(lab).join(', ')+(d.single?'':` (${base.filter(p=>d.v.some(k=>d.test(p,k))).length})`);
  const opts=d.opts.map(([k,l])=>{const on=k==='ALL'?!d.v.length:d.v.includes(k);
   const row=`<div class="oopt${on?' sel':''}" data-k="${k}">${d.m&&k!=='ALL'?ck(on):''}${d.mark(k)}<span>${l}</span><span class="ocnt">${n(k)}</span></div>`;
-  return k==='ALL'?`<div class="otop">${row}${d.single?'':`<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div>`}</div>`:row}).join('');
+  return k==='ALL'?`<div class="otop">${row}${d.single?'':`<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div>`}</div>`:(d.divAt===k?'<div class="odiv"></div>':'')+row}).join('');
  const host=$('dd-'+id);
  host.innerHTML=`<span class="olab">${d.label}</span><div class="odd"><button type="button" class="obtn${d.v.length?' act':''}">${d.v.length?d.v.map(d.mark).join(''):''}<span class="otxt">${txt}</span><span class="oarr">&#9662;</span></button><div class="omenu"${openDD===id?'':' hidden'}>${opts}</div></div>`;
  const btn=host.querySelector('.obtn'),menu=host.querySelector('.omenu');
@@ -3023,7 +3030,6 @@ all();
   init();
 </script>
 
-<script src="no-statcast.js"></script>
 <script src="player-search.js"></script>
 <script src="top-scrollbar.js"></script>
 </body>

@@ -122,6 +122,7 @@
   .oc-check.on { background: var(--tab-active); border-color: var(--tab-active); }
   .oc-top { display: flex; align-items: center; gap: 0.4rem; padding-bottom: 4px; margin-bottom: 4px; border-bottom: 1px solid var(--border); }
   .oc-top .oc-opt { flex: 1; }
+  .oc-div { height: 1px; background: var(--border); margin: 6px 2px; }
   .oc-multi { display: flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.55rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); cursor: pointer; white-space: nowrap; }
   .oc-multi:hover { color: var(--text); background: #f5f3ee; }
   .oc-caret { color: var(--text-muted); font-size: 0.8rem; }
@@ -343,6 +344,8 @@
   .error { color: #c0392b; }
 </style>
 <script src="pitch-reclass.js"></script>
+<script src="no-statcast.js"></script>
+<script src="pitch-outcomes.js"></script>
 <style>
 .reclass-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 .8rem;font-size:.82rem;color:var(--text-muted);line-height:1.4}
 .rc-seg{display:inline-flex;border:1.5px solid #0d1b3a;border-radius:999px;overflow:hidden}
@@ -602,10 +605,11 @@
     ['FOUL', 'Foul'],
     ['BALL', 'Ball'],
     ['IN_PLAY', 'Ball In Play'],
+    ...PitchOutcomes.OPTS,
   ];
   // Chart key order; also the dropdown order.
   const KEY_ORDER = ['CALLED', 'SWINGING', 'FOUL', 'BALL', 'IN_PLAY'];
-  function outcomeColor(k) { return k === 'FOUL' ? CALL_TYPES.CALLED.color : (CALL_TYPES[k] || {}).color; }
+  function outcomeColor(k) { if (PitchOutcomes.isKey(k)) return PitchOutcomes.COLOR[k]; return k === 'FOUL' ? CALL_TYPES.CALLED.color : (CALL_TYPES[k] || {}).color; }
   function outcomeMarkerHtml(k) {
     if (k === 'ALL') return '<span class="oc-mark"></span>';
     const c = outcomeColor(k);
@@ -618,13 +622,15 @@
     const base = selectedAtBat === null ? allPitches : atBats[selectedAtBat].pitches;
     return activeTypes.length === 0 ? base : base.filter(p => activeTypes.includes(p.type));
   }
-  function matchesOutcome(p) { return activeOutcomes.length === 0 || activeOutcomes.includes(markerKind(p.call)); }
+  const outcomeTest = (p, k) => PitchOutcomes.isKey(k) ? p.oc === k : markerKind(p.call) === k;
+  function matchesOutcome(p) { return activeOutcomes.length === 0 || activeOutcomes.some(k => outcomeTest(p, k)); }
   function outcomeLabels() { return activeOutcomes.map(k => (OUTCOME_OPTIONS.find(o => o[0] === k) || [0, k])[1]); }
 
   // Count buckets. balls/strikes on each pitch are the count BEFORE that pitch (set in buildAtBats).
   const COUNT_OPTIONS = [
     ['ALL', 'All Counts'], ['FIRST', 'First Pitch (0-0)'], ['AHEAD', 'Ahead (Strikes > Balls)'], ['EVEN', 'Even (1-1, 2-2)'],
     ['BEHIND', 'Behind (Balls > Strikes)'], ['FULL', 'Full Count (3-2)'], ['TWO', 'Two Strikes'],
+    ['C_0_1', '0-1'],['C_0_2', '0-2'],['C_1_0', '1-0'],['C_1_1', '1-1'],['C_1_2', '1-2'],['C_2_0', '2-0'],['C_2_1', '2-1'],['C_2_2', '2-2'],['C_3_0', '3-0'],['C_3_1', '3-1'],
   ];
   const COUNT_TEST = {
     FIRST: p => p.balls === 0 && p.strikes === 0,
@@ -633,6 +639,7 @@
     BEHIND: p => p.balls > p.strikes && !(p.balls === 3 && p.strikes === 2),
     FULL: p => p.balls === 3 && p.strikes === 2,
     TWO: p => p.strikes === 2,
+    C_0_1: p => p.balls === 0 && p.strikes === 1,C_0_2: p => p.balls === 0 && p.strikes === 2,C_1_0: p => p.balls === 1 && p.strikes === 0,C_1_1: p => p.balls === 1 && p.strikes === 1,C_1_2: p => p.balls === 1 && p.strikes === 2,C_2_0: p => p.balls === 2 && p.strikes === 0,C_2_1: p => p.balls === 2 && p.strikes === 1,C_2_2: p => p.balls === 2 && p.strikes === 2,C_3_0: p => p.balls === 3 && p.strikes === 0,C_3_1: p => p.balls === 3 && p.strikes === 1,
   };
   function matchesCount(p) { return activeCounts.length === 0 || activeCounts.some(k => COUNT_TEST[k](p)); }
   function matchesInning(p) { return activeInnings.length === 0 || activeInnings.includes(String(p.inning)); }
@@ -677,14 +684,14 @@
         all: 'All Results', short: 'Results', opts: OUTCOME_OPTIONS, mark: outcomeMarkerHtml,
         get v() { return activeOutcomes; }, set v(x) { activeOutcomes = x; },
         get m() { return multiMode; }, set m(x) { multiMode = x; },
-        test: (p, k) => markerKind(p.call) === k,
+        test: outcomeTest, divAt: 'O_1B',
         base: () => getTypeScopedPitches().filter(p => matchesCount(p) && matchesInning(p) && matchesHit(p)),
       },
       cnt: {
         all: 'All Counts', short: 'Counts', opts: COUNT_OPTIONS, mark: check0,
         get v() { return activeCounts; }, set v(x) { activeCounts = x; },
         get m() { return countMulti; }, set m(x) { countMulti = x; },
-        test: (p, k) => COUNT_TEST[k](p),
+        test: (p, k) => COUNT_TEST[k](p), divAt: 'C_0_1',
         base: () => getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesInning(p) && matchesHit(p)),
       },
       inn: {
@@ -719,7 +726,7 @@
       const opts = d.opts.map(([k, l]) => {
         const on = k === 'ALL' ? d.v.length === 0 : d.v.includes(k);
         const row = `<div class="oc-opt${on ? ' sel' : ''}" role="option" aria-selected="${on}" data-dd="${id}" data-k="${k}">${d.m && k !== 'ALL' ? check(on) : ''}${d.mark(k)}<span>${l}</span><span class="oc-count">${countFor(k)}</span></div>`;
-        return k === 'ALL' ? `<div class="oc-top">${row}${d.single ? '' : multiBox}</div>` : row;
+        return k === 'ALL' ? `<div class="oc-top">${row}${d.single ? '' : multiBox}</div>` : (d.divAt === k ? '<div class="oc-div"></div>' : '') + row;
       }).join('');
       return `<div class="oc-dd">
         <button type="button" class="oc-btn${d.v.length ? ' active' : ''}" data-btn="${id}" aria-haspopup="listbox" aria-expanded="${openMenu === id}" title="${btnText.replace(/"/g, '')}">${btnMarks}<span class="oc-text">${btnText}</span><span class="oc-caret">&#9662;</span></button>
@@ -1787,6 +1794,7 @@
           extension: num(r.extension), plateTime: num(r.plate_time), typeConfidence: num(r.type_confidence),
           spinDirection: num(r.spin_direction) !== null ? Math.round(num(r.spin_direction)) : null,
           launch_speed: num(r.launch_speed), launch_angle: num(r.launch_angle), trajectory: r.trajectory,
+          oc: /^in play/i.test(r.call) ? PitchOutcomes.of(r.play_result_type, r.play_result, r.trajectory) : '',
           px, pz, plateIsReal: hasRealPlate,
         };
       });
@@ -1873,7 +1881,6 @@
 
   init();
 </script>
-<script src="no-statcast.js"></script>
 <script src="player-search.js"></script>
 <script src="top-scrollbar.js"></script>
 </body>
