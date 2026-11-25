@@ -122,7 +122,9 @@
   .oc-check.on { background: var(--tab-active); border-color: var(--tab-active); }
   .oc-top { display: flex; align-items: center; gap: 0.4rem; padding-bottom: 4px; margin-bottom: 4px; border-bottom: 1px solid var(--border); }
   .oc-top .oc-opt { flex: 1; }
-  .oc-div { height: 1px; background: var(--border); margin: 6px 2px; }
+  .oc-sec { display: flex; align-items: center; justify-content: space-between; margin: 6px 0 2px; padding: 7px 9px; border-top: 1px solid var(--border); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; user-select: none; }
+  .oc-sec:hover { background: #f2f1ee; }
+  .oc-menu { max-height: min(70vh, 520px); overflow-y: auto; }
   .oc-multi { display: flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.55rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); cursor: pointer; white-space: nowrap; }
   .oc-multi:hover { color: var(--text); background: #f5f3ee; }
   .oc-caret { color: var(--text-muted); font-size: 0.8rem; }
@@ -612,6 +614,7 @@
   function outcomeColor(k) { if (PitchOutcomes.isKey(k)) return PitchOutcomes.COLOR[k]; return k === 'FOUL' ? CALL_TYPES.CALLED.color : (CALL_TYPES[k] || {}).color; }
   function outcomeMarkerHtml(k) {
     if (k === 'ALL') return '<span class="oc-mark"></span>';
+    if (PitchOutcomes.isKey(k)) return '';
     const c = outcomeColor(k);
     if (k === 'SWINGING') return `<span class="oc-mark oc-x" style="color:${c};">&#10005;</span>`;
     if (k === 'FOUL') return `<span class="oc-mark"><span class="oc-sq" style="background:${c};"></span></span>`;
@@ -684,14 +687,14 @@
         all: 'All Results', short: 'Results', opts: OUTCOME_OPTIONS, mark: outcomeMarkerHtml,
         get v() { return activeOutcomes; }, set v(x) { activeOutcomes = x; },
         get m() { return multiMode; }, set m(x) { multiMode = x; },
-        test: outcomeTest, divAt: 'O_1B',
+        test: outcomeTest, divAt: 'O_1B', secLabel: 'Specific Outcomes',
         base: () => getTypeScopedPitches().filter(p => matchesCount(p) && matchesInning(p) && matchesHit(p)),
       },
       cnt: {
         all: 'All Counts', short: 'Counts', opts: COUNT_OPTIONS, mark: check0,
         get v() { return activeCounts; }, set v(x) { activeCounts = x; },
         get m() { return countMulti; }, set m(x) { countMulti = x; },
-        test: (p, k) => COUNT_TEST[k](p), divAt: 'C_0_1',
+        test: (p, k) => COUNT_TEST[k](p), divAt: 'C_0_1', secLabel: 'Specific Counts',
         base: () => getTypeScopedPitches().filter(p => matchesOutcome(p) && matchesInning(p) && matchesHit(p)),
       },
       inn: {
@@ -710,6 +713,7 @@
       },
     };
   }
+  const secOpen = {};
   function renderOutcomeSelect() {
     const wrap = document.getElementById('outcomeRow');
     if (!wrap) return;
@@ -723,10 +727,14 @@
       const btnText = d.v.length === 0 ? d.short : `${d.v.map(label).join(', ')}${d.single ? '' : ` (${selCount})`}`;
       const btnMarks = d.v.length === 0 ? '' : d.v.map(d.mark).join('');
       const multiBox = `<div class="oc-multi" data-multi="${id}" role="checkbox" aria-checked="${d.m}">${check(d.m)}<span>Multiple Selections</span></div>`;
-      const opts = d.opts.map(([k, l]) => {
+      const di = d.divAt ? d.opts.findIndex(o => o[0] === d.divAt) : -1;
+      const hasSel = di >= 0 && d.v.some(k => d.opts.findIndex(o => o[0] === k) >= di);
+      const exp = di >= 0 ? (secOpen[id] !== undefined ? secOpen[id] : hasSel) : true;
+      const opts = d.opts.map(([k, l], i) => {
+        if (di >= 0 && i >= di && !exp) return i === di ? `<div class="oc-sec" data-sec="${id}"><span>${d.secLabel}</span><span>&#9656;</span></div>` : '';
         const on = k === 'ALL' ? d.v.length === 0 : d.v.includes(k);
         const row = `<div class="oc-opt${on ? ' sel' : ''}" role="option" aria-selected="${on}" data-dd="${id}" data-k="${k}">${d.m && k !== 'ALL' ? check(on) : ''}${d.mark(k)}<span>${l}</span><span class="oc-count">${countFor(k)}</span></div>`;
-        return k === 'ALL' ? `<div class="oc-top">${row}${d.single ? '' : multiBox}</div>` : (d.divAt === k ? '<div class="oc-div"></div>' : '') + row;
+        return k === 'ALL' ? `<div class="oc-top">${row}${d.single ? '' : multiBox}</div>` : (d.divAt === k ? `<div class="oc-sec" data-sec="${id}"><span>${d.secLabel}</span><span>&#9662;</span></div>` : '') + row;
       }).join('');
       return `<div class="oc-dd">
         <button type="button" class="oc-btn${d.v.length ? ' active' : ''}" data-btn="${id}" aria-haspopup="listbox" aria-expanded="${openMenu === id}" title="${btnText.replace(/"/g, '')}">${btnMarks}<span class="oc-text">${btnText}</span><span class="oc-caret">&#9662;</span></button>
@@ -737,6 +745,7 @@
       e.stopPropagation(); openMenu = openMenu === btn.dataset.btn ? null : btn.dataset.btn; syncMenus();
     }));
     wrap.querySelectorAll('[data-menu]').forEach(m => m.addEventListener('click', e => e.stopPropagation()));
+    wrap.querySelectorAll('.oc-sec').forEach(el => el.addEventListener('click', () => { const id = el.dataset.sec, d = defs[id], di = d.opts.findIndex(o => o[0] === d.divAt); const cur = secOpen[id] !== undefined ? secOpen[id] : d.v.some(k => d.opts.findIndex(o => o[0] === k) >= di); secOpen[id] = !cur; renderOutcomeSelect(); }));
     wrap.querySelectorAll('.oc-opt').forEach(el => el.addEventListener('click', () => {
       const d = defs[el.dataset.dd], k = el.dataset.k;
       if (k === 'ALL') d.v = [];

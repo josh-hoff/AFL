@@ -269,6 +269,12 @@
 #seasonSc .omenu{position:absolute;left:0;top:calc(100% + 4px);min-width:21rem;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:5px;z-index:20}
 #seasonSc .omenu[hidden]{display:none}
 #seasonSc .odiv{height:1px;background:var(--line);margin:6px 2px}
+#seasonSc .osec{display:flex;align-items:center;justify-content:space-between;margin:6px 0 2px;padding:7px 9px;border-top:1px solid var(--line);font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);cursor:pointer;user-select:none}
+#seasonSc .osec:hover{background:var(--head)}
+#seasonSc .omenu{max-height:min(70vh,520px);overflow-y:auto}
+#seasonSc .oc-mk{display:inline-flex;width:12px;justify-content:center;align-items:center}
+#seasonSc .oc-mk .lg-x{margin:0;font-size:.85rem}
+#seasonSc .oc-mk .lg-sq{margin:0}
 #seasonSc .otop{display:flex;align-items:center;gap:6px;padding-bottom:4px;margin-bottom:4px;border-bottom:1px solid var(--line)}
 #seasonSc .otop .oopt{flex:1}
 #seasonSc .omulti{display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:6px;font-size:.78rem;font-weight:600;color:var(--mut);cursor:pointer;white-space:nowrap}
@@ -1035,10 +1041,13 @@ const INN_OPTS=[['ALL','All Innings'],...INNS.map(n=>[String(n),ORD(n)+' Inning 
 const HIT_OPTS=[['ALL','All Hitters'],['R','vs RHH'],['L','vs LHH']];
 const CNT_TEST={FIRST:p=>p.b===0&&p.s===0,AHEAD:p=>p.s>p.b,EVEN:p=>p.s===p.b&&p.b>0,BEHIND:p=>p.b>p.s&&!(p.b===3&&p.s===2),FULL:p=>p.b===3&&p.s===2,TWO:p=>p.s===2,C_0_1:p=>p.b===0&&p.s===1,C_0_2:p=>p.b===0&&p.s===2,C_1_0:p=>p.b===1&&p.s===0,C_1_1:p=>p.b===1&&p.s===1,C_1_2:p=>p.b===1&&p.s===2,C_2_0:p=>p.b===2&&p.s===0,C_2_1:p=>p.b===2&&p.s===1,C_2_2:p=>p.b===2&&p.s===2,C_3_0:p=>p.b===3&&p.s===0,C_3_1:p=>p.b===3&&p.s===1};
 const cntOk=p=>!cnt.length||cnt.some(k=>CNT_TEST[k](p));
+// Result markers match the chart key (Called Strike red dot, Swinging Strike red X, Foul red square, Ball green dot, Ball In Play blue dot); the specific outcomes have none.
+const RESMARK=k=>{const c=OC2[k];if(!c)return '';return `<span class="oc-mk">${k==='SWING'?`<span class="lg-x" style="color:${c}">&#10005;</span>`:k==='FOUL'?`<span class="lg-sq" style="background:${c}"></span>`:`<span class="oc-dot" style="background:${c}"></span>`}</span>`};
+const secOpen={};
 const DD={
- res:{label:'Result',all:'All Results',short:'Results',opts:RES_OPTS,divAt:'O_1B',test:RT,mark:k=>k==='ALL'?'':`<span class="oc-dot" style="background:${OCOL[k]||PitchOutcomes.COLOR[k]}"></span>`,
+ res:{label:'Result',all:'All Results',short:'Results',opts:RES_OPTS,divAt:'O_1B',secLabel:'Specific Outcomes',test:RT,mark:k=>RESMARK(k),
       get v(){return res},set v(x){res=x},get m(){return resMulti},set m(x){resMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&cntOk(p)&&innOk(p)&&hitOk(p))},
- cnt:{label:'Count',all:'All Counts',short:'Counts',opts:CNT_OPTS,divAt:'C_0_1',test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
+ cnt:{label:'Count',all:'All Counts',short:'Counts',opts:CNT_OPTS,divAt:'C_0_1',secLabel:'Specific Counts',test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
       get v(){return cnt},set v(x){cnt=x},get m(){return cntMulti},set m(x){cntMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&innOk(p)&&hitOk(p))},
  inn:{label:'Inning',all:'All Innings',short:'Innings',opts:INN_OPTS,test:(p,k)=>String(p.inn)===k,mark:()=>'',
       get v(){return inn},set v(x){inn=x},get m(){return innMulti},set m(x){innMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&cntOk(p)&&hitOk(p))},
@@ -1050,14 +1059,17 @@ function renderDD(id){
  const ck=on=>`<span class="cb${on?' on':''}">${on?'&#10003;':''}</span>`;
  const lab=k=>d.opts.find(o=>o[0]===k)[1];
  const txt=!d.v.length?d.short:d.v.map(lab).join(', ')+(d.single?'':` (${base.filter(p=>d.v.some(k=>d.test(p,k))).length})`);
- const opts=d.opts.map(([k,l])=>{const on=k==='ALL'?!d.v.length:d.v.includes(k);
+ const di=d.divAt?d.opts.findIndex(o=>o[0]===d.divAt):-1,hasSel=di>=0&&d.v.some(k=>d.opts.findIndex(o=>o[0]===k)>=di),exp=di>=0?(secOpen[id]!==undefined?secOpen[id]:hasSel):true;
+ const opts=d.opts.map(([k,l],i)=>{const on=k==='ALL'?!d.v.length:d.v.includes(k);
+  if(di>=0&&i>=di&&!exp)return i===di?`<div class="osec" data-sec="1"><span>${d.secLabel}</span><span>&#9656;</span></div>`:'';
   const row=`<div class="oopt${on?' sel':''}" data-k="${k}">${d.m&&k!=='ALL'?ck(on):''}${d.mark(k)}<span>${l}</span><span class="ocnt">${n(k)}</span></div>`;
-  return k==='ALL'?`<div class="otop">${row}${d.single?'':`<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div>`}</div>`:(d.divAt===k?'<div class="odiv"></div>':'')+row}).join('');
+  return k==='ALL'?`<div class="otop">${row}${d.single?'':`<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div>`}</div>`:(d.divAt===k?`<div class="osec" data-sec="1"><span>${d.secLabel}</span><span>&#9662;</span></div>`:'')+row}).join('');
  const host=$('dd-'+id);
  host.innerHTML=`<span class="olab">${d.label}</span><div class="odd"><button type="button" class="obtn${d.v.length?' act':''}">${d.v.length?d.v.map(d.mark).join(''):''}<span class="otxt">${txt}</span><span class="oarr">&#9662;</span></button><div class="omenu"${openDD===id?'':' hidden'}>${opts}</div></div>`;
  const btn=host.querySelector('.obtn'),menu=host.querySelector('.omenu');
  btn.onclick=e=>{e.stopPropagation();openDD=openDD===id?null:id;syncOpen()};
  menu.onclick=e=>e.stopPropagation();
+ menu.querySelectorAll('.osec').forEach(el=>el.onclick=e=>{e.stopPropagation();secOpen[id]=!exp;renderDD(id)});
  menu.querySelectorAll('.oopt').forEach(el=>el.onclick=()=>{const k=el.dataset.k;
   if(k==='ALL')d.v=[];else if(d.m)d.v=d.v.includes(k)?d.v.filter(x=>x!==k):[...d.v,k];else d.v=[k];
   if(!d.m)openDD=null;all()});
@@ -1444,10 +1456,13 @@ const INN_OPTS=[['ALL','All Innings'],...INNS.map(n=>[String(n),ORD(n)+' Inning'
 const HIT_OPTS=[['ALL','All Pitchers'],['R','vs RHP'],['L','vs LHP']];
 const CNT_TEST={FIRST:p=>p.b===0&&p.s===0,AHEAD:p=>p.b>p.s&&!(p.b===3&&p.s===2),EVEN:p=>p.s===p.b&&p.b>0,BEHIND:p=>p.s>p.b,FULL:p=>p.b===3&&p.s===2,TWO:p=>p.s===2,C_0_1:p=>p.b===0&&p.s===1,C_0_2:p=>p.b===0&&p.s===2,C_1_0:p=>p.b===1&&p.s===0,C_1_1:p=>p.b===1&&p.s===1,C_1_2:p=>p.b===1&&p.s===2,C_2_0:p=>p.b===2&&p.s===0,C_2_1:p=>p.b===2&&p.s===1,C_2_2:p=>p.b===2&&p.s===2,C_3_0:p=>p.b===3&&p.s===0,C_3_1:p=>p.b===3&&p.s===1};
 const cntOk=p=>!cnt.length||cnt.some(k=>CNT_TEST[k](p));
+// Result markers match the chart key (Called Strike red dot, Swinging Strike red X, Foul red square, Ball green dot, Ball In Play blue dot); the specific outcomes have none.
+const RESMARK=k=>{const c=OC2[k];if(!c)return '';return `<span class="oc-mk">${k==='SWING'?`<span class="lg-x" style="color:${c}">&#10005;</span>`:k==='FOUL'?`<span class="lg-sq" style="background:${c}"></span>`:`<span class="oc-dot" style="background:${c}"></span>`}</span>`};
+const secOpen={};
 const DD={
- res:{label:'Result',all:'All Results',short:'Results',opts:RES_OPTS,divAt:'O_1B',test:RT,mark:k=>k==='ALL'?'':`<span class="oc-dot" style="background:${OCOL[k]||PitchOutcomes.COLOR[k]}"></span>`,
+ res:{label:'Result',all:'All Results',short:'Results',opts:RES_OPTS,divAt:'O_1B',secLabel:'Specific Outcomes',test:RT,mark:k=>RESMARK(k),
       get v(){return res},set v(x){res=x},get m(){return resMulti},set m(x){resMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&cntOk(p)&&innOk(p)&&hitOk(p))},
- cnt:{label:'Count',all:'All Counts',short:'Counts',opts:CNT_OPTS,divAt:'C_0_1',test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
+ cnt:{label:'Count',all:'All Counts',short:'Counts',opts:CNT_OPTS,divAt:'C_0_1',secLabel:'Specific Counts',test:(p,k)=>CNT_TEST[k](p),mark:()=>'',
       get v(){return cnt},set v(x){cnt=x},get m(){return cntMulti},set m(x){cntMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&innOk(p)&&hitOk(p))},
  inn:{label:'Inning',all:'All Innings',short:'Innings',opts:INN_OPTS,test:(p,k)=>String(p.inn)===k,mark:()=>'',
       get v(){return inn},set v(x){inn=x},get m(){return innMulti},set m(x){innMulti=x},base:()=>P.filter(p=>(!sel.length||sel.includes(p.t))&&resOk(p)&&cntOk(p)&&hitOk(p))},
@@ -1459,14 +1474,17 @@ function renderDD(id){
  const ck=on=>`<span class="cb${on?' on':''}">${on?'&#10003;':''}</span>`;
  const lab=k=>d.opts.find(o=>o[0]===k)[1];
  const txt=!d.v.length?d.short:d.v.map(lab).join(', ')+(d.single?'':` (${base.filter(p=>d.v.some(k=>d.test(p,k))).length})`);
- const opts=d.opts.map(([k,l])=>{const on=k==='ALL'?!d.v.length:d.v.includes(k);
+ const di=d.divAt?d.opts.findIndex(o=>o[0]===d.divAt):-1,hasSel=di>=0&&d.v.some(k=>d.opts.findIndex(o=>o[0]===k)>=di),exp=di>=0?(secOpen[id]!==undefined?secOpen[id]:hasSel):true;
+ const opts=d.opts.map(([k,l],i)=>{const on=k==='ALL'?!d.v.length:d.v.includes(k);
+  if(di>=0&&i>=di&&!exp)return i===di?`<div class="osec" data-sec="1"><span>${d.secLabel}</span><span>&#9656;</span></div>`:'';
   const row=`<div class="oopt${on?' sel':''}" data-k="${k}">${d.m&&k!=='ALL'?ck(on):''}${d.mark(k)}<span>${l}</span><span class="ocnt">${n(k)}</span></div>`;
-  return k==='ALL'?`<div class="otop">${row}${d.single?'':`<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div>`}</div>`:(d.divAt===k?'<div class="odiv"></div>':'')+row}).join('');
+  return k==='ALL'?`<div class="otop">${row}${d.single?'':`<div class="omulti" data-m="1">${ck(d.m)}<span>Multiple Selections</span></div>`}</div>`:(d.divAt===k?`<div class="osec" data-sec="1"><span>${d.secLabel}</span><span>&#9662;</span></div>`:'')+row}).join('');
  const host=$('dd-'+id);
  host.innerHTML=`<span class="olab">${d.label}</span><div class="odd"><button type="button" class="obtn${d.v.length?' act':''}">${d.v.length?d.v.map(d.mark).join(''):''}<span class="otxt">${txt}</span><span class="oarr">&#9662;</span></button><div class="omenu"${openDD===id?'':' hidden'}>${opts}</div></div>`;
  const btn=host.querySelector('.obtn'),menu=host.querySelector('.omenu');
  btn.onclick=e=>{e.stopPropagation();openDD=openDD===id?null:id;syncOpen()};
  menu.onclick=e=>e.stopPropagation();
+ menu.querySelectorAll('.osec').forEach(el=>el.onclick=e=>{e.stopPropagation();secOpen[id]=!exp;renderDD(id)});
  menu.querySelectorAll('.oopt').forEach(el=>el.onclick=()=>{const k=el.dataset.k;
   if(k==='ALL')d.v=[];else if(d.m)d.v=d.v.includes(k)?d.v.filter(x=>x!==k):[...d.v,k];else d.v=[k];
   if(!d.m)openDD=null;all()});
