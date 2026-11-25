@@ -225,6 +225,7 @@
     color: var(--tab-active);
     border-bottom-color: var(--tab-active);
   }
+  .finish-icon { font-size: 1rem; line-height: 1; cursor: default; }
   .streak-win { color: var(--final); font-weight: 700; }
   .streak-loss { color: var(--cancelled); font-weight: 700; }
   .diff-pos { color: var(--final); }
@@ -284,6 +285,7 @@
   let currentDate = null;
   let seasonDateRange = null;
   let tieGames = []; // {date, teams:[a,b]} for each tied Final game, from schedule.csv
+  let championship = null; // {date, champion, runnerUp} once the Championship game is Final, from schedule.csv
 
   function buildZeroTeams() {
     return AFL_TEAM_NAMES.map(name => ({
@@ -336,6 +338,23 @@
       if (Number(c[iAs]) === Number(c[iHs])) out.push({ date, teams: [c[iA], c[iH]] });
     }
     return out;
+  }
+
+  // The Championship game (game_type 'Championship') decides the champion and runner-up once it is Final.
+  function extractChampionship(csvText) {
+    const lines = csvText.trim().split(/\r?\n/);
+    if (lines.length < 2) return null;
+    const h = parseCsvLine(lines[0]);
+    const ix = n => h.indexOf(n);
+    const iD = ix('date'), iA = ix('away_team'), iH = ix('home_team'), iAs = ix('away_score'), iHs = ix('home_score'), iS = ix('status'), iT = ix('game_type');
+    for (let i = 1; i < lines.length; i++) {
+      const c = parseCsvLine(lines[i]);
+      if ((c[iT] || '') !== 'Championship' || (c[iS] || '') !== 'Final') continue;
+      if (c[iAs] === '' || c[iHs] === '' || c[iAs] === undefined || Number(c[iAs]) === Number(c[iHs])) continue;
+      const awayWon = Number(c[iAs]) > Number(c[iHs]);
+      return { date: (c[iD] || '').slice(0, 10), champion: awayWon ? c[iA] : c[iH], runnerUp: awayWon ? c[iH] : c[iA] };
+    }
+    return null;
   }
 
   function tiesFor(teamName, asOf) {
@@ -484,13 +503,20 @@
         </div>
     `;
 
+    // Trophy and silver medal show only on the final standings date of a season whose Championship game is Final.
+    const showFinish = !noDataYet && championship && availableDates.length > 0 &&
+      currentDate === availableDates[availableDates.length - 1] && currentDate > championship.date;
+
     (data.teams || []).forEach(t => {
+      let finishIcon = '';
+      if (showFinish && t.team_name === championship.champion) finishIcon = '<span class="finish-icon" title="AFL Champion" aria-label="AFL Champion">\u{1F3C6}</span>';
+      else if (showFinish && t.team_name === championship.runnerUp) finishIcon = '<span class="finish-icon" title="AFL Runner-up" aria-label="AFL Runner-up">\u{1F948}</span>';
       const teamLink = `schedule.html?season=${currentSeason}&team=${encodeURIComponent(t.team_name)}`;
       html += `
         <div class="standings-row body">
           <div class="standings-team-cell">
             ${teamLogoImg(t.team_name)}
-            <a class="standings-team-link" href="${teamLink}">${t.team_name}</a>
+            <a class="standings-team-link" href="${teamLink}">${t.team_name}</a>${finishIcon}
           </div>
           <div class="standings-cell">${t.wins ?? ''}</div>
           <div class="standings-cell">${t.losses ?? ''}</div>
@@ -541,12 +567,14 @@
 
     seasonDateRange = null;
     tieGames = [];
+    championship = null;
     try {
       const schedRes = await fetch(`data/${currentSeason}/schedule.csv`);
       if (schedRes.ok) {
         const text = await schedRes.text();
         seasonDateRange = extractSeasonDateRange(text);
         tieGames = extractTieGames(text);
+        championship = extractChampionship(text);
       }
     } catch (e) {}
 
