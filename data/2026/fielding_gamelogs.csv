@@ -1115,6 +1115,7 @@ season,player_id,player_name,team,date,opponent,is_home,is_win,game_pk,game_type
 2026,702965,Hiro Wyatt,Surprise Saguaros,2026-10-21,Mesa Solar Sox,False,True,867691,R,P,2.1,0,0,0,0,0,1.000,0,0,0.00,0.00,,,,,
 2026,702965,Hiro Wyatt,Surprise Saguaros,2026-10-28,Mesa Solar Sox,False,True,867669,R,P,2.2,0,0,0,0,0,1.000,0,0,0.00,0.00,,,,,
 2026,702965,Hiro Wyatt,Surprise Saguaros,2026-11-21,Adelaide Giants,False,True,851292,R,P,4.0,1,0,0,0,1,1.000,0,0,1.00,2.25,,,,,
+2026,702965,Hiro Wyatt,Surprise Saguaros,2026-11-27,Perth Heat,True,False,851272,R,P,4.0,1,0,0,0,1,1.000,0,0,1.00,2.25,,,,,
 2026,695037,J'Briell Easley,Surprise Saguaros,2026-10-04,Salt River Rafters,True,True,867728,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00,,,,,
 2026,695037,J'Briell Easley,Surprise Saguaros,2026-10-09,Peoria Javelinas,True,False,867704,R,P,1.2,0,0,0,0,0,.000,0,0,0.00,0.00,,,,,
 2026,695037,J'Briell Easley,Surprise Saguaros,2026-10-16,Mesa Solar Sox,True,True,867697,R,P,1.0,0,0,0,0,0,.000,0,0,0.00,0.00,,,,,
